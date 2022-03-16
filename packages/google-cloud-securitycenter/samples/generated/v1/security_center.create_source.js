@@ -31,8 +31,8 @@ function main(parent, source) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The Source being created, only the display_name and description will be
-   *  used. All other fields will be ignored.
+   *  Required. The Source being created, only the display_name and description
+   *  will be used. All other fields will be ignored.
    */
   // const source = {}
 

@@ -362,7 +362,6 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSource(request), expectedError);
@@ -489,7 +488,6 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createFinding(request), expectedError);
@@ -616,7 +614,6 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -747,7 +744,6 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -874,7 +870,6 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSource(request), expectedError);
@@ -1001,7 +996,6 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setFindingState(request), expectedError);
@@ -1128,7 +1122,6 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1256,7 +1249,6 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1387,7 +1379,6 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       request.finding = {};
       request.finding.name = '';
-      const expectedHeaderRequestParams = 'finding.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateFinding(request), expectedError);
@@ -1522,7 +1513,6 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       request.organizationSettings = {};
       request.organizationSettings.name = '';
-      const expectedHeaderRequestParams = 'organization_settings.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1656,7 +1646,6 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       request.source = {};
       request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSource(request), expectedError);
@@ -1788,7 +1777,6 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       request.securityMarks = {};
       request.securityMarks.name = '';
-      const expectedHeaderRequestParams = 'security_marks.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSecurityMarks(request), expectedError);

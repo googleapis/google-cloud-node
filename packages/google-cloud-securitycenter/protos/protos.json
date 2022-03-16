@@ -181,6 +181,58 @@
                         }
                       }
                     },
+                    "BigQueryExport": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/BigQueryExport",
+                        "(google.api.resource).pattern": "projects/{project}/bigQueryExports/{export}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataset": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "mostRecentEditor": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "principal": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ExternalSystem": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ExternalSystem",
@@ -299,6 +351,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "mitreAttack": {
+                          "type": "MitreAttack",
+                          "id": 25
+                        },
                         "access": {
                           "type": "Access",
                           "id": 26
@@ -339,7 +395,8 @@
                             "THREAT": 1,
                             "VULNERABILITY": 2,
                             "MISCONFIGURATION": 3,
-                            "OBSERVATION": 4
+                            "OBSERVATION": 4,
+                            "SCC_ERROR": 5
                           }
                         }
                       }
@@ -355,6 +412,87 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "MitreAttack": {
+                      "fields": {
+                        "primaryTactic": {
+                          "type": "Tactic",
+                          "id": 1
+                        },
+                        "primaryTechniques": {
+                          "rule": "repeated",
+                          "type": "Technique",
+                          "id": 2
+                        },
+                        "additionalTactics": {
+                          "rule": "repeated",
+                          "type": "Tactic",
+                          "id": 3
+                        },
+                        "additionalTechniques": {
+                          "rule": "repeated",
+                          "type": "Technique",
+                          "id": 4
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Tactic": {
+                          "values": {
+                            "TACTIC_UNSPECIFIED": 0,
+                            "RECONNAISSANCE": 1,
+                            "RESOURCE_DEVELOPMENT": 2,
+                            "INITIAL_ACCESS": 5,
+                            "EXECUTION": 3,
+                            "PERSISTENCE": 6,
+                            "PRIVILEGE_ESCALATION": 8,
+                            "DEFENSE_EVASION": 7,
+                            "CREDENTIAL_ACCESS": 9,
+                            "DISCOVERY": 10,
+                            "LATERAL_MOVEMENT": 11,
+                            "COLLECTION": 12,
+                            "COMMAND_AND_CONTROL": 4,
+                            "EXFILTRATION": 13,
+                            "IMPACT": 14
+                          }
+                        },
+                        "Technique": {
+                          "values": {
+                            "TECHNIQUE_UNSPECIFIED": 0,
+                            "ACTIVE_SCANNING": 1,
+                            "SCANNING_IP_BLOCKS": 2,
+                            "INGRESS_TOOL_TRANSFER": 3,
+                            "NATIVE_API": 4,
+                            "SHARED_MODULES": 5,
+                            "COMMAND_AND_SCRIPTING_INTERPRETER": 6,
+                            "UNIX_SHELL": 7,
+                            "RESOURCE_HIJACKING": 8,
+                            "PROXY": 9,
+                            "EXTERNAL_PROXY": 10,
+                            "MULTI_HOP_PROXY": 11,
+                            "DYNAMIC_RESOLUTION": 12,
+                            "UNSECURED_CREDENTIALS": 13,
+                            "VALID_ACCOUNTS": 14,
+                            "LOCAL_ACCOUNTS": 15,
+                            "CLOUD_ACCOUNTS": 16,
+                            "NETWORK_DENIAL_OF_SERVICE": 17,
+                            "PERMISSION_GROUPS_DISCOVERY": 18,
+                            "CLOUD_GROUPS": 19,
+                            "EXFILTRATION_OVER_WEB_SERVICE": 20,
+                            "EXFILTRATION_TO_CLOUD_STORAGE": 21,
+                            "ACCOUNT_MANIPULATION": 22,
+                            "SSH_AUTHORIZED_KEYS": 23,
+                            "CREATE_OR_MODIFY_SYSTEM_PROCESS": 24,
+                            "STEAL_WEB_SESSION_COOKIE": 25,
+                            "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE": 26,
+                            "EXPLOIT_PUBLIC_FACING_APPLICATION": 27,
+                            "MODIFY_AUTHENTICATION_PROCESS": 28
+                          }
                         }
                       }
                     },
@@ -380,6 +518,10 @@
                         "cvssv3": {
                           "type": "Cvssv3",
                           "id": 3
+                        },
+                        "upstreamFixAvailable": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },
@@ -901,6 +1043,33 @@
                             {
                               "(google.api.http)": {
                                 "delete": "/v1/{name=organizations/*/notificationConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetBigQueryExport": {
+                          "requestType": "GetBigQueryExportRequest",
+                          "responseType": "BigQueryExport",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/bigQueryExports/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/bigQueryExports/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/bigQueryExports/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/bigQueryExports/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/bigQueryExports/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -1521,6 +1690,124 @@
                               "(google.api.method_signature)": "security_marks"
                             }
                           ]
+                        },
+                        "CreateBigQueryExport": {
+                          "requestType": "CreateBigQueryExportRequest",
+                          "responseType": "BigQueryExport",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*}/bigQueryExports",
+                            "(google.api.http).body": "big_query_export",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/bigQueryExports",
+                            "(google.api.http).additional_bindings.body": "big_query_export",
+                            "(google.api.method_signature)": "parent,big_query_export,big_query_export_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*}/bigQueryExports",
+                                "body": "big_query_export",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*}/bigQueryExports",
+                                    "body": "big_query_export"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*}/bigQueryExports",
+                                    "body": "big_query_export"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,big_query_export,big_query_export_id"
+                            }
+                          ]
+                        },
+                        "DeleteBigQueryExport": {
+                          "requestType": "DeleteBigQueryExportRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/bigQueryExports/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/bigQueryExports/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/bigQueryExports/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v1/{name=folders/*/bigQueryExports/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=projects/*/bigQueryExports/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateBigQueryExport": {
+                          "requestType": "UpdateBigQueryExportRequest",
+                          "responseType": "BigQueryExport",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{big_query_export.name=organizations/*/bigQueryExports/*}",
+                            "(google.api.http).body": "big_query_export",
+                            "(google.api.http).additional_bindings.patch": "/v1/{big_query_export.name=projects/*/bigQueryExports/*}",
+                            "(google.api.http).additional_bindings.body": "big_query_export",
+                            "(google.api.method_signature)": "big_query_export,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{big_query_export.name=organizations/*/bigQueryExports/*}",
+                                "body": "big_query_export",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{big_query_export.name=folders/*/bigQueryExports/*}",
+                                    "body": "big_query_export"
+                                  },
+                                  {
+                                    "patch": "/v1/{big_query_export.name=projects/*/bigQueryExports/*}",
+                                    "body": "big_query_export"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "big_query_export,update_mask"
+                            }
+                          ]
+                        },
+                        "ListBigQueryExports": {
+                          "requestType": "ListBigQueryExportsRequest",
+                          "responseType": "ListBigQueryExportsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*}/bigQueryExports",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/bigQueryExports",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*}/bigQueryExports",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*}/bigQueryExports"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*}/bigQueryExports"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1667,6 +1954,18 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "securitycenter.googleapis.com/NotificationConfig"
+                          }
+                        }
+                      }
+                    },
+                    "GetBigQueryExportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/BigQueryExport"
                           }
                         }
                       }
@@ -2329,6 +2628,92 @@
                         "startTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 3
+                        }
+                      }
+                    },
+                    "CreateBigQueryExportRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/BigQueryExport"
+                          }
+                        },
+                        "bigQueryExport": {
+                          "type": "BigQueryExport",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "bigQueryExportId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateBigQueryExportRequest": {
+                      "fields": {
+                        "bigQueryExport": {
+                          "type": "BigQueryExport",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListBigQueryExportsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/BigQueryExport"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListBigQueryExportsResponse": {
+                      "fields": {
+                        "bigQueryExports": {
+                          "rule": "repeated",
+                          "type": "BigQueryExport",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteBigQueryExportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/BigQueryExport"
+                          }
                         }
                       }
                     },
@@ -5082,101 +5467,14 @@
         },
         "api": {
           "options": {
+            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
             "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -5270,6 +5568,93 @@
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             },
             "methodSignature": {

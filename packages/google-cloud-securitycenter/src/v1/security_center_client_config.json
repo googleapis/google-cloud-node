@@ -52,6 +52,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "GetBigQueryExport": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetIamPolicy": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
@@ -164,6 +168,22 @@
         },
         "UpdateSecurityMarks": {
           "timeout_millis": 480000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateBigQueryExport": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteBigQueryExport": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateBigQueryExport": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListBigQueryExports": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

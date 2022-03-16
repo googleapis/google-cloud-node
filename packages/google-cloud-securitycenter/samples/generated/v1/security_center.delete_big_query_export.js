@@ -21,13 +21,15 @@
 'use strict';
 
 function main(name) {
-  // [START securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
+  // [START securitycenter_v1_generated_SecurityCenter_DeleteBigQueryExport_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the organization to get organization settings for. Its
-   *  format is "organizations/[organization_id]/organizationSettings".
+   *  Required. Name of the big query export to delete. Its format is
+   *  organizations/{organization}/bigQueryExports/{export_id},
+   *  folders/{folder}/bigQueryExports/{export_id}, or
+   *  projects/{project}/bigQueryExports/{export_id}
    */
   // const name = 'abc123'
 
@@ -37,19 +39,19 @@ function main(name) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function callGetOrganizationSettings() {
+  async function callDeleteBigQueryExport() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await securitycenterClient.getOrganizationSettings(request);
+    const response = await securitycenterClient.deleteBigQueryExport(request);
     console.log(response);
   }
 
-  callGetOrganizationSettings();
-  // [END securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
+  callDeleteBigQueryExport();
+  // [END securitycenter_v1_generated_SecurityCenter_DeleteBigQueryExport_async]
 }
 
 process.on('unhandledRejection', err => {

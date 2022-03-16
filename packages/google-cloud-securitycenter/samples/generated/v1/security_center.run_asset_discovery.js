@@ -26,8 +26,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the organization to run asset discovery for. Its format is
-   *  "organizations/[organization_id]".
+   *  Required. Name of the organization to run asset discovery for. Its format
+   *  is "organizations/[organization_id]".
    */
   // const parent = 'abc123'
 

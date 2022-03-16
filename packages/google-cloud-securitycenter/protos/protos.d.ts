@@ -797,6 +797,138 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a BigQueryExport. */
+                interface IBigQueryExport {
+
+                    /** BigQueryExport name */
+                    name?: (string|null);
+
+                    /** BigQueryExport description */
+                    description?: (string|null);
+
+                    /** BigQueryExport filter */
+                    filter?: (string|null);
+
+                    /** BigQueryExport dataset */
+                    dataset?: (string|null);
+
+                    /** BigQueryExport createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BigQueryExport updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BigQueryExport mostRecentEditor */
+                    mostRecentEditor?: (string|null);
+
+                    /** BigQueryExport principal */
+                    principal?: (string|null);
+                }
+
+                /** Represents a BigQueryExport. */
+                class BigQueryExport implements IBigQueryExport {
+
+                    /**
+                     * Constructs a new BigQueryExport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IBigQueryExport);
+
+                    /** BigQueryExport name. */
+                    public name: string;
+
+                    /** BigQueryExport description. */
+                    public description: string;
+
+                    /** BigQueryExport filter. */
+                    public filter: string;
+
+                    /** BigQueryExport dataset. */
+                    public dataset: string;
+
+                    /** BigQueryExport createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BigQueryExport updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BigQueryExport mostRecentEditor. */
+                    public mostRecentEditor: string;
+
+                    /** BigQueryExport principal. */
+                    public principal: string;
+
+                    /**
+                     * Creates a new BigQueryExport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryExport instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IBigQueryExport): google.cloud.securitycenter.v1.BigQueryExport;
+
+                    /**
+                     * Encodes the specified BigQueryExport message. Does not implicitly {@link google.cloud.securitycenter.v1.BigQueryExport.verify|verify} messages.
+                     * @param message BigQueryExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IBigQueryExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryExport message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.BigQueryExport.verify|verify} messages.
+                     * @param message BigQueryExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IBigQueryExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryExport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.BigQueryExport;
+
+                    /**
+                     * Decodes a BigQueryExport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.BigQueryExport;
+
+                    /**
+                     * Verifies a BigQueryExport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryExport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryExport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.BigQueryExport;
+
+                    /**
+                     * Creates a plain object from a BigQueryExport message. Also converts values to other types if specified.
+                     * @param message BigQueryExport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.BigQueryExport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryExport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an ExternalSystem. */
                 interface IExternalSystem {
 
@@ -968,6 +1100,9 @@ export namespace google {
                     /** Finding externalSystems */
                     externalSystems?: ({ [k: string]: google.cloud.securitycenter.v1.IExternalSystem }|null);
 
+                    /** Finding mitreAttack */
+                    mitreAttack?: (google.cloud.securitycenter.v1.IMitreAttack|null);
+
                     /** Finding access */
                     access?: (google.cloud.securitycenter.v1.IAccess|null);
 
@@ -1037,6 +1172,9 @@ export namespace google {
 
                     /** Finding externalSystems. */
                     public externalSystems: { [k: string]: google.cloud.securitycenter.v1.IExternalSystem };
+
+                    /** Finding mitreAttack. */
+                    public mitreAttack?: (google.cloud.securitycenter.v1.IMitreAttack|null);
 
                     /** Finding access. */
                     public access?: (google.cloud.securitycenter.v1.IAccess|null);
@@ -1147,7 +1285,8 @@ export namespace google {
                         THREAT = 1,
                         VULNERABILITY = 2,
                         MISCONFIGURATION = 3,
-                        OBSERVATION = 4
+                        OBSERVATION = 4,
+                        SCC_ERROR = 5
                     }
                 }
 
@@ -1245,6 +1384,175 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MitreAttack. */
+                interface IMitreAttack {
+
+                    /** MitreAttack primaryTactic */
+                    primaryTactic?: (google.cloud.securitycenter.v1.MitreAttack.Tactic|keyof typeof google.cloud.securitycenter.v1.MitreAttack.Tactic|null);
+
+                    /** MitreAttack primaryTechniques */
+                    primaryTechniques?: (google.cloud.securitycenter.v1.MitreAttack.Technique[]|null);
+
+                    /** MitreAttack additionalTactics */
+                    additionalTactics?: (google.cloud.securitycenter.v1.MitreAttack.Tactic[]|null);
+
+                    /** MitreAttack additionalTechniques */
+                    additionalTechniques?: (google.cloud.securitycenter.v1.MitreAttack.Technique[]|null);
+
+                    /** MitreAttack version */
+                    version?: (string|null);
+                }
+
+                /** Represents a MitreAttack. */
+                class MitreAttack implements IMitreAttack {
+
+                    /**
+                     * Constructs a new MitreAttack.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IMitreAttack);
+
+                    /** MitreAttack primaryTactic. */
+                    public primaryTactic: (google.cloud.securitycenter.v1.MitreAttack.Tactic|keyof typeof google.cloud.securitycenter.v1.MitreAttack.Tactic);
+
+                    /** MitreAttack primaryTechniques. */
+                    public primaryTechniques: google.cloud.securitycenter.v1.MitreAttack.Technique[];
+
+                    /** MitreAttack additionalTactics. */
+                    public additionalTactics: google.cloud.securitycenter.v1.MitreAttack.Tactic[];
+
+                    /** MitreAttack additionalTechniques. */
+                    public additionalTechniques: google.cloud.securitycenter.v1.MitreAttack.Technique[];
+
+                    /** MitreAttack version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new MitreAttack instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MitreAttack instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IMitreAttack): google.cloud.securitycenter.v1.MitreAttack;
+
+                    /**
+                     * Encodes the specified MitreAttack message. Does not implicitly {@link google.cloud.securitycenter.v1.MitreAttack.verify|verify} messages.
+                     * @param message MitreAttack message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IMitreAttack, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MitreAttack message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.MitreAttack.verify|verify} messages.
+                     * @param message MitreAttack message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IMitreAttack, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MitreAttack message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MitreAttack
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.MitreAttack;
+
+                    /**
+                     * Decodes a MitreAttack message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MitreAttack
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.MitreAttack;
+
+                    /**
+                     * Verifies a MitreAttack message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MitreAttack message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MitreAttack
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.MitreAttack;
+
+                    /**
+                     * Creates a plain object from a MitreAttack message. Also converts values to other types if specified.
+                     * @param message MitreAttack
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.MitreAttack, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MitreAttack to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace MitreAttack {
+
+                    /** Tactic enum. */
+                    enum Tactic {
+                        TACTIC_UNSPECIFIED = 0,
+                        RECONNAISSANCE = 1,
+                        RESOURCE_DEVELOPMENT = 2,
+                        INITIAL_ACCESS = 5,
+                        EXECUTION = 3,
+                        PERSISTENCE = 6,
+                        PRIVILEGE_ESCALATION = 8,
+                        DEFENSE_EVASION = 7,
+                        CREDENTIAL_ACCESS = 9,
+                        DISCOVERY = 10,
+                        LATERAL_MOVEMENT = 11,
+                        COLLECTION = 12,
+                        COMMAND_AND_CONTROL = 4,
+                        EXFILTRATION = 13,
+                        IMPACT = 14
+                    }
+
+                    /** Technique enum. */
+                    enum Technique {
+                        TECHNIQUE_UNSPECIFIED = 0,
+                        ACTIVE_SCANNING = 1,
+                        SCANNING_IP_BLOCKS = 2,
+                        INGRESS_TOOL_TRANSFER = 3,
+                        NATIVE_API = 4,
+                        SHARED_MODULES = 5,
+                        COMMAND_AND_SCRIPTING_INTERPRETER = 6,
+                        UNIX_SHELL = 7,
+                        RESOURCE_HIJACKING = 8,
+                        PROXY = 9,
+                        EXTERNAL_PROXY = 10,
+                        MULTI_HOP_PROXY = 11,
+                        DYNAMIC_RESOLUTION = 12,
+                        UNSECURED_CREDENTIALS = 13,
+                        VALID_ACCOUNTS = 14,
+                        LOCAL_ACCOUNTS = 15,
+                        CLOUD_ACCOUNTS = 16,
+                        NETWORK_DENIAL_OF_SERVICE = 17,
+                        PERMISSION_GROUPS_DISCOVERY = 18,
+                        CLOUD_GROUPS = 19,
+                        EXFILTRATION_OVER_WEB_SERVICE = 20,
+                        EXFILTRATION_TO_CLOUD_STORAGE = 21,
+                        ACCOUNT_MANIPULATION = 22,
+                        SSH_AUTHORIZED_KEYS = 23,
+                        CREATE_OR_MODIFY_SYSTEM_PROCESS = 24,
+                        STEAL_WEB_SESSION_COOKIE = 25,
+                        MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE = 26,
+                        EXPLOIT_PUBLIC_FACING_APPLICATION = 27,
+                        MODIFY_AUTHENTICATION_PROCESS = 28
+                    }
                 }
 
                 /** Properties of a Vulnerability. */
@@ -1348,6 +1656,9 @@ export namespace google {
 
                     /** Cve cvssv3 */
                     cvssv3?: (google.cloud.securitycenter.v1.ICvssv3|null);
+
+                    /** Cve upstreamFixAvailable */
+                    upstreamFixAvailable?: (boolean|null);
                 }
 
                 /** Represents a Cve. */
@@ -1367,6 +1678,9 @@ export namespace google {
 
                     /** Cve cvssv3. */
                     public cvssv3?: (google.cloud.securitycenter.v1.ICvssv3|null);
+
+                    /** Cve upstreamFixAvailable. */
+                    public upstreamFixAvailable: boolean;
 
                     /**
                      * Creates a new Cve instance using the specified properties.
@@ -2738,6 +3052,20 @@ export namespace google {
                     public deleteNotificationConfig(request: google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls GetBigQueryExport.
+                     * @param request GetBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public getBigQueryExport(request: google.cloud.securitycenter.v1.IGetBigQueryExportRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.GetBigQueryExportCallback): void;
+
+                    /**
+                     * Calls GetBigQueryExport.
+                     * @param request GetBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBigQueryExport(request: google.cloud.securitycenter.v1.IGetBigQueryExportRequest): Promise<google.cloud.securitycenter.v1.BigQueryExport>;
+
+                    /**
                      * Calls GetIamPolicy.
                      * @param request GetIamPolicyRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Policy
@@ -3072,6 +3400,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateSecurityMarks(request: google.cloud.securitycenter.v1.IUpdateSecurityMarksRequest): Promise<google.cloud.securitycenter.v1.SecurityMarks>;
+
+                    /**
+                     * Calls CreateBigQueryExport.
+                     * @param request CreateBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public createBigQueryExport(request: google.cloud.securitycenter.v1.ICreateBigQueryExportRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.CreateBigQueryExportCallback): void;
+
+                    /**
+                     * Calls CreateBigQueryExport.
+                     * @param request CreateBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createBigQueryExport(request: google.cloud.securitycenter.v1.ICreateBigQueryExportRequest): Promise<google.cloud.securitycenter.v1.BigQueryExport>;
+
+                    /**
+                     * Calls DeleteBigQueryExport.
+                     * @param request DeleteBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteBigQueryExport(request: google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.DeleteBigQueryExportCallback): void;
+
+                    /**
+                     * Calls DeleteBigQueryExport.
+                     * @param request DeleteBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteBigQueryExport(request: google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateBigQueryExport.
+                     * @param request UpdateBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public updateBigQueryExport(request: google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.UpdateBigQueryExportCallback): void;
+
+                    /**
+                     * Calls UpdateBigQueryExport.
+                     * @param request UpdateBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateBigQueryExport(request: google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest): Promise<google.cloud.securitycenter.v1.BigQueryExport>;
+
+                    /**
+                     * Calls ListBigQueryExports.
+                     * @param request ListBigQueryExportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBigQueryExportsResponse
+                     */
+                    public listBigQueryExports(request: google.cloud.securitycenter.v1.IListBigQueryExportsRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.ListBigQueryExportsCallback): void;
+
+                    /**
+                     * Calls ListBigQueryExports.
+                     * @param request ListBigQueryExportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBigQueryExports(request: google.cloud.securitycenter.v1.IListBigQueryExportsRequest): Promise<google.cloud.securitycenter.v1.ListBigQueryExportsResponse>;
                 }
 
                 namespace SecurityCenter {
@@ -3124,6 +3508,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteNotificationConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type GetBigQueryExportCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.BigQueryExport) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getIamPolicy}.
@@ -3292,6 +3683,34 @@ export namespace google {
                      * @param [response] SecurityMarks
                      */
                     type UpdateSecurityMarksCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.SecurityMarks) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type CreateBigQueryExportCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.BigQueryExport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#deleteBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteBigQueryExportCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type UpdateBigQueryExportCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.BigQueryExport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listBigQueryExports}.
+                     * @param error Error, if any
+                     * @param [response] ListBigQueryExportsResponse
+                     */
+                    type ListBigQueryExportsCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.ListBigQueryExportsResponse) => void;
                 }
 
                 /** Properties of a BulkMuteFindingsRequest. */
@@ -4057,6 +4476,96 @@ export namespace google {
 
                     /**
                      * Converts this DeleteNotificationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetBigQueryExportRequest. */
+                interface IGetBigQueryExportRequest {
+
+                    /** GetBigQueryExportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBigQueryExportRequest. */
+                class GetBigQueryExportRequest implements IGetBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new GetBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IGetBigQueryExportRequest);
+
+                    /** GetBigQueryExportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IGetBigQueryExportRequest): google.cloud.securitycenter.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified GetBigQueryExportRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.GetBigQueryExportRequest.verify|verify} messages.
+                     * @param message GetBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IGetBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.GetBigQueryExportRequest.verify|verify} messages.
+                     * @param message GetBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IGetBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Decodes a GetBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Verifies a GetBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from a GetBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message GetBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.GetBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBigQueryExportRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -7380,6 +7889,492 @@ export namespace google {
 
                     /**
                      * Converts this UpdateSecurityMarksRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateBigQueryExportRequest. */
+                interface ICreateBigQueryExportRequest {
+
+                    /** CreateBigQueryExportRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateBigQueryExportRequest bigQueryExport */
+                    bigQueryExport?: (google.cloud.securitycenter.v1.IBigQueryExport|null);
+
+                    /** CreateBigQueryExportRequest bigQueryExportId */
+                    bigQueryExportId?: (string|null);
+                }
+
+                /** Represents a CreateBigQueryExportRequest. */
+                class CreateBigQueryExportRequest implements ICreateBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new CreateBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICreateBigQueryExportRequest);
+
+                    /** CreateBigQueryExportRequest parent. */
+                    public parent: string;
+
+                    /** CreateBigQueryExportRequest bigQueryExport. */
+                    public bigQueryExport?: (google.cloud.securitycenter.v1.IBigQueryExport|null);
+
+                    /** CreateBigQueryExportRequest bigQueryExportId. */
+                    public bigQueryExportId: string;
+
+                    /**
+                     * Creates a new CreateBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICreateBigQueryExportRequest): google.cloud.securitycenter.v1.CreateBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified CreateBigQueryExportRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.CreateBigQueryExportRequest.verify|verify} messages.
+                     * @param message CreateBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICreateBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CreateBigQueryExportRequest.verify|verify} messages.
+                     * @param message CreateBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICreateBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.CreateBigQueryExportRequest;
+
+                    /**
+                     * Decodes a CreateBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.CreateBigQueryExportRequest;
+
+                    /**
+                     * Verifies a CreateBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.CreateBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from a CreateBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message CreateBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.CreateBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateBigQueryExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateBigQueryExportRequest. */
+                interface IUpdateBigQueryExportRequest {
+
+                    /** UpdateBigQueryExportRequest bigQueryExport */
+                    bigQueryExport?: (google.cloud.securitycenter.v1.IBigQueryExport|null);
+
+                    /** UpdateBigQueryExportRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateBigQueryExportRequest. */
+                class UpdateBigQueryExportRequest implements IUpdateBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new UpdateBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest);
+
+                    /** UpdateBigQueryExportRequest bigQueryExport. */
+                    public bigQueryExport?: (google.cloud.securitycenter.v1.IBigQueryExport|null);
+
+                    /** UpdateBigQueryExportRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest): google.cloud.securitycenter.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified UpdateBigQueryExportRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                     * @param message UpdateBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                     * @param message UpdateBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Verifies an UpdateBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message UpdateBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.UpdateBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateBigQueryExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListBigQueryExportsRequest. */
+                interface IListBigQueryExportsRequest {
+
+                    /** ListBigQueryExportsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBigQueryExportsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBigQueryExportsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListBigQueryExportsRequest. */
+                class ListBigQueryExportsRequest implements IListBigQueryExportsRequest {
+
+                    /**
+                     * Constructs a new ListBigQueryExportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IListBigQueryExportsRequest);
+
+                    /** ListBigQueryExportsRequest parent. */
+                    public parent: string;
+
+                    /** ListBigQueryExportsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBigQueryExportsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListBigQueryExportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBigQueryExportsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IListBigQueryExportsRequest): google.cloud.securitycenter.v1.ListBigQueryExportsRequest;
+
+                    /**
+                     * Encodes the specified ListBigQueryExportsRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.ListBigQueryExportsRequest.verify|verify} messages.
+                     * @param message ListBigQueryExportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IListBigQueryExportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBigQueryExportsRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListBigQueryExportsRequest.verify|verify} messages.
+                     * @param message ListBigQueryExportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IListBigQueryExportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBigQueryExportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBigQueryExportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ListBigQueryExportsRequest;
+
+                    /**
+                     * Decodes a ListBigQueryExportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBigQueryExportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ListBigQueryExportsRequest;
+
+                    /**
+                     * Verifies a ListBigQueryExportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBigQueryExportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBigQueryExportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ListBigQueryExportsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBigQueryExportsRequest message. Also converts values to other types if specified.
+                     * @param message ListBigQueryExportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ListBigQueryExportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBigQueryExportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListBigQueryExportsResponse. */
+                interface IListBigQueryExportsResponse {
+
+                    /** ListBigQueryExportsResponse bigQueryExports */
+                    bigQueryExports?: (google.cloud.securitycenter.v1.IBigQueryExport[]|null);
+
+                    /** ListBigQueryExportsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListBigQueryExportsResponse. */
+                class ListBigQueryExportsResponse implements IListBigQueryExportsResponse {
+
+                    /**
+                     * Constructs a new ListBigQueryExportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IListBigQueryExportsResponse);
+
+                    /** ListBigQueryExportsResponse bigQueryExports. */
+                    public bigQueryExports: google.cloud.securitycenter.v1.IBigQueryExport[];
+
+                    /** ListBigQueryExportsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListBigQueryExportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBigQueryExportsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IListBigQueryExportsResponse): google.cloud.securitycenter.v1.ListBigQueryExportsResponse;
+
+                    /**
+                     * Encodes the specified ListBigQueryExportsResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.ListBigQueryExportsResponse.verify|verify} messages.
+                     * @param message ListBigQueryExportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IListBigQueryExportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBigQueryExportsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListBigQueryExportsResponse.verify|verify} messages.
+                     * @param message ListBigQueryExportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IListBigQueryExportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBigQueryExportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBigQueryExportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ListBigQueryExportsResponse;
+
+                    /**
+                     * Decodes a ListBigQueryExportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBigQueryExportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ListBigQueryExportsResponse;
+
+                    /**
+                     * Verifies a ListBigQueryExportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBigQueryExportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBigQueryExportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ListBigQueryExportsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBigQueryExportsResponse message. Also converts values to other types if specified.
+                     * @param message ListBigQueryExportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ListBigQueryExportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBigQueryExportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteBigQueryExportRequest. */
+                interface IDeleteBigQueryExportRequest {
+
+                    /** DeleteBigQueryExportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteBigQueryExportRequest. */
+                class DeleteBigQueryExportRequest implements IDeleteBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new DeleteBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest);
+
+                    /** DeleteBigQueryExportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest): google.cloud.securitycenter.v1.DeleteBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified DeleteBigQueryExportRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteBigQueryExportRequest.verify|verify} messages.
+                     * @param message DeleteBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteBigQueryExportRequest.verify|verify} messages.
+                     * @param message DeleteBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.DeleteBigQueryExportRequest;
+
+                    /**
+                     * Decodes a DeleteBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.DeleteBigQueryExportRequest;
+
+                    /**
+                     * Verifies a DeleteBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.DeleteBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message DeleteBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.DeleteBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteBigQueryExportRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -16352,6 +17347,256 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -16689,256 +17934,6 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
         }
     }
 

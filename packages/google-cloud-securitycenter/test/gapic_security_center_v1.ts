@@ -362,7 +362,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.CreateSourceRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSource(request), expectedError);
@@ -489,7 +488,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.CreateFindingRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createFinding(request), expectedError);
@@ -616,7 +614,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.CreateMuteConfigRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createMuteConfig(request), expectedError);
@@ -747,7 +744,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.CreateNotificationConfigRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -877,7 +873,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.DeleteMuteConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteMuteConfig(request), expectedError);
@@ -1008,13 +1003,138 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.DeleteNotificationConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
         client.deleteNotificationConfig(request),
         expectedError
       );
+    });
+  });
+
+  describe('getBigQueryExport', () => {
+    it('invokes getBigQueryExport without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetBigQueryExportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BigQueryExport()
+      );
+      client.innerApiCalls.getBigQueryExport = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBigQueryExport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getBigQueryExport without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetBigQueryExportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BigQueryExport()
+      );
+      client.innerApiCalls.getBigQueryExport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBigQueryExport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IBigQueryExport | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getBigQueryExport with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetBigQueryExportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBigQueryExport = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getBigQueryExport(request), expectedError);
+      assert(
+        (client.innerApiCalls.getBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getBigQueryExport with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetBigQueryExportRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBigQueryExport(request), expectedError);
     });
   });
 
@@ -1138,7 +1258,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1265,7 +1384,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.GetMuteConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMuteConfig(request), expectedError);
@@ -1396,7 +1514,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.GetNotificationConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1530,7 +1647,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.GetOrganizationSettingsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1657,7 +1773,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.GetSourceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSource(request), expectedError);
@@ -1784,7 +1899,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.SetFindingStateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setFindingState(request), expectedError);
@@ -1908,7 +2022,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1.SetMuteRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMute(request), expectedError);
@@ -2035,7 +2148,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2163,7 +2275,6 @@ describe('v1.SecurityCenterClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2295,7 +2406,6 @@ describe('v1.SecurityCenterClient', () => {
       );
       request.externalSystem = {};
       request.externalSystem.name = '';
-      const expectedHeaderRequestParams = 'external_system.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateExternalSystem(request), expectedError);
@@ -2426,7 +2536,6 @@ describe('v1.SecurityCenterClient', () => {
       );
       request.finding = {};
       request.finding.name = '';
-      const expectedHeaderRequestParams = 'finding.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateFinding(request), expectedError);
@@ -2557,7 +2666,6 @@ describe('v1.SecurityCenterClient', () => {
       );
       request.muteConfig = {};
       request.muteConfig.name = '';
-      const expectedHeaderRequestParams = 'mute_config.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateMuteConfig(request), expectedError);
@@ -2692,7 +2800,6 @@ describe('v1.SecurityCenterClient', () => {
       );
       request.notificationConfig = {};
       request.notificationConfig.name = '';
-      const expectedHeaderRequestParams = 'notification_config.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2830,7 +2937,6 @@ describe('v1.SecurityCenterClient', () => {
       );
       request.organizationSettings = {};
       request.organizationSettings.name = '';
-      const expectedHeaderRequestParams = 'organization_settings.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2964,7 +3070,6 @@ describe('v1.SecurityCenterClient', () => {
       );
       request.source = {};
       request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSource(request), expectedError);
@@ -3096,10 +3201,394 @@ describe('v1.SecurityCenterClient', () => {
       );
       request.securityMarks = {};
       request.securityMarks.name = '';
-      const expectedHeaderRequestParams = 'security_marks.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSecurityMarks(request), expectedError);
+    });
+  });
+
+  describe('createBigQueryExport', () => {
+    it('invokes createBigQueryExport without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateBigQueryExportRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BigQueryExport()
+      );
+      client.innerApiCalls.createBigQueryExport =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createBigQueryExport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createBigQueryExport without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateBigQueryExportRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BigQueryExport()
+      );
+      client.innerApiCalls.createBigQueryExport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createBigQueryExport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IBigQueryExport | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createBigQueryExport with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateBigQueryExportRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBigQueryExport = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createBigQueryExport(request), expectedError);
+      assert(
+        (client.innerApiCalls.createBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createBigQueryExport with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateBigQueryExportRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createBigQueryExport(request), expectedError);
+    });
+  });
+
+  describe('deleteBigQueryExport', () => {
+    it('invokes deleteBigQueryExport without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteBigQueryExportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteBigQueryExport =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteBigQueryExport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteBigQueryExport without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteBigQueryExportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteBigQueryExport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteBigQueryExport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteBigQueryExport with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteBigQueryExportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBigQueryExport = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteBigQueryExport(request), expectedError);
+      assert(
+        (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteBigQueryExport with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteBigQueryExportRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteBigQueryExport(request), expectedError);
+    });
+  });
+
+  describe('updateBigQueryExport', () => {
+    it('invokes updateBigQueryExport without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateBigQueryExportRequest()
+      );
+      request.bigQueryExport = {};
+      request.bigQueryExport.name = '';
+      const expectedHeaderRequestParams = 'big_query_export.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BigQueryExport()
+      );
+      client.innerApiCalls.updateBigQueryExport =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateBigQueryExport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateBigQueryExport without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateBigQueryExportRequest()
+      );
+      request.bigQueryExport = {};
+      request.bigQueryExport.name = '';
+      const expectedHeaderRequestParams = 'big_query_export.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BigQueryExport()
+      );
+      client.innerApiCalls.updateBigQueryExport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateBigQueryExport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IBigQueryExport | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateBigQueryExport with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateBigQueryExportRequest()
+      );
+      request.bigQueryExport = {};
+      request.bigQueryExport.name = '';
+      const expectedHeaderRequestParams = 'big_query_export.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBigQueryExport = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateBigQueryExport(request), expectedError);
+      assert(
+        (client.innerApiCalls.updateBigQueryExport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateBigQueryExport with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateBigQueryExportRequest()
+      );
+      request.bigQueryExport = {};
+      request.bigQueryExport.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateBigQueryExport(request), expectedError);
     });
   });
 
@@ -5697,6 +6186,318 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('listBigQueryExports', () => {
+    it('invokes listBigQueryExports without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListBigQueryExportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+      ];
+      client.innerApiCalls.listBigQueryExports =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listBigQueryExports(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listBigQueryExports as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listBigQueryExports without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListBigQueryExportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+      ];
+      client.innerApiCalls.listBigQueryExports =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listBigQueryExports(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.securitycenter.v1.IBigQueryExport[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listBigQueryExports as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listBigQueryExports with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListBigQueryExportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBigQueryExports = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listBigQueryExports(request), expectedError);
+      assert(
+        (client.innerApiCalls.listBigQueryExports as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listBigQueryExportsStream without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListBigQueryExportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+      ];
+      client.descriptors.page.listBigQueryExports.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listBigQueryExportsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.BigQueryExport[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.securitycenter.v1.BigQueryExport) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBigQueryExports, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listBigQueryExports.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listBigQueryExportsStream with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListBigQueryExportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBigQueryExports.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listBigQueryExportsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.BigQueryExport[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.securitycenter.v1.BigQueryExport) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBigQueryExports, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listBigQueryExports.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listBigQueryExports without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListBigQueryExportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.BigQueryExport()
+        ),
+      ];
+      client.descriptors.page.listBigQueryExports.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1.IBigQueryExport[] =
+        [];
+      const iterable = client.listBigQueryExportsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listBigQueryExports with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListBigQueryExportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBigQueryExports.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listBigQueryExportsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.securitycenter.v1.IBigQueryExport[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('folderAsset', () => {
       const fakePath = '/rendered/path/folderAsset';
@@ -5804,6 +6605,55 @@ describe('v1.SecurityCenterClient', () => {
             client.pathTemplates.folderAssetSecurityMarksPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('folderExport', () => {
+      const fakePath = '/rendered/path/folderExport';
+      const expectedParameters = {
+        folder: 'folderValue',
+        export: 'exportValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderExportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderExportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderExportPath', () => {
+        const result = client.folderExportPath('folderValue', 'exportValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.folderExportPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderExportName', () => {
+        const result = client.matchFolderFromFolderExportName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (client.pathTemplates.folderExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExportFromFolderExportName', () => {
+        const result = client.matchExportFromFolderExportName(fakePath);
+        assert.strictEqual(result, 'exportValue');
+        assert(
+          (client.pathTemplates.folderExportPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6390,6 +7240,68 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
 
+    describe('organizationExport', () => {
+      const fakePath = '/rendered/path/organizationExport';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        export: 'exportValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationExportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationExportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationExportPath', () => {
+        const result = client.organizationExportPath(
+          'organizationValue',
+          'exportValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationExportPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationExportName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationExportName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationExportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExportFromOrganizationExportName', () => {
+        const result = client.matchExportFromOrganizationExportName(fakePath);
+        assert.strictEqual(result, 'exportValue');
+        assert(
+          (
+            client.pathTemplates.organizationExportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationMuteConfig', () => {
       const fakePath = '/rendered/path/organizationMuteConfig';
       const expectedParameters = {
@@ -6938,6 +7850,55 @@ describe('v1.SecurityCenterClient', () => {
             client.pathTemplates.projectAssetSecurityMarksPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectExport', () => {
+      const fakePath = '/rendered/path/projectExport';
+      const expectedParameters = {
+        project: 'projectValue',
+        export: 'exportValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectExportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectExportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectExportPath', () => {
+        const result = client.projectExportPath('projectValue', 'exportValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectExportPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectExportName', () => {
+        const result = client.matchProjectFromProjectExportName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExportFromProjectExportName', () => {
+        const result = client.matchExportFromProjectExportName(fakePath);
+        assert.strictEqual(result, 'exportValue');
+        assert(
+          (client.pathTemplates.projectExportPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -20,16 +20,28 @@
 
 'use strict';
 
-function main(name) {
-  // [START securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
+function main(parent, bigQueryExport, bigQueryExportId) {
+  // [START securitycenter_v1_generated_SecurityCenter_CreateBigQueryExport_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the organization to get organization settings for. Its
-   *  format is "organizations/[organization_id]/organizationSettings".
+   *  Required. Resource name of the new big query export's parent. Its format is
+   *  "organizations/[organization_id]", "folders/[folder_id]", or
+   *  "projects/[project_id]".
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. The big query export being created.
+   */
+  // const bigQueryExport = {}
+  /**
+   *  Required. Unique identifier provided by the client within the parent scope.
+   *  It must consist of lower case letters, numbers, and hyphen, with the first
+   *  character a letter, the last a letter or a number, and a 63 character
+   *  maximum.
+   */
+  // const bigQueryExportId = 'abc123'
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} = require('@google-cloud/security-center').v1;
@@ -37,19 +49,21 @@ function main(name) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function callGetOrganizationSettings() {
+  async function callCreateBigQueryExport() {
     // Construct request
     const request = {
-      name,
+      parent,
+      bigQueryExport,
+      bigQueryExportId,
     };
 
     // Run request
-    const response = await securitycenterClient.getOrganizationSettings(request);
+    const response = await securitycenterClient.createBigQueryExport(request);
     console.log(response);
   }
 
-  callGetOrganizationSettings();
-  // [END securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
+  callCreateBigQueryExport();
+  // [END securitycenter_v1_generated_SecurityCenter_CreateBigQueryExport_async]
 }
 
 process.on('unhandledRejection', err => {

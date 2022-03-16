@@ -20,16 +20,20 @@
 
 'use strict';
 
-function main(name) {
-  // [START securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
+function main(bigQueryExport) {
+  // [START securitycenter_v1_generated_SecurityCenter_UpdateBigQueryExport_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the organization to get organization settings for. Its
-   *  format is "organizations/[organization_id]/organizationSettings".
+   *  Required. The BigQuery export being updated.
    */
-  // const name = 'abc123'
+  // const bigQueryExport = {}
+  /**
+   *  The list of fields to be updated.
+   *  If empty all mutable fields will be updated.
+   */
+  // const updateMask = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} = require('@google-cloud/security-center').v1;
@@ -37,19 +41,19 @@ function main(name) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function callGetOrganizationSettings() {
+  async function callUpdateBigQueryExport() {
     // Construct request
     const request = {
-      name,
+      bigQueryExport,
     };
 
     // Run request
-    const response = await securitycenterClient.getOrganizationSettings(request);
+    const response = await securitycenterClient.updateBigQueryExport(request);
     console.log(response);
   }
 
-  callGetOrganizationSettings();
-  // [END securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
+  callUpdateBigQueryExport();
+  // [END securitycenter_v1_generated_SecurityCenter_UpdateBigQueryExport_async]
 }
 
 process.on('unhandledRejection', err => {

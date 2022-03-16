@@ -40,6 +40,11 @@
                 "deleteNotificationConfig"
               ]
             },
+            "GetBigQueryExport": {
+              "methods": [
+                "getBigQueryExport"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -120,6 +125,21 @@
                 "updateSecurityMarks"
               ]
             },
+            "CreateBigQueryExport": {
+              "methods": [
+                "createBigQueryExport"
+              ]
+            },
+            "DeleteBigQueryExport": {
+              "methods": [
+                "deleteBigQueryExport"
+              ]
+            },
+            "UpdateBigQueryExport": {
+              "methods": [
+                "updateBigQueryExport"
+              ]
+            },
             "BulkMuteFindings": {
               "methods": [
                 "bulkMuteFindings"
@@ -177,6 +197,13 @@
                 "listSources",
                 "listSourcesStream",
                 "listSourcesAsync"
+              ]
+            },
+            "ListBigQueryExports": {
+              "methods": [
+                "listBigQueryExports",
+                "listBigQueryExportsStream",
+                "listBigQueryExportsAsync"
               ]
             }
           }
@@ -214,6 +241,11 @@
                 "deleteNotificationConfig"
               ]
             },
+            "GetBigQueryExport": {
+              "methods": [
+                "getBigQueryExport"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -294,6 +326,21 @@
                 "updateSecurityMarks"
               ]
             },
+            "CreateBigQueryExport": {
+              "methods": [
+                "createBigQueryExport"
+              ]
+            },
+            "DeleteBigQueryExport": {
+              "methods": [
+                "deleteBigQueryExport"
+              ]
+            },
+            "UpdateBigQueryExport": {
+              "methods": [
+                "updateBigQueryExport"
+              ]
+            },
             "BulkMuteFindings": {
               "methods": [
                 "bulkMuteFindings"
@@ -351,6 +398,13 @@
                 "listSources",
                 "listSourcesStream",
                 "listSourcesAsync"
+              ]
+            },
+            "ListBigQueryExports": {
+              "methods": [
+                "listBigQueryExports",
+                "listBigQueryExportsStream",
+                "listBigQueryExportsAsync"
               ]
             }
           }

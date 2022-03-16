@@ -26,8 +26,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the parent of sources to list. Its format should be
-   *  "organizations/[organization_id], folders/[folder_id], or
+   *  Required. Resource name of the parent of sources to list. Its format should
+   *  be "organizations/[organization_id], folders/[folder_id], or
    *  projects/[project_id]".
    */
   // const parent = 'abc123'

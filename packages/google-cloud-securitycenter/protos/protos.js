@@ -2034,6 +2034,358 @@
                         return SecurityMarks;
                     })();
     
+                    v1.BigQueryExport = (function() {
+    
+                        /**
+                         * Properties of a BigQueryExport.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IBigQueryExport
+                         * @property {string|null} [name] BigQueryExport name
+                         * @property {string|null} [description] BigQueryExport description
+                         * @property {string|null} [filter] BigQueryExport filter
+                         * @property {string|null} [dataset] BigQueryExport dataset
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BigQueryExport createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] BigQueryExport updateTime
+                         * @property {string|null} [mostRecentEditor] BigQueryExport mostRecentEditor
+                         * @property {string|null} [principal] BigQueryExport principal
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryExport.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a BigQueryExport.
+                         * @implements IBigQueryExport
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IBigQueryExport=} [properties] Properties to set
+                         */
+                        function BigQueryExport(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryExport name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.name = "";
+    
+                        /**
+                         * BigQueryExport description.
+                         * @member {string} description
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.description = "";
+    
+                        /**
+                         * BigQueryExport filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.filter = "";
+    
+                        /**
+                         * BigQueryExport dataset.
+                         * @member {string} dataset
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.dataset = "";
+    
+                        /**
+                         * BigQueryExport createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.createTime = null;
+    
+                        /**
+                         * BigQueryExport updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.updateTime = null;
+    
+                        /**
+                         * BigQueryExport mostRecentEditor.
+                         * @member {string} mostRecentEditor
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.mostRecentEditor = "";
+    
+                        /**
+                         * BigQueryExport principal.
+                         * @member {string} principal
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.principal = "";
+    
+                        /**
+                         * Creates a new BigQueryExport instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBigQueryExport=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.BigQueryExport} BigQueryExport instance
+                         */
+                        BigQueryExport.create = function create(properties) {
+                            return new BigQueryExport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryExport message. Does not implicitly {@link google.cloud.securitycenter.v1.BigQueryExport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBigQueryExport} message BigQueryExport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryExport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.dataset);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.mostRecentEditor != null && Object.hasOwnProperty.call(message, "mostRecentEditor"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.mostRecentEditor);
+                            if (message.principal != null && Object.hasOwnProperty.call(message, "principal"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.principal);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryExport message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.BigQueryExport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBigQueryExport} message BigQueryExport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryExport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryExport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.BigQueryExport} BigQueryExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryExport.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.BigQueryExport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.filter = reader.string();
+                                    break;
+                                case 4:
+                                    message.dataset = reader.string();
+                                    break;
+                                case 5:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.mostRecentEditor = reader.string();
+                                    break;
+                                case 8:
+                                    message.principal = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryExport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.BigQueryExport} BigQueryExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryExport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryExport message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryExport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                if (!$util.isString(message.dataset))
+                                    return "dataset: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.mostRecentEditor != null && message.hasOwnProperty("mostRecentEditor"))
+                                if (!$util.isString(message.mostRecentEditor))
+                                    return "mostRecentEditor: string expected";
+                            if (message.principal != null && message.hasOwnProperty("principal"))
+                                if (!$util.isString(message.principal))
+                                    return "principal: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryExport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.BigQueryExport} BigQueryExport
+                         */
+                        BigQueryExport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.BigQueryExport)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.BigQueryExport();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.dataset != null)
+                                message.dataset = String(object.dataset);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.BigQueryExport.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.BigQueryExport.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.mostRecentEditor != null)
+                                message.mostRecentEditor = String(object.mostRecentEditor);
+                            if (object.principal != null)
+                                message.principal = String(object.principal);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryExport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.BigQueryExport} message BigQueryExport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryExport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.filter = "";
+                                object.dataset = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.mostRecentEditor = "";
+                                object.principal = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = message.dataset;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.mostRecentEditor != null && message.hasOwnProperty("mostRecentEditor"))
+                                object.mostRecentEditor = message.mostRecentEditor;
+                            if (message.principal != null && message.hasOwnProperty("principal"))
+                                object.principal = message.principal;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryExport to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.BigQueryExport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryExport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BigQueryExport;
+                    })();
+    
                     v1.ExternalSystem = (function() {
     
                         /**
@@ -2356,6 +2708,7 @@
                          * @property {google.cloud.securitycenter.v1.IVulnerability|null} [vulnerability] Finding vulnerability
                          * @property {google.protobuf.ITimestamp|null} [muteUpdateTime] Finding muteUpdateTime
                          * @property {Object.<string,google.cloud.securitycenter.v1.IExternalSystem>|null} [externalSystems] Finding externalSystems
+                         * @property {google.cloud.securitycenter.v1.IMitreAttack|null} [mitreAttack] Finding mitreAttack
                          * @property {google.cloud.securitycenter.v1.IAccess|null} [access] Finding access
                          * @property {string|null} [muteInitiator] Finding muteInitiator
                          */
@@ -2522,6 +2875,14 @@
                         Finding.prototype.externalSystems = $util.emptyObject;
     
                         /**
+                         * Finding mitreAttack.
+                         * @member {google.cloud.securitycenter.v1.IMitreAttack|null|undefined} mitreAttack
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.mitreAttack = null;
+    
+                        /**
                          * Finding access.
                          * @member {google.cloud.securitycenter.v1.IAccess|null|undefined} access
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -2603,6 +2964,8 @@
                                     writer.uint32(/* id 22, wireType 2 =*/178).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.securitycenter.v1.ExternalSystem.encode(message.externalSystems[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.mitreAttack != null && Object.hasOwnProperty.call(message, "mitreAttack"))
+                                $root.google.cloud.securitycenter.v1.MitreAttack.encode(message.mitreAttack, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             if (message.access != null && Object.hasOwnProperty.call(message, "access"))
                                 $root.google.cloud.securitycenter.v1.Access.encode(message.access, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.muteInitiator != null && Object.hasOwnProperty.call(message, "muteInitiator"))
@@ -2733,6 +3096,9 @@
                                     }
                                     message.externalSystems[key] = value;
                                     break;
+                                case 25:
+                                    message.mitreAttack = $root.google.cloud.securitycenter.v1.MitreAttack.decode(reader, reader.uint32());
+                                    break;
                                 case 26:
                                     message.access = $root.google.cloud.securitycenter.v1.Access.decode(reader, reader.uint32());
                                     break;
@@ -2856,6 +3222,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.indicator != null && message.hasOwnProperty("indicator")) {
@@ -2882,6 +3249,11 @@
                                     if (error)
                                         return "externalSystems." + error;
                                 }
+                            }
+                            if (message.mitreAttack != null && message.hasOwnProperty("mitreAttack")) {
+                                var error = $root.google.cloud.securitycenter.v1.MitreAttack.verify(message.mitreAttack);
+                                if (error)
+                                    return "mitreAttack." + error;
                             }
                             if (message.access != null && message.hasOwnProperty("access")) {
                                 var error = $root.google.cloud.securitycenter.v1.Access.verify(message.access);
@@ -3018,6 +3390,10 @@
                             case 4:
                                 message.findingClass = 4;
                                 break;
+                            case "SCC_ERROR":
+                            case 5:
+                                message.findingClass = 5;
+                                break;
                             }
                             if (object.indicator != null) {
                                 if (typeof object.indicator !== "object")
@@ -3043,6 +3419,11 @@
                                         throw TypeError(".google.cloud.securitycenter.v1.Finding.externalSystems: object expected");
                                     message.externalSystems[keys[i]] = $root.google.cloud.securitycenter.v1.ExternalSystem.fromObject(object.externalSystems[keys[i]]);
                                 }
+                            }
+                            if (object.mitreAttack != null) {
+                                if (typeof object.mitreAttack !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.mitreAttack: object expected");
+                                message.mitreAttack = $root.google.cloud.securitycenter.v1.MitreAttack.fromObject(object.mitreAttack);
                             }
                             if (object.access != null) {
                                 if (typeof object.access !== "object")
@@ -3088,6 +3469,7 @@
                                 object.indicator = null;
                                 object.vulnerability = null;
                                 object.muteUpdateTime = null;
+                                object.mitreAttack = null;
                                 object.access = null;
                                 object.muteInitiator = "";
                             }
@@ -3134,6 +3516,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.externalSystems[keys2[j]] = $root.google.cloud.securitycenter.v1.ExternalSystem.toObject(message.externalSystems[keys2[j]], options);
                             }
+                            if (message.mitreAttack != null && message.hasOwnProperty("mitreAttack"))
+                                object.mitreAttack = $root.google.cloud.securitycenter.v1.MitreAttack.toObject(message.mitreAttack, options);
                             if (message.access != null && message.hasOwnProperty("access"))
                                 object.access = $root.google.cloud.securitycenter.v1.Access.toObject(message.access, options);
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
@@ -3215,6 +3599,7 @@
                          * @property {number} VULNERABILITY=2 VULNERABILITY value
                          * @property {number} MISCONFIGURATION=3 MISCONFIGURATION value
                          * @property {number} OBSERVATION=4 OBSERVATION value
+                         * @property {number} SCC_ERROR=5 SCC_ERROR value
                          */
                         Finding.FindingClass = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3223,6 +3608,7 @@
                             values[valuesById[2] = "VULNERABILITY"] = 2;
                             values[valuesById[3] = "MISCONFIGURATION"] = 3;
                             values[valuesById[4] = "OBSERVATION"] = 4;
+                            values[valuesById[5] = "SCC_ERROR"] = 5;
                             return values;
                         })();
     
@@ -3471,6 +3857,922 @@
                         return Indicator;
                     })();
     
+                    v1.MitreAttack = (function() {
+    
+                        /**
+                         * Properties of a MitreAttack.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IMitreAttack
+                         * @property {google.cloud.securitycenter.v1.MitreAttack.Tactic|null} [primaryTactic] MitreAttack primaryTactic
+                         * @property {Array.<google.cloud.securitycenter.v1.MitreAttack.Technique>|null} [primaryTechniques] MitreAttack primaryTechniques
+                         * @property {Array.<google.cloud.securitycenter.v1.MitreAttack.Tactic>|null} [additionalTactics] MitreAttack additionalTactics
+                         * @property {Array.<google.cloud.securitycenter.v1.MitreAttack.Technique>|null} [additionalTechniques] MitreAttack additionalTechniques
+                         * @property {string|null} [version] MitreAttack version
+                         */
+    
+                        /**
+                         * Constructs a new MitreAttack.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a MitreAttack.
+                         * @implements IMitreAttack
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IMitreAttack=} [properties] Properties to set
+                         */
+                        function MitreAttack(properties) {
+                            this.primaryTechniques = [];
+                            this.additionalTactics = [];
+                            this.additionalTechniques = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MitreAttack primaryTactic.
+                         * @member {google.cloud.securitycenter.v1.MitreAttack.Tactic} primaryTactic
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @instance
+                         */
+                        MitreAttack.prototype.primaryTactic = 0;
+    
+                        /**
+                         * MitreAttack primaryTechniques.
+                         * @member {Array.<google.cloud.securitycenter.v1.MitreAttack.Technique>} primaryTechniques
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @instance
+                         */
+                        MitreAttack.prototype.primaryTechniques = $util.emptyArray;
+    
+                        /**
+                         * MitreAttack additionalTactics.
+                         * @member {Array.<google.cloud.securitycenter.v1.MitreAttack.Tactic>} additionalTactics
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @instance
+                         */
+                        MitreAttack.prototype.additionalTactics = $util.emptyArray;
+    
+                        /**
+                         * MitreAttack additionalTechniques.
+                         * @member {Array.<google.cloud.securitycenter.v1.MitreAttack.Technique>} additionalTechniques
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @instance
+                         */
+                        MitreAttack.prototype.additionalTechniques = $util.emptyArray;
+    
+                        /**
+                         * MitreAttack version.
+                         * @member {string} version
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @instance
+                         */
+                        MitreAttack.prototype.version = "";
+    
+                        /**
+                         * Creates a new MitreAttack instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IMitreAttack=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.MitreAttack} MitreAttack instance
+                         */
+                        MitreAttack.create = function create(properties) {
+                            return new MitreAttack(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MitreAttack message. Does not implicitly {@link google.cloud.securitycenter.v1.MitreAttack.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IMitreAttack} message MitreAttack message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MitreAttack.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.primaryTactic != null && Object.hasOwnProperty.call(message, "primaryTactic"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.primaryTactic);
+                            if (message.primaryTechniques != null && message.primaryTechniques.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.primaryTechniques.length; ++i)
+                                    writer.int32(message.primaryTechniques[i]);
+                                writer.ldelim();
+                            }
+                            if (message.additionalTactics != null && message.additionalTactics.length) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                for (var i = 0; i < message.additionalTactics.length; ++i)
+                                    writer.int32(message.additionalTactics[i]);
+                                writer.ldelim();
+                            }
+                            if (message.additionalTechniques != null && message.additionalTechniques.length) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                for (var i = 0; i < message.additionalTechniques.length; ++i)
+                                    writer.int32(message.additionalTechniques[i]);
+                                writer.ldelim();
+                            }
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.version);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MitreAttack message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.MitreAttack.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IMitreAttack} message MitreAttack message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MitreAttack.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MitreAttack message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.MitreAttack} MitreAttack
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MitreAttack.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.MitreAttack();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.primaryTactic = reader.int32();
+                                    break;
+                                case 2:
+                                    if (!(message.primaryTechniques && message.primaryTechniques.length))
+                                        message.primaryTechniques = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.primaryTechniques.push(reader.int32());
+                                    } else
+                                        message.primaryTechniques.push(reader.int32());
+                                    break;
+                                case 3:
+                                    if (!(message.additionalTactics && message.additionalTactics.length))
+                                        message.additionalTactics = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.additionalTactics.push(reader.int32());
+                                    } else
+                                        message.additionalTactics.push(reader.int32());
+                                    break;
+                                case 4:
+                                    if (!(message.additionalTechniques && message.additionalTechniques.length))
+                                        message.additionalTechniques = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.additionalTechniques.push(reader.int32());
+                                    } else
+                                        message.additionalTechniques.push(reader.int32());
+                                    break;
+                                case 5:
+                                    message.version = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MitreAttack message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.MitreAttack} MitreAttack
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MitreAttack.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MitreAttack message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MitreAttack.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.primaryTactic != null && message.hasOwnProperty("primaryTactic"))
+                                switch (message.primaryTactic) {
+                                default:
+                                    return "primaryTactic: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 5:
+                                case 3:
+                                case 6:
+                                case 8:
+                                case 7:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 4:
+                                case 13:
+                                case 14:
+                                    break;
+                                }
+                            if (message.primaryTechniques != null && message.hasOwnProperty("primaryTechniques")) {
+                                if (!Array.isArray(message.primaryTechniques))
+                                    return "primaryTechniques: array expected";
+                                for (var i = 0; i < message.primaryTechniques.length; ++i)
+                                    switch (message.primaryTechniques[i]) {
+                                    default:
+                                        return "primaryTechniques: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                    case 13:
+                                    case 14:
+                                    case 15:
+                                    case 16:
+                                    case 17:
+                                    case 18:
+                                    case 19:
+                                    case 20:
+                                    case 21:
+                                    case 22:
+                                    case 23:
+                                    case 24:
+                                    case 25:
+                                    case 26:
+                                    case 27:
+                                    case 28:
+                                        break;
+                                    }
+                            }
+                            if (message.additionalTactics != null && message.hasOwnProperty("additionalTactics")) {
+                                if (!Array.isArray(message.additionalTactics))
+                                    return "additionalTactics: array expected";
+                                for (var i = 0; i < message.additionalTactics.length; ++i)
+                                    switch (message.additionalTactics[i]) {
+                                    default:
+                                        return "additionalTactics: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 5:
+                                    case 3:
+                                    case 6:
+                                    case 8:
+                                    case 7:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                    case 4:
+                                    case 13:
+                                    case 14:
+                                        break;
+                                    }
+                            }
+                            if (message.additionalTechniques != null && message.hasOwnProperty("additionalTechniques")) {
+                                if (!Array.isArray(message.additionalTechniques))
+                                    return "additionalTechniques: array expected";
+                                for (var i = 0; i < message.additionalTechniques.length; ++i)
+                                    switch (message.additionalTechniques[i]) {
+                                    default:
+                                        return "additionalTechniques: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                    case 13:
+                                    case 14:
+                                    case 15:
+                                    case 16:
+                                    case 17:
+                                    case 18:
+                                    case 19:
+                                    case 20:
+                                    case 21:
+                                    case 22:
+                                    case 23:
+                                    case 24:
+                                    case 25:
+                                    case 26:
+                                    case 27:
+                                    case 28:
+                                        break;
+                                    }
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MitreAttack message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.MitreAttack} MitreAttack
+                         */
+                        MitreAttack.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.MitreAttack)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.MitreAttack();
+                            switch (object.primaryTactic) {
+                            case "TACTIC_UNSPECIFIED":
+                            case 0:
+                                message.primaryTactic = 0;
+                                break;
+                            case "RECONNAISSANCE":
+                            case 1:
+                                message.primaryTactic = 1;
+                                break;
+                            case "RESOURCE_DEVELOPMENT":
+                            case 2:
+                                message.primaryTactic = 2;
+                                break;
+                            case "INITIAL_ACCESS":
+                            case 5:
+                                message.primaryTactic = 5;
+                                break;
+                            case "EXECUTION":
+                            case 3:
+                                message.primaryTactic = 3;
+                                break;
+                            case "PERSISTENCE":
+                            case 6:
+                                message.primaryTactic = 6;
+                                break;
+                            case "PRIVILEGE_ESCALATION":
+                            case 8:
+                                message.primaryTactic = 8;
+                                break;
+                            case "DEFENSE_EVASION":
+                            case 7:
+                                message.primaryTactic = 7;
+                                break;
+                            case "CREDENTIAL_ACCESS":
+                            case 9:
+                                message.primaryTactic = 9;
+                                break;
+                            case "DISCOVERY":
+                            case 10:
+                                message.primaryTactic = 10;
+                                break;
+                            case "LATERAL_MOVEMENT":
+                            case 11:
+                                message.primaryTactic = 11;
+                                break;
+                            case "COLLECTION":
+                            case 12:
+                                message.primaryTactic = 12;
+                                break;
+                            case "COMMAND_AND_CONTROL":
+                            case 4:
+                                message.primaryTactic = 4;
+                                break;
+                            case "EXFILTRATION":
+                            case 13:
+                                message.primaryTactic = 13;
+                                break;
+                            case "IMPACT":
+                            case 14:
+                                message.primaryTactic = 14;
+                                break;
+                            }
+                            if (object.primaryTechniques) {
+                                if (!Array.isArray(object.primaryTechniques))
+                                    throw TypeError(".google.cloud.securitycenter.v1.MitreAttack.primaryTechniques: array expected");
+                                message.primaryTechniques = [];
+                                for (var i = 0; i < object.primaryTechniques.length; ++i)
+                                    switch (object.primaryTechniques[i]) {
+                                    default:
+                                    case "TECHNIQUE_UNSPECIFIED":
+                                    case 0:
+                                        message.primaryTechniques[i] = 0;
+                                        break;
+                                    case "ACTIVE_SCANNING":
+                                    case 1:
+                                        message.primaryTechniques[i] = 1;
+                                        break;
+                                    case "SCANNING_IP_BLOCKS":
+                                    case 2:
+                                        message.primaryTechniques[i] = 2;
+                                        break;
+                                    case "INGRESS_TOOL_TRANSFER":
+                                    case 3:
+                                        message.primaryTechniques[i] = 3;
+                                        break;
+                                    case "NATIVE_API":
+                                    case 4:
+                                        message.primaryTechniques[i] = 4;
+                                        break;
+                                    case "SHARED_MODULES":
+                                    case 5:
+                                        message.primaryTechniques[i] = 5;
+                                        break;
+                                    case "COMMAND_AND_SCRIPTING_INTERPRETER":
+                                    case 6:
+                                        message.primaryTechniques[i] = 6;
+                                        break;
+                                    case "UNIX_SHELL":
+                                    case 7:
+                                        message.primaryTechniques[i] = 7;
+                                        break;
+                                    case "RESOURCE_HIJACKING":
+                                    case 8:
+                                        message.primaryTechniques[i] = 8;
+                                        break;
+                                    case "PROXY":
+                                    case 9:
+                                        message.primaryTechniques[i] = 9;
+                                        break;
+                                    case "EXTERNAL_PROXY":
+                                    case 10:
+                                        message.primaryTechniques[i] = 10;
+                                        break;
+                                    case "MULTI_HOP_PROXY":
+                                    case 11:
+                                        message.primaryTechniques[i] = 11;
+                                        break;
+                                    case "DYNAMIC_RESOLUTION":
+                                    case 12:
+                                        message.primaryTechniques[i] = 12;
+                                        break;
+                                    case "UNSECURED_CREDENTIALS":
+                                    case 13:
+                                        message.primaryTechniques[i] = 13;
+                                        break;
+                                    case "VALID_ACCOUNTS":
+                                    case 14:
+                                        message.primaryTechniques[i] = 14;
+                                        break;
+                                    case "LOCAL_ACCOUNTS":
+                                    case 15:
+                                        message.primaryTechniques[i] = 15;
+                                        break;
+                                    case "CLOUD_ACCOUNTS":
+                                    case 16:
+                                        message.primaryTechniques[i] = 16;
+                                        break;
+                                    case "NETWORK_DENIAL_OF_SERVICE":
+                                    case 17:
+                                        message.primaryTechniques[i] = 17;
+                                        break;
+                                    case "PERMISSION_GROUPS_DISCOVERY":
+                                    case 18:
+                                        message.primaryTechniques[i] = 18;
+                                        break;
+                                    case "CLOUD_GROUPS":
+                                    case 19:
+                                        message.primaryTechniques[i] = 19;
+                                        break;
+                                    case "EXFILTRATION_OVER_WEB_SERVICE":
+                                    case 20:
+                                        message.primaryTechniques[i] = 20;
+                                        break;
+                                    case "EXFILTRATION_TO_CLOUD_STORAGE":
+                                    case 21:
+                                        message.primaryTechniques[i] = 21;
+                                        break;
+                                    case "ACCOUNT_MANIPULATION":
+                                    case 22:
+                                        message.primaryTechniques[i] = 22;
+                                        break;
+                                    case "SSH_AUTHORIZED_KEYS":
+                                    case 23:
+                                        message.primaryTechniques[i] = 23;
+                                        break;
+                                    case "CREATE_OR_MODIFY_SYSTEM_PROCESS":
+                                    case 24:
+                                        message.primaryTechniques[i] = 24;
+                                        break;
+                                    case "STEAL_WEB_SESSION_COOKIE":
+                                    case 25:
+                                        message.primaryTechniques[i] = 25;
+                                        break;
+                                    case "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE":
+                                    case 26:
+                                        message.primaryTechniques[i] = 26;
+                                        break;
+                                    case "EXPLOIT_PUBLIC_FACING_APPLICATION":
+                                    case 27:
+                                        message.primaryTechniques[i] = 27;
+                                        break;
+                                    case "MODIFY_AUTHENTICATION_PROCESS":
+                                    case 28:
+                                        message.primaryTechniques[i] = 28;
+                                        break;
+                                    }
+                            }
+                            if (object.additionalTactics) {
+                                if (!Array.isArray(object.additionalTactics))
+                                    throw TypeError(".google.cloud.securitycenter.v1.MitreAttack.additionalTactics: array expected");
+                                message.additionalTactics = [];
+                                for (var i = 0; i < object.additionalTactics.length; ++i)
+                                    switch (object.additionalTactics[i]) {
+                                    default:
+                                    case "TACTIC_UNSPECIFIED":
+                                    case 0:
+                                        message.additionalTactics[i] = 0;
+                                        break;
+                                    case "RECONNAISSANCE":
+                                    case 1:
+                                        message.additionalTactics[i] = 1;
+                                        break;
+                                    case "RESOURCE_DEVELOPMENT":
+                                    case 2:
+                                        message.additionalTactics[i] = 2;
+                                        break;
+                                    case "INITIAL_ACCESS":
+                                    case 5:
+                                        message.additionalTactics[i] = 5;
+                                        break;
+                                    case "EXECUTION":
+                                    case 3:
+                                        message.additionalTactics[i] = 3;
+                                        break;
+                                    case "PERSISTENCE":
+                                    case 6:
+                                        message.additionalTactics[i] = 6;
+                                        break;
+                                    case "PRIVILEGE_ESCALATION":
+                                    case 8:
+                                        message.additionalTactics[i] = 8;
+                                        break;
+                                    case "DEFENSE_EVASION":
+                                    case 7:
+                                        message.additionalTactics[i] = 7;
+                                        break;
+                                    case "CREDENTIAL_ACCESS":
+                                    case 9:
+                                        message.additionalTactics[i] = 9;
+                                        break;
+                                    case "DISCOVERY":
+                                    case 10:
+                                        message.additionalTactics[i] = 10;
+                                        break;
+                                    case "LATERAL_MOVEMENT":
+                                    case 11:
+                                        message.additionalTactics[i] = 11;
+                                        break;
+                                    case "COLLECTION":
+                                    case 12:
+                                        message.additionalTactics[i] = 12;
+                                        break;
+                                    case "COMMAND_AND_CONTROL":
+                                    case 4:
+                                        message.additionalTactics[i] = 4;
+                                        break;
+                                    case "EXFILTRATION":
+                                    case 13:
+                                        message.additionalTactics[i] = 13;
+                                        break;
+                                    case "IMPACT":
+                                    case 14:
+                                        message.additionalTactics[i] = 14;
+                                        break;
+                                    }
+                            }
+                            if (object.additionalTechniques) {
+                                if (!Array.isArray(object.additionalTechniques))
+                                    throw TypeError(".google.cloud.securitycenter.v1.MitreAttack.additionalTechniques: array expected");
+                                message.additionalTechniques = [];
+                                for (var i = 0; i < object.additionalTechniques.length; ++i)
+                                    switch (object.additionalTechniques[i]) {
+                                    default:
+                                    case "TECHNIQUE_UNSPECIFIED":
+                                    case 0:
+                                        message.additionalTechniques[i] = 0;
+                                        break;
+                                    case "ACTIVE_SCANNING":
+                                    case 1:
+                                        message.additionalTechniques[i] = 1;
+                                        break;
+                                    case "SCANNING_IP_BLOCKS":
+                                    case 2:
+                                        message.additionalTechniques[i] = 2;
+                                        break;
+                                    case "INGRESS_TOOL_TRANSFER":
+                                    case 3:
+                                        message.additionalTechniques[i] = 3;
+                                        break;
+                                    case "NATIVE_API":
+                                    case 4:
+                                        message.additionalTechniques[i] = 4;
+                                        break;
+                                    case "SHARED_MODULES":
+                                    case 5:
+                                        message.additionalTechniques[i] = 5;
+                                        break;
+                                    case "COMMAND_AND_SCRIPTING_INTERPRETER":
+                                    case 6:
+                                        message.additionalTechniques[i] = 6;
+                                        break;
+                                    case "UNIX_SHELL":
+                                    case 7:
+                                        message.additionalTechniques[i] = 7;
+                                        break;
+                                    case "RESOURCE_HIJACKING":
+                                    case 8:
+                                        message.additionalTechniques[i] = 8;
+                                        break;
+                                    case "PROXY":
+                                    case 9:
+                                        message.additionalTechniques[i] = 9;
+                                        break;
+                                    case "EXTERNAL_PROXY":
+                                    case 10:
+                                        message.additionalTechniques[i] = 10;
+                                        break;
+                                    case "MULTI_HOP_PROXY":
+                                    case 11:
+                                        message.additionalTechniques[i] = 11;
+                                        break;
+                                    case "DYNAMIC_RESOLUTION":
+                                    case 12:
+                                        message.additionalTechniques[i] = 12;
+                                        break;
+                                    case "UNSECURED_CREDENTIALS":
+                                    case 13:
+                                        message.additionalTechniques[i] = 13;
+                                        break;
+                                    case "VALID_ACCOUNTS":
+                                    case 14:
+                                        message.additionalTechniques[i] = 14;
+                                        break;
+                                    case "LOCAL_ACCOUNTS":
+                                    case 15:
+                                        message.additionalTechniques[i] = 15;
+                                        break;
+                                    case "CLOUD_ACCOUNTS":
+                                    case 16:
+                                        message.additionalTechniques[i] = 16;
+                                        break;
+                                    case "NETWORK_DENIAL_OF_SERVICE":
+                                    case 17:
+                                        message.additionalTechniques[i] = 17;
+                                        break;
+                                    case "PERMISSION_GROUPS_DISCOVERY":
+                                    case 18:
+                                        message.additionalTechniques[i] = 18;
+                                        break;
+                                    case "CLOUD_GROUPS":
+                                    case 19:
+                                        message.additionalTechniques[i] = 19;
+                                        break;
+                                    case "EXFILTRATION_OVER_WEB_SERVICE":
+                                    case 20:
+                                        message.additionalTechniques[i] = 20;
+                                        break;
+                                    case "EXFILTRATION_TO_CLOUD_STORAGE":
+                                    case 21:
+                                        message.additionalTechniques[i] = 21;
+                                        break;
+                                    case "ACCOUNT_MANIPULATION":
+                                    case 22:
+                                        message.additionalTechniques[i] = 22;
+                                        break;
+                                    case "SSH_AUTHORIZED_KEYS":
+                                    case 23:
+                                        message.additionalTechniques[i] = 23;
+                                        break;
+                                    case "CREATE_OR_MODIFY_SYSTEM_PROCESS":
+                                    case 24:
+                                        message.additionalTechniques[i] = 24;
+                                        break;
+                                    case "STEAL_WEB_SESSION_COOKIE":
+                                    case 25:
+                                        message.additionalTechniques[i] = 25;
+                                        break;
+                                    case "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE":
+                                    case 26:
+                                        message.additionalTechniques[i] = 26;
+                                        break;
+                                    case "EXPLOIT_PUBLIC_FACING_APPLICATION":
+                                    case 27:
+                                        message.additionalTechniques[i] = 27;
+                                        break;
+                                    case "MODIFY_AUTHENTICATION_PROCESS":
+                                    case 28:
+                                        message.additionalTechniques[i] = 28;
+                                        break;
+                                    }
+                            }
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MitreAttack message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.MitreAttack} message MitreAttack
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MitreAttack.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.primaryTechniques = [];
+                                object.additionalTactics = [];
+                                object.additionalTechniques = [];
+                            }
+                            if (options.defaults) {
+                                object.primaryTactic = options.enums === String ? "TACTIC_UNSPECIFIED" : 0;
+                                object.version = "";
+                            }
+                            if (message.primaryTactic != null && message.hasOwnProperty("primaryTactic"))
+                                object.primaryTactic = options.enums === String ? $root.google.cloud.securitycenter.v1.MitreAttack.Tactic[message.primaryTactic] : message.primaryTactic;
+                            if (message.primaryTechniques && message.primaryTechniques.length) {
+                                object.primaryTechniques = [];
+                                for (var j = 0; j < message.primaryTechniques.length; ++j)
+                                    object.primaryTechniques[j] = options.enums === String ? $root.google.cloud.securitycenter.v1.MitreAttack.Technique[message.primaryTechniques[j]] : message.primaryTechniques[j];
+                            }
+                            if (message.additionalTactics && message.additionalTactics.length) {
+                                object.additionalTactics = [];
+                                for (var j = 0; j < message.additionalTactics.length; ++j)
+                                    object.additionalTactics[j] = options.enums === String ? $root.google.cloud.securitycenter.v1.MitreAttack.Tactic[message.additionalTactics[j]] : message.additionalTactics[j];
+                            }
+                            if (message.additionalTechniques && message.additionalTechniques.length) {
+                                object.additionalTechniques = [];
+                                for (var j = 0; j < message.additionalTechniques.length; ++j)
+                                    object.additionalTechniques[j] = options.enums === String ? $root.google.cloud.securitycenter.v1.MitreAttack.Technique[message.additionalTechniques[j]] : message.additionalTechniques[j];
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MitreAttack to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.MitreAttack
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MitreAttack.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Tactic enum.
+                         * @name google.cloud.securitycenter.v1.MitreAttack.Tactic
+                         * @enum {number}
+                         * @property {number} TACTIC_UNSPECIFIED=0 TACTIC_UNSPECIFIED value
+                         * @property {number} RECONNAISSANCE=1 RECONNAISSANCE value
+                         * @property {number} RESOURCE_DEVELOPMENT=2 RESOURCE_DEVELOPMENT value
+                         * @property {number} INITIAL_ACCESS=5 INITIAL_ACCESS value
+                         * @property {number} EXECUTION=3 EXECUTION value
+                         * @property {number} PERSISTENCE=6 PERSISTENCE value
+                         * @property {number} PRIVILEGE_ESCALATION=8 PRIVILEGE_ESCALATION value
+                         * @property {number} DEFENSE_EVASION=7 DEFENSE_EVASION value
+                         * @property {number} CREDENTIAL_ACCESS=9 CREDENTIAL_ACCESS value
+                         * @property {number} DISCOVERY=10 DISCOVERY value
+                         * @property {number} LATERAL_MOVEMENT=11 LATERAL_MOVEMENT value
+                         * @property {number} COLLECTION=12 COLLECTION value
+                         * @property {number} COMMAND_AND_CONTROL=4 COMMAND_AND_CONTROL value
+                         * @property {number} EXFILTRATION=13 EXFILTRATION value
+                         * @property {number} IMPACT=14 IMPACT value
+                         */
+                        MitreAttack.Tactic = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TACTIC_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RECONNAISSANCE"] = 1;
+                            values[valuesById[2] = "RESOURCE_DEVELOPMENT"] = 2;
+                            values[valuesById[5] = "INITIAL_ACCESS"] = 5;
+                            values[valuesById[3] = "EXECUTION"] = 3;
+                            values[valuesById[6] = "PERSISTENCE"] = 6;
+                            values[valuesById[8] = "PRIVILEGE_ESCALATION"] = 8;
+                            values[valuesById[7] = "DEFENSE_EVASION"] = 7;
+                            values[valuesById[9] = "CREDENTIAL_ACCESS"] = 9;
+                            values[valuesById[10] = "DISCOVERY"] = 10;
+                            values[valuesById[11] = "LATERAL_MOVEMENT"] = 11;
+                            values[valuesById[12] = "COLLECTION"] = 12;
+                            values[valuesById[4] = "COMMAND_AND_CONTROL"] = 4;
+                            values[valuesById[13] = "EXFILTRATION"] = 13;
+                            values[valuesById[14] = "IMPACT"] = 14;
+                            return values;
+                        })();
+    
+                        /**
+                         * Technique enum.
+                         * @name google.cloud.securitycenter.v1.MitreAttack.Technique
+                         * @enum {number}
+                         * @property {number} TECHNIQUE_UNSPECIFIED=0 TECHNIQUE_UNSPECIFIED value
+                         * @property {number} ACTIVE_SCANNING=1 ACTIVE_SCANNING value
+                         * @property {number} SCANNING_IP_BLOCKS=2 SCANNING_IP_BLOCKS value
+                         * @property {number} INGRESS_TOOL_TRANSFER=3 INGRESS_TOOL_TRANSFER value
+                         * @property {number} NATIVE_API=4 NATIVE_API value
+                         * @property {number} SHARED_MODULES=5 SHARED_MODULES value
+                         * @property {number} COMMAND_AND_SCRIPTING_INTERPRETER=6 COMMAND_AND_SCRIPTING_INTERPRETER value
+                         * @property {number} UNIX_SHELL=7 UNIX_SHELL value
+                         * @property {number} RESOURCE_HIJACKING=8 RESOURCE_HIJACKING value
+                         * @property {number} PROXY=9 PROXY value
+                         * @property {number} EXTERNAL_PROXY=10 EXTERNAL_PROXY value
+                         * @property {number} MULTI_HOP_PROXY=11 MULTI_HOP_PROXY value
+                         * @property {number} DYNAMIC_RESOLUTION=12 DYNAMIC_RESOLUTION value
+                         * @property {number} UNSECURED_CREDENTIALS=13 UNSECURED_CREDENTIALS value
+                         * @property {number} VALID_ACCOUNTS=14 VALID_ACCOUNTS value
+                         * @property {number} LOCAL_ACCOUNTS=15 LOCAL_ACCOUNTS value
+                         * @property {number} CLOUD_ACCOUNTS=16 CLOUD_ACCOUNTS value
+                         * @property {number} NETWORK_DENIAL_OF_SERVICE=17 NETWORK_DENIAL_OF_SERVICE value
+                         * @property {number} PERMISSION_GROUPS_DISCOVERY=18 PERMISSION_GROUPS_DISCOVERY value
+                         * @property {number} CLOUD_GROUPS=19 CLOUD_GROUPS value
+                         * @property {number} EXFILTRATION_OVER_WEB_SERVICE=20 EXFILTRATION_OVER_WEB_SERVICE value
+                         * @property {number} EXFILTRATION_TO_CLOUD_STORAGE=21 EXFILTRATION_TO_CLOUD_STORAGE value
+                         * @property {number} ACCOUNT_MANIPULATION=22 ACCOUNT_MANIPULATION value
+                         * @property {number} SSH_AUTHORIZED_KEYS=23 SSH_AUTHORIZED_KEYS value
+                         * @property {number} CREATE_OR_MODIFY_SYSTEM_PROCESS=24 CREATE_OR_MODIFY_SYSTEM_PROCESS value
+                         * @property {number} STEAL_WEB_SESSION_COOKIE=25 STEAL_WEB_SESSION_COOKIE value
+                         * @property {number} MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE=26 MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE value
+                         * @property {number} EXPLOIT_PUBLIC_FACING_APPLICATION=27 EXPLOIT_PUBLIC_FACING_APPLICATION value
+                         * @property {number} MODIFY_AUTHENTICATION_PROCESS=28 MODIFY_AUTHENTICATION_PROCESS value
+                         */
+                        MitreAttack.Technique = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TECHNIQUE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE_SCANNING"] = 1;
+                            values[valuesById[2] = "SCANNING_IP_BLOCKS"] = 2;
+                            values[valuesById[3] = "INGRESS_TOOL_TRANSFER"] = 3;
+                            values[valuesById[4] = "NATIVE_API"] = 4;
+                            values[valuesById[5] = "SHARED_MODULES"] = 5;
+                            values[valuesById[6] = "COMMAND_AND_SCRIPTING_INTERPRETER"] = 6;
+                            values[valuesById[7] = "UNIX_SHELL"] = 7;
+                            values[valuesById[8] = "RESOURCE_HIJACKING"] = 8;
+                            values[valuesById[9] = "PROXY"] = 9;
+                            values[valuesById[10] = "EXTERNAL_PROXY"] = 10;
+                            values[valuesById[11] = "MULTI_HOP_PROXY"] = 11;
+                            values[valuesById[12] = "DYNAMIC_RESOLUTION"] = 12;
+                            values[valuesById[13] = "UNSECURED_CREDENTIALS"] = 13;
+                            values[valuesById[14] = "VALID_ACCOUNTS"] = 14;
+                            values[valuesById[15] = "LOCAL_ACCOUNTS"] = 15;
+                            values[valuesById[16] = "CLOUD_ACCOUNTS"] = 16;
+                            values[valuesById[17] = "NETWORK_DENIAL_OF_SERVICE"] = 17;
+                            values[valuesById[18] = "PERMISSION_GROUPS_DISCOVERY"] = 18;
+                            values[valuesById[19] = "CLOUD_GROUPS"] = 19;
+                            values[valuesById[20] = "EXFILTRATION_OVER_WEB_SERVICE"] = 20;
+                            values[valuesById[21] = "EXFILTRATION_TO_CLOUD_STORAGE"] = 21;
+                            values[valuesById[22] = "ACCOUNT_MANIPULATION"] = 22;
+                            values[valuesById[23] = "SSH_AUTHORIZED_KEYS"] = 23;
+                            values[valuesById[24] = "CREATE_OR_MODIFY_SYSTEM_PROCESS"] = 24;
+                            values[valuesById[25] = "STEAL_WEB_SESSION_COOKIE"] = 25;
+                            values[valuesById[26] = "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE"] = 26;
+                            values[valuesById[27] = "EXPLOIT_PUBLIC_FACING_APPLICATION"] = 27;
+                            values[valuesById[28] = "MODIFY_AUTHENTICATION_PROCESS"] = 28;
+                            return values;
+                        })();
+    
+                        return MitreAttack;
+                    })();
+    
                     v1.Vulnerability = (function() {
     
                         /**
@@ -3672,6 +4974,7 @@
                          * @property {string|null} [id] Cve id
                          * @property {Array.<google.cloud.securitycenter.v1.IReference>|null} [references] Cve references
                          * @property {google.cloud.securitycenter.v1.ICvssv3|null} [cvssv3] Cve cvssv3
+                         * @property {boolean|null} [upstreamFixAvailable] Cve upstreamFixAvailable
                          */
     
                         /**
@@ -3715,6 +5018,14 @@
                         Cve.prototype.cvssv3 = null;
     
                         /**
+                         * Cve upstreamFixAvailable.
+                         * @member {boolean} upstreamFixAvailable
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @instance
+                         */
+                        Cve.prototype.upstreamFixAvailable = false;
+    
+                        /**
                          * Creates a new Cve instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1.Cve
@@ -3745,6 +5056,8 @@
                                     $root.google.cloud.securitycenter.v1.Reference.encode(message.references[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.cvssv3 != null && Object.hasOwnProperty.call(message, "cvssv3"))
                                 $root.google.cloud.securitycenter.v1.Cvssv3.encode(message.cvssv3, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.upstreamFixAvailable != null && Object.hasOwnProperty.call(message, "upstreamFixAvailable"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.upstreamFixAvailable);
                             return writer;
                         };
     
@@ -3789,6 +5102,9 @@
                                     break;
                                 case 3:
                                     message.cvssv3 = $root.google.cloud.securitycenter.v1.Cvssv3.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.upstreamFixAvailable = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3842,6 +5158,9 @@
                                 if (error)
                                     return "cvssv3." + error;
                             }
+                            if (message.upstreamFixAvailable != null && message.hasOwnProperty("upstreamFixAvailable"))
+                                if (typeof message.upstreamFixAvailable !== "boolean")
+                                    return "upstreamFixAvailable: boolean expected";
                             return null;
                         };
     
@@ -3874,6 +5193,8 @@
                                     throw TypeError(".google.cloud.securitycenter.v1.Cve.cvssv3: object expected");
                                 message.cvssv3 = $root.google.cloud.securitycenter.v1.Cvssv3.fromObject(object.cvssv3);
                             }
+                            if (object.upstreamFixAvailable != null)
+                                message.upstreamFixAvailable = Boolean(object.upstreamFixAvailable);
                             return message;
                         };
     
@@ -3895,6 +5216,7 @@
                             if (options.defaults) {
                                 object.id = "";
                                 object.cvssv3 = null;
+                                object.upstreamFixAvailable = false;
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
@@ -3905,6 +5227,8 @@
                             }
                             if (message.cvssv3 != null && message.hasOwnProperty("cvssv3"))
                                 object.cvssv3 = $root.google.cloud.securitycenter.v1.Cvssv3.toObject(message.cvssv3, options);
+                            if (message.upstreamFixAvailable != null && message.hasOwnProperty("upstreamFixAvailable"))
+                                object.upstreamFixAvailable = message.upstreamFixAvailable;
                             return object;
                         };
     
@@ -7274,6 +8598,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getBigQueryExport}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef GetBigQueryExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.BigQueryExport} [response] BigQueryExport
+                         */
+    
+                        /**
+                         * Calls GetBigQueryExport.
+                         * @function getBigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IGetBigQueryExportRequest} request GetBigQueryExportRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.GetBigQueryExportCallback} callback Node-style callback called with the error, if any, and BigQueryExport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.getBigQueryExport = function getBigQueryExport(request, callback) {
+                            return this.rpcCall(getBigQueryExport, $root.google.cloud.securitycenter.v1.GetBigQueryExportRequest, $root.google.cloud.securitycenter.v1.BigQueryExport, request, callback);
+                        }, "name", { value: "GetBigQueryExport" });
+    
+                        /**
+                         * Calls GetBigQueryExport.
+                         * @function getBigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IGetBigQueryExportRequest} request GetBigQueryExportRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.BigQueryExport>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getIamPolicy}.
                          * @memberof google.cloud.securitycenter.v1.SecurityCenter
                          * @typedef GetIamPolicyCallback
@@ -8062,6 +9419,138 @@
                          * @instance
                          * @param {google.cloud.securitycenter.v1.IUpdateSecurityMarksRequest} request UpdateSecurityMarksRequest message or plain object
                          * @returns {Promise<google.cloud.securitycenter.v1.SecurityMarks>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createBigQueryExport}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef CreateBigQueryExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.BigQueryExport} [response] BigQueryExport
+                         */
+    
+                        /**
+                         * Calls CreateBigQueryExport.
+                         * @function createBigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.ICreateBigQueryExportRequest} request CreateBigQueryExportRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.CreateBigQueryExportCallback} callback Node-style callback called with the error, if any, and BigQueryExport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.createBigQueryExport = function createBigQueryExport(request, callback) {
+                            return this.rpcCall(createBigQueryExport, $root.google.cloud.securitycenter.v1.CreateBigQueryExportRequest, $root.google.cloud.securitycenter.v1.BigQueryExport, request, callback);
+                        }, "name", { value: "CreateBigQueryExport" });
+    
+                        /**
+                         * Calls CreateBigQueryExport.
+                         * @function createBigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.ICreateBigQueryExportRequest} request CreateBigQueryExportRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.BigQueryExport>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#deleteBigQueryExport}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef DeleteBigQueryExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteBigQueryExport.
+                         * @function deleteBigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest} request DeleteBigQueryExportRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.DeleteBigQueryExportCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.deleteBigQueryExport = function deleteBigQueryExport(request, callback) {
+                            return this.rpcCall(deleteBigQueryExport, $root.google.cloud.securitycenter.v1.DeleteBigQueryExportRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteBigQueryExport" });
+    
+                        /**
+                         * Calls DeleteBigQueryExport.
+                         * @function deleteBigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest} request DeleteBigQueryExportRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateBigQueryExport}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef UpdateBigQueryExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.BigQueryExport} [response] BigQueryExport
+                         */
+    
+                        /**
+                         * Calls UpdateBigQueryExport.
+                         * @function updateBigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest} request UpdateBigQueryExportRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.UpdateBigQueryExportCallback} callback Node-style callback called with the error, if any, and BigQueryExport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.updateBigQueryExport = function updateBigQueryExport(request, callback) {
+                            return this.rpcCall(updateBigQueryExport, $root.google.cloud.securitycenter.v1.UpdateBigQueryExportRequest, $root.google.cloud.securitycenter.v1.BigQueryExport, request, callback);
+                        }, "name", { value: "UpdateBigQueryExport" });
+    
+                        /**
+                         * Calls UpdateBigQueryExport.
+                         * @function updateBigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest} request UpdateBigQueryExportRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.BigQueryExport>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listBigQueryExports}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef ListBigQueryExportsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.ListBigQueryExportsResponse} [response] ListBigQueryExportsResponse
+                         */
+    
+                        /**
+                         * Calls ListBigQueryExports.
+                         * @function listBigQueryExports
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsRequest} request ListBigQueryExportsRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.ListBigQueryExportsCallback} callback Node-style callback called with the error, if any, and ListBigQueryExportsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.listBigQueryExports = function listBigQueryExports(request, callback) {
+                            return this.rpcCall(listBigQueryExports, $root.google.cloud.securitycenter.v1.ListBigQueryExportsRequest, $root.google.cloud.securitycenter.v1.ListBigQueryExportsResponse, request, callback);
+                        }, "name", { value: "ListBigQueryExports" });
+    
+                        /**
+                         * Calls ListBigQueryExports.
+                         * @function listBigQueryExports
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsRequest} request ListBigQueryExportsRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.ListBigQueryExportsResponse>} Promise
                          * @variation 2
                          */
     
@@ -9758,6 +11247,193 @@
                         };
     
                         return DeleteNotificationConfigRequest;
+                    })();
+    
+                    v1.GetBigQueryExportRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBigQueryExportRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IGetBigQueryExportRequest
+                         * @property {string|null} [name] GetBigQueryExportRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBigQueryExportRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a GetBigQueryExportRequest.
+                         * @implements IGetBigQueryExportRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IGetBigQueryExportRequest=} [properties] Properties to set
+                         */
+                        function GetBigQueryExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBigQueryExportRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @instance
+                         */
+                        GetBigQueryExportRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBigQueryExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetBigQueryExportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.GetBigQueryExportRequest} GetBigQueryExportRequest instance
+                         */
+                        GetBigQueryExportRequest.create = function create(properties) {
+                            return new GetBigQueryExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBigQueryExportRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.GetBigQueryExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetBigQueryExportRequest} message GetBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBigQueryExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.GetBigQueryExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetBigQueryExportRequest} message GetBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBigQueryExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBigQueryExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.GetBigQueryExportRequest} GetBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBigQueryExportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.GetBigQueryExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.GetBigQueryExportRequest} GetBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBigQueryExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBigQueryExportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBigQueryExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.GetBigQueryExportRequest} GetBigQueryExportRequest
+                         */
+                        GetBigQueryExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.GetBigQueryExportRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.GetBigQueryExportRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBigQueryExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.GetBigQueryExportRequest} message GetBigQueryExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBigQueryExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBigQueryExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.GetBigQueryExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBigQueryExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetBigQueryExportRequest;
                     })();
     
                     v1.GetMuteConfigRequest = (function() {
@@ -17811,6 +19487,1113 @@
                         };
     
                         return UpdateSecurityMarksRequest;
+                    })();
+    
+                    v1.CreateBigQueryExportRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateBigQueryExportRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ICreateBigQueryExportRequest
+                         * @property {string|null} [parent] CreateBigQueryExportRequest parent
+                         * @property {google.cloud.securitycenter.v1.IBigQueryExport|null} [bigQueryExport] CreateBigQueryExportRequest bigQueryExport
+                         * @property {string|null} [bigQueryExportId] CreateBigQueryExportRequest bigQueryExportId
+                         */
+    
+                        /**
+                         * Constructs a new CreateBigQueryExportRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a CreateBigQueryExportRequest.
+                         * @implements ICreateBigQueryExportRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ICreateBigQueryExportRequest=} [properties] Properties to set
+                         */
+                        function CreateBigQueryExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateBigQueryExportRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @instance
+                         */
+                        CreateBigQueryExportRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateBigQueryExportRequest bigQueryExport.
+                         * @member {google.cloud.securitycenter.v1.IBigQueryExport|null|undefined} bigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @instance
+                         */
+                        CreateBigQueryExportRequest.prototype.bigQueryExport = null;
+    
+                        /**
+                         * CreateBigQueryExportRequest bigQueryExportId.
+                         * @member {string} bigQueryExportId
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @instance
+                         */
+                        CreateBigQueryExportRequest.prototype.bigQueryExportId = "";
+    
+                        /**
+                         * Creates a new CreateBigQueryExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateBigQueryExportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.CreateBigQueryExportRequest} CreateBigQueryExportRequest instance
+                         */
+                        CreateBigQueryExportRequest.create = function create(properties) {
+                            return new CreateBigQueryExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBigQueryExportRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.CreateBigQueryExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateBigQueryExportRequest} message CreateBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBigQueryExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.bigQueryExport != null && Object.hasOwnProperty.call(message, "bigQueryExport"))
+                                $root.google.cloud.securitycenter.v1.BigQueryExport.encode(message.bigQueryExport, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.bigQueryExportId != null && Object.hasOwnProperty.call(message, "bigQueryExportId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.bigQueryExportId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CreateBigQueryExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateBigQueryExportRequest} message CreateBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBigQueryExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateBigQueryExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.CreateBigQueryExportRequest} CreateBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBigQueryExportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.CreateBigQueryExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.bigQueryExport = $root.google.cloud.securitycenter.v1.BigQueryExport.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.bigQueryExportId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.CreateBigQueryExportRequest} CreateBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBigQueryExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateBigQueryExportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateBigQueryExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.bigQueryExport != null && message.hasOwnProperty("bigQueryExport")) {
+                                var error = $root.google.cloud.securitycenter.v1.BigQueryExport.verify(message.bigQueryExport);
+                                if (error)
+                                    return "bigQueryExport." + error;
+                            }
+                            if (message.bigQueryExportId != null && message.hasOwnProperty("bigQueryExportId"))
+                                if (!$util.isString(message.bigQueryExportId))
+                                    return "bigQueryExportId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.CreateBigQueryExportRequest} CreateBigQueryExportRequest
+                         */
+                        CreateBigQueryExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.CreateBigQueryExportRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.CreateBigQueryExportRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.bigQueryExport != null) {
+                                if (typeof object.bigQueryExport !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.CreateBigQueryExportRequest.bigQueryExport: object expected");
+                                message.bigQueryExport = $root.google.cloud.securitycenter.v1.BigQueryExport.fromObject(object.bigQueryExport);
+                            }
+                            if (object.bigQueryExportId != null)
+                                message.bigQueryExportId = String(object.bigQueryExportId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateBigQueryExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.CreateBigQueryExportRequest} message CreateBigQueryExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateBigQueryExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.bigQueryExport = null;
+                                object.bigQueryExportId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.bigQueryExport != null && message.hasOwnProperty("bigQueryExport"))
+                                object.bigQueryExport = $root.google.cloud.securitycenter.v1.BigQueryExport.toObject(message.bigQueryExport, options);
+                            if (message.bigQueryExportId != null && message.hasOwnProperty("bigQueryExportId"))
+                                object.bigQueryExportId = message.bigQueryExportId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateBigQueryExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.CreateBigQueryExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateBigQueryExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateBigQueryExportRequest;
+                    })();
+    
+                    v1.UpdateBigQueryExportRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateBigQueryExportRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IUpdateBigQueryExportRequest
+                         * @property {google.cloud.securitycenter.v1.IBigQueryExport|null} [bigQueryExport] UpdateBigQueryExportRequest bigQueryExport
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBigQueryExportRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateBigQueryExportRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an UpdateBigQueryExportRequest.
+                         * @implements IUpdateBigQueryExportRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest=} [properties] Properties to set
+                         */
+                        function UpdateBigQueryExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateBigQueryExportRequest bigQueryExport.
+                         * @member {google.cloud.securitycenter.v1.IBigQueryExport|null|undefined} bigQueryExport
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @instance
+                         */
+                        UpdateBigQueryExportRequest.prototype.bigQueryExport = null;
+    
+                        /**
+                         * UpdateBigQueryExportRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @instance
+                         */
+                        UpdateBigQueryExportRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateBigQueryExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.UpdateBigQueryExportRequest} UpdateBigQueryExportRequest instance
+                         */
+                        UpdateBigQueryExportRequest.create = function create(properties) {
+                            return new UpdateBigQueryExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBigQueryExportRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest} message UpdateBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBigQueryExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bigQueryExport != null && Object.hasOwnProperty.call(message, "bigQueryExport"))
+                                $root.google.cloud.securitycenter.v1.BigQueryExport.encode(message.bigQueryExport, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest} message UpdateBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBigQueryExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.UpdateBigQueryExportRequest} UpdateBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBigQueryExportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.UpdateBigQueryExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.bigQueryExport = $root.google.cloud.securitycenter.v1.BigQueryExport.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.UpdateBigQueryExportRequest} UpdateBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBigQueryExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateBigQueryExportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateBigQueryExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bigQueryExport != null && message.hasOwnProperty("bigQueryExport")) {
+                                var error = $root.google.cloud.securitycenter.v1.BigQueryExport.verify(message.bigQueryExport);
+                                if (error)
+                                    return "bigQueryExport." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.UpdateBigQueryExportRequest} UpdateBigQueryExportRequest
+                         */
+                        UpdateBigQueryExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.UpdateBigQueryExportRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.UpdateBigQueryExportRequest();
+                            if (object.bigQueryExport != null) {
+                                if (typeof object.bigQueryExport !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.UpdateBigQueryExportRequest.bigQueryExport: object expected");
+                                message.bigQueryExport = $root.google.cloud.securitycenter.v1.BigQueryExport.fromObject(object.bigQueryExport);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.UpdateBigQueryExportRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateBigQueryExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.UpdateBigQueryExportRequest} message UpdateBigQueryExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateBigQueryExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.bigQueryExport = null;
+                                object.updateMask = null;
+                            }
+                            if (message.bigQueryExport != null && message.hasOwnProperty("bigQueryExport"))
+                                object.bigQueryExport = $root.google.cloud.securitycenter.v1.BigQueryExport.toObject(message.bigQueryExport, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateBigQueryExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.UpdateBigQueryExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateBigQueryExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateBigQueryExportRequest;
+                    })();
+    
+                    v1.ListBigQueryExportsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBigQueryExportsRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IListBigQueryExportsRequest
+                         * @property {string|null} [parent] ListBigQueryExportsRequest parent
+                         * @property {number|null} [pageSize] ListBigQueryExportsRequest pageSize
+                         * @property {string|null} [pageToken] ListBigQueryExportsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListBigQueryExportsRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a ListBigQueryExportsRequest.
+                         * @implements IListBigQueryExportsRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsRequest=} [properties] Properties to set
+                         */
+                        function ListBigQueryExportsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBigQueryExportsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @instance
+                         */
+                        ListBigQueryExportsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBigQueryExportsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @instance
+                         */
+                        ListBigQueryExportsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBigQueryExportsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @instance
+                         */
+                        ListBigQueryExportsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListBigQueryExportsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ListBigQueryExportsRequest} ListBigQueryExportsRequest instance
+                         */
+                        ListBigQueryExportsRequest.create = function create(properties) {
+                            return new ListBigQueryExportsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBigQueryExportsRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.ListBigQueryExportsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsRequest} message ListBigQueryExportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBigQueryExportsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBigQueryExportsRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListBigQueryExportsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsRequest} message ListBigQueryExportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBigQueryExportsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBigQueryExportsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ListBigQueryExportsRequest} ListBigQueryExportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBigQueryExportsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ListBigQueryExportsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBigQueryExportsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ListBigQueryExportsRequest} ListBigQueryExportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBigQueryExportsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBigQueryExportsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBigQueryExportsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBigQueryExportsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ListBigQueryExportsRequest} ListBigQueryExportsRequest
+                         */
+                        ListBigQueryExportsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ListBigQueryExportsRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ListBigQueryExportsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBigQueryExportsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ListBigQueryExportsRequest} message ListBigQueryExportsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBigQueryExportsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBigQueryExportsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBigQueryExportsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListBigQueryExportsRequest;
+                    })();
+    
+                    v1.ListBigQueryExportsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBigQueryExportsResponse.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IListBigQueryExportsResponse
+                         * @property {Array.<google.cloud.securitycenter.v1.IBigQueryExport>|null} [bigQueryExports] ListBigQueryExportsResponse bigQueryExports
+                         * @property {string|null} [nextPageToken] ListBigQueryExportsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListBigQueryExportsResponse.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a ListBigQueryExportsResponse.
+                         * @implements IListBigQueryExportsResponse
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsResponse=} [properties] Properties to set
+                         */
+                        function ListBigQueryExportsResponse(properties) {
+                            this.bigQueryExports = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBigQueryExportsResponse bigQueryExports.
+                         * @member {Array.<google.cloud.securitycenter.v1.IBigQueryExport>} bigQueryExports
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @instance
+                         */
+                        ListBigQueryExportsResponse.prototype.bigQueryExports = $util.emptyArray;
+    
+                        /**
+                         * ListBigQueryExportsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @instance
+                         */
+                        ListBigQueryExportsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListBigQueryExportsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ListBigQueryExportsResponse} ListBigQueryExportsResponse instance
+                         */
+                        ListBigQueryExportsResponse.create = function create(properties) {
+                            return new ListBigQueryExportsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBigQueryExportsResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.ListBigQueryExportsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsResponse} message ListBigQueryExportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBigQueryExportsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bigQueryExports != null && message.bigQueryExports.length)
+                                for (var i = 0; i < message.bigQueryExports.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.BigQueryExport.encode(message.bigQueryExports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBigQueryExportsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListBigQueryExportsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListBigQueryExportsResponse} message ListBigQueryExportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBigQueryExportsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBigQueryExportsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ListBigQueryExportsResponse} ListBigQueryExportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBigQueryExportsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ListBigQueryExportsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.bigQueryExports && message.bigQueryExports.length))
+                                        message.bigQueryExports = [];
+                                    message.bigQueryExports.push($root.google.cloud.securitycenter.v1.BigQueryExport.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBigQueryExportsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ListBigQueryExportsResponse} ListBigQueryExportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBigQueryExportsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBigQueryExportsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBigQueryExportsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bigQueryExports != null && message.hasOwnProperty("bigQueryExports")) {
+                                if (!Array.isArray(message.bigQueryExports))
+                                    return "bigQueryExports: array expected";
+                                for (var i = 0; i < message.bigQueryExports.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.BigQueryExport.verify(message.bigQueryExports[i]);
+                                    if (error)
+                                        return "bigQueryExports." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBigQueryExportsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ListBigQueryExportsResponse} ListBigQueryExportsResponse
+                         */
+                        ListBigQueryExportsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ListBigQueryExportsResponse)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ListBigQueryExportsResponse();
+                            if (object.bigQueryExports) {
+                                if (!Array.isArray(object.bigQueryExports))
+                                    throw TypeError(".google.cloud.securitycenter.v1.ListBigQueryExportsResponse.bigQueryExports: array expected");
+                                message.bigQueryExports = [];
+                                for (var i = 0; i < object.bigQueryExports.length; ++i) {
+                                    if (typeof object.bigQueryExports[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.ListBigQueryExportsResponse.bigQueryExports: object expected");
+                                    message.bigQueryExports[i] = $root.google.cloud.securitycenter.v1.BigQueryExport.fromObject(object.bigQueryExports[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBigQueryExportsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ListBigQueryExportsResponse} message ListBigQueryExportsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBigQueryExportsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.bigQueryExports = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.bigQueryExports && message.bigQueryExports.length) {
+                                object.bigQueryExports = [];
+                                for (var j = 0; j < message.bigQueryExports.length; ++j)
+                                    object.bigQueryExports[j] = $root.google.cloud.securitycenter.v1.BigQueryExport.toObject(message.bigQueryExports[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBigQueryExportsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ListBigQueryExportsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBigQueryExportsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListBigQueryExportsResponse;
+                    })();
+    
+                    v1.DeleteBigQueryExportRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteBigQueryExportRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IDeleteBigQueryExportRequest
+                         * @property {string|null} [name] DeleteBigQueryExportRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteBigQueryExportRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a DeleteBigQueryExportRequest.
+                         * @implements IDeleteBigQueryExportRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest=} [properties] Properties to set
+                         */
+                        function DeleteBigQueryExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteBigQueryExportRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @instance
+                         */
+                        DeleteBigQueryExportRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteBigQueryExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.DeleteBigQueryExportRequest} DeleteBigQueryExportRequest instance
+                         */
+                        DeleteBigQueryExportRequest.create = function create(properties) {
+                            return new DeleteBigQueryExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBigQueryExportRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteBigQueryExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest} message DeleteBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBigQueryExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteBigQueryExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest} message DeleteBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBigQueryExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteBigQueryExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.DeleteBigQueryExportRequest} DeleteBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBigQueryExportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.DeleteBigQueryExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.DeleteBigQueryExportRequest} DeleteBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBigQueryExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteBigQueryExportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteBigQueryExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.DeleteBigQueryExportRequest} DeleteBigQueryExportRequest
+                         */
+                        DeleteBigQueryExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.DeleteBigQueryExportRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.DeleteBigQueryExportRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteBigQueryExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.DeleteBigQueryExportRequest} message DeleteBigQueryExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteBigQueryExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteBigQueryExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.DeleteBigQueryExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteBigQueryExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteBigQueryExportRequest;
                     })();
     
                     v1.Source = (function() {
@@ -39236,6 +42019,667 @@
              */
             var api = {};
     
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        case 10:
+                            if (!(message.style && message.style.length))
+                                message.style = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.style.push(reader.int32());
+                            } else
+                                message.style.push(reader.int32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -40138,667 +43582,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
-                                    message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
             })();
     
             return api;

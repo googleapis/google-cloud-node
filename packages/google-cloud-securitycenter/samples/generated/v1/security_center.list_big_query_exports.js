@@ -20,16 +20,31 @@
 
 'use strict';
 
-function main(name) {
-  // [START securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
+function main(parent) {
+  // [START securitycenter_v1_generated_SecurityCenter_ListBigQueryExports_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the organization to get organization settings for. Its
-   *  format is "organizations/[organization_id]/organizationSettings".
+   *  Required. The parent, which owns the collection of BigQuery exports. Its
+   *  format is "organizations/[organization_id]", "folders/[folder_id]",
+   *  "projects/[project_id]".
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  The maximum number of configs to return. The service may return fewer than
+   *  this value.
+   *  If unspecified, at most 10 configs will be returned.
+   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   */
+  // const pageSize = 1234
+  /**
+   *  A page token, received from a previous `ListBigQueryExports` call.
+   *  Provide this to retrieve the subsequent page.
+   *  When paginating, all other parameters provided to `ListBigQueryExports`
+   *  must match the call that provided the page token.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} = require('@google-cloud/security-center').v1;
@@ -37,19 +52,21 @@ function main(name) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function callGetOrganizationSettings() {
+  async function callListBigQueryExports() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await securitycenterClient.getOrganizationSettings(request);
-    console.log(response);
+    const iterable = await securitycenterClient.listBigQueryExportsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callGetOrganizationSettings();
-  // [END securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
+  callListBigQueryExports();
+  // [END securitycenter_v1_generated_SecurityCenter_ListBigQueryExports_async]
 }
 
 process.on('unhandledRejection', err => {

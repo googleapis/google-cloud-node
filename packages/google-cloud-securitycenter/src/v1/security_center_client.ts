@@ -172,6 +172,9 @@ export class SecurityCenterClient {
       folderAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/assets/{asset}/securityMarks'
       ),
+      folderExportPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/bigQueryExports/{export}'
+      ),
       folderMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/muteConfigs/{mute_config}'
       ),
@@ -202,6 +205,9 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/assets/{asset}/securityMarks'
         ),
+      organizationExportPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/bigQueryExports/{export}'
+      ),
       organizationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/muteConfigs/{mute_config}'
       ),
@@ -227,6 +233,9 @@ export class SecurityCenterClient {
       ),
       projectAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/assets/{asset}/securityMarks'
+      ),
+      projectExportPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/bigQueryExports/{export}'
       ),
       projectMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/muteConfigs/{mute_config}'
@@ -285,6 +294,11 @@ export class SecurityCenterClient {
         'pageToken',
         'nextPageToken',
         'sources'
+      ),
+      listBigQueryExports: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'bigQueryExports'
       ),
     };
 
@@ -383,6 +397,7 @@ export class SecurityCenterClient {
       'createNotificationConfig',
       'deleteMuteConfig',
       'deleteNotificationConfig',
+      'getBigQueryExport',
       'getIamPolicy',
       'getMuteConfig',
       'getNotificationConfig',
@@ -407,6 +422,10 @@ export class SecurityCenterClient {
       'updateOrganizationSettings',
       'updateSource',
       'updateSecurityMarks',
+      'createBigQueryExport',
+      'deleteBigQueryExport',
+      'updateBigQueryExport',
+      'listBigQueryExports',
     ];
     for (const methodName of securityCenterStubMethods) {
       const callPromise = this.securityCenterStub.then(
@@ -501,8 +520,8 @@ export class SecurityCenterClient {
    *   Required. Resource name of the new source's parent. Its format should be
    *   "organizations/[organization_id]".
    * @param {google.cloud.securitycenter.v1.Source} request.source
-   *   Required. The Source being created, only the display_name and description will be
-   *   used. All other fields will be ignored.
+   *   Required. The Source being created, only the display_name and description
+   *   will be used. All other fields will be ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -601,8 +620,8 @@ export class SecurityCenterClient {
    *   It must be alphanumeric and less than or equal to 32 characters and
    *   greater than 0 characters in length.
    * @param {google.cloud.securitycenter.v1.Finding} request.finding
-   *   Required. The Finding being created. The name and security_marks will be ignored as
-   *   they are both output only fields on this resource.
+   *   Required. The Finding being created. The name and security_marks will be
+   *   ignored as they are both output only fields on this resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -799,16 +818,17 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the new notification config's parent. Its format is
-   *   "organizations/[organization_id]".
+   *   Required. Resource name of the new notification config's parent. Its format
+   *   is "organizations/[organization_id]".
    * @param {string} request.configId
    *   Required.
    *   Unique identifier provided by the client within the parent scope.
    *   It must be between 1 and 128 characters, and contains alphanumeric
    *   characters, underscores or hyphens only.
    * @param {google.cloud.securitycenter.v1.NotificationConfig} request.notificationConfig
-   *   Required. The notification config being created. The name and the service account
-   *   will be ignored as they are both output only fields on this resource.
+   *   Required. The notification config being created. The name and the service
+   *   account will be ignored as they are both output only fields on this
+   *   resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1106,6 +1126,106 @@ export class SecurityCenterClient {
     );
   }
   /**
+   * Gets a big query export.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the big query export to retrieve. Its format is
+   *   organizations/{organization}/bigQueryExports/{export_id},
+   *   folders/{folder}/bigQueryExports/{export_id}, or
+   *   projects/{project}/bigQueryExports/{export_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_big_query_export.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetBigQueryExport_async
+   */
+  getBigQueryExport(
+    request?: protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getBigQueryExport(
+    request: protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBigQueryExport(
+    request: protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBigQueryExport(
+    request?: protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          | protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getBigQueryExport(request, options, callback);
+  }
+  /**
    * Gets the access control policy on the specified Source.
    *
    * @param {Object} request
@@ -1390,8 +1510,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the organization to get organization settings for. Its format is
-   *   "organizations/[organization_id]/organizationSettings".
+   *   Required. Name of the organization to get organization settings for. Its
+   *   format is "organizations/[organization_id]/organizationSettings".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2054,8 +2174,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.securitycenter.v1.Finding} request.finding
-   *   Required. The finding resource to update or create if it does not already exist.
-   *   parent, security_marks, and update_time will be ignored.
+   *   Required. The finding resource to update or create if it does not already
+   *   exist. parent, security_marks, and update_time will be ignored.
    *
    *   In the case of creation, the finding id portion of the name must be
    *   alphanumeric and less than or equal to 32 characters and greater than 0
@@ -2667,6 +2787,312 @@ export class SecurityCenterClient {
     this.initialize();
     return this.innerApiCalls.updateSecurityMarks(request, options, callback);
   }
+  /**
+   * Creates a big query export.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the new big query export's parent. Its format is
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
+   * @param {google.cloud.securitycenter.v1.BigQueryExport} request.bigQueryExport
+   *   Required. The big query export being created.
+   * @param {string} request.bigQueryExportId
+   *   Required. Unique identifier provided by the client within the parent scope.
+   *   It must consist of lower case letters, numbers, and hyphen, with the first
+   *   character a letter, the last a letter or a number, and a 63 character
+   *   maximum.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.create_big_query_export.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_CreateBigQueryExport_async
+   */
+  createBigQueryExport(
+    request?: protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      (
+        | protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createBigQueryExport(
+    request: protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createBigQueryExport(
+    request: protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createBigQueryExport(
+    request?: protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          | protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      (
+        | protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createBigQueryExport(request, options, callback);
+  }
+  /**
+   * Deletes an existing big query export.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the big query export to delete. Its format is
+   *   organizations/{organization}/bigQueryExports/{export_id},
+   *   folders/{folder}/bigQueryExports/{export_id}, or
+   *   projects/{project}/bigQueryExports/{export_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.delete_big_query_export.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_DeleteBigQueryExport_async
+   */
+  deleteBigQueryExport(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteBigQueryExport(
+    request: protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteBigQueryExport(
+    request: protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteBigQueryExport(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteBigQueryExport(request, options, callback);
+  }
+  /**
+   * Updates a BigQuery export.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycenter.v1.BigQueryExport} request.bigQueryExport
+   *   Required. The BigQuery export being updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   *   If empty all mutable fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.update_big_query_export.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_UpdateBigQueryExport_async
+   */
+  updateBigQueryExport(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateBigQueryExport(
+    request: protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateBigQueryExport(
+    request: protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateBigQueryExport(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          | protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      | protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBigQueryExport,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'big_query_export.name': request.bigQueryExport!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateBigQueryExport(request, options, callback);
+  }
 
   /**
    * Kicks off an LRO to bulk mute findings for a parent based on a filter. The
@@ -2676,8 +3102,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, at which bulk action needs to be applied. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, at which bulk action needs to be applied. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that identifies findings that should be updated.
@@ -2844,8 +3270,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the organization to run asset discovery for. Its format is
-   *   "organizations/[organization_id]".
+   *   Required. Name of the organization to run asset discovery for. Its format
+   *   is "organizations/[organization_id]".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3050,9 +3476,9 @@ export class SecurityCenterClient {
    *   Use a negated partial match on the empty string to filter based on a
    *   property not existing: `-resource_properties.my_property : ""`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
+   *   Required. Expression that defines what assets fields to use for grouping.
+   *   The string value should follow SQL syntax: comma separated list of fields.
+   *   For example:
    *   "security_center_properties.resource_project,security_center_properties.project".
    *
    *   The following fields are supported when compare_duration is not set:
@@ -3268,9 +3694,9 @@ export class SecurityCenterClient {
    *   Use a negated partial match on the empty string to filter based on a
    *   property not existing: `-resource_properties.my_property : ""`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
+   *   Required. Expression that defines what assets fields to use for grouping.
+   *   The string value should follow SQL syntax: comma separated list of fields.
+   *   For example:
    *   "security_center_properties.resource_project,security_center_properties.project".
    *
    *   The following fields are supported when compare_duration is not set:
@@ -3434,9 +3860,9 @@ export class SecurityCenterClient {
    *   Use a negated partial match on the empty string to filter based on a
    *   property not existing: `-resource_properties.my_property : ""`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
+   *   Required. Expression that defines what assets fields to use for grouping.
+   *   The string value should follow SQL syntax: comma separated list of fields.
+   *   For example:
    *   "security_center_properties.resource_project,security_center_properties.project".
    *
    *   The following fields are supported when compare_duration is not set:
@@ -3606,9 +4032,9 @@ export class SecurityCenterClient {
    *     * resource.project_display_name: `=`, `:`
    *     * resource.type: `=`, `:`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state_change`). The string value should follow SQL syntax: comma separated
-   *   list of fields. For example: "parent,resource_name".
+   *   Required. Expression that defines what assets fields to use for grouping
+   *   (including `state_change`). The string value should follow SQL syntax:
+   *   comma separated list of fields. For example: "parent,resource_name".
    *
    *   The following fields are supported:
    *
@@ -3827,9 +4253,9 @@ export class SecurityCenterClient {
    *     * resource.project_display_name: `=`, `:`
    *     * resource.type: `=`, `:`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state_change`). The string value should follow SQL syntax: comma separated
-   *   list of fields. For example: "parent,resource_name".
+   *   Required. Expression that defines what assets fields to use for grouping
+   *   (including `state_change`). The string value should follow SQL syntax:
+   *   comma separated list of fields. For example: "parent,resource_name".
    *
    *   The following fields are supported:
    *
@@ -3996,9 +4422,9 @@ export class SecurityCenterClient {
    *     * resource.project_display_name: `=`, `:`
    *     * resource.type: `=`, `:`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state_change`). The string value should follow SQL syntax: comma separated
-   *   list of fields. For example: "parent,resource_name".
+   *   Required. Expression that defines what assets fields to use for grouping
+   *   (including `state_change`). The string value should follow SQL syntax:
+   *   comma separated list of fields. For example: "parent,resource_name".
    *
    *   The following fields are supported:
    *
@@ -5236,8 +5662,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of mute configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -5343,8 +5769,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of mute configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -5398,8 +5824,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of mute configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -5657,8 +6083,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id], folders/[folder_id], or
+   *   Required. Resource name of the parent of sources to list. Its format should
+   *   be "organizations/[organization_id], folders/[folder_id], or
    *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
@@ -5760,8 +6186,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id], folders/[folder_id], or
+   *   Required. Resource name of the parent of sources to list. Its format should
+   *   be "organizations/[organization_id], folders/[folder_id], or
    *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
@@ -5811,8 +6237,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id], folders/[folder_id], or
+   *   Required. Resource name of the parent of sources to list. Its format should
+   *   be "organizations/[organization_id], folders/[folder_id], or
    *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
@@ -5854,6 +6280,223 @@ export class SecurityCenterClient {
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.ISource>;
+  }
+  /**
+   * Lists BigQuery exports. Note that when requesting BigQuery exports at a
+   * given level all exports under that level are also returned e.g. if
+   * requesting BigQuery exports under a folder, then all BigQuery exports
+   * immediately under the folder plus the ones created under the projects
+   * within the folder are returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of BigQuery exports. Its
+   *   format is "organizations/[organization_id]", "folders/[folder_id]",
+   *   "projects/[project_id]".
+   * @param {number} request.pageSize
+   *   The maximum number of configs to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBigQueryExports` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListBigQueryExports`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBigQueryExportsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listBigQueryExports(
+    request?: protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBigQueryExport[],
+      protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest | null,
+      protos.google.cloud.securitycenter.v1.IListBigQueryExportsResponse
+    ]
+  >;
+  listBigQueryExports(
+    request: protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+      | protos.google.cloud.securitycenter.v1.IListBigQueryExportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IBigQueryExport
+    >
+  ): void;
+  listBigQueryExports(
+    request: protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+      | protos.google.cloud.securitycenter.v1.IListBigQueryExportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IBigQueryExport
+    >
+  ): void;
+  listBigQueryExports(
+    request?: protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+          | protos.google.cloud.securitycenter.v1.IListBigQueryExportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IBigQueryExport
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+      | protos.google.cloud.securitycenter.v1.IListBigQueryExportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IBigQueryExport
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBigQueryExport[],
+      protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest | null,
+      protos.google.cloud.securitycenter.v1.IListBigQueryExportsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listBigQueryExports(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of BigQuery exports. Its
+   *   format is "organizations/[organization_id]", "folders/[folder_id]",
+   *   "projects/[project_id]".
+   * @param {number} request.pageSize
+   *   The maximum number of configs to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBigQueryExports` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListBigQueryExports`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBigQueryExportsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listBigQueryExportsStream(
+    request?: protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listBigQueryExports'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBigQueryExports.createStream(
+      this.innerApiCalls.listBigQueryExports as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listBigQueryExports`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of BigQuery exports. Its
+   *   format is "organizations/[organization_id]", "folders/[folder_id]",
+   *   "projects/[project_id]".
+   * @param {number} request.pageSize
+   *   The maximum number of configs to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBigQueryExports` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListBigQueryExports`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_big_query_exports.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListBigQueryExports_async
+   */
+  listBigQueryExportsAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IBigQueryExport> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listBigQueryExports'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBigQueryExports.asyncIterate(
+      this.innerApiCalls['listBigQueryExports'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IBigQueryExport>;
   }
   // --------------------
   // -- Path templates --
@@ -5939,6 +6582,44 @@ export class SecurityCenterClient {
     return this.pathTemplates.folderAssetSecurityMarksPathTemplate.match(
       folderAssetSecurityMarksName
     ).asset;
+  }
+
+  /**
+   * Return a fully-qualified folderExport resource name string.
+   *
+   * @param {string} folder
+   * @param {string} exportParam
+   * @returns {string} Resource name string.
+   */
+  folderExportPath(folder: string, exportParam: string) {
+    return this.pathTemplates.folderExportPathTemplate.render({
+      folder: folder,
+      export: exportParam,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderExport resource.
+   *
+   * @param {string} folderExportName
+   *   A fully-qualified path representing folder_export resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderExportName(folderExportName: string) {
+    return this.pathTemplates.folderExportPathTemplate.match(folderExportName)
+      .folder;
+  }
+
+  /**
+   * Parse the export from FolderExport resource.
+   *
+   * @param {string} folderExportName
+   *   A fully-qualified path representing folder_export resource.
+   * @returns {string} A string representing the export.
+   */
+  matchExportFromFolderExportName(folderExportName: string) {
+    return this.pathTemplates.folderExportPathTemplate.match(folderExportName)
+      .export;
   }
 
   /**
@@ -6379,6 +7060,46 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified organizationExport resource name string.
+   *
+   * @param {string} organization
+   * @param {string} exportParam
+   * @returns {string} Resource name string.
+   */
+  organizationExportPath(organization: string, exportParam: string) {
+    return this.pathTemplates.organizationExportPathTemplate.render({
+      organization: organization,
+      export: exportParam,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationExport resource.
+   *
+   * @param {string} organizationExportName
+   *   A fully-qualified path representing organization_export resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationExportName(organizationExportName: string) {
+    return this.pathTemplates.organizationExportPathTemplate.match(
+      organizationExportName
+    ).organization;
+  }
+
+  /**
+   * Parse the export from OrganizationExport resource.
+   *
+   * @param {string} organizationExportName
+   *   A fully-qualified path representing organization_export resource.
+   * @returns {string} A string representing the export.
+   */
+  matchExportFromOrganizationExportName(organizationExportName: string) {
+    return this.pathTemplates.organizationExportPathTemplate.match(
+      organizationExportName
+    ).export;
+  }
+
+  /**
    * Return a fully-qualified organizationMuteConfig resource name string.
    *
    * @param {string} organization
@@ -6786,6 +7507,44 @@ export class SecurityCenterClient {
     return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(
       projectAssetSecurityMarksName
     ).asset;
+  }
+
+  /**
+   * Return a fully-qualified projectExport resource name string.
+   *
+   * @param {string} project
+   * @param {string} exportParam
+   * @returns {string} Resource name string.
+   */
+  projectExportPath(project: string, exportParam: string) {
+    return this.pathTemplates.projectExportPathTemplate.render({
+      project: project,
+      export: exportParam,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectExport resource.
+   *
+   * @param {string} projectExportName
+   *   A fully-qualified path representing project_export resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectExportName(projectExportName: string) {
+    return this.pathTemplates.projectExportPathTemplate.match(projectExportName)
+      .project;
+  }
+
+  /**
+   * Parse the export from ProjectExport resource.
+   *
+   * @param {string} projectExportName
+   *   A fully-qualified path representing project_export resource.
+   * @returns {string} A string representing the export.
+   */
+  matchExportFromProjectExportName(projectExportName: string) {
+    return this.pathTemplates.projectExportPathTemplate.match(projectExportName)
+      .export;
   }
 
   /**
