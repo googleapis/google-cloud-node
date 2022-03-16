@@ -357,7 +357,6 @@ describe('v1.TpuClient', () => {
         new protos.google.cloud.tpu.v1.GetNodeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getNode(request), expectedError);
@@ -485,7 +484,6 @@ describe('v1.TpuClient', () => {
         new protos.google.cloud.tpu.v1.GetTensorFlowVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTensorFlowVersion(request), expectedError);
@@ -613,7 +611,6 @@ describe('v1.TpuClient', () => {
         new protos.google.cloud.tpu.v1.GetAcceleratorTypeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAcceleratorType(request), expectedError);

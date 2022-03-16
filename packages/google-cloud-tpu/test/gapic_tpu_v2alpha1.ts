@@ -357,7 +357,6 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getNode(request), expectedError);
@@ -488,7 +487,6 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -619,7 +617,6 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAcceleratorType(request), expectedError);
@@ -746,7 +743,6 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRuntimeVersion(request), expectedError);
@@ -874,7 +870,6 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGuestAttributes(request), expectedError);
