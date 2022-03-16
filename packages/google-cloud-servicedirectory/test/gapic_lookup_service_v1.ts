@@ -265,7 +265,6 @@ describe('v1.LookupServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.ResolveServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resolveService(request), expectedError);

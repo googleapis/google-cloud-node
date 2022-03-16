@@ -338,7 +338,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createNamespace(request), expectedError);
@@ -473,7 +472,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getNamespace(request), expectedError);
@@ -612,7 +610,6 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.namespace = {};
       request.namespace.name = '';
-      const expectedHeaderRequestParams = 'namespace.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateNamespace(request), expectedError);
@@ -747,7 +744,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteNamespace(request), expectedError);
@@ -882,7 +878,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createService(request), expectedError);
@@ -1017,7 +1012,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getService(request), expectedError);
@@ -1156,7 +1150,6 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.service = {};
       request.service.name = '';
-      const expectedHeaderRequestParams = 'service.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateService(request), expectedError);
@@ -1291,7 +1284,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteService(request), expectedError);
@@ -1426,7 +1418,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEndpoint(request), expectedError);
@@ -1561,7 +1552,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEndpoint(request), expectedError);
@@ -1700,7 +1690,6 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.endpoint = {};
       request.endpoint.name = '';
-      const expectedHeaderRequestParams = 'endpoint.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEndpoint(request), expectedError);
@@ -1835,7 +1824,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEndpoint(request), expectedError);
@@ -1970,7 +1958,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -2105,7 +2092,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2241,7 +2227,6 @@ describe('v1.RegistrationServiceClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
