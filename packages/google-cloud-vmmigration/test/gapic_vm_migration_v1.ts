@@ -357,7 +357,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSource(request), expectedError);
@@ -484,7 +483,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
       request.source = '';
-      const expectedHeaderRequestParams = 'source=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchInventory(request), expectedError);
@@ -612,7 +610,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getUtilizationReport(request), expectedError);
@@ -743,7 +740,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -873,7 +869,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMigratingVm(request), expectedError);
@@ -1000,7 +995,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCloneJob(request), expectedError);
@@ -1127,7 +1121,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCutoverJob(request), expectedError);
@@ -1251,7 +1244,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGroup(request), expectedError);
@@ -1378,7 +1370,6 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTargetProject(request), expectedError);
