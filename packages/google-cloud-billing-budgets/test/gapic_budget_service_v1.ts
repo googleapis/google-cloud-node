@@ -328,7 +328,6 @@ describe('v1.BudgetServiceClient', () => {
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createBudget(request), expectedError);
@@ -459,7 +458,6 @@ describe('v1.BudgetServiceClient', () => {
       );
       request.budget = {};
       request.budget.name = '';
-      const expectedHeaderRequestParams = 'budget.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateBudget(request), expectedError);
@@ -583,7 +581,6 @@ describe('v1.BudgetServiceClient', () => {
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBudget(request), expectedError);
@@ -710,7 +707,6 @@ describe('v1.BudgetServiceClient', () => {
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteBudget(request), expectedError);
