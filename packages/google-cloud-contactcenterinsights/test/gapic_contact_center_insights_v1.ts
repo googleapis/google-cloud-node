@@ -375,7 +375,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createConversation(request), expectedError);
@@ -511,7 +510,6 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.conversation = {};
       request.conversation.name = '';
-      const expectedHeaderRequestParams = 'conversation.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateConversation(request), expectedError);
@@ -642,7 +640,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConversation(request), expectedError);
@@ -774,7 +771,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteConversation(request), expectedError);
@@ -905,7 +901,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAnalysis(request), expectedError);
@@ -1036,7 +1031,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAnalysis(request), expectedError);
@@ -1171,7 +1165,6 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.issueModel = {};
       request.issueModel.name = '';
-      const expectedHeaderRequestParams = 'issue_model.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIssueModel(request), expectedError);
@@ -1302,7 +1295,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIssueModel(request), expectedError);
@@ -1433,7 +1425,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listIssueModels(request), expectedError);
@@ -1561,7 +1552,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIssue(request), expectedError);
@@ -1692,7 +1682,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listIssues(request), expectedError);
@@ -1827,7 +1816,6 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.issue = {};
       request.issue.name = '';
-      const expectedHeaderRequestParams = 'issue.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIssue(request), expectedError);
@@ -1962,7 +1950,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
       request.issueModel = '';
-      const expectedHeaderRequestParams = 'issue_model=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2097,7 +2084,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPhraseMatcher(request), expectedError);
@@ -2228,7 +2214,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPhraseMatcher(request), expectedError);
@@ -2360,7 +2345,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePhraseMatcher(request), expectedError);
@@ -2496,7 +2480,6 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.phraseMatcher = {};
       request.phraseMatcher.name = '';
-      const expectedHeaderRequestParams = 'phrase_matcher.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePhraseMatcher(request), expectedError);
@@ -2627,7 +2610,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
       request.location = '';
-      const expectedHeaderRequestParams = 'location=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.calculateStats(request), expectedError);
@@ -2758,7 +2740,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSettings(request), expectedError);
@@ -2893,7 +2874,6 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.settings = {};
       request.settings.name = '';
-      const expectedHeaderRequestParams = 'settings.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSettings(request), expectedError);
@@ -3024,7 +3004,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createView(request), expectedError);
@@ -3152,7 +3131,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getView(request), expectedError);
@@ -3287,7 +3265,6 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.view = {};
       request.view.name = '';
-      const expectedHeaderRequestParams = 'view.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateView(request), expectedError);
@@ -3418,7 +3395,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteView(request), expectedError);
