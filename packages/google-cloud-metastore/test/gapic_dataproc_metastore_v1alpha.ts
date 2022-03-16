@@ -367,7 +367,6 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.GetServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getService(request), expectedError);
@@ -498,7 +497,6 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.GetMetadataImportRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMetadataImport(request), expectedError);
@@ -626,7 +624,6 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.GetBackupRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBackup(request), expectedError);
