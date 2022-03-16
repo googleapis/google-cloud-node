@@ -370,7 +370,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCustomer(request), expectedError);
@@ -509,7 +508,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -647,7 +645,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCustomer(request), expectedError);
@@ -786,7 +783,6 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.customer = {};
       request.customer.name = '';
-      const expectedHeaderRequestParams = 'customer.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCustomer(request), expectedError);
@@ -921,7 +917,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteCustomer(request), expectedError);
@@ -1056,7 +1051,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.importCustomer(request), expectedError);
@@ -1191,7 +1185,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntitlement(request), expectedError);
@@ -1330,7 +1323,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1472,7 +1464,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1614,7 +1605,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1752,7 +1742,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
       request.entitlement = '';
-      const expectedHeaderRequestParams = 'entitlement=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.lookupOffer(request), expectedError);
@@ -1888,7 +1877,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
       request.account = '';
-      const expectedHeaderRequestParams = 'account=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.registerSubscriber(request), expectedError);
@@ -2024,7 +2012,6 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
       request.account = '';
-      const expectedHeaderRequestParams = 'account=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.unregisterSubscriber(request), expectedError);
