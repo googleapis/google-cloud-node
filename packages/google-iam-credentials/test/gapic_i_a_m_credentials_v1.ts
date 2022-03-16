@@ -268,7 +268,6 @@ describe('v1.IAMCredentialsClient', () => {
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.generateAccessToken(request), expectedError);
@@ -395,7 +394,6 @@ describe('v1.IAMCredentialsClient', () => {
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.generateIdToken(request), expectedError);
@@ -519,7 +517,6 @@ describe('v1.IAMCredentialsClient', () => {
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.signBlob(request), expectedError);
@@ -643,7 +640,6 @@ describe('v1.IAMCredentialsClient', () => {
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.signJwt(request), expectedError);
