@@ -374,7 +374,6 @@ describe('v1.ManagedNotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRuntime(request), expectedError);

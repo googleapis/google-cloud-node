@@ -362,7 +362,6 @@ describe('v1.NotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.GetInstanceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInstance(request), expectedError);
@@ -493,7 +492,6 @@ describe('v1.NotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.IsInstanceUpgradeableRequest()
       );
       request.notebookInstance = '';
-      const expectedHeaderRequestParams = 'notebook_instance=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -623,7 +621,6 @@ describe('v1.NotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.GetInstanceHealthRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInstanceHealth(request), expectedError);
@@ -750,7 +747,6 @@ describe('v1.NotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.GetEnvironmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEnvironment(request), expectedError);
@@ -877,7 +873,6 @@ describe('v1.NotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.GetScheduleRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSchedule(request), expectedError);
@@ -1004,7 +999,6 @@ describe('v1.NotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.GetExecutionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getExecution(request), expectedError);
