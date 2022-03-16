@@ -383,7 +383,6 @@ describe('v1.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -521,7 +520,6 @@ describe('v1.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -655,7 +653,6 @@ describe('v1.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1.GetInventoryRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInventory(request), expectedError);
@@ -790,7 +787,6 @@ describe('v1.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1.GetVulnerabilityReportRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

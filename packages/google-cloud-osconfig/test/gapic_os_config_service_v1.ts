@@ -330,7 +330,6 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.executePatchJob(request), expectedError);
@@ -457,7 +456,6 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPatchJob(request), expectedError);
@@ -584,7 +582,6 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelPatchJob(request), expectedError);
@@ -715,7 +712,6 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -846,7 +842,6 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPatchDeployment(request), expectedError);
@@ -977,7 +972,6 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1115,7 +1109,6 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.patchDeployment = {};
       request.patchDeployment.name = '';
-      const expectedHeaderRequestParams = 'patch_deployment.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1246,7 +1239,6 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.pausePatchDeployment(request), expectedError);
@@ -1377,7 +1369,6 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
