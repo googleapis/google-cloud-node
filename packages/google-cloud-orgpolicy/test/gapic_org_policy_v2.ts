@@ -325,7 +325,6 @@ describe('v2.OrgPolicyClient', () => {
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPolicy(request), expectedError);
@@ -453,7 +452,6 @@ describe('v2.OrgPolicyClient', () => {
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEffectivePolicy(request), expectedError);
@@ -580,7 +578,6 @@ describe('v2.OrgPolicyClient', () => {
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPolicy(request), expectedError);
@@ -711,7 +708,6 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.policy = {};
       request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePolicy(request), expectedError);
@@ -838,7 +834,6 @@ describe('v2.OrgPolicyClient', () => {
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePolicy(request), expectedError);
