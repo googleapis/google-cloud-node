@@ -360,7 +360,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.CreateProductSetRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProductSet(request), expectedError);
@@ -487,7 +486,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.GetProductSetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProductSet(request), expectedError);
@@ -618,7 +616,6 @@ describe('v1.ProductSearchClient', () => {
       );
       request.productSet = {};
       request.productSet.name = '';
-      const expectedHeaderRequestParams = 'product_set.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProductSet(request), expectedError);
@@ -745,7 +742,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.DeleteProductSetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProductSet(request), expectedError);
@@ -872,7 +868,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.CreateProductRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProduct(request), expectedError);
@@ -999,7 +994,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.GetProductRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProduct(request), expectedError);
@@ -1130,7 +1124,6 @@ describe('v1.ProductSearchClient', () => {
       );
       request.product = {};
       request.product.name = '';
-      const expectedHeaderRequestParams = 'product.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProduct(request), expectedError);
@@ -1257,7 +1250,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.DeleteProductRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProduct(request), expectedError);
@@ -1385,7 +1377,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.CreateReferenceImageRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createReferenceImage(request), expectedError);
@@ -1513,7 +1504,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.DeleteReferenceImageRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteReferenceImage(request), expectedError);
@@ -1640,7 +1630,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.GetReferenceImageRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getReferenceImage(request), expectedError);
@@ -1771,7 +1760,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.AddProductToProductSetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1905,7 +1893,6 @@ describe('v1.ProductSearchClient', () => {
         new protos.google.cloud.vision.v1.RemoveProductFromProductSetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

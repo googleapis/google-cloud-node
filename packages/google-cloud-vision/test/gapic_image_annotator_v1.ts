@@ -300,7 +300,6 @@ describe('v1.ImageAnnotatorClient', () => {
         new protos.google.cloud.vision.v1.BatchAnnotateImagesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchAnnotateImages(request), expectedError);
@@ -428,7 +427,6 @@ describe('v1.ImageAnnotatorClient', () => {
         new protos.google.cloud.vision.v1.BatchAnnotateFilesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchAnnotateFiles(request), expectedError);
