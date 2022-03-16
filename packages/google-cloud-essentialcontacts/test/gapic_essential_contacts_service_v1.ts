@@ -344,7 +344,6 @@ describe('v1.EssentialContactsServiceClient', () => {
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createContact(request), expectedError);
@@ -479,7 +478,6 @@ describe('v1.EssentialContactsServiceClient', () => {
       );
       request.contact = {};
       request.contact.name = '';
-      const expectedHeaderRequestParams = 'contact.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateContact(request), expectedError);
@@ -610,7 +608,6 @@ describe('v1.EssentialContactsServiceClient', () => {
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getContact(request), expectedError);
@@ -741,7 +738,6 @@ describe('v1.EssentialContactsServiceClient', () => {
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteContact(request), expectedError);
@@ -872,7 +868,6 @@ describe('v1.EssentialContactsServiceClient', () => {
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.sendTestMessage(request), expectedError);
