@@ -362,7 +362,6 @@ describe('v1beta2.CloudMemcacheClient', () => {
         new protos.google.cloud.memcache.v1beta2.GetInstanceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInstance(request), expectedError);
