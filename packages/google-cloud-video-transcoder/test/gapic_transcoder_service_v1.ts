@@ -327,7 +327,6 @@ describe('v1.TranscoderServiceClient', () => {
         new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createJob(request), expectedError);
@@ -451,7 +450,6 @@ describe('v1.TranscoderServiceClient', () => {
         new protos.google.cloud.video.transcoder.v1.GetJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJob(request), expectedError);
@@ -575,7 +573,6 @@ describe('v1.TranscoderServiceClient', () => {
         new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -702,7 +699,6 @@ describe('v1.TranscoderServiceClient', () => {
         new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createJobTemplate(request), expectedError);
@@ -829,7 +825,6 @@ describe('v1.TranscoderServiceClient', () => {
         new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJobTemplate(request), expectedError);
@@ -956,7 +951,6 @@ describe('v1.TranscoderServiceClient', () => {
         new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteJobTemplate(request), expectedError);
