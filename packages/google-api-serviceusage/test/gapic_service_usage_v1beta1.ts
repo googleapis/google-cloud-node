@@ -369,7 +369,6 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getService(request), expectedError);
@@ -501,7 +500,6 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -635,7 +633,6 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

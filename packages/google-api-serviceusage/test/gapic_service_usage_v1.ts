@@ -360,7 +360,6 @@ describe('v1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getService(request), expectedError);
@@ -487,7 +486,6 @@ describe('v1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchGetServices(request), expectedError);
