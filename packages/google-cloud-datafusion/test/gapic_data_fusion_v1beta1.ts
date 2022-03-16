@@ -360,7 +360,6 @@ describe('v1beta1.DataFusionClient', () => {
         new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInstance(request), expectedError);
@@ -487,7 +486,6 @@ describe('v1beta1.DataFusionClient', () => {
         new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeIamPolicy(request), expectedError);
@@ -614,7 +612,6 @@ describe('v1beta1.DataFusionClient', () => {
         new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addDnsPeering(request), expectedError);
@@ -741,7 +738,6 @@ describe('v1beta1.DataFusionClient', () => {
         new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeDnsPeering(request), expectedError);
