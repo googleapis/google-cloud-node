@@ -365,7 +365,6 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createAssessment(request), expectedError);
@@ -505,7 +504,6 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.annotateAssessment(request), expectedError);
@@ -641,7 +639,6 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createKey(request), expectedError);
@@ -777,7 +774,6 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
         new protos.google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getKey(request), expectedError);
@@ -917,7 +913,6 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       request.key = {};
       request.key.name = '';
-      const expectedHeaderRequestParams = 'key.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateKey(request), expectedError);
@@ -1053,7 +1048,6 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
         new protos.google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteKey(request), expectedError);
