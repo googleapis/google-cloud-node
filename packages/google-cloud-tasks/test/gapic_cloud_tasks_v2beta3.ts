@@ -325,7 +325,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.GetQueueRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getQueue(request), expectedError);
@@ -452,7 +451,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.CreateQueueRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createQueue(request), expectedError);
@@ -583,7 +581,6 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.queue = {};
       request.queue.name = '';
-      const expectedHeaderRequestParams = 'queue.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateQueue(request), expectedError);
@@ -710,7 +707,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.DeleteQueueRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteQueue(request), expectedError);
@@ -837,7 +833,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.PurgeQueueRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.purgeQueue(request), expectedError);
@@ -964,7 +959,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.PauseQueueRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.pauseQueue(request), expectedError);
@@ -1091,7 +1085,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.ResumeQueueRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resumeQueue(request), expectedError);
@@ -1218,7 +1211,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1345,7 +1337,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1473,7 +1464,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1597,7 +1587,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.GetTaskRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTask(request), expectedError);
@@ -1724,7 +1713,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.CreateTaskRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTask(request), expectedError);
@@ -1851,7 +1839,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.DeleteTaskRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTask(request), expectedError);
@@ -1975,7 +1962,6 @@ describe('v2beta3.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta3.RunTaskRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runTask(request), expectedError);
