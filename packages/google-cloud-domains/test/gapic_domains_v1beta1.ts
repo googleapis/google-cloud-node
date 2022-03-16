@@ -360,7 +360,6 @@ describe('v1beta1.DomainsClient', () => {
         new protos.google.cloud.domains.v1beta1.SearchDomainsRequest()
       );
       request.location = '';
-      const expectedHeaderRequestParams = 'location=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.searchDomains(request), expectedError);
@@ -491,7 +490,6 @@ describe('v1beta1.DomainsClient', () => {
         new protos.google.cloud.domains.v1beta1.RetrieveRegisterParametersRequest()
       );
       request.location = '';
-      const expectedHeaderRequestParams = 'location=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -625,7 +623,6 @@ describe('v1beta1.DomainsClient', () => {
         new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
       );
       request.location = '';
-      const expectedHeaderRequestParams = 'location=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -755,7 +752,6 @@ describe('v1beta1.DomainsClient', () => {
         new protos.google.cloud.domains.v1beta1.GetRegistrationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRegistration(request), expectedError);
@@ -886,7 +882,6 @@ describe('v1beta1.DomainsClient', () => {
         new protos.google.cloud.domains.v1beta1.RetrieveAuthorizationCodeRequest()
       );
       request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1020,7 +1015,6 @@ describe('v1beta1.DomainsClient', () => {
         new protos.google.cloud.domains.v1beta1.ResetAuthorizationCodeRequest()
       );
       request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
