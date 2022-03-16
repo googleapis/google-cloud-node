@@ -380,7 +380,6 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       );
       request.workload = {};
       request.workload.name = '';
-      const expectedHeaderRequestParams = 'workload.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateWorkload(request), expectedError);
@@ -511,7 +510,6 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
         new protos.google.cloud.assuredworkloads.v1.DeleteWorkloadRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteWorkload(request), expectedError);
@@ -642,7 +640,6 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
         new protos.google.cloud.assuredworkloads.v1.GetWorkloadRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkload(request), expectedError);
