@@ -328,7 +328,6 @@ describe('v1.EkmServiceClient', () => {
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEkmConnection(request), expectedError);
@@ -456,7 +455,6 @@ describe('v1.EkmServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEkmConnection(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.EkmServiceClient', () => {
       );
       request.ekmConnection = {};
       request.ekmConnection.name = '';
-      const expectedHeaderRequestParams = 'ekm_connection.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEkmConnection(request), expectedError);

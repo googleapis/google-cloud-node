@@ -347,7 +347,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getKeyRing(request), expectedError);
@@ -478,7 +477,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCryptoKey(request), expectedError);
@@ -610,7 +608,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCryptoKeyVersion(request), expectedError);
@@ -741,7 +738,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPublicKey(request), expectedError);
@@ -872,7 +868,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getImportJob(request), expectedError);
@@ -1003,7 +998,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createKeyRing(request), expectedError);
@@ -1134,7 +1128,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCryptoKey(request), expectedError);
@@ -1269,7 +1262,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1407,7 +1399,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1541,7 +1532,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createImportJob(request), expectedError);
@@ -1676,7 +1666,6 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.cryptoKey = {};
       request.cryptoKey.name = '';
-      const expectedHeaderRequestParams = 'crypto_key.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCryptoKey(request), expectedError);
@@ -1815,7 +1804,6 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.cryptoKeyVersion = {};
       request.cryptoKeyVersion.name = '';
-      const expectedHeaderRequestParams = 'crypto_key_version.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1953,7 +1941,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2091,7 +2078,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2229,7 +2215,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2360,7 +2345,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.encrypt(request), expectedError);
@@ -2488,7 +2472,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.decrypt(request), expectedError);
@@ -2619,7 +2602,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.asymmetricSign(request), expectedError);
@@ -2750,7 +2732,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.asymmetricDecrypt(request), expectedError);
@@ -2878,7 +2859,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.macSign(request), expectedError);
@@ -3006,7 +2986,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.macVerify(request), expectedError);
@@ -3138,7 +3117,6 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
       request.location = '';
-      const expectedHeaderRequestParams = 'location=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.generateRandomBytes(request), expectedError);
