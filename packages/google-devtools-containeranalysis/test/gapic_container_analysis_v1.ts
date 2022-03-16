@@ -267,7 +267,6 @@ describe('v1.ContainerAnalysisClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -394,7 +393,6 @@ describe('v1.ContainerAnalysisClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -522,7 +520,6 @@ describe('v1.ContainerAnalysisClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -655,7 +652,6 @@ describe('v1.ContainerAnalysisClient', () => {
         new protos.google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

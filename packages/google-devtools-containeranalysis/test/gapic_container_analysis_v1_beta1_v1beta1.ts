@@ -365,7 +365,6 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -504,7 +503,6 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -644,7 +642,6 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -783,7 +780,6 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         new protos.google.devtools.containeranalysis.v1beta1.GetScanConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getScanConfig(request), expectedError);
@@ -922,7 +918,6 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         new protos.google.devtools.containeranalysis.v1beta1.UpdateScanConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateScanConfig(request), expectedError);
