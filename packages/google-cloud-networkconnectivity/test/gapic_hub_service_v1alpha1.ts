@@ -357,7 +357,6 @@ describe('v1alpha1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1alpha1.GetHubRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getHub(request), expectedError);
@@ -481,7 +480,6 @@ describe('v1alpha1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1alpha1.GetSpokeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSpoke(request), expectedError);
