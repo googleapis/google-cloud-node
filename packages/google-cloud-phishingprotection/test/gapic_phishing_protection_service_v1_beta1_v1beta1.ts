@@ -302,7 +302,6 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.reportPhishing(request), expectedError);
