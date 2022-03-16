@@ -267,7 +267,6 @@ describe('v1.SystemPolicyV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.GetSystemPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSystemPolicy(request), expectedError);

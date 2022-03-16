@@ -362,7 +362,6 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.GetPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPolicy(request), expectedError);
@@ -505,7 +504,6 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       );
       request.policy = {};
       request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePolicy(request), expectedError);
@@ -644,7 +642,6 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.CreateAttestorRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createAttestor(request), expectedError);
@@ -783,7 +780,6 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.GetAttestorRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAttestor(request), expectedError);
@@ -926,7 +922,6 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       );
       request.attestor = {};
       request.attestor.name = '';
-      const expectedHeaderRequestParams = 'attestor.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAttestor(request), expectedError);
@@ -1065,7 +1060,6 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.DeleteAttestorRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAttestor(request), expectedError);

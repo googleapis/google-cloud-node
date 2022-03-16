@@ -271,7 +271,6 @@ describe('v1.ValidationHelperV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
       request.attestor = '';
-      const expectedHeaderRequestParams = 'attestor=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
