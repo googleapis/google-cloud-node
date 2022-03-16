@@ -330,7 +330,6 @@ describe('v1.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1.CreateScanConfigRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createScanConfig(request), expectedError);
@@ -457,7 +456,6 @@ describe('v1.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1.DeleteScanConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteScanConfig(request), expectedError);
@@ -584,7 +582,6 @@ describe('v1.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1.GetScanConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getScanConfig(request), expectedError);
@@ -715,7 +712,6 @@ describe('v1.WebSecurityScannerClient', () => {
       );
       request.scanConfig = {};
       request.scanConfig.name = '';
-      const expectedHeaderRequestParams = 'scan_config.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateScanConfig(request), expectedError);
@@ -842,7 +838,6 @@ describe('v1.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1.StartScanRunRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.startScanRun(request), expectedError);
@@ -969,7 +964,6 @@ describe('v1.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1.GetScanRunRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getScanRun(request), expectedError);
@@ -1096,7 +1090,6 @@ describe('v1.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1.StopScanRunRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.stopScanRun(request), expectedError);
@@ -1223,7 +1216,6 @@ describe('v1.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1.GetFindingRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getFinding(request), expectedError);
@@ -1351,7 +1343,6 @@ describe('v1.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1.ListFindingTypeStatsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listFindingTypeStats(request), expectedError);
