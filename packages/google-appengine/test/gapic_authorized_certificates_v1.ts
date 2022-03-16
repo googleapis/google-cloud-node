@@ -346,7 +346,6 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -484,7 +483,6 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -622,7 +620,6 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -760,7 +757,6 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

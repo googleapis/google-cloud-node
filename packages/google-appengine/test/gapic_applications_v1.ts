@@ -297,7 +297,6 @@ describe('v1.ApplicationsClient', () => {
         new protos.google.appengine.v1.GetApplicationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getApplication(request), expectedError);

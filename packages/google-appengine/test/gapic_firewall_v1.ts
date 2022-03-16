@@ -332,7 +332,6 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -462,7 +461,6 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createIngressRule(request), expectedError);
@@ -589,7 +587,6 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIngressRule(request), expectedError);
@@ -716,7 +713,6 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIngressRule(request), expectedError);
@@ -843,7 +839,6 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteIngressRule(request), expectedError);

@@ -360,7 +360,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.appengine.v1.GetInstanceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInstance(request), expectedError);

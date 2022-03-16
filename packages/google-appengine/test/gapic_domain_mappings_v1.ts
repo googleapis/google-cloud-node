@@ -362,7 +362,6 @@ describe('v1.DomainMappingsClient', () => {
         new protos.google.appengine.v1.GetDomainMappingRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDomainMapping(request), expectedError);
