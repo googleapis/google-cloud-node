@@ -330,7 +330,6 @@ describe('v1.DashboardsServiceClient', () => {
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDashboard(request), expectedError);
@@ -457,7 +456,6 @@ describe('v1.DashboardsServiceClient', () => {
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDashboard(request), expectedError);
@@ -584,7 +582,6 @@ describe('v1.DashboardsServiceClient', () => {
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDashboard(request), expectedError);
@@ -715,7 +712,6 @@ describe('v1.DashboardsServiceClient', () => {
       );
       request.dashboard = {};
       request.dashboard.name = '';
-      const expectedHeaderRequestParams = 'dashboard.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDashboard(request), expectedError);
