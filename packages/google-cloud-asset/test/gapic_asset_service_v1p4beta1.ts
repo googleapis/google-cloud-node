@@ -303,7 +303,6 @@ describe('v1p4beta1.AssetServiceClient', () => {
       );
       request.analysisQuery = {};
       request.analysisQuery.parent = '';
-      const expectedHeaderRequestParams = 'analysis_query.parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.analyzeIamPolicy(request), expectedError);
