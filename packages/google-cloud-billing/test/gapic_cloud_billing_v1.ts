@@ -328,7 +328,6 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBillingAccount(request), expectedError);
@@ -456,7 +455,6 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateBillingAccount(request), expectedError);
@@ -689,7 +687,6 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -823,7 +820,6 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -953,7 +949,6 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1080,7 +1075,6 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1208,7 +1202,6 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
