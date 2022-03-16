@@ -341,7 +341,6 @@ describe('v4beta1.ApplicationServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.CreateApplicationRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createApplication(request), expectedError);
@@ -472,7 +471,6 @@ describe('v4beta1.ApplicationServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.GetApplicationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getApplication(request), expectedError);
@@ -607,7 +605,6 @@ describe('v4beta1.ApplicationServiceClient', () => {
       );
       request.application = {};
       request.application.name = '';
-      const expectedHeaderRequestParams = 'application.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateApplication(request), expectedError);
@@ -738,7 +735,6 @@ describe('v4beta1.ApplicationServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.DeleteApplicationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteApplication(request), expectedError);

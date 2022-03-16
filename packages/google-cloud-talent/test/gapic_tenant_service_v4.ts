@@ -328,7 +328,6 @@ describe('v4.TenantServiceClient', () => {
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTenant(request), expectedError);
@@ -452,7 +451,6 @@ describe('v4.TenantServiceClient', () => {
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTenant(request), expectedError);
@@ -583,7 +581,6 @@ describe('v4.TenantServiceClient', () => {
       );
       request.tenant = {};
       request.tenant.name = '';
-      const expectedHeaderRequestParams = 'tenant.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTenant(request), expectedError);
@@ -710,7 +707,6 @@ describe('v4.TenantServiceClient', () => {
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTenant(request), expectedError);

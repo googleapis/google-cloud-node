@@ -265,7 +265,6 @@ describe('v4.CompletionClient', () => {
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
       request.tenant = '';
-      const expectedHeaderRequestParams = 'tenant=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.completeQuery(request), expectedError);

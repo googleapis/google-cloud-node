@@ -357,7 +357,6 @@ describe('v4.JobServiceClient', () => {
         new protos.google.cloud.talent.v4.CreateJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createJob(request), expectedError);
@@ -481,7 +480,6 @@ describe('v4.JobServiceClient', () => {
         new protos.google.cloud.talent.v4.GetJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJob(request), expectedError);
@@ -609,7 +607,6 @@ describe('v4.JobServiceClient', () => {
       );
       request.job = {};
       request.job.name = '';
-      const expectedHeaderRequestParams = 'job.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateJob(request), expectedError);
@@ -733,7 +730,6 @@ describe('v4.JobServiceClient', () => {
         new protos.google.cloud.talent.v4.DeleteJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -860,7 +856,6 @@ describe('v4.JobServiceClient', () => {
         new protos.google.cloud.talent.v4.SearchJobsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.searchJobs(request), expectedError);
@@ -988,7 +983,6 @@ describe('v4.JobServiceClient', () => {
         new protos.google.cloud.talent.v4.SearchJobsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.searchJobsForAlert(request), expectedError);

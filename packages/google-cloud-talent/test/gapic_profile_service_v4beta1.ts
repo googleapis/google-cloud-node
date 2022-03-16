@@ -330,7 +330,6 @@ describe('v4beta1.ProfileServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.CreateProfileRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProfile(request), expectedError);
@@ -457,7 +456,6 @@ describe('v4beta1.ProfileServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.GetProfileRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProfile(request), expectedError);
@@ -588,7 +586,6 @@ describe('v4beta1.ProfileServiceClient', () => {
       );
       request.profile = {};
       request.profile.name = '';
-      const expectedHeaderRequestParams = 'profile.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProfile(request), expectedError);
@@ -715,7 +712,6 @@ describe('v4beta1.ProfileServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.DeleteProfileRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProfile(request), expectedError);
@@ -842,7 +838,6 @@ describe('v4beta1.ProfileServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.SearchProfilesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.searchProfiles(request), expectedError);

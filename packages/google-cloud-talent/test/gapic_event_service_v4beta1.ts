@@ -267,7 +267,6 @@ describe('v4beta1.EventServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.CreateClientEventRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createClientEvent(request), expectedError);

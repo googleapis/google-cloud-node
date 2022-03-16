@@ -330,7 +330,6 @@ describe('v4beta1.CompanyServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.CreateCompanyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCompany(request), expectedError);
@@ -457,7 +456,6 @@ describe('v4beta1.CompanyServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.GetCompanyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCompany(request), expectedError);
@@ -588,7 +586,6 @@ describe('v4beta1.CompanyServiceClient', () => {
       );
       request.company = {};
       request.company.name = '';
-      const expectedHeaderRequestParams = 'company.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCompany(request), expectedError);
@@ -715,7 +712,6 @@ describe('v4beta1.CompanyServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.DeleteCompanyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteCompany(request), expectedError);
