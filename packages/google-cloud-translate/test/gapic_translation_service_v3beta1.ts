@@ -373,7 +373,6 @@ describe('v3beta1.TranslationServiceClient', () => {
         new protos.google.cloud.translation.v3beta1.TranslateTextRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.translateText(request), expectedError);
@@ -504,7 +503,6 @@ describe('v3beta1.TranslationServiceClient', () => {
         new protos.google.cloud.translation.v3beta1.DetectLanguageRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.detectLanguage(request), expectedError);
@@ -639,7 +637,6 @@ describe('v3beta1.TranslationServiceClient', () => {
         new protos.google.cloud.translation.v3beta1.GetSupportedLanguagesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -773,7 +770,6 @@ describe('v3beta1.TranslationServiceClient', () => {
         new protos.google.cloud.translation.v3beta1.TranslateDocumentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.translateDocument(request), expectedError);
@@ -904,7 +900,6 @@ describe('v3beta1.TranslationServiceClient', () => {
         new protos.google.cloud.translation.v3beta1.GetGlossaryRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGlossary(request), expectedError);
