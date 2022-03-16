@@ -403,7 +403,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCertificate(request), expectedError);
@@ -542,7 +541,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCertificate(request), expectedError);
@@ -681,7 +679,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.revokeCertificate(request), expectedError);
@@ -824,7 +821,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificate = {};
       request.certificate.name = '';
-      const expectedHeaderRequestParams = 'certificate.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCertificate(request), expectedError);
@@ -967,7 +963,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1113,7 +1108,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1252,7 +1246,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCaPool(request), expectedError);
@@ -1391,7 +1384,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
       request.caPool = '';
-      const expectedHeaderRequestParams = 'ca_pool=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchCaCerts(request), expectedError);
@@ -1534,7 +1526,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1680,7 +1671,6 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
