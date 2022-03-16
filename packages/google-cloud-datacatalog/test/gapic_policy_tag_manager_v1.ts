@@ -330,7 +330,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTaxonomy(request), expectedError);
@@ -457,7 +456,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTaxonomy(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.taxonomy = {};
       request.taxonomy.name = '';
-      const expectedHeaderRequestParams = 'taxonomy.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTaxonomy(request), expectedError);
@@ -715,7 +712,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTaxonomy(request), expectedError);
@@ -842,7 +838,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPolicyTag(request), expectedError);
@@ -969,7 +964,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePolicyTag(request), expectedError);
@@ -1100,7 +1094,6 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.policyTag = {};
       request.policyTag.name = '';
-      const expectedHeaderRequestParams = 'policy_tag.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePolicyTag(request), expectedError);
@@ -1227,7 +1220,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPolicyTag(request), expectedError);
@@ -1354,7 +1346,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1481,7 +1472,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1609,7 +1599,6 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

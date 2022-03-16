@@ -328,7 +328,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEntryGroup(request), expectedError);
@@ -455,7 +454,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntryGroup(request), expectedError);
@@ -586,7 +584,6 @@ describe('v1.DataCatalogClient', () => {
       );
       request.entryGroup = {};
       request.entryGroup.name = '';
-      const expectedHeaderRequestParams = 'entry_group.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEntryGroup(request), expectedError);
@@ -713,7 +710,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEntryGroup(request), expectedError);
@@ -840,7 +836,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEntry(request), expectedError);
@@ -971,7 +966,6 @@ describe('v1.DataCatalogClient', () => {
       );
       request.entry = {};
       request.entry.name = '';
-      const expectedHeaderRequestParams = 'entry.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEntry(request), expectedError);
@@ -1098,7 +1092,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEntry(request), expectedError);
@@ -1222,7 +1215,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.GetEntryRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntry(request), expectedError);
@@ -1451,7 +1443,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.modifyEntryOverview(request), expectedError);
@@ -1579,7 +1570,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.modifyEntryContacts(request), expectedError);
@@ -1706,7 +1696,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTagTemplate(request), expectedError);
@@ -1833,7 +1822,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTagTemplate(request), expectedError);
@@ -1964,7 +1952,6 @@ describe('v1.DataCatalogClient', () => {
       );
       request.tagTemplate = {};
       request.tagTemplate.name = '';
-      const expectedHeaderRequestParams = 'tag_template.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTagTemplate(request), expectedError);
@@ -2091,7 +2078,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTagTemplate(request), expectedError);
@@ -2222,7 +2208,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2356,7 +2341,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2490,7 +2474,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2624,7 +2607,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2758,7 +2740,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2885,7 +2866,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateTagRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTag(request), expectedError);
@@ -3013,7 +2993,6 @@ describe('v1.DataCatalogClient', () => {
       );
       request.tag = {};
       request.tag.name = '';
-      const expectedHeaderRequestParams = 'tag.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTag(request), expectedError);
@@ -3137,7 +3116,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTag(request), expectedError);
@@ -3261,7 +3239,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.StarEntryRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.starEntry(request), expectedError);
@@ -3388,7 +3365,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.unstarEntry(request), expectedError);
@@ -3515,7 +3491,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -3642,7 +3617,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -3770,7 +3744,6 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

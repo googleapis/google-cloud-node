@@ -302,7 +302,6 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
         new protos.google.cloud.datacatalog.v1.ReplaceTaxonomyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.replaceTaxonomy(request), expectedError);
@@ -441,7 +440,6 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
         new protos.google.cloud.datacatalog.v1.ImportTaxonomiesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.importTaxonomies(request), expectedError);
@@ -580,7 +578,6 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
         new protos.google.cloud.datacatalog.v1.ExportTaxonomiesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.exportTaxonomies(request), expectedError);
