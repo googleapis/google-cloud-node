@@ -334,7 +334,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.parent = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listClusters(request), expectedError);
@@ -465,7 +464,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCluster(request), expectedError);
@@ -596,7 +594,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.parent = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCluster(request), expectedError);
@@ -727,7 +724,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCluster(request), expectedError);
@@ -858,7 +854,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateNodePool(request), expectedError);
@@ -993,7 +988,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1127,7 +1121,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLoggingService(request), expectedError);
@@ -1259,7 +1252,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMonitoringService(request), expectedError);
@@ -1390,7 +1382,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setAddonsConfig(request), expectedError);
@@ -1528,7 +1519,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLocations(request), expectedError);
@@ -1660,7 +1650,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateMaster(request), expectedError);
@@ -1791,7 +1780,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMasterAuth(request), expectedError);
@@ -1922,7 +1910,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteCluster(request), expectedError);
@@ -2053,7 +2040,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.parent = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listOperations(request), expectedError);
@@ -2184,7 +2170,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getOperation(request), expectedError);
@@ -2315,7 +2300,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelOperation(request), expectedError);
@@ -2446,7 +2430,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServerConfig(request), expectedError);
@@ -2573,7 +2556,6 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJSONWebKeys(request), expectedError);
@@ -2704,7 +2686,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.parent = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listNodePools(request), expectedError);
@@ -2835,7 +2816,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getNodePool(request), expectedError);
@@ -2966,7 +2946,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.parent = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createNodePool(request), expectedError);
@@ -3097,7 +3076,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteNodePool(request), expectedError);
@@ -3232,7 +3210,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3370,7 +3347,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3501,7 +3477,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -3632,7 +3607,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLegacyAbac(request), expectedError);
@@ -3763,7 +3737,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.startIPRotation(request), expectedError);
@@ -3895,7 +3868,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.completeIPRotation(request), expectedError);
@@ -4026,7 +3998,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setNodePoolSize(request), expectedError);
@@ -4157,7 +4128,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setNetworkPolicy(request), expectedError);
@@ -4289,7 +4259,6 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = '';
       request.projectId = '';
-      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMaintenancePolicy(request), expectedError);
