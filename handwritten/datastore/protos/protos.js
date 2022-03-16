@@ -14934,7 +14934,10 @@
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
+                            case 9:
                             case 11:
+                            case 13:
                                 break;
                             }
                         if (message.value != null && message.hasOwnProperty("value")) {
@@ -14987,9 +14990,21 @@
                         case 5:
                             message.op = 5;
                             break;
+                        case "IN":
+                        case 6:
+                            message.op = 6;
+                            break;
+                        case "NOT_EQUAL":
+                        case 9:
+                            message.op = 9;
+                            break;
                         case "HAS_ANCESTOR":
                         case 11:
                             message.op = 11;
+                            break;
+                        case "NOT_IN":
+                        case 13:
+                            message.op = 13;
                             break;
                         }
                         if (object.value != null) {
@@ -15048,7 +15063,10 @@
                      * @property {number} GREATER_THAN=3 GREATER_THAN value
                      * @property {number} GREATER_THAN_OR_EQUAL=4 GREATER_THAN_OR_EQUAL value
                      * @property {number} EQUAL=5 EQUAL value
+                     * @property {number} IN=6 IN value
+                     * @property {number} NOT_EQUAL=9 NOT_EQUAL value
                      * @property {number} HAS_ANCESTOR=11 HAS_ANCESTOR value
+                     * @property {number} NOT_IN=13 NOT_IN value
                      */
                     PropertyFilter.Operator = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -15058,7 +15076,10 @@
                         values[valuesById[3] = "GREATER_THAN"] = 3;
                         values[valuesById[4] = "GREATER_THAN_OR_EQUAL"] = 4;
                         values[valuesById[5] = "EQUAL"] = 5;
+                        values[valuesById[6] = "IN"] = 6;
+                        values[valuesById[9] = "NOT_EQUAL"] = 9;
                         values[valuesById[11] = "HAS_ANCESTOR"] = 11;
+                        values[valuesById[13] = "NOT_IN"] = 13;
                         return values;
                     })();
     

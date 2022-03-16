@@ -262,7 +262,6 @@ describe('v1.DatastoreClient', () => {
         new protos.google.datastore.v1.LookupRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.lookup(request), expectedError);
@@ -386,7 +385,6 @@ describe('v1.DatastoreClient', () => {
         new protos.google.datastore.v1.RunQueryRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runQuery(request), expectedError);
@@ -513,7 +511,6 @@ describe('v1.DatastoreClient', () => {
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.beginTransaction(request), expectedError);
@@ -637,7 +634,6 @@ describe('v1.DatastoreClient', () => {
         new protos.google.datastore.v1.CommitRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.commit(request), expectedError);
@@ -761,7 +757,6 @@ describe('v1.DatastoreClient', () => {
         new protos.google.datastore.v1.RollbackRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.rollback(request), expectedError);
@@ -888,7 +883,6 @@ describe('v1.DatastoreClient', () => {
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.allocateIds(request), expectedError);
@@ -1015,7 +1009,6 @@ describe('v1.DatastoreClient', () => {
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.reserveIds(request), expectedError);
