@@ -364,7 +364,6 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -494,7 +493,6 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createFeed(request), expectedError);
@@ -618,7 +616,6 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getFeed(request), expectedError);
@@ -742,7 +739,6 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listFeeds(request), expectedError);
@@ -873,7 +869,6 @@ describe('v1.AssetServiceClient', () => {
       );
       request.feed = {};
       request.feed.name = '';
-      const expectedHeaderRequestParams = 'feed.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateFeed(request), expectedError);
@@ -1000,7 +995,6 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteFeed(request), expectedError);
@@ -1131,7 +1125,6 @@ describe('v1.AssetServiceClient', () => {
       );
       request.analysisQuery = {};
       request.analysisQuery.scope = '';
-      const expectedHeaderRequestParams = 'analysis_query.scope=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.analyzeIamPolicy(request), expectedError);
@@ -1258,7 +1251,6 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.analyzeMove(request), expectedError);
