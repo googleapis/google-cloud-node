@@ -366,7 +366,6 @@ describe('v1beta1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1beta1.GetAuthorizationPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -497,7 +496,6 @@ describe('v1beta1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1beta1.GetServerTlsPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServerTlsPolicy(request), expectedError);
@@ -625,7 +623,6 @@ describe('v1beta1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1beta1.GetClientTlsPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getClientTlsPolicy(request), expectedError);
