@@ -344,7 +344,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetAccountRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAccount(request), expectedError);
@@ -475,7 +474,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteAccountRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAccount(request), expectedError);
@@ -610,7 +608,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.account = {};
       request.account.name = '';
-      const expectedHeaderRequestParams = 'account.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAccount(request), expectedError);
@@ -853,7 +850,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetPropertyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProperty(request), expectedError);
@@ -1089,7 +1085,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeletePropertyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProperty(request), expectedError);
@@ -1224,7 +1219,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.property = {};
       request.property.name = '';
-      const expectedHeaderRequestParams = 'property.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProperty(request), expectedError);
@@ -1355,7 +1349,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetUserLinkRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getUserLink(request), expectedError);
@@ -1486,7 +1479,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.BatchGetUserLinksRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchGetUserLinks(request), expectedError);
@@ -1617,7 +1609,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateUserLinkRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createUserLink(request), expectedError);
@@ -1749,7 +1740,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.BatchCreateUserLinksRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchCreateUserLinks(request), expectedError);
@@ -1884,7 +1874,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.userLink = {};
       request.userLink.name = '';
-      const expectedHeaderRequestParams = 'user_link.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateUserLink(request), expectedError);
@@ -2016,7 +2005,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.BatchUpdateUserLinksRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchUpdateUserLinks(request), expectedError);
@@ -2147,7 +2135,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteUserLinkRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteUserLink(request), expectedError);
@@ -2279,7 +2266,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.BatchDeleteUserLinksRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchDeleteUserLinks(request), expectedError);
@@ -2411,7 +2397,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateFirebaseLinkRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createFirebaseLink(request), expectedError);
@@ -2543,7 +2528,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteFirebaseLink(request), expectedError);
@@ -2674,7 +2658,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetGlobalSiteTagRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGlobalSiteTag(request), expectedError);
@@ -2806,7 +2789,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateGoogleAdsLinkRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createGoogleAdsLink(request), expectedError);
@@ -2942,7 +2924,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.googleAdsLink = {};
       request.googleAdsLink.name = '';
-      const expectedHeaderRequestParams = 'google_ads_link.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateGoogleAdsLink(request), expectedError);
@@ -3074,7 +3055,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteGoogleAdsLinkRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteGoogleAdsLink(request), expectedError);
@@ -3209,7 +3189,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetDataSharingSettingsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3347,7 +3326,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3485,7 +3463,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3623,7 +3600,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3765,7 +3741,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.measurementProtocolSecret = {};
       request.measurementProtocolSecret.name = '';
-      const expectedHeaderRequestParams = 'measurement_protocol_secret.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3903,7 +3878,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest()
       );
       request.property = '';
-      const expectedHeaderRequestParams = 'property=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4041,7 +4015,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4183,7 +4156,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.googleSignalsSettings = {};
       request.googleSignalsSettings.name = '';
-      const expectedHeaderRequestParams = 'google_signals_settings.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4321,7 +4293,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateConversionEventRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4456,7 +4427,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetConversionEventRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConversionEvent(request), expectedError);
@@ -4591,7 +4561,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteConversionEventRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4729,7 +4698,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4869,7 +4837,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5009,7 +4976,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5156,8 +5122,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.displayVideo_360AdvertiserLink = {};
       request.displayVideo_360AdvertiserLink.name = '';
-      const expectedHeaderRequestParams =
-        'display_video_360_advertiser_link.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5304,7 +5268,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5450,7 +5413,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5596,7 +5558,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5742,7 +5703,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5888,7 +5848,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -6026,7 +5985,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateCustomDimensionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -6168,7 +6126,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.customDimension = {};
       request.customDimension.name = '';
-      const expectedHeaderRequestParams = 'custom_dimension.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -6306,7 +6263,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -6441,7 +6397,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetCustomDimensionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCustomDimension(request), expectedError);
@@ -6573,7 +6528,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateCustomMetricRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCustomMetric(request), expectedError);
@@ -6709,7 +6663,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.customMetric = {};
       request.customMetric.name = '';
-      const expectedHeaderRequestParams = 'custom_metric.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCustomMetric(request), expectedError);
@@ -6841,7 +6794,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.archiveCustomMetric(request), expectedError);
@@ -6972,7 +6924,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetCustomMetricRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCustomMetric(request), expectedError);
@@ -7107,7 +7058,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -7249,7 +7199,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.dataRetentionSettings = {};
       request.dataRetentionSettings.name = '';
-      const expectedHeaderRequestParams = 'data_retention_settings.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -7383,7 +7332,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.CreateDataStreamRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDataStream(request), expectedError);
@@ -7514,7 +7462,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.DeleteDataStreamRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDataStream(request), expectedError);
@@ -7649,7 +7596,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       request.dataStream = {};
       request.dataStream.name = '';
-      const expectedHeaderRequestParams = 'data_stream.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDataStream(request), expectedError);
@@ -7780,7 +7726,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1alpha.GetDataStreamRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataStream(request), expectedError);
