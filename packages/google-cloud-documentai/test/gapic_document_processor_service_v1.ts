@@ -313,7 +313,6 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new protos.google.cloud.documentai.v1.ProcessRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.processDocument(request), expectedError);

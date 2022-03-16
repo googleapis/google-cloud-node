@@ -397,7 +397,6 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new protos.google.cloud.documentai.v1beta3.ProcessRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.processDocument(request), expectedError);
@@ -537,7 +536,6 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new protos.google.cloud.documentai.v1beta3.FetchProcessorTypesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchProcessorTypes(request), expectedError);
@@ -676,7 +674,6 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new protos.google.cloud.documentai.v1beta3.CreateProcessorRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProcessor(request), expectedError);
