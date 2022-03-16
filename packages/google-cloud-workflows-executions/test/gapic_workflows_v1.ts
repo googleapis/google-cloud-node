@@ -360,7 +360,6 @@ describe('v1.WorkflowsClient', () => {
         new protos.google.cloud.workflows.v1.GetWorkflowRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkflow(request), expectedError);

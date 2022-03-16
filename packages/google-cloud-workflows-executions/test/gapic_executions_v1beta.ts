@@ -328,7 +328,6 @@ describe('v1beta.ExecutionsClient', () => {
         new protos.google.cloud.workflows.executions.v1beta.CreateExecutionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createExecution(request), expectedError);
@@ -455,7 +454,6 @@ describe('v1beta.ExecutionsClient', () => {
         new protos.google.cloud.workflows.executions.v1beta.GetExecutionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getExecution(request), expectedError);
@@ -582,7 +580,6 @@ describe('v1beta.ExecutionsClient', () => {
         new protos.google.cloud.workflows.executions.v1beta.CancelExecutionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelExecution(request), expectedError);
