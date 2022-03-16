@@ -371,7 +371,6 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConnectivityTest(request), expectedError);
