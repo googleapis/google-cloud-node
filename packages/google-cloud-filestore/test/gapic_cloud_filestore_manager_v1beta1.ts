@@ -376,7 +376,6 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.GetInstanceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInstance(request), expectedError);
@@ -504,7 +503,6 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.GetBackupRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBackup(request), expectedError);
