@@ -267,7 +267,6 @@ describe('v1alpha.QuestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getQuestion(request), expectedError);
@@ -394,7 +393,6 @@ describe('v1alpha.QuestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createQuestion(request), expectedError);
@@ -521,7 +519,6 @@ describe('v1alpha.QuestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.executeQuestion(request), expectedError);
@@ -648,7 +645,6 @@ describe('v1alpha.QuestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getUserFeedback(request), expectedError);
@@ -780,7 +776,6 @@ describe('v1alpha.QuestionServiceClient', () => {
       );
       request.userFeedback = {};
       request.userFeedback.name = '';
-      const expectedHeaderRequestParams = 'user_feedback.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateUserFeedback(request), expectedError);

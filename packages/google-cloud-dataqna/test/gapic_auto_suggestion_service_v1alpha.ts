@@ -281,7 +281,6 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.suggestQueries(request), expectedError);
