@@ -347,7 +347,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSecret(request), expectedError);
@@ -478,7 +477,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addSecretVersion(request), expectedError);
@@ -606,7 +604,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.GetSecretRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSecret(request), expectedError);
@@ -741,7 +738,6 @@ describe('v1.SecretManagerServiceClient', () => {
       );
       request.secret = {};
       request.secret.name = '';
-      const expectedHeaderRequestParams = 'secret.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSecret(request), expectedError);
@@ -872,7 +868,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteSecret(request), expectedError);
@@ -1003,7 +998,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSecretVersion(request), expectedError);
@@ -1135,7 +1129,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.accessSecretVersion(request), expectedError);
@@ -1267,7 +1260,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.disableSecretVersion(request), expectedError);
@@ -1399,7 +1391,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.enableSecretVersion(request), expectedError);
@@ -1531,7 +1522,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.destroySecretVersion(request), expectedError);
@@ -1662,7 +1652,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1793,7 +1782,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1925,7 +1913,6 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
