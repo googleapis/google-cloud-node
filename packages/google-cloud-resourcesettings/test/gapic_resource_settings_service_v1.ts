@@ -344,7 +344,6 @@ describe('v1.ResourceSettingsServiceClient', () => {
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSetting(request), expectedError);
@@ -479,7 +478,6 @@ describe('v1.ResourceSettingsServiceClient', () => {
       );
       request.setting = {};
       request.setting.name = '';
-      const expectedHeaderRequestParams = 'setting.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSetting(request), expectedError);
