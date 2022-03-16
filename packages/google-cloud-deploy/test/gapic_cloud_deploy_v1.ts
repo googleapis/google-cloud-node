@@ -361,7 +361,6 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDeliveryPipeline(request), expectedError);
@@ -485,7 +484,6 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTarget(request), expectedError);
@@ -612,7 +610,6 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRelease(request), expectedError);
@@ -739,7 +736,6 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.approveRollout(request), expectedError);
@@ -866,7 +862,6 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRollout(request), expectedError);
@@ -990,7 +985,6 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConfig(request), expectedError);
