@@ -327,7 +327,6 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJob(request), expectedError);
@@ -451,7 +450,6 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createJob(request), expectedError);
@@ -579,7 +577,6 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.job = {};
       request.job.name = '';
-      const expectedHeaderRequestParams = 'job.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateJob(request), expectedError);
@@ -703,7 +700,6 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -827,7 +823,6 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.pauseJob(request), expectedError);
@@ -951,7 +946,6 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resumeJob(request), expectedError);
@@ -1075,7 +1069,6 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runJob(request), expectedError);
