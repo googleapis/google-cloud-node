@@ -366,7 +366,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConnectionProfile(request), expectedError);
@@ -497,7 +496,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -624,7 +622,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getStream(request), expectedError);
@@ -751,7 +748,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getStreamObject(request), expectedError);
@@ -879,7 +875,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.lookupStreamObject(request), expectedError);
@@ -1006,7 +1001,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
       request.object = '';
-      const expectedHeaderRequestParams = 'object=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.startBackfillJob(request), expectedError);
@@ -1133,7 +1127,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
       request.object = '';
-      const expectedHeaderRequestParams = 'object=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.stopBackfillJob(request), expectedError);
@@ -1261,7 +1254,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPrivateConnection(request), expectedError);
@@ -1385,7 +1377,6 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRoute(request), expectedError);
