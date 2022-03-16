@@ -360,7 +360,6 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTrigger(request), expectedError);
@@ -487,7 +486,6 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getChannel(request), expectedError);
@@ -615,7 +613,6 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getChannelConnection(request), expectedError);
