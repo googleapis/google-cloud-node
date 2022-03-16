@@ -333,7 +333,6 @@ describe('v2.AnswerRecordsClient', () => {
       );
       request.answerRecord = {};
       request.answerRecord.name = '';
-      const expectedHeaderRequestParams = 'answer_record.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAnswerRecord(request), expectedError);

@@ -383,7 +383,6 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationDatasetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

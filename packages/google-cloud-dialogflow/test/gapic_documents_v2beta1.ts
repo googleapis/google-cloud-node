@@ -360,7 +360,6 @@ describe('v2beta1.DocumentsClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.GetDocumentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDocument(request), expectedError);

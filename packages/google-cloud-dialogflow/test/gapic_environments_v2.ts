@@ -328,7 +328,6 @@ describe('v2.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetEnvironmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEnvironment(request), expectedError);
@@ -455,7 +454,6 @@ describe('v2.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateEnvironmentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEnvironment(request), expectedError);
@@ -586,7 +584,6 @@ describe('v2.EnvironmentsClient', () => {
       );
       request.environment = {};
       request.environment.name = '';
-      const expectedHeaderRequestParams = 'environment.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEnvironment(request), expectedError);
@@ -713,7 +710,6 @@ describe('v2.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteEnvironmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEnvironment(request), expectedError);

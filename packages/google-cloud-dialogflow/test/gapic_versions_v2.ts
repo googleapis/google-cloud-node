@@ -328,7 +328,6 @@ describe('v2.VersionsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getVersion(request), expectedError);
@@ -455,7 +454,6 @@ describe('v2.VersionsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateVersionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createVersion(request), expectedError);
@@ -586,7 +584,6 @@ describe('v2.VersionsClient', () => {
       );
       request.version = {};
       request.version.name = '';
-      const expectedHeaderRequestParams = 'version.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateVersion(request), expectedError);
@@ -713,7 +710,6 @@ describe('v2.VersionsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteVersionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteVersion(request), expectedError);

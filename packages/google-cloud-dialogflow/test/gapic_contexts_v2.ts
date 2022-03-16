@@ -328,7 +328,6 @@ describe('v2.ContextsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetContextRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getContext(request), expectedError);
@@ -455,7 +454,6 @@ describe('v2.ContextsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateContextRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createContext(request), expectedError);
@@ -586,7 +584,6 @@ describe('v2.ContextsClient', () => {
       );
       request.context = {};
       request.context.name = '';
-      const expectedHeaderRequestParams = 'context.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateContext(request), expectedError);
@@ -713,7 +710,6 @@ describe('v2.ContextsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteContextRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteContext(request), expectedError);
@@ -840,7 +836,6 @@ describe('v2.ContextsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteAllContextsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAllContexts(request), expectedError);

@@ -330,7 +330,6 @@ describe('v2.KnowledgeBasesClient', () => {
         new protos.google.cloud.dialogflow.v2.GetKnowledgeBaseRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getKnowledgeBase(request), expectedError);
@@ -458,7 +457,6 @@ describe('v2.KnowledgeBasesClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateKnowledgeBaseRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createKnowledgeBase(request), expectedError);
@@ -586,7 +584,6 @@ describe('v2.KnowledgeBasesClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteKnowledgeBaseRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteKnowledgeBase(request), expectedError);
@@ -718,7 +715,6 @@ describe('v2.KnowledgeBasesClient', () => {
       );
       request.knowledgeBase = {};
       request.knowledgeBase.name = '';
-      const expectedHeaderRequestParams = 'knowledge_base.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateKnowledgeBase(request), expectedError);

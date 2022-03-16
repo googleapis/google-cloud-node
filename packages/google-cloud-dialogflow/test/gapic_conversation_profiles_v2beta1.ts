@@ -346,7 +346,6 @@ describe('v2beta1.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.GetConversationProfileRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -484,7 +483,6 @@ describe('v2beta1.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.CreateConversationProfileRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -626,7 +624,6 @@ describe('v2beta1.ConversationProfilesClient', () => {
       );
       request.conversationProfile = {};
       request.conversationProfile.name = '';
-      const expectedHeaderRequestParams = 'conversation_profile.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -764,7 +761,6 @@ describe('v2beta1.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.DeleteConversationProfileRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

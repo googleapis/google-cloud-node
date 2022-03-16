@@ -281,7 +281,6 @@ describe('v2.SessionsClient', () => {
         new protos.google.cloud.dialogflow.v2.DetectIntentRequest()
       );
       request.session = '';
-      const expectedHeaderRequestParams = 'session=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.detectIntent(request), expectedError);

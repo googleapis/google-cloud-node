@@ -357,7 +357,6 @@ describe('v2.IntentsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetIntentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIntent(request), expectedError);
@@ -484,7 +483,6 @@ describe('v2.IntentsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateIntentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createIntent(request), expectedError);
@@ -615,7 +613,6 @@ describe('v2.IntentsClient', () => {
       );
       request.intent = {};
       request.intent.name = '';
-      const expectedHeaderRequestParams = 'intent.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIntent(request), expectedError);
@@ -742,7 +739,6 @@ describe('v2.IntentsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteIntentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteIntent(request), expectedError);

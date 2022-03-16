@@ -357,7 +357,6 @@ describe('v2beta1.AgentsClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.GetAgentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAgent(request), expectedError);
@@ -485,7 +484,6 @@ describe('v2beta1.AgentsClient', () => {
       );
       request.agent = {};
       request.agent.parent = '';
-      const expectedHeaderRequestParams = 'agent.parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setAgent(request), expectedError);
@@ -612,7 +610,6 @@ describe('v2beta1.AgentsClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.DeleteAgentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAgent(request), expectedError);
@@ -740,7 +737,6 @@ describe('v2beta1.AgentsClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.GetValidationResultRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getValidationResult(request), expectedError);

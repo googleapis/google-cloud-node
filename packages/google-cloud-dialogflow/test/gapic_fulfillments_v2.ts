@@ -265,7 +265,6 @@ describe('v2.FulfillmentsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetFulfillmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getFulfillment(request), expectedError);
@@ -396,7 +395,6 @@ describe('v2.FulfillmentsClient', () => {
       );
       request.fulfillment = {};
       request.fulfillment.name = '';
-      const expectedHeaderRequestParams = 'fulfillment.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateFulfillment(request), expectedError);

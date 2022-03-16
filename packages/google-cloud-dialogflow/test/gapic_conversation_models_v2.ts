@@ -363,7 +363,6 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationModelRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConversationModel(request), expectedError);
@@ -494,7 +493,6 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
