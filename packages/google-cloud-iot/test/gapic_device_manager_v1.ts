@@ -329,7 +329,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDeviceRegistry(request), expectedError);
@@ -456,7 +455,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDeviceRegistry(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.deviceRegistry = {};
       request.deviceRegistry.name = '';
-      const expectedHeaderRequestParams = 'device_registry.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDeviceRegistry(request), expectedError);
@@ -716,7 +713,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDeviceRegistry(request), expectedError);
@@ -843,7 +839,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDevice(request), expectedError);
@@ -967,7 +962,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDevice(request), expectedError);
@@ -1098,7 +1092,6 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.device = {};
       request.device.name = '';
-      const expectedHeaderRequestParams = 'device.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDevice(request), expectedError);
@@ -1225,7 +1218,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDevice(request), expectedError);
@@ -1356,7 +1348,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1490,7 +1481,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1620,7 +1610,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listDeviceStates(request), expectedError);
@@ -1747,7 +1736,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1874,7 +1862,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -2002,7 +1989,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2130,7 +2116,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.sendCommandToDevice(request), expectedError);
@@ -2258,7 +2243,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.bindDeviceToGateway(request), expectedError);
@@ -2389,7 +2373,6 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
