@@ -185,12 +185,27 @@ describe('v1beta2.ArtifactRegistryClient', () => {
     assert(client.artifactRegistryStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.artifactRegistryStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.artifactRegistryStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -336,6 +351,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getRepository with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRepository(request), expectedError);
+    });
   });
 
   describe('updateRepository', () => {
@@ -450,6 +480,22 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateRepository with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
+      );
+      request.repository = {};
+      request.repository.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateRepository(request), expectedError);
+    });
   });
 
   describe('getPackage', () => {
@@ -560,6 +606,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getPackage with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPackage(request), expectedError);
     });
   });
 
@@ -672,6 +733,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getVersion with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getVersion(request), expectedError);
+    });
   });
 
   describe('getFile', () => {
@@ -779,6 +855,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getFile with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getFile(request), expectedError);
     });
   });
 
@@ -888,6 +979,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getTag with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTag(request), expectedError);
+    });
   });
 
   describe('createTag', () => {
@@ -995,6 +1101,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createTag with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTag(request), expectedError);
     });
   });
 
@@ -1107,6 +1228,22 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTag with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
+      );
+      request.tag = {};
+      request.tag.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTag(request), expectedError);
+    });
   });
 
   describe('deleteTag', () => {
@@ -1214,6 +1351,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteTag with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteTag(request), expectedError);
     });
   });
 
@@ -1326,6 +1478,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
   });
 
   describe('getIamPolicy', () => {
@@ -1436,6 +1603,21 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
 
@@ -1548,6 +1730,673 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+    });
+  });
+
+  describe('getProjectSettings', () => {
+    it('invokes getProjectSettings without error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ProjectSettings()
+      );
+      client.innerApiCalls.getProjectSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getProjectSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getProjectSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getProjectSettings without error using callback', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ProjectSettings()
+      );
+      client.innerApiCalls.getProjectSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.artifactregistry.v1beta2.IProjectSettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getProjectSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getProjectSettings with error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getProjectSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getProjectSettings(request), expectedError);
+      assert(
+        (client.innerApiCalls.getProjectSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getProjectSettings with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getProjectSettings(request), expectedError);
+    });
+  });
+
+  describe('updateProjectSettings', () => {
+    it('invokes updateProjectSettings without error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest()
+      );
+      request.projectSettings = {};
+      request.projectSettings.name = '';
+      const expectedHeaderRequestParams = 'project_settings.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ProjectSettings()
+      );
+      client.innerApiCalls.updateProjectSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateProjectSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateProjectSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateProjectSettings without error using callback', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest()
+      );
+      request.projectSettings = {};
+      request.projectSettings.name = '';
+      const expectedHeaderRequestParams = 'project_settings.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ProjectSettings()
+      );
+      client.innerApiCalls.updateProjectSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateProjectSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.artifactregistry.v1beta2.IProjectSettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateProjectSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateProjectSettings with error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest()
+      );
+      request.projectSettings = {};
+      request.projectSettings.name = '';
+      const expectedHeaderRequestParams = 'project_settings.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateProjectSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateProjectSettings(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateProjectSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateProjectSettings with closed client', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest()
+      );
+      request.projectSettings = {};
+      request.projectSettings.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateProjectSettings(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('importAptArtifacts', () => {
+    it('invokes importAptArtifacts without error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importAptArtifacts =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.importAptArtifacts(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.importAptArtifacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes importAptArtifacts without error using callback', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importAptArtifacts =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importAptArtifacts(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsResponse,
+              protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.importAptArtifacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes importAptArtifacts with call error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importAptArtifacts = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.importAptArtifacts(request), expectedError);
+      assert(
+        (client.innerApiCalls.importAptArtifacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes importAptArtifacts with LRO error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importAptArtifacts = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.importAptArtifacts(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.importAptArtifacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkImportAptArtifactsProgress without error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportAptArtifactsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportAptArtifactsProgress with error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkImportAptArtifactsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('importYumArtifacts', () => {
+    it('invokes importYumArtifacts without error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importYumArtifacts =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.importYumArtifacts(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.importYumArtifacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes importYumArtifacts without error using callback', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importYumArtifacts =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importYumArtifacts(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsResponse,
+              protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.importYumArtifacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes importYumArtifacts with call error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importYumArtifacts = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.importYumArtifacts(request), expectedError);
+      assert(
+        (client.innerApiCalls.importYumArtifacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes importYumArtifacts with LRO error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importYumArtifacts = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.importYumArtifacts(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.importYumArtifacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkImportYumArtifactsProgress without error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportYumArtifactsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportYumArtifactsProgress with error', async () => {
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkImportYumArtifactsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -3889,6 +4738,82 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('aptArtifact', () => {
+      const fakePath = '/rendered/path/aptArtifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        apt_artifact: 'aptArtifactValue',
+      };
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.aptArtifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aptArtifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aptArtifactPath', () => {
+        const result = client.aptArtifactPath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'aptArtifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.aptArtifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAptArtifactName', () => {
+        const result = client.matchProjectFromAptArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.aptArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAptArtifactName', () => {
+        const result = client.matchLocationFromAptArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.aptArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromAptArtifactName', () => {
+        const result = client.matchRepositoryFromAptArtifactName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.aptArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAptArtifactFromAptArtifactName', () => {
+        const result = client.matchAptArtifactFromAptArtifactName(fakePath);
+        assert.strictEqual(result, 'aptArtifactValue');
+        assert(
+          (client.pathTemplates.aptArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('file', () => {
       const fakePath = '/rendered/path/file';
       const expectedParameters = {
@@ -3965,6 +4890,44 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       });
     });
 
+    describe('projectSettings', () => {
+      const fakePath = '/rendered/path/projectSettings';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectSettingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectSettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectSettingsPath', () => {
+        const result = client.projectSettingsPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectSettingsPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectSettingsName', () => {
+        const result = client.matchProjectFromProjectSettingsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectSettingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('repository', () => {
       const fakePath = '/rendered/path/repository';
       const expectedParameters = {
@@ -4023,6 +4986,258 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         assert.strictEqual(result, 'repositoryValue');
         assert(
           (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tag', () => {
+      const fakePath = '/rendered/path/tag';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        package: 'packageValue',
+        tag: 'tagValue',
+      };
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tagPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tagPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tagPath', () => {
+        const result = client.tagPath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'packageValue',
+          'tagValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tagPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTagName', () => {
+        const result = client.matchProjectFromTagName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTagName', () => {
+        const result = client.matchLocationFromTagName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromTagName', () => {
+        const result = client.matchRepositoryFromTagName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.tagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPackageFromTagName', () => {
+        const result = client.matchPackageFromTagName(fakePath);
+        assert.strictEqual(result, 'packageValue');
+        assert(
+          (client.pathTemplates.tagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTagFromTagName', () => {
+        const result = client.matchTagFromTagName(fakePath);
+        assert.strictEqual(result, 'tagValue');
+        assert(
+          (client.pathTemplates.tagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('version', () => {
+      const fakePath = '/rendered/path/version';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        package: 'packageValue',
+        version: 'versionValue',
+      };
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.versionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.versionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('versionPath', () => {
+        const result = client.versionPath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'packageValue',
+          'versionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.versionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromVersionName', () => {
+        const result = client.matchProjectFromVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.versionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromVersionName', () => {
+        const result = client.matchLocationFromVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.versionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromVersionName', () => {
+        const result = client.matchRepositoryFromVersionName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.versionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPackageFromVersionName', () => {
+        const result = client.matchPackageFromVersionName(fakePath);
+        assert.strictEqual(result, 'packageValue');
+        assert(
+          (client.pathTemplates.versionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchVersionFromVersionName', () => {
+        const result = client.matchVersionFromVersionName(fakePath);
+        assert.strictEqual(result, 'versionValue');
+        assert(
+          (client.pathTemplates.versionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('yumArtifact', () => {
+      const fakePath = '/rendered/path/yumArtifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        yum_artifact: 'yumArtifactValue',
+      };
+      const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.yumArtifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.yumArtifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('yumArtifactPath', () => {
+        const result = client.yumArtifactPath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'yumArtifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.yumArtifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromYumArtifactName', () => {
+        const result = client.matchProjectFromYumArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.yumArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromYumArtifactName', () => {
+        const result = client.matchLocationFromYumArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.yumArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromYumArtifactName', () => {
+        const result = client.matchRepositoryFromYumArtifactName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.yumArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchYumArtifactFromYumArtifactName', () => {
+        const result = client.matchYumArtifactFromYumArtifactName(fakePath);
+        assert.strictEqual(result, 'yumArtifactValue');
+        assert(
+          (client.pathTemplates.yumArtifactPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

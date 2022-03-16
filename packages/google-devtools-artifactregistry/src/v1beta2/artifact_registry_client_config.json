@@ -23,6 +23,14 @@
         }
       },
       "methods": {
+        "ImportAptArtifacts": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ImportYumArtifacts": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListRepositories": {
           "timeout_millis": 30000,
           "retry_codes_name": "unavailable",
@@ -124,6 +132,14 @@
         },
         "TestIamPermissions": {
           "timeout_millis": 30000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetProjectSettings": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateProjectSettings": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

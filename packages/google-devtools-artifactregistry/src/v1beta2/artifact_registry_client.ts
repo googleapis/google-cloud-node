@@ -178,11 +178,26 @@ export class ArtifactRegistryClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aptArtifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/aptArtifacts/{apt_artifact}'
+      ),
       filePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/files/{file}'
       ),
+      projectSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/projectSettings'
+      ),
       repositoryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}'
+      ),
+      tagPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/tags/{tag}'
+      ),
+      versionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/versions/{version}'
+      ),
+      yumArtifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/yumArtifacts/{yum_artifact}'
       ),
     };
 
@@ -229,6 +244,18 @@ export class ArtifactRegistryClient {
         grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
+    const importAptArtifactsResponse = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsResponse'
+    ) as gax.protobuf.Type;
+    const importAptArtifactsMetadata = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsMetadata'
+    ) as gax.protobuf.Type;
+    const importYumArtifactsResponse = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsResponse'
+    ) as gax.protobuf.Type;
+    const importYumArtifactsMetadata = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsMetadata'
+    ) as gax.protobuf.Type;
     const createRepositoryResponse = protoFilesRoot.lookup(
       '.google.devtools.artifactregistry.v1beta2.Repository'
     ) as gax.protobuf.Type;
@@ -255,6 +282,16 @@ export class ArtifactRegistryClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      importAptArtifacts: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importAptArtifactsResponse.decode.bind(importAptArtifactsResponse),
+        importAptArtifactsMetadata.decode.bind(importAptArtifactsMetadata)
+      ),
+      importYumArtifacts: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importYumArtifactsResponse.decode.bind(importYumArtifactsResponse),
+        importYumArtifactsMetadata.decode.bind(importYumArtifactsMetadata)
+      ),
       createRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRepositoryResponse.decode.bind(createRepositoryResponse),
@@ -328,6 +365,8 @@ export class ArtifactRegistryClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const artifactRegistryStubMethods = [
+      'importAptArtifacts',
+      'importYumArtifacts',
       'listRepositories',
       'getRepository',
       'createRepository',
@@ -349,6 +388,8 @@ export class ArtifactRegistryClient {
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
+      'getProjectSettings',
+      'updateProjectSettings',
     ];
     for (const methodName of artifactRegistryStubMethods) {
       const callPromise = this.artifactRegistryStub.then(
@@ -443,7 +484,7 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the repository to retrieve.
+   *   Required. The name of the repository to retrieve.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1589,7 +1630,487 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
+  /**
+   * Retrieves the Settings for the Project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the projectSettings resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProjectSettings]{@link google.devtools.artifactregistry.v1beta2.ProjectSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.get_project_settings.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_GetProjectSettings_async
+   */
+  getProjectSettings(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      (
+        | protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getProjectSettings(
+    request: protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      | protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProjectSettings(
+    request: protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      | protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProjectSettings(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+          | protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      | protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      (
+        | protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getProjectSettings(request, options, callback);
+  }
+  /**
+   * Updates the Settings for the Project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1beta2.ProjectSettings} request.projectSettings
+   *   The project settings.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask to support partial updates.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProjectSettings]{@link google.devtools.artifactregistry.v1beta2.ProjectSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.update_project_settings.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_UpdateProjectSettings_async
+   */
+  updateProjectSettings(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      (
+        | protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateProjectSettings(
+    request: protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      | protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateProjectSettings(
+    request: protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      | protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateProjectSettings(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+          | protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      | protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1beta2.IProjectSettings,
+      (
+        | protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'project_settings.name': request.projectSettings!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateProjectSettings(request, options, callback);
+  }
 
+  /**
+   * Imports Apt artifacts. The returned Operation will complete once the
+   * resources are imported. Package, Version, and File resources are created
+   * based on the imported artifacts. Imported artifacts that conflict with
+   * existing resources are ignored.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1beta2.ImportAptArtifactsGcsSource} request.gcsSource
+   *   Google Cloud Storage location where input content is located.
+   * @param {string} request.parent
+   *   The name of the parent resource where the artifacts will be imported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.import_apt_artifacts.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ImportAptArtifacts_async
+   */
+  importAptArtifacts(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  importAptArtifacts(
+    request: protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importAptArtifacts(
+    request: protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importAptArtifacts(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsResponse,
+            protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importAptArtifacts(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importAptArtifacts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.import_apt_artifacts.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ImportAptArtifacts_async
+   */
+  async checkImportAptArtifactsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsResponse,
+      protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importAptArtifacts,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsResponse,
+      protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsMetadata
+    >;
+  }
+  /**
+   * Imports Yum (RPM) artifacts. The returned Operation will complete once the
+   * resources are imported. Package, Version, and File resources are created
+   * based on the imported artifacts. Imported artifacts that conflict with
+   * existing resources are ignored.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1beta2.ImportYumArtifactsGcsSource} request.gcsSource
+   *   Google Cloud Storage location where input content is located.
+   * @param {string} request.parent
+   *   The name of the parent resource where the artifacts will be imported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.import_yum_artifacts.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ImportYumArtifacts_async
+   */
+  importYumArtifacts(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  importYumArtifacts(
+    request: protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importYumArtifacts(
+    request: protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importYumArtifacts(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsResponse,
+            protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsResponse,
+        protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importYumArtifacts(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importYumArtifacts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.import_yum_artifacts.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ImportYumArtifacts_async
+   */
+  async checkImportYumArtifactsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsResponse,
+      protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importYumArtifacts,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsResponse,
+      protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsMetadata
+    >;
+  }
   /**
    * Creates a repository. The returned Operation will finish once the
    * repository has been created. Its response will be the created Repository.
@@ -1597,7 +2118,7 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource where the repository will be created.
+   *   Required. The name of the parent resource where the repository will be created.
    * @param {string} request.repositoryId
    *   The repository id to use for this repository.
    * @param {google.devtools.artifactregistry.v1beta2.Repository} request.repository
@@ -1740,7 +2261,7 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the repository to delete.
+   *   Required. The name of the repository to delete.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2156,10 +2677,9 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose repositories will be listed.
+   *   Required. The name of the parent resource whose repositories will be listed.
    * @param {number} request.pageSize
-   *   The maximum number of repositories to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -2255,10 +2775,9 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose repositories will be listed.
+   *   Required. The name of the parent resource whose repositories will be listed.
    * @param {number} request.pageSize
-   *   The maximum number of repositories to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -2302,10 +2821,9 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose repositories will be listed.
+   *   Required. The name of the parent resource whose repositories will be listed.
    * @param {number} request.pageSize
-   *   The maximum number of repositories to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -2542,12 +3060,13 @@ export class ArtifactRegistryClient {
    * @param {string} request.parent
    *   The name of the parent resource whose versions will be listed.
    * @param {number} request.pageSize
-   *   The maximum number of versions to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of versions to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {google.devtools.artifactregistry.v1beta2.VersionView} request.view
    *   The view that should be returned in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2643,12 +3162,13 @@ export class ArtifactRegistryClient {
    * @param {string} request.parent
    *   The name of the parent resource whose versions will be listed.
    * @param {number} request.pageSize
-   *   The maximum number of versions to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of versions to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {google.devtools.artifactregistry.v1beta2.VersionView} request.view
    *   The view that should be returned in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2692,12 +3212,13 @@ export class ArtifactRegistryClient {
    * @param {string} request.parent
    *   The name of the parent resource whose versions will be listed.
    * @param {number} request.pageSize
-   *   The maximum number of versions to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of versions to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {google.devtools.artifactregistry.v1beta2.VersionView} request.view
    *   The view that should be returned in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2738,7 +3259,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose files will be listed.
+   *   The name of the repository whose files will be listed. For example:
+   *   "projects/p1/locations/us-central1/repositories/repo1
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
@@ -2849,7 +3371,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose files will be listed.
+   *   The name of the repository whose files will be listed. For example:
+   *   "projects/p1/locations/us-central1/repositories/repo1
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
@@ -2908,7 +3431,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose files will be listed.
+   *   The name of the repository whose files will be listed. For example:
+   *   "projects/p1/locations/us-central1/repositories/repo1
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
@@ -2978,8 +3502,7 @@ export class ArtifactRegistryClient {
    *     * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
    *     --> Tags that are applied to the version `1.0` in package `pkg1`.
    * @param {number} request.pageSize
-   *   The maximum number of tags to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of tags to return. Maximum page size is 10,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -3087,8 +3610,7 @@ export class ArtifactRegistryClient {
    *     * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
    *     --> Tags that are applied to the version `1.0` in package `pkg1`.
    * @param {number} request.pageSize
-   *   The maximum number of tags to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of tags to return. Maximum page size is 10,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -3144,8 +3666,7 @@ export class ArtifactRegistryClient {
    *     * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
    *     --> Tags that are applied to the version `1.0` in package `pkg1`.
    * @param {number} request.pageSize
-   *   The maximum number of tags to return.
-   *   Maximum page size is 10,000.
+   *   The maximum number of tags to return. Maximum page size is 10,000.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
    * @param {object} [options]
@@ -3185,6 +3706,77 @@ export class ArtifactRegistryClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified aptArtifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} apt_artifact
+   * @returns {string} Resource name string.
+   */
+  aptArtifactPath(
+    project: string,
+    location: string,
+    repository: string,
+    aptArtifact: string
+  ) {
+    return this.pathTemplates.aptArtifactPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      apt_artifact: aptArtifact,
+    });
+  }
+
+  /**
+   * Parse the project from AptArtifact resource.
+   *
+   * @param {string} aptArtifactName
+   *   A fully-qualified path representing AptArtifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAptArtifactName(aptArtifactName: string) {
+    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AptArtifact resource.
+   *
+   * @param {string} aptArtifactName
+   *   A fully-qualified path representing AptArtifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAptArtifactName(aptArtifactName: string) {
+    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from AptArtifact resource.
+   *
+   * @param {string} aptArtifactName
+   *   A fully-qualified path representing AptArtifact resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromAptArtifactName(aptArtifactName: string) {
+    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
+      .repository;
+  }
+
+  /**
+   * Parse the apt_artifact from AptArtifact resource.
+   *
+   * @param {string} aptArtifactName
+   *   A fully-qualified path representing AptArtifact resource.
+   * @returns {string} A string representing the apt_artifact.
+   */
+  matchAptArtifactFromAptArtifactName(aptArtifactName: string) {
+    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
+      .apt_artifact;
+  }
 
   /**
    * Return a fully-qualified file resource name string.
@@ -3254,6 +3846,31 @@ export class ArtifactRegistryClient {
   }
 
   /**
+   * Return a fully-qualified projectSettings resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectSettingsPath(project: string) {
+    return this.pathTemplates.projectSettingsPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectSettings resource.
+   *
+   * @param {string} projectSettingsName
+   *   A fully-qualified path representing ProjectSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSettingsName(projectSettingsName: string) {
+    return this.pathTemplates.projectSettingsPathTemplate.match(
+      projectSettingsName
+    ).project;
+  }
+
+  /**
    * Return a fully-qualified repository resource name string.
    *
    * @param {string} project
@@ -3306,15 +3923,247 @@ export class ArtifactRegistryClient {
   }
 
   /**
+   * Return a fully-qualified tag resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} packageParam
+   * @param {string} tag
+   * @returns {string} Resource name string.
+   */
+  tagPath(
+    project: string,
+    location: string,
+    repository: string,
+    packageParam: string,
+    tag: string
+  ) {
+    return this.pathTemplates.tagPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      package: packageParam,
+      tag: tag,
+    });
+  }
+
+  /**
+   * Parse the project from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTagName(tagName: string) {
+    return this.pathTemplates.tagPathTemplate.match(tagName).project;
+  }
+
+  /**
+   * Parse the location from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTagName(tagName: string) {
+    return this.pathTemplates.tagPathTemplate.match(tagName).location;
+  }
+
+  /**
+   * Parse the repository from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromTagName(tagName: string) {
+    return this.pathTemplates.tagPathTemplate.match(tagName).repository;
+  }
+
+  /**
+   * Parse the package from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the package.
+   */
+  matchPackageFromTagName(tagName: string) {
+    return this.pathTemplates.tagPathTemplate.match(tagName).package;
+  }
+
+  /**
+   * Parse the tag from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the tag.
+   */
+  matchTagFromTagName(tagName: string) {
+    return this.pathTemplates.tagPathTemplate.match(tagName).tag;
+  }
+
+  /**
+   * Return a fully-qualified version resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} packageParam
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  versionPath(
+    project: string,
+    location: string,
+    repository: string,
+    packageParam: string,
+    version: string
+  ) {
+    return this.pathTemplates.versionPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      package: packageParam,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from Version resource.
+   *
+   * @param {string} versionName
+   *   A fully-qualified path representing Version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromVersionName(versionName: string) {
+    return this.pathTemplates.versionPathTemplate.match(versionName).project;
+  }
+
+  /**
+   * Parse the location from Version resource.
+   *
+   * @param {string} versionName
+   *   A fully-qualified path representing Version resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromVersionName(versionName: string) {
+    return this.pathTemplates.versionPathTemplate.match(versionName).location;
+  }
+
+  /**
+   * Parse the repository from Version resource.
+   *
+   * @param {string} versionName
+   *   A fully-qualified path representing Version resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromVersionName(versionName: string) {
+    return this.pathTemplates.versionPathTemplate.match(versionName).repository;
+  }
+
+  /**
+   * Parse the package from Version resource.
+   *
+   * @param {string} versionName
+   *   A fully-qualified path representing Version resource.
+   * @returns {string} A string representing the package.
+   */
+  matchPackageFromVersionName(versionName: string) {
+    return this.pathTemplates.versionPathTemplate.match(versionName).package;
+  }
+
+  /**
+   * Parse the version from Version resource.
+   *
+   * @param {string} versionName
+   *   A fully-qualified path representing Version resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromVersionName(versionName: string) {
+    return this.pathTemplates.versionPathTemplate.match(versionName).version;
+  }
+
+  /**
+   * Return a fully-qualified yumArtifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} yum_artifact
+   * @returns {string} Resource name string.
+   */
+  yumArtifactPath(
+    project: string,
+    location: string,
+    repository: string,
+    yumArtifact: string
+  ) {
+    return this.pathTemplates.yumArtifactPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      yum_artifact: yumArtifact,
+    });
+  }
+
+  /**
+   * Parse the project from YumArtifact resource.
+   *
+   * @param {string} yumArtifactName
+   *   A fully-qualified path representing YumArtifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromYumArtifactName(yumArtifactName: string) {
+    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName)
+      .project;
+  }
+
+  /**
+   * Parse the location from YumArtifact resource.
+   *
+   * @param {string} yumArtifactName
+   *   A fully-qualified path representing YumArtifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromYumArtifactName(yumArtifactName: string) {
+    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from YumArtifact resource.
+   *
+   * @param {string} yumArtifactName
+   *   A fully-qualified path representing YumArtifact resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromYumArtifactName(yumArtifactName: string) {
+    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName)
+      .repository;
+  }
+
+  /**
+   * Parse the yum_artifact from YumArtifact resource.
+   *
+   * @param {string} yumArtifactName
+   *   A fully-qualified path representing YumArtifact resource.
+   * @returns {string} A string representing the yum_artifact.
+   */
+  matchYumArtifactFromYumArtifactName(yumArtifactName: string) {
+    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName)
+      .yum_artifact;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.artifactRegistryStub!.then(stub => {
+    if (this.artifactRegistryStub && !this._terminated) {
+      return this.artifactRegistryStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
