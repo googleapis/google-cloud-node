@@ -361,7 +361,6 @@ describe('v1.CloudBuildClient', () => {
       );
       request.projectId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBuild(request), expectedError);
@@ -492,7 +491,6 @@ describe('v1.CloudBuildClient', () => {
       );
       request.projectId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelBuild(request), expectedError);
@@ -624,7 +622,6 @@ describe('v1.CloudBuildClient', () => {
       );
       request.projectId = '';
       request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createBuildTrigger(request), expectedError);
@@ -755,7 +752,6 @@ describe('v1.CloudBuildClient', () => {
       );
       request.projectId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBuildTrigger(request), expectedError);
@@ -887,7 +883,6 @@ describe('v1.CloudBuildClient', () => {
       );
       request.projectId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteBuildTrigger(request), expectedError);
@@ -1023,7 +1018,6 @@ describe('v1.CloudBuildClient', () => {
       request.projectId = '';
       request.trigger = {};
       request.trigger.resourceName = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger.resource_name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateBuildTrigger(request), expectedError);
@@ -1158,7 +1152,6 @@ describe('v1.CloudBuildClient', () => {
       );
       request.projectId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1288,7 +1281,6 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkerPool(request), expectedError);
