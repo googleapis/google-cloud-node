@@ -360,7 +360,6 @@ describe('v1.GkeHubClient', () => {
         new protos.google.cloud.gkehub.v1.GetMembershipRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMembership(request), expectedError);
@@ -487,7 +486,6 @@ describe('v1.GkeHubClient', () => {
         new protos.google.cloud.gkehub.v1.GetFeatureRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getFeature(request), expectedError);
@@ -618,7 +616,6 @@ describe('v1.GkeHubClient', () => {
         new protos.google.cloud.gkehub.v1.GenerateConnectManifestRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

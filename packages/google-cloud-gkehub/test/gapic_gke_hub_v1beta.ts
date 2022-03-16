@@ -360,7 +360,6 @@ describe('v1beta.GkeHubClient', () => {
         new protos.google.cloud.gkehub.v1beta.GetFeatureRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getFeature(request), expectedError);
