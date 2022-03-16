@@ -375,7 +375,6 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -510,7 +509,6 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -646,7 +644,6 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -781,7 +778,6 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);

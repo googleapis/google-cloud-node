@@ -356,7 +356,6 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -487,7 +486,6 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setNamedPorts(request), expectedError);

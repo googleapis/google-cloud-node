@@ -343,7 +343,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addSignedUrlKey(request), expectedError);
@@ -467,7 +466,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -595,7 +593,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteSignedUrlKey(request), expectedError);
@@ -718,7 +715,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -842,7 +838,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getHealth(request), expectedError);
@@ -966,7 +961,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1089,7 +1083,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1220,7 +1213,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1350,7 +1342,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setSecurityPolicy(request), expectedError);
@@ -1474,7 +1465,6 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);

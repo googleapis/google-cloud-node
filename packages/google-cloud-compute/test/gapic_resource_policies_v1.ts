@@ -340,7 +340,6 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -463,7 +462,6 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -590,7 +588,6 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -714,7 +711,6 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -841,7 +837,6 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -969,7 +964,6 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

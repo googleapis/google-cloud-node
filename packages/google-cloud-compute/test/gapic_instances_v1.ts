@@ -341,7 +341,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addAccessConfig(request), expectedError);
@@ -469,7 +468,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addResourcePolicies(request), expectedError);
@@ -596,7 +594,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.attachDisk(request), expectedError);
@@ -723,7 +720,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.bulkInsert(request), expectedError);
@@ -847,7 +843,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -975,7 +970,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAccessConfig(request), expectedError);
@@ -1102,7 +1096,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.detachDisk(request), expectedError);
@@ -1225,7 +1218,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -1356,7 +1348,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1487,7 +1478,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGuestAttributes(request), expectedError);
@@ -1614,7 +1604,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1741,7 +1730,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getScreenshot(request), expectedError);
@@ -1869,7 +1857,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSerialPortOutput(request), expectedError);
@@ -2000,7 +1987,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2127,7 +2113,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -2258,7 +2243,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2384,7 +2368,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.reset(request), expectedError);
@@ -2508,7 +2491,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resume(request), expectedError);
@@ -2639,7 +2621,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2773,7 +2754,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2903,7 +2883,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setDiskAutoDelete(request), expectedError);
@@ -3030,7 +3009,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -3154,7 +3132,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -3282,7 +3259,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMachineResources(request), expectedError);
@@ -3409,7 +3385,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMachineType(request), expectedError);
@@ -3536,7 +3511,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMetadata(request), expectedError);
@@ -3663,7 +3637,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMinCpuPlatform(request), expectedError);
@@ -3790,7 +3763,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setScheduling(request), expectedError);
@@ -3917,7 +3889,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setServiceAccount(request), expectedError);
@@ -4050,7 +4021,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4177,7 +4147,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setTags(request), expectedError);
@@ -4308,7 +4277,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4434,7 +4402,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.start(request), expectedError);
@@ -4565,7 +4532,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4691,7 +4657,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.stop(request), expectedError);
@@ -4815,7 +4780,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.suspend(request), expectedError);
@@ -4943,7 +4907,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -5067,7 +5030,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -5195,7 +5157,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAccessConfig(request), expectedError);
@@ -5323,7 +5284,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDisplayDevice(request), expectedError);
@@ -5454,7 +5414,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5588,7 +5547,6 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

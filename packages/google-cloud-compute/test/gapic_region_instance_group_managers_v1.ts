@@ -378,7 +378,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.abandonInstances(request), expectedError);
@@ -521,7 +520,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -663,7 +661,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createInstances(request), expectedError);
@@ -799,7 +796,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -938,7 +934,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteInstances(request), expectedError);
@@ -1081,7 +1076,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1219,7 +1213,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -1355,7 +1348,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1490,7 +1482,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1633,7 +1624,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1775,7 +1765,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.recreateInstances(request), expectedError);
@@ -1911,7 +1900,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resize(request), expectedError);
@@ -2051,7 +2039,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setInstanceTemplate(request), expectedError);
@@ -2190,7 +2177,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setTargetPools(request), expectedError);
@@ -2333,7 +2319,6 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

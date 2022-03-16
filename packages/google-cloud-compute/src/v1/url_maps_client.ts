@@ -1079,7 +1079,7 @@ export class UrlMapsClient {
   }
 
   /**
-   * Equivalent to `aggregatedList`, but returns an iterable object.
+   * Retrieves the list of all UrlMap resources, regional and global, available to the specified project.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request

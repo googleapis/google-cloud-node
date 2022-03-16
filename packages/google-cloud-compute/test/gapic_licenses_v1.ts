@@ -338,7 +338,6 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -712,7 +709,6 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -839,7 +835,6 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -967,7 +962,6 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

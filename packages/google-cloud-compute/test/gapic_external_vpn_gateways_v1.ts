@@ -348,7 +348,6 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -479,7 +478,6 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -611,7 +609,6 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -743,7 +740,6 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -879,7 +875,6 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

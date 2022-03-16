@@ -342,7 +342,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addResourcePolicies(request), expectedError);
@@ -469,7 +468,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSnapshot(request), expectedError);
@@ -593,7 +591,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -716,7 +713,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.GetRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -843,7 +839,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -967,7 +962,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1098,7 +1092,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1225,7 +1218,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.ResizeRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resize(request), expectedError);
@@ -1352,7 +1344,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1476,7 +1467,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -1604,7 +1594,6 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

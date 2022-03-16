@@ -340,7 +340,6 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -463,7 +462,6 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -587,7 +585,6 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -710,7 +707,6 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -838,7 +834,6 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

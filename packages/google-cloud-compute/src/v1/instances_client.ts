@@ -5282,7 +5282,7 @@ export class InstancesClient {
   }
 
   /**
-   * Equivalent to `aggregatedList`, but returns an iterable object.
+   * Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request

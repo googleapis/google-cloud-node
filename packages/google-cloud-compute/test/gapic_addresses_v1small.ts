@@ -338,7 +338,6 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -462,7 +461,6 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);

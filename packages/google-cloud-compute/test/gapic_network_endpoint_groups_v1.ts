@@ -359,7 +359,6 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -490,7 +489,6 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -625,7 +623,6 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -755,7 +752,6 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -883,7 +879,6 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1015,7 +1010,6 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

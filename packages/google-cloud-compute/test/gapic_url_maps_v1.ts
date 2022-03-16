@@ -338,7 +338,6 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.DeleteUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.GetUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -585,7 +583,6 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InsertUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -712,7 +709,6 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InvalidateCacheUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.invalidateCache(request), expectedError);
@@ -835,7 +831,6 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.PatchUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -959,7 +954,6 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.UpdateUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -1083,7 +1077,6 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ValidateUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.validate(request), expectedError);

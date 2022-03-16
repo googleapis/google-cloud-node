@@ -375,7 +375,6 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
       request.operation = '';
-      const expectedHeaderRequestParams = 'operation=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -510,7 +509,6 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
       request.operation = '';
-      const expectedHeaderRequestParams = 'operation=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);

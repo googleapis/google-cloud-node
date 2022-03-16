@@ -338,7 +338,6 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -712,7 +709,6 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -836,7 +832,6 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resize(request), expectedError);
@@ -963,7 +958,6 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1091,7 +1085,6 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1215,7 +1208,6 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);

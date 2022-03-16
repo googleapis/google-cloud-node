@@ -337,7 +337,6 @@ describe('v1.MachineTypesClient', () => {
         new protos.google.cloud.compute.v1.GetMachineTypeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);

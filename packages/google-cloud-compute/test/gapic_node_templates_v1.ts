@@ -338,7 +338,6 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -712,7 +709,6 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -839,7 +835,6 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -967,7 +962,6 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

@@ -338,7 +338,6 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -585,7 +583,6 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetStatusVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getStatus(request), expectedError);
@@ -709,7 +706,6 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.InsertVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -833,7 +829,6 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -961,7 +956,6 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

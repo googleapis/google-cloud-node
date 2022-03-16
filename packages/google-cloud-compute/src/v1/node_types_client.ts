@@ -402,7 +402,7 @@ export class NodeTypesClient {
   }
 
   /**
-   * Equivalent to `aggregatedList`, but returns an iterable object.
+   * Retrieves an aggregated list of node types.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request

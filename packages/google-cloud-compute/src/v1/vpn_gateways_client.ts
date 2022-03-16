@@ -979,7 +979,7 @@ export class VpnGatewaysClient {
   }
 
   /**
-   * Equivalent to `aggregatedList`, but returns an iterable object.
+   * Retrieves an aggregated list of VPN gateways.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request

@@ -352,7 +352,6 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -479,7 +478,6 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -607,7 +605,6 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -734,7 +731,6 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -862,7 +858,6 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -990,7 +985,6 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setTarget(request), expectedError);

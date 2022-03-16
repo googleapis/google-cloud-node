@@ -354,7 +354,6 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -481,7 +480,6 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -609,7 +607,6 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -741,7 +738,6 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setSslCertificates(request), expectedError);
@@ -869,7 +865,6 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setUrlMap(request), expectedError);

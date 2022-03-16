@@ -340,7 +340,6 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -463,7 +462,6 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -587,7 +585,6 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -714,7 +711,6 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setBackendService(request), expectedError);
@@ -841,7 +837,6 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setProxyHeader(request), expectedError);
@@ -969,7 +964,6 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setSslCertificates(request), expectedError);
@@ -1096,7 +1090,6 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setSslPolicy(request), expectedError);

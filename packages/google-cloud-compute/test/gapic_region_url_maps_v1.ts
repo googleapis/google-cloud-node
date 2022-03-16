@@ -338,7 +338,6 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -585,7 +583,6 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -708,7 +705,6 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -832,7 +828,6 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -956,7 +951,6 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.validate(request), expectedError);

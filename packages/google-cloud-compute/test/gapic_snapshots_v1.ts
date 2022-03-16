@@ -338,7 +338,6 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -712,7 +709,6 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -839,7 +835,6 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -963,7 +958,6 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -1091,7 +1085,6 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

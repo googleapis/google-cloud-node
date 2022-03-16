@@ -338,7 +338,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addNodes(request), expectedError);
@@ -462,7 +461,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -589,7 +587,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteNodes(request), expectedError);
@@ -712,7 +709,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -839,7 +835,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -963,7 +958,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1086,7 +1080,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1213,7 +1206,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1340,7 +1332,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setNodeTemplate(request), expectedError);
@@ -1468,7 +1459,6 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

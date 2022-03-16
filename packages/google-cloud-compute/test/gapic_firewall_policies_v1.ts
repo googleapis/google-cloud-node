@@ -343,7 +343,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addAssociation(request), expectedError);
@@ -467,7 +466,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addRule(request), expectedError);
@@ -594,7 +592,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cloneRules(request), expectedError);
@@ -718,7 +715,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -841,7 +837,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -968,7 +963,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAssociation(request), expectedError);
@@ -1095,7 +1089,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1219,7 +1212,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRule(request), expectedError);
@@ -1541,7 +1533,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.MoveFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.move(request), expectedError);
@@ -1664,7 +1655,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1788,7 +1778,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patchRule(request), expectedError);
@@ -1915,7 +1904,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeAssociation(request), expectedError);
@@ -2042,7 +2030,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest()
       );
       request.firewallPolicy = '';
-      const expectedHeaderRequestParams = 'firewall_policy=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeRule(request), expectedError);
@@ -2169,7 +2156,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2297,7 +2283,6 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

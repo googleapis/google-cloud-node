@@ -338,7 +338,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -465,7 +464,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.expandIpCidrRange(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -715,7 +712,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -839,7 +835,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -962,7 +957,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1089,7 +1083,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1220,7 +1213,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1351,7 +1343,6 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

@@ -341,7 +341,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.disableXpnHost(request), expectedError);
@@ -469,7 +468,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.disableXpnResource(request), expectedError);
@@ -596,7 +594,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.enableXpnHost(request), expectedError);
@@ -723,7 +720,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.enableXpnResource(request), expectedError);
@@ -846,7 +842,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -973,7 +968,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getXpnHost(request), expectedError);
@@ -1097,7 +1091,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.moveDisk(request), expectedError);
@@ -1224,7 +1217,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.moveInstance(request), expectedError);
@@ -1355,7 +1347,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1489,7 +1480,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1620,7 +1610,6 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setUsageExportBucket(request), expectedError);

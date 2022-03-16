@@ -341,7 +341,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addPeering(request), expectedError);
@@ -465,7 +464,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -719,7 +716,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -846,7 +842,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -969,7 +964,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1096,7 +1090,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removePeering(request), expectedError);
@@ -1224,7 +1217,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.switchToCustomMode(request), expectedError);
@@ -1351,7 +1343,6 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePeering(request), expectedError);

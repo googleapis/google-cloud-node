@@ -343,7 +343,6 @@ describe('v1.InstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.AddInstancesInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addInstances(request), expectedError);
@@ -467,7 +466,6 @@ describe('v1.InstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -590,7 +588,6 @@ describe('v1.InstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -714,7 +711,6 @@ describe('v1.InstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -841,7 +837,6 @@ describe('v1.InstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstancesInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeInstances(request), expectedError);
@@ -968,7 +963,6 @@ describe('v1.InstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setNamedPorts(request), expectedError);

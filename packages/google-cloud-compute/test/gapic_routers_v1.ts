@@ -338,7 +338,6 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRouterStatus(request), expectedError);
@@ -712,7 +709,6 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -835,7 +831,6 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -959,7 +954,6 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.preview(request), expectedError);
@@ -1083,7 +1077,6 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);

@@ -375,7 +375,6 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -510,7 +509,6 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -646,7 +644,6 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);

@@ -280,7 +280,6 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.bulkInsert(request), expectedError);

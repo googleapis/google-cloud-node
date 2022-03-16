@@ -1444,7 +1444,7 @@ export class NodeGroupsClient {
   }
 
   /**
-   * Equivalent to `aggregatedList`, but returns an iterable object.
+   * Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
