@@ -377,7 +377,6 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resetAdminPassword(request), expectedError);
@@ -505,7 +504,6 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDomain(request), expectedError);
