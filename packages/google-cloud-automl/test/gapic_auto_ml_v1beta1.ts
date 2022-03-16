@@ -360,7 +360,6 @@ describe('v1beta1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDataset(request), expectedError);
@@ -487,7 +486,6 @@ describe('v1beta1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataset(request), expectedError);
@@ -618,7 +616,6 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.dataset = {};
       request.dataset.name = '';
-      const expectedHeaderRequestParams = 'dataset.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDataset(request), expectedError);
@@ -745,7 +742,6 @@ describe('v1beta1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAnnotationSpec(request), expectedError);
@@ -872,7 +868,6 @@ describe('v1beta1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTableSpec(request), expectedError);
@@ -1003,7 +998,6 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.tableSpec = {};
       request.tableSpec.name = '';
-      const expectedHeaderRequestParams = 'table_spec.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTableSpec(request), expectedError);
@@ -1130,7 +1124,6 @@ describe('v1beta1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getColumnSpec(request), expectedError);
@@ -1261,7 +1254,6 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.columnSpec = {};
       request.columnSpec.name = '';
-      const expectedHeaderRequestParams = 'column_spec.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateColumnSpec(request), expectedError);
@@ -1385,7 +1377,6 @@ describe('v1beta1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getModel(request), expectedError);
@@ -1513,7 +1504,6 @@ describe('v1beta1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getModelEvaluation(request), expectedError);

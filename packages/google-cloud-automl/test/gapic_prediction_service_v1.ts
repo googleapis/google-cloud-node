@@ -296,7 +296,6 @@ describe('v1.PredictionServiceClient', () => {
         new protos.google.cloud.automl.v1.PredictRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.predict(request), expectedError);

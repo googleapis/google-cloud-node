@@ -360,7 +360,6 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.GetDatasetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataset(request), expectedError);
@@ -491,7 +490,6 @@ describe('v1.AutoMlClient', () => {
       );
       request.dataset = {};
       request.dataset.name = '';
-      const expectedHeaderRequestParams = 'dataset.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDataset(request), expectedError);
@@ -618,7 +616,6 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.GetAnnotationSpecRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAnnotationSpec(request), expectedError);
@@ -742,7 +739,6 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.GetModelRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getModel(request), expectedError);
@@ -873,7 +869,6 @@ describe('v1.AutoMlClient', () => {
       );
       request.model = {};
       request.model.name = '';
-      const expectedHeaderRequestParams = 'model.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateModel(request), expectedError);
@@ -1001,7 +996,6 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.GetModelEvaluationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getModelEvaluation(request), expectedError);
