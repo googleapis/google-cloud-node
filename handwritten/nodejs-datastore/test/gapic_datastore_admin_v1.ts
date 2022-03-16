@@ -359,7 +359,6 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIndex(request), expectedError);
