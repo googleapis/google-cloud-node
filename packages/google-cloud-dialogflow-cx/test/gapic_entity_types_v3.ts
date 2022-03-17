@@ -328,7 +328,6 @@ describe('v3.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetEntityTypeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntityType(request), expectedError);
@@ -455,7 +454,6 @@ describe('v3.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateEntityTypeRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEntityType(request), expectedError);
@@ -586,7 +584,6 @@ describe('v3.EntityTypesClient', () => {
       );
       request.entityType = {};
       request.entityType.name = '';
-      const expectedHeaderRequestParams = 'entity_type.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEntityType(request), expectedError);
@@ -713,7 +710,6 @@ describe('v3.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeleteEntityTypeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEntityType(request), expectedError);

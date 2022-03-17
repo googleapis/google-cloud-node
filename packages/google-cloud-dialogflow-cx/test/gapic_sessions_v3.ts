@@ -281,7 +281,6 @@ describe('v3.SessionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentRequest()
       );
       request.session = '';
-      const expectedHeaderRequestParams = 'session=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.detectIntent(request), expectedError);
@@ -408,7 +407,6 @@ describe('v3.SessionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentRequest()
       );
       request.session = '';
-      const expectedHeaderRequestParams = 'session=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.matchIntent(request), expectedError);
@@ -539,7 +537,6 @@ describe('v3.SessionsClient', () => {
       );
       request.matchIntentRequest = {};
       request.matchIntentRequest.session = '';
-      const expectedHeaderRequestParams = 'match_intent_request.session=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fulfillIntent(request), expectedError);

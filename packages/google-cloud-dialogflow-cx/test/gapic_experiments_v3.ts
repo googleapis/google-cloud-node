@@ -328,7 +328,6 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetExperimentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getExperiment(request), expectedError);
@@ -455,7 +454,6 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateExperimentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createExperiment(request), expectedError);
@@ -586,7 +584,6 @@ describe('v3.ExperimentsClient', () => {
       );
       request.experiment = {};
       request.experiment.name = '';
-      const expectedHeaderRequestParams = 'experiment.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateExperiment(request), expectedError);
@@ -713,7 +710,6 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteExperiment(request), expectedError);
@@ -840,7 +836,6 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.StartExperimentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.startExperiment(request), expectedError);
@@ -967,7 +962,6 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.StopExperimentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.stopExperiment(request), expectedError);

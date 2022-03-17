@@ -328,7 +328,6 @@ describe('v3beta1.WebhooksClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWebhook(request), expectedError);
@@ -455,7 +454,6 @@ describe('v3beta1.WebhooksClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createWebhook(request), expectedError);
@@ -586,7 +584,6 @@ describe('v3beta1.WebhooksClient', () => {
       );
       request.webhook = {};
       request.webhook.name = '';
-      const expectedHeaderRequestParams = 'webhook.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateWebhook(request), expectedError);
@@ -713,7 +710,6 @@ describe('v3beta1.WebhooksClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteWebhook(request), expectedError);

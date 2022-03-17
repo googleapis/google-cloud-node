@@ -328,7 +328,6 @@ describe('v3.DeploymentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetDeploymentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDeployment(request), expectedError);

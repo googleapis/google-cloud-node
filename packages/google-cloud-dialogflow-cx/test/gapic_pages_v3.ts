@@ -325,7 +325,6 @@ describe('v3.PagesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetPageRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPage(request), expectedError);
@@ -452,7 +451,6 @@ describe('v3.PagesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreatePageRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPage(request), expectedError);
@@ -583,7 +581,6 @@ describe('v3.PagesClient', () => {
       );
       request.page = {};
       request.page.name = '';
-      const expectedHeaderRequestParams = 'page.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePage(request), expectedError);
@@ -710,7 +707,6 @@ describe('v3.PagesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeletePageRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePage(request), expectedError);

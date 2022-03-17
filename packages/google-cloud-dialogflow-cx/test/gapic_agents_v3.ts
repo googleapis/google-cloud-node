@@ -357,7 +357,6 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetAgentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAgent(request), expectedError);
@@ -484,7 +483,6 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateAgentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createAgent(request), expectedError);
@@ -615,7 +613,6 @@ describe('v3.AgentsClient', () => {
       );
       request.agent = {};
       request.agent.name = '';
-      const expectedHeaderRequestParams = 'agent.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAgent(request), expectedError);
@@ -742,7 +739,6 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeleteAgentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAgent(request), expectedError);
@@ -869,7 +865,6 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ValidateAgentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.validateAgent(request), expectedError);
@@ -1000,7 +995,6 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

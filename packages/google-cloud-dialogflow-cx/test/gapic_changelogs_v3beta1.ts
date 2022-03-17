@@ -328,7 +328,6 @@ describe('v3beta1.ChangelogsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.GetChangelogRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getChangelog(request), expectedError);

@@ -40205,6 +40205,9 @@ export namespace google {
 
                         /** TestConfig flow */
                         flow?: (string|null);
+
+                        /** TestConfig page */
+                        page?: (string|null);
                     }
 
                     /** Represents a TestConfig. */
@@ -40221,6 +40224,9 @@ export namespace google {
 
                         /** TestConfig flow. */
                         public flow: string;
+
+                        /** TestConfig page. */
+                        public page: string;
 
                         /**
                          * Creates a new TestConfig instance using the specified properties.

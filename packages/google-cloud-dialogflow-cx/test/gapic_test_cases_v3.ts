@@ -361,7 +361,6 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchDeleteTestCases(request), expectedError);
@@ -488,7 +487,6 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTestCase(request), expectedError);
@@ -615,7 +613,6 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTestCase(request), expectedError);
@@ -746,7 +743,6 @@ describe('v3.TestCasesClient', () => {
       );
       request.testCase = {};
       request.testCase.name = '';
-      const expectedHeaderRequestParams = 'test_case.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTestCase(request), expectedError);
@@ -873,7 +869,6 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
       request.agent = '';
-      const expectedHeaderRequestParams = 'agent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.calculateCoverage(request), expectedError);
@@ -1000,7 +995,6 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTestCaseResult(request), expectedError);

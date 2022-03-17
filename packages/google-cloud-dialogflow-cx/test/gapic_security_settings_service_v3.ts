@@ -348,7 +348,6 @@ describe('v3.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateSecuritySettingsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -483,7 +482,6 @@ describe('v3.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetSecuritySettingsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSecuritySettings(request), expectedError);
@@ -622,7 +620,6 @@ describe('v3.SecuritySettingsServiceClient', () => {
       );
       request.securitySettings = {};
       request.securitySettings.name = '';
-      const expectedHeaderRequestParams = 'security_settings.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -760,7 +757,6 @@ describe('v3.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeleteSecuritySettingsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

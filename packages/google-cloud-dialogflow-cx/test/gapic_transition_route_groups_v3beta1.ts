@@ -348,7 +348,6 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -486,7 +485,6 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -628,7 +626,6 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       );
       request.transitionRouteGroup = {};
       request.transitionRouteGroup.name = '';
-      const expectedHeaderRequestParams = 'transition_route_group.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -766,7 +763,6 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
