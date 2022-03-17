@@ -338,7 +338,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataSource(request), expectedError);
@@ -474,7 +473,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTransferConfig(request), expectedError);
@@ -614,7 +612,6 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.transferConfig = {};
       request.transferConfig.name = '';
-      const expectedHeaderRequestParams = 'transfer_config.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTransferConfig(request), expectedError);
@@ -750,7 +747,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTransferConfig(request), expectedError);
@@ -885,7 +881,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTransferConfig(request), expectedError);
@@ -1028,7 +1023,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.scheduleTransferRuns(request), expectedError);
@@ -1168,7 +1162,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1306,7 +1299,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTransferRun(request), expectedError);
@@ -1441,7 +1433,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTransferRun(request), expectedError);
@@ -1576,7 +1567,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.checkValidCreds(request), expectedError);
@@ -1711,7 +1701,6 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.enrollDataSources(request), expectedError);
