@@ -330,7 +330,6 @@ describe('v1.MetadataServiceClient', () => {
         new protos.google.cloud.dataplex.v1.CreateEntityRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEntity(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.MetadataServiceClient', () => {
       );
       request.entity = {};
       request.entity.name = '';
-      const expectedHeaderRequestParams = 'entity.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEntity(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.MetadataServiceClient', () => {
         new protos.google.cloud.dataplex.v1.DeleteEntityRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEntity(request), expectedError);
@@ -712,7 +709,6 @@ describe('v1.MetadataServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetEntityRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntity(request), expectedError);
@@ -839,7 +835,6 @@ describe('v1.MetadataServiceClient', () => {
         new protos.google.cloud.dataplex.v1.CreatePartitionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPartition(request), expectedError);
@@ -966,7 +961,6 @@ describe('v1.MetadataServiceClient', () => {
         new protos.google.cloud.dataplex.v1.DeletePartitionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePartition(request), expectedError);
@@ -1093,7 +1087,6 @@ describe('v1.MetadataServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetPartitionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPartition(request), expectedError);

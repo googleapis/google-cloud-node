@@ -359,7 +359,6 @@ describe('v1.DataplexServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetLakeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getLake(request), expectedError);
@@ -483,7 +482,6 @@ describe('v1.DataplexServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetZoneRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getZone(request), expectedError);
@@ -607,7 +605,6 @@ describe('v1.DataplexServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetAssetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAsset(request), expectedError);
@@ -731,7 +728,6 @@ describe('v1.DataplexServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetTaskRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTask(request), expectedError);
@@ -855,7 +851,6 @@ describe('v1.DataplexServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJob(request), expectedError);
@@ -979,7 +974,6 @@ describe('v1.DataplexServiceClient', () => {
         new protos.google.cloud.dataplex.v1.CancelJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelJob(request), expectedError);
@@ -1106,7 +1100,6 @@ describe('v1.DataplexServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEnvironment(request), expectedError);

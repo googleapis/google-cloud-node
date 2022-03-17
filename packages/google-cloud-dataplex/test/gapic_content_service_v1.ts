@@ -330,7 +330,6 @@ describe('v1.ContentServiceClient', () => {
         new protos.google.cloud.dataplex.v1.CreateContentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createContent(request), expectedError);
@@ -461,7 +460,6 @@ describe('v1.ContentServiceClient', () => {
       );
       request.content = {};
       request.content.name = '';
-      const expectedHeaderRequestParams = 'content.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateContent(request), expectedError);
@@ -588,7 +586,6 @@ describe('v1.ContentServiceClient', () => {
         new protos.google.cloud.dataplex.v1.DeleteContentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteContent(request), expectedError);
@@ -715,7 +712,6 @@ describe('v1.ContentServiceClient', () => {
         new protos.google.cloud.dataplex.v1.GetContentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getContent(request), expectedError);
