@@ -379,7 +379,6 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAccessPolicy(request), expectedError);
@@ -510,7 +509,6 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAccessLevel(request), expectedError);
@@ -642,7 +640,6 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServicePerimeter(request), expectedError);
@@ -777,7 +774,6 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
