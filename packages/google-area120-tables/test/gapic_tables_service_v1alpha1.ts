@@ -327,7 +327,6 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTable(request), expectedError);
@@ -454,7 +453,6 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkspace(request), expectedError);
@@ -578,7 +576,6 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRow(request), expectedError);
@@ -702,7 +699,6 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createRow(request), expectedError);
@@ -829,7 +825,6 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchCreateRows(request), expectedError);
@@ -957,7 +952,6 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.row = {};
       request.row.name = '';
-      const expectedHeaderRequestParams = 'row.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateRow(request), expectedError);
@@ -1084,7 +1078,6 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchUpdateRows(request), expectedError);
@@ -1208,7 +1201,6 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteRow(request), expectedError);
@@ -1335,7 +1327,6 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchDeleteRows(request), expectedError);
