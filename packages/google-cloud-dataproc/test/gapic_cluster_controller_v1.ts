@@ -362,7 +362,6 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCluster(request), expectedError);

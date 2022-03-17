@@ -357,7 +357,6 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.submitJob(request), expectedError);
@@ -481,7 +480,6 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJob(request), expectedError);
@@ -605,7 +603,6 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateJob(request), expectedError);
@@ -729,7 +726,6 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelJob(request), expectedError);
@@ -853,7 +849,6 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteJob(request), expectedError);

@@ -359,7 +359,6 @@ describe('v1.BatchControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetBatchRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBatch(request), expectedError);
@@ -486,7 +485,6 @@ describe('v1.BatchControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteBatch(request), expectedError);

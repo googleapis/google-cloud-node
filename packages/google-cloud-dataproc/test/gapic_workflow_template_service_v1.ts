@@ -380,7 +380,6 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -515,7 +514,6 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.GetWorkflowTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkflowTemplate(request), expectedError);
@@ -654,7 +652,6 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       );
       request.template = {};
       request.template.name = '';
-      const expectedHeaderRequestParams = 'template.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -792,7 +789,6 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

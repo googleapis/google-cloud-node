@@ -348,7 +348,6 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -490,7 +489,6 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.policy = {};
       request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -625,7 +623,6 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
@@ -760,7 +757,6 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
