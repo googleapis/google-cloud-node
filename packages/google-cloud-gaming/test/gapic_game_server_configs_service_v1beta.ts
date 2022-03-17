@@ -385,7 +385,6 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGameServerConfig(request), expectedError);

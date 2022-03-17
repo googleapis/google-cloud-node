@@ -357,7 +357,6 @@ describe('v1.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1.GetRealmRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRealm(request), expectedError);
@@ -489,7 +488,6 @@ describe('v1.RealmsServiceClient', () => {
       );
       request.realm = {};
       request.realm.name = '';
-      const expectedHeaderRequestParams = 'realm.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.previewRealmUpdate(request), expectedError);

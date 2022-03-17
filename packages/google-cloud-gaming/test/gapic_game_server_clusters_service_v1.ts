@@ -377,7 +377,6 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGameServerCluster(request), expectedError);
@@ -512,7 +511,6 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -650,7 +648,6 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -792,7 +789,6 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster = {};
       request.gameServerCluster.name = '';
-      const expectedHeaderRequestParams = 'game_server_cluster.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

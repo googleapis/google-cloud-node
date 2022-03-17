@@ -401,7 +401,6 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -547,7 +546,6 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -699,7 +697,6 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout = {};
       request.rollout.name = '';
-      const expectedHeaderRequestParams = 'rollout.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -842,7 +839,6 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchDeploymentState(request), expectedError);
