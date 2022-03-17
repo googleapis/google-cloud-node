@@ -267,7 +267,6 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSnapshot(request), expectedError);
@@ -394,7 +393,6 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteSnapshot(request), expectedError);
@@ -521,7 +519,6 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listSnapshots(request), expectedError);

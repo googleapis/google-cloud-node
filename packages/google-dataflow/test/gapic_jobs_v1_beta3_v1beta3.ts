@@ -325,7 +325,6 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createJob(request), expectedError);
@@ -449,7 +448,6 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJob(request), expectedError);
@@ -573,7 +571,6 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateJob(request), expectedError);
@@ -801,7 +798,6 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.snapshotJob(request), expectedError);

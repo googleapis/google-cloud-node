@@ -2396,6 +2396,7 @@
                      * @property {string|null} [containerImage] SdkHarnessContainerImage containerImage
                      * @property {boolean|null} [useSingleCorePerContainer] SdkHarnessContainerImage useSingleCorePerContainer
                      * @property {string|null} [environmentId] SdkHarnessContainerImage environmentId
+                     * @property {Array.<string>|null} [capabilities] SdkHarnessContainerImage capabilities
                      */
     
                     /**
@@ -2407,6 +2408,7 @@
                      * @param {google.dataflow.v1beta3.ISdkHarnessContainerImage=} [properties] Properties to set
                      */
                     function SdkHarnessContainerImage(properties) {
+                        this.capabilities = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -2438,6 +2440,14 @@
                     SdkHarnessContainerImage.prototype.environmentId = "";
     
                     /**
+                     * SdkHarnessContainerImage capabilities.
+                     * @member {Array.<string>} capabilities
+                     * @memberof google.dataflow.v1beta3.SdkHarnessContainerImage
+                     * @instance
+                     */
+                    SdkHarnessContainerImage.prototype.capabilities = $util.emptyArray;
+    
+                    /**
                      * Creates a new SdkHarnessContainerImage instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.SdkHarnessContainerImage
@@ -2467,6 +2477,9 @@
                             writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useSingleCorePerContainer);
                         if (message.environmentId != null && Object.hasOwnProperty.call(message, "environmentId"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.environmentId);
+                        if (message.capabilities != null && message.capabilities.length)
+                            for (var i = 0; i < message.capabilities.length; ++i)
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.capabilities[i]);
                         return writer;
                     };
     
@@ -2509,6 +2522,11 @@
                                 break;
                             case 3:
                                 message.environmentId = reader.string();
+                                break;
+                            case 4:
+                                if (!(message.capabilities && message.capabilities.length))
+                                    message.capabilities = [];
+                                message.capabilities.push(reader.string());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -2554,6 +2572,13 @@
                         if (message.environmentId != null && message.hasOwnProperty("environmentId"))
                             if (!$util.isString(message.environmentId))
                                 return "environmentId: string expected";
+                        if (message.capabilities != null && message.hasOwnProperty("capabilities")) {
+                            if (!Array.isArray(message.capabilities))
+                                return "capabilities: array expected";
+                            for (var i = 0; i < message.capabilities.length; ++i)
+                                if (!$util.isString(message.capabilities[i]))
+                                    return "capabilities: string[] expected";
+                        }
                         return null;
                     };
     
@@ -2575,6 +2600,13 @@
                             message.useSingleCorePerContainer = Boolean(object.useSingleCorePerContainer);
                         if (object.environmentId != null)
                             message.environmentId = String(object.environmentId);
+                        if (object.capabilities) {
+                            if (!Array.isArray(object.capabilities))
+                                throw TypeError(".google.dataflow.v1beta3.SdkHarnessContainerImage.capabilities: array expected");
+                            message.capabilities = [];
+                            for (var i = 0; i < object.capabilities.length; ++i)
+                                message.capabilities[i] = String(object.capabilities[i]);
+                        }
                         return message;
                     };
     
@@ -2591,6 +2623,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.arrays || options.defaults)
+                            object.capabilities = [];
                         if (options.defaults) {
                             object.containerImage = "";
                             object.useSingleCorePerContainer = false;
@@ -2602,6 +2636,11 @@
                             object.useSingleCorePerContainer = message.useSingleCorePerContainer;
                         if (message.environmentId != null && message.hasOwnProperty("environmentId"))
                             object.environmentId = message.environmentId;
+                        if (message.capabilities && message.capabilities.length) {
+                            object.capabilities = [];
+                            for (var j = 0; j < message.capabilities.length; ++j)
+                                object.capabilities[j] = message.capabilities[j];
+                        }
                         return object;
                     };
     

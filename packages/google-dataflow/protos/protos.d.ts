@@ -876,6 +876,9 @@ export namespace google {
 
                 /** SdkHarnessContainerImage environmentId */
                 environmentId?: (string|null);
+
+                /** SdkHarnessContainerImage capabilities */
+                capabilities?: (string[]|null);
             }
 
             /** Represents a SdkHarnessContainerImage. */
@@ -895,6 +898,9 @@ export namespace google {
 
                 /** SdkHarnessContainerImage environmentId. */
                 public environmentId: string;
+
+                /** SdkHarnessContainerImage capabilities. */
+                public capabilities: string[];
 
                 /**
                  * Creates a new SdkHarnessContainerImage instance using the specified properties.

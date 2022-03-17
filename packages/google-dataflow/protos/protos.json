@@ -299,6 +299,11 @@
                     "environmentId": {
                       "type": "string",
                       "id": 3
+                    },
+                    "capabilities": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4
                     }
                   }
                 },

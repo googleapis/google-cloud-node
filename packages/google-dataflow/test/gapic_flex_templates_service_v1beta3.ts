@@ -280,7 +280,6 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.launchFlexTemplate(request), expectedError);
