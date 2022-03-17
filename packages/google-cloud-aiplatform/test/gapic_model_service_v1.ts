@@ -357,7 +357,6 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetModelRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getModel(request), expectedError);
@@ -488,7 +487,6 @@ describe('v1.ModelServiceClient', () => {
       );
       request.model = {};
       request.model.name = '';
-      const expectedHeaderRequestParams = 'model.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateModel(request), expectedError);
@@ -616,7 +614,6 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getModelEvaluation(request), expectedError);
@@ -747,7 +744,6 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

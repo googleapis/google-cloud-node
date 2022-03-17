@@ -16777,6 +16777,10 @@
                           "type": "BatchDedicatedResources",
                           "id": 7
                         },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 29
+                        },
                         "manualBatchTuningParameters": {
                           "type": "ManualBatchTuningParameters",
                           "id": 8,

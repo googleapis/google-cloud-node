@@ -269,7 +269,6 @@ describe('v1beta1.PredictionServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.PredictRequest()
       );
       request.endpoint = '';
-      const expectedHeaderRequestParams = 'endpoint=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.predict(request), expectedError);
@@ -397,7 +396,6 @@ describe('v1beta1.PredictionServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.RawPredictRequest()
       );
       request.endpoint = '';
-      const expectedHeaderRequestParams = 'endpoint=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.rawPredict(request), expectedError);
@@ -525,7 +523,6 @@ describe('v1beta1.PredictionServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ExplainRequest()
       );
       request.endpoint = '';
-      const expectedHeaderRequestParams = 'endpoint=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.explain(request), expectedError);

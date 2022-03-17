@@ -362,7 +362,6 @@ describe('v1.EndpointServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetEndpointRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEndpoint(request), expectedError);
@@ -493,7 +492,6 @@ describe('v1.EndpointServiceClient', () => {
       );
       request.endpoint = {};
       request.endpoint.name = '';
-      const expectedHeaderRequestParams = 'endpoint.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEndpoint(request), expectedError);

@@ -376,7 +376,6 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetSpecialistPoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSpecialistPool(request), expectedError);

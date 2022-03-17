@@ -379,7 +379,6 @@ describe('v1.IndexEndpointServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetIndexEndpointRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIndexEndpoint(request), expectedError);
@@ -515,7 +514,6 @@ describe('v1.IndexEndpointServiceClient', () => {
       );
       request.indexEndpoint = {};
       request.indexEndpoint.name = '';
-      const expectedHeaderRequestParams = 'index_endpoint.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIndexEndpoint(request), expectedError);

@@ -360,7 +360,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createStudy(request), expectedError);
@@ -484,7 +483,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetStudyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getStudy(request), expectedError);
@@ -611,7 +609,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteStudy(request), expectedError);
@@ -738,7 +735,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.lookupStudy(request), expectedError);
@@ -865,7 +861,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTrial(request), expectedError);
@@ -989,7 +984,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetTrialRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTrial(request), expectedError);
@@ -1117,7 +1111,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
       );
       request.trialName = '';
-      const expectedHeaderRequestParams = 'trial_name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addTrialMeasurement(request), expectedError);
@@ -1244,7 +1237,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.completeTrial(request), expectedError);
@@ -1371,7 +1363,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTrial(request), expectedError);
@@ -1495,7 +1486,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.StopTrialRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.stopTrial(request), expectedError);
@@ -1622,7 +1612,6 @@ describe('v1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listOptimalTrials(request), expectedError);

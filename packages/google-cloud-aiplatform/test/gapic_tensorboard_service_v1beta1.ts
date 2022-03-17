@@ -394,7 +394,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTensorboard(request), expectedError);
@@ -529,7 +528,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -667,7 +665,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -809,7 +806,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardExperiment = {};
       request.tensorboardExperiment.name = '';
-      const expectedHeaderRequestParams = 'tensorboard_experiment.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -944,7 +940,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTensorboardRun(request), expectedError);
@@ -1079,7 +1074,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1213,7 +1207,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTensorboardRun(request), expectedError);
@@ -1349,7 +1342,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardRun = {};
       request.tensorboardRun.name = '';
-      const expectedHeaderRequestParams = 'tensorboard_run.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTensorboardRun(request), expectedError);
@@ -1484,7 +1476,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1622,7 +1613,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1760,7 +1750,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1902,7 +1891,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardTimeSeries = {};
       request.tensorboardTimeSeries.name = '';
-      const expectedHeaderRequestParams = 'tensorboard_time_series.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2042,7 +2030,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest()
       );
       request.tensorboard = '';
-      const expectedHeaderRequestParams = 'tensorboard=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2180,7 +2167,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest()
       );
       request.tensorboardTimeSeries = '';
-      const expectedHeaderRequestParams = 'tensorboard_time_series=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2318,7 +2304,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest()
       );
       request.tensorboardExperiment = '';
-      const expectedHeaderRequestParams = 'tensorboard_experiment=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2456,7 +2441,6 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest()
       );
       request.tensorboardRun = '';
-      const expectedHeaderRequestParams = 'tensorboard_run=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3782,6 +3766,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest()
       );
+      request.timeSeries = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       const stream = client.readTensorboardBlobData(request);

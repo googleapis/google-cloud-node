@@ -362,7 +362,6 @@ describe('v1beta1.DatasetServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetDatasetRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataset(request), expectedError);
@@ -493,7 +492,6 @@ describe('v1beta1.DatasetServiceClient', () => {
       );
       request.dataset = {};
       request.dataset.name = '';
-      const expectedHeaderRequestParams = 'dataset.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDataset(request), expectedError);
@@ -620,7 +618,6 @@ describe('v1beta1.DatasetServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAnnotationSpec(request), expectedError);

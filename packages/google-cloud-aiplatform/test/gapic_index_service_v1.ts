@@ -357,7 +357,6 @@ describe('v1.IndexServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetIndexRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIndex(request), expectedError);

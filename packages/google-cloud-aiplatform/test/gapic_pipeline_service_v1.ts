@@ -366,7 +366,6 @@ describe('v1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -497,7 +496,6 @@ describe('v1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTrainingPipeline(request), expectedError);
@@ -628,7 +626,6 @@ describe('v1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -758,7 +755,6 @@ describe('v1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPipelineJob(request), expectedError);
@@ -885,7 +881,6 @@ describe('v1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPipelineJob(request), expectedError);
@@ -1012,7 +1007,6 @@ describe('v1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelPipelineJob(request), expectedError);

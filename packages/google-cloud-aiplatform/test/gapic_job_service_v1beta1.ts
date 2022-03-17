@@ -360,7 +360,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCustomJob(request), expectedError);
@@ -487,7 +486,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetCustomJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCustomJob(request), expectedError);
@@ -614,7 +612,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelCustomJob(request), expectedError);
@@ -745,7 +742,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -876,7 +872,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataLabelingJob(request), expectedError);
@@ -1007,7 +1002,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1141,7 +1135,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1275,7 +1268,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1409,7 +1401,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1543,7 +1534,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1677,7 +1667,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1811,7 +1800,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1947,7 +1935,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2081,7 +2068,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2217,7 +2203,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2353,7 +2338,6 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
