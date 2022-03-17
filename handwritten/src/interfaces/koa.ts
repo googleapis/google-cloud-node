@@ -27,7 +27,7 @@ import {koaRequestInformationExtractor} from '../request-extractors/koa';
  * the request chain handling and this function corresponds to the format given
  * in: https://github.com/koajs/koa/wiki/Error-Handling.
  * @function koaErrorHandler
- * @param {AuthClient} - The API client instance to report errors to Stackdriver
+ * @param {AuthClient} - The API client instance to report errors to Google Cloud
  * @param {NormalizedConfigurationVariables} - The application configuration
  * @returns {Function} - The function used to catch errors yielded by downstream
  *  request handlers.

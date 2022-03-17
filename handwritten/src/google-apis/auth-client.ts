@@ -117,7 +117,7 @@ export class RequestHandler extends Service {
           this._logger.error(
             [
               'Unable to find credential information on instance. This library',
-              'will be unable to communicate with the Stackdriver API to save',
+              'will be unable to communicate with the Google Cloud API to save',
               'errors.  Message: ' + err.message,
             ].join(' ')
           );
@@ -191,7 +191,7 @@ export class RequestHandler extends Service {
             this._logger.error(
               [
                 'Encountered an error while attempting to transmit an error to',
-                'the Stackdriver Error Reporting API.',
+                'the Error Reporting API.',
               ].join(' '),
               err
             );
@@ -203,7 +203,7 @@ export class RequestHandler extends Service {
       cb(
         new Error(
           [
-            'The stackdriver error reporting client is configured to report errors',
+            'The error reporting client is configured to report errors',
             'if and only if the NODE_ENV environment variable is set to "production".',
             'Errors will not be reported.  To have errors always reported, regardless of the',
             'value of NODE_ENV, set the reportMode configuration option to "always".',
