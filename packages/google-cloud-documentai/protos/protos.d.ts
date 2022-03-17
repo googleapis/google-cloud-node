@@ -12453,6 +12453,9 @@ export namespace google {
 
                         /** TextAnchor textSegments */
                         textSegments?: (google.cloud.documentai.v1beta2.Document.TextAnchor.ITextSegment[]|null);
+
+                        /** TextAnchor content */
+                        content?: (string|null);
                     }
 
                     /** Represents a TextAnchor. */
@@ -12466,6 +12469,9 @@ export namespace google {
 
                         /** TextAnchor textSegments. */
                         public textSegments: google.cloud.documentai.v1beta2.Document.TextAnchor.ITextSegment[];
+
+                        /** TextAnchor content. */
+                        public content: string;
 
                         /**
                          * Creates a new TextAnchor instance using the specified properties.

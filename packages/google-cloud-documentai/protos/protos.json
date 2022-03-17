@@ -2715,6 +2715,10 @@
                               "rule": "repeated",
                               "type": "TextSegment",
                               "id": 1
+                            },
+                            "content": {
+                              "type": "string",
+                              "id": 2
                             }
                           },
                           "nested": {
