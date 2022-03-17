@@ -12,7 +12,7 @@
 
 > Node.js idiomatic client for [Error Reporting][product-docs].
 
-[Cloud Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
+[Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
 
 
 A comprehensive list of changes in each version may be found in
@@ -68,8 +68,8 @@ const errors = new ErrorReporting();
 errors.report('Something broke!');
 
 ```
-This module provides custom Cloud Error Reporting support for Node.js applications.
-[Cloud Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
+This module provides custom Error Reporting support for Node.js applications.
+[Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
 Google Cloud Platform that allows in-depth monitoring and viewing of errors reported by
 applications running in almost any environment.
 
@@ -77,11 +77,11 @@ However, note that [@google-cloud/logging-winston](https://github.com/googleapis
 
 Thus, if you are already using Winston or Bunyan in your application, and don't need custom error reporting capabilities, you do not need to use the `@google-cloud/error-reporting` library directly to report errors to the Error Reporting Console.
 
-![Cloud Error Reporting overview](https://raw.githubusercontent.com/googleapis/nodejs-error-reporting/master/doc/images/errors-overview.png)
+![Error Reporting overview](https://raw.githubusercontent.com/googleapis/nodejs-error-reporting/master/doc/images/errors-overview.png)
 
 Here's an introductory video that provides some more details:
 
-[![Learn about Error Reporting in Cloud](https://img.youtube.com/vi/cVpWVD75Hs8/0.jpg)](https://www.youtube.com/watch?v=cVpWVD75Hs8)
+[![Learn about Error Reporting in Google Cloud](https://img.youtube.com/vi/cVpWVD75Hs8/0.jpg)](https://www.youtube.com/watch?v=cVpWVD75Hs8)
 
 # When Errors Are Reported
 

@@ -64,7 +64,7 @@ export interface ServiceContext {
  * service.
  * @class Configuration
  * @classdesc The Configuration class represents the runtime configuration of
- *  the Stackdriver error handling library. This Configuration class accepts the
+ *  the error handling library. This Configuration class accepts the
  *  configuration options potentially given through the application interface
  *  but it also preferences values received from the metadata service over
  *  values given through the application interface. Becuase the Configuration
@@ -115,9 +115,9 @@ export class Configuration {
      */
     this._projectId = null;
     /**
-     * The _key property is meant to contain the optional Stackdriver API key
+     * The _key property is meant to contain the optional Google Cloud API key
      * that may be used in place of default application credentials to
-     * authenticate with the Stackdriver Error API. This property will remain
+     * authenticate with the Error API. This property will remain
      * null if a key is not given in the runtime configuration or an invalid
      * type is given as the runtime configuration.
      * {@link https://support.google.com/cloud/answer/6158862?hl=en}
@@ -345,7 +345,7 @@ export class Configuration {
     if (this.isReportingEnabled() && !this.getShouldReportErrorsToAPI()) {
       this._logger.warn(
         [
-          'The stackdriver error reporting client is configured to report errors',
+          'The error reporting client is configured to report errors',
           'if and only if the NODE_ENV environment variable is set to "production".',
           'Errors will not be reported.  To have errors always reported, regardless of the',
           'value of NODE_ENV, set the reportMode configuration option to "always".',
