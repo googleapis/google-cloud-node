@@ -272,7 +272,6 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         new protos.google.analytics.data.v1beta.RunReportRequest()
       );
       request.property = '';
-      const expectedHeaderRequestParams = 'property=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runReport(request), expectedError);
@@ -407,7 +406,6 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         new protos.google.analytics.data.v1beta.RunPivotReportRequest()
       );
       request.property = '';
-      const expectedHeaderRequestParams = 'property=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runPivotReport(request), expectedError);
@@ -542,7 +540,6 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         new protos.google.analytics.data.v1beta.BatchRunReportsRequest()
       );
       request.property = '';
-      const expectedHeaderRequestParams = 'property=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchRunReports(request), expectedError);
@@ -678,7 +675,6 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         new protos.google.analytics.data.v1beta.BatchRunPivotReportsRequest()
       );
       request.property = '';
-      const expectedHeaderRequestParams = 'property=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchRunPivotReports(request), expectedError);
@@ -813,7 +809,6 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         new protos.google.analytics.data.v1beta.GetMetadataRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMetadata(request), expectedError);
@@ -948,7 +943,6 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         new protos.google.analytics.data.v1beta.RunRealtimeReportRequest()
       );
       request.property = '';
-      const expectedHeaderRequestParams = 'property=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runRealtimeReport(request), expectedError);
@@ -1084,7 +1078,6 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
       );
       request.property = '';
-      const expectedHeaderRequestParams = 'property=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.checkCompatibility(request), expectedError);
