@@ -330,7 +330,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createReservation(request), expectedError);
@@ -457,7 +456,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getReservation(request), expectedError);
@@ -584,7 +582,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteReservation(request), expectedError);
@@ -715,7 +712,6 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.reservation = {};
       request.reservation.name = '';
-      const expectedHeaderRequestParams = 'reservation.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateReservation(request), expectedError);
@@ -846,7 +842,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -980,7 +975,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1114,7 +1108,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1252,7 +1245,6 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.capacityCommitment = {};
       request.capacityCommitment.name = '';
-      const expectedHeaderRequestParams = 'capacity_commitment.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1386,7 +1378,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1520,7 +1511,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1650,7 +1640,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createAssignment(request), expectedError);
@@ -1777,7 +1766,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAssignment(request), expectedError);
@@ -1904,7 +1892,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.moveAssignment(request), expectedError);
@@ -2031,7 +2018,6 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBiReservation(request), expectedError);
@@ -2163,7 +2149,6 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.biReservation = {};
       request.biReservation.name = '';
-      const expectedHeaderRequestParams = 'bi_reservation.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateBiReservation(request), expectedError);
