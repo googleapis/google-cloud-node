@@ -330,7 +330,6 @@ describe('v1.ConnectionServiceClient', () => {
         new protos.google.cloud.bigquery.connection.v1.CreateConnectionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createConnection(request), expectedError);
@@ -457,7 +456,6 @@ describe('v1.ConnectionServiceClient', () => {
         new protos.google.cloud.bigquery.connection.v1.GetConnectionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConnection(request), expectedError);
@@ -584,7 +582,6 @@ describe('v1.ConnectionServiceClient', () => {
         new protos.google.cloud.bigquery.connection.v1.UpdateConnectionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateConnection(request), expectedError);
@@ -711,7 +708,6 @@ describe('v1.ConnectionServiceClient', () => {
         new protos.google.cloud.bigquery.connection.v1.DeleteConnectionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteConnection(request), expectedError);
@@ -838,7 +834,6 @@ describe('v1.ConnectionServiceClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -965,7 +960,6 @@ describe('v1.ConnectionServiceClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1093,7 +1087,6 @@ describe('v1.ConnectionServiceClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
