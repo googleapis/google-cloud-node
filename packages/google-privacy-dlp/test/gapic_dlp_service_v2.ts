@@ -328,7 +328,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.inspectContent(request), expectedError);
@@ -455,7 +454,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.redactImage(request), expectedError);
@@ -582,7 +580,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deidentifyContent(request), expectedError);
@@ -709,7 +706,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.reidentifyContent(request), expectedError);
@@ -836,7 +832,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listInfoTypes(request), expectedError);
@@ -967,7 +962,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1101,7 +1095,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1232,7 +1225,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInspectTemplate(request), expectedError);
@@ -1363,7 +1355,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1497,7 +1488,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1631,7 +1621,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1765,7 +1754,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1899,7 +1887,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2029,7 +2016,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createJobTrigger(request), expectedError);
@@ -2156,7 +2142,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateJobTrigger(request), expectedError);
@@ -2287,7 +2272,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2417,7 +2401,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJobTrigger(request), expectedError);
@@ -2544,7 +2527,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteJobTrigger(request), expectedError);
@@ -2672,7 +2654,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.activateJobTrigger(request), expectedError);
@@ -2799,7 +2780,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDlpJob(request), expectedError);
@@ -2923,7 +2903,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDlpJob(request), expectedError);
@@ -3050,7 +3029,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDlpJob(request), expectedError);
@@ -3177,7 +3155,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelDlpJob(request), expectedError);
@@ -3305,7 +3282,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createStoredInfoType(request), expectedError);
@@ -3433,7 +3409,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateStoredInfoType(request), expectedError);
@@ -3560,7 +3535,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getStoredInfoType(request), expectedError);
@@ -3688,7 +3662,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteStoredInfoType(request), expectedError);
@@ -3816,7 +3789,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.hybridInspectDlpJob(request), expectedError);
@@ -3943,7 +3915,6 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.finishDlpJob(request), expectedError);
