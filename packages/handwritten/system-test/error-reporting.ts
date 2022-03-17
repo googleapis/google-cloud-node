@@ -370,7 +370,7 @@ describe('Client creation', () => {
 
 describe('Expected Behavior', () => {
   const ERROR_STRING = [
-    'The stackdriver error reporting client is configured to report errors',
+    'The error reporting client is configured to report errors',
     'if and only if the NODE_ENV environment variable is set to "production".',
     'Errors will not be reported.  To have errors always reported, regardless of the',
     'value of NODE_ENV, set the reportMode configuration option to "always".',

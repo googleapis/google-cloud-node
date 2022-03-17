@@ -167,7 +167,7 @@ describe('RequestHandler', () => {
       null, // no access token error
       {
         warn:
-          'The stackdriver error reporting client is configured to report ' +
+          'The error reporting client is configured to report ' +
           'errors if and only if the NODE_ENV environment variable is set to ' +
           '"production". Errors will not be reported.  To have errors always ' +
           'reported, regardless of the value of NODE_ENV, set the reportMode ' +
@@ -184,7 +184,7 @@ describe('RequestHandler', () => {
       null, // no access token error
       {
         warn:
-          'The stackdriver error reporting client is configured to report ' +
+          'The error reporting client is configured to report ' +
           'errors if and only if the NODE_ENV environment variable is set to ' +
           '"production". Errors will not be reported.  To have errors always ' +
           'reported, regardless of the value of NODE_ENV, set the reportMode ' +
@@ -203,7 +203,7 @@ describe('RequestHandler', () => {
       {
         error:
           'Unable to find credential information on instance. This ' +
-          'library will be unable to communicate with the Stackdriver API to ' +
+          'library will be unable to communicate with the Google Cloud API to ' +
           'save errors.  Message: ' +
           message,
         warn:

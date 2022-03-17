@@ -55,10 +55,10 @@ export {ErrorMessage};
  * @property {String} [serviceContext.version] - the version the hosting
  *  application is currently labelled as
  * @property {Boolean} [ignoreEnvironmentCheck] - flag indicating whether or not
- *  to communicate errors to the Stackdriver service even if NODE_ENV is not set
+ *  to communicate errors to the Google Cloud service even if NODE_ENV is not set
  *  to production
  * @property {String} [reportMode] - flag indicating whether or not
- *  to communicate errors to the Stackdriver service.  Possible values are:
+ *  to communicate errors to the Google Cloud service.  Possible values are:
  *  -> 'production' (default)
  *     -> Only report errors if NODE_ENV is set to "production".
  *  -> 'always'
@@ -71,21 +71,19 @@ export {ErrorMessage};
  * @typedef Errors
  * @type {Object}
  * @property {Function} report - The manual interface to report Errors to the
- *  Stackdriver Error Reporting Service
+ *  Error Reporting Service
  * @property {ErrorMessage} event - Returns a new ErrorMessage class instance
  *  to use to create custom messages
- * @property {Function} express - The express plugin for Stackdriver Error
- *  Reporting
- * @property {Object} hapi - The hapi plugin for Stackdriver Error Reporting
- * @property {Function} koa - The koa plugin for Stackdriver Error Reporting
- * @property {Function} restify - The restify plugin for Stackdriver Error
- *  Reporting
+ * @property {Function} express - The express plugin for Error Reporting
+ * @property {Object} hapi - The hapi plugin for Error Reporting
+ * @property {Function} koa - The koa plugin for Error Reporting
+ * @property {Function} restify - The restify plugin for Error Reporting
  */
 
 /**
- * This module provides Stackdriver Error Reporting support for Node.js
+ * This module provides Error Reporting support for Node.js
  * applications.
- * [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is
+ * [Error Reporting](https://cloud.google.com/error-reporting/) is
  * a feature of Google Cloud Platform that allows in-depth monitoring and
  * viewing of errors reported by applications running in almost any environment.
  *
@@ -96,7 +94,7 @@ export {ErrorMessage};
  * @alias module:error-reporting
  * @constructor
  *
- * @resource [What is Stackdriver Error Reporting]{@link
+ * @resource [What is Error Reporting]{@link
  * https://cloud.google.com/error-reporting/}
  *
  * @param {ConfigurationOptions} initConfiguration - The desired project/error
