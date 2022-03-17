@@ -362,7 +362,6 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGateway(request), expectedError);
@@ -486,7 +485,6 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getApi(request), expectedError);
@@ -613,7 +611,6 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getApiConfig(request), expectedError);
