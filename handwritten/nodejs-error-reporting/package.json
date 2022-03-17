@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/error-reporting",
-  "description": "Stackdriver Error Reporting Client Library for Node.js",
+  "description": "Error Reporting Client Library for Node.js",
   "version": "2.0.4",
   "license": "Apache-2.0",
   "author": "Google Inc.",

@@ -44,7 +44,7 @@ export class ErrorMessage {
    * @type {Object}
    * @class ErrorMessage
    * @classdesc ErrorMessage is a class which is meant to store and control-for
-   *  Stackdriver Error API submittable values. Meant to be JSON string-ifiable
+   *  Google Cloud Error API submittable values. Meant to be JSON string-ifiable
    *  representation of the final values which will be submitted to the Error
    * API this class enforces type-checking on every setter function and will
    * write default type-friendly values to instance properties if given values

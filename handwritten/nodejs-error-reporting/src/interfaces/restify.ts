@@ -26,7 +26,7 @@ import * as expressRequestInformationExtractor from '../request-extractors/expre
  * the serviceContext property on the corresponding ErrorMessage instance,
  * routing the captured error to the right handler so that it can be correctly
  * marshaled into the ErrorMessage instance and then attempting to send it to
- * the Stackdriver API via the given API client instance.
+ * the Google Cloud API via the given API client instance.
  * @function restifyErrorHandler
  * @param {AuthClient} client - the API client
  * @param {NormalizedConfigurationVariables} config - the application
@@ -55,7 +55,7 @@ function restifyErrorHandler(
  * attempt to determine whether or not the body of response is an instance of
  * the Error class or its status codes indicate that the response ended in an
  * error state. If either of the preceding are true then the restifyErrorHandler
- * will be called with the error to be routed to the Stackdriver service.
+ * will be called with the error to be routed to the Google Cloud service.
  * @function restifyRequestFinishHandler
  * @param {AuthClient} client - the API client
  * @param {NormalizedConfigurationVariables} config - the application
@@ -146,7 +146,7 @@ function restifyRequestHandler(
  * event is emitted when an uncaught error is thrown inside a restify request
  * handler. This init function will return the actual request handler function
  * which will attach to outgoing responses, determine if they are instances of
- * errors and then attempt to send this information to the Stackdriver API.
+ * errors and then attempt to send this information to the Google Cloud API.
  * @function serverErrorHandler
  * @param {AuthClient} client - the API client
  * @param {NormalizedConfigurationVariables} config - the application
