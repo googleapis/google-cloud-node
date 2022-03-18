@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/nodejs-logging-winston/compare/v4.1.3...v4.2.0) (2022-03-18)
+
+
+### Features
+
+* Add support to print structured logging to STDOUT ([#676](https://github.com/googleapis/nodejs-logging-winston/issues/676)) ([76135ca](https://github.com/googleapis/nodejs-logging-winston/commit/76135ca81cf0a2e6e48bc34e4b982daa64ce2cd9))
+
 ### [4.1.3](https://github.com/googleapis/nodejs-logging-winston/compare/v4.1.2...v4.1.3) (2022-03-09)
 
 
