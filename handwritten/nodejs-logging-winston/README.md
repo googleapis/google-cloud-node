@@ -158,13 +158,13 @@ main();
 
 ### Error Reporting
 
-Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) if you have specified a `serviceContext.service` when instantiating a `LoggingWinston` instance:
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Error Reporting](https://cloud.google.com/error-reporting/) if you have specified a `serviceContext.service` when instantiating a `LoggingWinston` instance:
 
 ```javascript
 const loggingWinston = new LoggingWinston({
 serviceContext: {
     service: 'my-service', // required to report logged errors
-                        // to the Google Cloud Error Reporting
+                        // to the Error Reporting
                         // console
     version: 'my-version'
 }
@@ -179,7 +179,7 @@ You may also want to see the [@google-cloud/error-reporting](https://github.com/
 
 ### Error handling with a default callback
 
-The `LoggingWinston` class creates an instance of `LoggingCommon` which uses the `Log` class from `@google-cloud/logging` package to write log entries. 
+The `LoggingWinston` class creates an instance of `LoggingCommon` which by default uses the `Log` class from `@google-cloud/logging` package to write log entries. 
 The `Log` class writes logs asynchronously and there are cases when log entries cannot be written and an error is 
 thrown - if error is not handled properly, it could crash the application. One possible way to handle the error is to provide a default callback
 to the `LoggingWinston` constructor which will be used to initialize `Log` object with that callback like in example below:
@@ -288,6 +288,28 @@ logger.debug('test msg');
 ```
 
 ![Request log with prefix](https://raw.githubusercontent.com/googleapis/nodejs-logging-winston/master/doc/images/request-log-with-prefix.png)
+
+### Alternative way to ingest logs in Google Cloud managed environments
+If you use this library with the Cloud Logging Agent, you can configure the handler to output logs to `process.stdout` using
+the [structured logging Json format](https://cloud.google.com/logging/docs/structured-logging#special-payload-fields).
+To do this, add `redirectToStdout: true` parameter to the `LoggingWinston` constructor as in sample below.
+You can use this parameter when running applications in Google Cloud managed environments such as AppEngine, Cloud Run,
+Cloud Function or GKE. The logger agent installed on these environments can capture `process.stdout` and ingest it into Cloud Logging.
+The agent can parse structured logs printed to `process.stdout` and capture additional log metadata beside the log payload.
+It is recommended to set `redirectToStdout: true` in serverless environments like Cloud Functions since it could 
+decrease logging record loss upon execution termination - since all logs are written to `process.stdout` those
+would be picked up by the Cloud Logging Agent running in Google Cloud managed environment. 
+
+```js
+// Imports the Google Cloud client library for Winston
+const {LoggingWinston} = require('@google-cloud/logging-winston');
+
+// Creates a client that writes logs to stdout
+const loggingWinston = new LoggingWinston({
+  projectId: 'your-project-id',
+  keyFilename: '/path/to/key.json',
+  redirectToStdout: true,
+});
 
 
 ## Samples
