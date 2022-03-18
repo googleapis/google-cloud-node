@@ -136,26 +136,6 @@ describe('Compute', () => {
         image: NAME,
       });
     });
-
-    it('create and fetch image, test int64 type field', async function () {
-      this.timeout(10 * 60 * 1000);
-      const resource = {
-        name: NAME,
-        licenseCodes: [5543610867827062957],
-        sourceImage:
-          'projects/debian-cloud/global/images/debian-10-buster-v20210721',
-      };
-      const [op] = await client.insert({
-        project,
-        imageResource: resource,
-      });
-      await waitGlobalOperation(op);
-      const [fetched] = await client.get({
-        project,
-        image: NAME,
-      });
-      assert.strictEqual(fetched.licenseCodes[0], '5543610867827062957');
-    });
   });
 
   describe('Firewall', () => {
