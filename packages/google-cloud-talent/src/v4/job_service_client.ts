@@ -793,6 +793,8 @@ export class JobServiceClient {
    *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
    *   matching entities within each bucket.
    *
+   *   A maximum of 200 histogram buckets are supported.
+   *
    *   Data types:
    *
    *   * Histogram facet: facet names with format `{@link a-zA-Z0-9_|a-zA-Z}+`.
@@ -1118,6 +1120,8 @@ export class JobServiceClient {
    *   for each distinct attribute value.
    *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
    *   matching entities within each bucket.
+   *
+   *   A maximum of 200 histogram buckets are supported.
    *
    *   Data types:
    *
