@@ -15,6 +15,7 @@
 import {
   HttpRequest,
   Log,
+  LogSync,
   middleware as commonMiddleware,
 } from '@google-cloud/logging';
 import {GCPEnv} from 'google-auth-library';
@@ -64,7 +65,11 @@ export async function makeMiddleware(
     logger.add(transport);
   }
 
-  const auth = transport.common.stackdriverLog.logging.auth;
+  const auth = (
+    transport.common.redirectToStdout
+      ? (transport.common.cloudLog as LogSync)
+      : (transport.common.cloudLog as Log)
+  ).logging.auth;
   const [env, projectId] = await Promise.all([
     auth.getEnv(),
     auth.getProjectId(),

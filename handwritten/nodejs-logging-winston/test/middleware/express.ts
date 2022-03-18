@@ -40,7 +40,7 @@ class FakeLoggingWinston extends TransportStream {
     transport = this;
     passedOptions.push(options);
     this.common = {
-      stackdriverLog: {
+      cloudLog: {
         logging: {
           auth: {
             async getProjectId() {
