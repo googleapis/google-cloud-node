@@ -1380,6 +1380,12 @@ export class TestCasesClient {
    *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
    *   to import test cases from. The format of this URI must be
    *   `gs://<bucket-name>/<object-name>`.
+   *
+   *   Dialogflow performs a read operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have read permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
    * @param {Buffer} request.content
    *   Uncompressed raw byte content for test cases.
    * @param {object} [options]
@@ -1533,6 +1539,12 @@ export class TestCasesClient {
    *   export the test cases to. The format of this URI must be
    *   `gs://<bucket-name>/<object-name>`. If unspecified, the serialized test
    *   cases is returned inline.
+   *
+   *   Dialogflow performs a write operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have write permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
    * @param {google.cloud.dialogflow.cx.v3beta1.ExportTestCasesRequest.DataFormat} request.dataFormat
    *   The data format of the exported test cases. If not specified, `BLOB` is
    *   assumed.
