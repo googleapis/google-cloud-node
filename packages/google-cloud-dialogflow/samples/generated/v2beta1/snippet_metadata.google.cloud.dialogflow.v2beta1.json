@@ -234,7 +234,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 61,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -278,7 +278,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 62,
+          "end": 67,
           "type": "FULL"
         }
       ],
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 62,
+          "end": 67,
           "type": "FULL"
         }
       ],
@@ -1004,6 +1004,102 @@
         "method": {
           "shortName": "DeleteConversationProfile",
           "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.DeleteConversationProfile",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_ConversationProfiles_SetSuggestionFeatureConfig_async",
+      "title": "dialogflow setSuggestionFeatureConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds or updates a suggestion feature in a conversation profile. If the conversation profile contains the type of suggestion feature for the participant role, it will update it. Otherwise it will insert the suggestion feature. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [SetSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2beta1.SetSuggestionFeatureConfigOperationMetadata] - `response`: [ConversationProfile][google.cloud.dialogflow.v2beta1.ConversationProfile] If a long running operation to add or update suggestion feature config for the same conversation profile, participant role and suggestion feature type exists, please cancel the existing long running operation before sending such request, otherwise the request will be rejected.",
+      "canonical": true,
+      "file": "conversation_profiles.set_suggestion_feature_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetSuggestionFeatureConfig",
+        "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.SetSuggestionFeatureConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "conversation_profile",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "participant_role",
+            "type": ".google.cloud.dialogflow.v2beta1.Participant.Role"
+          },
+          {
+            "name": "suggestion_feature_config",
+            "type": ".google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "SetSuggestionFeatureConfig",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.SetSuggestionFeatureConfig",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_ConversationProfiles_ClearSuggestionFeatureConfig_async",
+      "title": "dialogflow clearSuggestionFeatureConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Clears a suggestion feature from a conversation profile for the given participant role. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [ClearSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2beta1.ClearSuggestionFeatureConfigOperationMetadata] - `response`: [ConversationProfile][google.cloud.dialogflow.v2beta1.ConversationProfile]",
+      "canonical": true,
+      "file": "conversation_profiles.clear_suggestion_feature_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ClearSuggestionFeatureConfig",
+        "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.ClearSuggestionFeatureConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "conversation_profile",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "participant_role",
+            "type": ".google.cloud.dialogflow.v2beta1.Participant.Role"
+          },
+          {
+            "name": "suggestion_feature_type",
+            "type": ".google.cloud.dialogflow.v2beta1.SuggestionFeature.Type"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "ClearSuggestionFeatureConfig",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.ClearSuggestionFeatureConfig",
           "service": {
             "shortName": "ConversationProfiles",
             "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles"

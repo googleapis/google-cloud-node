@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -37,7 +38,7 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './conversation_profiles_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -63,6 +64,7 @@ export class ConversationProfilesClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   conversationProfilesStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -302,6 +304,52 @@ export class ConversationProfilesClient {
       ),
     };
 
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
+    const setSuggestionFeatureConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2beta1.ConversationProfile'
+    ) as gax.protobuf.Type;
+    const setSuggestionFeatureConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2beta1.SetSuggestionFeatureConfigOperationMetadata'
+    ) as gax.protobuf.Type;
+    const clearSuggestionFeatureConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2beta1.ConversationProfile'
+    ) as gax.protobuf.Type;
+    const clearSuggestionFeatureConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2beta1.ClearSuggestionFeatureConfigOperationMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      setSuggestionFeatureConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        setSuggestionFeatureConfigResponse.decode.bind(
+          setSuggestionFeatureConfigResponse
+        ),
+        setSuggestionFeatureConfigMetadata.decode.bind(
+          setSuggestionFeatureConfigMetadata
+        )
+      ),
+      clearSuggestionFeatureConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        clearSuggestionFeatureConfigResponse.decode.bind(
+          clearSuggestionFeatureConfigResponse
+        ),
+        clearSuggestionFeatureConfigMetadata.decode.bind(
+          clearSuggestionFeatureConfigMetadata
+        )
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.ConversationProfiles',
@@ -358,6 +406,8 @@ export class ConversationProfilesClient {
       'createConversationProfile',
       'updateConversationProfile',
       'deleteConversationProfile',
+      'setSuggestionFeatureConfig',
+      'clearSuggestionFeatureConfig',
     ];
     for (const methodName of conversationProfilesStubMethods) {
       const callPromise = this.conversationProfilesStub.then(
@@ -374,7 +424,10 @@ export class ConversationProfilesClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -865,6 +918,325 @@ export class ConversationProfilesClient {
     );
   }
 
+  /**
+   * Adds or updates a suggestion feature in a conversation profile.
+   * If the conversation profile contains the type of suggestion feature for
+   * the participant role, it will update it. Otherwise it will insert the
+   * suggestion feature.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2beta1.SetSuggestionFeatureConfigOperationMetadata|SetSuggestionFeatureConfigOperationMetadata}
+   * - `response`: {@link google.cloud.dialogflow.v2beta1.ConversationProfile|ConversationProfile}
+   *
+   * If a long running operation to add or update suggestion feature
+   * config for the same conversation profile, participant role and suggestion
+   * feature type exists, please cancel the existing long running operation
+   * before sending such request, otherwise the request will be rejected.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversationProfile
+   *   Required. The Conversation Profile to add or update the suggestion feature
+   *   config. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversationProfiles/<Conversation Profile ID>`.
+   * @param {google.cloud.dialogflow.v2beta1.Participant.Role} request.participantRole
+   *   Required. The participant role to add or update the suggestion feature
+   *   config. Only HUMAN_AGENT or END_USER can be used.
+   * @param {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig} request.suggestionFeatureConfig
+   *   Required. The suggestion feature config to add or update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/conversation_profiles.set_suggestion_feature_config.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_ConversationProfiles_SetSuggestionFeatureConfig_async
+   */
+  setSuggestionFeatureConfig(
+    request?: protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  setSuggestionFeatureConfig(
+    request: protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setSuggestionFeatureConfig(
+    request: protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setSuggestionFeatureConfig(
+    request?: protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+            protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        conversation_profile: request.conversationProfile || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setSuggestionFeatureConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `setSuggestionFeatureConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/conversation_profiles.set_suggestion_feature_config.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_ConversationProfiles_SetSuggestionFeatureConfig_async
+   */
+  async checkSetSuggestionFeatureConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2beta1.ConversationProfile,
+      protos.google.cloud.dialogflow.v2beta1.SetSuggestionFeatureConfigOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.setSuggestionFeatureConfig,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2beta1.ConversationProfile,
+      protos.google.cloud.dialogflow.v2beta1.SetSuggestionFeatureConfigOperationMetadata
+    >;
+  }
+  /**
+   * Clears a suggestion feature from a conversation profile for the given
+   * participant role.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2beta1.ClearSuggestionFeatureConfigOperationMetadata|ClearSuggestionFeatureConfigOperationMetadata}
+   * - `response`: {@link google.cloud.dialogflow.v2beta1.ConversationProfile|ConversationProfile}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversationProfile
+   *   Required. The Conversation Profile to add or update the suggestion feature
+   *   config. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversationProfiles/<Conversation Profile ID>`.
+   * @param {google.cloud.dialogflow.v2beta1.Participant.Role} request.participantRole
+   *   Required. The participant role to remove the suggestion feature
+   *   config. Only HUMAN_AGENT or END_USER can be used.
+   * @param {google.cloud.dialogflow.v2beta1.SuggestionFeature.Type} request.suggestionFeatureType
+   *   Required. The type of the suggestion feature to remove.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/conversation_profiles.clear_suggestion_feature_config.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_ConversationProfiles_ClearSuggestionFeatureConfig_async
+   */
+  clearSuggestionFeatureConfig(
+    request?: protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  clearSuggestionFeatureConfig(
+    request: protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  clearSuggestionFeatureConfig(
+    request: protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  clearSuggestionFeatureConfig(
+    request?: protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+            protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IConversationProfile,
+        protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        conversation_profile: request.conversationProfile || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.clearSuggestionFeatureConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `clearSuggestionFeatureConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/conversation_profiles.clear_suggestion_feature_config.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_ConversationProfiles_ClearSuggestionFeatureConfig_async
+   */
+  async checkClearSuggestionFeatureConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2beta1.ConversationProfile,
+      protos.google.cloud.dialogflow.v2beta1.ClearSuggestionFeatureConfigOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.clearSuggestionFeatureConfig,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2beta1.ConversationProfile,
+      protos.google.cloud.dialogflow.v2beta1.ClearSuggestionFeatureConfigOperationMetadata
+    >;
+  }
   /**
    * Returns the list of all conversation profiles in the specified project.
    *
@@ -3364,6 +3736,7 @@ export class ConversationProfilesClient {
       return this.conversationProfilesStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();

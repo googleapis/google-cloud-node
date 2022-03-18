@@ -264,6 +264,16 @@
                 "deleteConversationProfile"
               ]
             },
+            "SetSuggestionFeatureConfig": {
+              "methods": [
+                "setSuggestionFeatureConfig"
+              ]
+            },
+            "ClearSuggestionFeatureConfig": {
+              "methods": [
+                "clearSuggestionFeatureConfig"
+              ]
+            },
             "ListConversationProfiles": {
               "methods": [
                 "listConversationProfiles",
@@ -294,6 +304,16 @@
             "DeleteConversationProfile": {
               "methods": [
                 "deleteConversationProfile"
+              ]
+            },
+            "SetSuggestionFeatureConfig": {
+              "methods": [
+                "setSuggestionFeatureConfig"
+              ]
+            },
+            "ClearSuggestionFeatureConfig": {
+              "methods": [
+                "clearSuggestionFeatureConfig"
               ]
             },
             "ListConversationProfiles": {
