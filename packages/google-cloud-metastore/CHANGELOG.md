@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v2.0.0...v2.1.0) (2022-03-21)
+
+
+### Features
+
+* Added additional endTime field for MetadataImports ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added AuxiliaryVersionConfig for configuring the auxiliary hive versions during creation or update of the DPMS instance ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added AVRO DatabaseDumpSpec for importing and exporting Avro files ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added configuration for Dataplex integration ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added DatabaseType field for the type of backing store used ([#121](https://github.com/googleapis/nodejs-dataproc-metastore/issues/121)) ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added EncryptionConfig which contains information used to configure the Dataproc Metastore service to encrypt customer data at rest (CMEK) ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added NetworkConfig for exposing the DPMS endpoint in multiple subnetworks using PSC (this skips the need for VPC peering) ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added RESTORING status on Backups ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added support for IAM management for metadata resources ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+* Added support to record the services that are restoring the backup ([097cf5f](https://github.com/googleapis/nodejs-dataproc-metastore/commit/097cf5fa1d2c32e2eab3fb53830ddabdef7ea2dc))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.3.0...v2.0.0) (2021-08-30)
 
 
