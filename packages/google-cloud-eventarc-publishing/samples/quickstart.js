@@ -63,35 +63,16 @@ function main(channelConnection) {
       },
       textData: '{"message": "test message 123"}',
     });
-    console.log(event);
 
-    const eventy = {
-      '@type': 'type.googleapis.com/io.cloudevents.v1.CloudEvent',
-      id: '12345',
-      source: '//weatherco/example',
-      specVersion: '1.0',
-      type: 'weatherco.v1.forecast',
-      attributes: {
-        time: {
-          ceTimestamp: '1970-01-01T00:00:01Z',
-        },
-        datacontenttype: {
-          ceString: 'application/json',
-        },
-      },
-      textData: '{"message": "test message 123"}',
-    };
     const message = Any.fromObject({
       typeUrl: typeName,
       value: event,
     });
 
-    console.log(type.encode(event).finish().toString());
-
-    // const request = {
-    //   channelConnection,
-      // events: [any],
-    // };
+    const request = {
+      channelConnection,
+      events: [message],
+    };
 
     // Run request
     const response = await publishingClient.publishChannelConnectionEvents(
