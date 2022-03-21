@@ -32,10 +32,10 @@ let passedOptions: Array<MiddlewareOptions | undefined>;
 
 class FakeLoggingBunyan {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  stackdriverLog: any;
+  cloudLog: any;
   constructor(options: MiddlewareOptions) {
     passedOptions.push(options);
-    this.stackdriverLog = {
+    this.cloudLog = {
       logging: {
         auth: {
           async getProjectId() {

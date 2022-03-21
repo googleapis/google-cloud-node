@@ -20,7 +20,7 @@ import * as bunyan from 'bunyan';
 import * as uuid from 'uuid';
 import * as types from '../src/types/core';
 import {ErrorsApiTransport} from './errors-transport';
-import {Logging} from '@google-cloud/logging';
+import {Logging, LogSync} from '@google-cloud/logging';
 
 const logging = new Logging();
 import {LoggingBunyan} from '../src/index';
@@ -45,6 +45,14 @@ describe('LoggingBunyan', function () {
   const logger = bunyan.createLogger({
     name: 'google-cloud-node-system-test',
     streams: [loggingBunyan.stream('info')],
+  });
+
+  it('should create LoggingBunyan with LogSync', () => {
+    const loggingBunyan = new LoggingBunyan({
+      logName: LOG_NAME,
+      redirectToStdout: true,
+    });
+    assert.ok(loggingBunyan.cloudLog instanceof LogSync);
   });
 
   it('should properly write log entries', async function () {
