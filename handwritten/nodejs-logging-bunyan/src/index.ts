@@ -20,11 +20,18 @@ import * as express from './middleware/express';
 // Export the express middleware as 'express'.
 export {express};
 
-import {Logging, detectServiceContext} from '@google-cloud/logging';
+import {
+  Logging,
+  detectServiceContext,
+  Log,
+  LogSync,
+  Entry,
+} from '@google-cloud/logging';
 
 import * as types from './types/core';
 
 import {ApiResponseCallback} from '@google-cloud/logging/build/src/log';
+import {LogSeverityFunctions} from '@google-cloud/logging/build/src/utils/log-common';
 
 // Map of Stackdriver logging levels.
 const BUNYAN_TO_STACKDRIVER: Map<number, string> = new Map([
@@ -160,7 +167,8 @@ export class LoggingBunyan extends Writable {
   private resource: types.MonitoredResource | undefined;
   private serviceContext?: types.ServiceContext;
   private defaultCallback?: ApiResponseCallback;
-  stackdriverLog: types.StackdriverLog; // TODO: add type for @google-cloud/logging
+  cloudLog: LogSeverityFunctions;
+  redirectToStdout: boolean;
   constructor(options?: types.Options) {
     options = options || {};
     super({objectMode: true});
@@ -168,15 +176,19 @@ export class LoggingBunyan extends Writable {
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
     this.defaultCallback = options.defaultCallback;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.stackdriverLog = new Logging(options as any).log(this.logName, {
-      removeCircular: true,
-      // See: https://cloud.google.com/logging/quotas, a log size of
-      // 250,000 has been chosen to keep us comfortably within the
-      // 256,000 limit.
-      maxEntrySize: options.maxEntrySize || 250000,
+    this.redirectToStdout = options.redirectToStdout ?? false;
+    if (!this.redirectToStdout) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }) as any;
+      this.cloudLog = new Logging(options).log(this.logName, {
+        removeCircular: true,
+        // See: https://cloud.google.com/logging/quotas, a log size of
+        // 250,000 has been chosen to keep us comfortably within the
+        // 256,000 limit.
+        maxEntrySize: options.maxEntrySize || 250000,
+      });
+    } else {
+      this.cloudLog = new Logging(options).logSync(this.logName);
+    }
 
     // serviceContext.service is required by the Error Reporting
     // API.  Without it, errors that are logged with level 'error'
@@ -194,7 +206,8 @@ export class LoggingBunyan extends Writable {
 
     /* Asynchrnously attempt to discover the service context. */
     if (!this.serviceContext) {
-      detectServiceContext(this.stackdriverLog.logging.auth).then(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      detectServiceContext((this.cloudLog as any).logging.auth).then(
         serviceContext => {
           this.serviceContext = serviceContext!;
         },
@@ -283,7 +296,15 @@ export class LoggingBunyan extends Writable {
       delete record[LOGGING_SAMPLED_KEY];
     }
 
-    return this.stackdriverLog.entry(entryMetadata, record);
+    return (
+      (
+        this.redirectToStdout
+          ? (this.cloudLog as LogSync)
+          : (this.cloudLog as Log)
+      )
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .entry(entryMetadata as any, record)
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -350,7 +371,7 @@ export class LoggingBunyan extends Writable {
    */
   _write(record: types.BunyanLogRecord, encoding: string, callback: Function) {
     const entry = this.formatEntry_(record);
-    this.stackdriverLog.write(entry, this.defaultCallback ?? callback);
+    this._writeCall(entry, callback);
   }
 
   /**
@@ -375,8 +396,44 @@ export class LoggingBunyan extends Writable {
         return this.formatEntry_(request.chunk);
       }
     );
+    this._writeCall(entries, callback);
+  }
 
-    this.stackdriverLog.write(entries, this.defaultCallback ?? callback);
+  /**
+   * Creates a combined callback which calls the this.defaultCallback and the Writable.write supplied callback
+   * @param callback The callback function provided by Writable
+   * @returns Combined callback which executes both, this.defaultCallback and one supplied by Writable.write
+   */
+  generateCallback(callback: Function): ApiResponseCallback {
+    // Make sure that both callbacks are called in case if provided
+    const newCallback: ApiResponseCallback = (
+      err: Error | null,
+      apiResponse?: {}
+    ) => {
+      if (callback) {
+        callback(err, apiResponse);
+      }
+      if (this.defaultCallback) {
+        this.defaultCallback(err, apiResponse);
+      }
+    };
+    return newCallback;
+  }
+
+  /**
+   * A helper function to make a write call
+   * @param entries The entries to be written
+   * @param callback The callback supplied by Writable.write
+   */
+  _writeCall(entries: Entry | Entry[], callback: Function) {
+    if (this.redirectToStdout) {
+      (this.cloudLog as LogSync).write(entries);
+      // The LogSync class does not supports callback. However if callback provided and
+      // if this.defaultCallback exists, we should call it
+      this.generateCallback(callback)(null, undefined);
+    } else {
+      (this.cloudLog as Log).write(entries, this.generateCallback(callback));
+    }
   }
 }
 

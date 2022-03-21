@@ -79,11 +79,18 @@ export interface Options {
    */
   apiEndpoint?: string;
   // An attempt will be made to truncate messages larger than maxEntrySize.
+  // Please note that this parameter is ignored when redirectToStdout is set.
   maxEntrySize?: number;
-
   // A default global callback to be used for {@link LoggingBunyan} write calls
   // when callback is not supplied by caller in function parameters
   defaultCallback?: ApiResponseCallback;
+  /**
+   * Boolen flag that opts-in redirecting the output to STDOUT instead of ingesting logs to Cloud
+   * Logging using Logging API. Defaults to {@code false}. Redirecting logs can be used in
+   * Google Cloud environments with installed logging agent to delegate log ingestions to the
+   * agent. Redirected logs are formatted as one line Json string following the structured logging guidelines.
+   */
+  redirectToStdout?: boolean;
 }
 
 export interface MonitoredResource {

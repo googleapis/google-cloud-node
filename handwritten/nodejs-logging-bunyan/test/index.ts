@@ -264,7 +264,7 @@ describe('logging-bunyan', () => {
     });
 
     it('should properly create an entry', done => {
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record: types.StackdriverEntryMetadata
       ) => {
@@ -284,7 +284,7 @@ describe('logging-bunyan', () => {
       const recordWithMsg = Object.assign({msg: 'msg'}, RECORD);
       const recordWithMessage = Object.assign({message: 'msg'}, RECORD);
 
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record: types.StackdriverEntryMetadata
       ) => {
@@ -317,7 +317,7 @@ describe('logging-bunyan', () => {
         RECORD
       );
 
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record_: types.StackdriverEntryMetadata
       ) => {
@@ -340,7 +340,7 @@ describe('logging-bunyan', () => {
         RECORD
       );
 
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record_: types.StackdriverEntryMetadata
       ) => {
@@ -362,7 +362,7 @@ describe('logging-bunyan', () => {
         RECORD
       );
 
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record: string | types.BunyanLogRecord
       ) => {
@@ -382,7 +382,7 @@ describe('logging-bunyan', () => {
     it('should promote properly formatted labels to metadata', done => {
       const labels = {key: 'value', 0: 'value2'};
       const recordWithLabels = {...RECORD, labels};
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record: string | types.BunyanLogRecord
       ) => {
@@ -396,7 +396,7 @@ describe('logging-bunyan', () => {
     it('should not promote ill-formatted labels to metadata', done => {
       const labels = {key: -1}; // values must be strings.
       const recordWithLabels = {...RECORD, labels};
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record: string | types.BunyanLogRecord
       ) => {
@@ -417,7 +417,7 @@ describe('logging-bunyan', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (recordWithTrace as any)[loggingBunyanLib.LOGGING_SAMPLED_KEY] = true;
 
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record: string | types.BunyanLogRecord
       ) => {
@@ -441,7 +441,7 @@ describe('logging-bunyan', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (recordWithTrace as any)[loggingBunyanLib.LOGGING_SAMPLED_KEY] = false;
 
-      loggingBunyan.stackdriverLog.entry = (
+      loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
         record: string | types.BunyanLogRecord
       ) => {
@@ -630,11 +630,11 @@ describe('logging-bunyan', () => {
     it('should write the record to the log instance', done => {
       const entry = {};
 
-      loggingBunyan.stackdriverLog.entry = () => {
+      loggingBunyan.cloudLog.entry = () => {
         return entry;
       };
 
-      loggingBunyan.stackdriverLog.write =
+      loggingBunyan.cloudLog.write =
         // Writable.write used 'any' in function signature.
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (entries: any, callback: Function) => {
@@ -647,22 +647,19 @@ describe('logging-bunyan', () => {
 
     it('should write the record and call default callback', done => {
       let isCallbackCalled = false;
-      loggingBunyan.stackdriverLog.entry = () => {
+      loggingBunyan.cloudLog.entry = () => {
         return {};
       };
       loggingBunyan.defaultCallback = () => {
         isCallbackCalled = true;
       };
-      loggingBunyan.stackdriverLog.write =
+      loggingBunyan.cloudLog.write =
         // Writable.write used 'any' in function signature.
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (entries: any, callback: Function) => {
           callback();
         };
-
-      loggingBunyan._write(RECORD, '', () => {
-        throw Error('Should never be called!');
-      });
+      loggingBunyan._write(RECORD, '', () => {});
       assert.strictEqual(isCallbackCalled, true);
       done();
     });
@@ -690,11 +687,11 @@ describe('logging-bunyan', () => {
     it('should write the records to the log instance', done => {
       const entry = {};
 
-      loggingBunyan.stackdriverLog.entry = () => {
+      loggingBunyan.cloudLog.entry = () => {
         return entry;
       };
 
-      loggingBunyan.stackdriverLog.write =
+      loggingBunyan.cloudLog.write =
         // Writable.write used 'any' in function signature.
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (entries: any, callback: Function) => {

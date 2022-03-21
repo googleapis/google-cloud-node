@@ -64,8 +64,8 @@ export async function middleware(
     name: `${options.logName}_${APP_LOG_SUFFIX}`,
     streams: [loggingBunyanApp.stream(options.level as types.LogLevel)],
   });
-
-  const auth = loggingBunyanApp.stackdriverLog.logging.auth;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const auth = (loggingBunyanApp.cloudLog as any).logging.auth;
   const [env, projectId] = await Promise.all([
     auth.getEnv(),
     auth.getProjectId(),
