@@ -13,7 +13,10 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/eventarc-publishing": "^0.1.0"
+    "@google-cloud/eventarc-publishing": "^0.1.0",
+    "@types/google-protobuf": "^3.15.5",
+    "google-protobuf": "^3.20.0-rc.2",
+    "protobufjs": "^6.11.2"
   },
   "devDependencies": {
     "c8": "^7.1.0",

@@ -1,50 +1,110 @@
+// Copyright 2021 Google LLC
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     https://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
 'use strict';
 
-async function main() {
+const protobufjs = require('protobufjs');
+const spec = require('./spec.json');
 
-  // [START nodejs_eventarc_publishing_quickstart]
-  // Imports the Google Cloud client library
+function main(channelConnection) {
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  /**
+   *  The channel_connection that the events are published from. For example:
+   *  `projects/{partner_project_id}/locations/{location}/channelConnections/{channel_connection_id}`.
+   */
+  // const channelConnection = 'abc123'
+  /**
+   *  The CloudEvents v1.0 events to publish. No other types are allowed.
+   */
+  // const events = 1234
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
-  const {PublisherClient} = require('@google-cloud/eventarc-publishing');
+  // Imports the Publishing library
+  const {PublisherClient} = require('@google-cloud/eventarc-publishing').v1;
 
-  // TODO(developer): replace with your prefered project ID.
-  // const projectId = 'my-project'
+  // Instantiates a client
+  const publishingClient = new PublisherClient();
 
-  // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {PublisherClient}();
+  async function callPublishChannelConnectionEvents() {
+    const typeName = 'type.googleapis.com/io.cloudevents.v1.CloudEvent'.replace(
+      /^.*\//,
+      ''
+    );
+    //console.log(typeName);
+    const root = protobufjs.Root.fromJSON(require('./spec.json'));
+    const type = root.lookupType(typeName);
+    const Any = root.lookupType('google.protobuf.Any');
 
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-   console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
-   // const [thing] = await client.methodName({
-   // });
-   // console.info(thing);
+    const event = type.fromObject({
+      // '@type': 'type.googleapis.com/io.cloudevents.v1.CloudEvent',
+      id: '12345',
+      source: '//weatherco/example',
+      specVersion: '1.0',
+      //type: 'weatherco.v1.forecast',
+      attributes: {
+        time: {
+          ceTimestamp: new Date('1970-01-01T00:00:01Z'),
+        },
+        datacontenttype: {
+          ceString: 'application/json',
+        },
+      },
+      textData: '{"message": "test message 123"}',
+    });
+    console.log(event);
+
+    const eventy = {
+      '@type': 'type.googleapis.com/io.cloudevents.v1.CloudEvent',
+      id: '12345',
+      source: '//weatherco/example',
+      specVersion: '1.0',
+      type: 'weatherco.v1.forecast',
+      attributes: {
+        time: {
+          ceTimestamp: '1970-01-01T00:00:01Z',
+        },
+        datacontenttype: {
+          ceString: 'application/json',
+        },
+      },
+      textData: '{"message": "test message 123"}',
+    };
+    const message = Any.fromObject({
+      typeUrl: typeName,
+      value: event,
+    });
+
+    console.log(type.encode(event).finish().toString());
+
+    // const request = {
+    //   channelConnection,
+      // events: [any],
+    // };
+
+    // Run request
+    const response = await publishingClient.publishChannelConnectionEvents(
+      request
+    );
+    console.log(response);
   }
-  doSomething();
-  // [END nodejs_eventarc_publishing_quickstart]
+
+  callPublishChannelConnectionEvents();
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err.message);
-  process.exitCode = 1;
-});
 process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });
+main(...process.argv.slice(2));
