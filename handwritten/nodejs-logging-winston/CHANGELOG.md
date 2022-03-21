@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [4.2.1](https://github.com/googleapis/nodejs-logging-winston/compare/v4.2.0...v4.2.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* Add missing closure for code snippet in README ([#682](https://github.com/googleapis/nodejs-logging-winston/issues/682)) ([71158c8](https://github.com/googleapis/nodejs-logging-winston/commit/71158c8f2ef6a3fa2172db0728c8e07eb514abc5))
+
 ## [4.2.0](https://github.com/googleapis/nodejs-logging-winston/compare/v4.1.3...v4.2.0) (2022-03-18)
 
 
