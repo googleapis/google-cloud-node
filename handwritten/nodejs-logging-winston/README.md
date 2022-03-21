@@ -310,6 +310,7 @@ const loggingWinston = new LoggingWinston({
   keyFilename: '/path/to/key.json',
   redirectToStdout: true,
 });
+```
 
 
 ## Samples
