@@ -4387,6 +4387,15 @@ export namespace google {
 
                     /** Service releaseChannel */
                     releaseChannel?: (google.cloud.metastore.v1alpha.Service.ReleaseChannel|keyof typeof google.cloud.metastore.v1alpha.Service.ReleaseChannel|null);
+
+                    /** Service encryptionConfig */
+                    encryptionConfig?: (google.cloud.metastore.v1alpha.IEncryptionConfig|null);
+
+                    /** Service networkConfig */
+                    networkConfig?: (google.cloud.metastore.v1alpha.INetworkConfig|null);
+
+                    /** Service databaseType */
+                    databaseType?: (google.cloud.metastore.v1alpha.Service.DatabaseType|keyof typeof google.cloud.metastore.v1alpha.Service.DatabaseType|null);
                 }
 
                 /** Represents a Service. */
@@ -4448,6 +4457,15 @@ export namespace google {
 
                     /** Service releaseChannel. */
                     public releaseChannel: (google.cloud.metastore.v1alpha.Service.ReleaseChannel|keyof typeof google.cloud.metastore.v1alpha.Service.ReleaseChannel);
+
+                    /** Service encryptionConfig. */
+                    public encryptionConfig?: (google.cloud.metastore.v1alpha.IEncryptionConfig|null);
+
+                    /** Service networkConfig. */
+                    public networkConfig?: (google.cloud.metastore.v1alpha.INetworkConfig|null);
+
+                    /** Service databaseType. */
+                    public databaseType: (google.cloud.metastore.v1alpha.Service.DatabaseType|keyof typeof google.cloud.metastore.v1alpha.Service.DatabaseType);
 
                     /** Service metastoreConfig. */
                     public metastoreConfig?: "hiveMetastoreConfig";
@@ -4550,6 +4568,13 @@ export namespace google {
                         CANARY = 1,
                         STABLE = 2
                     }
+
+                    /** DatabaseType enum. */
+                    enum DatabaseType {
+                        DATABASE_TYPE_UNSPECIFIED = 0,
+                        MYSQL = 1,
+                        SPANNER = 2
+                    }
                 }
 
                 /** Properties of a MetadataIntegration. */
@@ -4557,6 +4582,9 @@ export namespace google {
 
                     /** MetadataIntegration dataCatalogConfig */
                     dataCatalogConfig?: (google.cloud.metastore.v1alpha.IDataCatalogConfig|null);
+
+                    /** MetadataIntegration dataplexConfig */
+                    dataplexConfig?: (google.cloud.metastore.v1alpha.IDataplexConfig|null);
                 }
 
                 /** Represents a MetadataIntegration. */
@@ -4570,6 +4598,9 @@ export namespace google {
 
                     /** MetadataIntegration dataCatalogConfig. */
                     public dataCatalogConfig?: (google.cloud.metastore.v1alpha.IDataCatalogConfig|null);
+
+                    /** MetadataIntegration dataplexConfig. */
+                    public dataplexConfig?: (google.cloud.metastore.v1alpha.IDataplexConfig|null);
 
                     /**
                      * Creates a new MetadataIntegration instance using the specified properties.
@@ -4732,6 +4763,186 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a DataplexConfig. */
+                interface IDataplexConfig {
+
+                    /** DataplexConfig lakeResources */
+                    lakeResources?: ({ [k: string]: google.cloud.metastore.v1alpha.ILake }|null);
+                }
+
+                /** Represents a DataplexConfig. */
+                class DataplexConfig implements IDataplexConfig {
+
+                    /**
+                     * Constructs a new DataplexConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IDataplexConfig);
+
+                    /** DataplexConfig lakeResources. */
+                    public lakeResources: { [k: string]: google.cloud.metastore.v1alpha.ILake };
+
+                    /**
+                     * Creates a new DataplexConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataplexConfig instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IDataplexConfig): google.cloud.metastore.v1alpha.DataplexConfig;
+
+                    /**
+                     * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.metastore.v1alpha.DataplexConfig.verify|verify} messages.
+                     * @param message DataplexConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.DataplexConfig.verify|verify} messages.
+                     * @param message DataplexConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataplexConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataplexConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.DataplexConfig;
+
+                    /**
+                     * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataplexConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.DataplexConfig;
+
+                    /**
+                     * Verifies a DataplexConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataplexConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.DataplexConfig;
+
+                    /**
+                     * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                     * @param message DataplexConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.DataplexConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataplexConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Lake. */
+                interface ILake {
+
+                    /** Lake name */
+                    name?: (string|null);
+                }
+
+                /** Represents a Lake. */
+                class Lake implements ILake {
+
+                    /**
+                     * Constructs a new Lake.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.ILake);
+
+                    /** Lake name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new Lake instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Lake instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.ILake): google.cloud.metastore.v1alpha.Lake;
+
+                    /**
+                     * Encodes the specified Lake message. Does not implicitly {@link google.cloud.metastore.v1alpha.Lake.verify|verify} messages.
+                     * @param message Lake message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.ILake, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Lake message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.Lake.verify|verify} messages.
+                     * @param message Lake message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.ILake, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Lake message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Lake
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.Lake;
+
+                    /**
+                     * Decodes a Lake message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Lake
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.Lake;
+
+                    /**
+                     * Verifies a Lake message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Lake message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Lake
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.Lake;
+
+                    /**
+                     * Creates a plain object from a Lake message. Also converts values to other types if specified.
+                     * @param message Lake
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.Lake, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Lake to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a MaintenanceWindow. */
                 interface IMaintenanceWindow {
 
@@ -4839,6 +5050,12 @@ export namespace google {
 
                     /** HiveMetastoreConfig kerberosConfig */
                     kerberosConfig?: (google.cloud.metastore.v1alpha.IKerberosConfig|null);
+
+                    /** HiveMetastoreConfig endpointProtocol */
+                    endpointProtocol?: (google.cloud.metastore.v1alpha.HiveMetastoreConfig.EndpointProtocol|keyof typeof google.cloud.metastore.v1alpha.HiveMetastoreConfig.EndpointProtocol|null);
+
+                    /** HiveMetastoreConfig auxiliaryVersions */
+                    auxiliaryVersions?: ({ [k: string]: google.cloud.metastore.v1alpha.IAuxiliaryVersionConfig }|null);
                 }
 
                 /** Represents a HiveMetastoreConfig. */
@@ -4858,6 +5075,12 @@ export namespace google {
 
                     /** HiveMetastoreConfig kerberosConfig. */
                     public kerberosConfig?: (google.cloud.metastore.v1alpha.IKerberosConfig|null);
+
+                    /** HiveMetastoreConfig endpointProtocol. */
+                    public endpointProtocol: (google.cloud.metastore.v1alpha.HiveMetastoreConfig.EndpointProtocol|keyof typeof google.cloud.metastore.v1alpha.HiveMetastoreConfig.EndpointProtocol);
+
+                    /** HiveMetastoreConfig auxiliaryVersions. */
+                    public auxiliaryVersions: { [k: string]: google.cloud.metastore.v1alpha.IAuxiliaryVersionConfig };
 
                     /**
                      * Creates a new HiveMetastoreConfig instance using the specified properties.
@@ -4928,6 +5151,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace HiveMetastoreConfig {
+
+                    /** EndpointProtocol enum. */
+                    enum EndpointProtocol {
+                        ENDPOINT_PROTOCOL_UNSPECIFIED = 0,
+                        THRIFT = 1,
+                        GRPC = 2
+                    }
                 }
 
                 /** Properties of a KerberosConfig. */
@@ -5125,6 +5358,390 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an EncryptionConfig. */
+                interface IEncryptionConfig {
+
+                    /** EncryptionConfig kmsKey */
+                    kmsKey?: (string|null);
+                }
+
+                /** Represents an EncryptionConfig. */
+                class EncryptionConfig implements IEncryptionConfig {
+
+                    /**
+                     * Constructs a new EncryptionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IEncryptionConfig);
+
+                    /** EncryptionConfig kmsKey. */
+                    public kmsKey: string;
+
+                    /**
+                     * Creates a new EncryptionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionConfig instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IEncryptionConfig): google.cloud.metastore.v1alpha.EncryptionConfig;
+
+                    /**
+                     * Encodes the specified EncryptionConfig message. Does not implicitly {@link google.cloud.metastore.v1alpha.EncryptionConfig.verify|verify} messages.
+                     * @param message EncryptionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.EncryptionConfig.verify|verify} messages.
+                     * @param message EncryptionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.EncryptionConfig;
+
+                    /**
+                     * Decodes an EncryptionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.EncryptionConfig;
+
+                    /**
+                     * Verifies an EncryptionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.EncryptionConfig;
+
+                    /**
+                     * Creates a plain object from an EncryptionConfig message. Also converts values to other types if specified.
+                     * @param message EncryptionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.EncryptionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AuxiliaryVersionConfig. */
+                interface IAuxiliaryVersionConfig {
+
+                    /** AuxiliaryVersionConfig version */
+                    version?: (string|null);
+
+                    /** AuxiliaryVersionConfig configOverrides */
+                    configOverrides?: ({ [k: string]: string }|null);
+
+                    /** AuxiliaryVersionConfig networkConfig */
+                    networkConfig?: (google.cloud.metastore.v1alpha.INetworkConfig|null);
+                }
+
+                /** Represents an AuxiliaryVersionConfig. */
+                class AuxiliaryVersionConfig implements IAuxiliaryVersionConfig {
+
+                    /**
+                     * Constructs a new AuxiliaryVersionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IAuxiliaryVersionConfig);
+
+                    /** AuxiliaryVersionConfig version. */
+                    public version: string;
+
+                    /** AuxiliaryVersionConfig configOverrides. */
+                    public configOverrides: { [k: string]: string };
+
+                    /** AuxiliaryVersionConfig networkConfig. */
+                    public networkConfig?: (google.cloud.metastore.v1alpha.INetworkConfig|null);
+
+                    /**
+                     * Creates a new AuxiliaryVersionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuxiliaryVersionConfig instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IAuxiliaryVersionConfig): google.cloud.metastore.v1alpha.AuxiliaryVersionConfig;
+
+                    /**
+                     * Encodes the specified AuxiliaryVersionConfig message. Does not implicitly {@link google.cloud.metastore.v1alpha.AuxiliaryVersionConfig.verify|verify} messages.
+                     * @param message AuxiliaryVersionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IAuxiliaryVersionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuxiliaryVersionConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.AuxiliaryVersionConfig.verify|verify} messages.
+                     * @param message AuxiliaryVersionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IAuxiliaryVersionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuxiliaryVersionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuxiliaryVersionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.AuxiliaryVersionConfig;
+
+                    /**
+                     * Decodes an AuxiliaryVersionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuxiliaryVersionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.AuxiliaryVersionConfig;
+
+                    /**
+                     * Verifies an AuxiliaryVersionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuxiliaryVersionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuxiliaryVersionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.AuxiliaryVersionConfig;
+
+                    /**
+                     * Creates a plain object from an AuxiliaryVersionConfig message. Also converts values to other types if specified.
+                     * @param message AuxiliaryVersionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.AuxiliaryVersionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuxiliaryVersionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a NetworkConfig. */
+                interface INetworkConfig {
+
+                    /** NetworkConfig consumers */
+                    consumers?: (google.cloud.metastore.v1alpha.NetworkConfig.IConsumer[]|null);
+                }
+
+                /** Represents a NetworkConfig. */
+                class NetworkConfig implements INetworkConfig {
+
+                    /**
+                     * Constructs a new NetworkConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.INetworkConfig);
+
+                    /** NetworkConfig consumers. */
+                    public consumers: google.cloud.metastore.v1alpha.NetworkConfig.IConsumer[];
+
+                    /**
+                     * Creates a new NetworkConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkConfig instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.INetworkConfig): google.cloud.metastore.v1alpha.NetworkConfig;
+
+                    /**
+                     * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.metastore.v1alpha.NetworkConfig.verify|verify} messages.
+                     * @param message NetworkConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.NetworkConfig.verify|verify} messages.
+                     * @param message NetworkConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.NetworkConfig;
+
+                    /**
+                     * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.NetworkConfig;
+
+                    /**
+                     * Verifies a NetworkConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.NetworkConfig;
+
+                    /**
+                     * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                     * @param message NetworkConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.NetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace NetworkConfig {
+
+                    /** Properties of a Consumer. */
+                    interface IConsumer {
+
+                        /** Consumer subnetwork */
+                        subnetwork?: (string|null);
+
+                        /** Consumer endpointUri */
+                        endpointUri?: (string|null);
+                    }
+
+                    /** Represents a Consumer. */
+                    class Consumer implements IConsumer {
+
+                        /**
+                         * Constructs a new Consumer.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.metastore.v1alpha.NetworkConfig.IConsumer);
+
+                        /** Consumer subnetwork. */
+                        public subnetwork?: (string|null);
+
+                        /** Consumer endpointUri. */
+                        public endpointUri: string;
+
+                        /** Consumer vpcResource. */
+                        public vpcResource?: "subnetwork";
+
+                        /**
+                         * Creates a new Consumer instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Consumer instance
+                         */
+                        public static create(properties?: google.cloud.metastore.v1alpha.NetworkConfig.IConsumer): google.cloud.metastore.v1alpha.NetworkConfig.Consumer;
+
+                        /**
+                         * Encodes the specified Consumer message. Does not implicitly {@link google.cloud.metastore.v1alpha.NetworkConfig.Consumer.verify|verify} messages.
+                         * @param message Consumer message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.metastore.v1alpha.NetworkConfig.IConsumer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Consumer message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.NetworkConfig.Consumer.verify|verify} messages.
+                         * @param message Consumer message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.metastore.v1alpha.NetworkConfig.IConsumer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Consumer message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Consumer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.NetworkConfig.Consumer;
+
+                        /**
+                         * Decodes a Consumer message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Consumer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.NetworkConfig.Consumer;
+
+                        /**
+                         * Verifies a Consumer message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Consumer message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Consumer
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.NetworkConfig.Consumer;
+
+                        /**
+                         * Creates a plain object from a Consumer message. Also converts values to other types if specified.
+                         * @param message Consumer
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.metastore.v1alpha.NetworkConfig.Consumer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Consumer to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Properties of a MetadataManagementActivity. */
                 interface IMetadataManagementActivity {
 
@@ -5239,6 +5856,9 @@ export namespace google {
                     /** MetadataImport updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
 
+                    /** MetadataImport endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
                     /** MetadataImport state */
                     state?: (google.cloud.metastore.v1alpha.MetadataImport.State|keyof typeof google.cloud.metastore.v1alpha.MetadataImport.State|null);
                 }
@@ -5266,6 +5886,9 @@ export namespace google {
 
                     /** MetadataImport updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataImport endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
 
                     /** MetadataImport state. */
                     public state: (google.cloud.metastore.v1alpha.MetadataImport.State|keyof typeof google.cloud.metastore.v1alpha.MetadataImport.State);
@@ -5622,6 +6245,9 @@ export namespace google {
 
                     /** Backup description */
                     description?: (string|null);
+
+                    /** Backup restoringServices */
+                    restoringServices?: (string[]|null);
                 }
 
                 /** Represents a Backup. */
@@ -5650,6 +6276,9 @@ export namespace google {
 
                     /** Backup description. */
                     public description: string;
+
+                    /** Backup restoringServices. */
+                    public restoringServices: string[];
 
                     /**
                      * Creates a new Backup instance using the specified properties.
@@ -5730,7 +6359,8 @@ export namespace google {
                         CREATING = 1,
                         DELETING = 2,
                         ACTIVE = 3,
-                        FAILED = 4
+                        FAILED = 4,
+                        RESTORING = 5
                     }
                 }
 
@@ -8134,7 +8764,8 @@ export namespace google {
                     /** Type enum. */
                     enum Type {
                         TYPE_UNSPECIFIED = 0,
-                        MYSQL = 1
+                        MYSQL = 1,
+                        AVRO = 2
                     }
                 }
             }

@@ -3457,6 +3457,71 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       });
     });
 
+    describe('lake', () => {
+      const fakePath = '/rendered/path/lake';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        lake: 'lakeValue',
+      };
+      const client =
+        new dataprocmetastoreModule.v1alpha.DataprocMetastoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.lakePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lakePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lakePath', () => {
+        const result = client.lakePath(
+          'projectValue',
+          'locationValue',
+          'lakeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.lakePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLakeName', () => {
+        const result = client.matchProjectFromLakeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.lakePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLakeName', () => {
+        const result = client.matchLocationFromLakeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.lakePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLakeFromLakeName', () => {
+        const result = client.matchLakeFromLakeName(fakePath);
+        assert.strictEqual(result, 'lakeValue');
+        assert(
+          (client.pathTemplates.lakePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('location', () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {

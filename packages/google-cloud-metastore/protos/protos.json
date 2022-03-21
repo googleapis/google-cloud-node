@@ -1456,8 +1456,9 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "MetastoreProto",
                     "java_package": "com.google.cloud.metastore.v1alpha",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                    "php_namespace": "Google\\Cloud\\Metastore\\V1alpha",
+                    "(google.api.resource_definition).type": "dataplex.googleapis.com/Lake",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/lakes/{lake}"
                   },
                   "nested": {
                     "DataprocMetastore": {
@@ -1935,6 +1936,27 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "databaseType": {
+                          "type": "DatabaseType",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -1963,6 +1985,13 @@
                             "CANARY": 1,
                             "STABLE": 2
                           }
+                        },
+                        "DatabaseType": {
+                          "values": {
+                            "DATABASE_TYPE_UNSPECIFIED": 0,
+                            "MYSQL": 1,
+                            "SPANNER": 2
+                          }
                         }
                       }
                     },
@@ -1971,6 +2000,10 @@
                         "dataCatalogConfig": {
                           "type": "DataCatalogConfig",
                           "id": 1
+                        },
+                        "dataplexConfig": {
+                          "type": "DataplexConfig",
+                          "id": 2
                         }
                       }
                     },
@@ -1979,6 +2012,26 @@
                         "enabled": {
                           "type": "bool",
                           "id": 2
+                        }
+                      }
+                    },
+                    "DataplexConfig": {
+                      "fields": {
+                        "lakeResources": {
+                          "keyType": "string",
+                          "type": "Lake",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Lake": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Lake"
+                          }
                         }
                       }
                     },
@@ -2011,6 +2064,24 @@
                         "kerberosConfig": {
                           "type": "KerberosConfig",
                           "id": 3
+                        },
+                        "endpointProtocol": {
+                          "type": "EndpointProtocol",
+                          "id": 4
+                        },
+                        "auxiliaryVersions": {
+                          "keyType": "string",
+                          "type": "AuxiliaryVersionConfig",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "EndpointProtocol": {
+                          "values": {
+                            "ENDPOINT_PROTOCOL_UNSPECIFIED": 0,
+                            "THRIFT": 1,
+                            "GRPC": 2
+                          }
                         }
                       }
                     },
@@ -2042,6 +2113,73 @@
                         "cloudSecret": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "EncryptionConfig": {
+                      "fields": {
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AuxiliaryVersionConfig": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "configOverrides": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "NetworkConfig": {
+                      "fields": {
+                        "consumers": {
+                          "rule": "repeated",
+                          "type": "Consumer",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Consumer": {
+                          "oneofs": {
+                            "vpcResource": {
+                              "oneof": [
+                                "subnetwork"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "subnetwork": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Subnetwork"
+                              }
+                            },
+                            "endpointUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -2106,6 +2244,13 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2268,6 +2413,14 @@
                         "description": {
                           "type": "string",
                           "id": 6
+                        },
+                        "restoringServices": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2277,7 +2430,8 @@
                             "CREATING": 1,
                             "DELETING": 2,
                             "ACTIVE": 3,
-                            "FAILED": 4
+                            "FAILED": 4,
+                            "RESTORING": 5
                           }
                         }
                       }
@@ -2897,7 +3051,8 @@
                         "Type": {
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
-                            "MYSQL": 1
+                            "MYSQL": 1,
+                            "AVRO": 2
                           }
                         }
                       }

@@ -28,7 +28,7 @@ function main(parent, metadataImportId, metadataImport) {
   /**
    *  Required. The relative resource name of the service in which to create a metastore
    *  import, in the following form:
-   *  `projects/{project_number}/locations/{location_id}/services/{service_id}`
+   *  `projects/{project_number}/locations/{location_id}/services/{service_id}`.
    */
   // const parent = 'abc123'
   /**

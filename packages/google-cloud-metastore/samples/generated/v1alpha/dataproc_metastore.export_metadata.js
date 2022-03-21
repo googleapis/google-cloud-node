@@ -34,7 +34,7 @@ function main(service) {
   /**
    *  Required. The relative resource name of the metastore service to run export, in the
    *  following form:
-   *  `projects/{project_id}/locations/{location_id}/services/{service_id}`
+   *  `projects/{project_id}/locations/{location_id}/services/{service_id}`.
    */
   // const service = 'abc123'
   /**

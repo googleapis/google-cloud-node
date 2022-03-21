@@ -43,8 +43,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  Configures and manages metastore services.
- *  Metastore services are fully managed, highly available, auto-scaled,
- *  auto-healing, OSS-native deployments of technical metadata management
+ *  Metastore services are fully managed, highly available, autoscaled,
+ *  autohealing, OSS-native deployments of technical metadata management
  *  software. Each metastore service exposes a network endpoint through which
  *  metadata queries are served. Metadata queries can originate from a variety
  *  of sources, including Apache Hive, Apache Presto, and Apache Spark.
@@ -184,6 +184,9 @@ export class DataprocMetastoreClient {
     this.pathTemplates = {
       backupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/services/{service}/backups/{backup}'
+      ),
+      lakePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
@@ -1260,7 +1263,7 @@ export class DataprocMetastoreClient {
    *   Required. The relative resource name of the service in which to create a metastore
    *   import, in the following form:
    *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
    * @param {string} request.metadataImportId
    *   Required. The ID of the metadata import, which is used as the final component of the
    *   metadata import's name.
@@ -1588,7 +1591,7 @@ export class DataprocMetastoreClient {
    *   Required. The relative resource name of the metastore service to run export, in the
    *   following form:
    *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
    * @param {string} [request.requestId]
    *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
    *   request if it has completed. The server will ignore subsequent requests
@@ -1743,12 +1746,12 @@ export class DataprocMetastoreClient {
    *   Required. The relative resource name of the metastore service to run restore, in the
    *   following form:
    *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
    * @param {string} request.backup
    *   Required. The relative resource name of the metastore service backup to restore
    *   from, in the following form:
    *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
    * @param {google.cloud.metastore.v1alpha.Restore.RestoreType} [request.restoreType]
    *   Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
    * @param {string} [request.requestId]
@@ -1895,7 +1898,7 @@ export class DataprocMetastoreClient {
     >;
   }
   /**
-   * Creates a new Backup in a given project and location.
+   * Creates a new backup in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1903,7 +1906,7 @@ export class DataprocMetastoreClient {
    *   Required. The relative resource name of the service in which to create a backup
    *   of the following form:
    *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
    * @param {string} request.backupId
    *   Required. The ID of the backup, which is used as the final component of the
    *   backup's name.
@@ -3008,6 +3011,55 @@ export class DataprocMetastoreClient {
    */
   matchBackupFromBackupName(backupName: string) {
     return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
+
+  /**
+   * Return a fully-qualified lake resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lake
+   * @returns {string} Resource name string.
+   */
+  lakePath(project: string, location: string, lake: string) {
+    return this.pathTemplates.lakePathTemplate.render({
+      project: project,
+      location: location,
+      lake: lake,
+    });
+  }
+
+  /**
+   * Parse the project from Lake resource.
+   *
+   * @param {string} lakeName
+   *   A fully-qualified path representing Lake resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLakeName(lakeName: string) {
+    return this.pathTemplates.lakePathTemplate.match(lakeName).project;
+  }
+
+  /**
+   * Parse the location from Lake resource.
+   *
+   * @param {string} lakeName
+   *   A fully-qualified path representing Lake resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLakeName(lakeName: string) {
+    return this.pathTemplates.lakePathTemplate.match(lakeName).location;
+  }
+
+  /**
+   * Parse the lake from Lake resource.
+   *
+   * @param {string} lakeName
+   *   A fully-qualified path representing Lake resource.
+   * @returns {string} A string representing the lake.
+   */
+  matchLakeFromLakeName(lakeName: string) {
+    return this.pathTemplates.lakePathTemplate.match(lakeName).lake;
   }
 
   /**

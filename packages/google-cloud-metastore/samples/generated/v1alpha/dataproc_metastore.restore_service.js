@@ -28,13 +28,13 @@ function main(service, backup) {
   /**
    *  Required. The relative resource name of the metastore service to run restore, in the
    *  following form:
-   *  `projects/{project_id}/locations/{location_id}/services/{service_id}`
+   *  `projects/{project_id}/locations/{location_id}/services/{service_id}`.
    */
   // const service = 'abc123'
   /**
    *  Required. The relative resource name of the metastore service backup to restore
    *  from, in the following form:
-   *  `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`
+   *  `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
    */
   // const backup = 'abc123'
   /**
