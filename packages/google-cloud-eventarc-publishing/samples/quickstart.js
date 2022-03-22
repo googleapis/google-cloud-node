@@ -15,9 +15,8 @@
 'use strict';
 
 const protobufjs = require('protobufjs');
-const spec = require('./spec.json');
 
-function main(channelConnection) {
+function main(channelConnection, id, providerId, eventType, date, textData) {
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -30,6 +29,9 @@ function main(channelConnection) {
    *  The CloudEvents v1.0 events to publish. No other types are allowed.
    */
   // const events = 1234
+  const GOOGLE_API = 'type.googleapis.com/';
+  const CLOUD_EVENT_ID = 'io.cloudevents.v1.CloudEvent';
+  const typeName = `${GOOGLE_API}/${CLOUD_EVENT_ID}`.replace(/^.*\//, '');
 
   // Imports the Publishing library
   const {PublisherClient} = require('@google-cloud/eventarc-publishing').v1;
@@ -38,35 +40,34 @@ function main(channelConnection) {
   const publishingClient = new PublisherClient();
 
   async function callPublishChannelConnectionEvents() {
-    const typeName = 'type.googleapis.com/io.cloudevents.v1.CloudEvent'.replace(
-      /^.*\//,
-      ''
-    );
-    //console.log(typeName);
-    const root = protobufjs.Root.fromJSON(require('./spec.json'));
+    // Set up the call to wrap the Cloud Event object into a Protobuf 'Any' object
+    // eslint-disable-next-line node/no-unpublished-require
+    const root = protobufjs.Root.fromJSON(require('../protos/spec.json'));
     const type = root.lookupType(typeName);
-    const Any = root.lookupType('google.protobuf.Any');
+    const Any = root.lookupType('protobuf.Any');
 
+    // Need to construct an event of type Cloud Event
     const event = type.fromObject({
-      // '@type': 'type.googleapis.com/io.cloudevents.v1.CloudEvent',
-      id: '12345',
-      source: '//weatherco/example',
+      '@type': `${GOOGLE_API}/${CLOUD_EVENT_ID}`,
+      id,
+      source: `//${providerId}`,
       specVersion: '1.0',
-      //type: 'weatherco.v1.forecast',
+      type: eventType,
       attributes: {
         time: {
-          ceTimestamp: new Date('1970-01-01T00:00:01Z'),
+          ceTimestamp: new Date(date),
         },
         datacontenttype: {
           ceString: 'application/json',
         },
       },
-      textData: '{"message": "test message 123"}',
+      textData,
     });
 
+    // Wrap that event in a Protobuf 'Any' object
     const message = Any.fromObject({
-      typeUrl: typeName,
-      value: event,
+      type_url: `${GOOGLE_API}/${typeName}`,
+      value: type.encode(event).finish(),
     });
 
     const request = {
