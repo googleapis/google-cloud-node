@@ -7,7 +7,8 @@
     "https://console.cloud.google.com/cloudshell",
     "https://support.google.com",
     "https://github.com/googleapis/nodejs-eventarc-publishing/blob/master/CHANGELOG.md",
-    "https://googleapis.dev/nodejs/publishing/latest/"
+    "https://googleapis.dev/nodejs/publishing/latest/",
+    "https://github.com/googleapis/nodejs-eventarc-publishing/blob/addSamples/CHANGELOG.md"
   ],
   "silent": true,
   "concurrency": 5,
