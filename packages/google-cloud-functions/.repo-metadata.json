@@ -9,7 +9,7 @@
   "requires_billing": false,
   "name_pretty": "Google Cloud Functions",
   "name": "nodejs-functions",
-  "codeowner_team": "@googleapis/serverless-team",
+  "codeowner_team": "@googleapis/aap-dpes",
   "default_version": "v1",
   "language": "nodejs",
   "api_shortname": "cloudfunctions",
