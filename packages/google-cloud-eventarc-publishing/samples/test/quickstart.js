@@ -29,25 +29,31 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const client = new {PublisherClient}();
+const client = new PublisherClient();
+const id = '1234';
+const providerId = 'weatherco';
+const eventType = 'weatherco.v1.forecast';
+const date = '1970-01-01T00:00:01Z';
+const textData = '{"message": "test message 123"}';
+const channelConnectionName = 'test-connection-abc';
 
 describe('Quickstart', () => {
-  //TODO: remove this if not using the projectId 
+  //TODO: remove this if not using the projectId
   // eslint-disable-next-line no-unused-vars
   let projectId;
+  let channelConnectionId;
 
   before(async () => {
     // eslint-disable-next-line no-unused-vars
     projectId = await client.getProjectId();
+    channelConnectionId = `projects/${projectId}/locations/us-central1/channelConnections/${channelConnectionName}`;
   });
 
   it('should run quickstart', async () => {
-  //TODO: remove this line 
-  // eslint-disable-next-line no-unused-vars  
     const stdout = execSync(
-      `node ./quickstart.js`,
+      `node quickstart.js ${channelConnectionId} ${id} ${providerId} ${eventType} ${date} '${textData}'`,
       {cwd}
     );
-    //assert(stdout, stdout !== null);
+    assert(stdout, stdout !== null);
   });
 });

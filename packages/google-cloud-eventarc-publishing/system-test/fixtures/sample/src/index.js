@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const publishing = require('@google-cloud/publishing');
+const publishing = require('@google-cloud/eventarc-publishing');
 
 function main() {
   const publisherClient = new publishing.PublisherClient();

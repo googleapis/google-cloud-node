@@ -1,0 +1,148 @@
+{
+  "nested": {
+    "io": {
+      "nested": {
+        "cloudevents": {
+          "nested": {
+            "v1": {
+              "options": {
+                "go_package": "cloudevents.io/genproto/v1",
+                "java_package": "io.cloudevents.v1.proto",
+                "java_multiple_files": true,
+                "php_namespace": "Io\\CloudEvents\\V1\\Proto",
+                "ruby_package": "Io::CloudEvents::V1::Proto"
+              },
+              "nested": {
+                "CloudEvent": {
+                  "oneofs": {
+                    "data": {
+                      "oneof": [
+                        "binaryData",
+                        "textData",
+                        "protoData"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "id": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "source": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "specVersion": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "type": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "attributes": {
+                      "keyType": "string",
+                      "type": "CloudEventAttributeValue",
+                      "id": 5
+                    },
+                    "binaryData": {
+                      "type": "bytes",
+                      "id": 6
+                    },
+                    "textData": {
+                      "type": "string",
+                      "id": 7
+                    },
+                    "protoData": {
+                      "type": "google.protobuf.Any",
+                      "id": 8
+                    }
+                  },
+                  "nested": {
+                    "CloudEventAttributeValue": {
+                      "oneofs": {
+                        "attr": {
+                          "oneof": [
+                            "ceBoolean",
+                            "ceInteger",
+                            "ceString",
+                            "ceBytes",
+                            "ceUri",
+                            "ceUriRef",
+                            "ceTimestamp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ceBoolean": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "ceInteger": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "ceString": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "ceBytes": {
+                          "type": "bytes",
+                          "id": 4
+                        },
+                        "ceUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "ceUriRef": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "ceTimestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
