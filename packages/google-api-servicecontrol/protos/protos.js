@@ -17710,6 +17710,1362 @@
                     return v1;
                 })();
     
+                servicecontrol.v2 = (function() {
+    
+                    /**
+                     * Namespace v2.
+                     * @memberof google.api.servicecontrol
+                     * @namespace
+                     */
+                    var v2 = {};
+    
+                    v2.ServiceController = (function() {
+    
+                        /**
+                         * Constructs a new ServiceController service.
+                         * @memberof google.api.servicecontrol.v2
+                         * @classdesc Represents a ServiceController
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function ServiceController(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (ServiceController.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ServiceController;
+    
+                        /**
+                         * Creates new ServiceController service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.api.servicecontrol.v2.ServiceController
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {ServiceController} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        ServiceController.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.api.servicecontrol.v2.ServiceController#check}.
+                         * @memberof google.api.servicecontrol.v2.ServiceController
+                         * @typedef CheckCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.servicecontrol.v2.CheckResponse} [response] CheckResponse
+                         */
+    
+                        /**
+                         * Calls Check.
+                         * @function check
+                         * @memberof google.api.servicecontrol.v2.ServiceController
+                         * @instance
+                         * @param {google.api.servicecontrol.v2.ICheckRequest} request CheckRequest message or plain object
+                         * @param {google.api.servicecontrol.v2.ServiceController.CheckCallback} callback Node-style callback called with the error, if any, and CheckResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ServiceController.prototype.check = function check(request, callback) {
+                            return this.rpcCall(check, $root.google.api.servicecontrol.v2.CheckRequest, $root.google.api.servicecontrol.v2.CheckResponse, request, callback);
+                        }, "name", { value: "Check" });
+    
+                        /**
+                         * Calls Check.
+                         * @function check
+                         * @memberof google.api.servicecontrol.v2.ServiceController
+                         * @instance
+                         * @param {google.api.servicecontrol.v2.ICheckRequest} request CheckRequest message or plain object
+                         * @returns {Promise<google.api.servicecontrol.v2.CheckResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.api.servicecontrol.v2.ServiceController#report}.
+                         * @memberof google.api.servicecontrol.v2.ServiceController
+                         * @typedef ReportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.servicecontrol.v2.ReportResponse} [response] ReportResponse
+                         */
+    
+                        /**
+                         * Calls Report.
+                         * @function report
+                         * @memberof google.api.servicecontrol.v2.ServiceController
+                         * @instance
+                         * @param {google.api.servicecontrol.v2.IReportRequest} request ReportRequest message or plain object
+                         * @param {google.api.servicecontrol.v2.ServiceController.ReportCallback} callback Node-style callback called with the error, if any, and ReportResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ServiceController.prototype.report = function report(request, callback) {
+                            return this.rpcCall(report, $root.google.api.servicecontrol.v2.ReportRequest, $root.google.api.servicecontrol.v2.ReportResponse, request, callback);
+                        }, "name", { value: "Report" });
+    
+                        /**
+                         * Calls Report.
+                         * @function report
+                         * @memberof google.api.servicecontrol.v2.ServiceController
+                         * @instance
+                         * @param {google.api.servicecontrol.v2.IReportRequest} request ReportRequest message or plain object
+                         * @returns {Promise<google.api.servicecontrol.v2.ReportResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return ServiceController;
+                    })();
+    
+                    v2.CheckRequest = (function() {
+    
+                        /**
+                         * Properties of a CheckRequest.
+                         * @memberof google.api.servicecontrol.v2
+                         * @interface ICheckRequest
+                         * @property {string|null} [serviceName] CheckRequest serviceName
+                         * @property {string|null} [serviceConfigId] CheckRequest serviceConfigId
+                         * @property {google.rpc.context.IAttributeContext|null} [attributes] CheckRequest attributes
+                         * @property {Array.<google.api.servicecontrol.v2.IResourceInfo>|null} [resources] CheckRequest resources
+                         * @property {string|null} [flags] CheckRequest flags
+                         */
+    
+                        /**
+                         * Constructs a new CheckRequest.
+                         * @memberof google.api.servicecontrol.v2
+                         * @classdesc Represents a CheckRequest.
+                         * @implements ICheckRequest
+                         * @constructor
+                         * @param {google.api.servicecontrol.v2.ICheckRequest=} [properties] Properties to set
+                         */
+                        function CheckRequest(properties) {
+                            this.resources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CheckRequest serviceName.
+                         * @member {string} serviceName
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @instance
+                         */
+                        CheckRequest.prototype.serviceName = "";
+    
+                        /**
+                         * CheckRequest serviceConfigId.
+                         * @member {string} serviceConfigId
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @instance
+                         */
+                        CheckRequest.prototype.serviceConfigId = "";
+    
+                        /**
+                         * CheckRequest attributes.
+                         * @member {google.rpc.context.IAttributeContext|null|undefined} attributes
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @instance
+                         */
+                        CheckRequest.prototype.attributes = null;
+    
+                        /**
+                         * CheckRequest resources.
+                         * @member {Array.<google.api.servicecontrol.v2.IResourceInfo>} resources
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @instance
+                         */
+                        CheckRequest.prototype.resources = $util.emptyArray;
+    
+                        /**
+                         * CheckRequest flags.
+                         * @member {string} flags
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @instance
+                         */
+                        CheckRequest.prototype.flags = "";
+    
+                        /**
+                         * Creates a new CheckRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ICheckRequest=} [properties] Properties to set
+                         * @returns {google.api.servicecontrol.v2.CheckRequest} CheckRequest instance
+                         */
+                        CheckRequest.create = function create(properties) {
+                            return new CheckRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CheckRequest message. Does not implicitly {@link google.api.servicecontrol.v2.CheckRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ICheckRequest} message CheckRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CheckRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceName != null && Object.hasOwnProperty.call(message, "serviceName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceName);
+                            if (message.serviceConfigId != null && Object.hasOwnProperty.call(message, "serviceConfigId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceConfigId);
+                            if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
+                                $root.google.rpc.context.AttributeContext.encode(message.attributes, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.resources != null && message.resources.length)
+                                for (var i = 0; i < message.resources.length; ++i)
+                                    $root.google.api.servicecontrol.v2.ResourceInfo.encode(message.resources[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.flags);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CheckRequest message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.CheckRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ICheckRequest} message CheckRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CheckRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CheckRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.servicecontrol.v2.CheckRequest} CheckRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CheckRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.servicecontrol.v2.CheckRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.serviceName = reader.string();
+                                    break;
+                                case 2:
+                                    message.serviceConfigId = reader.string();
+                                    break;
+                                case 3:
+                                    message.attributes = $root.google.rpc.context.AttributeContext.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    if (!(message.resources && message.resources.length))
+                                        message.resources = [];
+                                    message.resources.push($root.google.api.servicecontrol.v2.ResourceInfo.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.flags = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CheckRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.servicecontrol.v2.CheckRequest} CheckRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CheckRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CheckRequest message.
+                         * @function verify
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CheckRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                if (!$util.isString(message.serviceName))
+                                    return "serviceName: string expected";
+                            if (message.serviceConfigId != null && message.hasOwnProperty("serviceConfigId"))
+                                if (!$util.isString(message.serviceConfigId))
+                                    return "serviceConfigId: string expected";
+                            if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                                var error = $root.google.rpc.context.AttributeContext.verify(message.attributes);
+                                if (error)
+                                    return "attributes." + error;
+                            }
+                            if (message.resources != null && message.hasOwnProperty("resources")) {
+                                if (!Array.isArray(message.resources))
+                                    return "resources: array expected";
+                                for (var i = 0; i < message.resources.length; ++i) {
+                                    var error = $root.google.api.servicecontrol.v2.ResourceInfo.verify(message.resources[i]);
+                                    if (error)
+                                        return "resources." + error;
+                                }
+                            }
+                            if (message.flags != null && message.hasOwnProperty("flags"))
+                                if (!$util.isString(message.flags))
+                                    return "flags: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CheckRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.servicecontrol.v2.CheckRequest} CheckRequest
+                         */
+                        CheckRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.servicecontrol.v2.CheckRequest)
+                                return object;
+                            var message = new $root.google.api.servicecontrol.v2.CheckRequest();
+                            if (object.serviceName != null)
+                                message.serviceName = String(object.serviceName);
+                            if (object.serviceConfigId != null)
+                                message.serviceConfigId = String(object.serviceConfigId);
+                            if (object.attributes != null) {
+                                if (typeof object.attributes !== "object")
+                                    throw TypeError(".google.api.servicecontrol.v2.CheckRequest.attributes: object expected");
+                                message.attributes = $root.google.rpc.context.AttributeContext.fromObject(object.attributes);
+                            }
+                            if (object.resources) {
+                                if (!Array.isArray(object.resources))
+                                    throw TypeError(".google.api.servicecontrol.v2.CheckRequest.resources: array expected");
+                                message.resources = [];
+                                for (var i = 0; i < object.resources.length; ++i) {
+                                    if (typeof object.resources[i] !== "object")
+                                        throw TypeError(".google.api.servicecontrol.v2.CheckRequest.resources: object expected");
+                                    message.resources[i] = $root.google.api.servicecontrol.v2.ResourceInfo.fromObject(object.resources[i]);
+                                }
+                            }
+                            if (object.flags != null)
+                                message.flags = String(object.flags);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CheckRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @static
+                         * @param {google.api.servicecontrol.v2.CheckRequest} message CheckRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CheckRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resources = [];
+                            if (options.defaults) {
+                                object.serviceName = "";
+                                object.serviceConfigId = "";
+                                object.attributes = null;
+                                object.flags = "";
+                            }
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                object.serviceName = message.serviceName;
+                            if (message.serviceConfigId != null && message.hasOwnProperty("serviceConfigId"))
+                                object.serviceConfigId = message.serviceConfigId;
+                            if (message.attributes != null && message.hasOwnProperty("attributes"))
+                                object.attributes = $root.google.rpc.context.AttributeContext.toObject(message.attributes, options);
+                            if (message.resources && message.resources.length) {
+                                object.resources = [];
+                                for (var j = 0; j < message.resources.length; ++j)
+                                    object.resources[j] = $root.google.api.servicecontrol.v2.ResourceInfo.toObject(message.resources[j], options);
+                            }
+                            if (message.flags != null && message.hasOwnProperty("flags"))
+                                object.flags = message.flags;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CheckRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.servicecontrol.v2.CheckRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CheckRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CheckRequest;
+                    })();
+    
+                    v2.ResourceInfo = (function() {
+    
+                        /**
+                         * Properties of a ResourceInfo.
+                         * @memberof google.api.servicecontrol.v2
+                         * @interface IResourceInfo
+                         * @property {string|null} [name] ResourceInfo name
+                         * @property {string|null} [type] ResourceInfo type
+                         * @property {string|null} [permission] ResourceInfo permission
+                         * @property {string|null} [container] ResourceInfo container
+                         * @property {string|null} [location] ResourceInfo location
+                         */
+    
+                        /**
+                         * Constructs a new ResourceInfo.
+                         * @memberof google.api.servicecontrol.v2
+                         * @classdesc Represents a ResourceInfo.
+                         * @implements IResourceInfo
+                         * @constructor
+                         * @param {google.api.servicecontrol.v2.IResourceInfo=} [properties] Properties to set
+                         */
+                        function ResourceInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceInfo name.
+                         * @member {string} name
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @instance
+                         */
+                        ResourceInfo.prototype.name = "";
+    
+                        /**
+                         * ResourceInfo type.
+                         * @member {string} type
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @instance
+                         */
+                        ResourceInfo.prototype.type = "";
+    
+                        /**
+                         * ResourceInfo permission.
+                         * @member {string} permission
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @instance
+                         */
+                        ResourceInfo.prototype.permission = "";
+    
+                        /**
+                         * ResourceInfo container.
+                         * @member {string} container
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @instance
+                         */
+                        ResourceInfo.prototype.container = "";
+    
+                        /**
+                         * ResourceInfo location.
+                         * @member {string} location
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @instance
+                         */
+                        ResourceInfo.prototype.location = "";
+    
+                        /**
+                         * Creates a new ResourceInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IResourceInfo=} [properties] Properties to set
+                         * @returns {google.api.servicecontrol.v2.ResourceInfo} ResourceInfo instance
+                         */
+                        ResourceInfo.create = function create(properties) {
+                            return new ResourceInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceInfo message. Does not implicitly {@link google.api.servicecontrol.v2.ResourceInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IResourceInfo} message ResourceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.type);
+                            if (message.permission != null && Object.hasOwnProperty.call(message, "permission"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.permission);
+                            if (message.container != null && Object.hasOwnProperty.call(message, "container"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.container);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceInfo message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.ResourceInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IResourceInfo} message ResourceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.servicecontrol.v2.ResourceInfo} ResourceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.servicecontrol.v2.ResourceInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.type = reader.string();
+                                    break;
+                                case 3:
+                                    message.permission = reader.string();
+                                    break;
+                                case 4:
+                                    message.container = reader.string();
+                                    break;
+                                case 5:
+                                    message.location = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.servicecontrol.v2.ResourceInfo} ResourceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceInfo message.
+                         * @function verify
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.permission != null && message.hasOwnProperty("permission"))
+                                if (!$util.isString(message.permission))
+                                    return "permission: string expected";
+                            if (message.container != null && message.hasOwnProperty("container"))
+                                if (!$util.isString(message.container))
+                                    return "container: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.servicecontrol.v2.ResourceInfo} ResourceInfo
+                         */
+                        ResourceInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.servicecontrol.v2.ResourceInfo)
+                                return object;
+                            var message = new $root.google.api.servicecontrol.v2.ResourceInfo();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.permission != null)
+                                message.permission = String(object.permission);
+                            if (object.container != null)
+                                message.container = String(object.container);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ResourceInfo} message ResourceInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.type = "";
+                                object.permission = "";
+                                object.container = "";
+                                object.location = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.permission != null && message.hasOwnProperty("permission"))
+                                object.permission = message.permission;
+                            if (message.container != null && message.hasOwnProperty("container"))
+                                object.container = message.container;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.api.servicecontrol.v2.ResourceInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResourceInfo;
+                    })();
+    
+                    v2.CheckResponse = (function() {
+    
+                        /**
+                         * Properties of a CheckResponse.
+                         * @memberof google.api.servicecontrol.v2
+                         * @interface ICheckResponse
+                         * @property {google.rpc.IStatus|null} [status] CheckResponse status
+                         * @property {Object.<string,string>|null} [headers] CheckResponse headers
+                         */
+    
+                        /**
+                         * Constructs a new CheckResponse.
+                         * @memberof google.api.servicecontrol.v2
+                         * @classdesc Represents a CheckResponse.
+                         * @implements ICheckResponse
+                         * @constructor
+                         * @param {google.api.servicecontrol.v2.ICheckResponse=} [properties] Properties to set
+                         */
+                        function CheckResponse(properties) {
+                            this.headers = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CheckResponse status.
+                         * @member {google.rpc.IStatus|null|undefined} status
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @instance
+                         */
+                        CheckResponse.prototype.status = null;
+    
+                        /**
+                         * CheckResponse headers.
+                         * @member {Object.<string,string>} headers
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @instance
+                         */
+                        CheckResponse.prototype.headers = $util.emptyObject;
+    
+                        /**
+                         * Creates a new CheckResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ICheckResponse=} [properties] Properties to set
+                         * @returns {google.api.servicecontrol.v2.CheckResponse} CheckResponse instance
+                         */
+                        CheckResponse.create = function create(properties) {
+                            return new CheckResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CheckResponse message. Does not implicitly {@link google.api.servicecontrol.v2.CheckResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ICheckResponse} message CheckResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CheckResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                $root.google.rpc.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.headers != null && Object.hasOwnProperty.call(message, "headers"))
+                                for (var keys = Object.keys(message.headers), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.headers[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CheckResponse message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.CheckResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ICheckResponse} message CheckResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CheckResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CheckResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.servicecontrol.v2.CheckResponse} CheckResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CheckResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.servicecontrol.v2.CheckResponse(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    if (message.headers === $util.emptyObject)
+                                        message.headers = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.headers[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CheckResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.servicecontrol.v2.CheckResponse} CheckResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CheckResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CheckResponse message.
+                         * @function verify
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CheckResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.rpc.Status.verify(message.status);
+                                if (error)
+                                    return "status." + error;
+                            }
+                            if (message.headers != null && message.hasOwnProperty("headers")) {
+                                if (!$util.isObject(message.headers))
+                                    return "headers: object expected";
+                                var key = Object.keys(message.headers);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.headers[key[i]]))
+                                        return "headers: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CheckResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.servicecontrol.v2.CheckResponse} CheckResponse
+                         */
+                        CheckResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.servicecontrol.v2.CheckResponse)
+                                return object;
+                            var message = new $root.google.api.servicecontrol.v2.CheckResponse();
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.api.servicecontrol.v2.CheckResponse.status: object expected");
+                                message.status = $root.google.rpc.Status.fromObject(object.status);
+                            }
+                            if (object.headers) {
+                                if (typeof object.headers !== "object")
+                                    throw TypeError(".google.api.servicecontrol.v2.CheckResponse.headers: object expected");
+                                message.headers = {};
+                                for (var keys = Object.keys(object.headers), i = 0; i < keys.length; ++i)
+                                    message.headers[keys[i]] = String(object.headers[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CheckResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @static
+                         * @param {google.api.servicecontrol.v2.CheckResponse} message CheckResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CheckResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.headers = {};
+                            if (options.defaults)
+                                object.status = null;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.rpc.Status.toObject(message.status, options);
+                            var keys2;
+                            if (message.headers && (keys2 = Object.keys(message.headers)).length) {
+                                object.headers = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.headers[keys2[j]] = message.headers[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CheckResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.api.servicecontrol.v2.CheckResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CheckResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CheckResponse;
+                    })();
+    
+                    v2.ReportRequest = (function() {
+    
+                        /**
+                         * Properties of a ReportRequest.
+                         * @memberof google.api.servicecontrol.v2
+                         * @interface IReportRequest
+                         * @property {string|null} [serviceName] ReportRequest serviceName
+                         * @property {string|null} [serviceConfigId] ReportRequest serviceConfigId
+                         * @property {Array.<google.rpc.context.IAttributeContext>|null} [operations] ReportRequest operations
+                         */
+    
+                        /**
+                         * Constructs a new ReportRequest.
+                         * @memberof google.api.servicecontrol.v2
+                         * @classdesc Represents a ReportRequest.
+                         * @implements IReportRequest
+                         * @constructor
+                         * @param {google.api.servicecontrol.v2.IReportRequest=} [properties] Properties to set
+                         */
+                        function ReportRequest(properties) {
+                            this.operations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReportRequest serviceName.
+                         * @member {string} serviceName
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @instance
+                         */
+                        ReportRequest.prototype.serviceName = "";
+    
+                        /**
+                         * ReportRequest serviceConfigId.
+                         * @member {string} serviceConfigId
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @instance
+                         */
+                        ReportRequest.prototype.serviceConfigId = "";
+    
+                        /**
+                         * ReportRequest operations.
+                         * @member {Array.<google.rpc.context.IAttributeContext>} operations
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @instance
+                         */
+                        ReportRequest.prototype.operations = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ReportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IReportRequest=} [properties] Properties to set
+                         * @returns {google.api.servicecontrol.v2.ReportRequest} ReportRequest instance
+                         */
+                        ReportRequest.create = function create(properties) {
+                            return new ReportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportRequest message. Does not implicitly {@link google.api.servicecontrol.v2.ReportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IReportRequest} message ReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceName != null && Object.hasOwnProperty.call(message, "serviceName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceName);
+                            if (message.serviceConfigId != null && Object.hasOwnProperty.call(message, "serviceConfigId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceConfigId);
+                            if (message.operations != null && message.operations.length)
+                                for (var i = 0; i < message.operations.length; ++i)
+                                    $root.google.rpc.context.AttributeContext.encode(message.operations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportRequest message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.ReportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IReportRequest} message ReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.servicecontrol.v2.ReportRequest} ReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.servicecontrol.v2.ReportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.serviceName = reader.string();
+                                    break;
+                                case 2:
+                                    message.serviceConfigId = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.operations && message.operations.length))
+                                        message.operations = [];
+                                    message.operations.push($root.google.rpc.context.AttributeContext.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.servicecontrol.v2.ReportRequest} ReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportRequest message.
+                         * @function verify
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                if (!$util.isString(message.serviceName))
+                                    return "serviceName: string expected";
+                            if (message.serviceConfigId != null && message.hasOwnProperty("serviceConfigId"))
+                                if (!$util.isString(message.serviceConfigId))
+                                    return "serviceConfigId: string expected";
+                            if (message.operations != null && message.hasOwnProperty("operations")) {
+                                if (!Array.isArray(message.operations))
+                                    return "operations: array expected";
+                                for (var i = 0; i < message.operations.length; ++i) {
+                                    var error = $root.google.rpc.context.AttributeContext.verify(message.operations[i]);
+                                    if (error)
+                                        return "operations." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.servicecontrol.v2.ReportRequest} ReportRequest
+                         */
+                        ReportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.servicecontrol.v2.ReportRequest)
+                                return object;
+                            var message = new $root.google.api.servicecontrol.v2.ReportRequest();
+                            if (object.serviceName != null)
+                                message.serviceName = String(object.serviceName);
+                            if (object.serviceConfigId != null)
+                                message.serviceConfigId = String(object.serviceConfigId);
+                            if (object.operations) {
+                                if (!Array.isArray(object.operations))
+                                    throw TypeError(".google.api.servicecontrol.v2.ReportRequest.operations: array expected");
+                                message.operations = [];
+                                for (var i = 0; i < object.operations.length; ++i) {
+                                    if (typeof object.operations[i] !== "object")
+                                        throw TypeError(".google.api.servicecontrol.v2.ReportRequest.operations: object expected");
+                                    message.operations[i] = $root.google.rpc.context.AttributeContext.fromObject(object.operations[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ReportRequest} message ReportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.operations = [];
+                            if (options.defaults) {
+                                object.serviceName = "";
+                                object.serviceConfigId = "";
+                            }
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                object.serviceName = message.serviceName;
+                            if (message.serviceConfigId != null && message.hasOwnProperty("serviceConfigId"))
+                                object.serviceConfigId = message.serviceConfigId;
+                            if (message.operations && message.operations.length) {
+                                object.operations = [];
+                                for (var j = 0; j < message.operations.length; ++j)
+                                    object.operations[j] = $root.google.rpc.context.AttributeContext.toObject(message.operations[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.servicecontrol.v2.ReportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ReportRequest;
+                    })();
+    
+                    v2.ReportResponse = (function() {
+    
+                        /**
+                         * Properties of a ReportResponse.
+                         * @memberof google.api.servicecontrol.v2
+                         * @interface IReportResponse
+                         */
+    
+                        /**
+                         * Constructs a new ReportResponse.
+                         * @memberof google.api.servicecontrol.v2
+                         * @classdesc Represents a ReportResponse.
+                         * @implements IReportResponse
+                         * @constructor
+                         * @param {google.api.servicecontrol.v2.IReportResponse=} [properties] Properties to set
+                         */
+                        function ReportResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ReportResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IReportResponse=} [properties] Properties to set
+                         * @returns {google.api.servicecontrol.v2.ReportResponse} ReportResponse instance
+                         */
+                        ReportResponse.create = function create(properties) {
+                            return new ReportResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportResponse message. Does not implicitly {@link google.api.servicecontrol.v2.ReportResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IReportResponse} message ReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportResponse message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.ReportResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IReportResponse} message ReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.servicecontrol.v2.ReportResponse} ReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.servicecontrol.v2.ReportResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.servicecontrol.v2.ReportResponse} ReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportResponse message.
+                         * @function verify
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.servicecontrol.v2.ReportResponse} ReportResponse
+                         */
+                        ReportResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.servicecontrol.v2.ReportResponse)
+                                return object;
+                            return new $root.google.api.servicecontrol.v2.ReportResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ReportResponse} message ReportResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ReportResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.api.servicecontrol.v2.ReportResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ReportResponse;
+                    })();
+    
+                    return v2;
+                })();
+    
                 return servicecontrol;
             })();
     
@@ -20705,6 +22061,2668 @@
                 };
     
                 return Status;
+            })();
+    
+            rpc.context = (function() {
+    
+                /**
+                 * Namespace context.
+                 * @memberof google.rpc
+                 * @namespace
+                 */
+                var context = {};
+    
+                context.AttributeContext = (function() {
+    
+                    /**
+                     * Properties of an AttributeContext.
+                     * @memberof google.rpc.context
+                     * @interface IAttributeContext
+                     * @property {google.rpc.context.AttributeContext.IPeer|null} [origin] AttributeContext origin
+                     * @property {google.rpc.context.AttributeContext.IPeer|null} [source] AttributeContext source
+                     * @property {google.rpc.context.AttributeContext.IPeer|null} [destination] AttributeContext destination
+                     * @property {google.rpc.context.AttributeContext.IRequest|null} [request] AttributeContext request
+                     * @property {google.rpc.context.AttributeContext.IResponse|null} [response] AttributeContext response
+                     * @property {google.rpc.context.AttributeContext.IResource|null} [resource] AttributeContext resource
+                     * @property {google.rpc.context.AttributeContext.IApi|null} [api] AttributeContext api
+                     * @property {Array.<google.protobuf.IAny>|null} [extensions] AttributeContext extensions
+                     */
+    
+                    /**
+                     * Constructs a new AttributeContext.
+                     * @memberof google.rpc.context
+                     * @classdesc Represents an AttributeContext.
+                     * @implements IAttributeContext
+                     * @constructor
+                     * @param {google.rpc.context.IAttributeContext=} [properties] Properties to set
+                     */
+                    function AttributeContext(properties) {
+                        this.extensions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AttributeContext origin.
+                     * @member {google.rpc.context.AttributeContext.IPeer|null|undefined} origin
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     */
+                    AttributeContext.prototype.origin = null;
+    
+                    /**
+                     * AttributeContext source.
+                     * @member {google.rpc.context.AttributeContext.IPeer|null|undefined} source
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     */
+                    AttributeContext.prototype.source = null;
+    
+                    /**
+                     * AttributeContext destination.
+                     * @member {google.rpc.context.AttributeContext.IPeer|null|undefined} destination
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     */
+                    AttributeContext.prototype.destination = null;
+    
+                    /**
+                     * AttributeContext request.
+                     * @member {google.rpc.context.AttributeContext.IRequest|null|undefined} request
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     */
+                    AttributeContext.prototype.request = null;
+    
+                    /**
+                     * AttributeContext response.
+                     * @member {google.rpc.context.AttributeContext.IResponse|null|undefined} response
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     */
+                    AttributeContext.prototype.response = null;
+    
+                    /**
+                     * AttributeContext resource.
+                     * @member {google.rpc.context.AttributeContext.IResource|null|undefined} resource
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     */
+                    AttributeContext.prototype.resource = null;
+    
+                    /**
+                     * AttributeContext api.
+                     * @member {google.rpc.context.AttributeContext.IApi|null|undefined} api
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     */
+                    AttributeContext.prototype.api = null;
+    
+                    /**
+                     * AttributeContext extensions.
+                     * @member {Array.<google.protobuf.IAny>} extensions
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     */
+                    AttributeContext.prototype.extensions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new AttributeContext instance using the specified properties.
+                     * @function create
+                     * @memberof google.rpc.context.AttributeContext
+                     * @static
+                     * @param {google.rpc.context.IAttributeContext=} [properties] Properties to set
+                     * @returns {google.rpc.context.AttributeContext} AttributeContext instance
+                     */
+                    AttributeContext.create = function create(properties) {
+                        return new AttributeContext(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AttributeContext message. Does not implicitly {@link google.rpc.context.AttributeContext.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.rpc.context.AttributeContext
+                     * @static
+                     * @param {google.rpc.context.IAttributeContext} message AttributeContext message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AttributeContext.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                            $root.google.rpc.context.AttributeContext.Peer.encode(message.source, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                            $root.google.rpc.context.AttributeContext.Peer.encode(message.destination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                            $root.google.rpc.context.AttributeContext.Request.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                            $root.google.rpc.context.AttributeContext.Response.encode(message.response, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            $root.google.rpc.context.AttributeContext.Resource.encode(message.resource, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.api != null && Object.hasOwnProperty.call(message, "api"))
+                            $root.google.rpc.context.AttributeContext.Api.encode(message.api, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.origin != null && Object.hasOwnProperty.call(message, "origin"))
+                            $root.google.rpc.context.AttributeContext.Peer.encode(message.origin, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.extensions != null && message.extensions.length)
+                            for (var i = 0; i < message.extensions.length; ++i)
+                                $root.google.protobuf.Any.encode(message.extensions[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AttributeContext message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.rpc.context.AttributeContext
+                     * @static
+                     * @param {google.rpc.context.IAttributeContext} message AttributeContext message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AttributeContext.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AttributeContext message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.rpc.context.AttributeContext
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.rpc.context.AttributeContext} AttributeContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AttributeContext.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.context.AttributeContext();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 7:
+                                message.origin = $root.google.rpc.context.AttributeContext.Peer.decode(reader, reader.uint32());
+                                break;
+                            case 1:
+                                message.source = $root.google.rpc.context.AttributeContext.Peer.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                message.destination = $root.google.rpc.context.AttributeContext.Peer.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.request = $root.google.rpc.context.AttributeContext.Request.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                message.response = $root.google.rpc.context.AttributeContext.Response.decode(reader, reader.uint32());
+                                break;
+                            case 5:
+                                message.resource = $root.google.rpc.context.AttributeContext.Resource.decode(reader, reader.uint32());
+                                break;
+                            case 6:
+                                message.api = $root.google.rpc.context.AttributeContext.Api.decode(reader, reader.uint32());
+                                break;
+                            case 8:
+                                if (!(message.extensions && message.extensions.length))
+                                    message.extensions = [];
+                                message.extensions.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AttributeContext message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.rpc.context.AttributeContext
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.rpc.context.AttributeContext} AttributeContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AttributeContext.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AttributeContext message.
+                     * @function verify
+                     * @memberof google.rpc.context.AttributeContext
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AttributeContext.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.origin != null && message.hasOwnProperty("origin")) {
+                            var error = $root.google.rpc.context.AttributeContext.Peer.verify(message.origin);
+                            if (error)
+                                return "origin." + error;
+                        }
+                        if (message.source != null && message.hasOwnProperty("source")) {
+                            var error = $root.google.rpc.context.AttributeContext.Peer.verify(message.source);
+                            if (error)
+                                return "source." + error;
+                        }
+                        if (message.destination != null && message.hasOwnProperty("destination")) {
+                            var error = $root.google.rpc.context.AttributeContext.Peer.verify(message.destination);
+                            if (error)
+                                return "destination." + error;
+                        }
+                        if (message.request != null && message.hasOwnProperty("request")) {
+                            var error = $root.google.rpc.context.AttributeContext.Request.verify(message.request);
+                            if (error)
+                                return "request." + error;
+                        }
+                        if (message.response != null && message.hasOwnProperty("response")) {
+                            var error = $root.google.rpc.context.AttributeContext.Response.verify(message.response);
+                            if (error)
+                                return "response." + error;
+                        }
+                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                            var error = $root.google.rpc.context.AttributeContext.Resource.verify(message.resource);
+                            if (error)
+                                return "resource." + error;
+                        }
+                        if (message.api != null && message.hasOwnProperty("api")) {
+                            var error = $root.google.rpc.context.AttributeContext.Api.verify(message.api);
+                            if (error)
+                                return "api." + error;
+                        }
+                        if (message.extensions != null && message.hasOwnProperty("extensions")) {
+                            if (!Array.isArray(message.extensions))
+                                return "extensions: array expected";
+                            for (var i = 0; i < message.extensions.length; ++i) {
+                                var error = $root.google.protobuf.Any.verify(message.extensions[i]);
+                                if (error)
+                                    return "extensions." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AttributeContext message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.rpc.context.AttributeContext
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.rpc.context.AttributeContext} AttributeContext
+                     */
+                    AttributeContext.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.rpc.context.AttributeContext)
+                            return object;
+                        var message = new $root.google.rpc.context.AttributeContext();
+                        if (object.origin != null) {
+                            if (typeof object.origin !== "object")
+                                throw TypeError(".google.rpc.context.AttributeContext.origin: object expected");
+                            message.origin = $root.google.rpc.context.AttributeContext.Peer.fromObject(object.origin);
+                        }
+                        if (object.source != null) {
+                            if (typeof object.source !== "object")
+                                throw TypeError(".google.rpc.context.AttributeContext.source: object expected");
+                            message.source = $root.google.rpc.context.AttributeContext.Peer.fromObject(object.source);
+                        }
+                        if (object.destination != null) {
+                            if (typeof object.destination !== "object")
+                                throw TypeError(".google.rpc.context.AttributeContext.destination: object expected");
+                            message.destination = $root.google.rpc.context.AttributeContext.Peer.fromObject(object.destination);
+                        }
+                        if (object.request != null) {
+                            if (typeof object.request !== "object")
+                                throw TypeError(".google.rpc.context.AttributeContext.request: object expected");
+                            message.request = $root.google.rpc.context.AttributeContext.Request.fromObject(object.request);
+                        }
+                        if (object.response != null) {
+                            if (typeof object.response !== "object")
+                                throw TypeError(".google.rpc.context.AttributeContext.response: object expected");
+                            message.response = $root.google.rpc.context.AttributeContext.Response.fromObject(object.response);
+                        }
+                        if (object.resource != null) {
+                            if (typeof object.resource !== "object")
+                                throw TypeError(".google.rpc.context.AttributeContext.resource: object expected");
+                            message.resource = $root.google.rpc.context.AttributeContext.Resource.fromObject(object.resource);
+                        }
+                        if (object.api != null) {
+                            if (typeof object.api !== "object")
+                                throw TypeError(".google.rpc.context.AttributeContext.api: object expected");
+                            message.api = $root.google.rpc.context.AttributeContext.Api.fromObject(object.api);
+                        }
+                        if (object.extensions) {
+                            if (!Array.isArray(object.extensions))
+                                throw TypeError(".google.rpc.context.AttributeContext.extensions: array expected");
+                            message.extensions = [];
+                            for (var i = 0; i < object.extensions.length; ++i) {
+                                if (typeof object.extensions[i] !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.extensions: object expected");
+                                message.extensions[i] = $root.google.protobuf.Any.fromObject(object.extensions[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AttributeContext message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.rpc.context.AttributeContext
+                     * @static
+                     * @param {google.rpc.context.AttributeContext} message AttributeContext
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AttributeContext.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.extensions = [];
+                        if (options.defaults) {
+                            object.source = null;
+                            object.destination = null;
+                            object.request = null;
+                            object.response = null;
+                            object.resource = null;
+                            object.api = null;
+                            object.origin = null;
+                        }
+                        if (message.source != null && message.hasOwnProperty("source"))
+                            object.source = $root.google.rpc.context.AttributeContext.Peer.toObject(message.source, options);
+                        if (message.destination != null && message.hasOwnProperty("destination"))
+                            object.destination = $root.google.rpc.context.AttributeContext.Peer.toObject(message.destination, options);
+                        if (message.request != null && message.hasOwnProperty("request"))
+                            object.request = $root.google.rpc.context.AttributeContext.Request.toObject(message.request, options);
+                        if (message.response != null && message.hasOwnProperty("response"))
+                            object.response = $root.google.rpc.context.AttributeContext.Response.toObject(message.response, options);
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = $root.google.rpc.context.AttributeContext.Resource.toObject(message.resource, options);
+                        if (message.api != null && message.hasOwnProperty("api"))
+                            object.api = $root.google.rpc.context.AttributeContext.Api.toObject(message.api, options);
+                        if (message.origin != null && message.hasOwnProperty("origin"))
+                            object.origin = $root.google.rpc.context.AttributeContext.Peer.toObject(message.origin, options);
+                        if (message.extensions && message.extensions.length) {
+                            object.extensions = [];
+                            for (var j = 0; j < message.extensions.length; ++j)
+                                object.extensions[j] = $root.google.protobuf.Any.toObject(message.extensions[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AttributeContext to JSON.
+                     * @function toJSON
+                     * @memberof google.rpc.context.AttributeContext
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AttributeContext.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    AttributeContext.Peer = (function() {
+    
+                        /**
+                         * Properties of a Peer.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @interface IPeer
+                         * @property {string|null} [ip] Peer ip
+                         * @property {number|Long|null} [port] Peer port
+                         * @property {Object.<string,string>|null} [labels] Peer labels
+                         * @property {string|null} [principal] Peer principal
+                         * @property {string|null} [regionCode] Peer regionCode
+                         */
+    
+                        /**
+                         * Constructs a new Peer.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @classdesc Represents a Peer.
+                         * @implements IPeer
+                         * @constructor
+                         * @param {google.rpc.context.AttributeContext.IPeer=} [properties] Properties to set
+                         */
+                        function Peer(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Peer ip.
+                         * @member {string} ip
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @instance
+                         */
+                        Peer.prototype.ip = "";
+    
+                        /**
+                         * Peer port.
+                         * @member {number|Long} port
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @instance
+                         */
+                        Peer.prototype.port = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Peer labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @instance
+                         */
+                        Peer.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Peer principal.
+                         * @member {string} principal
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @instance
+                         */
+                        Peer.prototype.principal = "";
+    
+                        /**
+                         * Peer regionCode.
+                         * @member {string} regionCode
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @instance
+                         */
+                        Peer.prototype.regionCode = "";
+    
+                        /**
+                         * Creates a new Peer instance using the specified properties.
+                         * @function create
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IPeer=} [properties] Properties to set
+                         * @returns {google.rpc.context.AttributeContext.Peer} Peer instance
+                         */
+                        Peer.create = function create(properties) {
+                            return new Peer(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Peer message. Does not implicitly {@link google.rpc.context.AttributeContext.Peer.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IPeer} message Peer message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Peer.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ip != null && Object.hasOwnProperty.call(message, "ip"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.ip);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.port);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.principal != null && Object.hasOwnProperty.call(message, "principal"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.principal);
+                            if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.regionCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Peer message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Peer.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IPeer} message Peer message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Peer.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Peer message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.rpc.context.AttributeContext.Peer} Peer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Peer.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.context.AttributeContext.Peer(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.ip = reader.string();
+                                    break;
+                                case 2:
+                                    message.port = reader.int64();
+                                    break;
+                                case 6:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 7:
+                                    message.principal = reader.string();
+                                    break;
+                                case 8:
+                                    message.regionCode = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Peer message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.rpc.context.AttributeContext.Peer} Peer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Peer.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Peer message.
+                         * @function verify
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Peer.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ip != null && message.hasOwnProperty("ip"))
+                                if (!$util.isString(message.ip))
+                                    return "ip: string expected";
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                if (!$util.isInteger(message.port) && !(message.port && $util.isInteger(message.port.low) && $util.isInteger(message.port.high)))
+                                    return "port: integer|Long expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.principal != null && message.hasOwnProperty("principal"))
+                                if (!$util.isString(message.principal))
+                                    return "principal: string expected";
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                if (!$util.isString(message.regionCode))
+                                    return "regionCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Peer message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.rpc.context.AttributeContext.Peer} Peer
+                         */
+                        Peer.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.rpc.context.AttributeContext.Peer)
+                                return object;
+                            var message = new $root.google.rpc.context.AttributeContext.Peer();
+                            if (object.ip != null)
+                                message.ip = String(object.ip);
+                            if (object.port != null)
+                                if ($util.Long)
+                                    (message.port = $util.Long.fromValue(object.port)).unsigned = false;
+                                else if (typeof object.port === "string")
+                                    message.port = parseInt(object.port, 10);
+                                else if (typeof object.port === "number")
+                                    message.port = object.port;
+                                else if (typeof object.port === "object")
+                                    message.port = new $util.LongBits(object.port.low >>> 0, object.port.high >>> 0).toNumber();
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Peer.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.principal != null)
+                                message.principal = String(object.principal);
+                            if (object.regionCode != null)
+                                message.regionCode = String(object.regionCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Peer message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.Peer} message Peer
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Peer.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.ip = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.port = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.port = options.longs === String ? "0" : 0;
+                                object.principal = "";
+                                object.regionCode = "";
+                            }
+                            if (message.ip != null && message.hasOwnProperty("ip"))
+                                object.ip = message.ip;
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                if (typeof message.port === "number")
+                                    object.port = options.longs === String ? String(message.port) : message.port;
+                                else
+                                    object.port = options.longs === String ? $util.Long.prototype.toString.call(message.port) : options.longs === Number ? new $util.LongBits(message.port.low >>> 0, message.port.high >>> 0).toNumber() : message.port;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.principal != null && message.hasOwnProperty("principal"))
+                                object.principal = message.principal;
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                object.regionCode = message.regionCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Peer to JSON.
+                         * @function toJSON
+                         * @memberof google.rpc.context.AttributeContext.Peer
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Peer.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Peer;
+                    })();
+    
+                    AttributeContext.Api = (function() {
+    
+                        /**
+                         * Properties of an Api.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @interface IApi
+                         * @property {string|null} [service] Api service
+                         * @property {string|null} [operation] Api operation
+                         * @property {string|null} [protocol] Api protocol
+                         * @property {string|null} [version] Api version
+                         */
+    
+                        /**
+                         * Constructs a new Api.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @classdesc Represents an Api.
+                         * @implements IApi
+                         * @constructor
+                         * @param {google.rpc.context.AttributeContext.IApi=} [properties] Properties to set
+                         */
+                        function Api(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Api service.
+                         * @member {string} service
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @instance
+                         */
+                        Api.prototype.service = "";
+    
+                        /**
+                         * Api operation.
+                         * @member {string} operation
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @instance
+                         */
+                        Api.prototype.operation = "";
+    
+                        /**
+                         * Api protocol.
+                         * @member {string} protocol
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @instance
+                         */
+                        Api.prototype.protocol = "";
+    
+                        /**
+                         * Api version.
+                         * @member {string} version
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @instance
+                         */
+                        Api.prototype.version = "";
+    
+                        /**
+                         * Creates a new Api instance using the specified properties.
+                         * @function create
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IApi=} [properties] Properties to set
+                         * @returns {google.rpc.context.AttributeContext.Api} Api instance
+                         */
+                        Api.create = function create(properties) {
+                            return new Api(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Api message. Does not implicitly {@link google.rpc.context.AttributeContext.Api.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IApi} message Api message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Api.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.operation);
+                            if (message.protocol != null && Object.hasOwnProperty.call(message, "protocol"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.protocol);
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.version);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Api message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Api.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IApi} message Api message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Api.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Api message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.rpc.context.AttributeContext.Api} Api
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Api.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.context.AttributeContext.Api();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.service = reader.string();
+                                    break;
+                                case 2:
+                                    message.operation = reader.string();
+                                    break;
+                                case 3:
+                                    message.protocol = reader.string();
+                                    break;
+                                case 4:
+                                    message.version = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Api message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.rpc.context.AttributeContext.Api} Api
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Api.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Api message.
+                         * @function verify
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Api.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.operation != null && message.hasOwnProperty("operation"))
+                                if (!$util.isString(message.operation))
+                                    return "operation: string expected";
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                if (!$util.isString(message.protocol))
+                                    return "protocol: string expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Api message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.rpc.context.AttributeContext.Api} Api
+                         */
+                        Api.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.rpc.context.AttributeContext.Api)
+                                return object;
+                            var message = new $root.google.rpc.context.AttributeContext.Api();
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.operation != null)
+                                message.operation = String(object.operation);
+                            if (object.protocol != null)
+                                message.protocol = String(object.protocol);
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Api message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.Api} message Api
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Api.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.service = "";
+                                object.operation = "";
+                                object.protocol = "";
+                                object.version = "";
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.operation != null && message.hasOwnProperty("operation"))
+                                object.operation = message.operation;
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                object.protocol = message.protocol;
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Api to JSON.
+                         * @function toJSON
+                         * @memberof google.rpc.context.AttributeContext.Api
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Api.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Api;
+                    })();
+    
+                    AttributeContext.Auth = (function() {
+    
+                        /**
+                         * Properties of an Auth.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @interface IAuth
+                         * @property {string|null} [principal] Auth principal
+                         * @property {Array.<string>|null} [audiences] Auth audiences
+                         * @property {string|null} [presenter] Auth presenter
+                         * @property {google.protobuf.IStruct|null} [claims] Auth claims
+                         * @property {Array.<string>|null} [accessLevels] Auth accessLevels
+                         */
+    
+                        /**
+                         * Constructs a new Auth.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @classdesc Represents an Auth.
+                         * @implements IAuth
+                         * @constructor
+                         * @param {google.rpc.context.AttributeContext.IAuth=} [properties] Properties to set
+                         */
+                        function Auth(properties) {
+                            this.audiences = [];
+                            this.accessLevels = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Auth principal.
+                         * @member {string} principal
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @instance
+                         */
+                        Auth.prototype.principal = "";
+    
+                        /**
+                         * Auth audiences.
+                         * @member {Array.<string>} audiences
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @instance
+                         */
+                        Auth.prototype.audiences = $util.emptyArray;
+    
+                        /**
+                         * Auth presenter.
+                         * @member {string} presenter
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @instance
+                         */
+                        Auth.prototype.presenter = "";
+    
+                        /**
+                         * Auth claims.
+                         * @member {google.protobuf.IStruct|null|undefined} claims
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @instance
+                         */
+                        Auth.prototype.claims = null;
+    
+                        /**
+                         * Auth accessLevels.
+                         * @member {Array.<string>} accessLevels
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @instance
+                         */
+                        Auth.prototype.accessLevels = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Auth instance using the specified properties.
+                         * @function create
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IAuth=} [properties] Properties to set
+                         * @returns {google.rpc.context.AttributeContext.Auth} Auth instance
+                         */
+                        Auth.create = function create(properties) {
+                            return new Auth(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Auth message. Does not implicitly {@link google.rpc.context.AttributeContext.Auth.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IAuth} message Auth message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Auth.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.principal != null && Object.hasOwnProperty.call(message, "principal"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.principal);
+                            if (message.audiences != null && message.audiences.length)
+                                for (var i = 0; i < message.audiences.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.audiences[i]);
+                            if (message.presenter != null && Object.hasOwnProperty.call(message, "presenter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.presenter);
+                            if (message.claims != null && Object.hasOwnProperty.call(message, "claims"))
+                                $root.google.protobuf.Struct.encode(message.claims, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.accessLevels != null && message.accessLevels.length)
+                                for (var i = 0; i < message.accessLevels.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.accessLevels[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Auth message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Auth.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IAuth} message Auth message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Auth.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Auth message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.rpc.context.AttributeContext.Auth} Auth
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Auth.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.context.AttributeContext.Auth();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.principal = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.audiences && message.audiences.length))
+                                        message.audiences = [];
+                                    message.audiences.push(reader.string());
+                                    break;
+                                case 3:
+                                    message.presenter = reader.string();
+                                    break;
+                                case 4:
+                                    message.claims = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    if (!(message.accessLevels && message.accessLevels.length))
+                                        message.accessLevels = [];
+                                    message.accessLevels.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Auth message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.rpc.context.AttributeContext.Auth} Auth
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Auth.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Auth message.
+                         * @function verify
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Auth.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.principal != null && message.hasOwnProperty("principal"))
+                                if (!$util.isString(message.principal))
+                                    return "principal: string expected";
+                            if (message.audiences != null && message.hasOwnProperty("audiences")) {
+                                if (!Array.isArray(message.audiences))
+                                    return "audiences: array expected";
+                                for (var i = 0; i < message.audiences.length; ++i)
+                                    if (!$util.isString(message.audiences[i]))
+                                        return "audiences: string[] expected";
+                            }
+                            if (message.presenter != null && message.hasOwnProperty("presenter"))
+                                if (!$util.isString(message.presenter))
+                                    return "presenter: string expected";
+                            if (message.claims != null && message.hasOwnProperty("claims")) {
+                                var error = $root.google.protobuf.Struct.verify(message.claims);
+                                if (error)
+                                    return "claims." + error;
+                            }
+                            if (message.accessLevels != null && message.hasOwnProperty("accessLevels")) {
+                                if (!Array.isArray(message.accessLevels))
+                                    return "accessLevels: array expected";
+                                for (var i = 0; i < message.accessLevels.length; ++i)
+                                    if (!$util.isString(message.accessLevels[i]))
+                                        return "accessLevels: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Auth message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.rpc.context.AttributeContext.Auth} Auth
+                         */
+                        Auth.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.rpc.context.AttributeContext.Auth)
+                                return object;
+                            var message = new $root.google.rpc.context.AttributeContext.Auth();
+                            if (object.principal != null)
+                                message.principal = String(object.principal);
+                            if (object.audiences) {
+                                if (!Array.isArray(object.audiences))
+                                    throw TypeError(".google.rpc.context.AttributeContext.Auth.audiences: array expected");
+                                message.audiences = [];
+                                for (var i = 0; i < object.audiences.length; ++i)
+                                    message.audiences[i] = String(object.audiences[i]);
+                            }
+                            if (object.presenter != null)
+                                message.presenter = String(object.presenter);
+                            if (object.claims != null) {
+                                if (typeof object.claims !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Auth.claims: object expected");
+                                message.claims = $root.google.protobuf.Struct.fromObject(object.claims);
+                            }
+                            if (object.accessLevels) {
+                                if (!Array.isArray(object.accessLevels))
+                                    throw TypeError(".google.rpc.context.AttributeContext.Auth.accessLevels: array expected");
+                                message.accessLevels = [];
+                                for (var i = 0; i < object.accessLevels.length; ++i)
+                                    message.accessLevels[i] = String(object.accessLevels[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Auth message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.Auth} message Auth
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Auth.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.audiences = [];
+                                object.accessLevels = [];
+                            }
+                            if (options.defaults) {
+                                object.principal = "";
+                                object.presenter = "";
+                                object.claims = null;
+                            }
+                            if (message.principal != null && message.hasOwnProperty("principal"))
+                                object.principal = message.principal;
+                            if (message.audiences && message.audiences.length) {
+                                object.audiences = [];
+                                for (var j = 0; j < message.audiences.length; ++j)
+                                    object.audiences[j] = message.audiences[j];
+                            }
+                            if (message.presenter != null && message.hasOwnProperty("presenter"))
+                                object.presenter = message.presenter;
+                            if (message.claims != null && message.hasOwnProperty("claims"))
+                                object.claims = $root.google.protobuf.Struct.toObject(message.claims, options);
+                            if (message.accessLevels && message.accessLevels.length) {
+                                object.accessLevels = [];
+                                for (var j = 0; j < message.accessLevels.length; ++j)
+                                    object.accessLevels[j] = message.accessLevels[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Auth to JSON.
+                         * @function toJSON
+                         * @memberof google.rpc.context.AttributeContext.Auth
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Auth.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Auth;
+                    })();
+    
+                    AttributeContext.Request = (function() {
+    
+                        /**
+                         * Properties of a Request.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @interface IRequest
+                         * @property {string|null} [id] Request id
+                         * @property {string|null} [method] Request method
+                         * @property {Object.<string,string>|null} [headers] Request headers
+                         * @property {string|null} [path] Request path
+                         * @property {string|null} [host] Request host
+                         * @property {string|null} [scheme] Request scheme
+                         * @property {string|null} [query] Request query
+                         * @property {google.protobuf.ITimestamp|null} [time] Request time
+                         * @property {number|Long|null} [size] Request size
+                         * @property {string|null} [protocol] Request protocol
+                         * @property {string|null} [reason] Request reason
+                         * @property {google.rpc.context.AttributeContext.IAuth|null} [auth] Request auth
+                         */
+    
+                        /**
+                         * Constructs a new Request.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @classdesc Represents a Request.
+                         * @implements IRequest
+                         * @constructor
+                         * @param {google.rpc.context.AttributeContext.IRequest=} [properties] Properties to set
+                         */
+                        function Request(properties) {
+                            this.headers = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Request id.
+                         * @member {string} id
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.id = "";
+    
+                        /**
+                         * Request method.
+                         * @member {string} method
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.method = "";
+    
+                        /**
+                         * Request headers.
+                         * @member {Object.<string,string>} headers
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.headers = $util.emptyObject;
+    
+                        /**
+                         * Request path.
+                         * @member {string} path
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.path = "";
+    
+                        /**
+                         * Request host.
+                         * @member {string} host
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.host = "";
+    
+                        /**
+                         * Request scheme.
+                         * @member {string} scheme
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.scheme = "";
+    
+                        /**
+                         * Request query.
+                         * @member {string} query
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.query = "";
+    
+                        /**
+                         * Request time.
+                         * @member {google.protobuf.ITimestamp|null|undefined} time
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.time = null;
+    
+                        /**
+                         * Request size.
+                         * @member {number|Long} size
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.size = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Request protocol.
+                         * @member {string} protocol
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.protocol = "";
+    
+                        /**
+                         * Request reason.
+                         * @member {string} reason
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.reason = "";
+    
+                        /**
+                         * Request auth.
+                         * @member {google.rpc.context.AttributeContext.IAuth|null|undefined} auth
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         */
+                        Request.prototype.auth = null;
+    
+                        /**
+                         * Creates a new Request instance using the specified properties.
+                         * @function create
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IRequest=} [properties] Properties to set
+                         * @returns {google.rpc.context.AttributeContext.Request} Request instance
+                         */
+                        Request.create = function create(properties) {
+                            return new Request(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Request message. Does not implicitly {@link google.rpc.context.AttributeContext.Request.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IRequest} message Request message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Request.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.method != null && Object.hasOwnProperty.call(message, "method"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.method);
+                            if (message.headers != null && Object.hasOwnProperty.call(message, "headers"))
+                                for (var keys = Object.keys(message.headers), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.headers[keys[i]]).ldelim();
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.path);
+                            if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.host);
+                            if (message.scheme != null && Object.hasOwnProperty.call(message, "scheme"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.scheme);
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.query);
+                            if (message.time != null && Object.hasOwnProperty.call(message, "time"))
+                                $root.google.protobuf.Timestamp.encode(message.time, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.size != null && Object.hasOwnProperty.call(message, "size"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.size);
+                            if (message.protocol != null && Object.hasOwnProperty.call(message, "protocol"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.protocol);
+                            if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.reason);
+                            if (message.auth != null && Object.hasOwnProperty.call(message, "auth"))
+                                $root.google.rpc.context.AttributeContext.Auth.encode(message.auth, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Request message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Request.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IRequest} message Request message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Request.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Request message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.rpc.context.AttributeContext.Request} Request
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Request.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.context.AttributeContext.Request(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.id = reader.string();
+                                    break;
+                                case 2:
+                                    message.method = reader.string();
+                                    break;
+                                case 3:
+                                    if (message.headers === $util.emptyObject)
+                                        message.headers = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.headers[key] = value;
+                                    break;
+                                case 4:
+                                    message.path = reader.string();
+                                    break;
+                                case 5:
+                                    message.host = reader.string();
+                                    break;
+                                case 6:
+                                    message.scheme = reader.string();
+                                    break;
+                                case 7:
+                                    message.query = reader.string();
+                                    break;
+                                case 9:
+                                    message.time = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.size = reader.int64();
+                                    break;
+                                case 11:
+                                    message.protocol = reader.string();
+                                    break;
+                                case 12:
+                                    message.reason = reader.string();
+                                    break;
+                                case 13:
+                                    message.auth = $root.google.rpc.context.AttributeContext.Auth.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Request message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.rpc.context.AttributeContext.Request} Request
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Request.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Request message.
+                         * @function verify
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Request.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.method != null && message.hasOwnProperty("method"))
+                                if (!$util.isString(message.method))
+                                    return "method: string expected";
+                            if (message.headers != null && message.hasOwnProperty("headers")) {
+                                if (!$util.isObject(message.headers))
+                                    return "headers: object expected";
+                                var key = Object.keys(message.headers);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.headers[key[i]]))
+                                        return "headers: string{k:string} expected";
+                            }
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            if (message.host != null && message.hasOwnProperty("host"))
+                                if (!$util.isString(message.host))
+                                    return "host: string expected";
+                            if (message.scheme != null && message.hasOwnProperty("scheme"))
+                                if (!$util.isString(message.scheme))
+                                    return "scheme: string expected";
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            if (message.time != null && message.hasOwnProperty("time")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.time);
+                                if (error)
+                                    return "time." + error;
+                            }
+                            if (message.size != null && message.hasOwnProperty("size"))
+                                if (!$util.isInteger(message.size) && !(message.size && $util.isInteger(message.size.low) && $util.isInteger(message.size.high)))
+                                    return "size: integer|Long expected";
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                if (!$util.isString(message.protocol))
+                                    return "protocol: string expected";
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                if (!$util.isString(message.reason))
+                                    return "reason: string expected";
+                            if (message.auth != null && message.hasOwnProperty("auth")) {
+                                var error = $root.google.rpc.context.AttributeContext.Auth.verify(message.auth);
+                                if (error)
+                                    return "auth." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Request message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.rpc.context.AttributeContext.Request} Request
+                         */
+                        Request.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.rpc.context.AttributeContext.Request)
+                                return object;
+                            var message = new $root.google.rpc.context.AttributeContext.Request();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.method != null)
+                                message.method = String(object.method);
+                            if (object.headers) {
+                                if (typeof object.headers !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Request.headers: object expected");
+                                message.headers = {};
+                                for (var keys = Object.keys(object.headers), i = 0; i < keys.length; ++i)
+                                    message.headers[keys[i]] = String(object.headers[keys[i]]);
+                            }
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            if (object.host != null)
+                                message.host = String(object.host);
+                            if (object.scheme != null)
+                                message.scheme = String(object.scheme);
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            if (object.time != null) {
+                                if (typeof object.time !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Request.time: object expected");
+                                message.time = $root.google.protobuf.Timestamp.fromObject(object.time);
+                            }
+                            if (object.size != null)
+                                if ($util.Long)
+                                    (message.size = $util.Long.fromValue(object.size)).unsigned = false;
+                                else if (typeof object.size === "string")
+                                    message.size = parseInt(object.size, 10);
+                                else if (typeof object.size === "number")
+                                    message.size = object.size;
+                                else if (typeof object.size === "object")
+                                    message.size = new $util.LongBits(object.size.low >>> 0, object.size.high >>> 0).toNumber();
+                            if (object.protocol != null)
+                                message.protocol = String(object.protocol);
+                            if (object.reason != null)
+                                message.reason = String(object.reason);
+                            if (object.auth != null) {
+                                if (typeof object.auth !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Request.auth: object expected");
+                                message.auth = $root.google.rpc.context.AttributeContext.Auth.fromObject(object.auth);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Request message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.Request} message Request
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Request.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.headers = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.method = "";
+                                object.path = "";
+                                object.host = "";
+                                object.scheme = "";
+                                object.query = "";
+                                object.time = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.size = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.size = options.longs === String ? "0" : 0;
+                                object.protocol = "";
+                                object.reason = "";
+                                object.auth = null;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.method != null && message.hasOwnProperty("method"))
+                                object.method = message.method;
+                            var keys2;
+                            if (message.headers && (keys2 = Object.keys(message.headers)).length) {
+                                object.headers = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.headers[keys2[j]] = message.headers[keys2[j]];
+                            }
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            if (message.host != null && message.hasOwnProperty("host"))
+                                object.host = message.host;
+                            if (message.scheme != null && message.hasOwnProperty("scheme"))
+                                object.scheme = message.scheme;
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            if (message.time != null && message.hasOwnProperty("time"))
+                                object.time = $root.google.protobuf.Timestamp.toObject(message.time, options);
+                            if (message.size != null && message.hasOwnProperty("size"))
+                                if (typeof message.size === "number")
+                                    object.size = options.longs === String ? String(message.size) : message.size;
+                                else
+                                    object.size = options.longs === String ? $util.Long.prototype.toString.call(message.size) : options.longs === Number ? new $util.LongBits(message.size.low >>> 0, message.size.high >>> 0).toNumber() : message.size;
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                object.protocol = message.protocol;
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                object.reason = message.reason;
+                            if (message.auth != null && message.hasOwnProperty("auth"))
+                                object.auth = $root.google.rpc.context.AttributeContext.Auth.toObject(message.auth, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Request to JSON.
+                         * @function toJSON
+                         * @memberof google.rpc.context.AttributeContext.Request
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Request.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Request;
+                    })();
+    
+                    AttributeContext.Response = (function() {
+    
+                        /**
+                         * Properties of a Response.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @interface IResponse
+                         * @property {number|Long|null} [code] Response code
+                         * @property {number|Long|null} [size] Response size
+                         * @property {Object.<string,string>|null} [headers] Response headers
+                         * @property {google.protobuf.ITimestamp|null} [time] Response time
+                         * @property {google.protobuf.IDuration|null} [backendLatency] Response backendLatency
+                         */
+    
+                        /**
+                         * Constructs a new Response.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @classdesc Represents a Response.
+                         * @implements IResponse
+                         * @constructor
+                         * @param {google.rpc.context.AttributeContext.IResponse=} [properties] Properties to set
+                         */
+                        function Response(properties) {
+                            this.headers = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Response code.
+                         * @member {number|Long} code
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @instance
+                         */
+                        Response.prototype.code = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Response size.
+                         * @member {number|Long} size
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @instance
+                         */
+                        Response.prototype.size = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Response headers.
+                         * @member {Object.<string,string>} headers
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @instance
+                         */
+                        Response.prototype.headers = $util.emptyObject;
+    
+                        /**
+                         * Response time.
+                         * @member {google.protobuf.ITimestamp|null|undefined} time
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @instance
+                         */
+                        Response.prototype.time = null;
+    
+                        /**
+                         * Response backendLatency.
+                         * @member {google.protobuf.IDuration|null|undefined} backendLatency
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @instance
+                         */
+                        Response.prototype.backendLatency = null;
+    
+                        /**
+                         * Creates a new Response instance using the specified properties.
+                         * @function create
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IResponse=} [properties] Properties to set
+                         * @returns {google.rpc.context.AttributeContext.Response} Response instance
+                         */
+                        Response.create = function create(properties) {
+                            return new Response(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Response message. Does not implicitly {@link google.rpc.context.AttributeContext.Response.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IResponse} message Response message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Response.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.code);
+                            if (message.size != null && Object.hasOwnProperty.call(message, "size"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.size);
+                            if (message.headers != null && Object.hasOwnProperty.call(message, "headers"))
+                                for (var keys = Object.keys(message.headers), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.headers[keys[i]]).ldelim();
+                            if (message.time != null && Object.hasOwnProperty.call(message, "time"))
+                                $root.google.protobuf.Timestamp.encode(message.time, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.backendLatency != null && Object.hasOwnProperty.call(message, "backendLatency"))
+                                $root.google.protobuf.Duration.encode(message.backendLatency, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Response message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Response.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IResponse} message Response message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Response.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Response message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.rpc.context.AttributeContext.Response} Response
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Response.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.context.AttributeContext.Response(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.code = reader.int64();
+                                    break;
+                                case 2:
+                                    message.size = reader.int64();
+                                    break;
+                                case 3:
+                                    if (message.headers === $util.emptyObject)
+                                        message.headers = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.headers[key] = value;
+                                    break;
+                                case 4:
+                                    message.time = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.backendLatency = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Response message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.rpc.context.AttributeContext.Response} Response
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Response.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Response message.
+                         * @function verify
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Response.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                if (!$util.isInteger(message.code) && !(message.code && $util.isInteger(message.code.low) && $util.isInteger(message.code.high)))
+                                    return "code: integer|Long expected";
+                            if (message.size != null && message.hasOwnProperty("size"))
+                                if (!$util.isInteger(message.size) && !(message.size && $util.isInteger(message.size.low) && $util.isInteger(message.size.high)))
+                                    return "size: integer|Long expected";
+                            if (message.headers != null && message.hasOwnProperty("headers")) {
+                                if (!$util.isObject(message.headers))
+                                    return "headers: object expected";
+                                var key = Object.keys(message.headers);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.headers[key[i]]))
+                                        return "headers: string{k:string} expected";
+                            }
+                            if (message.time != null && message.hasOwnProperty("time")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.time);
+                                if (error)
+                                    return "time." + error;
+                            }
+                            if (message.backendLatency != null && message.hasOwnProperty("backendLatency")) {
+                                var error = $root.google.protobuf.Duration.verify(message.backendLatency);
+                                if (error)
+                                    return "backendLatency." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Response message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.rpc.context.AttributeContext.Response} Response
+                         */
+                        Response.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.rpc.context.AttributeContext.Response)
+                                return object;
+                            var message = new $root.google.rpc.context.AttributeContext.Response();
+                            if (object.code != null)
+                                if ($util.Long)
+                                    (message.code = $util.Long.fromValue(object.code)).unsigned = false;
+                                else if (typeof object.code === "string")
+                                    message.code = parseInt(object.code, 10);
+                                else if (typeof object.code === "number")
+                                    message.code = object.code;
+                                else if (typeof object.code === "object")
+                                    message.code = new $util.LongBits(object.code.low >>> 0, object.code.high >>> 0).toNumber();
+                            if (object.size != null)
+                                if ($util.Long)
+                                    (message.size = $util.Long.fromValue(object.size)).unsigned = false;
+                                else if (typeof object.size === "string")
+                                    message.size = parseInt(object.size, 10);
+                                else if (typeof object.size === "number")
+                                    message.size = object.size;
+                                else if (typeof object.size === "object")
+                                    message.size = new $util.LongBits(object.size.low >>> 0, object.size.high >>> 0).toNumber();
+                            if (object.headers) {
+                                if (typeof object.headers !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Response.headers: object expected");
+                                message.headers = {};
+                                for (var keys = Object.keys(object.headers), i = 0; i < keys.length; ++i)
+                                    message.headers[keys[i]] = String(object.headers[keys[i]]);
+                            }
+                            if (object.time != null) {
+                                if (typeof object.time !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Response.time: object expected");
+                                message.time = $root.google.protobuf.Timestamp.fromObject(object.time);
+                            }
+                            if (object.backendLatency != null) {
+                                if (typeof object.backendLatency !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Response.backendLatency: object expected");
+                                message.backendLatency = $root.google.protobuf.Duration.fromObject(object.backendLatency);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Response message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.Response} message Response
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Response.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.headers = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.code = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.code = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.size = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.size = options.longs === String ? "0" : 0;
+                                object.time = null;
+                                object.backendLatency = null;
+                            }
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                if (typeof message.code === "number")
+                                    object.code = options.longs === String ? String(message.code) : message.code;
+                                else
+                                    object.code = options.longs === String ? $util.Long.prototype.toString.call(message.code) : options.longs === Number ? new $util.LongBits(message.code.low >>> 0, message.code.high >>> 0).toNumber() : message.code;
+                            if (message.size != null && message.hasOwnProperty("size"))
+                                if (typeof message.size === "number")
+                                    object.size = options.longs === String ? String(message.size) : message.size;
+                                else
+                                    object.size = options.longs === String ? $util.Long.prototype.toString.call(message.size) : options.longs === Number ? new $util.LongBits(message.size.low >>> 0, message.size.high >>> 0).toNumber() : message.size;
+                            var keys2;
+                            if (message.headers && (keys2 = Object.keys(message.headers)).length) {
+                                object.headers = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.headers[keys2[j]] = message.headers[keys2[j]];
+                            }
+                            if (message.time != null && message.hasOwnProperty("time"))
+                                object.time = $root.google.protobuf.Timestamp.toObject(message.time, options);
+                            if (message.backendLatency != null && message.hasOwnProperty("backendLatency"))
+                                object.backendLatency = $root.google.protobuf.Duration.toObject(message.backendLatency, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Response to JSON.
+                         * @function toJSON
+                         * @memberof google.rpc.context.AttributeContext.Response
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Response.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Response;
+                    })();
+    
+                    AttributeContext.Resource = (function() {
+    
+                        /**
+                         * Properties of a Resource.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @interface IResource
+                         * @property {string|null} [service] Resource service
+                         * @property {string|null} [name] Resource name
+                         * @property {string|null} [type] Resource type
+                         * @property {Object.<string,string>|null} [labels] Resource labels
+                         * @property {string|null} [uid] Resource uid
+                         * @property {Object.<string,string>|null} [annotations] Resource annotations
+                         * @property {string|null} [displayName] Resource displayName
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Resource createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Resource updateTime
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] Resource deleteTime
+                         * @property {string|null} [etag] Resource etag
+                         * @property {string|null} [location] Resource location
+                         */
+    
+                        /**
+                         * Constructs a new Resource.
+                         * @memberof google.rpc.context.AttributeContext
+                         * @classdesc Represents a Resource.
+                         * @implements IResource
+                         * @constructor
+                         * @param {google.rpc.context.AttributeContext.IResource=} [properties] Properties to set
+                         */
+                        function Resource(properties) {
+                            this.labels = {};
+                            this.annotations = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Resource service.
+                         * @member {string} service
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.service = "";
+    
+                        /**
+                         * Resource name.
+                         * @member {string} name
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.name = "";
+    
+                        /**
+                         * Resource type.
+                         * @member {string} type
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.type = "";
+    
+                        /**
+                         * Resource labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Resource uid.
+                         * @member {string} uid
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.uid = "";
+    
+                        /**
+                         * Resource annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * Resource displayName.
+                         * @member {string} displayName
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.displayName = "";
+    
+                        /**
+                         * Resource createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.createTime = null;
+    
+                        /**
+                         * Resource updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.updateTime = null;
+    
+                        /**
+                         * Resource deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.deleteTime = null;
+    
+                        /**
+                         * Resource etag.
+                         * @member {string} etag
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.etag = "";
+    
+                        /**
+                         * Resource location.
+                         * @member {string} location
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         */
+                        Resource.prototype.location = "";
+    
+                        /**
+                         * Creates a new Resource instance using the specified properties.
+                         * @function create
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IResource=} [properties] Properties to set
+                         * @returns {google.rpc.context.AttributeContext.Resource} Resource instance
+                         */
+                        Resource.create = function create(properties) {
+                            return new Resource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Resource message. Does not implicitly {@link google.rpc.context.AttributeContext.Resource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IResource} message Resource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Resource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.uid);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.displayName);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.etag);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Resource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.IResource} message Resource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Resource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Resource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.rpc.context.AttributeContext.Resource} Resource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Resource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.context.AttributeContext.Resource(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.service = reader.string();
+                                    break;
+                                case 2:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.type = reader.string();
+                                    break;
+                                case 4:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 5:
+                                    message.uid = reader.string();
+                                    break;
+                                case 6:
+                                    if (message.annotations === $util.emptyObject)
+                                        message.annotations = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.annotations[key] = value;
+                                    break;
+                                case 7:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 8:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    message.etag = reader.string();
+                                    break;
+                                case 12:
+                                    message.location = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Resource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.rpc.context.AttributeContext.Resource} Resource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Resource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Resource message.
+                         * @function verify
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Resource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.rpc.context.AttributeContext.Resource} Resource
+                         */
+                        Resource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.rpc.context.AttributeContext.Resource)
+                                return object;
+                            var message = new $root.google.rpc.context.AttributeContext.Resource();
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Resource.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Resource.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Resource.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Resource.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.rpc.context.AttributeContext.Resource.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @static
+                         * @param {google.rpc.context.AttributeContext.Resource} message Resource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Resource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.annotations = {};
+                            }
+                            if (options.defaults) {
+                                object.service = "";
+                                object.name = "";
+                                object.type = "";
+                                object.uid = "";
+                                object.displayName = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.deleteTime = null;
+                                object.etag = "";
+                                object.location = "";
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Resource to JSON.
+                         * @function toJSON
+                         * @memberof google.rpc.context.AttributeContext.Resource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Resource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Resource;
+                    })();
+    
+                    return AttributeContext;
+                })();
+    
+                return context;
             })();
     
             return rpc;

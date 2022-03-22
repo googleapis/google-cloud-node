@@ -267,7 +267,6 @@ describe('v1.QuotaControllerClient', () => {
         new protos.google.api.servicecontrol.v1.AllocateQuotaRequest()
       );
       request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.allocateQuota(request), expectedError);

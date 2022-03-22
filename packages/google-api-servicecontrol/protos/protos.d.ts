@@ -6554,6 +6554,586 @@ export namespace google {
                     }
                 }
             }
+
+            /** Namespace v2. */
+            namespace v2 {
+
+                /** Represents a ServiceController */
+                class ServiceController extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ServiceController service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ServiceController service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ServiceController;
+
+                    /**
+                     * Calls Check.
+                     * @param request CheckRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CheckResponse
+                     */
+                    public check(request: google.api.servicecontrol.v2.ICheckRequest, callback: google.api.servicecontrol.v2.ServiceController.CheckCallback): void;
+
+                    /**
+                     * Calls Check.
+                     * @param request CheckRequest message or plain object
+                     * @returns Promise
+                     */
+                    public check(request: google.api.servicecontrol.v2.ICheckRequest): Promise<google.api.servicecontrol.v2.CheckResponse>;
+
+                    /**
+                     * Calls Report.
+                     * @param request ReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReportResponse
+                     */
+                    public report(request: google.api.servicecontrol.v2.IReportRequest, callback: google.api.servicecontrol.v2.ServiceController.ReportCallback): void;
+
+                    /**
+                     * Calls Report.
+                     * @param request ReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public report(request: google.api.servicecontrol.v2.IReportRequest): Promise<google.api.servicecontrol.v2.ReportResponse>;
+                }
+
+                namespace ServiceController {
+
+                    /**
+                     * Callback as used by {@link google.api.servicecontrol.v2.ServiceController#check}.
+                     * @param error Error, if any
+                     * @param [response] CheckResponse
+                     */
+                    type CheckCallback = (error: (Error|null), response?: google.api.servicecontrol.v2.CheckResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.api.servicecontrol.v2.ServiceController#report}.
+                     * @param error Error, if any
+                     * @param [response] ReportResponse
+                     */
+                    type ReportCallback = (error: (Error|null), response?: google.api.servicecontrol.v2.ReportResponse) => void;
+                }
+
+                /** Properties of a CheckRequest. */
+                interface ICheckRequest {
+
+                    /** CheckRequest serviceName */
+                    serviceName?: (string|null);
+
+                    /** CheckRequest serviceConfigId */
+                    serviceConfigId?: (string|null);
+
+                    /** CheckRequest attributes */
+                    attributes?: (google.rpc.context.IAttributeContext|null);
+
+                    /** CheckRequest resources */
+                    resources?: (google.api.servicecontrol.v2.IResourceInfo[]|null);
+
+                    /** CheckRequest flags */
+                    flags?: (string|null);
+                }
+
+                /** Represents a CheckRequest. */
+                class CheckRequest implements ICheckRequest {
+
+                    /**
+                     * Constructs a new CheckRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.servicecontrol.v2.ICheckRequest);
+
+                    /** CheckRequest serviceName. */
+                    public serviceName: string;
+
+                    /** CheckRequest serviceConfigId. */
+                    public serviceConfigId: string;
+
+                    /** CheckRequest attributes. */
+                    public attributes?: (google.rpc.context.IAttributeContext|null);
+
+                    /** CheckRequest resources. */
+                    public resources: google.api.servicecontrol.v2.IResourceInfo[];
+
+                    /** CheckRequest flags. */
+                    public flags: string;
+
+                    /**
+                     * Creates a new CheckRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckRequest instance
+                     */
+                    public static create(properties?: google.api.servicecontrol.v2.ICheckRequest): google.api.servicecontrol.v2.CheckRequest;
+
+                    /**
+                     * Encodes the specified CheckRequest message. Does not implicitly {@link google.api.servicecontrol.v2.CheckRequest.verify|verify} messages.
+                     * @param message CheckRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.servicecontrol.v2.ICheckRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckRequest message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.CheckRequest.verify|verify} messages.
+                     * @param message CheckRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.servicecontrol.v2.ICheckRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.servicecontrol.v2.CheckRequest;
+
+                    /**
+                     * Decodes a CheckRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.servicecontrol.v2.CheckRequest;
+
+                    /**
+                     * Verifies a CheckRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.servicecontrol.v2.CheckRequest;
+
+                    /**
+                     * Creates a plain object from a CheckRequest message. Also converts values to other types if specified.
+                     * @param message CheckRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.servicecontrol.v2.CheckRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ResourceInfo. */
+                interface IResourceInfo {
+
+                    /** ResourceInfo name */
+                    name?: (string|null);
+
+                    /** ResourceInfo type */
+                    type?: (string|null);
+
+                    /** ResourceInfo permission */
+                    permission?: (string|null);
+
+                    /** ResourceInfo container */
+                    container?: (string|null);
+
+                    /** ResourceInfo location */
+                    location?: (string|null);
+                }
+
+                /** Represents a ResourceInfo. */
+                class ResourceInfo implements IResourceInfo {
+
+                    /**
+                     * Constructs a new ResourceInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.servicecontrol.v2.IResourceInfo);
+
+                    /** ResourceInfo name. */
+                    public name: string;
+
+                    /** ResourceInfo type. */
+                    public type: string;
+
+                    /** ResourceInfo permission. */
+                    public permission: string;
+
+                    /** ResourceInfo container. */
+                    public container: string;
+
+                    /** ResourceInfo location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new ResourceInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceInfo instance
+                     */
+                    public static create(properties?: google.api.servicecontrol.v2.IResourceInfo): google.api.servicecontrol.v2.ResourceInfo;
+
+                    /**
+                     * Encodes the specified ResourceInfo message. Does not implicitly {@link google.api.servicecontrol.v2.ResourceInfo.verify|verify} messages.
+                     * @param message ResourceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.servicecontrol.v2.IResourceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceInfo message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.ResourceInfo.verify|verify} messages.
+                     * @param message ResourceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.servicecontrol.v2.IResourceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.servicecontrol.v2.ResourceInfo;
+
+                    /**
+                     * Decodes a ResourceInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.servicecontrol.v2.ResourceInfo;
+
+                    /**
+                     * Verifies a ResourceInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.servicecontrol.v2.ResourceInfo;
+
+                    /**
+                     * Creates a plain object from a ResourceInfo message. Also converts values to other types if specified.
+                     * @param message ResourceInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.servicecontrol.v2.ResourceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CheckResponse. */
+                interface ICheckResponse {
+
+                    /** CheckResponse status */
+                    status?: (google.rpc.IStatus|null);
+
+                    /** CheckResponse headers */
+                    headers?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a CheckResponse. */
+                class CheckResponse implements ICheckResponse {
+
+                    /**
+                     * Constructs a new CheckResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.servicecontrol.v2.ICheckResponse);
+
+                    /** CheckResponse status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /** CheckResponse headers. */
+                    public headers: { [k: string]: string };
+
+                    /**
+                     * Creates a new CheckResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckResponse instance
+                     */
+                    public static create(properties?: google.api.servicecontrol.v2.ICheckResponse): google.api.servicecontrol.v2.CheckResponse;
+
+                    /**
+                     * Encodes the specified CheckResponse message. Does not implicitly {@link google.api.servicecontrol.v2.CheckResponse.verify|verify} messages.
+                     * @param message CheckResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.servicecontrol.v2.ICheckResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckResponse message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.CheckResponse.verify|verify} messages.
+                     * @param message CheckResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.servicecontrol.v2.ICheckResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.servicecontrol.v2.CheckResponse;
+
+                    /**
+                     * Decodes a CheckResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.servicecontrol.v2.CheckResponse;
+
+                    /**
+                     * Verifies a CheckResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.servicecontrol.v2.CheckResponse;
+
+                    /**
+                     * Creates a plain object from a CheckResponse message. Also converts values to other types if specified.
+                     * @param message CheckResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.servicecontrol.v2.CheckResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ReportRequest. */
+                interface IReportRequest {
+
+                    /** ReportRequest serviceName */
+                    serviceName?: (string|null);
+
+                    /** ReportRequest serviceConfigId */
+                    serviceConfigId?: (string|null);
+
+                    /** ReportRequest operations */
+                    operations?: (google.rpc.context.IAttributeContext[]|null);
+                }
+
+                /** Represents a ReportRequest. */
+                class ReportRequest implements IReportRequest {
+
+                    /**
+                     * Constructs a new ReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.servicecontrol.v2.IReportRequest);
+
+                    /** ReportRequest serviceName. */
+                    public serviceName: string;
+
+                    /** ReportRequest serviceConfigId. */
+                    public serviceConfigId: string;
+
+                    /** ReportRequest operations. */
+                    public operations: google.rpc.context.IAttributeContext[];
+
+                    /**
+                     * Creates a new ReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportRequest instance
+                     */
+                    public static create(properties?: google.api.servicecontrol.v2.IReportRequest): google.api.servicecontrol.v2.ReportRequest;
+
+                    /**
+                     * Encodes the specified ReportRequest message. Does not implicitly {@link google.api.servicecontrol.v2.ReportRequest.verify|verify} messages.
+                     * @param message ReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.servicecontrol.v2.IReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportRequest message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.ReportRequest.verify|verify} messages.
+                     * @param message ReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.servicecontrol.v2.IReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.servicecontrol.v2.ReportRequest;
+
+                    /**
+                     * Decodes a ReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.servicecontrol.v2.ReportRequest;
+
+                    /**
+                     * Verifies a ReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.servicecontrol.v2.ReportRequest;
+
+                    /**
+                     * Creates a plain object from a ReportRequest message. Also converts values to other types if specified.
+                     * @param message ReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.servicecontrol.v2.ReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ReportResponse. */
+                interface IReportResponse {
+                }
+
+                /** Represents a ReportResponse. */
+                class ReportResponse implements IReportResponse {
+
+                    /**
+                     * Constructs a new ReportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.servicecontrol.v2.IReportResponse);
+
+                    /**
+                     * Creates a new ReportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportResponse instance
+                     */
+                    public static create(properties?: google.api.servicecontrol.v2.IReportResponse): google.api.servicecontrol.v2.ReportResponse;
+
+                    /**
+                     * Encodes the specified ReportResponse message. Does not implicitly {@link google.api.servicecontrol.v2.ReportResponse.verify|verify} messages.
+                     * @param message ReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.servicecontrol.v2.IReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportResponse message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.ReportResponse.verify|verify} messages.
+                     * @param message ReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.servicecontrol.v2.IReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.servicecontrol.v2.ReportResponse;
+
+                    /**
+                     * Decodes a ReportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.servicecontrol.v2.ReportResponse;
+
+                    /**
+                     * Verifies a ReportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.servicecontrol.v2.ReportResponse;
+
+                    /**
+                     * Creates a plain object from a ReportResponse message. Also converts values to other types if specified.
+                     * @param message ReportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.servicecontrol.v2.ReportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
         }
 
         /** Properties of a Distribution. */
@@ -7728,6 +8308,907 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+        }
+
+        /** Namespace context. */
+        namespace context {
+
+            /** Properties of an AttributeContext. */
+            interface IAttributeContext {
+
+                /** AttributeContext origin */
+                origin?: (google.rpc.context.AttributeContext.IPeer|null);
+
+                /** AttributeContext source */
+                source?: (google.rpc.context.AttributeContext.IPeer|null);
+
+                /** AttributeContext destination */
+                destination?: (google.rpc.context.AttributeContext.IPeer|null);
+
+                /** AttributeContext request */
+                request?: (google.rpc.context.AttributeContext.IRequest|null);
+
+                /** AttributeContext response */
+                response?: (google.rpc.context.AttributeContext.IResponse|null);
+
+                /** AttributeContext resource */
+                resource?: (google.rpc.context.AttributeContext.IResource|null);
+
+                /** AttributeContext api */
+                api?: (google.rpc.context.AttributeContext.IApi|null);
+
+                /** AttributeContext extensions */
+                extensions?: (google.protobuf.IAny[]|null);
+            }
+
+            /** Represents an AttributeContext. */
+            class AttributeContext implements IAttributeContext {
+
+                /**
+                 * Constructs a new AttributeContext.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.rpc.context.IAttributeContext);
+
+                /** AttributeContext origin. */
+                public origin?: (google.rpc.context.AttributeContext.IPeer|null);
+
+                /** AttributeContext source. */
+                public source?: (google.rpc.context.AttributeContext.IPeer|null);
+
+                /** AttributeContext destination. */
+                public destination?: (google.rpc.context.AttributeContext.IPeer|null);
+
+                /** AttributeContext request. */
+                public request?: (google.rpc.context.AttributeContext.IRequest|null);
+
+                /** AttributeContext response. */
+                public response?: (google.rpc.context.AttributeContext.IResponse|null);
+
+                /** AttributeContext resource. */
+                public resource?: (google.rpc.context.AttributeContext.IResource|null);
+
+                /** AttributeContext api. */
+                public api?: (google.rpc.context.AttributeContext.IApi|null);
+
+                /** AttributeContext extensions. */
+                public extensions: google.protobuf.IAny[];
+
+                /**
+                 * Creates a new AttributeContext instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AttributeContext instance
+                 */
+                public static create(properties?: google.rpc.context.IAttributeContext): google.rpc.context.AttributeContext;
+
+                /**
+                 * Encodes the specified AttributeContext message. Does not implicitly {@link google.rpc.context.AttributeContext.verify|verify} messages.
+                 * @param message AttributeContext message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.rpc.context.IAttributeContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AttributeContext message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.verify|verify} messages.
+                 * @param message AttributeContext message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.rpc.context.IAttributeContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AttributeContext message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AttributeContext
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.context.AttributeContext;
+
+                /**
+                 * Decodes an AttributeContext message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AttributeContext
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.context.AttributeContext;
+
+                /**
+                 * Verifies an AttributeContext message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AttributeContext message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AttributeContext
+                 */
+                public static fromObject(object: { [k: string]: any }): google.rpc.context.AttributeContext;
+
+                /**
+                 * Creates a plain object from an AttributeContext message. Also converts values to other types if specified.
+                 * @param message AttributeContext
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.rpc.context.AttributeContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AttributeContext to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace AttributeContext {
+
+                /** Properties of a Peer. */
+                interface IPeer {
+
+                    /** Peer ip */
+                    ip?: (string|null);
+
+                    /** Peer port */
+                    port?: (number|Long|string|null);
+
+                    /** Peer labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Peer principal */
+                    principal?: (string|null);
+
+                    /** Peer regionCode */
+                    regionCode?: (string|null);
+                }
+
+                /** Represents a Peer. */
+                class Peer implements IPeer {
+
+                    /**
+                     * Constructs a new Peer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.rpc.context.AttributeContext.IPeer);
+
+                    /** Peer ip. */
+                    public ip: string;
+
+                    /** Peer port. */
+                    public port: (number|Long|string);
+
+                    /** Peer labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Peer principal. */
+                    public principal: string;
+
+                    /** Peer regionCode. */
+                    public regionCode: string;
+
+                    /**
+                     * Creates a new Peer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Peer instance
+                     */
+                    public static create(properties?: google.rpc.context.AttributeContext.IPeer): google.rpc.context.AttributeContext.Peer;
+
+                    /**
+                     * Encodes the specified Peer message. Does not implicitly {@link google.rpc.context.AttributeContext.Peer.verify|verify} messages.
+                     * @param message Peer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.rpc.context.AttributeContext.IPeer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Peer message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Peer.verify|verify} messages.
+                     * @param message Peer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.rpc.context.AttributeContext.IPeer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Peer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Peer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.context.AttributeContext.Peer;
+
+                    /**
+                     * Decodes a Peer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Peer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.context.AttributeContext.Peer;
+
+                    /**
+                     * Verifies a Peer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Peer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Peer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.rpc.context.AttributeContext.Peer;
+
+                    /**
+                     * Creates a plain object from a Peer message. Also converts values to other types if specified.
+                     * @param message Peer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.rpc.context.AttributeContext.Peer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Peer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Api. */
+                interface IApi {
+
+                    /** Api service */
+                    service?: (string|null);
+
+                    /** Api operation */
+                    operation?: (string|null);
+
+                    /** Api protocol */
+                    protocol?: (string|null);
+
+                    /** Api version */
+                    version?: (string|null);
+                }
+
+                /** Represents an Api. */
+                class Api implements IApi {
+
+                    /**
+                     * Constructs a new Api.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.rpc.context.AttributeContext.IApi);
+
+                    /** Api service. */
+                    public service: string;
+
+                    /** Api operation. */
+                    public operation: string;
+
+                    /** Api protocol. */
+                    public protocol: string;
+
+                    /** Api version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new Api instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Api instance
+                     */
+                    public static create(properties?: google.rpc.context.AttributeContext.IApi): google.rpc.context.AttributeContext.Api;
+
+                    /**
+                     * Encodes the specified Api message. Does not implicitly {@link google.rpc.context.AttributeContext.Api.verify|verify} messages.
+                     * @param message Api message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.rpc.context.AttributeContext.IApi, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Api message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Api.verify|verify} messages.
+                     * @param message Api message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.rpc.context.AttributeContext.IApi, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Api message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Api
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.context.AttributeContext.Api;
+
+                    /**
+                     * Decodes an Api message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Api
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.context.AttributeContext.Api;
+
+                    /**
+                     * Verifies an Api message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Api message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Api
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.rpc.context.AttributeContext.Api;
+
+                    /**
+                     * Creates a plain object from an Api message. Also converts values to other types if specified.
+                     * @param message Api
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.rpc.context.AttributeContext.Api, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Api to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Auth. */
+                interface IAuth {
+
+                    /** Auth principal */
+                    principal?: (string|null);
+
+                    /** Auth audiences */
+                    audiences?: (string[]|null);
+
+                    /** Auth presenter */
+                    presenter?: (string|null);
+
+                    /** Auth claims */
+                    claims?: (google.protobuf.IStruct|null);
+
+                    /** Auth accessLevels */
+                    accessLevels?: (string[]|null);
+                }
+
+                /** Represents an Auth. */
+                class Auth implements IAuth {
+
+                    /**
+                     * Constructs a new Auth.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.rpc.context.AttributeContext.IAuth);
+
+                    /** Auth principal. */
+                    public principal: string;
+
+                    /** Auth audiences. */
+                    public audiences: string[];
+
+                    /** Auth presenter. */
+                    public presenter: string;
+
+                    /** Auth claims. */
+                    public claims?: (google.protobuf.IStruct|null);
+
+                    /** Auth accessLevels. */
+                    public accessLevels: string[];
+
+                    /**
+                     * Creates a new Auth instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Auth instance
+                     */
+                    public static create(properties?: google.rpc.context.AttributeContext.IAuth): google.rpc.context.AttributeContext.Auth;
+
+                    /**
+                     * Encodes the specified Auth message. Does not implicitly {@link google.rpc.context.AttributeContext.Auth.verify|verify} messages.
+                     * @param message Auth message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.rpc.context.AttributeContext.IAuth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Auth message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Auth.verify|verify} messages.
+                     * @param message Auth message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.rpc.context.AttributeContext.IAuth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Auth message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Auth
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.context.AttributeContext.Auth;
+
+                    /**
+                     * Decodes an Auth message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Auth
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.context.AttributeContext.Auth;
+
+                    /**
+                     * Verifies an Auth message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Auth message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Auth
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.rpc.context.AttributeContext.Auth;
+
+                    /**
+                     * Creates a plain object from an Auth message. Also converts values to other types if specified.
+                     * @param message Auth
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.rpc.context.AttributeContext.Auth, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Auth to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Request. */
+                interface IRequest {
+
+                    /** Request id */
+                    id?: (string|null);
+
+                    /** Request method */
+                    method?: (string|null);
+
+                    /** Request headers */
+                    headers?: ({ [k: string]: string }|null);
+
+                    /** Request path */
+                    path?: (string|null);
+
+                    /** Request host */
+                    host?: (string|null);
+
+                    /** Request scheme */
+                    scheme?: (string|null);
+
+                    /** Request query */
+                    query?: (string|null);
+
+                    /** Request time */
+                    time?: (google.protobuf.ITimestamp|null);
+
+                    /** Request size */
+                    size?: (number|Long|string|null);
+
+                    /** Request protocol */
+                    protocol?: (string|null);
+
+                    /** Request reason */
+                    reason?: (string|null);
+
+                    /** Request auth */
+                    auth?: (google.rpc.context.AttributeContext.IAuth|null);
+                }
+
+                /** Represents a Request. */
+                class Request implements IRequest {
+
+                    /**
+                     * Constructs a new Request.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.rpc.context.AttributeContext.IRequest);
+
+                    /** Request id. */
+                    public id: string;
+
+                    /** Request method. */
+                    public method: string;
+
+                    /** Request headers. */
+                    public headers: { [k: string]: string };
+
+                    /** Request path. */
+                    public path: string;
+
+                    /** Request host. */
+                    public host: string;
+
+                    /** Request scheme. */
+                    public scheme: string;
+
+                    /** Request query. */
+                    public query: string;
+
+                    /** Request time. */
+                    public time?: (google.protobuf.ITimestamp|null);
+
+                    /** Request size. */
+                    public size: (number|Long|string);
+
+                    /** Request protocol. */
+                    public protocol: string;
+
+                    /** Request reason. */
+                    public reason: string;
+
+                    /** Request auth. */
+                    public auth?: (google.rpc.context.AttributeContext.IAuth|null);
+
+                    /**
+                     * Creates a new Request instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Request instance
+                     */
+                    public static create(properties?: google.rpc.context.AttributeContext.IRequest): google.rpc.context.AttributeContext.Request;
+
+                    /**
+                     * Encodes the specified Request message. Does not implicitly {@link google.rpc.context.AttributeContext.Request.verify|verify} messages.
+                     * @param message Request message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.rpc.context.AttributeContext.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Request message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Request.verify|verify} messages.
+                     * @param message Request message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.rpc.context.AttributeContext.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Request message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Request
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.context.AttributeContext.Request;
+
+                    /**
+                     * Decodes a Request message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Request
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.context.AttributeContext.Request;
+
+                    /**
+                     * Verifies a Request message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Request message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Request
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.rpc.context.AttributeContext.Request;
+
+                    /**
+                     * Creates a plain object from a Request message. Also converts values to other types if specified.
+                     * @param message Request
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.rpc.context.AttributeContext.Request, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Request to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Response. */
+                interface IResponse {
+
+                    /** Response code */
+                    code?: (number|Long|string|null);
+
+                    /** Response size */
+                    size?: (number|Long|string|null);
+
+                    /** Response headers */
+                    headers?: ({ [k: string]: string }|null);
+
+                    /** Response time */
+                    time?: (google.protobuf.ITimestamp|null);
+
+                    /** Response backendLatency */
+                    backendLatency?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a Response. */
+                class Response implements IResponse {
+
+                    /**
+                     * Constructs a new Response.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.rpc.context.AttributeContext.IResponse);
+
+                    /** Response code. */
+                    public code: (number|Long|string);
+
+                    /** Response size. */
+                    public size: (number|Long|string);
+
+                    /** Response headers. */
+                    public headers: { [k: string]: string };
+
+                    /** Response time. */
+                    public time?: (google.protobuf.ITimestamp|null);
+
+                    /** Response backendLatency. */
+                    public backendLatency?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new Response instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Response instance
+                     */
+                    public static create(properties?: google.rpc.context.AttributeContext.IResponse): google.rpc.context.AttributeContext.Response;
+
+                    /**
+                     * Encodes the specified Response message. Does not implicitly {@link google.rpc.context.AttributeContext.Response.verify|verify} messages.
+                     * @param message Response message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.rpc.context.AttributeContext.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Response message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Response.verify|verify} messages.
+                     * @param message Response message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.rpc.context.AttributeContext.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Response message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Response
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.context.AttributeContext.Response;
+
+                    /**
+                     * Decodes a Response message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Response
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.context.AttributeContext.Response;
+
+                    /**
+                     * Verifies a Response message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Response message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Response
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.rpc.context.AttributeContext.Response;
+
+                    /**
+                     * Creates a plain object from a Response message. Also converts values to other types if specified.
+                     * @param message Response
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.rpc.context.AttributeContext.Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Response to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Resource. */
+                interface IResource {
+
+                    /** Resource service */
+                    service?: (string|null);
+
+                    /** Resource name */
+                    name?: (string|null);
+
+                    /** Resource type */
+                    type?: (string|null);
+
+                    /** Resource labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Resource uid */
+                    uid?: (string|null);
+
+                    /** Resource annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** Resource displayName */
+                    displayName?: (string|null);
+
+                    /** Resource createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Resource updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Resource deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Resource etag */
+                    etag?: (string|null);
+
+                    /** Resource location */
+                    location?: (string|null);
+                }
+
+                /** Represents a Resource. */
+                class Resource implements IResource {
+
+                    /**
+                     * Constructs a new Resource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.rpc.context.AttributeContext.IResource);
+
+                    /** Resource service. */
+                    public service: string;
+
+                    /** Resource name. */
+                    public name: string;
+
+                    /** Resource type. */
+                    public type: string;
+
+                    /** Resource labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Resource uid. */
+                    public uid: string;
+
+                    /** Resource annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** Resource displayName. */
+                    public displayName: string;
+
+                    /** Resource createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Resource updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Resource deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Resource etag. */
+                    public etag: string;
+
+                    /** Resource location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new Resource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Resource instance
+                     */
+                    public static create(properties?: google.rpc.context.AttributeContext.IResource): google.rpc.context.AttributeContext.Resource;
+
+                    /**
+                     * Encodes the specified Resource message. Does not implicitly {@link google.rpc.context.AttributeContext.Resource.verify|verify} messages.
+                     * @param message Resource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.rpc.context.AttributeContext.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.rpc.context.AttributeContext.Resource.verify|verify} messages.
+                     * @param message Resource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.rpc.context.AttributeContext.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Resource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Resource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.context.AttributeContext.Resource;
+
+                    /**
+                     * Decodes a Resource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Resource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.context.AttributeContext.Resource;
+
+                    /**
+                     * Verifies a Resource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Resource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.rpc.context.AttributeContext.Resource;
+
+                    /**
+                     * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                     * @param message Resource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.rpc.context.AttributeContext.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Resource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
         }
     }
 

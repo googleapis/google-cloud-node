@@ -1767,6 +1767,143 @@
                       }
                     }
                   }
+                },
+                "v2": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.ServiceControl.V2",
+                    "go_package": "google.golang.org/genproto/googleapis/api/servicecontrol/v2;servicecontrol",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "ServiceControllerProto",
+                    "java_package": "com.google.api.servicecontrol.v2",
+                    "objc_class_prefix": "GASC",
+                    "php_namespace": "Google\\Cloud\\ServiceControl\\V2",
+                    "ruby_package": "Google::Cloud::ServiceControl::V2"
+                  },
+                  "nested": {
+                    "ServiceController": {
+                      "options": {
+                        "(google.api.default_host)": "servicecontrol.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/servicecontrol"
+                      },
+                      "methods": {
+                        "Check": {
+                          "requestType": "CheckRequest",
+                          "responseType": "CheckResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/services/{service_name}:check",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/services/{service_name}:check",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "Report": {
+                          "requestType": "ReportRequest",
+                          "responseType": "ReportResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/services/{service_name}:report",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/services/{service_name}:report",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CheckRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "serviceConfigId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "attributes": {
+                          "type": "google.rpc.context.AttributeContext",
+                          "id": 3
+                        },
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "ResourceInfo",
+                          "id": 4
+                        },
+                        "flags": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ResourceInfo": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "permission": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "container": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "CheckResponse": {
+                      "fields": {
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ReportRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "serviceConfigId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "operations": {
+                          "rule": "repeated",
+                          "type": "google.rpc.context.AttributeContext",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ReportResponse": {
+                      "fields": {}
+                    }
+                  }
                 }
               }
             },
@@ -2032,6 +2169,259 @@
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
                   "id": 3
+                }
+              }
+            },
+            "context": {
+              "options": {
+                "cc_enable_arenas": true,
+                "go_package": "google.golang.org/genproto/googleapis/rpc/context/attribute_context;attribute_context",
+                "java_multiple_files": true,
+                "java_outer_classname": "AttributeContextProto",
+                "java_package": "com.google.rpc.context"
+              },
+              "nested": {
+                "AttributeContext": {
+                  "fields": {
+                    "origin": {
+                      "type": "Peer",
+                      "id": 7
+                    },
+                    "source": {
+                      "type": "Peer",
+                      "id": 1
+                    },
+                    "destination": {
+                      "type": "Peer",
+                      "id": 2
+                    },
+                    "request": {
+                      "type": "Request",
+                      "id": 3
+                    },
+                    "response": {
+                      "type": "Response",
+                      "id": 4
+                    },
+                    "resource": {
+                      "type": "Resource",
+                      "id": 5
+                    },
+                    "api": {
+                      "type": "Api",
+                      "id": 6
+                    },
+                    "extensions": {
+                      "rule": "repeated",
+                      "type": "google.protobuf.Any",
+                      "id": 8
+                    }
+                  },
+                  "nested": {
+                    "Peer": {
+                      "fields": {
+                        "ip": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "port": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "principal": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "Api": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "operation": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Auth": {
+                      "fields": {
+                        "principal": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "audiences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "presenter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "claims": {
+                          "type": "google.protobuf.Struct",
+                          "id": 4
+                        },
+                        "accessLevels": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "Request": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "method": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "scheme": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "time": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "size": {
+                          "type": "int64",
+                          "id": 10
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "reason": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "auth": {
+                          "type": "Auth",
+                          "id": 13
+                        }
+                      }
+                    },
+                    "Response": {
+                      "fields": {
+                        "code": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "size": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "time": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "backendLatency": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "Resource": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 12
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

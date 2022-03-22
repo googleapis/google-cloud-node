@@ -17,13 +17,14 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v2 from './v2';
 
 const QuotaControllerClient = v1.QuotaControllerClient;
 type QuotaControllerClient = v1.QuotaControllerClient;
 const ServiceControllerClient = v1.ServiceControllerClient;
 type ServiceControllerClient = v1.ServiceControllerClient;
 
-export {v1, QuotaControllerClient, ServiceControllerClient};
-export default {v1, QuotaControllerClient, ServiceControllerClient};
+export {v1, v2, QuotaControllerClient, ServiceControllerClient};
+export default {v1, v2, QuotaControllerClient, ServiceControllerClient};
 import * as protos from '../protos/protos';
 export {protos};

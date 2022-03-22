@@ -49,39 +49,39 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-describe('v1.ServiceControllerClient', () => {
+describe('v2.ServiceControllerClient', () => {
   it('has servicePath', () => {
     const servicePath =
-      servicecontrollerModule.v1.ServiceControllerClient.servicePath;
+      servicecontrollerModule.v2.ServiceControllerClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
     const apiEndpoint =
-      servicecontrollerModule.v1.ServiceControllerClient.apiEndpoint;
+      servicecontrollerModule.v2.ServiceControllerClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port = servicecontrollerModule.v1.ServiceControllerClient.port;
+    const port = servicecontrollerModule.v2.ServiceControllerClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
 
   it('should create a client with no option', () => {
-    const client = new servicecontrollerModule.v1.ServiceControllerClient();
+    const client = new servicecontrollerModule.v2.ServiceControllerClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new servicecontrollerModule.v1.ServiceControllerClient({
+    const client = new servicecontrollerModule.v2.ServiceControllerClient({
       fallback: true,
     });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new servicecontrollerModule.v1.ServiceControllerClient({
+    const client = new servicecontrollerModule.v2.ServiceControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -91,7 +91,7 @@ describe('v1.ServiceControllerClient', () => {
   });
 
   it('has close method for the initialized client', done => {
-    const client = new servicecontrollerModule.v1.ServiceControllerClient({
+    const client = new servicecontrollerModule.v2.ServiceControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -103,7 +103,7 @@ describe('v1.ServiceControllerClient', () => {
   });
 
   it('has close method for the non-initialized client', done => {
-    const client = new servicecontrollerModule.v1.ServiceControllerClient({
+    const client = new servicecontrollerModule.v2.ServiceControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -115,7 +115,7 @@ describe('v1.ServiceControllerClient', () => {
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new servicecontrollerModule.v1.ServiceControllerClient({
+    const client = new servicecontrollerModule.v2.ServiceControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -127,7 +127,7 @@ describe('v1.ServiceControllerClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new servicecontrollerModule.v1.ServiceControllerClient({
+    const client = new servicecontrollerModule.v2.ServiceControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -149,13 +149,13 @@ describe('v1.ServiceControllerClient', () => {
 
   describe('check', () => {
     it('invokes check without error', async () => {
-      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.CheckRequest()
+        new protos.google.api.servicecontrol.v2.CheckRequest()
       );
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
@@ -167,7 +167,7 @@ describe('v1.ServiceControllerClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.CheckResponse()
+        new protos.google.api.servicecontrol.v2.CheckResponse()
       );
       client.innerApiCalls.check = stubSimpleCall(expectedResponse);
       const [response] = await client.check(request);
@@ -180,13 +180,13 @@ describe('v1.ServiceControllerClient', () => {
     });
 
     it('invokes check without error using callback', async () => {
-      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.CheckRequest()
+        new protos.google.api.servicecontrol.v2.CheckRequest()
       );
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
@@ -198,7 +198,7 @@ describe('v1.ServiceControllerClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.CheckResponse()
+        new protos.google.api.servicecontrol.v2.CheckResponse()
       );
       client.innerApiCalls.check = stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
@@ -206,7 +206,7 @@ describe('v1.ServiceControllerClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.api.servicecontrol.v1.ICheckResponse | null
+            result?: protos.google.api.servicecontrol.v2.ICheckResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -226,13 +226,13 @@ describe('v1.ServiceControllerClient', () => {
     });
 
     it('invokes check with error', async () => {
-      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.CheckRequest()
+        new protos.google.api.servicecontrol.v2.CheckRequest()
       );
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
@@ -254,13 +254,13 @@ describe('v1.ServiceControllerClient', () => {
     });
 
     it('invokes check with closed client', async () => {
-      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.CheckRequest()
+        new protos.google.api.servicecontrol.v2.CheckRequest()
       );
       request.serviceName = '';
       const expectedError = new Error('The client has already been closed.');
@@ -271,13 +271,13 @@ describe('v1.ServiceControllerClient', () => {
 
   describe('report', () => {
     it('invokes report without error', async () => {
-      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.ReportRequest()
+        new protos.google.api.servicecontrol.v2.ReportRequest()
       );
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
@@ -289,7 +289,7 @@ describe('v1.ServiceControllerClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.ReportResponse()
+        new protos.google.api.servicecontrol.v2.ReportResponse()
       );
       client.innerApiCalls.report = stubSimpleCall(expectedResponse);
       const [response] = await client.report(request);
@@ -302,13 +302,13 @@ describe('v1.ServiceControllerClient', () => {
     });
 
     it('invokes report without error using callback', async () => {
-      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.ReportRequest()
+        new protos.google.api.servicecontrol.v2.ReportRequest()
       );
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
@@ -320,7 +320,7 @@ describe('v1.ServiceControllerClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.ReportResponse()
+        new protos.google.api.servicecontrol.v2.ReportResponse()
       );
       client.innerApiCalls.report =
         stubSimpleCallWithCallback(expectedResponse);
@@ -329,7 +329,7 @@ describe('v1.ServiceControllerClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.api.servicecontrol.v1.IReportResponse | null
+            result?: protos.google.api.servicecontrol.v2.IReportResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -349,13 +349,13 @@ describe('v1.ServiceControllerClient', () => {
     });
 
     it('invokes report with error', async () => {
-      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.ReportRequest()
+        new protos.google.api.servicecontrol.v2.ReportRequest()
       );
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
@@ -377,13 +377,13 @@ describe('v1.ServiceControllerClient', () => {
     });
 
     it('invokes report with closed client', async () => {
-      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.api.servicecontrol.v1.ReportRequest()
+        new protos.google.api.servicecontrol.v2.ReportRequest()
       );
       request.serviceName = '';
       const expectedError = new Error('The client has already been closed.');
