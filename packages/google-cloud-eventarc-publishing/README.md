@@ -14,7 +14,7 @@ publishing client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-eventarc-publishing/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-eventarc-publishing/blob/main/CHANGELOG.md).
 
 * [Eventarc Publishing API Node.js Client API Reference][client-docs]
 * [Eventarc Publishing API Documentation][product-docs]
@@ -103,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-eventarc-publishing/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-eventarc-publishing/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +115,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-eventarc-publishing/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-eventarc-publishing/blob/main/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/publishing/latest/
 [product-docs]: https://cloud.google.com/eventarc
