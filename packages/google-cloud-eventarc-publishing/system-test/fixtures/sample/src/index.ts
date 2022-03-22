@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {PublisherClient} from '@google-cloud/publishing';
+import {PublisherClient} from '@google-cloud/eventarc-publishing';
 
 // check that the client class type name can be used
 function doStuffWithPublisherClient(client: PublisherClient) {
