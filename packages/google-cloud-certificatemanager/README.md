@@ -14,7 +14,7 @@ certificatemanager client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-certificate-manager/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-certificate-manager/blob/main/CHANGELOG.md).
 
 * [Certificate Manager Node.js Client API Reference][client-docs]
 * [Certificate Manager Documentation][product-docs]
@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,73 @@ npm install @google-cloud/certificate-manager
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The project and location from which the certificate should be listed,
+ *  specified in the format `projects/* /locations/*`.
+ */
+// const parent = 'abc123'
+/**
+ *  Maximum number of certificates to return per call.
+ */
+// const pageSize = 1234
+/**
+ *  The value returned by the last `ListCertificatesResponse`. Indicates that
+ *  this is a continuation of a prior `ListCertificates` call, and that the
+ *  system should return the next page of data.
+ */
+// const pageToken = 'abc123'
+/**
+ *  Filter expression to restrict the Certificates returned.
+ */
+// const filter = 'abc123'
+/**
+ *  A list of Certificate field names used to specify the order of the returned
+ *  results. The default sorting order is ascending. To specify descending
+ *  order for a field, add a suffix " desc".
+ */
+// const orderBy = 'abc123'
+
+// Imports the Certificatemanager library
+const {CertificateManagerClient} =
+  require('@google-cloud/certificate-manager').v1;
+
+// Instantiates a client
+const certificatemanagerClient = new CertificateManagerClient();
+
+async function callListCertificates() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await certificatemanagerClient.listCertificatesAsync(
+    request
+  );
+  for await (const response of iterable) {
+    console.log(response);
+  }
+}
+
+callListCertificates();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-certificate-manager/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-certificate-manager/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-certificate-manager&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -103,7 +170,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-certificate-manager/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-certificate-manager/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +182,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-certificate-manager/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-certificate-manager/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/certificatemanager/latest
 [product-docs]: https://cloud.google.com/certificate-manager/
