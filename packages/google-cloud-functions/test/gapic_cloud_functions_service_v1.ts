@@ -374,7 +374,6 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new protos.google.cloud.functions.v1.GetFunctionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getFunction(request), expectedError);
@@ -505,7 +504,6 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new protos.google.cloud.functions.v1.CallFunctionRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.callFunction(request), expectedError);
@@ -636,7 +634,6 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new protos.google.cloud.functions.v1.GenerateUploadUrlRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.generateUploadUrl(request), expectedError);
@@ -768,7 +765,6 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new protos.google.cloud.functions.v1.GenerateDownloadUrlRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.generateDownloadUrl(request), expectedError);
@@ -899,7 +895,6 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1030,7 +1025,6 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1162,7 +1156,6 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

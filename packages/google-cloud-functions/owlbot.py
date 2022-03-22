@@ -16,8 +16,4 @@ import synthtool as s
 import synthtool.languages.node as node
 from pathlib import Path
 
-def patch(library: Path):
-    s.replace(library / 'src/v1/cloud_functions_service_client.ts', "function:string", "function_: string")
-    s.replace(library / 'src/v1/cloud_functions_service_client.ts', "function: function", "function: function_")
-
-node.owlbot_main(staging_excludes=['README.md', 'package.json'], patch_staging=patch)
+node.owlbot_main(staging_excludes=['README.md', 'package.json'])

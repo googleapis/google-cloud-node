@@ -1691,14 +1691,14 @@ export class CloudFunctionsServiceClient {
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} function
+   * @param {string} functionParam
    * @returns {string} Resource name string.
    */
-  cloudFunctionPath(project: string, location: string, function_: string) {
+  cloudFunctionPath(project: string, location: string, functionParam: string) {
     return this.pathTemplates.cloudFunctionPathTemplate.render({
       project: project,
       location: location,
-      function: function_,
+      function: functionParam,
     });
   }
 
