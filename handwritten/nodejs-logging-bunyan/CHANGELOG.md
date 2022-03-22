@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [3.3.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v3.2.2...v3.3.0) (2022-03-21)
+
+
+### Features
+
+* Logging provider for Cloud Functions that outputs structured logs to process.stdout ([#605](https://github.com/googleapis/nodejs-logging-bunyan/issues/605)) ([f3ed3aa](https://github.com/googleapis/nodejs-logging-bunyan/commit/f3ed3aa973d0e2cd1f7311ef48a69cbd72df80f1))
+
 ### [3.2.2](https://github.com/googleapis/nodejs-logging-bunyan/compare/v3.2.1...v3.2.2) (2022-03-09)
 
 
