@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/nodejs-service-control/compare/v1.3.0...v1.4.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#122](https://github.com/googleapis/nodejs-service-control/issues/122)) ([d4a1030](https://github.com/googleapis/nodejs-service-control/commit/d4a10308bb2ec3a5bfc7758a0b42eda6d73bc3a6)), closes [#8](https://github.com/googleapis/nodejs-service-control/issues/8) [#98](https://github.com/googleapis/nodejs-service-control/issues/98)
+
 ## [1.3.0](https://github.com/googleapis/nodejs-service-control/compare/v1.2.1...v1.3.0) (2022-02-23)
 
 
