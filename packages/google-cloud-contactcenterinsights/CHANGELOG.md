@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/googleapis/nodejs-contact-center-insights/compare/v1.10.0...v1.11.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#106](https://github.com/googleapis/nodejs-contact-center-insights/issues/106)) ([0c3b5f9](https://github.com/googleapis/nodejs-contact-center-insights/commit/0c3b5f9c1b0e94a2a6b06aef2b3b209293160773)), closes [#7](https://github.com/googleapis/nodejs-contact-center-insights/issues/7)
+
 ## [1.10.0](https://github.com/googleapis/nodejs-contact-center-insights/compare/v1.9.0...v1.10.0) (2022-01-20)
 
 
