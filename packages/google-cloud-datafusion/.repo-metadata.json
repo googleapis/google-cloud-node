@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/data-fusion/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/data-fusion/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5552618",
-  "release_level": "preview",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-data-fusion",
   "distribution_name": "@google-cloud/data-fusion",
