@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/nodejs-ids/compare/v1.0.0...v1.1.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#22](https://github.com/googleapis/nodejs-ids/issues/22)) ([3ed2274](https://github.com/googleapis/nodejs-ids/commit/3ed22745929a394165bbf7f853c80305c9900ae3)), closes [#7](https://github.com/googleapis/nodejs-ids/issues/7)
+
 ## 1.0.0 (2022-01-10)
 
 
