@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-resource-manager/compare/v3.0.0...v3.1.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#436](https://github.com/googleapis/nodejs-resource-manager/issues/436)) ([7aa1961](https://github.com/googleapis/nodejs-resource-manager/commit/7aa1961bbcdc61f0074486388b3c710610312a6b)), closes [#421](https://github.com/googleapis/nodejs-resource-manager/issues/421)
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-resource-manager/compare/v2.0.1...v3.0.0) (2021-09-14)
 
 
