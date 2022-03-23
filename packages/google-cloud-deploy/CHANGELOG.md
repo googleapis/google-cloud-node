@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-deploy/compare/v0.2.0...v1.0.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#36](https://github.com/googleapis/nodejs-deploy/issues/36)) ([00960ff](https://github.com/googleapis/nodejs-deploy/commit/00960ff75a3d40e9f4a81efb868e56642937e49f))
+
 ## 0.2.0 (2021-10-07)
 
 
