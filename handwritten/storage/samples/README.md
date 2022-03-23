@@ -108,6 +108,7 @@ objects to users via direct download.
   * [Remove Retention Policy](#remove-retention-policy)
   * [Rename File](#rename-file)
   * [Rotate Encryption Key](#rotate-encryption-key)
+  * [Set Client Endpoint](#set-client-endpoint)
   * [Set Event Based Hold](#set-event-based-hold)
   * [Set Public Access Prevention Enforced](#set-public-access-prevention-enforced)
   * [Set Public Access Prevention Inherited](#set-public-access-prevention-inherited)
@@ -1718,6 +1719,23 @@ __Usage:__
 
 
 `node samples/rotateEncryptionKey.js`
+
+
+-----
+
+
+
+
+### Set Client Endpoint
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/setClientEndpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/setClientEndpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setClientEndpoint.js`
 
 
 -----
