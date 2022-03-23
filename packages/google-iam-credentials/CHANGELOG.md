@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/nodejs-iam-credentials/compare/v1.1.1...v1.2.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#121](https://github.com/googleapis/nodejs-iam-credentials/issues/121)) ([7988a83](https://github.com/googleapis/nodejs-iam-credentials/commit/7988a83a3082c2d20995dcfc8e901d4f0c41e451))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.1.0...v1.1.1) (2021-09-03)
 
 
