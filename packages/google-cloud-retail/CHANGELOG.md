@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.6.1](https://github.com/googleapis/nodejs-retail/compare/v1.6.0...v1.6.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* remove gcloud_project env variable ([#156](https://github.com/googleapis/nodejs-retail/issues/156)) ([16cefb4](https://github.com/googleapis/nodejs-retail/commit/16cefb46e213f094daca8121bb09ec1e5c4da206))
+
 ## [1.6.0](https://github.com/googleapis/nodejs-retail/compare/v1.5.0...v1.6.0) (2022-02-15)
 
 
