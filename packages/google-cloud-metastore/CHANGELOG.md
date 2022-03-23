@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v2.1.0...v2.2.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#123](https://github.com/googleapis/nodejs-dataproc-metastore/issues/123)) ([76cbc74](https://github.com/googleapis/nodejs-dataproc-metastore/commit/76cbc74672d80bb36118619fa27d6b290fe8d40d))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v2.0.0...v2.1.0) (2022-03-21)
 
 
