@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [4.2.2](https://github.com/googleapis/nodejs-logging-winston/compare/v4.2.1...v4.2.2) (2022-03-23)
+
+
+### Bug Fixes
+
+* Error: write after end when handling SIGINT ([#684](https://github.com/googleapis/nodejs-logging-winston/issues/684)) ([acc1933](https://github.com/googleapis/nodejs-logging-winston/commit/acc19334037fdf3d7ff07597dc39514713e7264f))
+
 ### [4.2.1](https://github.com/googleapis/nodejs-logging-winston/compare/v4.2.0...v4.2.1) (2022-03-21)
 
 
