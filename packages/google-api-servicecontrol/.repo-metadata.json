@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-control/latest",
   "requires_billing": true,
   "distribution_name": "@google-cloud/service-control",
-  "release_level": "preview",
+  "release_level": "stable",
   "api_id": "servicecontrol.googleapis.com",
   "name": "service-control",
   "language": "nodejs",
@@ -11,6 +11,6 @@
   "issue_tracker": "https://github.com/googleapis/nodejs-service-control/issues",
   "name_pretty": "Service Control API",
   "repo": "googleapis/nodejs-service-control",
-  "api_shortname": "service-control",
+  "api_shortname": "servicecontrol",
   "library_type": "GAPIC_AUTO"
 }
