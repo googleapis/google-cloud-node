@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.17.0...v1.18.0) (2022-03-17)
+
+
+### Features
+
+* add `service_account` to `BatchPredictionJob` in aiplatform `v1beta1` `batch_prediction_job.proto` ([#278](https://github.com/googleapis/nodejs-ai-platform/issues/278)) ([1f05428](https://github.com/googleapis/nodejs-ai-platform/commit/1f05428689df1408ea1979976dc93bfbb5cfaaf6))
+
 ## [1.17.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.16.0...v1.17.0) (2022-03-14)
 
 
