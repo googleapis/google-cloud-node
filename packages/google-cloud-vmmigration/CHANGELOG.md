@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-vmmigration/compare/v0.2.0...v1.0.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#31](https://github.com/googleapis/nodejs-vmmigration/issues/31)) ([edfa50a](https://github.com/googleapis/nodejs-vmmigration/commit/edfa50a047cf5968b75cd95b38d3c2953dd1cdca))
+
 ## 0.2.0 (2021-12-23)
 
 
