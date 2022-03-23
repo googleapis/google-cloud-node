@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/migrate/compute-engine/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vmmigration/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-vmmigration/issues",
-  "release_level": "preview",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-vmmigration",
   "distribution_name": "@google-cloud/vmmigration",
