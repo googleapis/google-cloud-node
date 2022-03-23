@@ -20,23 +20,40 @@
 
 'use strict';
 
-function main(parent) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+function main() {
+  // [START artifactregistry_v1_generated_ArtifactRegistry_ListFiles_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose repositories will be listed.
+   *  The name of the repository whose files will be listed. For example:
+   *  "projects/p1/locations/us-central1/repositories/repo1
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of repositories to return. Maximum page size is 1,000.
+   *  An expression for filtering the results of the request. Filter rules are
+   *  case insensitive. The fields eligible for filtering are:
+   *    * `name`
+   *    * `owner`
+   *   An example of using a filter:
+   *    * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
+   *    ID starting with "a/b/".
+   *    * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
+   *    Files owned by the version `1.0` in package `pkg1`.
+   */
+  // const filter = 'abc123'
+  /**
+   *  The maximum number of files to return.
    */
   // const pageSize = 1234
   /**
    *  The next_page_token value returned from a previous list request, if any.
    */
   // const pageToken = 'abc123'
+  /**
+   *  The field to order the results by.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
@@ -44,21 +61,20 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callListRepositories() {
+  async function callListFiles() {
     // Construct request
     const request = {
-      parent,
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listRepositoriesAsync(request);
+    const iterable = await artifactregistryClient.listFilesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListRepositories();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+  callListFiles();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_ListFiles_async]
 }
 
 process.on('unhandledRejection', err => {

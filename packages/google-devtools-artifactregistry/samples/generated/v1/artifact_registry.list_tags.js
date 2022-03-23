@@ -20,17 +20,26 @@
 
 'use strict';
 
-function main(parent) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+function main() {
+  // [START artifactregistry_v1_generated_ArtifactRegistry_ListTags_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose repositories will be listed.
+   *  The name of the parent resource whose tags will be listed.
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of repositories to return. Maximum page size is 1,000.
+   *  An expression for filtering the results of the request. Filter rules are
+   *  case insensitive. The fields eligible for filtering are:
+   *    * `version`
+   *   An example of using a filter:
+   *    * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
+   *    --> Tags that are applied to the version `1.0` in package `pkg1`.
+   */
+  // const filter = 'abc123'
+  /**
+   *  The maximum number of tags to return. Maximum page size is 10,000.
    */
   // const pageSize = 1234
   /**
@@ -44,21 +53,20 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callListRepositories() {
+  async function callListTags() {
     // Construct request
     const request = {
-      parent,
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listRepositoriesAsync(request);
+    const iterable = await artifactregistryClient.listTagsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListRepositories();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+  callListTags();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_ListTags_async]
 }
 
 process.on('unhandledRejection', err => {

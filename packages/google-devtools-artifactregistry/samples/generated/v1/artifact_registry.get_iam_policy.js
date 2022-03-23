@@ -20,23 +20,21 @@
 
 'use strict';
 
-function main(parent) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+function main(resource) {
+  // [START artifactregistry_v1_generated_ArtifactRegistry_GetIamPolicy_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose repositories will be listed.
+   *  REQUIRED: The resource for which the policy is being requested.
+   *  See the operation documentation for the appropriate value for this field.
    */
-  // const parent = 'abc123'
+  // const resource = 'abc123'
   /**
-   *  The maximum number of repositories to return. Maximum page size is 1,000.
+   *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *  `GetIamPolicy`. This field is only used by Cloud IAM.
    */
-  // const pageSize = 1234
-  /**
-   *  The next_page_token value returned from a previous list request, if any.
-   */
-  // const pageToken = 'abc123'
+  // const options = {}
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
@@ -44,21 +42,19 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callListRepositories() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
-      parent,
+      resource,
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listRepositoriesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await artifactregistryClient.getIamPolicy(request);
+    console.log(response);
   }
 
-  callListRepositories();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+  callGetIamPolicy();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_GetIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
