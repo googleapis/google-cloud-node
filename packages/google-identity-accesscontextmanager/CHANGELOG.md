@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-access-context-manager/compare/v0.2.0...v1.0.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#37](https://github.com/googleapis/nodejs-access-context-manager/issues/37)) ([7273284](https://github.com/googleapis/nodejs-access-context-manager/commit/72732849e7dfb075e016a0ca8d632fbc49f490cf))
+
 ## 0.2.0 (2021-10-13)
 
 
