@@ -234,4 +234,10 @@ body: |-
       redirectToStdout: true,
     });
     ```
+
+    ### Waiting for logs to be written
+    Starting from v3.0, the [Winston](https://github.com/winstonjs/winston/blob/master/UPGRADE-3.0.md#winstonlogger) library no longer supports
+    callbacks in their logging API, which reduces the ability to wait for logs to be written before exit/shutdown. The issue tracking the ask to reestablish callback support in Winston is tracked by [2095](https://github.com/winstonjs/winston/issues/2095).
+    One possible solution is to adopt an [Alternative way to ingest logs in Google Cloud managed environments](https://github.com/googleapis/nodejs-logging-winston#alternative-way-to-ingest-logs-in-google-cloud-managed-environments).
+    Another possible way is to use a `setTimeout` with a desired interval in order to let the library to send as many logs as possible.
     
