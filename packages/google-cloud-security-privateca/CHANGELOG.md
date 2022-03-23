@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-security-private-ca/compare/v3.0.0...v3.1.0) (2022-03-16)
+
+
+### Features
+
+* Add `skip_grace_period` flag to DeleteCertificateAuthority API ([#164](https://github.com/googleapis/nodejs-security-private-ca/issues/164)) ([7dcc0fc](https://github.com/googleapis/nodejs-security-private-ca/commit/7dcc0fcc59bbaf2e472b36ccef8b3529de5bd976))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.5.0...v3.0.0) (2021-11-26)
 
 
