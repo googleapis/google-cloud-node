@@ -20,23 +20,23 @@
 
 'use strict';
 
-function main(parent) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+function main() {
+  // [START artifactregistry_v1_generated_ArtifactRegistry_CreateTag_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose repositories will be listed.
+   *  The name of the parent resource where the tag will be created.
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of repositories to return. Maximum page size is 1,000.
+   *  The tag id to use for this repository.
    */
-  // const pageSize = 1234
+  // const tagId = 'abc123'
   /**
-   *  The next_page_token value returned from a previous list request, if any.
+   *  The tag to be created.
    */
-  // const pageToken = 'abc123'
+  // const tag = {}
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
@@ -44,21 +44,18 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callListRepositories() {
+  async function callCreateTag() {
     // Construct request
     const request = {
-      parent,
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listRepositoriesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await artifactregistryClient.createTag(request);
+    console.log(response);
   }
 
-  callListRepositories();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+  callCreateTag();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_CreateTag_async]
 }
 
 process.on('unhandledRejection', err => {

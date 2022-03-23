@@ -66,6 +66,1458 @@
                      */
                     var v1 = {};
     
+                    v1.AptArtifact = (function() {
+    
+                        /**
+                         * Properties of an AptArtifact.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IAptArtifact
+                         * @property {string|null} [name] AptArtifact name
+                         * @property {string|null} [packageName] AptArtifact packageName
+                         * @property {google.devtools.artifactregistry.v1.AptArtifact.PackageType|null} [packageType] AptArtifact packageType
+                         * @property {string|null} [architecture] AptArtifact architecture
+                         * @property {string|null} [component] AptArtifact component
+                         * @property {Uint8Array|null} [controlFile] AptArtifact controlFile
+                         */
+    
+                        /**
+                         * Constructs a new AptArtifact.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an AptArtifact.
+                         * @implements IAptArtifact
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IAptArtifact=} [properties] Properties to set
+                         */
+                        function AptArtifact(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AptArtifact name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @instance
+                         */
+                        AptArtifact.prototype.name = "";
+    
+                        /**
+                         * AptArtifact packageName.
+                         * @member {string} packageName
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @instance
+                         */
+                        AptArtifact.prototype.packageName = "";
+    
+                        /**
+                         * AptArtifact packageType.
+                         * @member {google.devtools.artifactregistry.v1.AptArtifact.PackageType} packageType
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @instance
+                         */
+                        AptArtifact.prototype.packageType = 0;
+    
+                        /**
+                         * AptArtifact architecture.
+                         * @member {string} architecture
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @instance
+                         */
+                        AptArtifact.prototype.architecture = "";
+    
+                        /**
+                         * AptArtifact component.
+                         * @member {string} component
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @instance
+                         */
+                        AptArtifact.prototype.component = "";
+    
+                        /**
+                         * AptArtifact controlFile.
+                         * @member {Uint8Array} controlFile
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @instance
+                         */
+                        AptArtifact.prototype.controlFile = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new AptArtifact instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IAptArtifact=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.AptArtifact} AptArtifact instance
+                         */
+                        AptArtifact.create = function create(properties) {
+                            return new AptArtifact(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AptArtifact message. Does not implicitly {@link google.devtools.artifactregistry.v1.AptArtifact.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IAptArtifact} message AptArtifact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AptArtifact.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.packageName != null && Object.hasOwnProperty.call(message, "packageName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.packageName);
+                            if (message.packageType != null && Object.hasOwnProperty.call(message, "packageType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.packageType);
+                            if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.architecture);
+                            if (message.component != null && Object.hasOwnProperty.call(message, "component"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.component);
+                            if (message.controlFile != null && Object.hasOwnProperty.call(message, "controlFile"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.controlFile);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AptArtifact message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.AptArtifact.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IAptArtifact} message AptArtifact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AptArtifact.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AptArtifact message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.AptArtifact} AptArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AptArtifact.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.AptArtifact();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.packageName = reader.string();
+                                    break;
+                                case 3:
+                                    message.packageType = reader.int32();
+                                    break;
+                                case 4:
+                                    message.architecture = reader.string();
+                                    break;
+                                case 5:
+                                    message.component = reader.string();
+                                    break;
+                                case 6:
+                                    message.controlFile = reader.bytes();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AptArtifact message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.AptArtifact} AptArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AptArtifact.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AptArtifact message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AptArtifact.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.packageName != null && message.hasOwnProperty("packageName"))
+                                if (!$util.isString(message.packageName))
+                                    return "packageName: string expected";
+                            if (message.packageType != null && message.hasOwnProperty("packageType"))
+                                switch (message.packageType) {
+                                default:
+                                    return "packageType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                if (!$util.isString(message.architecture))
+                                    return "architecture: string expected";
+                            if (message.component != null && message.hasOwnProperty("component"))
+                                if (!$util.isString(message.component))
+                                    return "component: string expected";
+                            if (message.controlFile != null && message.hasOwnProperty("controlFile"))
+                                if (!(message.controlFile && typeof message.controlFile.length === "number" || $util.isString(message.controlFile)))
+                                    return "controlFile: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AptArtifact message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.AptArtifact} AptArtifact
+                         */
+                        AptArtifact.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.AptArtifact)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.AptArtifact();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.packageName != null)
+                                message.packageName = String(object.packageName);
+                            switch (object.packageType) {
+                            case "PACKAGE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.packageType = 0;
+                                break;
+                            case "BINARY":
+                            case 1:
+                                message.packageType = 1;
+                                break;
+                            case "SOURCE":
+                            case 2:
+                                message.packageType = 2;
+                                break;
+                            }
+                            if (object.architecture != null)
+                                message.architecture = String(object.architecture);
+                            if (object.component != null)
+                                message.component = String(object.component);
+                            if (object.controlFile != null)
+                                if (typeof object.controlFile === "string")
+                                    $util.base64.decode(object.controlFile, message.controlFile = $util.newBuffer($util.base64.length(object.controlFile)), 0);
+                                else if (object.controlFile.length)
+                                    message.controlFile = object.controlFile;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AptArtifact message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.AptArtifact} message AptArtifact
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AptArtifact.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.packageName = "";
+                                object.packageType = options.enums === String ? "PACKAGE_TYPE_UNSPECIFIED" : 0;
+                                object.architecture = "";
+                                object.component = "";
+                                if (options.bytes === String)
+                                    object.controlFile = "";
+                                else {
+                                    object.controlFile = [];
+                                    if (options.bytes !== Array)
+                                        object.controlFile = $util.newBuffer(object.controlFile);
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.packageName != null && message.hasOwnProperty("packageName"))
+                                object.packageName = message.packageName;
+                            if (message.packageType != null && message.hasOwnProperty("packageType"))
+                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1.AptArtifact.PackageType[message.packageType] : message.packageType;
+                            if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                object.architecture = message.architecture;
+                            if (message.component != null && message.hasOwnProperty("component"))
+                                object.component = message.component;
+                            if (message.controlFile != null && message.hasOwnProperty("controlFile"))
+                                object.controlFile = options.bytes === String ? $util.base64.encode(message.controlFile, 0, message.controlFile.length) : options.bytes === Array ? Array.prototype.slice.call(message.controlFile) : message.controlFile;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AptArtifact to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.AptArtifact
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AptArtifact.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * PackageType enum.
+                         * @name google.devtools.artifactregistry.v1.AptArtifact.PackageType
+                         * @enum {number}
+                         * @property {number} PACKAGE_TYPE_UNSPECIFIED=0 PACKAGE_TYPE_UNSPECIFIED value
+                         * @property {number} BINARY=1 BINARY value
+                         * @property {number} SOURCE=2 SOURCE value
+                         */
+                        AptArtifact.PackageType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PACKAGE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BINARY"] = 1;
+                            values[valuesById[2] = "SOURCE"] = 2;
+                            return values;
+                        })();
+    
+                        return AptArtifact;
+                    })();
+    
+                    v1.ImportAptArtifactsGcsSource = (function() {
+    
+                        /**
+                         * Properties of an ImportAptArtifactsGcsSource.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportAptArtifactsGcsSource
+                         * @property {Array.<string>|null} [uris] ImportAptArtifactsGcsSource uris
+                         * @property {boolean|null} [useWildcards] ImportAptArtifactsGcsSource useWildcards
+                         */
+    
+                        /**
+                         * Constructs a new ImportAptArtifactsGcsSource.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportAptArtifactsGcsSource.
+                         * @implements IImportAptArtifactsGcsSource
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsGcsSource=} [properties] Properties to set
+                         */
+                        function ImportAptArtifactsGcsSource(properties) {
+                            this.uris = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportAptArtifactsGcsSource uris.
+                         * @member {Array.<string>} uris
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @instance
+                         */
+                        ImportAptArtifactsGcsSource.prototype.uris = $util.emptyArray;
+    
+                        /**
+                         * ImportAptArtifactsGcsSource useWildcards.
+                         * @member {boolean} useWildcards
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @instance
+                         */
+                        ImportAptArtifactsGcsSource.prototype.useWildcards = false;
+    
+                        /**
+                         * Creates a new ImportAptArtifactsGcsSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsGcsSource=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource} ImportAptArtifactsGcsSource instance
+                         */
+                        ImportAptArtifactsGcsSource.create = function create(properties) {
+                            return new ImportAptArtifactsGcsSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsGcsSource message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsGcsSource} message ImportAptArtifactsGcsSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsGcsSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uris != null && message.uris.length)
+                                for (var i = 0; i < message.uris.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uris[i]);
+                            if (message.useWildcards != null && Object.hasOwnProperty.call(message, "useWildcards"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useWildcards);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsGcsSource message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsGcsSource} message ImportAptArtifactsGcsSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsGcsSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsGcsSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource} ImportAptArtifactsGcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsGcsSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.uris && message.uris.length))
+                                        message.uris = [];
+                                    message.uris.push(reader.string());
+                                    break;
+                                case 2:
+                                    message.useWildcards = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsGcsSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource} ImportAptArtifactsGcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsGcsSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportAptArtifactsGcsSource message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportAptArtifactsGcsSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uris != null && message.hasOwnProperty("uris")) {
+                                if (!Array.isArray(message.uris))
+                                    return "uris: array expected";
+                                for (var i = 0; i < message.uris.length; ++i)
+                                    if (!$util.isString(message.uris[i]))
+                                        return "uris: string[] expected";
+                            }
+                            if (message.useWildcards != null && message.hasOwnProperty("useWildcards"))
+                                if (typeof message.useWildcards !== "boolean")
+                                    return "useWildcards: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportAptArtifactsGcsSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource} ImportAptArtifactsGcsSource
+                         */
+                        ImportAptArtifactsGcsSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource();
+                            if (object.uris) {
+                                if (!Array.isArray(object.uris))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.uris: array expected");
+                                message.uris = [];
+                                for (var i = 0; i < object.uris.length; ++i)
+                                    message.uris[i] = String(object.uris[i]);
+                            }
+                            if (object.useWildcards != null)
+                                message.useWildcards = Boolean(object.useWildcards);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportAptArtifactsGcsSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource} message ImportAptArtifactsGcsSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportAptArtifactsGcsSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.uris = [];
+                            if (options.defaults)
+                                object.useWildcards = false;
+                            if (message.uris && message.uris.length) {
+                                object.uris = [];
+                                for (var j = 0; j < message.uris.length; ++j)
+                                    object.uris[j] = message.uris[j];
+                            }
+                            if (message.useWildcards != null && message.hasOwnProperty("useWildcards"))
+                                object.useWildcards = message.useWildcards;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportAptArtifactsGcsSource to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportAptArtifactsGcsSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportAptArtifactsGcsSource;
+                    })();
+    
+                    v1.ImportAptArtifactsRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportAptArtifactsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportAptArtifactsRequest
+                         * @property {google.devtools.artifactregistry.v1.IImportAptArtifactsGcsSource|null} [gcsSource] ImportAptArtifactsRequest gcsSource
+                         * @property {string|null} [parent] ImportAptArtifactsRequest parent
+                         */
+    
+                        /**
+                         * Constructs a new ImportAptArtifactsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportAptArtifactsRequest.
+                         * @implements IImportAptArtifactsRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsRequest=} [properties] Properties to set
+                         */
+                        function ImportAptArtifactsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportAptArtifactsRequest gcsSource.
+                         * @member {google.devtools.artifactregistry.v1.IImportAptArtifactsGcsSource|null|undefined} gcsSource
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @instance
+                         */
+                        ImportAptArtifactsRequest.prototype.gcsSource = null;
+    
+                        /**
+                         * ImportAptArtifactsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @instance
+                         */
+                        ImportAptArtifactsRequest.prototype.parent = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImportAptArtifactsRequest source.
+                         * @member {"gcsSource"|undefined} source
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ImportAptArtifactsRequest.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImportAptArtifactsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsRequest} ImportAptArtifactsRequest instance
+                         */
+                        ImportAptArtifactsRequest.create = function create(properties) {
+                            return new ImportAptArtifactsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsRequest} message ImportAptArtifactsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.encode(message.gcsSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsRequest} message ImportAptArtifactsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsRequest} ImportAptArtifactsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.gcsSource = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.decode(reader, reader.uint32());
+                                    break;
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsRequest} ImportAptArtifactsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportAptArtifactsRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportAptArtifactsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportAptArtifactsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsRequest} ImportAptArtifactsRequest
+                         */
+                        ImportAptArtifactsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportAptArtifactsRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsRequest();
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportAptArtifactsRequest.gcsSource: object expected");
+                                message.gcsSource = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.fromObject(object.gcsSource);
+                            }
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportAptArtifactsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportAptArtifactsRequest} message ImportAptArtifactsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportAptArtifactsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.source = "gcsSource";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportAptArtifactsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportAptArtifactsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportAptArtifactsRequest;
+                    })();
+    
+                    v1.ImportAptArtifactsErrorInfo = (function() {
+    
+                        /**
+                         * Properties of an ImportAptArtifactsErrorInfo.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportAptArtifactsErrorInfo
+                         * @property {google.devtools.artifactregistry.v1.IImportAptArtifactsGcsSource|null} [gcsSource] ImportAptArtifactsErrorInfo gcsSource
+                         * @property {google.rpc.IStatus|null} [error] ImportAptArtifactsErrorInfo error
+                         */
+    
+                        /**
+                         * Constructs a new ImportAptArtifactsErrorInfo.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportAptArtifactsErrorInfo.
+                         * @implements IImportAptArtifactsErrorInfo
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsErrorInfo=} [properties] Properties to set
+                         */
+                        function ImportAptArtifactsErrorInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportAptArtifactsErrorInfo gcsSource.
+                         * @member {google.devtools.artifactregistry.v1.IImportAptArtifactsGcsSource|null|undefined} gcsSource
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @instance
+                         */
+                        ImportAptArtifactsErrorInfo.prototype.gcsSource = null;
+    
+                        /**
+                         * ImportAptArtifactsErrorInfo error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @instance
+                         */
+                        ImportAptArtifactsErrorInfo.prototype.error = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImportAptArtifactsErrorInfo source.
+                         * @member {"gcsSource"|undefined} source
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @instance
+                         */
+                        Object.defineProperty(ImportAptArtifactsErrorInfo.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImportAptArtifactsErrorInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsErrorInfo=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo} ImportAptArtifactsErrorInfo instance
+                         */
+                        ImportAptArtifactsErrorInfo.create = function create(properties) {
+                            return new ImportAptArtifactsErrorInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsErrorInfo message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsErrorInfo} message ImportAptArtifactsErrorInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsErrorInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.encode(message.gcsSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsErrorInfo message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsErrorInfo} message ImportAptArtifactsErrorInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsErrorInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsErrorInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo} ImportAptArtifactsErrorInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsErrorInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsSource = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsErrorInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo} ImportAptArtifactsErrorInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsErrorInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportAptArtifactsErrorInfo message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportAptArtifactsErrorInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportAptArtifactsErrorInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo} ImportAptArtifactsErrorInfo
+                         */
+                        ImportAptArtifactsErrorInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo();
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.gcsSource: object expected");
+                                message.gcsSource = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.fromObject(object.gcsSource);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportAptArtifactsErrorInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo} message ImportAptArtifactsErrorInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportAptArtifactsErrorInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.error = null;
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.source = "gcsSource";
+                            }
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportAptArtifactsErrorInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportAptArtifactsErrorInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportAptArtifactsErrorInfo;
+                    })();
+    
+                    v1.ImportAptArtifactsResponse = (function() {
+    
+                        /**
+                         * Properties of an ImportAptArtifactsResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportAptArtifactsResponse
+                         * @property {Array.<google.devtools.artifactregistry.v1.IAptArtifact>|null} [aptArtifacts] ImportAptArtifactsResponse aptArtifacts
+                         * @property {Array.<google.devtools.artifactregistry.v1.IImportAptArtifactsErrorInfo>|null} [errors] ImportAptArtifactsResponse errors
+                         */
+    
+                        /**
+                         * Constructs a new ImportAptArtifactsResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportAptArtifactsResponse.
+                         * @implements IImportAptArtifactsResponse
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsResponse=} [properties] Properties to set
+                         */
+                        function ImportAptArtifactsResponse(properties) {
+                            this.aptArtifacts = [];
+                            this.errors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportAptArtifactsResponse aptArtifacts.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IAptArtifact>} aptArtifacts
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @instance
+                         */
+                        ImportAptArtifactsResponse.prototype.aptArtifacts = $util.emptyArray;
+    
+                        /**
+                         * ImportAptArtifactsResponse errors.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IImportAptArtifactsErrorInfo>} errors
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @instance
+                         */
+                        ImportAptArtifactsResponse.prototype.errors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ImportAptArtifactsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsResponse=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsResponse} ImportAptArtifactsResponse instance
+                         */
+                        ImportAptArtifactsResponse.create = function create(properties) {
+                            return new ImportAptArtifactsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsResponse} message ImportAptArtifactsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.aptArtifacts != null && message.aptArtifacts.length)
+                                for (var i = 0; i < message.aptArtifacts.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.AptArtifact.encode(message.aptArtifacts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.errors != null && message.errors.length)
+                                for (var i = 0; i < message.errors.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.encode(message.errors[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsResponse} message ImportAptArtifactsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsResponse} ImportAptArtifactsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.aptArtifacts && message.aptArtifacts.length))
+                                        message.aptArtifacts = [];
+                                    message.aptArtifacts.push($root.google.devtools.artifactregistry.v1.AptArtifact.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.errors && message.errors.length))
+                                        message.errors = [];
+                                    message.errors.push($root.google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsResponse} ImportAptArtifactsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportAptArtifactsResponse message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportAptArtifactsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.aptArtifacts != null && message.hasOwnProperty("aptArtifacts")) {
+                                if (!Array.isArray(message.aptArtifacts))
+                                    return "aptArtifacts: array expected";
+                                for (var i = 0; i < message.aptArtifacts.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.AptArtifact.verify(message.aptArtifacts[i]);
+                                    if (error)
+                                        return "aptArtifacts." + error;
+                                }
+                            }
+                            if (message.errors != null && message.hasOwnProperty("errors")) {
+                                if (!Array.isArray(message.errors))
+                                    return "errors: array expected";
+                                for (var i = 0; i < message.errors.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.verify(message.errors[i]);
+                                    if (error)
+                                        return "errors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportAptArtifactsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsResponse} ImportAptArtifactsResponse
+                         */
+                        ImportAptArtifactsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse();
+                            if (object.aptArtifacts) {
+                                if (!Array.isArray(object.aptArtifacts))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportAptArtifactsResponse.aptArtifacts: array expected");
+                                message.aptArtifacts = [];
+                                for (var i = 0; i < object.aptArtifacts.length; ++i) {
+                                    if (typeof object.aptArtifacts[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ImportAptArtifactsResponse.aptArtifacts: object expected");
+                                    message.aptArtifacts[i] = $root.google.devtools.artifactregistry.v1.AptArtifact.fromObject(object.aptArtifacts[i]);
+                                }
+                            }
+                            if (object.errors) {
+                                if (!Array.isArray(object.errors))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportAptArtifactsResponse.errors: array expected");
+                                message.errors = [];
+                                for (var i = 0; i < object.errors.length; ++i) {
+                                    if (typeof object.errors[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ImportAptArtifactsResponse.errors: object expected");
+                                    message.errors[i] = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.fromObject(object.errors[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportAptArtifactsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportAptArtifactsResponse} message ImportAptArtifactsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportAptArtifactsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.aptArtifacts = [];
+                                object.errors = [];
+                            }
+                            if (message.aptArtifacts && message.aptArtifacts.length) {
+                                object.aptArtifacts = [];
+                                for (var j = 0; j < message.aptArtifacts.length; ++j)
+                                    object.aptArtifacts[j] = $root.google.devtools.artifactregistry.v1.AptArtifact.toObject(message.aptArtifacts[j], options);
+                            }
+                            if (message.errors && message.errors.length) {
+                                object.errors = [];
+                                for (var j = 0; j < message.errors.length; ++j)
+                                    object.errors[j] = $root.google.devtools.artifactregistry.v1.ImportAptArtifactsErrorInfo.toObject(message.errors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportAptArtifactsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportAptArtifactsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportAptArtifactsResponse;
+                    })();
+    
+                    v1.ImportAptArtifactsMetadata = (function() {
+    
+                        /**
+                         * Properties of an ImportAptArtifactsMetadata.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportAptArtifactsMetadata
+                         */
+    
+                        /**
+                         * Constructs a new ImportAptArtifactsMetadata.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportAptArtifactsMetadata.
+                         * @implements IImportAptArtifactsMetadata
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata=} [properties] Properties to set
+                         */
+                        function ImportAptArtifactsMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ImportAptArtifactsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata} ImportAptArtifactsMetadata instance
+                         */
+                        ImportAptArtifactsMetadata.create = function create(properties) {
+                            return new ImportAptArtifactsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsMetadata message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata} message ImportAptArtifactsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAptArtifactsMetadata message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata} message ImportAptArtifactsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAptArtifactsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata} ImportAptArtifactsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportAptArtifactsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata} ImportAptArtifactsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAptArtifactsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportAptArtifactsMetadata message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportAptArtifactsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportAptArtifactsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata} ImportAptArtifactsMetadata
+                         */
+                        ImportAptArtifactsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata)
+                                return object;
+                            return new $root.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportAptArtifactsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata} message ImportAptArtifactsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportAptArtifactsMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ImportAptArtifactsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportAptArtifactsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportAptArtifactsMetadata;
+                    })();
+    
                     v1.DockerImage = (function() {
     
                         /**
@@ -890,12 +2342,2592 @@
                         return ListDockerImagesResponse;
                     })();
     
+                    v1.GetDockerImageRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDockerImageRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IGetDockerImageRequest
+                         * @property {string|null} [name] GetDockerImageRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDockerImageRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a GetDockerImageRequest.
+                         * @implements IGetDockerImageRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IGetDockerImageRequest=} [properties] Properties to set
+                         */
+                        function GetDockerImageRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDockerImageRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @instance
+                         */
+                        GetDockerImageRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDockerImageRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetDockerImageRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.GetDockerImageRequest} GetDockerImageRequest instance
+                         */
+                        GetDockerImageRequest.create = function create(properties) {
+                            return new GetDockerImageRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDockerImageRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetDockerImageRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetDockerImageRequest} message GetDockerImageRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDockerImageRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDockerImageRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetDockerImageRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetDockerImageRequest} message GetDockerImageRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDockerImageRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDockerImageRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.GetDockerImageRequest} GetDockerImageRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDockerImageRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.GetDockerImageRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDockerImageRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.GetDockerImageRequest} GetDockerImageRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDockerImageRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDockerImageRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDockerImageRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDockerImageRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.GetDockerImageRequest} GetDockerImageRequest
+                         */
+                        GetDockerImageRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.GetDockerImageRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.GetDockerImageRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDockerImageRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.GetDockerImageRequest} message GetDockerImageRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDockerImageRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDockerImageRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.GetDockerImageRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDockerImageRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetDockerImageRequest;
+                    })();
+    
+                    v1.Hash = (function() {
+    
+                        /**
+                         * Properties of a Hash.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IHash
+                         * @property {google.devtools.artifactregistry.v1.Hash.HashType|null} [type] Hash type
+                         * @property {Uint8Array|null} [value] Hash value
+                         */
+    
+                        /**
+                         * Constructs a new Hash.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a Hash.
+                         * @implements IHash
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IHash=} [properties] Properties to set
+                         */
+                        function Hash(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Hash type.
+                         * @member {google.devtools.artifactregistry.v1.Hash.HashType} type
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @instance
+                         */
+                        Hash.prototype.type = 0;
+    
+                        /**
+                         * Hash value.
+                         * @member {Uint8Array} value
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @instance
+                         */
+                        Hash.prototype.value = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new Hash instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IHash=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.Hash} Hash instance
+                         */
+                        Hash.create = function create(properties) {
+                            return new Hash(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Hash message. Does not implicitly {@link google.devtools.artifactregistry.v1.Hash.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IHash} message Hash message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Hash.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Hash message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Hash.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IHash} message Hash message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Hash.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Hash message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.Hash} Hash
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Hash.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.Hash();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.type = reader.int32();
+                                    break;
+                                case 2:
+                                    message.value = reader.bytes();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Hash message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.Hash} Hash
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Hash.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Hash message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Hash.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                                    return "value: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Hash message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.Hash} Hash
+                         */
+                        Hash.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.Hash)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.Hash();
+                            switch (object.type) {
+                            case "HASH_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "SHA256":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "MD5":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            if (object.value != null)
+                                if (typeof object.value === "string")
+                                    $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                                else if (object.value.length)
+                                    message.value = object.value;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Hash message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.Hash} message Hash
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Hash.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = options.enums === String ? "HASH_TYPE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.value = "";
+                                else {
+                                    object.value = [];
+                                    if (options.bytes !== Array)
+                                        object.value = $util.newBuffer(object.value);
+                                }
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.devtools.artifactregistry.v1.Hash.HashType[message.type] : message.type;
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Hash to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.Hash
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Hash.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * HashType enum.
+                         * @name google.devtools.artifactregistry.v1.Hash.HashType
+                         * @enum {number}
+                         * @property {number} HASH_TYPE_UNSPECIFIED=0 HASH_TYPE_UNSPECIFIED value
+                         * @property {number} SHA256=1 SHA256 value
+                         * @property {number} MD5=2 MD5 value
+                         */
+                        Hash.HashType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HASH_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SHA256"] = 1;
+                            values[valuesById[2] = "MD5"] = 2;
+                            return values;
+                        })();
+    
+                        return Hash;
+                    })();
+    
+                    v1.File = (function() {
+    
+                        /**
+                         * Properties of a File.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IFile
+                         * @property {string|null} [name] File name
+                         * @property {number|Long|null} [sizeBytes] File sizeBytes
+                         * @property {Array.<google.devtools.artifactregistry.v1.IHash>|null} [hashes] File hashes
+                         * @property {google.protobuf.ITimestamp|null} [createTime] File createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] File updateTime
+                         * @property {string|null} [owner] File owner
+                         */
+    
+                        /**
+                         * Constructs a new File.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a File.
+                         * @implements IFile
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IFile=} [properties] Properties to set
+                         */
+                        function File(properties) {
+                            this.hashes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * File name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @instance
+                         */
+                        File.prototype.name = "";
+    
+                        /**
+                         * File sizeBytes.
+                         * @member {number|Long} sizeBytes
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @instance
+                         */
+                        File.prototype.sizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * File hashes.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IHash>} hashes
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @instance
+                         */
+                        File.prototype.hashes = $util.emptyArray;
+    
+                        /**
+                         * File createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @instance
+                         */
+                        File.prototype.createTime = null;
+    
+                        /**
+                         * File updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @instance
+                         */
+                        File.prototype.updateTime = null;
+    
+                        /**
+                         * File owner.
+                         * @member {string} owner
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @instance
+                         */
+                        File.prototype.owner = "";
+    
+                        /**
+                         * Creates a new File instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IFile=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.File} File instance
+                         */
+                        File.create = function create(properties) {
+                            return new File(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified File message. Does not implicitly {@link google.devtools.artifactregistry.v1.File.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IFile} message File message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        File.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.sizeBytes != null && Object.hasOwnProperty.call(message, "sizeBytes"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.sizeBytes);
+                            if (message.hashes != null && message.hashes.length)
+                                for (var i = 0; i < message.hashes.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.Hash.encode(message.hashes[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.owner != null && Object.hasOwnProperty.call(message, "owner"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.owner);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified File message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.File.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IFile} message File message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        File.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a File message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.File} File
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        File.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.File();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.sizeBytes = reader.int64();
+                                    break;
+                                case 4:
+                                    if (!(message.hashes && message.hashes.length))
+                                        message.hashes = [];
+                                    message.hashes.push($root.google.devtools.artifactregistry.v1.Hash.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.owner = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a File message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.File} File
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        File.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a File message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        File.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (!$util.isInteger(message.sizeBytes) && !(message.sizeBytes && $util.isInteger(message.sizeBytes.low) && $util.isInteger(message.sizeBytes.high)))
+                                    return "sizeBytes: integer|Long expected";
+                            if (message.hashes != null && message.hasOwnProperty("hashes")) {
+                                if (!Array.isArray(message.hashes))
+                                    return "hashes: array expected";
+                                for (var i = 0; i < message.hashes.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.Hash.verify(message.hashes[i]);
+                                    if (error)
+                                        return "hashes." + error;
+                                }
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.owner != null && message.hasOwnProperty("owner"))
+                                if (!$util.isString(message.owner))
+                                    return "owner: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a File message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.File} File
+                         */
+                        File.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.File)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.File();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.sizeBytes != null)
+                                if ($util.Long)
+                                    (message.sizeBytes = $util.Long.fromValue(object.sizeBytes)).unsigned = false;
+                                else if (typeof object.sizeBytes === "string")
+                                    message.sizeBytes = parseInt(object.sizeBytes, 10);
+                                else if (typeof object.sizeBytes === "number")
+                                    message.sizeBytes = object.sizeBytes;
+                                else if (typeof object.sizeBytes === "object")
+                                    message.sizeBytes = new $util.LongBits(object.sizeBytes.low >>> 0, object.sizeBytes.high >>> 0).toNumber();
+                            if (object.hashes) {
+                                if (!Array.isArray(object.hashes))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.File.hashes: array expected");
+                                message.hashes = [];
+                                for (var i = 0; i < object.hashes.length; ++i) {
+                                    if (typeof object.hashes[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.File.hashes: object expected");
+                                    message.hashes[i] = $root.google.devtools.artifactregistry.v1.Hash.fromObject(object.hashes[i]);
+                                }
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.File.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.File.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.owner != null)
+                                message.owner = String(object.owner);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a File message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.File} message File
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        File.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.hashes = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.sizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.sizeBytes = options.longs === String ? "0" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.owner = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (typeof message.sizeBytes === "number")
+                                    object.sizeBytes = options.longs === String ? String(message.sizeBytes) : message.sizeBytes;
+                                else
+                                    object.sizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.sizeBytes) : options.longs === Number ? new $util.LongBits(message.sizeBytes.low >>> 0, message.sizeBytes.high >>> 0).toNumber() : message.sizeBytes;
+                            if (message.hashes && message.hashes.length) {
+                                object.hashes = [];
+                                for (var j = 0; j < message.hashes.length; ++j)
+                                    object.hashes[j] = $root.google.devtools.artifactregistry.v1.Hash.toObject(message.hashes[j], options);
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.owner != null && message.hasOwnProperty("owner"))
+                                object.owner = message.owner;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this File to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.File
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        File.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return File;
+                    })();
+    
+                    v1.ListFilesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListFilesRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListFilesRequest
+                         * @property {string|null} [parent] ListFilesRequest parent
+                         * @property {string|null} [filter] ListFilesRequest filter
+                         * @property {number|null} [pageSize] ListFilesRequest pageSize
+                         * @property {string|null} [pageToken] ListFilesRequest pageToken
+                         * @property {string|null} [orderBy] ListFilesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListFilesRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListFilesRequest.
+                         * @implements IListFilesRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListFilesRequest=} [properties] Properties to set
+                         */
+                        function ListFilesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListFilesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @instance
+                         */
+                        ListFilesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListFilesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @instance
+                         */
+                        ListFilesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListFilesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @instance
+                         */
+                        ListFilesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListFilesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @instance
+                         */
+                        ListFilesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListFilesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @instance
+                         */
+                        ListFilesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListFilesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListFilesRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListFilesRequest} ListFilesRequest instance
+                         */
+                        ListFilesRequest.create = function create(properties) {
+                            return new ListFilesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListFilesRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListFilesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListFilesRequest} message ListFilesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFilesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListFilesRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListFilesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListFilesRequest} message ListFilesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFilesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListFilesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListFilesRequest} ListFilesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFilesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListFilesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListFilesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListFilesRequest} ListFilesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFilesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListFilesRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListFilesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListFilesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListFilesRequest} ListFilesRequest
+                         */
+                        ListFilesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListFilesRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListFilesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListFilesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListFilesRequest} message ListFilesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListFilesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListFilesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListFilesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListFilesRequest;
+                    })();
+    
+                    v1.ListFilesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListFilesResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListFilesResponse
+                         * @property {Array.<google.devtools.artifactregistry.v1.IFile>|null} [files] ListFilesResponse files
+                         * @property {string|null} [nextPageToken] ListFilesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListFilesResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListFilesResponse.
+                         * @implements IListFilesResponse
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListFilesResponse=} [properties] Properties to set
+                         */
+                        function ListFilesResponse(properties) {
+                            this.files = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListFilesResponse files.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IFile>} files
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @instance
+                         */
+                        ListFilesResponse.prototype.files = $util.emptyArray;
+    
+                        /**
+                         * ListFilesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @instance
+                         */
+                        ListFilesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListFilesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListFilesResponse=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListFilesResponse} ListFilesResponse instance
+                         */
+                        ListFilesResponse.create = function create(properties) {
+                            return new ListFilesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListFilesResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListFilesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListFilesResponse} message ListFilesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFilesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.files != null && message.files.length)
+                                for (var i = 0; i < message.files.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.File.encode(message.files[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListFilesResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListFilesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListFilesResponse} message ListFilesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFilesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListFilesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListFilesResponse} ListFilesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFilesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListFilesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.files && message.files.length))
+                                        message.files = [];
+                                    message.files.push($root.google.devtools.artifactregistry.v1.File.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListFilesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListFilesResponse} ListFilesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFilesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListFilesResponse message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListFilesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.files != null && message.hasOwnProperty("files")) {
+                                if (!Array.isArray(message.files))
+                                    return "files: array expected";
+                                for (var i = 0; i < message.files.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.File.verify(message.files[i]);
+                                    if (error)
+                                        return "files." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListFilesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListFilesResponse} ListFilesResponse
+                         */
+                        ListFilesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListFilesResponse)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListFilesResponse();
+                            if (object.files) {
+                                if (!Array.isArray(object.files))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ListFilesResponse.files: array expected");
+                                message.files = [];
+                                for (var i = 0; i < object.files.length; ++i) {
+                                    if (typeof object.files[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ListFilesResponse.files: object expected");
+                                    message.files[i] = $root.google.devtools.artifactregistry.v1.File.fromObject(object.files[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListFilesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListFilesResponse} message ListFilesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListFilesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.files = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.files && message.files.length) {
+                                object.files = [];
+                                for (var j = 0; j < message.files.length; ++j)
+                                    object.files[j] = $root.google.devtools.artifactregistry.v1.File.toObject(message.files[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListFilesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListFilesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListFilesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListFilesResponse;
+                    })();
+    
+                    v1.GetFileRequest = (function() {
+    
+                        /**
+                         * Properties of a GetFileRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IGetFileRequest
+                         * @property {string|null} [name] GetFileRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetFileRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a GetFileRequest.
+                         * @implements IGetFileRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IGetFileRequest=} [properties] Properties to set
+                         */
+                        function GetFileRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetFileRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @instance
+                         */
+                        GetFileRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetFileRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetFileRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.GetFileRequest} GetFileRequest instance
+                         */
+                        GetFileRequest.create = function create(properties) {
+                            return new GetFileRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetFileRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetFileRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetFileRequest} message GetFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFileRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetFileRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetFileRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetFileRequest} message GetFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFileRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetFileRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.GetFileRequest} GetFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFileRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.GetFileRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetFileRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.GetFileRequest} GetFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFileRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetFileRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetFileRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetFileRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.GetFileRequest} GetFileRequest
+                         */
+                        GetFileRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.GetFileRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.GetFileRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetFileRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.GetFileRequest} message GetFileRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetFileRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetFileRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.GetFileRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetFileRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetFileRequest;
+                    })();
+    
+                    v1.Package = (function() {
+    
+                        /**
+                         * Properties of a Package.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IPackage
+                         * @property {string|null} [name] Package name
+                         * @property {string|null} [displayName] Package displayName
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Package createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Package updateTime
+                         */
+    
+                        /**
+                         * Constructs a new Package.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a Package.
+                         * @implements IPackage
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IPackage=} [properties] Properties to set
+                         */
+                        function Package(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Package name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @instance
+                         */
+                        Package.prototype.name = "";
+    
+                        /**
+                         * Package displayName.
+                         * @member {string} displayName
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @instance
+                         */
+                        Package.prototype.displayName = "";
+    
+                        /**
+                         * Package createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @instance
+                         */
+                        Package.prototype.createTime = null;
+    
+                        /**
+                         * Package updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @instance
+                         */
+                        Package.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new Package instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IPackage=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.Package} Package instance
+                         */
+                        Package.create = function create(properties) {
+                            return new Package(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Package message. Does not implicitly {@link google.devtools.artifactregistry.v1.Package.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IPackage} message Package message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Package.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Package message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Package.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IPackage} message Package message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Package.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Package message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.Package} Package
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Package.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.Package();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 5:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Package message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.Package} Package
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Package.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Package message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Package.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Package message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.Package} Package
+                         */
+                        Package.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.Package)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.Package();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Package.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Package.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Package message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.Package} message Package
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Package.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Package to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.Package
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Package.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Package;
+                    })();
+    
+                    v1.ListPackagesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListPackagesRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListPackagesRequest
+                         * @property {string|null} [parent] ListPackagesRequest parent
+                         * @property {number|null} [pageSize] ListPackagesRequest pageSize
+                         * @property {string|null} [pageToken] ListPackagesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPackagesRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListPackagesRequest.
+                         * @implements IListPackagesRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesRequest=} [properties] Properties to set
+                         */
+                        function ListPackagesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPackagesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @instance
+                         */
+                        ListPackagesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListPackagesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @instance
+                         */
+                        ListPackagesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListPackagesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @instance
+                         */
+                        ListPackagesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListPackagesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListPackagesRequest} ListPackagesRequest instance
+                         */
+                        ListPackagesRequest.create = function create(properties) {
+                            return new ListPackagesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPackagesRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListPackagesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesRequest} message ListPackagesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPackagesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPackagesRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListPackagesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesRequest} message ListPackagesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPackagesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPackagesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListPackagesRequest} ListPackagesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPackagesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListPackagesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPackagesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListPackagesRequest} ListPackagesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPackagesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPackagesRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPackagesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPackagesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListPackagesRequest} ListPackagesRequest
+                         */
+                        ListPackagesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListPackagesRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListPackagesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPackagesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListPackagesRequest} message ListPackagesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPackagesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPackagesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPackagesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListPackagesRequest;
+                    })();
+    
+                    v1.ListPackagesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListPackagesResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListPackagesResponse
+                         * @property {Array.<google.devtools.artifactregistry.v1.IPackage>|null} [packages] ListPackagesResponse packages
+                         * @property {string|null} [nextPageToken] ListPackagesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPackagesResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListPackagesResponse.
+                         * @implements IListPackagesResponse
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesResponse=} [properties] Properties to set
+                         */
+                        function ListPackagesResponse(properties) {
+                            this.packages = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPackagesResponse packages.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IPackage>} packages
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @instance
+                         */
+                        ListPackagesResponse.prototype.packages = $util.emptyArray;
+    
+                        /**
+                         * ListPackagesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @instance
+                         */
+                        ListPackagesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListPackagesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesResponse=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListPackagesResponse} ListPackagesResponse instance
+                         */
+                        ListPackagesResponse.create = function create(properties) {
+                            return new ListPackagesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPackagesResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListPackagesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesResponse} message ListPackagesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPackagesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.packages != null && message.packages.length)
+                                for (var i = 0; i < message.packages.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.Package.encode(message.packages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPackagesResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListPackagesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesResponse} message ListPackagesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPackagesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPackagesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListPackagesResponse} ListPackagesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPackagesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListPackagesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.packages && message.packages.length))
+                                        message.packages = [];
+                                    message.packages.push($root.google.devtools.artifactregistry.v1.Package.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPackagesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListPackagesResponse} ListPackagesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPackagesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPackagesResponse message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPackagesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.packages != null && message.hasOwnProperty("packages")) {
+                                if (!Array.isArray(message.packages))
+                                    return "packages: array expected";
+                                for (var i = 0; i < message.packages.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.Package.verify(message.packages[i]);
+                                    if (error)
+                                        return "packages." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPackagesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListPackagesResponse} ListPackagesResponse
+                         */
+                        ListPackagesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListPackagesResponse)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListPackagesResponse();
+                            if (object.packages) {
+                                if (!Array.isArray(object.packages))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ListPackagesResponse.packages: array expected");
+                                message.packages = [];
+                                for (var i = 0; i < object.packages.length; ++i) {
+                                    if (typeof object.packages[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ListPackagesResponse.packages: object expected");
+                                    message.packages[i] = $root.google.devtools.artifactregistry.v1.Package.fromObject(object.packages[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPackagesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListPackagesResponse} message ListPackagesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPackagesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.packages = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.packages && message.packages.length) {
+                                object.packages = [];
+                                for (var j = 0; j < message.packages.length; ++j)
+                                    object.packages[j] = $root.google.devtools.artifactregistry.v1.Package.toObject(message.packages[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPackagesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListPackagesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPackagesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListPackagesResponse;
+                    })();
+    
+                    v1.GetPackageRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPackageRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IGetPackageRequest
+                         * @property {string|null} [name] GetPackageRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPackageRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a GetPackageRequest.
+                         * @implements IGetPackageRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IGetPackageRequest=} [properties] Properties to set
+                         */
+                        function GetPackageRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPackageRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @instance
+                         */
+                        GetPackageRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPackageRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetPackageRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.GetPackageRequest} GetPackageRequest instance
+                         */
+                        GetPackageRequest.create = function create(properties) {
+                            return new GetPackageRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPackageRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetPackageRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetPackageRequest} message GetPackageRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPackageRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPackageRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetPackageRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetPackageRequest} message GetPackageRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPackageRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPackageRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.GetPackageRequest} GetPackageRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPackageRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.GetPackageRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPackageRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.GetPackageRequest} GetPackageRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPackageRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPackageRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPackageRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPackageRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.GetPackageRequest} GetPackageRequest
+                         */
+                        GetPackageRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.GetPackageRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.GetPackageRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPackageRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.GetPackageRequest} message GetPackageRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPackageRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPackageRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.GetPackageRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPackageRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetPackageRequest;
+                    })();
+    
+                    v1.DeletePackageRequest = (function() {
+    
+                        /**
+                         * Properties of a DeletePackageRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IDeletePackageRequest
+                         * @property {string|null} [name] DeletePackageRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeletePackageRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a DeletePackageRequest.
+                         * @implements IDeletePackageRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IDeletePackageRequest=} [properties] Properties to set
+                         */
+                        function DeletePackageRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeletePackageRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @instance
+                         */
+                        DeletePackageRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeletePackageRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeletePackageRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.DeletePackageRequest} DeletePackageRequest instance
+                         */
+                        DeletePackageRequest.create = function create(properties) {
+                            return new DeletePackageRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePackageRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.DeletePackageRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeletePackageRequest} message DeletePackageRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePackageRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePackageRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.DeletePackageRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeletePackageRequest} message DeletePackageRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePackageRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeletePackageRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.DeletePackageRequest} DeletePackageRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePackageRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.DeletePackageRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeletePackageRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.DeletePackageRequest} DeletePackageRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePackageRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeletePackageRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeletePackageRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeletePackageRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.DeletePackageRequest} DeletePackageRequest
+                         */
+                        DeletePackageRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.DeletePackageRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.DeletePackageRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeletePackageRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.DeletePackageRequest} message DeletePackageRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeletePackageRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeletePackageRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.DeletePackageRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeletePackageRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeletePackageRequest;
+                    })();
+    
                     v1.Repository = (function() {
     
                         /**
                          * Properties of a Repository.
                          * @memberof google.devtools.artifactregistry.v1
                          * @interface IRepository
+                         * @property {google.devtools.artifactregistry.v1.Repository.IMavenRepositoryConfig|null} [mavenConfig] Repository mavenConfig
                          * @property {string|null} [name] Repository name
                          * @property {google.devtools.artifactregistry.v1.Repository.Format|null} [format] Repository format
                          * @property {string|null} [description] Repository description
@@ -920,6 +4952,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * Repository mavenConfig.
+                         * @member {google.devtools.artifactregistry.v1.Repository.IMavenRepositoryConfig|null|undefined} mavenConfig
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.mavenConfig = null;
     
                         /**
                          * Repository name.
@@ -977,6 +5017,20 @@
                          */
                         Repository.prototype.kmsKeyName = "";
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Repository formatConfig.
+                         * @member {"mavenConfig"|undefined} formatConfig
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Object.defineProperty(Repository.prototype, "formatConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["mavenConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Repository instance using the specified properties.
                          * @function create
@@ -1016,6 +5070,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.kmsKeyName);
+                            if (message.mavenConfig != null && Object.hasOwnProperty.call(message, "mavenConfig"))
+                                $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.encode(message.mavenConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -1050,6 +5106,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 9:
+                                    message.mavenConfig = $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.decode(reader, reader.uint32());
+                                    break;
                                 case 1:
                                     message.name = reader.string();
                                     break;
@@ -1125,6 +5184,15 @@
                         Repository.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.mavenConfig != null && message.hasOwnProperty("mavenConfig")) {
+                                properties.formatConfig = 1;
+                                {
+                                    var error = $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.verify(message.mavenConfig);
+                                    if (error)
+                                        return "mavenConfig." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -1180,6 +5248,11 @@
                             if (object instanceof $root.google.devtools.artifactregistry.v1.Repository)
                                 return object;
                             var message = new $root.google.devtools.artifactregistry.v1.Repository();
+                            if (object.mavenConfig != null) {
+                                if (typeof object.mavenConfig !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Repository.mavenConfig: object expected");
+                                message.mavenConfig = $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.fromObject(object.mavenConfig);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.format) {
@@ -1277,6 +5350,11 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.mavenConfig != null && message.hasOwnProperty("mavenConfig")) {
+                                object.mavenConfig = $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.toObject(message.mavenConfig, options);
+                                if (options.oneofs)
+                                    object.formatConfig = "mavenConfig";
+                            }
                             return object;
                         };
     
@@ -1290,6 +5368,250 @@
                         Repository.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        Repository.MavenRepositoryConfig = (function() {
+    
+                            /**
+                             * Properties of a MavenRepositoryConfig.
+                             * @memberof google.devtools.artifactregistry.v1.Repository
+                             * @interface IMavenRepositoryConfig
+                             * @property {boolean|null} [allowSnapshotOverwrites] MavenRepositoryConfig allowSnapshotOverwrites
+                             * @property {google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.VersionPolicy|null} [versionPolicy] MavenRepositoryConfig versionPolicy
+                             */
+    
+                            /**
+                             * Constructs a new MavenRepositoryConfig.
+                             * @memberof google.devtools.artifactregistry.v1.Repository
+                             * @classdesc Represents a MavenRepositoryConfig.
+                             * @implements IMavenRepositoryConfig
+                             * @constructor
+                             * @param {google.devtools.artifactregistry.v1.Repository.IMavenRepositoryConfig=} [properties] Properties to set
+                             */
+                            function MavenRepositoryConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MavenRepositoryConfig allowSnapshotOverwrites.
+                             * @member {boolean} allowSnapshotOverwrites
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @instance
+                             */
+                            MavenRepositoryConfig.prototype.allowSnapshotOverwrites = false;
+    
+                            /**
+                             * MavenRepositoryConfig versionPolicy.
+                             * @member {google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.VersionPolicy} versionPolicy
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @instance
+                             */
+                            MavenRepositoryConfig.prototype.versionPolicy = 0;
+    
+                            /**
+                             * Creates a new MavenRepositoryConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @static
+                             * @param {google.devtools.artifactregistry.v1.Repository.IMavenRepositoryConfig=} [properties] Properties to set
+                             * @returns {google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig} MavenRepositoryConfig instance
+                             */
+                            MavenRepositoryConfig.create = function create(properties) {
+                                return new MavenRepositoryConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MavenRepositoryConfig message. Does not implicitly {@link google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @static
+                             * @param {google.devtools.artifactregistry.v1.Repository.IMavenRepositoryConfig} message MavenRepositoryConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MavenRepositoryConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allowSnapshotOverwrites != null && Object.hasOwnProperty.call(message, "allowSnapshotOverwrites"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.allowSnapshotOverwrites);
+                                if (message.versionPolicy != null && Object.hasOwnProperty.call(message, "versionPolicy"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.versionPolicy);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MavenRepositoryConfig message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @static
+                             * @param {google.devtools.artifactregistry.v1.Repository.IMavenRepositoryConfig} message MavenRepositoryConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MavenRepositoryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MavenRepositoryConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig} MavenRepositoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MavenRepositoryConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.allowSnapshotOverwrites = reader.bool();
+                                        break;
+                                    case 2:
+                                        message.versionPolicy = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MavenRepositoryConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig} MavenRepositoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MavenRepositoryConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MavenRepositoryConfig message.
+                             * @function verify
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MavenRepositoryConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.allowSnapshotOverwrites != null && message.hasOwnProperty("allowSnapshotOverwrites"))
+                                    if (typeof message.allowSnapshotOverwrites !== "boolean")
+                                        return "allowSnapshotOverwrites: boolean expected";
+                                if (message.versionPolicy != null && message.hasOwnProperty("versionPolicy"))
+                                    switch (message.versionPolicy) {
+                                    default:
+                                        return "versionPolicy: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MavenRepositoryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig} MavenRepositoryConfig
+                             */
+                            MavenRepositoryConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig)
+                                    return object;
+                                var message = new $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig();
+                                if (object.allowSnapshotOverwrites != null)
+                                    message.allowSnapshotOverwrites = Boolean(object.allowSnapshotOverwrites);
+                                switch (object.versionPolicy) {
+                                case "VERSION_POLICY_UNSPECIFIED":
+                                case 0:
+                                    message.versionPolicy = 0;
+                                    break;
+                                case "RELEASE":
+                                case 1:
+                                    message.versionPolicy = 1;
+                                    break;
+                                case "SNAPSHOT":
+                                case 2:
+                                    message.versionPolicy = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MavenRepositoryConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @static
+                             * @param {google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig} message MavenRepositoryConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MavenRepositoryConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.allowSnapshotOverwrites = false;
+                                    object.versionPolicy = options.enums === String ? "VERSION_POLICY_UNSPECIFIED" : 0;
+                                }
+                                if (message.allowSnapshotOverwrites != null && message.hasOwnProperty("allowSnapshotOverwrites"))
+                                    object.allowSnapshotOverwrites = message.allowSnapshotOverwrites;
+                                if (message.versionPolicy != null && message.hasOwnProperty("versionPolicy"))
+                                    object.versionPolicy = options.enums === String ? $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.VersionPolicy[message.versionPolicy] : message.versionPolicy;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MavenRepositoryConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MavenRepositoryConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * VersionPolicy enum.
+                             * @name google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.VersionPolicy
+                             * @enum {number}
+                             * @property {number} VERSION_POLICY_UNSPECIFIED=0 VERSION_POLICY_UNSPECIFIED value
+                             * @property {number} RELEASE=1 RELEASE value
+                             * @property {number} SNAPSHOT=2 SNAPSHOT value
+                             */
+                            MavenRepositoryConfig.VersionPolicy = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "VERSION_POLICY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "RELEASE"] = 1;
+                                values[valuesById[2] = "SNAPSHOT"] = 2;
+                                return values;
+                            })();
+    
+                            return MavenRepositoryConfig;
+                        })();
     
                         /**
                          * Format enum.
@@ -1968,6 +6290,650 @@
                         return GetRepositoryRequest;
                     })();
     
+                    v1.CreateRepositoryRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateRepositoryRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface ICreateRepositoryRequest
+                         * @property {string|null} [parent] CreateRepositoryRequest parent
+                         * @property {string|null} [repositoryId] CreateRepositoryRequest repositoryId
+                         * @property {google.devtools.artifactregistry.v1.IRepository|null} [repository] CreateRepositoryRequest repository
+                         */
+    
+                        /**
+                         * Constructs a new CreateRepositoryRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a CreateRepositoryRequest.
+                         * @implements ICreateRepositoryRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.ICreateRepositoryRequest=} [properties] Properties to set
+                         */
+                        function CreateRepositoryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateRepositoryRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @instance
+                         */
+                        CreateRepositoryRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateRepositoryRequest repositoryId.
+                         * @member {string} repositoryId
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @instance
+                         */
+                        CreateRepositoryRequest.prototype.repositoryId = "";
+    
+                        /**
+                         * CreateRepositoryRequest repository.
+                         * @member {google.devtools.artifactregistry.v1.IRepository|null|undefined} repository
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @instance
+                         */
+                        CreateRepositoryRequest.prototype.repository = null;
+    
+                        /**
+                         * Creates a new CreateRepositoryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ICreateRepositoryRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.CreateRepositoryRequest} CreateRepositoryRequest instance
+                         */
+                        CreateRepositoryRequest.create = function create(properties) {
+                            return new CreateRepositoryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRepositoryRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.CreateRepositoryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ICreateRepositoryRequest} message CreateRepositoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRepositoryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.repositoryId != null && Object.hasOwnProperty.call(message, "repositoryId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.repositoryId);
+                            if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                $root.google.devtools.artifactregistry.v1.Repository.encode(message.repository, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRepositoryRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.CreateRepositoryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ICreateRepositoryRequest} message CreateRepositoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRepositoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateRepositoryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.CreateRepositoryRequest} CreateRepositoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRepositoryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.CreateRepositoryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.repositoryId = reader.string();
+                                    break;
+                                case 3:
+                                    message.repository = $root.google.devtools.artifactregistry.v1.Repository.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateRepositoryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.CreateRepositoryRequest} CreateRepositoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRepositoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateRepositoryRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateRepositoryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.repositoryId != null && message.hasOwnProperty("repositoryId"))
+                                if (!$util.isString(message.repositoryId))
+                                    return "repositoryId: string expected";
+                            if (message.repository != null && message.hasOwnProperty("repository")) {
+                                var error = $root.google.devtools.artifactregistry.v1.Repository.verify(message.repository);
+                                if (error)
+                                    return "repository." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateRepositoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.CreateRepositoryRequest} CreateRepositoryRequest
+                         */
+                        CreateRepositoryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.CreateRepositoryRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.CreateRepositoryRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.repositoryId != null)
+                                message.repositoryId = String(object.repositoryId);
+                            if (object.repository != null) {
+                                if (typeof object.repository !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.CreateRepositoryRequest.repository: object expected");
+                                message.repository = $root.google.devtools.artifactregistry.v1.Repository.fromObject(object.repository);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateRepositoryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.CreateRepositoryRequest} message CreateRepositoryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateRepositoryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.repositoryId = "";
+                                object.repository = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.repositoryId != null && message.hasOwnProperty("repositoryId"))
+                                object.repositoryId = message.repositoryId;
+                            if (message.repository != null && message.hasOwnProperty("repository"))
+                                object.repository = $root.google.devtools.artifactregistry.v1.Repository.toObject(message.repository, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateRepositoryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.CreateRepositoryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateRepositoryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateRepositoryRequest;
+                    })();
+    
+                    v1.UpdateRepositoryRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateRepositoryRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IUpdateRepositoryRequest
+                         * @property {google.devtools.artifactregistry.v1.IRepository|null} [repository] UpdateRepositoryRequest repository
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateRepositoryRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateRepositoryRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an UpdateRepositoryRequest.
+                         * @implements IUpdateRepositoryRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IUpdateRepositoryRequest=} [properties] Properties to set
+                         */
+                        function UpdateRepositoryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateRepositoryRequest repository.
+                         * @member {google.devtools.artifactregistry.v1.IRepository|null|undefined} repository
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @instance
+                         */
+                        UpdateRepositoryRequest.prototype.repository = null;
+    
+                        /**
+                         * UpdateRepositoryRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @instance
+                         */
+                        UpdateRepositoryRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateRepositoryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateRepositoryRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.UpdateRepositoryRequest} UpdateRepositoryRequest instance
+                         */
+                        UpdateRepositoryRequest.create = function create(properties) {
+                            return new UpdateRepositoryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateRepositoryRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateRepositoryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateRepositoryRequest} message UpdateRepositoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateRepositoryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                $root.google.devtools.artifactregistry.v1.Repository.encode(message.repository, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateRepositoryRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateRepositoryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateRepositoryRequest} message UpdateRepositoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateRepositoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateRepositoryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.UpdateRepositoryRequest} UpdateRepositoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateRepositoryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.UpdateRepositoryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.repository = $root.google.devtools.artifactregistry.v1.Repository.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateRepositoryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.UpdateRepositoryRequest} UpdateRepositoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateRepositoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateRepositoryRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateRepositoryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.repository != null && message.hasOwnProperty("repository")) {
+                                var error = $root.google.devtools.artifactregistry.v1.Repository.verify(message.repository);
+                                if (error)
+                                    return "repository." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateRepositoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.UpdateRepositoryRequest} UpdateRepositoryRequest
+                         */
+                        UpdateRepositoryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.UpdateRepositoryRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.UpdateRepositoryRequest();
+                            if (object.repository != null) {
+                                if (typeof object.repository !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.UpdateRepositoryRequest.repository: object expected");
+                                message.repository = $root.google.devtools.artifactregistry.v1.Repository.fromObject(object.repository);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.UpdateRepositoryRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateRepositoryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.UpdateRepositoryRequest} message UpdateRepositoryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateRepositoryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.repository = null;
+                                object.updateMask = null;
+                            }
+                            if (message.repository != null && message.hasOwnProperty("repository"))
+                                object.repository = $root.google.devtools.artifactregistry.v1.Repository.toObject(message.repository, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateRepositoryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.UpdateRepositoryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateRepositoryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateRepositoryRequest;
+                    })();
+    
+                    v1.DeleteRepositoryRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteRepositoryRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IDeleteRepositoryRequest
+                         * @property {string|null} [name] DeleteRepositoryRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteRepositoryRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a DeleteRepositoryRequest.
+                         * @implements IDeleteRepositoryRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IDeleteRepositoryRequest=} [properties] Properties to set
+                         */
+                        function DeleteRepositoryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteRepositoryRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @instance
+                         */
+                        DeleteRepositoryRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteRepositoryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteRepositoryRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.DeleteRepositoryRequest} DeleteRepositoryRequest instance
+                         */
+                        DeleteRepositoryRequest.create = function create(properties) {
+                            return new DeleteRepositoryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRepositoryRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteRepositoryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteRepositoryRequest} message DeleteRepositoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRepositoryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRepositoryRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteRepositoryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteRepositoryRequest} message DeleteRepositoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRepositoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteRepositoryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.DeleteRepositoryRequest} DeleteRepositoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRepositoryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.DeleteRepositoryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteRepositoryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.DeleteRepositoryRequest} DeleteRepositoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRepositoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteRepositoryRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteRepositoryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteRepositoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.DeleteRepositoryRequest} DeleteRepositoryRequest
+                         */
+                        DeleteRepositoryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.DeleteRepositoryRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.DeleteRepositoryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteRepositoryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.DeleteRepositoryRequest} message DeleteRepositoryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteRepositoryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteRepositoryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.DeleteRepositoryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteRepositoryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteRepositoryRequest;
+                    })();
+    
                     v1.ArtifactRegistry = (function() {
     
                         /**
@@ -2030,6 +6996,105 @@
                          * @instance
                          * @param {google.devtools.artifactregistry.v1.IListDockerImagesRequest} request ListDockerImagesRequest message or plain object
                          * @returns {Promise<google.devtools.artifactregistry.v1.ListDockerImagesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#getDockerImage}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef GetDockerImageCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.DockerImage} [response] DockerImage
+                         */
+    
+                        /**
+                         * Calls GetDockerImage.
+                         * @function getDockerImage
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetDockerImageRequest} request GetDockerImageRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.GetDockerImageCallback} callback Node-style callback called with the error, if any, and DockerImage
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.getDockerImage = function getDockerImage(request, callback) {
+                            return this.rpcCall(getDockerImage, $root.google.devtools.artifactregistry.v1.GetDockerImageRequest, $root.google.devtools.artifactregistry.v1.DockerImage, request, callback);
+                        }, "name", { value: "GetDockerImage" });
+    
+                        /**
+                         * Calls GetDockerImage.
+                         * @function getDockerImage
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetDockerImageRequest} request GetDockerImageRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.DockerImage>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#importAptArtifacts}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef ImportAptArtifactsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ImportAptArtifacts.
+                         * @function importAptArtifacts
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsRequest} request ImportAptArtifactsRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.ImportAptArtifactsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.importAptArtifacts = function importAptArtifacts(request, callback) {
+                            return this.rpcCall(importAptArtifacts, $root.google.devtools.artifactregistry.v1.ImportAptArtifactsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ImportAptArtifacts" });
+    
+                        /**
+                         * Calls ImportAptArtifacts.
+                         * @function importAptArtifacts
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IImportAptArtifactsRequest} request ImportAptArtifactsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#importYumArtifacts}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef ImportYumArtifactsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ImportYumArtifacts.
+                         * @function importYumArtifacts
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsRequest} request ImportYumArtifactsRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.ImportYumArtifactsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.importYumArtifacts = function importYumArtifacts(request, callback) {
+                            return this.rpcCall(importYumArtifacts, $root.google.devtools.artifactregistry.v1.ImportYumArtifactsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ImportYumArtifacts" });
+    
+                        /**
+                         * Calls ImportYumArtifacts.
+                         * @function importYumArtifacts
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsRequest} request ImportYumArtifactsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -2099,7 +7164,5757 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#createRepository}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef CreateRepositoryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateRepository.
+                         * @function createRepository
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.ICreateRepositoryRequest} request CreateRepositoryRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.CreateRepositoryCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.createRepository = function createRepository(request, callback) {
+                            return this.rpcCall(createRepository, $root.google.devtools.artifactregistry.v1.CreateRepositoryRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateRepository" });
+    
+                        /**
+                         * Calls CreateRepository.
+                         * @function createRepository
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.ICreateRepositoryRequest} request CreateRepositoryRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#updateRepository}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef UpdateRepositoryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.Repository} [response] Repository
+                         */
+    
+                        /**
+                         * Calls UpdateRepository.
+                         * @function updateRepository
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IUpdateRepositoryRequest} request UpdateRepositoryRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateRepositoryCallback} callback Node-style callback called with the error, if any, and Repository
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.updateRepository = function updateRepository(request, callback) {
+                            return this.rpcCall(updateRepository, $root.google.devtools.artifactregistry.v1.UpdateRepositoryRequest, $root.google.devtools.artifactregistry.v1.Repository, request, callback);
+                        }, "name", { value: "UpdateRepository" });
+    
+                        /**
+                         * Calls UpdateRepository.
+                         * @function updateRepository
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IUpdateRepositoryRequest} request UpdateRepositoryRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.Repository>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#deleteRepository}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef DeleteRepositoryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteRepository.
+                         * @function deleteRepository
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IDeleteRepositoryRequest} request DeleteRepositoryRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteRepositoryCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.deleteRepository = function deleteRepository(request, callback) {
+                            return this.rpcCall(deleteRepository, $root.google.devtools.artifactregistry.v1.DeleteRepositoryRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteRepository" });
+    
+                        /**
+                         * Calls DeleteRepository.
+                         * @function deleteRepository
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IDeleteRepositoryRequest} request DeleteRepositoryRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#listPackages}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef ListPackagesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.ListPackagesResponse} [response] ListPackagesResponse
+                         */
+    
+                        /**
+                         * Calls ListPackages.
+                         * @function listPackages
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesRequest} request ListPackagesRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.ListPackagesCallback} callback Node-style callback called with the error, if any, and ListPackagesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.listPackages = function listPackages(request, callback) {
+                            return this.rpcCall(listPackages, $root.google.devtools.artifactregistry.v1.ListPackagesRequest, $root.google.devtools.artifactregistry.v1.ListPackagesResponse, request, callback);
+                        }, "name", { value: "ListPackages" });
+    
+                        /**
+                         * Calls ListPackages.
+                         * @function listPackages
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListPackagesRequest} request ListPackagesRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.ListPackagesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#getPackage}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef GetPackageCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.Package} [response] Package
+                         */
+    
+                        /**
+                         * Calls GetPackage.
+                         * @function getPackage
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetPackageRequest} request GetPackageRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.GetPackageCallback} callback Node-style callback called with the error, if any, and Package
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.getPackage = function getPackage(request, callback) {
+                            return this.rpcCall(getPackage, $root.google.devtools.artifactregistry.v1.GetPackageRequest, $root.google.devtools.artifactregistry.v1.Package, request, callback);
+                        }, "name", { value: "GetPackage" });
+    
+                        /**
+                         * Calls GetPackage.
+                         * @function getPackage
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetPackageRequest} request GetPackageRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.Package>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#deletePackage}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef DeletePackageCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeletePackage.
+                         * @function deletePackage
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IDeletePackageRequest} request DeletePackageRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.DeletePackageCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.deletePackage = function deletePackage(request, callback) {
+                            return this.rpcCall(deletePackage, $root.google.devtools.artifactregistry.v1.DeletePackageRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeletePackage" });
+    
+                        /**
+                         * Calls DeletePackage.
+                         * @function deletePackage
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IDeletePackageRequest} request DeletePackageRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#listVersions}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef ListVersionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.ListVersionsResponse} [response] ListVersionsResponse
+                         */
+    
+                        /**
+                         * Calls ListVersions.
+                         * @function listVersions
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsRequest} request ListVersionsRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.ListVersionsCallback} callback Node-style callback called with the error, if any, and ListVersionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.listVersions = function listVersions(request, callback) {
+                            return this.rpcCall(listVersions, $root.google.devtools.artifactregistry.v1.ListVersionsRequest, $root.google.devtools.artifactregistry.v1.ListVersionsResponse, request, callback);
+                        }, "name", { value: "ListVersions" });
+    
+                        /**
+                         * Calls ListVersions.
+                         * @function listVersions
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsRequest} request ListVersionsRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.ListVersionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#getVersion}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef GetVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.Version} [response] Version
+                         */
+    
+                        /**
+                         * Calls GetVersion.
+                         * @function getVersion
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetVersionRequest} request GetVersionRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.GetVersionCallback} callback Node-style callback called with the error, if any, and Version
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.getVersion = function getVersion(request, callback) {
+                            return this.rpcCall(getVersion, $root.google.devtools.artifactregistry.v1.GetVersionRequest, $root.google.devtools.artifactregistry.v1.Version, request, callback);
+                        }, "name", { value: "GetVersion" });
+    
+                        /**
+                         * Calls GetVersion.
+                         * @function getVersion
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetVersionRequest} request GetVersionRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.Version>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#deleteVersion}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef DeleteVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteVersion.
+                         * @function deleteVersion
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IDeleteVersionRequest} request DeleteVersionRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteVersionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.deleteVersion = function deleteVersion(request, callback) {
+                            return this.rpcCall(deleteVersion, $root.google.devtools.artifactregistry.v1.DeleteVersionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteVersion" });
+    
+                        /**
+                         * Calls DeleteVersion.
+                         * @function deleteVersion
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IDeleteVersionRequest} request DeleteVersionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#listFiles}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef ListFilesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.ListFilesResponse} [response] ListFilesResponse
+                         */
+    
+                        /**
+                         * Calls ListFiles.
+                         * @function listFiles
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListFilesRequest} request ListFilesRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.ListFilesCallback} callback Node-style callback called with the error, if any, and ListFilesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.listFiles = function listFiles(request, callback) {
+                            return this.rpcCall(listFiles, $root.google.devtools.artifactregistry.v1.ListFilesRequest, $root.google.devtools.artifactregistry.v1.ListFilesResponse, request, callback);
+                        }, "name", { value: "ListFiles" });
+    
+                        /**
+                         * Calls ListFiles.
+                         * @function listFiles
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListFilesRequest} request ListFilesRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.ListFilesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#getFile}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef GetFileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.File} [response] File
+                         */
+    
+                        /**
+                         * Calls GetFile.
+                         * @function getFile
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetFileRequest} request GetFileRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.GetFileCallback} callback Node-style callback called with the error, if any, and File
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.getFile = function getFile(request, callback) {
+                            return this.rpcCall(getFile, $root.google.devtools.artifactregistry.v1.GetFileRequest, $root.google.devtools.artifactregistry.v1.File, request, callback);
+                        }, "name", { value: "GetFile" });
+    
+                        /**
+                         * Calls GetFile.
+                         * @function getFile
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetFileRequest} request GetFileRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.File>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#listTags}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef ListTagsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.ListTagsResponse} [response] ListTagsResponse
+                         */
+    
+                        /**
+                         * Calls ListTags.
+                         * @function listTags
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListTagsRequest} request ListTagsRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.ListTagsCallback} callback Node-style callback called with the error, if any, and ListTagsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.listTags = function listTags(request, callback) {
+                            return this.rpcCall(listTags, $root.google.devtools.artifactregistry.v1.ListTagsRequest, $root.google.devtools.artifactregistry.v1.ListTagsResponse, request, callback);
+                        }, "name", { value: "ListTags" });
+    
+                        /**
+                         * Calls ListTags.
+                         * @function listTags
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListTagsRequest} request ListTagsRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.ListTagsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#getTag}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef GetTagCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.Tag} [response] Tag
+                         */
+    
+                        /**
+                         * Calls GetTag.
+                         * @function getTag
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetTagRequest} request GetTagRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.GetTagCallback} callback Node-style callback called with the error, if any, and Tag
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.getTag = function getTag(request, callback) {
+                            return this.rpcCall(getTag, $root.google.devtools.artifactregistry.v1.GetTagRequest, $root.google.devtools.artifactregistry.v1.Tag, request, callback);
+                        }, "name", { value: "GetTag" });
+    
+                        /**
+                         * Calls GetTag.
+                         * @function getTag
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetTagRequest} request GetTagRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.Tag>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#createTag}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef CreateTagCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.Tag} [response] Tag
+                         */
+    
+                        /**
+                         * Calls CreateTag.
+                         * @function createTag
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.ICreateTagRequest} request CreateTagRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.CreateTagCallback} callback Node-style callback called with the error, if any, and Tag
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.createTag = function createTag(request, callback) {
+                            return this.rpcCall(createTag, $root.google.devtools.artifactregistry.v1.CreateTagRequest, $root.google.devtools.artifactregistry.v1.Tag, request, callback);
+                        }, "name", { value: "CreateTag" });
+    
+                        /**
+                         * Calls CreateTag.
+                         * @function createTag
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.ICreateTagRequest} request CreateTagRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.Tag>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#updateTag}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef UpdateTagCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.Tag} [response] Tag
+                         */
+    
+                        /**
+                         * Calls UpdateTag.
+                         * @function updateTag
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IUpdateTagRequest} request UpdateTagRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateTagCallback} callback Node-style callback called with the error, if any, and Tag
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.updateTag = function updateTag(request, callback) {
+                            return this.rpcCall(updateTag, $root.google.devtools.artifactregistry.v1.UpdateTagRequest, $root.google.devtools.artifactregistry.v1.Tag, request, callback);
+                        }, "name", { value: "UpdateTag" });
+    
+                        /**
+                         * Calls UpdateTag.
+                         * @function updateTag
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IUpdateTagRequest} request UpdateTagRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.Tag>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#deleteTag}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef DeleteTagCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteTag.
+                         * @function deleteTag
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IDeleteTagRequest} request DeleteTagRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteTagCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.deleteTag = function deleteTag(request, callback) {
+                            return this.rpcCall(deleteTag, $root.google.devtools.artifactregistry.v1.DeleteTagRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteTag" });
+    
+                        /**
+                         * Calls DeleteTag.
+                         * @function deleteTag
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IDeleteTagRequest} request DeleteTagRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#setIamPolicy}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef SetIamPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls SetIamPolicy.
+                         * @function setIamPolicy
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                            return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        }, "name", { value: "SetIamPolicy" });
+    
+                        /**
+                         * Calls SetIamPolicy.
+                         * @function setIamPolicy
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                         * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#getIamPolicy}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef GetIamPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls GetIamPolicy.
+                         * @function getIamPolicy
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                            return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        }, "name", { value: "GetIamPolicy" });
+    
+                        /**
+                         * Calls GetIamPolicy.
+                         * @function getIamPolicy
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                         * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#testIamPermissions}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef TestIamPermissionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                         */
+    
+                        /**
+                         * Calls TestIamPermissions.
+                         * @function testIamPermissions
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                            return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                        }, "name", { value: "TestIamPermissions" });
+    
+                        /**
+                         * Calls TestIamPermissions.
+                         * @function testIamPermissions
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                         * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#getProjectSettings}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef GetProjectSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.ProjectSettings} [response] ProjectSettings
+                         */
+    
+                        /**
+                         * Calls GetProjectSettings.
+                         * @function getProjectSettings
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetProjectSettingsRequest} request GetProjectSettingsRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.GetProjectSettingsCallback} callback Node-style callback called with the error, if any, and ProjectSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.getProjectSettings = function getProjectSettings(request, callback) {
+                            return this.rpcCall(getProjectSettings, $root.google.devtools.artifactregistry.v1.GetProjectSettingsRequest, $root.google.devtools.artifactregistry.v1.ProjectSettings, request, callback);
+                        }, "name", { value: "GetProjectSettings" });
+    
+                        /**
+                         * Calls GetProjectSettings.
+                         * @function getProjectSettings
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetProjectSettingsRequest} request GetProjectSettingsRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.ProjectSettings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#updateProjectSettings}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef UpdateProjectSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.ProjectSettings} [response] ProjectSettings
+                         */
+    
+                        /**
+                         * Calls UpdateProjectSettings.
+                         * @function updateProjectSettings
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest} request UpdateProjectSettingsRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateProjectSettingsCallback} callback Node-style callback called with the error, if any, and ProjectSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.updateProjectSettings = function updateProjectSettings(request, callback) {
+                            return this.rpcCall(updateProjectSettings, $root.google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest, $root.google.devtools.artifactregistry.v1.ProjectSettings, request, callback);
+                        }, "name", { value: "UpdateProjectSettings" });
+    
+                        /**
+                         * Calls UpdateProjectSettings.
+                         * @function updateProjectSettings
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest} request UpdateProjectSettingsRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.ProjectSettings>} Promise
+                         * @variation 2
+                         */
+    
                         return ArtifactRegistry;
+                    })();
+    
+                    v1.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IOperationMetadata
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.devtools.artifactregistry.v1.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.OperationMetadata)
+                                return object;
+                            return new $root.google.devtools.artifactregistry.v1.OperationMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    v1.ProjectSettings = (function() {
+    
+                        /**
+                         * Properties of a ProjectSettings.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IProjectSettings
+                         * @property {string|null} [name] ProjectSettings name
+                         * @property {google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState|null} [legacyRedirectionState] ProjectSettings legacyRedirectionState
+                         */
+    
+                        /**
+                         * Constructs a new ProjectSettings.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ProjectSettings.
+                         * @implements IProjectSettings
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IProjectSettings=} [properties] Properties to set
+                         */
+                        function ProjectSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProjectSettings name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @instance
+                         */
+                        ProjectSettings.prototype.name = "";
+    
+                        /**
+                         * ProjectSettings legacyRedirectionState.
+                         * @member {google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState} legacyRedirectionState
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @instance
+                         */
+                        ProjectSettings.prototype.legacyRedirectionState = 0;
+    
+                        /**
+                         * Creates a new ProjectSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IProjectSettings=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ProjectSettings} ProjectSettings instance
+                         */
+                        ProjectSettings.create = function create(properties) {
+                            return new ProjectSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProjectSettings message. Does not implicitly {@link google.devtools.artifactregistry.v1.ProjectSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IProjectSettings} message ProjectSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProjectSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.legacyRedirectionState != null && Object.hasOwnProperty.call(message, "legacyRedirectionState"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.legacyRedirectionState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProjectSettings message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ProjectSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IProjectSettings} message ProjectSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProjectSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProjectSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ProjectSettings} ProjectSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProjectSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ProjectSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.legacyRedirectionState = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProjectSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ProjectSettings} ProjectSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProjectSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProjectSettings message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProjectSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.legacyRedirectionState != null && message.hasOwnProperty("legacyRedirectionState"))
+                                switch (message.legacyRedirectionState) {
+                                default:
+                                    return "legacyRedirectionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProjectSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ProjectSettings} ProjectSettings
+                         */
+                        ProjectSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ProjectSettings)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ProjectSettings();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.legacyRedirectionState) {
+                            case "REDIRECTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.legacyRedirectionState = 0;
+                                break;
+                            case "REDIRECTION_FROM_GCR_IO_DISABLED":
+                            case 1:
+                                message.legacyRedirectionState = 1;
+                                break;
+                            case "REDIRECTION_FROM_GCR_IO_ENABLED":
+                            case 2:
+                                message.legacyRedirectionState = 2;
+                                break;
+                            case "REDIRECTION_FROM_GCR_IO_FINALIZED":
+                            case 3:
+                                message.legacyRedirectionState = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProjectSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ProjectSettings} message ProjectSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProjectSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.legacyRedirectionState = options.enums === String ? "REDIRECTION_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.legacyRedirectionState != null && message.hasOwnProperty("legacyRedirectionState"))
+                                object.legacyRedirectionState = options.enums === String ? $root.google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState[message.legacyRedirectionState] : message.legacyRedirectionState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProjectSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ProjectSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProjectSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * RedirectionState enum.
+                         * @name google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState
+                         * @enum {number}
+                         * @property {number} REDIRECTION_STATE_UNSPECIFIED=0 REDIRECTION_STATE_UNSPECIFIED value
+                         * @property {number} REDIRECTION_FROM_GCR_IO_DISABLED=1 REDIRECTION_FROM_GCR_IO_DISABLED value
+                         * @property {number} REDIRECTION_FROM_GCR_IO_ENABLED=2 REDIRECTION_FROM_GCR_IO_ENABLED value
+                         * @property {number} REDIRECTION_FROM_GCR_IO_FINALIZED=3 REDIRECTION_FROM_GCR_IO_FINALIZED value
+                         */
+                        ProjectSettings.RedirectionState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REDIRECTION_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REDIRECTION_FROM_GCR_IO_DISABLED"] = 1;
+                            values[valuesById[2] = "REDIRECTION_FROM_GCR_IO_ENABLED"] = 2;
+                            values[valuesById[3] = "REDIRECTION_FROM_GCR_IO_FINALIZED"] = 3;
+                            return values;
+                        })();
+    
+                        return ProjectSettings;
+                    })();
+    
+                    v1.GetProjectSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetProjectSettingsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IGetProjectSettingsRequest
+                         * @property {string|null} [name] GetProjectSettingsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetProjectSettingsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a GetProjectSettingsRequest.
+                         * @implements IGetProjectSettingsRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IGetProjectSettingsRequest=} [properties] Properties to set
+                         */
+                        function GetProjectSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetProjectSettingsRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @instance
+                         */
+                        GetProjectSettingsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetProjectSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetProjectSettingsRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.GetProjectSettingsRequest} GetProjectSettingsRequest instance
+                         */
+                        GetProjectSettingsRequest.create = function create(properties) {
+                            return new GetProjectSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetProjectSettingsRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetProjectSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetProjectSettingsRequest} message GetProjectSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetProjectSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetProjectSettingsRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetProjectSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetProjectSettingsRequest} message GetProjectSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetProjectSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetProjectSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.GetProjectSettingsRequest} GetProjectSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetProjectSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.GetProjectSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetProjectSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.GetProjectSettingsRequest} GetProjectSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetProjectSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetProjectSettingsRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetProjectSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetProjectSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.GetProjectSettingsRequest} GetProjectSettingsRequest
+                         */
+                        GetProjectSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.GetProjectSettingsRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.GetProjectSettingsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetProjectSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.GetProjectSettingsRequest} message GetProjectSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetProjectSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetProjectSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.GetProjectSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetProjectSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetProjectSettingsRequest;
+                    })();
+    
+                    v1.UpdateProjectSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateProjectSettingsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IUpdateProjectSettingsRequest
+                         * @property {google.devtools.artifactregistry.v1.IProjectSettings|null} [projectSettings] UpdateProjectSettingsRequest projectSettings
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateProjectSettingsRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateProjectSettingsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an UpdateProjectSettingsRequest.
+                         * @implements IUpdateProjectSettingsRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest=} [properties] Properties to set
+                         */
+                        function UpdateProjectSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateProjectSettingsRequest projectSettings.
+                         * @member {google.devtools.artifactregistry.v1.IProjectSettings|null|undefined} projectSettings
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @instance
+                         */
+                        UpdateProjectSettingsRequest.prototype.projectSettings = null;
+    
+                        /**
+                         * UpdateProjectSettingsRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @instance
+                         */
+                        UpdateProjectSettingsRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateProjectSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest} UpdateProjectSettingsRequest instance
+                         */
+                        UpdateProjectSettingsRequest.create = function create(properties) {
+                            return new UpdateProjectSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateProjectSettingsRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest} message UpdateProjectSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateProjectSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectSettings != null && Object.hasOwnProperty.call(message, "projectSettings"))
+                                $root.google.devtools.artifactregistry.v1.ProjectSettings.encode(message.projectSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateProjectSettingsRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest} message UpdateProjectSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateProjectSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateProjectSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest} UpdateProjectSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateProjectSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.projectSettings = $root.google.devtools.artifactregistry.v1.ProjectSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateProjectSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest} UpdateProjectSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateProjectSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateProjectSettingsRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateProjectSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectSettings != null && message.hasOwnProperty("projectSettings")) {
+                                var error = $root.google.devtools.artifactregistry.v1.ProjectSettings.verify(message.projectSettings);
+                                if (error)
+                                    return "projectSettings." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateProjectSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest} UpdateProjectSettingsRequest
+                         */
+                        UpdateProjectSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest();
+                            if (object.projectSettings != null) {
+                                if (typeof object.projectSettings !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest.projectSettings: object expected");
+                                message.projectSettings = $root.google.devtools.artifactregistry.v1.ProjectSettings.fromObject(object.projectSettings);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateProjectSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest} message UpdateProjectSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateProjectSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectSettings = null;
+                                object.updateMask = null;
+                            }
+                            if (message.projectSettings != null && message.hasOwnProperty("projectSettings"))
+                                object.projectSettings = $root.google.devtools.artifactregistry.v1.ProjectSettings.toObject(message.projectSettings, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateProjectSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.UpdateProjectSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateProjectSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateProjectSettingsRequest;
+                    })();
+    
+                    v1.Tag = (function() {
+    
+                        /**
+                         * Properties of a Tag.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface ITag
+                         * @property {string|null} [name] Tag name
+                         * @property {string|null} [version] Tag version
+                         */
+    
+                        /**
+                         * Constructs a new Tag.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a Tag.
+                         * @implements ITag
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.ITag=} [properties] Properties to set
+                         */
+                        function Tag(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Tag name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @instance
+                         */
+                        Tag.prototype.name = "";
+    
+                        /**
+                         * Tag version.
+                         * @member {string} version
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @instance
+                         */
+                        Tag.prototype.version = "";
+    
+                        /**
+                         * Creates a new Tag instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ITag=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.Tag} Tag instance
+                         */
+                        Tag.create = function create(properties) {
+                            return new Tag(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Tag message. Does not implicitly {@link google.devtools.artifactregistry.v1.Tag.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ITag} message Tag message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Tag.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Tag message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Tag.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ITag} message Tag message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Tag.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Tag message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.Tag} Tag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Tag.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.Tag();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.version = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Tag message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.Tag} Tag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Tag.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Tag message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Tag.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Tag message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.Tag} Tag
+                         */
+                        Tag.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.Tag)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.Tag();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Tag message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.Tag} message Tag
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Tag.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.version = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Tag to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.Tag
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Tag.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Tag;
+                    })();
+    
+                    v1.ListTagsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListTagsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListTagsRequest
+                         * @property {string|null} [parent] ListTagsRequest parent
+                         * @property {string|null} [filter] ListTagsRequest filter
+                         * @property {number|null} [pageSize] ListTagsRequest pageSize
+                         * @property {string|null} [pageToken] ListTagsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListTagsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListTagsRequest.
+                         * @implements IListTagsRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListTagsRequest=} [properties] Properties to set
+                         */
+                        function ListTagsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListTagsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @instance
+                         */
+                        ListTagsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListTagsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @instance
+                         */
+                        ListTagsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListTagsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @instance
+                         */
+                        ListTagsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListTagsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @instance
+                         */
+                        ListTagsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListTagsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListTagsRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListTagsRequest} ListTagsRequest instance
+                         */
+                        ListTagsRequest.create = function create(properties) {
+                            return new ListTagsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListTagsRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListTagsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListTagsRequest} message ListTagsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTagsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListTagsRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListTagsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListTagsRequest} message ListTagsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTagsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListTagsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListTagsRequest} ListTagsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTagsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListTagsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListTagsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListTagsRequest} ListTagsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTagsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListTagsRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListTagsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListTagsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListTagsRequest} ListTagsRequest
+                         */
+                        ListTagsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListTagsRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListTagsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListTagsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListTagsRequest} message ListTagsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListTagsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListTagsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListTagsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListTagsRequest;
+                    })();
+    
+                    v1.ListTagsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListTagsResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListTagsResponse
+                         * @property {Array.<google.devtools.artifactregistry.v1.ITag>|null} [tags] ListTagsResponse tags
+                         * @property {string|null} [nextPageToken] ListTagsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListTagsResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListTagsResponse.
+                         * @implements IListTagsResponse
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListTagsResponse=} [properties] Properties to set
+                         */
+                        function ListTagsResponse(properties) {
+                            this.tags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListTagsResponse tags.
+                         * @member {Array.<google.devtools.artifactregistry.v1.ITag>} tags
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @instance
+                         */
+                        ListTagsResponse.prototype.tags = $util.emptyArray;
+    
+                        /**
+                         * ListTagsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @instance
+                         */
+                        ListTagsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListTagsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListTagsResponse=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListTagsResponse} ListTagsResponse instance
+                         */
+                        ListTagsResponse.create = function create(properties) {
+                            return new ListTagsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListTagsResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListTagsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListTagsResponse} message ListTagsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTagsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tags != null && message.tags.length)
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.Tag.encode(message.tags[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListTagsResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListTagsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListTagsResponse} message ListTagsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTagsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListTagsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListTagsResponse} ListTagsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTagsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListTagsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.tags && message.tags.length))
+                                        message.tags = [];
+                                    message.tags.push($root.google.devtools.artifactregistry.v1.Tag.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListTagsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListTagsResponse} ListTagsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTagsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListTagsResponse message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListTagsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!Array.isArray(message.tags))
+                                    return "tags: array expected";
+                                for (var i = 0; i < message.tags.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.Tag.verify(message.tags[i]);
+                                    if (error)
+                                        return "tags." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListTagsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListTagsResponse} ListTagsResponse
+                         */
+                        ListTagsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListTagsResponse)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListTagsResponse();
+                            if (object.tags) {
+                                if (!Array.isArray(object.tags))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ListTagsResponse.tags: array expected");
+                                message.tags = [];
+                                for (var i = 0; i < object.tags.length; ++i) {
+                                    if (typeof object.tags[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ListTagsResponse.tags: object expected");
+                                    message.tags[i] = $root.google.devtools.artifactregistry.v1.Tag.fromObject(object.tags[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListTagsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListTagsResponse} message ListTagsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListTagsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tags = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.tags && message.tags.length) {
+                                object.tags = [];
+                                for (var j = 0; j < message.tags.length; ++j)
+                                    object.tags[j] = $root.google.devtools.artifactregistry.v1.Tag.toObject(message.tags[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListTagsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListTagsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListTagsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListTagsResponse;
+                    })();
+    
+                    v1.GetTagRequest = (function() {
+    
+                        /**
+                         * Properties of a GetTagRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IGetTagRequest
+                         * @property {string|null} [name] GetTagRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetTagRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a GetTagRequest.
+                         * @implements IGetTagRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IGetTagRequest=} [properties] Properties to set
+                         */
+                        function GetTagRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetTagRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @instance
+                         */
+                        GetTagRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetTagRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetTagRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.GetTagRequest} GetTagRequest instance
+                         */
+                        GetTagRequest.create = function create(properties) {
+                            return new GetTagRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetTagRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetTagRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetTagRequest} message GetTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetTagRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetTagRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetTagRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetTagRequest} message GetTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetTagRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.GetTagRequest} GetTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetTagRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.GetTagRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetTagRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.GetTagRequest} GetTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetTagRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetTagRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetTagRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetTagRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.GetTagRequest} GetTagRequest
+                         */
+                        GetTagRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.GetTagRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.GetTagRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetTagRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.GetTagRequest} message GetTagRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetTagRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetTagRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.GetTagRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetTagRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetTagRequest;
+                    })();
+    
+                    v1.CreateTagRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateTagRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface ICreateTagRequest
+                         * @property {string|null} [parent] CreateTagRequest parent
+                         * @property {string|null} [tagId] CreateTagRequest tagId
+                         * @property {google.devtools.artifactregistry.v1.ITag|null} [tag] CreateTagRequest tag
+                         */
+    
+                        /**
+                         * Constructs a new CreateTagRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a CreateTagRequest.
+                         * @implements ICreateTagRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.ICreateTagRequest=} [properties] Properties to set
+                         */
+                        function CreateTagRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateTagRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @instance
+                         */
+                        CreateTagRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateTagRequest tagId.
+                         * @member {string} tagId
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @instance
+                         */
+                        CreateTagRequest.prototype.tagId = "";
+    
+                        /**
+                         * CreateTagRequest tag.
+                         * @member {google.devtools.artifactregistry.v1.ITag|null|undefined} tag
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @instance
+                         */
+                        CreateTagRequest.prototype.tag = null;
+    
+                        /**
+                         * Creates a new CreateTagRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ICreateTagRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.CreateTagRequest} CreateTagRequest instance
+                         */
+                        CreateTagRequest.create = function create(properties) {
+                            return new CreateTagRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTagRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.CreateTagRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ICreateTagRequest} message CreateTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTagRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.tagId != null && Object.hasOwnProperty.call(message, "tagId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tagId);
+                            if (message.tag != null && Object.hasOwnProperty.call(message, "tag"))
+                                $root.google.devtools.artifactregistry.v1.Tag.encode(message.tag, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTagRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.CreateTagRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ICreateTagRequest} message CreateTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateTagRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.CreateTagRequest} CreateTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTagRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.CreateTagRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.tagId = reader.string();
+                                    break;
+                                case 3:
+                                    message.tag = $root.google.devtools.artifactregistry.v1.Tag.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateTagRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.CreateTagRequest} CreateTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTagRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateTagRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateTagRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.tagId != null && message.hasOwnProperty("tagId"))
+                                if (!$util.isString(message.tagId))
+                                    return "tagId: string expected";
+                            if (message.tag != null && message.hasOwnProperty("tag")) {
+                                var error = $root.google.devtools.artifactregistry.v1.Tag.verify(message.tag);
+                                if (error)
+                                    return "tag." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateTagRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.CreateTagRequest} CreateTagRequest
+                         */
+                        CreateTagRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.CreateTagRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.CreateTagRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.tagId != null)
+                                message.tagId = String(object.tagId);
+                            if (object.tag != null) {
+                                if (typeof object.tag !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.CreateTagRequest.tag: object expected");
+                                message.tag = $root.google.devtools.artifactregistry.v1.Tag.fromObject(object.tag);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateTagRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.CreateTagRequest} message CreateTagRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateTagRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.tagId = "";
+                                object.tag = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.tagId != null && message.hasOwnProperty("tagId"))
+                                object.tagId = message.tagId;
+                            if (message.tag != null && message.hasOwnProperty("tag"))
+                                object.tag = $root.google.devtools.artifactregistry.v1.Tag.toObject(message.tag, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateTagRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.CreateTagRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateTagRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateTagRequest;
+                    })();
+    
+                    v1.UpdateTagRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateTagRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IUpdateTagRequest
+                         * @property {google.devtools.artifactregistry.v1.ITag|null} [tag] UpdateTagRequest tag
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateTagRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateTagRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an UpdateTagRequest.
+                         * @implements IUpdateTagRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IUpdateTagRequest=} [properties] Properties to set
+                         */
+                        function UpdateTagRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateTagRequest tag.
+                         * @member {google.devtools.artifactregistry.v1.ITag|null|undefined} tag
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @instance
+                         */
+                        UpdateTagRequest.prototype.tag = null;
+    
+                        /**
+                         * UpdateTagRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @instance
+                         */
+                        UpdateTagRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateTagRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateTagRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.UpdateTagRequest} UpdateTagRequest instance
+                         */
+                        UpdateTagRequest.create = function create(properties) {
+                            return new UpdateTagRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateTagRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateTagRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateTagRequest} message UpdateTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateTagRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tag != null && Object.hasOwnProperty.call(message, "tag"))
+                                $root.google.devtools.artifactregistry.v1.Tag.encode(message.tag, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateTagRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateTagRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IUpdateTagRequest} message UpdateTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateTagRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.UpdateTagRequest} UpdateTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateTagRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.UpdateTagRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.tag = $root.google.devtools.artifactregistry.v1.Tag.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateTagRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.UpdateTagRequest} UpdateTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateTagRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateTagRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateTagRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tag != null && message.hasOwnProperty("tag")) {
+                                var error = $root.google.devtools.artifactregistry.v1.Tag.verify(message.tag);
+                                if (error)
+                                    return "tag." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateTagRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.UpdateTagRequest} UpdateTagRequest
+                         */
+                        UpdateTagRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.UpdateTagRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.UpdateTagRequest();
+                            if (object.tag != null) {
+                                if (typeof object.tag !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.UpdateTagRequest.tag: object expected");
+                                message.tag = $root.google.devtools.artifactregistry.v1.Tag.fromObject(object.tag);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.UpdateTagRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateTagRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.UpdateTagRequest} message UpdateTagRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateTagRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.tag = null;
+                                object.updateMask = null;
+                            }
+                            if (message.tag != null && message.hasOwnProperty("tag"))
+                                object.tag = $root.google.devtools.artifactregistry.v1.Tag.toObject(message.tag, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateTagRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.UpdateTagRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateTagRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateTagRequest;
+                    })();
+    
+                    v1.DeleteTagRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteTagRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IDeleteTagRequest
+                         * @property {string|null} [name] DeleteTagRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteTagRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a DeleteTagRequest.
+                         * @implements IDeleteTagRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IDeleteTagRequest=} [properties] Properties to set
+                         */
+                        function DeleteTagRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteTagRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @instance
+                         */
+                        DeleteTagRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteTagRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteTagRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.DeleteTagRequest} DeleteTagRequest instance
+                         */
+                        DeleteTagRequest.create = function create(properties) {
+                            return new DeleteTagRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTagRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteTagRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteTagRequest} message DeleteTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTagRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTagRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteTagRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteTagRequest} message DeleteTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteTagRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.DeleteTagRequest} DeleteTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTagRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.DeleteTagRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteTagRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.DeleteTagRequest} DeleteTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTagRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteTagRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteTagRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteTagRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.DeleteTagRequest} DeleteTagRequest
+                         */
+                        DeleteTagRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.DeleteTagRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.DeleteTagRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteTagRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.DeleteTagRequest} message DeleteTagRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteTagRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteTagRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.DeleteTagRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteTagRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteTagRequest;
+                    })();
+    
+                    /**
+                     * VersionView enum.
+                     * @name google.devtools.artifactregistry.v1.VersionView
+                     * @enum {number}
+                     * @property {number} VERSION_VIEW_UNSPECIFIED=0 VERSION_VIEW_UNSPECIFIED value
+                     * @property {number} BASIC=1 BASIC value
+                     * @property {number} FULL=2 FULL value
+                     */
+                    v1.VersionView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "VERSION_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BASIC"] = 1;
+                        values[valuesById[2] = "FULL"] = 2;
+                        return values;
+                    })();
+    
+                    v1.Version = (function() {
+    
+                        /**
+                         * Properties of a Version.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IVersion
+                         * @property {string|null} [name] Version name
+                         * @property {string|null} [description] Version description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Version createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Version updateTime
+                         * @property {Array.<google.devtools.artifactregistry.v1.ITag>|null} [relatedTags] Version relatedTags
+                         * @property {google.protobuf.IStruct|null} [metadata] Version metadata
+                         */
+    
+                        /**
+                         * Constructs a new Version.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a Version.
+                         * @implements IVersion
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IVersion=} [properties] Properties to set
+                         */
+                        function Version(properties) {
+                            this.relatedTags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Version name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @instance
+                         */
+                        Version.prototype.name = "";
+    
+                        /**
+                         * Version description.
+                         * @member {string} description
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @instance
+                         */
+                        Version.prototype.description = "";
+    
+                        /**
+                         * Version createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @instance
+                         */
+                        Version.prototype.createTime = null;
+    
+                        /**
+                         * Version updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @instance
+                         */
+                        Version.prototype.updateTime = null;
+    
+                        /**
+                         * Version relatedTags.
+                         * @member {Array.<google.devtools.artifactregistry.v1.ITag>} relatedTags
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @instance
+                         */
+                        Version.prototype.relatedTags = $util.emptyArray;
+    
+                        /**
+                         * Version metadata.
+                         * @member {google.protobuf.IStruct|null|undefined} metadata
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @instance
+                         */
+                        Version.prototype.metadata = null;
+    
+                        /**
+                         * Creates a new Version instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IVersion=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.Version} Version instance
+                         */
+                        Version.create = function create(properties) {
+                            return new Version(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Version message. Does not implicitly {@link google.devtools.artifactregistry.v1.Version.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IVersion} message Version message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Version.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.relatedTags != null && message.relatedTags.length)
+                                for (var i = 0; i < message.relatedTags.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.Tag.encode(message.relatedTags[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                $root.google.protobuf.Struct.encode(message.metadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Version message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Version.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IVersion} message Version message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Version.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Version message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.Version} Version
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Version.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.Version();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 5:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    if (!(message.relatedTags && message.relatedTags.length))
+                                        message.relatedTags = [];
+                                    message.relatedTags.push($root.google.devtools.artifactregistry.v1.Tag.decode(reader, reader.uint32()));
+                                    break;
+                                case 8:
+                                    message.metadata = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Version message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.Version} Version
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Version.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Version message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Version.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.relatedTags != null && message.hasOwnProperty("relatedTags")) {
+                                if (!Array.isArray(message.relatedTags))
+                                    return "relatedTags: array expected";
+                                for (var i = 0; i < message.relatedTags.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.Tag.verify(message.relatedTags[i]);
+                                    if (error)
+                                        return "relatedTags." + error;
+                                }
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                var error = $root.google.protobuf.Struct.verify(message.metadata);
+                                if (error)
+                                    return "metadata." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Version message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.Version} Version
+                         */
+                        Version.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.Version)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.Version();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Version.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Version.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.relatedTags) {
+                                if (!Array.isArray(object.relatedTags))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Version.relatedTags: array expected");
+                                message.relatedTags = [];
+                                for (var i = 0; i < object.relatedTags.length; ++i) {
+                                    if (typeof object.relatedTags[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.Version.relatedTags: object expected");
+                                    message.relatedTags[i] = $root.google.devtools.artifactregistry.v1.Tag.fromObject(object.relatedTags[i]);
+                                }
+                            }
+                            if (object.metadata != null) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Version.metadata: object expected");
+                                message.metadata = $root.google.protobuf.Struct.fromObject(object.metadata);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Version message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.Version} message Version
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Version.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.relatedTags = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.metadata = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.relatedTags && message.relatedTags.length) {
+                                object.relatedTags = [];
+                                for (var j = 0; j < message.relatedTags.length; ++j)
+                                    object.relatedTags[j] = $root.google.devtools.artifactregistry.v1.Tag.toObject(message.relatedTags[j], options);
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                object.metadata = $root.google.protobuf.Struct.toObject(message.metadata, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Version to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Version.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Version;
+                    })();
+    
+                    v1.ListVersionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListVersionsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListVersionsRequest
+                         * @property {string|null} [parent] ListVersionsRequest parent
+                         * @property {number|null} [pageSize] ListVersionsRequest pageSize
+                         * @property {string|null} [pageToken] ListVersionsRequest pageToken
+                         * @property {google.devtools.artifactregistry.v1.VersionView|null} [view] ListVersionsRequest view
+                         * @property {string|null} [orderBy] ListVersionsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListVersionsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListVersionsRequest.
+                         * @implements IListVersionsRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsRequest=} [properties] Properties to set
+                         */
+                        function ListVersionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListVersionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @instance
+                         */
+                        ListVersionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListVersionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @instance
+                         */
+                        ListVersionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListVersionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @instance
+                         */
+                        ListVersionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListVersionsRequest view.
+                         * @member {google.devtools.artifactregistry.v1.VersionView} view
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @instance
+                         */
+                        ListVersionsRequest.prototype.view = 0;
+    
+                        /**
+                         * ListVersionsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @instance
+                         */
+                        ListVersionsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListVersionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListVersionsRequest} ListVersionsRequest instance
+                         */
+                        ListVersionsRequest.create = function create(properties) {
+                            return new ListVersionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListVersionsRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListVersionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsRequest} message ListVersionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVersionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.view);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListVersionsRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListVersionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsRequest} message ListVersionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVersionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListVersionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListVersionsRequest} ListVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVersionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListVersionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.view = reader.int32();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListVersionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListVersionsRequest} ListVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVersionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListVersionsRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListVersionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListVersionsRequest} ListVersionsRequest
+                         */
+                        ListVersionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListVersionsRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListVersionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            switch (object.view) {
+                            case "VERSION_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListVersionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListVersionsRequest} message ListVersionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListVersionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.view = options.enums === String ? "VERSION_VIEW_UNSPECIFIED" : 0;
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1.VersionView[message.view] : message.view;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListVersionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListVersionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListVersionsRequest;
+                    })();
+    
+                    v1.ListVersionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListVersionsResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListVersionsResponse
+                         * @property {Array.<google.devtools.artifactregistry.v1.IVersion>|null} [versions] ListVersionsResponse versions
+                         * @property {string|null} [nextPageToken] ListVersionsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListVersionsResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListVersionsResponse.
+                         * @implements IListVersionsResponse
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsResponse=} [properties] Properties to set
+                         */
+                        function ListVersionsResponse(properties) {
+                            this.versions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListVersionsResponse versions.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IVersion>} versions
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @instance
+                         */
+                        ListVersionsResponse.prototype.versions = $util.emptyArray;
+    
+                        /**
+                         * ListVersionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @instance
+                         */
+                        ListVersionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListVersionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsResponse=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListVersionsResponse} ListVersionsResponse instance
+                         */
+                        ListVersionsResponse.create = function create(properties) {
+                            return new ListVersionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListVersionsResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListVersionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsResponse} message ListVersionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVersionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.versions != null && message.versions.length)
+                                for (var i = 0; i < message.versions.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.Version.encode(message.versions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListVersionsResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListVersionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListVersionsResponse} message ListVersionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVersionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListVersionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListVersionsResponse} ListVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVersionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListVersionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.versions && message.versions.length))
+                                        message.versions = [];
+                                    message.versions.push($root.google.devtools.artifactregistry.v1.Version.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListVersionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListVersionsResponse} ListVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVersionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListVersionsResponse message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListVersionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.versions != null && message.hasOwnProperty("versions")) {
+                                if (!Array.isArray(message.versions))
+                                    return "versions: array expected";
+                                for (var i = 0; i < message.versions.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.Version.verify(message.versions[i]);
+                                    if (error)
+                                        return "versions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListVersionsResponse} ListVersionsResponse
+                         */
+                        ListVersionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListVersionsResponse)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListVersionsResponse();
+                            if (object.versions) {
+                                if (!Array.isArray(object.versions))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ListVersionsResponse.versions: array expected");
+                                message.versions = [];
+                                for (var i = 0; i < object.versions.length; ++i) {
+                                    if (typeof object.versions[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ListVersionsResponse.versions: object expected");
+                                    message.versions[i] = $root.google.devtools.artifactregistry.v1.Version.fromObject(object.versions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListVersionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListVersionsResponse} message ListVersionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListVersionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.versions = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.versions && message.versions.length) {
+                                object.versions = [];
+                                for (var j = 0; j < message.versions.length; ++j)
+                                    object.versions[j] = $root.google.devtools.artifactregistry.v1.Version.toObject(message.versions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListVersionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListVersionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListVersionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListVersionsResponse;
+                    })();
+    
+                    v1.GetVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetVersionRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IGetVersionRequest
+                         * @property {string|null} [name] GetVersionRequest name
+                         * @property {google.devtools.artifactregistry.v1.VersionView|null} [view] GetVersionRequest view
+                         */
+    
+                        /**
+                         * Constructs a new GetVersionRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a GetVersionRequest.
+                         * @implements IGetVersionRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IGetVersionRequest=} [properties] Properties to set
+                         */
+                        function GetVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @instance
+                         */
+                        GetVersionRequest.prototype.name = "";
+    
+                        /**
+                         * GetVersionRequest view.
+                         * @member {google.devtools.artifactregistry.v1.VersionView} view
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @instance
+                         */
+                        GetVersionRequest.prototype.view = 0;
+    
+                        /**
+                         * Creates a new GetVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetVersionRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.GetVersionRequest} GetVersionRequest instance
+                         */
+                        GetVersionRequest.create = function create(properties) {
+                            return new GetVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetVersionRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetVersionRequest} message GetVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.view);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetVersionRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetVersionRequest} message GetVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.GetVersionRequest} GetVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.GetVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.view = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.GetVersionRequest} GetVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetVersionRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.GetVersionRequest} GetVersionRequest
+                         */
+                        GetVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.GetVersionRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.GetVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.view) {
+                            case "VERSION_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.GetVersionRequest} message GetVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.view = options.enums === String ? "VERSION_VIEW_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1.VersionView[message.view] : message.view;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.GetVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetVersionRequest;
+                    })();
+    
+                    v1.DeleteVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteVersionRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IDeleteVersionRequest
+                         * @property {string|null} [name] DeleteVersionRequest name
+                         * @property {boolean|null} [force] DeleteVersionRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteVersionRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a DeleteVersionRequest.
+                         * @implements IDeleteVersionRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IDeleteVersionRequest=} [properties] Properties to set
+                         */
+                        function DeleteVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @instance
+                         */
+                        DeleteVersionRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteVersionRequest force.
+                         * @member {boolean} force
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @instance
+                         */
+                        DeleteVersionRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteVersionRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.DeleteVersionRequest} DeleteVersionRequest instance
+                         */
+                        DeleteVersionRequest.create = function create(properties) {
+                            return new DeleteVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteVersionRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteVersionRequest} message DeleteVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteVersionRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDeleteVersionRequest} message DeleteVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.DeleteVersionRequest} DeleteVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.DeleteVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.force = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.DeleteVersionRequest} DeleteVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteVersionRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.DeleteVersionRequest} DeleteVersionRequest
+                         */
+                        DeleteVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.DeleteVersionRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.DeleteVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.DeleteVersionRequest} message DeleteVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.DeleteVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteVersionRequest;
+                    })();
+    
+                    v1.YumArtifact = (function() {
+    
+                        /**
+                         * Properties of a YumArtifact.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IYumArtifact
+                         * @property {string|null} [name] YumArtifact name
+                         * @property {string|null} [packageName] YumArtifact packageName
+                         * @property {google.devtools.artifactregistry.v1.YumArtifact.PackageType|null} [packageType] YumArtifact packageType
+                         * @property {string|null} [architecture] YumArtifact architecture
+                         */
+    
+                        /**
+                         * Constructs a new YumArtifact.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a YumArtifact.
+                         * @implements IYumArtifact
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IYumArtifact=} [properties] Properties to set
+                         */
+                        function YumArtifact(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * YumArtifact name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @instance
+                         */
+                        YumArtifact.prototype.name = "";
+    
+                        /**
+                         * YumArtifact packageName.
+                         * @member {string} packageName
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @instance
+                         */
+                        YumArtifact.prototype.packageName = "";
+    
+                        /**
+                         * YumArtifact packageType.
+                         * @member {google.devtools.artifactregistry.v1.YumArtifact.PackageType} packageType
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @instance
+                         */
+                        YumArtifact.prototype.packageType = 0;
+    
+                        /**
+                         * YumArtifact architecture.
+                         * @member {string} architecture
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @instance
+                         */
+                        YumArtifact.prototype.architecture = "";
+    
+                        /**
+                         * Creates a new YumArtifact instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IYumArtifact=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.YumArtifact} YumArtifact instance
+                         */
+                        YumArtifact.create = function create(properties) {
+                            return new YumArtifact(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified YumArtifact message. Does not implicitly {@link google.devtools.artifactregistry.v1.YumArtifact.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IYumArtifact} message YumArtifact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        YumArtifact.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.packageName != null && Object.hasOwnProperty.call(message, "packageName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.packageName);
+                            if (message.packageType != null && Object.hasOwnProperty.call(message, "packageType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.packageType);
+                            if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.architecture);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified YumArtifact message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.YumArtifact.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IYumArtifact} message YumArtifact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        YumArtifact.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a YumArtifact message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.YumArtifact} YumArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        YumArtifact.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.YumArtifact();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.packageName = reader.string();
+                                    break;
+                                case 3:
+                                    message.packageType = reader.int32();
+                                    break;
+                                case 4:
+                                    message.architecture = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a YumArtifact message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.YumArtifact} YumArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        YumArtifact.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a YumArtifact message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        YumArtifact.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.packageName != null && message.hasOwnProperty("packageName"))
+                                if (!$util.isString(message.packageName))
+                                    return "packageName: string expected";
+                            if (message.packageType != null && message.hasOwnProperty("packageType"))
+                                switch (message.packageType) {
+                                default:
+                                    return "packageType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                if (!$util.isString(message.architecture))
+                                    return "architecture: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a YumArtifact message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.YumArtifact} YumArtifact
+                         */
+                        YumArtifact.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.YumArtifact)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.YumArtifact();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.packageName != null)
+                                message.packageName = String(object.packageName);
+                            switch (object.packageType) {
+                            case "PACKAGE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.packageType = 0;
+                                break;
+                            case "BINARY":
+                            case 1:
+                                message.packageType = 1;
+                                break;
+                            case "SOURCE":
+                            case 2:
+                                message.packageType = 2;
+                                break;
+                            }
+                            if (object.architecture != null)
+                                message.architecture = String(object.architecture);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a YumArtifact message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.YumArtifact} message YumArtifact
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        YumArtifact.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.packageName = "";
+                                object.packageType = options.enums === String ? "PACKAGE_TYPE_UNSPECIFIED" : 0;
+                                object.architecture = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.packageName != null && message.hasOwnProperty("packageName"))
+                                object.packageName = message.packageName;
+                            if (message.packageType != null && message.hasOwnProperty("packageType"))
+                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1.YumArtifact.PackageType[message.packageType] : message.packageType;
+                            if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                object.architecture = message.architecture;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this YumArtifact to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.YumArtifact
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        YumArtifact.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * PackageType enum.
+                         * @name google.devtools.artifactregistry.v1.YumArtifact.PackageType
+                         * @enum {number}
+                         * @property {number} PACKAGE_TYPE_UNSPECIFIED=0 PACKAGE_TYPE_UNSPECIFIED value
+                         * @property {number} BINARY=1 BINARY value
+                         * @property {number} SOURCE=2 SOURCE value
+                         */
+                        YumArtifact.PackageType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PACKAGE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BINARY"] = 1;
+                            values[valuesById[2] = "SOURCE"] = 2;
+                            return values;
+                        })();
+    
+                        return YumArtifact;
+                    })();
+    
+                    v1.ImportYumArtifactsGcsSource = (function() {
+    
+                        /**
+                         * Properties of an ImportYumArtifactsGcsSource.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportYumArtifactsGcsSource
+                         * @property {Array.<string>|null} [uris] ImportYumArtifactsGcsSource uris
+                         * @property {boolean|null} [useWildcards] ImportYumArtifactsGcsSource useWildcards
+                         */
+    
+                        /**
+                         * Constructs a new ImportYumArtifactsGcsSource.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportYumArtifactsGcsSource.
+                         * @implements IImportYumArtifactsGcsSource
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsGcsSource=} [properties] Properties to set
+                         */
+                        function ImportYumArtifactsGcsSource(properties) {
+                            this.uris = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportYumArtifactsGcsSource uris.
+                         * @member {Array.<string>} uris
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @instance
+                         */
+                        ImportYumArtifactsGcsSource.prototype.uris = $util.emptyArray;
+    
+                        /**
+                         * ImportYumArtifactsGcsSource useWildcards.
+                         * @member {boolean} useWildcards
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @instance
+                         */
+                        ImportYumArtifactsGcsSource.prototype.useWildcards = false;
+    
+                        /**
+                         * Creates a new ImportYumArtifactsGcsSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsGcsSource=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource} ImportYumArtifactsGcsSource instance
+                         */
+                        ImportYumArtifactsGcsSource.create = function create(properties) {
+                            return new ImportYumArtifactsGcsSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsGcsSource message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsGcsSource} message ImportYumArtifactsGcsSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsGcsSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uris != null && message.uris.length)
+                                for (var i = 0; i < message.uris.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uris[i]);
+                            if (message.useWildcards != null && Object.hasOwnProperty.call(message, "useWildcards"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useWildcards);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsGcsSource message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsGcsSource} message ImportYumArtifactsGcsSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsGcsSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsGcsSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource} ImportYumArtifactsGcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsGcsSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.uris && message.uris.length))
+                                        message.uris = [];
+                                    message.uris.push(reader.string());
+                                    break;
+                                case 2:
+                                    message.useWildcards = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsGcsSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource} ImportYumArtifactsGcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsGcsSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportYumArtifactsGcsSource message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportYumArtifactsGcsSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uris != null && message.hasOwnProperty("uris")) {
+                                if (!Array.isArray(message.uris))
+                                    return "uris: array expected";
+                                for (var i = 0; i < message.uris.length; ++i)
+                                    if (!$util.isString(message.uris[i]))
+                                        return "uris: string[] expected";
+                            }
+                            if (message.useWildcards != null && message.hasOwnProperty("useWildcards"))
+                                if (typeof message.useWildcards !== "boolean")
+                                    return "useWildcards: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportYumArtifactsGcsSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource} ImportYumArtifactsGcsSource
+                         */
+                        ImportYumArtifactsGcsSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource();
+                            if (object.uris) {
+                                if (!Array.isArray(object.uris))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.uris: array expected");
+                                message.uris = [];
+                                for (var i = 0; i < object.uris.length; ++i)
+                                    message.uris[i] = String(object.uris[i]);
+                            }
+                            if (object.useWildcards != null)
+                                message.useWildcards = Boolean(object.useWildcards);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportYumArtifactsGcsSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource} message ImportYumArtifactsGcsSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportYumArtifactsGcsSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.uris = [];
+                            if (options.defaults)
+                                object.useWildcards = false;
+                            if (message.uris && message.uris.length) {
+                                object.uris = [];
+                                for (var j = 0; j < message.uris.length; ++j)
+                                    object.uris[j] = message.uris[j];
+                            }
+                            if (message.useWildcards != null && message.hasOwnProperty("useWildcards"))
+                                object.useWildcards = message.useWildcards;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportYumArtifactsGcsSource to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportYumArtifactsGcsSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportYumArtifactsGcsSource;
+                    })();
+    
+                    v1.ImportYumArtifactsRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportYumArtifactsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportYumArtifactsRequest
+                         * @property {google.devtools.artifactregistry.v1.IImportYumArtifactsGcsSource|null} [gcsSource] ImportYumArtifactsRequest gcsSource
+                         * @property {string|null} [parent] ImportYumArtifactsRequest parent
+                         */
+    
+                        /**
+                         * Constructs a new ImportYumArtifactsRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportYumArtifactsRequest.
+                         * @implements IImportYumArtifactsRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsRequest=} [properties] Properties to set
+                         */
+                        function ImportYumArtifactsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportYumArtifactsRequest gcsSource.
+                         * @member {google.devtools.artifactregistry.v1.IImportYumArtifactsGcsSource|null|undefined} gcsSource
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @instance
+                         */
+                        ImportYumArtifactsRequest.prototype.gcsSource = null;
+    
+                        /**
+                         * ImportYumArtifactsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @instance
+                         */
+                        ImportYumArtifactsRequest.prototype.parent = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImportYumArtifactsRequest source.
+                         * @member {"gcsSource"|undefined} source
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ImportYumArtifactsRequest.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImportYumArtifactsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsRequest} ImportYumArtifactsRequest instance
+                         */
+                        ImportYumArtifactsRequest.create = function create(properties) {
+                            return new ImportYumArtifactsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsRequest} message ImportYumArtifactsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.encode(message.gcsSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsRequest} message ImportYumArtifactsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsRequest} ImportYumArtifactsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.gcsSource = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.decode(reader, reader.uint32());
+                                    break;
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsRequest} ImportYumArtifactsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportYumArtifactsRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportYumArtifactsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportYumArtifactsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsRequest} ImportYumArtifactsRequest
+                         */
+                        ImportYumArtifactsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportYumArtifactsRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsRequest();
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportYumArtifactsRequest.gcsSource: object expected");
+                                message.gcsSource = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.fromObject(object.gcsSource);
+                            }
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportYumArtifactsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportYumArtifactsRequest} message ImportYumArtifactsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportYumArtifactsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.source = "gcsSource";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportYumArtifactsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportYumArtifactsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportYumArtifactsRequest;
+                    })();
+    
+                    v1.ImportYumArtifactsErrorInfo = (function() {
+    
+                        /**
+                         * Properties of an ImportYumArtifactsErrorInfo.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportYumArtifactsErrorInfo
+                         * @property {google.devtools.artifactregistry.v1.IImportYumArtifactsGcsSource|null} [gcsSource] ImportYumArtifactsErrorInfo gcsSource
+                         * @property {google.rpc.IStatus|null} [error] ImportYumArtifactsErrorInfo error
+                         */
+    
+                        /**
+                         * Constructs a new ImportYumArtifactsErrorInfo.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportYumArtifactsErrorInfo.
+                         * @implements IImportYumArtifactsErrorInfo
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsErrorInfo=} [properties] Properties to set
+                         */
+                        function ImportYumArtifactsErrorInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportYumArtifactsErrorInfo gcsSource.
+                         * @member {google.devtools.artifactregistry.v1.IImportYumArtifactsGcsSource|null|undefined} gcsSource
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @instance
+                         */
+                        ImportYumArtifactsErrorInfo.prototype.gcsSource = null;
+    
+                        /**
+                         * ImportYumArtifactsErrorInfo error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @instance
+                         */
+                        ImportYumArtifactsErrorInfo.prototype.error = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImportYumArtifactsErrorInfo source.
+                         * @member {"gcsSource"|undefined} source
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @instance
+                         */
+                        Object.defineProperty(ImportYumArtifactsErrorInfo.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImportYumArtifactsErrorInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsErrorInfo=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo} ImportYumArtifactsErrorInfo instance
+                         */
+                        ImportYumArtifactsErrorInfo.create = function create(properties) {
+                            return new ImportYumArtifactsErrorInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsErrorInfo message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsErrorInfo} message ImportYumArtifactsErrorInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsErrorInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.encode(message.gcsSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsErrorInfo message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsErrorInfo} message ImportYumArtifactsErrorInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsErrorInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsErrorInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo} ImportYumArtifactsErrorInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsErrorInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsSource = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsErrorInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo} ImportYumArtifactsErrorInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsErrorInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportYumArtifactsErrorInfo message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportYumArtifactsErrorInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportYumArtifactsErrorInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo} ImportYumArtifactsErrorInfo
+                         */
+                        ImportYumArtifactsErrorInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo();
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.gcsSource: object expected");
+                                message.gcsSource = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.fromObject(object.gcsSource);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportYumArtifactsErrorInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo} message ImportYumArtifactsErrorInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportYumArtifactsErrorInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.error = null;
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.source = "gcsSource";
+                            }
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportYumArtifactsErrorInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportYumArtifactsErrorInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportYumArtifactsErrorInfo;
+                    })();
+    
+                    v1.ImportYumArtifactsResponse = (function() {
+    
+                        /**
+                         * Properties of an ImportYumArtifactsResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportYumArtifactsResponse
+                         * @property {Array.<google.devtools.artifactregistry.v1.IYumArtifact>|null} [yumArtifacts] ImportYumArtifactsResponse yumArtifacts
+                         * @property {Array.<google.devtools.artifactregistry.v1.IImportYumArtifactsErrorInfo>|null} [errors] ImportYumArtifactsResponse errors
+                         */
+    
+                        /**
+                         * Constructs a new ImportYumArtifactsResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportYumArtifactsResponse.
+                         * @implements IImportYumArtifactsResponse
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsResponse=} [properties] Properties to set
+                         */
+                        function ImportYumArtifactsResponse(properties) {
+                            this.yumArtifacts = [];
+                            this.errors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportYumArtifactsResponse yumArtifacts.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IYumArtifact>} yumArtifacts
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @instance
+                         */
+                        ImportYumArtifactsResponse.prototype.yumArtifacts = $util.emptyArray;
+    
+                        /**
+                         * ImportYumArtifactsResponse errors.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IImportYumArtifactsErrorInfo>} errors
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @instance
+                         */
+                        ImportYumArtifactsResponse.prototype.errors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ImportYumArtifactsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsResponse=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsResponse} ImportYumArtifactsResponse instance
+                         */
+                        ImportYumArtifactsResponse.create = function create(properties) {
+                            return new ImportYumArtifactsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsResponse} message ImportYumArtifactsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.yumArtifacts != null && message.yumArtifacts.length)
+                                for (var i = 0; i < message.yumArtifacts.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.YumArtifact.encode(message.yumArtifacts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.errors != null && message.errors.length)
+                                for (var i = 0; i < message.errors.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.encode(message.errors[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsResponse} message ImportYumArtifactsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsResponse} ImportYumArtifactsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.yumArtifacts && message.yumArtifacts.length))
+                                        message.yumArtifacts = [];
+                                    message.yumArtifacts.push($root.google.devtools.artifactregistry.v1.YumArtifact.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.errors && message.errors.length))
+                                        message.errors = [];
+                                    message.errors.push($root.google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsResponse} ImportYumArtifactsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportYumArtifactsResponse message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportYumArtifactsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.yumArtifacts != null && message.hasOwnProperty("yumArtifacts")) {
+                                if (!Array.isArray(message.yumArtifacts))
+                                    return "yumArtifacts: array expected";
+                                for (var i = 0; i < message.yumArtifacts.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.YumArtifact.verify(message.yumArtifacts[i]);
+                                    if (error)
+                                        return "yumArtifacts." + error;
+                                }
+                            }
+                            if (message.errors != null && message.hasOwnProperty("errors")) {
+                                if (!Array.isArray(message.errors))
+                                    return "errors: array expected";
+                                for (var i = 0; i < message.errors.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.verify(message.errors[i]);
+                                    if (error)
+                                        return "errors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportYumArtifactsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsResponse} ImportYumArtifactsResponse
+                         */
+                        ImportYumArtifactsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse();
+                            if (object.yumArtifacts) {
+                                if (!Array.isArray(object.yumArtifacts))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportYumArtifactsResponse.yumArtifacts: array expected");
+                                message.yumArtifacts = [];
+                                for (var i = 0; i < object.yumArtifacts.length; ++i) {
+                                    if (typeof object.yumArtifacts[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ImportYumArtifactsResponse.yumArtifacts: object expected");
+                                    message.yumArtifacts[i] = $root.google.devtools.artifactregistry.v1.YumArtifact.fromObject(object.yumArtifacts[i]);
+                                }
+                            }
+                            if (object.errors) {
+                                if (!Array.isArray(object.errors))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImportYumArtifactsResponse.errors: array expected");
+                                message.errors = [];
+                                for (var i = 0; i < object.errors.length; ++i) {
+                                    if (typeof object.errors[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ImportYumArtifactsResponse.errors: object expected");
+                                    message.errors[i] = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.fromObject(object.errors[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportYumArtifactsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportYumArtifactsResponse} message ImportYumArtifactsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportYumArtifactsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.yumArtifacts = [];
+                                object.errors = [];
+                            }
+                            if (message.yumArtifacts && message.yumArtifacts.length) {
+                                object.yumArtifacts = [];
+                                for (var j = 0; j < message.yumArtifacts.length; ++j)
+                                    object.yumArtifacts[j] = $root.google.devtools.artifactregistry.v1.YumArtifact.toObject(message.yumArtifacts[j], options);
+                            }
+                            if (message.errors && message.errors.length) {
+                                object.errors = [];
+                                for (var j = 0; j < message.errors.length; ++j)
+                                    object.errors[j] = $root.google.devtools.artifactregistry.v1.ImportYumArtifactsErrorInfo.toObject(message.errors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportYumArtifactsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportYumArtifactsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportYumArtifactsResponse;
+                    })();
+    
+                    v1.ImportYumArtifactsMetadata = (function() {
+    
+                        /**
+                         * Properties of an ImportYumArtifactsMetadata.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImportYumArtifactsMetadata
+                         */
+    
+                        /**
+                         * Constructs a new ImportYumArtifactsMetadata.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImportYumArtifactsMetadata.
+                         * @implements IImportYumArtifactsMetadata
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata=} [properties] Properties to set
+                         */
+                        function ImportYumArtifactsMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ImportYumArtifactsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata} ImportYumArtifactsMetadata instance
+                         */
+                        ImportYumArtifactsMetadata.create = function create(properties) {
+                            return new ImportYumArtifactsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsMetadata message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata} message ImportYumArtifactsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportYumArtifactsMetadata message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata} message ImportYumArtifactsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportYumArtifactsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata} ImportYumArtifactsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportYumArtifactsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata} ImportYumArtifactsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportYumArtifactsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportYumArtifactsMetadata message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportYumArtifactsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportYumArtifactsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata} ImportYumArtifactsMetadata
+                         */
+                        ImportYumArtifactsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata)
+                                return object;
+                            return new $root.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportYumArtifactsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata} message ImportYumArtifactsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportYumArtifactsMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ImportYumArtifactsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportYumArtifactsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportYumArtifactsMetadata;
                     })();
     
                     return v1;
@@ -24173,6 +34988,225 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type_url = reader.string();
+                            break;
+                        case 2:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Timestamp = (function() {
     
                 /**
@@ -24395,609 +35429,6 @@
                 };
     
                 return Timestamp;
-            })();
-    
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Any;
-            })();
-    
-            protobuf.Duration = (function() {
-    
-                /**
-                 * Properties of a Duration.
-                 * @memberof google.protobuf
-                 * @interface IDuration
-                 * @property {number|Long|null} [seconds] Duration seconds
-                 * @property {number|null} [nanos] Duration nanos
-                 */
-    
-                /**
-                 * Constructs a new Duration.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Duration.
-                 * @implements IDuration
-                 * @constructor
-                 * @param {google.protobuf.IDuration=} [properties] Properties to set
-                 */
-                function Duration(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Duration seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Duration
-                 * @instance
-                 */
-                Duration.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Duration nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Duration
-                 * @instance
-                 */
-                Duration.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Duration instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {google.protobuf.IDuration=} [properties] Properties to set
-                 * @returns {google.protobuf.Duration} Duration instance
-                 */
-                Duration.create = function create(properties) {
-                    return new Duration(properties);
-                };
-    
-                /**
-                 * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Duration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Duration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Duration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Duration} Duration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Duration.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Duration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Duration} Duration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Duration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Duration message.
-                 * @function verify
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Duration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Duration} Duration
-                 */
-                Duration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Duration)
-                        return object;
-                    var message = new $root.google.protobuf.Duration();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Duration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {google.protobuf.Duration} message Duration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Duration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Duration to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Duration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Duration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Duration;
-            })();
-    
-            protobuf.Empty = (function() {
-    
-                /**
-                 * Properties of an Empty.
-                 * @memberof google.protobuf
-                 * @interface IEmpty
-                 */
-    
-                /**
-                 * Constructs a new Empty.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Empty.
-                 * @implements IEmpty
-                 * @constructor
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 */
-                function Empty(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Creates a new Empty instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 * @returns {google.protobuf.Empty} Empty instance
-                 */
-                Empty.create = function create(properties) {
-                    return new Empty(properties);
-                };
-    
-                /**
-                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Empty message.
-                 * @function verify
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Empty.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Empty} Empty
-                 */
-                Empty.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Empty)
-                        return object;
-                    return new $root.google.protobuf.Empty();
-                };
-    
-                /**
-                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.Empty} message Empty
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Empty.toObject = function toObject() {
-                    return {};
-                };
-    
-                /**
-                 * Converts this Empty to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Empty
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Empty.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Empty;
             })();
     
             protobuf.FieldMask = (function() {
@@ -26017,7 +36448,657 @@
                 return ListValue;
             })();
     
+            protobuf.Duration = (function() {
+    
+                /**
+                 * Properties of a Duration.
+                 * @memberof google.protobuf
+                 * @interface IDuration
+                 * @property {number|Long|null} [seconds] Duration seconds
+                 * @property {number|null} [nanos] Duration nanos
+                 */
+    
+                /**
+                 * Constructs a new Duration.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Duration.
+                 * @implements IDuration
+                 * @constructor
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 */
+                function Duration(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Duration seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Duration nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Duration instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 * @returns {google.protobuf.Duration} Duration instance
+                 */
+                Duration.create = function create(properties) {
+                    return new Duration(properties);
+                };
+    
+                /**
+                 * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.seconds = reader.int64();
+                            break;
+                        case 2:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Duration message.
+                 * @function verify
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Duration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Duration} Duration
+                 */
+                Duration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Duration)
+                        return object;
+                    var message = new $root.google.protobuf.Duration();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Duration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.Duration} message Duration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Duration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Duration to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Duration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Duration;
+            })();
+    
+            protobuf.Empty = (function() {
+    
+                /**
+                 * Properties of an Empty.
+                 * @memberof google.protobuf
+                 * @interface IEmpty
+                 */
+    
+                /**
+                 * Constructs a new Empty.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Empty.
+                 * @implements IEmpty
+                 * @constructor
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 */
+                function Empty(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Creates a new Empty instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 * @returns {google.protobuf.Empty} Empty instance
+                 */
+                Empty.create = function create(properties) {
+                    return new Empty(properties);
+                };
+    
+                /**
+                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Empty message.
+                 * @function verify
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Empty.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Empty} Empty
+                 */
+                Empty.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Empty)
+                        return object;
+                    return new $root.google.protobuf.Empty();
+                };
+    
+                /**
+                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.Empty} message Empty
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Empty.toObject = function toObject() {
+                    return {};
+                };
+    
+                /**
+                 * Converts this Empty to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Empty
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Empty.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Empty;
+            })();
+    
             return protobuf;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.code = reader.int32();
+                            break;
+                        case 2:
+                            message.message = reader.string();
+                            break;
+                        case 3:
+                            if (!(message.details && message.details.length))
+                                message.details = [];
+                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         google.iam = (function() {
@@ -26037,6 +37118,1186 @@
                  * @namespace
                  */
                 var v1 = {};
+    
+                v1.IAMPolicy = (function() {
+    
+                    /**
+                     * Constructs a new IAMPolicy service.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a IAMPolicy
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function IAMPolicy(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (IAMPolicy.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = IAMPolicy;
+    
+                    /**
+                     * Creates new IAMPolicy service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {IAMPolicy} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    IAMPolicy.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy#setIamPolicy}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef SetIamPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.Policy} [response] Policy
+                     */
+    
+                    /**
+                     * Calls SetIamPolicy.
+                     * @function setIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                    }, "name", { value: "SetIamPolicy" });
+    
+                    /**
+                     * Calls SetIamPolicy.
+                     * @function setIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                     * @returns {Promise<google.iam.v1.Policy>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy#getIamPolicy}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef GetIamPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.Policy} [response] Policy
+                     */
+    
+                    /**
+                     * Calls GetIamPolicy.
+                     * @function getIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                    }, "name", { value: "GetIamPolicy" });
+    
+                    /**
+                     * Calls GetIamPolicy.
+                     * @function getIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                     * @returns {Promise<google.iam.v1.Policy>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy#testIamPermissions}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef TestIamPermissionsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                     */
+    
+                    /**
+                     * Calls TestIamPermissions.
+                     * @function testIamPermissions
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                    }, "name", { value: "TestIamPermissions" });
+    
+                    /**
+                     * Calls TestIamPermissions.
+                     * @function testIamPermissions
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                     * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return IAMPolicy;
+                })();
+    
+                v1.SetIamPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a SetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @interface ISetIamPolicyRequest
+                     * @property {string|null} [resource] SetIamPolicyRequest resource
+                     * @property {google.iam.v1.IPolicy|null} [policy] SetIamPolicyRequest policy
+                     */
+    
+                    /**
+                     * Constructs a new SetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a SetIamPolicyRequest.
+                     * @implements ISetIamPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
+                     */
+                    function SetIamPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SetIamPolicyRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     */
+                    SetIamPolicyRequest.prototype.resource = "";
+    
+                    /**
+                     * SetIamPolicyRequest policy.
+                     * @member {google.iam.v1.IPolicy|null|undefined} policy
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     */
+                    SetIamPolicyRequest.prototype.policy = null;
+    
+                    /**
+                     * Creates a new SetIamPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest instance
+                     */
+                    SetIamPolicyRequest.create = function create(properties) {
+                        return new SetIamPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SetIamPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                            $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SetIamPolicyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.SetIamPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.resource = reader.string();
+                                break;
+                            case 2:
+                                message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SetIamPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SetIamPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.policy != null && message.hasOwnProperty("policy")) {
+                            var error = $root.google.iam.v1.Policy.verify(message.policy);
+                            if (error)
+                                return "policy." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     */
+                    SetIamPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.SetIamPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.SetIamPolicyRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.policy != null) {
+                            if (typeof object.policy !== "object")
+                                throw TypeError(".google.iam.v1.SetIamPolicyRequest.policy: object expected");
+                            message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SetIamPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.SetIamPolicyRequest} message SetIamPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SetIamPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.resource = "";
+                            object.policy = null;
+                        }
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SetIamPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SetIamPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SetIamPolicyRequest;
+                })();
+    
+                v1.GetIamPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a GetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @interface IGetIamPolicyRequest
+                     * @property {string|null} [resource] GetIamPolicyRequest resource
+                     * @property {google.iam.v1.IGetPolicyOptions|null} [options] GetIamPolicyRequest options
+                     */
+    
+                    /**
+                     * Constructs a new GetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a GetIamPolicyRequest.
+                     * @implements IGetIamPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
+                     */
+                    function GetIamPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetIamPolicyRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     */
+                    GetIamPolicyRequest.prototype.resource = "";
+    
+                    /**
+                     * GetIamPolicyRequest options.
+                     * @member {google.iam.v1.IGetPolicyOptions|null|undefined} options
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     */
+                    GetIamPolicyRequest.prototype.options = null;
+    
+                    /**
+                     * Creates a new GetIamPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest instance
+                     */
+                    GetIamPolicyRequest.create = function create(properties) {
+                        return new GetIamPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetIamPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                            $root.google.iam.v1.GetPolicyOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetIamPolicyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetIamPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.resource = reader.string();
+                                break;
+                            case 2:
+                                message.options = $root.google.iam.v1.GetPolicyOptions.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetIamPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetIamPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.options != null && message.hasOwnProperty("options")) {
+                            var error = $root.google.iam.v1.GetPolicyOptions.verify(message.options);
+                            if (error)
+                                return "options." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     */
+                    GetIamPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.GetIamPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.GetIamPolicyRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.options != null) {
+                            if (typeof object.options !== "object")
+                                throw TypeError(".google.iam.v1.GetIamPolicyRequest.options: object expected");
+                            message.options = $root.google.iam.v1.GetPolicyOptions.fromObject(object.options);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetIamPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.GetIamPolicyRequest} message GetIamPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetIamPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.resource = "";
+                            object.options = null;
+                        }
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.options != null && message.hasOwnProperty("options"))
+                            object.options = $root.google.iam.v1.GetPolicyOptions.toObject(message.options, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetIamPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetIamPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetIamPolicyRequest;
+                })();
+    
+                v1.TestIamPermissionsRequest = (function() {
+    
+                    /**
+                     * Properties of a TestIamPermissionsRequest.
+                     * @memberof google.iam.v1
+                     * @interface ITestIamPermissionsRequest
+                     * @property {string|null} [resource] TestIamPermissionsRequest resource
+                     * @property {Array.<string>|null} [permissions] TestIamPermissionsRequest permissions
+                     */
+    
+                    /**
+                     * Constructs a new TestIamPermissionsRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a TestIamPermissionsRequest.
+                     * @implements ITestIamPermissionsRequest
+                     * @constructor
+                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
+                     */
+                    function TestIamPermissionsRequest(properties) {
+                        this.permissions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TestIamPermissionsRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     */
+                    TestIamPermissionsRequest.prototype.resource = "";
+    
+                    /**
+                     * TestIamPermissionsRequest permissions.
+                     * @member {Array.<string>} permissions
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     */
+                    TestIamPermissionsRequest.prototype.permissions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new TestIamPermissionsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest instance
+                     */
+                    TestIamPermissionsRequest.create = function create(properties) {
+                        return new TestIamPermissionsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsRequest message. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.permissions != null && message.permissions.length)
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.permissions[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsRequest message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.resource = reader.string();
+                                break;
+                            case 2:
+                                if (!(message.permissions && message.permissions.length))
+                                    message.permissions = [];
+                                message.permissions.push(reader.string());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TestIamPermissionsRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TestIamPermissionsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                            if (!Array.isArray(message.permissions))
+                                return "permissions: array expected";
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                if (!$util.isString(message.permissions[i]))
+                                    return "permissions: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TestIamPermissionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     */
+                    TestIamPermissionsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.TestIamPermissionsRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.TestIamPermissionsRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.permissions) {
+                            if (!Array.isArray(object.permissions))
+                                throw TypeError(".google.iam.v1.TestIamPermissionsRequest.permissions: array expected");
+                            message.permissions = [];
+                            for (var i = 0; i < object.permissions.length; ++i)
+                                message.permissions[i] = String(object.permissions[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TestIamPermissionsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.TestIamPermissionsRequest} message TestIamPermissionsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TestIamPermissionsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.permissions = [];
+                        if (options.defaults)
+                            object.resource = "";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.permissions && message.permissions.length) {
+                            object.permissions = [];
+                            for (var j = 0; j < message.permissions.length; ++j)
+                                object.permissions[j] = message.permissions[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TestIamPermissionsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TestIamPermissionsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return TestIamPermissionsRequest;
+                })();
+    
+                v1.TestIamPermissionsResponse = (function() {
+    
+                    /**
+                     * Properties of a TestIamPermissionsResponse.
+                     * @memberof google.iam.v1
+                     * @interface ITestIamPermissionsResponse
+                     * @property {Array.<string>|null} [permissions] TestIamPermissionsResponse permissions
+                     */
+    
+                    /**
+                     * Constructs a new TestIamPermissionsResponse.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a TestIamPermissionsResponse.
+                     * @implements ITestIamPermissionsResponse
+                     * @constructor
+                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
+                     */
+                    function TestIamPermissionsResponse(properties) {
+                        this.permissions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TestIamPermissionsResponse permissions.
+                     * @member {Array.<string>} permissions
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @instance
+                     */
+                    TestIamPermissionsResponse.prototype.permissions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new TestIamPermissionsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse instance
+                     */
+                    TestIamPermissionsResponse.create = function create(properties) {
+                        return new TestIamPermissionsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsResponse message. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.permissions != null && message.permissions.length)
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.permissions[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsResponse message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.permissions && message.permissions.length))
+                                    message.permissions = [];
+                                message.permissions.push(reader.string());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TestIamPermissionsResponse message.
+                     * @function verify
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TestIamPermissionsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                            if (!Array.isArray(message.permissions))
+                                return "permissions: array expected";
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                if (!$util.isString(message.permissions[i]))
+                                    return "permissions: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TestIamPermissionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     */
+                    TestIamPermissionsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.TestIamPermissionsResponse)
+                            return object;
+                        var message = new $root.google.iam.v1.TestIamPermissionsResponse();
+                        if (object.permissions) {
+                            if (!Array.isArray(object.permissions))
+                                throw TypeError(".google.iam.v1.TestIamPermissionsResponse.permissions: array expected");
+                            message.permissions = [];
+                            for (var i = 0; i < object.permissions.length; ++i)
+                                message.permissions[i] = String(object.permissions[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TestIamPermissionsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.TestIamPermissionsResponse} message TestIamPermissionsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TestIamPermissionsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.permissions = [];
+                        if (message.permissions && message.permissions.length) {
+                            object.permissions = [];
+                            for (var j = 0; j < message.permissions.length; ++j)
+                                object.permissions[j] = message.permissions[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TestIamPermissionsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TestIamPermissionsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return TestIamPermissionsResponse;
+                })();
+    
+                v1.GetPolicyOptions = (function() {
+    
+                    /**
+                     * Properties of a GetPolicyOptions.
+                     * @memberof google.iam.v1
+                     * @interface IGetPolicyOptions
+                     * @property {number|null} [requestedPolicyVersion] GetPolicyOptions requestedPolicyVersion
+                     */
+    
+                    /**
+                     * Constructs a new GetPolicyOptions.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a GetPolicyOptions.
+                     * @implements IGetPolicyOptions
+                     * @constructor
+                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
+                     */
+                    function GetPolicyOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetPolicyOptions requestedPolicyVersion.
+                     * @member {number} requestedPolicyVersion
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @instance
+                     */
+                    GetPolicyOptions.prototype.requestedPolicyVersion = 0;
+    
+                    /**
+                     * Creates a new GetPolicyOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions instance
+                     */
+                    GetPolicyOptions.create = function create(properties) {
+                        return new GetPolicyOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetPolicyOptions message. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPolicyOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.requestedPolicyVersion != null && Object.hasOwnProperty.call(message, "requestedPolicyVersion"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.requestedPolicyVersion);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetPolicyOptions message, length delimited. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPolicyOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetPolicyOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPolicyOptions.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetPolicyOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.requestedPolicyVersion = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetPolicyOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPolicyOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetPolicyOptions message.
+                     * @function verify
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetPolicyOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
+                            if (!$util.isInteger(message.requestedPolicyVersion))
+                                return "requestedPolicyVersion: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetPolicyOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     */
+                    GetPolicyOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.GetPolicyOptions)
+                            return object;
+                        var message = new $root.google.iam.v1.GetPolicyOptions();
+                        if (object.requestedPolicyVersion != null)
+                            message.requestedPolicyVersion = object.requestedPolicyVersion | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetPolicyOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.GetPolicyOptions} message GetPolicyOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetPolicyOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.requestedPolicyVersion = 0;
+                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
+                            object.requestedPolicyVersion = message.requestedPolicyVersion;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetPolicyOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetPolicyOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetPolicyOptions;
+                })();
     
                 v1.Policy = (function() {
     
@@ -27386,1186 +39647,6 @@
                     })();
     
                     return AuditConfigDelta;
-                })();
-    
-                v1.IAMPolicy = (function() {
-    
-                    /**
-                     * Constructs a new IAMPolicy service.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a IAMPolicy
-                     * @extends $protobuf.rpc.Service
-                     * @constructor
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    function IAMPolicy(rpcImpl, requestDelimited, responseDelimited) {
-                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                    }
-    
-                    (IAMPolicy.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = IAMPolicy;
-    
-                    /**
-                     * Creates new IAMPolicy service using the specified rpc implementation.
-                     * @function create
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @static
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     * @returns {IAMPolicy} RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    IAMPolicy.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                        return new this(rpcImpl, requestDelimited, responseDelimited);
-                    };
-    
-                    /**
-                     * Callback as used by {@link google.iam.v1.IAMPolicy#setIamPolicy}.
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @typedef SetIamPolicyCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.iam.v1.Policy} [response] Policy
-                     */
-    
-                    /**
-                     * Calls SetIamPolicy.
-                     * @function setIamPolicy
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
-                     * @param {google.iam.v1.IAMPolicy.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(IAMPolicy.prototype.setIamPolicy = function setIamPolicy(request, callback) {
-                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
-                    }, "name", { value: "SetIamPolicy" });
-    
-                    /**
-                     * Calls SetIamPolicy.
-                     * @function setIamPolicy
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
-                     * @returns {Promise<google.iam.v1.Policy>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.iam.v1.IAMPolicy#getIamPolicy}.
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @typedef GetIamPolicyCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.iam.v1.Policy} [response] Policy
-                     */
-    
-                    /**
-                     * Calls GetIamPolicy.
-                     * @function getIamPolicy
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
-                     * @param {google.iam.v1.IAMPolicy.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(IAMPolicy.prototype.getIamPolicy = function getIamPolicy(request, callback) {
-                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
-                    }, "name", { value: "GetIamPolicy" });
-    
-                    /**
-                     * Calls GetIamPolicy.
-                     * @function getIamPolicy
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
-                     * @returns {Promise<google.iam.v1.Policy>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.iam.v1.IAMPolicy#testIamPermissions}.
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @typedef TestIamPermissionsCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
-                     */
-    
-                    /**
-                     * Calls TestIamPermissions.
-                     * @function testIamPermissions
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
-                     * @param {google.iam.v1.IAMPolicy.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(IAMPolicy.prototype.testIamPermissions = function testIamPermissions(request, callback) {
-                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
-                    }, "name", { value: "TestIamPermissions" });
-    
-                    /**
-                     * Calls TestIamPermissions.
-                     * @function testIamPermissions
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
-                     * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
-                     * @variation 2
-                     */
-    
-                    return IAMPolicy;
-                })();
-    
-                v1.SetIamPolicyRequest = (function() {
-    
-                    /**
-                     * Properties of a SetIamPolicyRequest.
-                     * @memberof google.iam.v1
-                     * @interface ISetIamPolicyRequest
-                     * @property {string|null} [resource] SetIamPolicyRequest resource
-                     * @property {google.iam.v1.IPolicy|null} [policy] SetIamPolicyRequest policy
-                     */
-    
-                    /**
-                     * Constructs a new SetIamPolicyRequest.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a SetIamPolicyRequest.
-                     * @implements ISetIamPolicyRequest
-                     * @constructor
-                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
-                     */
-                    function SetIamPolicyRequest(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * SetIamPolicyRequest resource.
-                     * @member {string} resource
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @instance
-                     */
-                    SetIamPolicyRequest.prototype.resource = "";
-    
-                    /**
-                     * SetIamPolicyRequest policy.
-                     * @member {google.iam.v1.IPolicy|null|undefined} policy
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @instance
-                     */
-                    SetIamPolicyRequest.prototype.policy = null;
-    
-                    /**
-                     * Creates a new SetIamPolicyRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
-                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest instance
-                     */
-                    SetIamPolicyRequest.create = function create(properties) {
-                        return new SetIamPolicyRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified SetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    SetIamPolicyRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
-                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
-                            $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified SetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    SetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    SetIamPolicyRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.SetIamPolicyRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.resource = reader.string();
-                                break;
-                            case 2:
-                                message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    SetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a SetIamPolicyRequest message.
-                     * @function verify
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    SetIamPolicyRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            if (!$util.isString(message.resource))
-                                return "resource: string expected";
-                        if (message.policy != null && message.hasOwnProperty("policy")) {
-                            var error = $root.google.iam.v1.Policy.verify(message.policy);
-                            if (error)
-                                return "policy." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a SetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
-                     */
-                    SetIamPolicyRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.SetIamPolicyRequest)
-                            return object;
-                        var message = new $root.google.iam.v1.SetIamPolicyRequest();
-                        if (object.resource != null)
-                            message.resource = String(object.resource);
-                        if (object.policy != null) {
-                            if (typeof object.policy !== "object")
-                                throw TypeError(".google.iam.v1.SetIamPolicyRequest.policy: object expected");
-                            message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a SetIamPolicyRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.SetIamPolicyRequest} message SetIamPolicyRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    SetIamPolicyRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.resource = "";
-                            object.policy = null;
-                        }
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            object.resource = message.resource;
-                        if (message.policy != null && message.hasOwnProperty("policy"))
-                            object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this SetIamPolicyRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    SetIamPolicyRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return SetIamPolicyRequest;
-                })();
-    
-                v1.GetIamPolicyRequest = (function() {
-    
-                    /**
-                     * Properties of a GetIamPolicyRequest.
-                     * @memberof google.iam.v1
-                     * @interface IGetIamPolicyRequest
-                     * @property {string|null} [resource] GetIamPolicyRequest resource
-                     * @property {google.iam.v1.IGetPolicyOptions|null} [options] GetIamPolicyRequest options
-                     */
-    
-                    /**
-                     * Constructs a new GetIamPolicyRequest.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a GetIamPolicyRequest.
-                     * @implements IGetIamPolicyRequest
-                     * @constructor
-                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
-                     */
-                    function GetIamPolicyRequest(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * GetIamPolicyRequest resource.
-                     * @member {string} resource
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @instance
-                     */
-                    GetIamPolicyRequest.prototype.resource = "";
-    
-                    /**
-                     * GetIamPolicyRequest options.
-                     * @member {google.iam.v1.IGetPolicyOptions|null|undefined} options
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @instance
-                     */
-                    GetIamPolicyRequest.prototype.options = null;
-    
-                    /**
-                     * Creates a new GetIamPolicyRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
-                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest instance
-                     */
-                    GetIamPolicyRequest.create = function create(properties) {
-                        return new GetIamPolicyRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified GetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetIamPolicyRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
-                        if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                            $root.google.iam.v1.GetPolicyOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified GetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetIamPolicyRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetIamPolicyRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.resource = reader.string();
-                                break;
-                            case 2:
-                                message.options = $root.google.iam.v1.GetPolicyOptions.decode(reader, reader.uint32());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a GetIamPolicyRequest message.
-                     * @function verify
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    GetIamPolicyRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            if (!$util.isString(message.resource))
-                                return "resource: string expected";
-                        if (message.options != null && message.hasOwnProperty("options")) {
-                            var error = $root.google.iam.v1.GetPolicyOptions.verify(message.options);
-                            if (error)
-                                return "options." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a GetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
-                     */
-                    GetIamPolicyRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.GetIamPolicyRequest)
-                            return object;
-                        var message = new $root.google.iam.v1.GetIamPolicyRequest();
-                        if (object.resource != null)
-                            message.resource = String(object.resource);
-                        if (object.options != null) {
-                            if (typeof object.options !== "object")
-                                throw TypeError(".google.iam.v1.GetIamPolicyRequest.options: object expected");
-                            message.options = $root.google.iam.v1.GetPolicyOptions.fromObject(object.options);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a GetIamPolicyRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.GetIamPolicyRequest} message GetIamPolicyRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    GetIamPolicyRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.resource = "";
-                            object.options = null;
-                        }
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            object.resource = message.resource;
-                        if (message.options != null && message.hasOwnProperty("options"))
-                            object.options = $root.google.iam.v1.GetPolicyOptions.toObject(message.options, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this GetIamPolicyRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    GetIamPolicyRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return GetIamPolicyRequest;
-                })();
-    
-                v1.TestIamPermissionsRequest = (function() {
-    
-                    /**
-                     * Properties of a TestIamPermissionsRequest.
-                     * @memberof google.iam.v1
-                     * @interface ITestIamPermissionsRequest
-                     * @property {string|null} [resource] TestIamPermissionsRequest resource
-                     * @property {Array.<string>|null} [permissions] TestIamPermissionsRequest permissions
-                     */
-    
-                    /**
-                     * Constructs a new TestIamPermissionsRequest.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a TestIamPermissionsRequest.
-                     * @implements ITestIamPermissionsRequest
-                     * @constructor
-                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
-                     */
-                    function TestIamPermissionsRequest(properties) {
-                        this.permissions = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * TestIamPermissionsRequest resource.
-                     * @member {string} resource
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @instance
-                     */
-                    TestIamPermissionsRequest.prototype.resource = "";
-    
-                    /**
-                     * TestIamPermissionsRequest permissions.
-                     * @member {Array.<string>} permissions
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @instance
-                     */
-                    TestIamPermissionsRequest.prototype.permissions = $util.emptyArray;
-    
-                    /**
-                     * Creates a new TestIamPermissionsRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
-                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest instance
-                     */
-                    TestIamPermissionsRequest.create = function create(properties) {
-                        return new TestIamPermissionsRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified TestIamPermissionsRequest message. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TestIamPermissionsRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
-                        if (message.permissions != null && message.permissions.length)
-                            for (var i = 0; i < message.permissions.length; ++i)
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.permissions[i]);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified TestIamPermissionsRequest message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TestIamPermissionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TestIamPermissionsRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.resource = reader.string();
-                                break;
-                            case 2:
-                                if (!(message.permissions && message.permissions.length))
-                                    message.permissions = [];
-                                message.permissions.push(reader.string());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TestIamPermissionsRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a TestIamPermissionsRequest message.
-                     * @function verify
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    TestIamPermissionsRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            if (!$util.isString(message.resource))
-                                return "resource: string expected";
-                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
-                            if (!Array.isArray(message.permissions))
-                                return "permissions: array expected";
-                            for (var i = 0; i < message.permissions.length; ++i)
-                                if (!$util.isString(message.permissions[i]))
-                                    return "permissions: string[] expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a TestIamPermissionsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
-                     */
-                    TestIamPermissionsRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.TestIamPermissionsRequest)
-                            return object;
-                        var message = new $root.google.iam.v1.TestIamPermissionsRequest();
-                        if (object.resource != null)
-                            message.resource = String(object.resource);
-                        if (object.permissions) {
-                            if (!Array.isArray(object.permissions))
-                                throw TypeError(".google.iam.v1.TestIamPermissionsRequest.permissions: array expected");
-                            message.permissions = [];
-                            for (var i = 0; i < object.permissions.length; ++i)
-                                message.permissions[i] = String(object.permissions[i]);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a TestIamPermissionsRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {google.iam.v1.TestIamPermissionsRequest} message TestIamPermissionsRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    TestIamPermissionsRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.permissions = [];
-                        if (options.defaults)
-                            object.resource = "";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            object.resource = message.resource;
-                        if (message.permissions && message.permissions.length) {
-                            object.permissions = [];
-                            for (var j = 0; j < message.permissions.length; ++j)
-                                object.permissions[j] = message.permissions[j];
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this TestIamPermissionsRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    TestIamPermissionsRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return TestIamPermissionsRequest;
-                })();
-    
-                v1.TestIamPermissionsResponse = (function() {
-    
-                    /**
-                     * Properties of a TestIamPermissionsResponse.
-                     * @memberof google.iam.v1
-                     * @interface ITestIamPermissionsResponse
-                     * @property {Array.<string>|null} [permissions] TestIamPermissionsResponse permissions
-                     */
-    
-                    /**
-                     * Constructs a new TestIamPermissionsResponse.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a TestIamPermissionsResponse.
-                     * @implements ITestIamPermissionsResponse
-                     * @constructor
-                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
-                     */
-                    function TestIamPermissionsResponse(properties) {
-                        this.permissions = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * TestIamPermissionsResponse permissions.
-                     * @member {Array.<string>} permissions
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @instance
-                     */
-                    TestIamPermissionsResponse.prototype.permissions = $util.emptyArray;
-    
-                    /**
-                     * Creates a new TestIamPermissionsResponse instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
-                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse instance
-                     */
-                    TestIamPermissionsResponse.create = function create(properties) {
-                        return new TestIamPermissionsResponse(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified TestIamPermissionsResponse message. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TestIamPermissionsResponse.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.permissions != null && message.permissions.length)
-                            for (var i = 0; i < message.permissions.length; ++i)
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.permissions[i]);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified TestIamPermissionsResponse message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TestIamPermissionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TestIamPermissionsResponse.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsResponse();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.permissions && message.permissions.length))
-                                    message.permissions = [];
-                                message.permissions.push(reader.string());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TestIamPermissionsResponse.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a TestIamPermissionsResponse message.
-                     * @function verify
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    TestIamPermissionsResponse.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
-                            if (!Array.isArray(message.permissions))
-                                return "permissions: array expected";
-                            for (var i = 0; i < message.permissions.length; ++i)
-                                if (!$util.isString(message.permissions[i]))
-                                    return "permissions: string[] expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a TestIamPermissionsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
-                     */
-                    TestIamPermissionsResponse.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.TestIamPermissionsResponse)
-                            return object;
-                        var message = new $root.google.iam.v1.TestIamPermissionsResponse();
-                        if (object.permissions) {
-                            if (!Array.isArray(object.permissions))
-                                throw TypeError(".google.iam.v1.TestIamPermissionsResponse.permissions: array expected");
-                            message.permissions = [];
-                            for (var i = 0; i < object.permissions.length; ++i)
-                                message.permissions[i] = String(object.permissions[i]);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a TestIamPermissionsResponse message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {google.iam.v1.TestIamPermissionsResponse} message TestIamPermissionsResponse
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    TestIamPermissionsResponse.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.permissions = [];
-                        if (message.permissions && message.permissions.length) {
-                            object.permissions = [];
-                            for (var j = 0; j < message.permissions.length; ++j)
-                                object.permissions[j] = message.permissions[j];
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this TestIamPermissionsResponse to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    TestIamPermissionsResponse.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return TestIamPermissionsResponse;
-                })();
-    
-                v1.GetPolicyOptions = (function() {
-    
-                    /**
-                     * Properties of a GetPolicyOptions.
-                     * @memberof google.iam.v1
-                     * @interface IGetPolicyOptions
-                     * @property {number|null} [requestedPolicyVersion] GetPolicyOptions requestedPolicyVersion
-                     */
-    
-                    /**
-                     * Constructs a new GetPolicyOptions.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a GetPolicyOptions.
-                     * @implements IGetPolicyOptions
-                     * @constructor
-                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
-                     */
-                    function GetPolicyOptions(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * GetPolicyOptions requestedPolicyVersion.
-                     * @member {number} requestedPolicyVersion
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @instance
-                     */
-                    GetPolicyOptions.prototype.requestedPolicyVersion = 0;
-    
-                    /**
-                     * Creates a new GetPolicyOptions instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
-                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions instance
-                     */
-                    GetPolicyOptions.create = function create(properties) {
-                        return new GetPolicyOptions(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified GetPolicyOptions message. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetPolicyOptions.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.requestedPolicyVersion != null && Object.hasOwnProperty.call(message, "requestedPolicyVersion"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.requestedPolicyVersion);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified GetPolicyOptions message, length delimited. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetPolicyOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a GetPolicyOptions message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetPolicyOptions.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetPolicyOptions();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.requestedPolicyVersion = reader.int32();
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a GetPolicyOptions message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetPolicyOptions.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a GetPolicyOptions message.
-                     * @function verify
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    GetPolicyOptions.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
-                            if (!$util.isInteger(message.requestedPolicyVersion))
-                                return "requestedPolicyVersion: integer expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a GetPolicyOptions message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
-                     */
-                    GetPolicyOptions.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.GetPolicyOptions)
-                            return object;
-                        var message = new $root.google.iam.v1.GetPolicyOptions();
-                        if (object.requestedPolicyVersion != null)
-                            message.requestedPolicyVersion = object.requestedPolicyVersion | 0;
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a GetPolicyOptions message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {google.iam.v1.GetPolicyOptions} message GetPolicyOptions
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    GetPolicyOptions.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.requestedPolicyVersion = 0;
-                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
-                            object.requestedPolicyVersion = message.requestedPolicyVersion;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this GetPolicyOptions to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    GetPolicyOptions.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return GetPolicyOptions;
                 })();
     
                 return v1;
@@ -30839,272 +41920,6 @@
             })();
     
             return longrunning;
-        })();
-    
-        google.rpc = (function() {
-    
-            /**
-             * Namespace rpc.
-             * @memberof google
-             * @namespace
-             */
-            var rpc = {};
-    
-            rpc.Status = (function() {
-    
-                /**
-                 * Properties of a Status.
-                 * @memberof google.rpc
-                 * @interface IStatus
-                 * @property {number|null} [code] Status code
-                 * @property {string|null} [message] Status message
-                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
-                 */
-    
-                /**
-                 * Constructs a new Status.
-                 * @memberof google.rpc
-                 * @classdesc Represents a Status.
-                 * @implements IStatus
-                 * @constructor
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 */
-                function Status(properties) {
-                    this.details = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Status code.
-                 * @member {number} code
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.code = 0;
-    
-                /**
-                 * Status message.
-                 * @member {string} message
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.message = "";
-    
-                /**
-                 * Status details.
-                 * @member {Array.<google.protobuf.IAny>} details
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.details = $util.emptyArray;
-    
-                /**
-                 * Creates a new Status instance using the specified properties.
-                 * @function create
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 * @returns {google.rpc.Status} Status instance
-                 */
-                Status.create = function create(properties) {
-                    return new Status(properties);
-                };
-    
-                /**
-                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-                    if (message.details != null && message.details.length)
-                        for (var i = 0; i < message.details.length; ++i)
-                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.code = reader.int32();
-                            break;
-                        case 2:
-                            message.message = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.details && message.details.length))
-                                message.details = [];
-                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Status message.
-                 * @function verify
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Status.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        if (!$util.isInteger(message.code))
-                            return "code: integer expected";
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        if (!$util.isString(message.message))
-                            return "message: string expected";
-                    if (message.details != null && message.hasOwnProperty("details")) {
-                        if (!Array.isArray(message.details))
-                            return "details: array expected";
-                        for (var i = 0; i < message.details.length; ++i) {
-                            var error = $root.google.protobuf.Any.verify(message.details[i]);
-                            if (error)
-                                return "details." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.rpc.Status} Status
-                 */
-                Status.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.rpc.Status)
-                        return object;
-                    var message = new $root.google.rpc.Status();
-                    if (object.code != null)
-                        message.code = object.code | 0;
-                    if (object.message != null)
-                        message.message = String(object.message);
-                    if (object.details) {
-                        if (!Array.isArray(object.details))
-                            throw TypeError(".google.rpc.Status.details: array expected");
-                        message.details = [];
-                        for (var i = 0; i < object.details.length; ++i) {
-                            if (typeof object.details[i] !== "object")
-                                throw TypeError(".google.rpc.Status.details: object expected");
-                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Status message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.Status} message Status
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Status.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.details = [];
-                    if (options.defaults) {
-                        object.code = 0;
-                        object.message = "";
-                    }
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        object.code = message.code;
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        object.message = message.message;
-                    if (message.details && message.details.length) {
-                        object.details = [];
-                        for (var j = 0; j < message.details.length; ++j)
-                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Status to JSON.
-                 * @function toJSON
-                 * @memberof google.rpc.Status
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Status.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Status;
-            })();
-    
-            return rpc;
         })();
     
         return google;

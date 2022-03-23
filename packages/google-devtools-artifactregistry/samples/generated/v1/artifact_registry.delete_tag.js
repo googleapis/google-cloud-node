@@ -20,23 +20,15 @@
 
 'use strict';
 
-function main(parent) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+function main() {
+  // [START artifactregistry_v1_generated_ArtifactRegistry_DeleteTag_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose repositories will be listed.
+   *  The name of the tag to delete.
    */
-  // const parent = 'abc123'
-  /**
-   *  The maximum number of repositories to return. Maximum page size is 1,000.
-   */
-  // const pageSize = 1234
-  /**
-   *  The next_page_token value returned from a previous list request, if any.
-   */
-  // const pageToken = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
@@ -44,21 +36,18 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callListRepositories() {
+  async function callDeleteTag() {
     // Construct request
     const request = {
-      parent,
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listRepositoriesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await artifactregistryClient.deleteTag(request);
+    console.log(response);
   }
 
-  callListRepositories();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+  callDeleteTag();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_DeleteTag_async]
 }
 
 process.on('unhandledRejection', err => {

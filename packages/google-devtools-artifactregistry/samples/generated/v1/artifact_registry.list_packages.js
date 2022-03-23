@@ -21,16 +21,16 @@
 'use strict';
 
 function main(parent) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+  // [START artifactregistry_v1_generated_ArtifactRegistry_ListPackages_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose repositories will be listed.
+   *  Required. The name of the parent resource whose packages will be listed.
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of repositories to return. Maximum page size is 1,000.
+   *  The maximum number of packages to return. Maximum page size is 1,000.
    */
   // const pageSize = 1234
   /**
@@ -44,21 +44,21 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callListRepositories() {
+  async function callListPackages() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listRepositoriesAsync(request);
+    const iterable = await artifactregistryClient.listPackagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListRepositories();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async]
+  callListPackages();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_ListPackages_async]
 }
 
 process.on('unhandledRejection', err => {

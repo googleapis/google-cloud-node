@@ -10,9 +10,109 @@
         "grpc": {
           "libraryClient": "ArtifactRegistryClient",
           "rpcs": {
+            "GetDockerImage": {
+              "methods": [
+                "getDockerImage"
+              ]
+            },
             "GetRepository": {
               "methods": [
                 "getRepository"
+              ]
+            },
+            "UpdateRepository": {
+              "methods": [
+                "updateRepository"
+              ]
+            },
+            "GetPackage": {
+              "methods": [
+                "getPackage"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "GetFile": {
+              "methods": [
+                "getFile"
+              ]
+            },
+            "GetTag": {
+              "methods": [
+                "getTag"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "createTag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "updateTag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "deleteTag"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetProjectSettings": {
+              "methods": [
+                "getProjectSettings"
+              ]
+            },
+            "UpdateProjectSettings": {
+              "methods": [
+                "updateProjectSettings"
+              ]
+            },
+            "ImportAptArtifacts": {
+              "methods": [
+                "importAptArtifacts"
+              ]
+            },
+            "ImportYumArtifacts": {
+              "methods": [
+                "importYumArtifacts"
+              ]
+            },
+            "CreateRepository": {
+              "methods": [
+                "createRepository"
+              ]
+            },
+            "DeleteRepository": {
+              "methods": [
+                "deleteRepository"
+              ]
+            },
+            "DeletePackage": {
+              "methods": [
+                "deletePackage"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "deleteVersion"
               ]
             },
             "ListDockerImages": {
@@ -27,6 +127,34 @@
                 "listRepositories",
                 "listRepositoriesStream",
                 "listRepositoriesAsync"
+              ]
+            },
+            "ListPackages": {
+              "methods": [
+                "listPackages",
+                "listPackagesStream",
+                "listPackagesAsync"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "listVersions",
+                "listVersionsStream",
+                "listVersionsAsync"
+              ]
+            },
+            "ListFiles": {
+              "methods": [
+                "listFiles",
+                "listFilesStream",
+                "listFilesAsync"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "listTags",
+                "listTagsStream",
+                "listTagsAsync"
               ]
             }
           }
@@ -34,9 +162,109 @@
         "grpc-fallback": {
           "libraryClient": "ArtifactRegistryClient",
           "rpcs": {
+            "GetDockerImage": {
+              "methods": [
+                "getDockerImage"
+              ]
+            },
             "GetRepository": {
               "methods": [
                 "getRepository"
+              ]
+            },
+            "UpdateRepository": {
+              "methods": [
+                "updateRepository"
+              ]
+            },
+            "GetPackage": {
+              "methods": [
+                "getPackage"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "GetFile": {
+              "methods": [
+                "getFile"
+              ]
+            },
+            "GetTag": {
+              "methods": [
+                "getTag"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "createTag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "updateTag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "deleteTag"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetProjectSettings": {
+              "methods": [
+                "getProjectSettings"
+              ]
+            },
+            "UpdateProjectSettings": {
+              "methods": [
+                "updateProjectSettings"
+              ]
+            },
+            "ImportAptArtifacts": {
+              "methods": [
+                "importAptArtifacts"
+              ]
+            },
+            "ImportYumArtifacts": {
+              "methods": [
+                "importYumArtifacts"
+              ]
+            },
+            "CreateRepository": {
+              "methods": [
+                "createRepository"
+              ]
+            },
+            "DeleteRepository": {
+              "methods": [
+                "deleteRepository"
+              ]
+            },
+            "DeletePackage": {
+              "methods": [
+                "deletePackage"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "deleteVersion"
               ]
             },
             "ListDockerImages": {
@@ -51,6 +279,34 @@
                 "listRepositories",
                 "listRepositoriesStream",
                 "listRepositoriesAsync"
+              ]
+            },
+            "ListPackages": {
+              "methods": [
+                "listPackages",
+                "listPackagesStream",
+                "listPackagesAsync"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "listVersions",
+                "listVersionsStream",
+                "listVersionsAsync"
+              ]
+            },
+            "ListFiles": {
+              "methods": [
+                "listFiles",
+                "listFilesStream",
+                "listFilesAsync"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "listTags",
+                "listTagsStream",
+                "listTagsAsync"
               ]
             }
           }
