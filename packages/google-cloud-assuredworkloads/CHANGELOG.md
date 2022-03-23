@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v2.1.0...v2.2.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#148](https://github.com/googleapis/nodejs-assured-workloads/issues/148)) ([464f0b8](https://github.com/googleapis/nodejs-assured-workloads/commit/464f0b8157c35c0bd68f39ca757844fb83d00032)), closes [#3](https://github.com/googleapis/nodejs-assured-workloads/issues/3)
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v2.0.0...v2.1.0) (2021-12-10)
 
 
