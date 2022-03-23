@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-data-fusion/compare/v0.2.0...v1.0.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#38](https://github.com/googleapis/nodejs-data-fusion/issues/38)) ([e563f41](https://github.com/googleapis/nodejs-data-fusion/commit/e563f415e2ca24b8f8c524c8044bcf75f26ef176))
+
 ## 0.2.0 (2021-10-07)
 
 
