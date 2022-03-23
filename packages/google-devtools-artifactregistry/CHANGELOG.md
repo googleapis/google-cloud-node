@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/nodejs-artifact-registry/compare/v1.2.3...v1.3.0) (2022-03-23)
+
+
+### Features
+
+* promote v1beta2 features to v1 ([#132](https://github.com/googleapis/nodejs-artifact-registry/issues/132)) ([a217d2e](https://github.com/googleapis/nodejs-artifact-registry/commit/a217d2e62db8b6f297f13158e8140f88092d0cef))
+* upgrade to GA ([#96](https://github.com/googleapis/nodejs-artifact-registry/issues/96)) ([1e71407](https://github.com/googleapis/nodejs-artifact-registry/commit/1e71407f9251ececddc945e0511b63cee2965fee))
+
 ### [1.2.3](https://github.com/googleapis/nodejs-artifact-registry/compare/v1.2.2...v1.2.3) (2022-02-03)
 
 
