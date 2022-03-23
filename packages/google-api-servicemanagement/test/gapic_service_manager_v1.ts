@@ -362,7 +362,6 @@ describe('v1.ServiceManagerClient', () => {
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
       request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getService(request), expectedError);
@@ -486,7 +485,6 @@ describe('v1.ServiceManagerClient', () => {
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
       request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServiceConfig(request), expectedError);
@@ -611,7 +609,6 @@ describe('v1.ServiceManagerClient', () => {
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
       request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createServiceConfig(request), expectedError);
@@ -738,7 +735,6 @@ describe('v1.ServiceManagerClient', () => {
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
       request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServiceRollout(request), expectedError);
