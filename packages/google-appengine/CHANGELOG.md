@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/nodejs-appengine-admin/compare/v1.1.0...v1.2.0) (2022-03-23)
+
+
+### Features
+
+* promote to stable ([#119](https://github.com/googleapis/nodejs-appengine-admin/issues/119)) ([4d84360](https://github.com/googleapis/nodejs-appengine-admin/commit/4d84360f97c4417ae0ba4690b2c8511794640d94))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.6...v1.1.0) (2021-08-23)
 
 
