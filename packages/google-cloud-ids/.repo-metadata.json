@@ -4,12 +4,12 @@
   "product_documentation": "https://cloud.google.com/intrusion-detection-system/",
   "client_documentation": "https://cloud.google.com/intrusion-detection-system",
   "issue_tracker": "https://github.com/googleapis/nodejs-ids/issues",
-  "release_level": "beta",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-ids",
   "distribution_name": "@google-cloud/ids",
   "api_id": "ids.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
 }
-
