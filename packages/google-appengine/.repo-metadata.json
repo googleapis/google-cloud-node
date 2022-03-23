@@ -3,7 +3,7 @@
   "product_documentation": "https://cloud.google.com/appengine/docs/admin-api/",
   "name": "appengine-admin",
   "requires_billing": true,
-  "release_level": "preview",
+  "release_level": "stable",
   "language": "nodejs",
   "api_id": "appengine.googleapis.com",
   "distribution_name": "@google-cloud/appengine-admin",
