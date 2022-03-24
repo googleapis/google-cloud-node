@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build integration,go1.7
+//go:build integration && go1.7
 
 package e2e
 
@@ -96,7 +96,7 @@ git reset --hard {{.Commit}}
 
 retry npm_install --nodedir="$NODEDIR"
 
-npm run compile 
+npm run compile
 npm pack --nodedir="$NODEDIR" >/dev/null
 VERSION=$(node -e "console.log(require('./package.json').version);")
 PROFILER="$HOME/cloud-profiler-nodejs/google-cloud-profiler-$VERSION.tgz"
@@ -110,6 +110,9 @@ retry npm_install node-pre-gyp
 retry npm_install --nodedir="$NODEDIR" "$PROFILER" typescript gts
 
 npm run compile
+
+# Workaround to reduce flakiness connecting to the metadata server.
+export DETECT_GCP_RETRIES=5
 {{- end }}
 
 {{ define "integration" -}}
