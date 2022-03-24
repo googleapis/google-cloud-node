@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.19.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.18.0...v1.19.0) (2022-03-24)
+
+
+### Features
+
+* add data_item_schema_uri, annotation_schema_uri, explanation_specs to ModelEvaluationExplanationSpec in aiplatform v1 model_evaluation.proto ([b769264](https://github.com/googleapis/nodejs-ai-platform/commit/b769264263afb2e8e26e3b841c7ae0be7c67e0be))
+* add ImportModelEvaluation in aiplatform v1 model_service.proto ([#280](https://github.com/googleapis/nodejs-ai-platform/issues/280)) ([b769264](https://github.com/googleapis/nodejs-ai-platform/commit/b769264263afb2e8e26e3b841c7ae0be7c67e0be))
+* add ImportModelEvaluation in aiplatform v1beta1 model_service.proto ([b769264](https://github.com/googleapis/nodejs-ai-platform/commit/b769264263afb2e8e26e3b841c7ae0be7c67e0be))
+
 ## [1.18.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.17.0...v1.18.0) (2022-03-17)
 
 
