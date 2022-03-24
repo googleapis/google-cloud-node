@@ -394,6 +394,7 @@ export class ModelServiceClient {
       'updateModel',
       'deleteModel',
       'exportModel',
+      'importModelEvaluation',
       'getModelEvaluation',
       'listModelEvaluations',
       'getModelEvaluationSlice',
@@ -654,6 +655,106 @@ export class ModelServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateModel(request, options, callback);
+  }
+  /**
+   * Imports an externally generated ModelEvaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent model resource.
+   *   Format: `projects/{project}/locations/{location}/models/{model}`
+   * @param {google.cloud.aiplatform.v1.ModelEvaluation} request.modelEvaluation
+   *   Required. Model evaluation resource to be imported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ModelEvaluation]{@link google.cloud.aiplatform.v1.ModelEvaluation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/model_service.import_model_evaluation.js</caption>
+   * region_tag:aiplatform_v1_generated_ModelService_ImportModelEvaluation_async
+   */
+  importModelEvaluation(
+    request?: protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelEvaluation,
+      (
+        | protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  importModelEvaluation(
+    request: protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelEvaluation,
+      | protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importModelEvaluation(
+    request: protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelEvaluation,
+      | protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importModelEvaluation(
+    request?: protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IModelEvaluation,
+          | protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IModelEvaluation,
+      | protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelEvaluation,
+      (
+        | protos.google.cloud.aiplatform.v1.IImportModelEvaluationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importModelEvaluation(request, options, callback);
   }
   /**
    * Gets a ModelEvaluation.

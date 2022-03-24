@@ -10916,17 +10916,11 @@
                         },
                         "metricsSchemaUri": {
                           "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 2
                         },
                         "metrics": {
                           "type": "google.protobuf.Value",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 3
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -10938,16 +10932,37 @@
                         "sliceDimensions": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 5
+                        },
+                        "dataItemSchemaUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "annotationSchemaUri": {
+                          "type": "string",
+                          "id": 7
                         },
                         "modelExplanation": {
                           "type": "ModelExplanation",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          "id": 8
+                        },
+                        "explanationSpecs": {
+                          "rule": "repeated",
+                          "type": "ModelEvaluationExplanationSpec",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "ModelEvaluationExplanationSpec": {
+                          "fields": {
+                            "explanationType": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "explanationSpec": {
+                              "type": "ExplanationSpec",
+                              "id": 2
+                            }
                           }
                         }
                       }
@@ -11156,6 +11171,26 @@
                                 "response_type": "ExportModelResponse",
                                 "metadata_type": "ExportModelOperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "ImportModelEvaluation": {
+                          "requestType": "ImportModelEvaluationRequest",
+                          "responseType": "ModelEvaluation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/models/*}/evaluations:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,model_evaluation"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/models/*}/evaluations:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model_evaluation"
                             }
                           ]
                         },
@@ -11432,6 +11467,25 @@
                     },
                     "ExportModelResponse": {
                       "fields": {}
+                    },
+                    "ImportModelEvaluationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "modelEvaluation": {
+                          "type": "ModelEvaluation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
                     },
                     "GetModelEvaluationRequest": {
                       "fields": {
@@ -27787,17 +27841,11 @@
                         },
                         "metricsSchemaUri": {
                           "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 2
                         },
                         "metrics": {
                           "type": "google.protobuf.Value",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 3
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -27809,25 +27857,16 @@
                         "sliceDimensions": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 5
                         },
                         "modelExplanation": {
                           "type": "ModelExplanation",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 8
                         },
                         "explanationSpecs": {
                           "rule": "repeated",
                           "type": "ModelEvaluationExplanationSpec",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -28049,6 +28088,26 @@
                                 "response_type": "ExportModelResponse",
                                 "metadata_type": "ExportModelOperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "ImportModelEvaluation": {
+                          "requestType": "ImportModelEvaluationRequest",
+                          "responseType": "ModelEvaluation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/models/*}/evaluations:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,model_evaluation"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/models/*}/evaluations:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model_evaluation"
                             }
                           ]
                         },
@@ -28321,6 +28380,25 @@
                     },
                     "ExportModelResponse": {
                       "fields": {}
+                    },
+                    "ImportModelEvaluationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "modelEvaluation": {
+                          "type": "ModelEvaluation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
                     },
                     "GetModelEvaluationRequest": {
                       "fields": {

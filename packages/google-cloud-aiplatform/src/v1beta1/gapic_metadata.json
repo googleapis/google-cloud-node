@@ -1359,6 +1359,11 @@
                 "updateModel"
               ]
             },
+            "ImportModelEvaluation": {
+              "methods": [
+                "importModelEvaluation"
+              ]
+            },
             "GetModelEvaluation": {
               "methods": [
                 "getModelEvaluation"
@@ -1418,6 +1423,11 @@
             "UpdateModel": {
               "methods": [
                 "updateModel"
+              ]
+            },
+            "ImportModelEvaluation": {
+              "methods": [
+                "importModelEvaluation"
               ]
             },
             "GetModelEvaluation": {

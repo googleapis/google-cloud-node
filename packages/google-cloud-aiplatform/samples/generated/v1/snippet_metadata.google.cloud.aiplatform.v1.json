@@ -5556,6 +5556,50 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1_generated_ModelService_ImportModelEvaluation_async",
+      "title": "DatasetService importModelEvaluation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports an externally generated ModelEvaluation.",
+      "canonical": true,
+      "file": "model_service.import_model_evaluation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportModelEvaluation",
+        "fullName": "google.cloud.aiplatform.v1.ModelService.ImportModelEvaluation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_evaluation",
+            "type": ".google.cloud.aiplatform.v1.ModelEvaluation"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1.ModelEvaluation",
+        "client": {
+          "shortName": "ModelServiceClient",
+          "fullName": "google.cloud.aiplatform.v1.ModelServiceClient"
+        },
+        "method": {
+          "shortName": "ImportModelEvaluation",
+          "fullName": "google.cloud.aiplatform.v1.ModelService.ImportModelEvaluation",
+          "service": {
+            "shortName": "ModelService",
+            "fullName": "google.cloud.aiplatform.v1.ModelService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1_generated_ModelService_GetModelEvaluation_async",
       "title": "DatasetService getModelEvaluation Sample",
       "origin": "API_DEFINITION",
