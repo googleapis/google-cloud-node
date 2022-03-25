@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [3.4.0](https://github.com/googleapis/nodejs-dlp/compare/v3.3.0...v3.4.0) (2022-03-25)
+
+
+### Features
+
+* new Bytes and File types: POWERPOINT and EXCEL ([#693](https://github.com/googleapis/nodejs-dlp/issues/693)) ([ed3dc42](https://github.com/googleapis/nodejs-dlp/commit/ed3dc42bce256100a62528481c7ec10362f7fa93))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-dlp/compare/v3.2.1...v3.3.0) (2021-12-03)
 
 
