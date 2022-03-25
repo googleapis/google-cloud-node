@@ -23,9 +23,10 @@ const uuid = require('uuid');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const storage = new Storage();
-const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
-const bucketNameDualRegion = `nodejs-storage-samples-${uuid.v4()}`;
-const bucketNameWithClassAndLocation = `nodejs-storage-samples-${uuid.v4()}`;
+const samplesTestBucketPrefix = `nodejs-storage-samples-${uuid.v4()}`;
+const bucketName = `${samplesTestBucketPrefix}-a`;
+const bucketNameDualRegion = `${samplesTestBucketPrefix}-b`;
+const bucketNameWithClassAndLocation = `${samplesTestBucketPrefix}-c`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
 const bucketWithClassAndLocation = storage.bucket(
@@ -39,10 +40,16 @@ const PUBLIC_ACCESS_PREVENTION_ENFORCED = 'enforced';
 const RPO_ASYNC_TURBO = 'ASYNC_TURBO';
 const RPO_DEFAULT = 'DEFAULT';
 
-after(async () => {
-  await bucket.delete().catch(console.error);
-  await bucketWithClassAndLocation.delete().catch(console.error);
-});
+async function deleteAllBucketsAsync() {
+  const [buckets] = await storage.getBuckets({prefix: samplesTestBucketPrefix});
+
+  for (const bucket of buckets) {
+    await bucket.deleteFiles({force: true});
+    await bucket.delete({ignoreNotFound: true});
+  }
+}
+
+after(deleteAllBucketsAsync);
 
 it('should create a bucket', async () => {
   const output = execSync(`node createNewBucket.js ${bucketName}`);
