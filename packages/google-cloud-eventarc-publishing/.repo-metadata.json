@@ -4,12 +4,12 @@
   "product_documentation": "https://cloud.google.com/eventarc",
   "client_documentation": "https://googleapis.dev/nodejs/publishing/latest/",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5972217",
-  "release_level": "beta",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-eventarc-publishing",
   "distribution_name": "@google-cloud/eventarc-publishing",
   "api_id": "publishing.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
 }
-
