@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/nodejs-dataplex/compare/v1.1.0...v1.2.0) (2022-03-24)
+
+
+### Features
+
+* promote to stable ([#18](https://github.com/googleapis/nodejs-dataplex/issues/18)) ([a66995c](https://github.com/googleapis/nodejs-dataplex/commit/a66995c55005f941e1d43ca2befca1b497c6d9d4)), closes [#6](https://github.com/googleapis/nodejs-dataplex/issues/6)
+
 ## [1.1.0](https://github.com/googleapis/nodejs-dataplex/compare/v1.0.0...v1.1.0) (2022-02-16)
 
 
