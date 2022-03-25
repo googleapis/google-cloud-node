@@ -11,6 +11,6 @@
   "api_id": "serviceusage.googleapis.com",
   "requires_billing": true,
   "default_version": "v1",
-  "api_shortname": "service-usage",
+  "api_shortname": "serviceusage",
   "library_type": "GAPIC_AUTO"
 }
