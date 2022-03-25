@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [4.7.0](https://github.com/googleapis/nodejs-dialogflow/compare/v4.6.0...v4.7.0) (2022-03-25)
+
+
+### Features
+
+* added export documentation method ([35a77f4](https://github.com/googleapis/nodejs-dialogflow/commit/35a77f432d7d12dfe3e56370e2205ca37dd89a7d))
+* added option to configure the number of sentences in the suggestion context ([#917](https://github.com/googleapis/nodejs-dialogflow/issues/917)) ([17aa7d6](https://github.com/googleapis/nodejs-dialogflow/commit/17aa7d68c933382ea633727181e399f32f770409))
+* removed OPTIONAL for speech model variant docs: added more docs for speech model variant and improved docs format for participant ([#906](https://github.com/googleapis/nodejs-dialogflow/issues/906)) ([7df7d27](https://github.com/googleapis/nodejs-dialogflow/commit/7df7d2798490e0a32c7f0bb15de0b1aec7666b43))
+
 ## [4.6.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.5.0...v4.6.0) (2021-12-13)
 
 
