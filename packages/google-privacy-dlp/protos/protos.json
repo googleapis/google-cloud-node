@@ -1136,6 +1136,8 @@
                             "TEXT_UTF8": 5,
                             "WORD_DOCUMENT": 7,
                             "PDF": 8,
+                            "POWERPOINT_DOCUMENT": 9,
+                            "EXCEL_DOCUMENT": 10,
                             "AVRO": 11,
                             "CSV": 12,
                             "TSV": 13
@@ -3215,6 +3217,13 @@
                         }
                       },
                       "nested": {
+                        "TransformationResultCode": {
+                          "values": {
+                            "TRANSFORMATION_RESULT_CODE_UNSPECIFIED": 0,
+                            "SUCCESS": 1,
+                            "ERROR": 2
+                          }
+                        },
                         "SummaryResult": {
                           "fields": {
                             "count": {
@@ -3229,13 +3238,6 @@
                               "type": "string",
                               "id": 3
                             }
-                          }
-                        },
-                        "TransformationResultCode": {
-                          "values": {
-                            "TRANSFORMATION_RESULT_CODE_UNSPECIFIED": 0,
-                            "SUCCESS": 1,
-                            "ERROR": 2
                           }
                         }
                       }
@@ -4483,6 +4485,16 @@
                         }
                       }
                     },
+                    "Likelihood": {
+                      "values": {
+                        "LIKELIHOOD_UNSPECIFIED": 0,
+                        "VERY_UNLIKELY": 1,
+                        "UNLIKELY": 2,
+                        "POSSIBLE": 3,
+                        "LIKELY": 4,
+                        "VERY_LIKELY": 5
+                      }
+                    },
                     "StoredType": {
                       "fields": {
                         "name": {
@@ -4493,16 +4505,6 @@
                           "type": "google.protobuf.Timestamp",
                           "id": 2
                         }
-                      }
-                    },
-                    "Likelihood": {
-                      "values": {
-                        "LIKELIHOOD_UNSPECIFIED": 0,
-                        "VERY_UNLIKELY": 1,
-                        "UNLIKELY": 2,
-                        "POSSIBLE": 3,
-                        "LIKELY": 4,
-                        "VERY_LIKELY": 5
                       }
                     },
                     "CustomInfoType": {
@@ -4712,6 +4714,21 @@
                         }
                       }
                     },
+                    "FileType": {
+                      "values": {
+                        "FILE_TYPE_UNSPECIFIED": 0,
+                        "BINARY_FILE": 1,
+                        "TEXT_FILE": 2,
+                        "IMAGE": 3,
+                        "WORD": 5,
+                        "PDF": 6,
+                        "AVRO": 7,
+                        "CSV": 8,
+                        "TSV": 9,
+                        "POWERPOINT": 11,
+                        "EXCEL": 12
+                      }
+                    },
                     "CloudStorageRegexFileSet": {
                       "fields": {
                         "bucketName": {
@@ -4896,19 +4913,6 @@
                         }
                       }
                     },
-                    "FileType": {
-                      "values": {
-                        "FILE_TYPE_UNSPECIFIED": 0,
-                        "BINARY_FILE": 1,
-                        "TEXT_FILE": 2,
-                        "IMAGE": 3,
-                        "WORD": 5,
-                        "PDF": 6,
-                        "AVRO": 7,
-                        "CSV": 8,
-                        "TSV": 9
-                      }
-                    },
                     "HybridOptions": {
                       "fields": {
                         "description": {
@@ -5070,12 +5074,99 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "HttpProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "methodSignature": {
               "rule": "repeated",
               "type": "string",
@@ -5182,93 +5273,6 @@
                   "id": 1
                 },
                 "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
                   "type": "string",
                   "id": 2
                 }
