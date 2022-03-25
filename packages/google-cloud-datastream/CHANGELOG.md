@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/nodejs-datastream/compare/v1.0.0...v1.1.0) (2022-03-24)
+
+
+### Features
+
+* promote to stable ([#35](https://github.com/googleapis/nodejs-datastream/issues/35)) ([073f3af](https://github.com/googleapis/nodejs-datastream/commit/073f3af9301ff197dddd5450cea94d9346ea0e18))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-datastream/compare/v0.2.0...v1.0.0) (2022-02-18)
 
 
