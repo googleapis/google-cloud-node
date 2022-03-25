@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/nodejs-eventarc-publishing/compare/v1.0.0...v1.1.0) (2022-03-25)
+
+
+### Features
+
+* promote to stable ([#13](https://github.com/googleapis/nodejs-eventarc-publishing/issues/13)) ([466cca6](https://github.com/googleapis/nodejs-eventarc-publishing/commit/466cca61a4c645cc11cfee236ffbcf85b97a645e)), closes [#6](https://github.com/googleapis/nodejs-eventarc-publishing/issues/6)
+
 ## 1.0.0 (2022-03-22)
 
 
