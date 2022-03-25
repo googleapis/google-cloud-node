@@ -11,6 +11,6 @@
   "requires_billing": true,
   "name": "talent",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559664",
-  "api_shortname": "talent",
+  "api_shortname": "jobs",
   "library_type": "GAPIC_AUTO"
 }
