@@ -3320,7 +3320,9 @@ class File extends ServiceObject<File> {
    * ```
    */
   publicUrl(): string {
-    return `${this.storage.apiEndpoint}/${this.bucket.name}/${this.name}`;
+    return `${this.storage.apiEndpoint}/${
+      this.bucket.name
+    }/${encodeURIComponent(this.name)}`;
   }
 
   move(

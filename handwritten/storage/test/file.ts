@@ -3937,7 +3937,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${NAME}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
       );
       done();
     });
@@ -3947,7 +3947,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${NAME}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
       );
       done();
     });
@@ -3957,7 +3957,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${NAME}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
       );
       done();
     });
@@ -3967,7 +3967,17 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${NAME}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+      );
+      done();
+    });
+
+    it('with an ampersand in the name', done => {
+      const NAME = '&foo';
+      const file = new File(BUCKET, NAME);
+      assert.strictEqual(
+        file.publicUrl(),
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
       );
       done();
     });
