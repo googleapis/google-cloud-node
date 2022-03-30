@@ -33,7 +33,7 @@ import {
   ApiError,
   CreateUriCallback,
   PROTOCOL_REGEX,
-} from '../src/gcs-resumable-upload/index';
+} from '../src/gcs-resumable-upload';
 import {GaxiosOptions, GaxiosError, GaxiosResponse} from 'gaxios';
 
 nock.disableNetConnect();
