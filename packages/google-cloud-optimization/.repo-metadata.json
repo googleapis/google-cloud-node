@@ -1,0 +1,15 @@
+{
+  "name": "cloudoptimization",
+  "name_pretty": "Cloud Optimization AI",
+  "product_documentation": "https://cloud.google.com/optimization/",
+  "client_documentation": "https://googleapis.dev/nodejs/cloudoptimization/latest/",
+  "issue_tracker": "https://github.com/googleapis/nodejs-cloud-optimization/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-cloud-optimization",
+  "distribution_name": "@google-cloud/optimization",
+  "api_id": "optimization.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true
+}
+

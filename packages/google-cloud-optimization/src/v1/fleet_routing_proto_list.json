@@ -1,0 +1,4 @@
+[
+  "../../protos/google/cloud/optimization/v1/async_model.proto",
+  "../../protos/google/cloud/optimization/v1/fleet_routing.proto"
+]
