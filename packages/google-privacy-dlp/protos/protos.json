@@ -3828,6 +3828,116 @@
                         }
                       }
                     },
+                    "DataProfileAction": {
+                      "oneofs": {
+                        "action": {
+                          "oneof": [
+                            "exportData",
+                            "pubSubNotification"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "exportData": {
+                          "type": "Export",
+                          "id": 1
+                        },
+                        "pubSubNotification": {
+                          "type": "PubSubNotification",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Export": {
+                          "fields": {
+                            "profileTable": {
+                              "type": "BigQueryTable",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "PubSubNotification": {
+                          "fields": {
+                            "topic": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "event": {
+                              "type": "EventType",
+                              "id": 2
+                            },
+                            "pubsubCondition": {
+                              "type": "DataProfilePubSubCondition",
+                              "id": 3
+                            },
+                            "detailOfMessage": {
+                              "type": "DetailLevel",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "DetailLevel": {
+                              "values": {
+                                "DETAIL_LEVEL_UNSPECIFIED": 0,
+                                "TABLE_PROFILE": 1,
+                                "RESOURCE_NAME": 2
+                              }
+                            }
+                          }
+                        },
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "NEW_PROFILE": 1,
+                            "CHANGED_PROFILE": 2,
+                            "SCORE_INCREASED": 3,
+                            "ERROR_CHANGED": 4
+                          }
+                        }
+                      }
+                    },
+                    "DataProfileJobConfig": {
+                      "fields": {
+                        "location": {
+                          "type": "DataProfileLocation",
+                          "id": 1
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "inspectTemplates": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "dataProfileActions": {
+                          "rule": "repeated",
+                          "type": "DataProfileAction",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "DataProfileLocation": {
+                      "oneofs": {
+                        "location": {
+                          "oneof": [
+                            "organizationId",
+                            "folderId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "organizationId": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "folderId": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
                     "DlpJob": {
                       "options": {
                         "(google.api.resource).type": "dlp.googleapis.com/DlpJob",
@@ -4471,6 +4581,283 @@
                         "READY": 2,
                         "FAILED": 3,
                         "INVALID": 4
+                      }
+                    },
+                    "SensitivityScore": {
+                      "fields": {
+                        "score": {
+                          "type": "SensitivityScoreLevel",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SensitivityScoreLevel": {
+                          "values": {
+                            "SENSITIVITY_SCORE_UNSPECIFIED": 0,
+                            "SENSITIVITY_LOW": 10,
+                            "SENSITIVITY_MODERATE": 20,
+                            "SENSITIVITY_HIGH": 30
+                          }
+                        }
+                      }
+                    },
+                    "DataRiskLevel": {
+                      "fields": {
+                        "score": {
+                          "type": "DataRiskLevelScore",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "DataRiskLevelScore": {
+                          "values": {
+                            "RISK_SCORE_UNSPECIFIED": 0,
+                            "RISK_LOW": 10,
+                            "RISK_MODERATE": 20,
+                            "RISK_HIGH": 30
+                          }
+                        }
+                      }
+                    },
+                    "ResourceVisibility": {
+                      "values": {
+                        "RESOURCE_VISIBILITY_UNSPECIFIED": 0,
+                        "RESOURCE_VISIBILITY_PUBLIC": 10,
+                        "RESOURCE_VISIBILITY_RESTRICTED": 20
+                      }
+                    },
+                    "DataProfileConfigSnapshot": {
+                      "fields": {
+                        "inspectConfig": {
+                          "type": "InspectConfig",
+                          "id": 2
+                        },
+                        "dataProfileJob": {
+                          "type": "DataProfileJobConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TableDataProfile": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "projectDataProfile": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "datasetProjectId": {
+                          "type": "string",
+                          "id": 24
+                        },
+                        "datasetLocation": {
+                          "type": "string",
+                          "id": 29
+                        },
+                        "datasetId": {
+                          "type": "string",
+                          "id": 25
+                        },
+                        "tableId": {
+                          "type": "string",
+                          "id": 26
+                        },
+                        "fullResource": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "profileStatus": {
+                          "type": "ProfileStatus",
+                          "id": 21
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 22
+                        },
+                        "sensitivityScore": {
+                          "type": "SensitivityScore",
+                          "id": 5
+                        },
+                        "dataRiskLevel": {
+                          "type": "DataRiskLevel",
+                          "id": 6
+                        },
+                        "predictedInfoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoTypeSummary",
+                          "id": 27
+                        },
+                        "otherInfoTypes": {
+                          "rule": "repeated",
+                          "type": "OtherInfoTypeSummary",
+                          "id": 28
+                        },
+                        "configSnapshot": {
+                          "type": "DataProfileConfigSnapshot",
+                          "id": 7
+                        },
+                        "lastModifiedTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8
+                        },
+                        "expirationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "scannedColumnCount": {
+                          "type": "int64",
+                          "id": 10
+                        },
+                        "failedColumnCount": {
+                          "type": "int64",
+                          "id": 11
+                        },
+                        "tableSizeBytes": {
+                          "type": "int64",
+                          "id": 12
+                        },
+                        "rowCount": {
+                          "type": "int64",
+                          "id": 13
+                        },
+                        "encryptionStatus": {
+                          "type": "EncryptionStatus",
+                          "id": 14
+                        },
+                        "resourceVisibility": {
+                          "type": "ResourceVisibility",
+                          "id": 15
+                        },
+                        "profileLastGenerated": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 16
+                        },
+                        "resourceLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 17
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 23
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "DONE": 2
+                          }
+                        }
+                      }
+                    },
+                    "ProfileStatus": {
+                      "fields": {
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "timestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "EncryptionStatus": {
+                      "values": {
+                        "ENCRYPTION_STATUS_UNSPECIFIED": 0,
+                        "ENCRYPTION_GOOGLE_MANAGED": 1,
+                        "ENCRYPTION_CUSTOMER_MANAGED": 2
+                      }
+                    },
+                    "InfoTypeSummary": {
+                      "fields": {
+                        "infoType": {
+                          "type": "InfoType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OtherInfoTypeSummary": {
+                      "fields": {
+                        "infoType": {
+                          "type": "InfoType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DataProfilePubSubCondition": {
+                      "fields": {
+                        "expressions": {
+                          "type": "PubSubExpressions",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ProfileScoreBucket": {
+                          "values": {
+                            "PROFILE_SCORE_BUCKET_UNSPECIFIED": 0,
+                            "HIGH": 1,
+                            "MEDIUM_OR_HIGH": 2
+                          }
+                        },
+                        "PubSubCondition": {
+                          "oneofs": {
+                            "value": {
+                              "oneof": [
+                                "minimumRiskScore",
+                                "minimumSensitivityScore"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "minimumRiskScore": {
+                              "type": "ProfileScoreBucket",
+                              "id": 1
+                            },
+                            "minimumSensitivityScore": {
+                              "type": "ProfileScoreBucket",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "PubSubExpressions": {
+                          "fields": {
+                            "logicalOperator": {
+                              "type": "PubSubLogicalOperator",
+                              "id": 1
+                            },
+                            "conditions": {
+                              "rule": "repeated",
+                              "type": "PubSubCondition",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "PubSubLogicalOperator": {
+                              "values": {
+                                "LOGICAL_OPERATOR_UNSPECIFIED": 0,
+                                "OR": 1,
+                                "AND": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DataProfilePubSubMessage": {
+                      "fields": {
+                        "profile": {
+                          "type": "TableDataProfile",
+                          "id": 1
+                        },
+                        "event": {
+                          "type": "DataProfileAction.EventType",
+                          "id": 2
+                        }
                       }
                     },
                     "InfoType": {

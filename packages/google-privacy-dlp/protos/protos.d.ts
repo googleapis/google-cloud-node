@@ -15492,6 +15492,532 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a DataProfileAction. */
+                interface IDataProfileAction {
+
+                    /** DataProfileAction exportData */
+                    exportData?: (google.privacy.dlp.v2.DataProfileAction.IExport|null);
+
+                    /** DataProfileAction pubSubNotification */
+                    pubSubNotification?: (google.privacy.dlp.v2.DataProfileAction.IPubSubNotification|null);
+                }
+
+                /** Represents a DataProfileAction. */
+                class DataProfileAction implements IDataProfileAction {
+
+                    /**
+                     * Constructs a new DataProfileAction.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfileAction);
+
+                    /** DataProfileAction exportData. */
+                    public exportData?: (google.privacy.dlp.v2.DataProfileAction.IExport|null);
+
+                    /** DataProfileAction pubSubNotification. */
+                    public pubSubNotification?: (google.privacy.dlp.v2.DataProfileAction.IPubSubNotification|null);
+
+                    /** DataProfileAction action. */
+                    public action?: ("exportData"|"pubSubNotification");
+
+                    /**
+                     * Creates a new DataProfileAction instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfileAction instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfileAction): google.privacy.dlp.v2.DataProfileAction;
+
+                    /**
+                     * Encodes the specified DataProfileAction message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.verify|verify} messages.
+                     * @param message DataProfileAction message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfileAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfileAction message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.verify|verify} messages.
+                     * @param message DataProfileAction message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfileAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfileAction message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfileAction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction;
+
+                    /**
+                     * Decodes a DataProfileAction message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfileAction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction;
+
+                    /**
+                     * Verifies a DataProfileAction message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfileAction message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfileAction
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction;
+
+                    /**
+                     * Creates a plain object from a DataProfileAction message. Also converts values to other types if specified.
+                     * @param message DataProfileAction
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfileAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfileAction to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DataProfileAction {
+
+                    /** Properties of an Export. */
+                    interface IExport {
+
+                        /** Export profileTable */
+                        profileTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
+                    }
+
+                    /** Represents an Export. */
+                    class Export implements IExport {
+
+                        /**
+                         * Constructs a new Export.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.IExport);
+
+                        /** Export profileTable. */
+                        public profileTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
+
+                        /**
+                         * Creates a new Export instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Export instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.IExport): google.privacy.dlp.v2.DataProfileAction.Export;
+
+                        /**
+                         * Encodes the specified Export message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.Export.verify|verify} messages.
+                         * @param message Export message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.IExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Export message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.Export.verify|verify} messages.
+                         * @param message Export message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.IExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Export message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Export
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.Export;
+
+                        /**
+                         * Decodes an Export message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Export
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.Export;
+
+                        /**
+                         * Verifies an Export message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Export message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Export
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.Export;
+
+                        /**
+                         * Creates a plain object from an Export message. Also converts values to other types if specified.
+                         * @param message Export
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.Export, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Export to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a PubSubNotification. */
+                    interface IPubSubNotification {
+
+                        /** PubSubNotification topic */
+                        topic?: (string|null);
+
+                        /** PubSubNotification event */
+                        event?: (google.privacy.dlp.v2.DataProfileAction.EventType|keyof typeof google.privacy.dlp.v2.DataProfileAction.EventType|null);
+
+                        /** PubSubNotification pubsubCondition */
+                        pubsubCondition?: (google.privacy.dlp.v2.IDataProfilePubSubCondition|null);
+
+                        /** PubSubNotification detailOfMessage */
+                        detailOfMessage?: (google.privacy.dlp.v2.DataProfileAction.PubSubNotification.DetailLevel|keyof typeof google.privacy.dlp.v2.DataProfileAction.PubSubNotification.DetailLevel|null);
+                    }
+
+                    /** Represents a PubSubNotification. */
+                    class PubSubNotification implements IPubSubNotification {
+
+                        /**
+                         * Constructs a new PubSubNotification.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.IPubSubNotification);
+
+                        /** PubSubNotification topic. */
+                        public topic: string;
+
+                        /** PubSubNotification event. */
+                        public event: (google.privacy.dlp.v2.DataProfileAction.EventType|keyof typeof google.privacy.dlp.v2.DataProfileAction.EventType);
+
+                        /** PubSubNotification pubsubCondition. */
+                        public pubsubCondition?: (google.privacy.dlp.v2.IDataProfilePubSubCondition|null);
+
+                        /** PubSubNotification detailOfMessage. */
+                        public detailOfMessage: (google.privacy.dlp.v2.DataProfileAction.PubSubNotification.DetailLevel|keyof typeof google.privacy.dlp.v2.DataProfileAction.PubSubNotification.DetailLevel);
+
+                        /**
+                         * Creates a new PubSubNotification instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PubSubNotification instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.IPubSubNotification): google.privacy.dlp.v2.DataProfileAction.PubSubNotification;
+
+                        /**
+                         * Encodes the specified PubSubNotification message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PubSubNotification.verify|verify} messages.
+                         * @param message PubSubNotification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.IPubSubNotification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PubSubNotification message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PubSubNotification.verify|verify} messages.
+                         * @param message PubSubNotification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.IPubSubNotification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PubSubNotification message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PubSubNotification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.PubSubNotification;
+
+                        /**
+                         * Decodes a PubSubNotification message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PubSubNotification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.PubSubNotification;
+
+                        /**
+                         * Verifies a PubSubNotification message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PubSubNotification message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PubSubNotification
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.PubSubNotification;
+
+                        /**
+                         * Creates a plain object from a PubSubNotification message. Also converts values to other types if specified.
+                         * @param message PubSubNotification
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.PubSubNotification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PubSubNotification to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace PubSubNotification {
+
+                        /** DetailLevel enum. */
+                        enum DetailLevel {
+                            DETAIL_LEVEL_UNSPECIFIED = 0,
+                            TABLE_PROFILE = 1,
+                            RESOURCE_NAME = 2
+                        }
+                    }
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        NEW_PROFILE = 1,
+                        CHANGED_PROFILE = 2,
+                        SCORE_INCREASED = 3,
+                        ERROR_CHANGED = 4
+                    }
+                }
+
+                /** Properties of a DataProfileJobConfig. */
+                interface IDataProfileJobConfig {
+
+                    /** DataProfileJobConfig location */
+                    location?: (google.privacy.dlp.v2.IDataProfileLocation|null);
+
+                    /** DataProfileJobConfig projectId */
+                    projectId?: (string|null);
+
+                    /** DataProfileJobConfig inspectTemplates */
+                    inspectTemplates?: (string[]|null);
+
+                    /** DataProfileJobConfig dataProfileActions */
+                    dataProfileActions?: (google.privacy.dlp.v2.IDataProfileAction[]|null);
+                }
+
+                /** Represents a DataProfileJobConfig. */
+                class DataProfileJobConfig implements IDataProfileJobConfig {
+
+                    /**
+                     * Constructs a new DataProfileJobConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfileJobConfig);
+
+                    /** DataProfileJobConfig location. */
+                    public location?: (google.privacy.dlp.v2.IDataProfileLocation|null);
+
+                    /** DataProfileJobConfig projectId. */
+                    public projectId: string;
+
+                    /** DataProfileJobConfig inspectTemplates. */
+                    public inspectTemplates: string[];
+
+                    /** DataProfileJobConfig dataProfileActions. */
+                    public dataProfileActions: google.privacy.dlp.v2.IDataProfileAction[];
+
+                    /**
+                     * Creates a new DataProfileJobConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfileJobConfig instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfileJobConfig): google.privacy.dlp.v2.DataProfileJobConfig;
+
+                    /**
+                     * Encodes the specified DataProfileJobConfig message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileJobConfig.verify|verify} messages.
+                     * @param message DataProfileJobConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfileJobConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfileJobConfig message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileJobConfig.verify|verify} messages.
+                     * @param message DataProfileJobConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfileJobConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfileJobConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfileJobConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileJobConfig;
+
+                    /**
+                     * Decodes a DataProfileJobConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfileJobConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileJobConfig;
+
+                    /**
+                     * Verifies a DataProfileJobConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfileJobConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfileJobConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileJobConfig;
+
+                    /**
+                     * Creates a plain object from a DataProfileJobConfig message. Also converts values to other types if specified.
+                     * @param message DataProfileJobConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfileJobConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfileJobConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DataProfileLocation. */
+                interface IDataProfileLocation {
+
+                    /** DataProfileLocation organizationId */
+                    organizationId?: (number|Long|string|null);
+
+                    /** DataProfileLocation folderId */
+                    folderId?: (number|Long|string|null);
+                }
+
+                /** Represents a DataProfileLocation. */
+                class DataProfileLocation implements IDataProfileLocation {
+
+                    /**
+                     * Constructs a new DataProfileLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfileLocation);
+
+                    /** DataProfileLocation organizationId. */
+                    public organizationId?: (number|Long|string|null);
+
+                    /** DataProfileLocation folderId. */
+                    public folderId?: (number|Long|string|null);
+
+                    /** DataProfileLocation location. */
+                    public location?: ("organizationId"|"folderId");
+
+                    /**
+                     * Creates a new DataProfileLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfileLocation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfileLocation): google.privacy.dlp.v2.DataProfileLocation;
+
+                    /**
+                     * Encodes the specified DataProfileLocation message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileLocation.verify|verify} messages.
+                     * @param message DataProfileLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfileLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfileLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileLocation.verify|verify} messages.
+                     * @param message DataProfileLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfileLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfileLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfileLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileLocation;
+
+                    /**
+                     * Decodes a DataProfileLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfileLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileLocation;
+
+                    /**
+                     * Verifies a DataProfileLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfileLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfileLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileLocation;
+
+                    /**
+                     * Creates a plain object from a DataProfileLocation message. Also converts values to other types if specified.
+                     * @param message DataProfileLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfileLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfileLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a DlpJob. */
                 interface IDlpJob {
 
@@ -18596,6 +19122,1239 @@ export namespace google {
                     READY = 2,
                     FAILED = 3,
                     INVALID = 4
+                }
+
+                /** Properties of a SensitivityScore. */
+                interface ISensitivityScore {
+
+                    /** SensitivityScore score */
+                    score?: (google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel|keyof typeof google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel|null);
+                }
+
+                /** Represents a SensitivityScore. */
+                class SensitivityScore implements ISensitivityScore {
+
+                    /**
+                     * Constructs a new SensitivityScore.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ISensitivityScore);
+
+                    /** SensitivityScore score. */
+                    public score: (google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel|keyof typeof google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel);
+
+                    /**
+                     * Creates a new SensitivityScore instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SensitivityScore instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ISensitivityScore): google.privacy.dlp.v2.SensitivityScore;
+
+                    /**
+                     * Encodes the specified SensitivityScore message. Does not implicitly {@link google.privacy.dlp.v2.SensitivityScore.verify|verify} messages.
+                     * @param message SensitivityScore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ISensitivityScore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SensitivityScore message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.SensitivityScore.verify|verify} messages.
+                     * @param message SensitivityScore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ISensitivityScore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SensitivityScore message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SensitivityScore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.SensitivityScore;
+
+                    /**
+                     * Decodes a SensitivityScore message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SensitivityScore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.SensitivityScore;
+
+                    /**
+                     * Verifies a SensitivityScore message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SensitivityScore message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SensitivityScore
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.SensitivityScore;
+
+                    /**
+                     * Creates a plain object from a SensitivityScore message. Also converts values to other types if specified.
+                     * @param message SensitivityScore
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.SensitivityScore, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SensitivityScore to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace SensitivityScore {
+
+                    /** SensitivityScoreLevel enum. */
+                    enum SensitivityScoreLevel {
+                        SENSITIVITY_SCORE_UNSPECIFIED = 0,
+                        SENSITIVITY_LOW = 10,
+                        SENSITIVITY_MODERATE = 20,
+                        SENSITIVITY_HIGH = 30
+                    }
+                }
+
+                /** Properties of a DataRiskLevel. */
+                interface IDataRiskLevel {
+
+                    /** DataRiskLevel score */
+                    score?: (google.privacy.dlp.v2.DataRiskLevel.DataRiskLevelScore|keyof typeof google.privacy.dlp.v2.DataRiskLevel.DataRiskLevelScore|null);
+                }
+
+                /** Represents a DataRiskLevel. */
+                class DataRiskLevel implements IDataRiskLevel {
+
+                    /**
+                     * Constructs a new DataRiskLevel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataRiskLevel);
+
+                    /** DataRiskLevel score. */
+                    public score: (google.privacy.dlp.v2.DataRiskLevel.DataRiskLevelScore|keyof typeof google.privacy.dlp.v2.DataRiskLevel.DataRiskLevelScore);
+
+                    /**
+                     * Creates a new DataRiskLevel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataRiskLevel instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataRiskLevel): google.privacy.dlp.v2.DataRiskLevel;
+
+                    /**
+                     * Encodes the specified DataRiskLevel message. Does not implicitly {@link google.privacy.dlp.v2.DataRiskLevel.verify|verify} messages.
+                     * @param message DataRiskLevel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataRiskLevel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataRiskLevel message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataRiskLevel.verify|verify} messages.
+                     * @param message DataRiskLevel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataRiskLevel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataRiskLevel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataRiskLevel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataRiskLevel;
+
+                    /**
+                     * Decodes a DataRiskLevel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataRiskLevel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataRiskLevel;
+
+                    /**
+                     * Verifies a DataRiskLevel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataRiskLevel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataRiskLevel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataRiskLevel;
+
+                    /**
+                     * Creates a plain object from a DataRiskLevel message. Also converts values to other types if specified.
+                     * @param message DataRiskLevel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataRiskLevel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataRiskLevel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DataRiskLevel {
+
+                    /** DataRiskLevelScore enum. */
+                    enum DataRiskLevelScore {
+                        RISK_SCORE_UNSPECIFIED = 0,
+                        RISK_LOW = 10,
+                        RISK_MODERATE = 20,
+                        RISK_HIGH = 30
+                    }
+                }
+
+                /** ResourceVisibility enum. */
+                enum ResourceVisibility {
+                    RESOURCE_VISIBILITY_UNSPECIFIED = 0,
+                    RESOURCE_VISIBILITY_PUBLIC = 10,
+                    RESOURCE_VISIBILITY_RESTRICTED = 20
+                }
+
+                /** Properties of a DataProfileConfigSnapshot. */
+                interface IDataProfileConfigSnapshot {
+
+                    /** DataProfileConfigSnapshot inspectConfig */
+                    inspectConfig?: (google.privacy.dlp.v2.IInspectConfig|null);
+
+                    /** DataProfileConfigSnapshot dataProfileJob */
+                    dataProfileJob?: (google.privacy.dlp.v2.IDataProfileJobConfig|null);
+                }
+
+                /** Represents a DataProfileConfigSnapshot. */
+                class DataProfileConfigSnapshot implements IDataProfileConfigSnapshot {
+
+                    /**
+                     * Constructs a new DataProfileConfigSnapshot.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfileConfigSnapshot);
+
+                    /** DataProfileConfigSnapshot inspectConfig. */
+                    public inspectConfig?: (google.privacy.dlp.v2.IInspectConfig|null);
+
+                    /** DataProfileConfigSnapshot dataProfileJob. */
+                    public dataProfileJob?: (google.privacy.dlp.v2.IDataProfileJobConfig|null);
+
+                    /**
+                     * Creates a new DataProfileConfigSnapshot instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfileConfigSnapshot instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfileConfigSnapshot): google.privacy.dlp.v2.DataProfileConfigSnapshot;
+
+                    /**
+                     * Encodes the specified DataProfileConfigSnapshot message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileConfigSnapshot.verify|verify} messages.
+                     * @param message DataProfileConfigSnapshot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfileConfigSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfileConfigSnapshot message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileConfigSnapshot.verify|verify} messages.
+                     * @param message DataProfileConfigSnapshot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfileConfigSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfileConfigSnapshot message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfileConfigSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileConfigSnapshot;
+
+                    /**
+                     * Decodes a DataProfileConfigSnapshot message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfileConfigSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileConfigSnapshot;
+
+                    /**
+                     * Verifies a DataProfileConfigSnapshot message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfileConfigSnapshot message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfileConfigSnapshot
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileConfigSnapshot;
+
+                    /**
+                     * Creates a plain object from a DataProfileConfigSnapshot message. Also converts values to other types if specified.
+                     * @param message DataProfileConfigSnapshot
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfileConfigSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfileConfigSnapshot to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TableDataProfile. */
+                interface ITableDataProfile {
+
+                    /** TableDataProfile name */
+                    name?: (string|null);
+
+                    /** TableDataProfile projectDataProfile */
+                    projectDataProfile?: (string|null);
+
+                    /** TableDataProfile datasetProjectId */
+                    datasetProjectId?: (string|null);
+
+                    /** TableDataProfile datasetLocation */
+                    datasetLocation?: (string|null);
+
+                    /** TableDataProfile datasetId */
+                    datasetId?: (string|null);
+
+                    /** TableDataProfile tableId */
+                    tableId?: (string|null);
+
+                    /** TableDataProfile fullResource */
+                    fullResource?: (string|null);
+
+                    /** TableDataProfile profileStatus */
+                    profileStatus?: (google.privacy.dlp.v2.IProfileStatus|null);
+
+                    /** TableDataProfile state */
+                    state?: (google.privacy.dlp.v2.TableDataProfile.State|keyof typeof google.privacy.dlp.v2.TableDataProfile.State|null);
+
+                    /** TableDataProfile sensitivityScore */
+                    sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** TableDataProfile dataRiskLevel */
+                    dataRiskLevel?: (google.privacy.dlp.v2.IDataRiskLevel|null);
+
+                    /** TableDataProfile predictedInfoTypes */
+                    predictedInfoTypes?: (google.privacy.dlp.v2.IInfoTypeSummary[]|null);
+
+                    /** TableDataProfile otherInfoTypes */
+                    otherInfoTypes?: (google.privacy.dlp.v2.IOtherInfoTypeSummary[]|null);
+
+                    /** TableDataProfile configSnapshot */
+                    configSnapshot?: (google.privacy.dlp.v2.IDataProfileConfigSnapshot|null);
+
+                    /** TableDataProfile lastModifiedTime */
+                    lastModifiedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TableDataProfile expirationTime */
+                    expirationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TableDataProfile scannedColumnCount */
+                    scannedColumnCount?: (number|Long|string|null);
+
+                    /** TableDataProfile failedColumnCount */
+                    failedColumnCount?: (number|Long|string|null);
+
+                    /** TableDataProfile tableSizeBytes */
+                    tableSizeBytes?: (number|Long|string|null);
+
+                    /** TableDataProfile rowCount */
+                    rowCount?: (number|Long|string|null);
+
+                    /** TableDataProfile encryptionStatus */
+                    encryptionStatus?: (google.privacy.dlp.v2.EncryptionStatus|keyof typeof google.privacy.dlp.v2.EncryptionStatus|null);
+
+                    /** TableDataProfile resourceVisibility */
+                    resourceVisibility?: (google.privacy.dlp.v2.ResourceVisibility|keyof typeof google.privacy.dlp.v2.ResourceVisibility|null);
+
+                    /** TableDataProfile profileLastGenerated */
+                    profileLastGenerated?: (google.protobuf.ITimestamp|null);
+
+                    /** TableDataProfile resourceLabels */
+                    resourceLabels?: ({ [k: string]: string }|null);
+
+                    /** TableDataProfile createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a TableDataProfile. */
+                class TableDataProfile implements ITableDataProfile {
+
+                    /**
+                     * Constructs a new TableDataProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ITableDataProfile);
+
+                    /** TableDataProfile name. */
+                    public name: string;
+
+                    /** TableDataProfile projectDataProfile. */
+                    public projectDataProfile: string;
+
+                    /** TableDataProfile datasetProjectId. */
+                    public datasetProjectId: string;
+
+                    /** TableDataProfile datasetLocation. */
+                    public datasetLocation: string;
+
+                    /** TableDataProfile datasetId. */
+                    public datasetId: string;
+
+                    /** TableDataProfile tableId. */
+                    public tableId: string;
+
+                    /** TableDataProfile fullResource. */
+                    public fullResource: string;
+
+                    /** TableDataProfile profileStatus. */
+                    public profileStatus?: (google.privacy.dlp.v2.IProfileStatus|null);
+
+                    /** TableDataProfile state. */
+                    public state: (google.privacy.dlp.v2.TableDataProfile.State|keyof typeof google.privacy.dlp.v2.TableDataProfile.State);
+
+                    /** TableDataProfile sensitivityScore. */
+                    public sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** TableDataProfile dataRiskLevel. */
+                    public dataRiskLevel?: (google.privacy.dlp.v2.IDataRiskLevel|null);
+
+                    /** TableDataProfile predictedInfoTypes. */
+                    public predictedInfoTypes: google.privacy.dlp.v2.IInfoTypeSummary[];
+
+                    /** TableDataProfile otherInfoTypes. */
+                    public otherInfoTypes: google.privacy.dlp.v2.IOtherInfoTypeSummary[];
+
+                    /** TableDataProfile configSnapshot. */
+                    public configSnapshot?: (google.privacy.dlp.v2.IDataProfileConfigSnapshot|null);
+
+                    /** TableDataProfile lastModifiedTime. */
+                    public lastModifiedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TableDataProfile expirationTime. */
+                    public expirationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TableDataProfile scannedColumnCount. */
+                    public scannedColumnCount: (number|Long|string);
+
+                    /** TableDataProfile failedColumnCount. */
+                    public failedColumnCount: (number|Long|string);
+
+                    /** TableDataProfile tableSizeBytes. */
+                    public tableSizeBytes: (number|Long|string);
+
+                    /** TableDataProfile rowCount. */
+                    public rowCount: (number|Long|string);
+
+                    /** TableDataProfile encryptionStatus. */
+                    public encryptionStatus: (google.privacy.dlp.v2.EncryptionStatus|keyof typeof google.privacy.dlp.v2.EncryptionStatus);
+
+                    /** TableDataProfile resourceVisibility. */
+                    public resourceVisibility: (google.privacy.dlp.v2.ResourceVisibility|keyof typeof google.privacy.dlp.v2.ResourceVisibility);
+
+                    /** TableDataProfile profileLastGenerated. */
+                    public profileLastGenerated?: (google.protobuf.ITimestamp|null);
+
+                    /** TableDataProfile resourceLabels. */
+                    public resourceLabels: { [k: string]: string };
+
+                    /** TableDataProfile createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new TableDataProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TableDataProfile instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ITableDataProfile): google.privacy.dlp.v2.TableDataProfile;
+
+                    /**
+                     * Encodes the specified TableDataProfile message. Does not implicitly {@link google.privacy.dlp.v2.TableDataProfile.verify|verify} messages.
+                     * @param message TableDataProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ITableDataProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TableDataProfile message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TableDataProfile.verify|verify} messages.
+                     * @param message TableDataProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ITableDataProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TableDataProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TableDataProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TableDataProfile;
+
+                    /**
+                     * Decodes a TableDataProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TableDataProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TableDataProfile;
+
+                    /**
+                     * Verifies a TableDataProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TableDataProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TableDataProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TableDataProfile;
+
+                    /**
+                     * Creates a plain object from a TableDataProfile message. Also converts values to other types if specified.
+                     * @param message TableDataProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.TableDataProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TableDataProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace TableDataProfile {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        DONE = 2
+                    }
+                }
+
+                /** Properties of a ProfileStatus. */
+                interface IProfileStatus {
+
+                    /** ProfileStatus status */
+                    status?: (google.rpc.IStatus|null);
+
+                    /** ProfileStatus timestamp */
+                    timestamp?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ProfileStatus. */
+                class ProfileStatus implements IProfileStatus {
+
+                    /**
+                     * Constructs a new ProfileStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IProfileStatus);
+
+                    /** ProfileStatus status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /** ProfileStatus timestamp. */
+                    public timestamp?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ProfileStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProfileStatus instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IProfileStatus): google.privacy.dlp.v2.ProfileStatus;
+
+                    /**
+                     * Encodes the specified ProfileStatus message. Does not implicitly {@link google.privacy.dlp.v2.ProfileStatus.verify|verify} messages.
+                     * @param message ProfileStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IProfileStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProfileStatus message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ProfileStatus.verify|verify} messages.
+                     * @param message ProfileStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IProfileStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProfileStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProfileStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ProfileStatus;
+
+                    /**
+                     * Decodes a ProfileStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProfileStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ProfileStatus;
+
+                    /**
+                     * Verifies a ProfileStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProfileStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProfileStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ProfileStatus;
+
+                    /**
+                     * Creates a plain object from a ProfileStatus message. Also converts values to other types if specified.
+                     * @param message ProfileStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ProfileStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProfileStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** EncryptionStatus enum. */
+                enum EncryptionStatus {
+                    ENCRYPTION_STATUS_UNSPECIFIED = 0,
+                    ENCRYPTION_GOOGLE_MANAGED = 1,
+                    ENCRYPTION_CUSTOMER_MANAGED = 2
+                }
+
+                /** Properties of an InfoTypeSummary. */
+                interface IInfoTypeSummary {
+
+                    /** InfoTypeSummary infoType */
+                    infoType?: (google.privacy.dlp.v2.IInfoType|null);
+                }
+
+                /** Represents an InfoTypeSummary. */
+                class InfoTypeSummary implements IInfoTypeSummary {
+
+                    /**
+                     * Constructs a new InfoTypeSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IInfoTypeSummary);
+
+                    /** InfoTypeSummary infoType. */
+                    public infoType?: (google.privacy.dlp.v2.IInfoType|null);
+
+                    /**
+                     * Creates a new InfoTypeSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InfoTypeSummary instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IInfoTypeSummary): google.privacy.dlp.v2.InfoTypeSummary;
+
+                    /**
+                     * Encodes the specified InfoTypeSummary message. Does not implicitly {@link google.privacy.dlp.v2.InfoTypeSummary.verify|verify} messages.
+                     * @param message InfoTypeSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IInfoTypeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InfoTypeSummary message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.InfoTypeSummary.verify|verify} messages.
+                     * @param message InfoTypeSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IInfoTypeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InfoTypeSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InfoTypeSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.InfoTypeSummary;
+
+                    /**
+                     * Decodes an InfoTypeSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InfoTypeSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.InfoTypeSummary;
+
+                    /**
+                     * Verifies an InfoTypeSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InfoTypeSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InfoTypeSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.InfoTypeSummary;
+
+                    /**
+                     * Creates a plain object from an InfoTypeSummary message. Also converts values to other types if specified.
+                     * @param message InfoTypeSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.InfoTypeSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InfoTypeSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OtherInfoTypeSummary. */
+                interface IOtherInfoTypeSummary {
+
+                    /** OtherInfoTypeSummary infoType */
+                    infoType?: (google.privacy.dlp.v2.IInfoType|null);
+                }
+
+                /** Represents an OtherInfoTypeSummary. */
+                class OtherInfoTypeSummary implements IOtherInfoTypeSummary {
+
+                    /**
+                     * Constructs a new OtherInfoTypeSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherInfoTypeSummary);
+
+                    /** OtherInfoTypeSummary infoType. */
+                    public infoType?: (google.privacy.dlp.v2.IInfoType|null);
+
+                    /**
+                     * Creates a new OtherInfoTypeSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherInfoTypeSummary instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherInfoTypeSummary): google.privacy.dlp.v2.OtherInfoTypeSummary;
+
+                    /**
+                     * Encodes the specified OtherInfoTypeSummary message. Does not implicitly {@link google.privacy.dlp.v2.OtherInfoTypeSummary.verify|verify} messages.
+                     * @param message OtherInfoTypeSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherInfoTypeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherInfoTypeSummary message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherInfoTypeSummary.verify|verify} messages.
+                     * @param message OtherInfoTypeSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherInfoTypeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherInfoTypeSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherInfoTypeSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherInfoTypeSummary;
+
+                    /**
+                     * Decodes an OtherInfoTypeSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherInfoTypeSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherInfoTypeSummary;
+
+                    /**
+                     * Verifies an OtherInfoTypeSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherInfoTypeSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherInfoTypeSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherInfoTypeSummary;
+
+                    /**
+                     * Creates a plain object from an OtherInfoTypeSummary message. Also converts values to other types if specified.
+                     * @param message OtherInfoTypeSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherInfoTypeSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherInfoTypeSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DataProfilePubSubCondition. */
+                interface IDataProfilePubSubCondition {
+
+                    /** DataProfilePubSubCondition expressions */
+                    expressions?: (google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubExpressions|null);
+                }
+
+                /** Represents a DataProfilePubSubCondition. */
+                class DataProfilePubSubCondition implements IDataProfilePubSubCondition {
+
+                    /**
+                     * Constructs a new DataProfilePubSubCondition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfilePubSubCondition);
+
+                    /** DataProfilePubSubCondition expressions. */
+                    public expressions?: (google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubExpressions|null);
+
+                    /**
+                     * Creates a new DataProfilePubSubCondition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfilePubSubCondition instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfilePubSubCondition): google.privacy.dlp.v2.DataProfilePubSubCondition;
+
+                    /**
+                     * Encodes the specified DataProfilePubSubCondition message. Does not implicitly {@link google.privacy.dlp.v2.DataProfilePubSubCondition.verify|verify} messages.
+                     * @param message DataProfilePubSubCondition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfilePubSubCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfilePubSubCondition message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfilePubSubCondition.verify|verify} messages.
+                     * @param message DataProfilePubSubCondition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfilePubSubCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfilePubSubCondition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfilePubSubCondition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfilePubSubCondition;
+
+                    /**
+                     * Decodes a DataProfilePubSubCondition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfilePubSubCondition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfilePubSubCondition;
+
+                    /**
+                     * Verifies a DataProfilePubSubCondition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfilePubSubCondition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfilePubSubCondition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfilePubSubCondition;
+
+                    /**
+                     * Creates a plain object from a DataProfilePubSubCondition message. Also converts values to other types if specified.
+                     * @param message DataProfilePubSubCondition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfilePubSubCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfilePubSubCondition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DataProfilePubSubCondition {
+
+                    /** ProfileScoreBucket enum. */
+                    enum ProfileScoreBucket {
+                        PROFILE_SCORE_BUCKET_UNSPECIFIED = 0,
+                        HIGH = 1,
+                        MEDIUM_OR_HIGH = 2
+                    }
+
+                    /** Properties of a PubSubCondition. */
+                    interface IPubSubCondition {
+
+                        /** PubSubCondition minimumRiskScore */
+                        minimumRiskScore?: (google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket|keyof typeof google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket|null);
+
+                        /** PubSubCondition minimumSensitivityScore */
+                        minimumSensitivityScore?: (google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket|keyof typeof google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket|null);
+                    }
+
+                    /** Represents a PubSubCondition. */
+                    class PubSubCondition implements IPubSubCondition {
+
+                        /**
+                         * Constructs a new PubSubCondition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubCondition);
+
+                        /** PubSubCondition minimumRiskScore. */
+                        public minimumRiskScore?: (google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket|keyof typeof google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket|null);
+
+                        /** PubSubCondition minimumSensitivityScore. */
+                        public minimumSensitivityScore?: (google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket|keyof typeof google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket|null);
+
+                        /** PubSubCondition value. */
+                        public value?: ("minimumRiskScore"|"minimumSensitivityScore");
+
+                        /**
+                         * Creates a new PubSubCondition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PubSubCondition instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubCondition): google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition;
+
+                        /**
+                         * Encodes the specified PubSubCondition message. Does not implicitly {@link google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition.verify|verify} messages.
+                         * @param message PubSubCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PubSubCondition message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition.verify|verify} messages.
+                         * @param message PubSubCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PubSubCondition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PubSubCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition;
+
+                        /**
+                         * Decodes a PubSubCondition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PubSubCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition;
+
+                        /**
+                         * Verifies a PubSubCondition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PubSubCondition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PubSubCondition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition;
+
+                        /**
+                         * Creates a plain object from a PubSubCondition message. Also converts values to other types if specified.
+                         * @param message PubSubCondition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PubSubCondition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a PubSubExpressions. */
+                    interface IPubSubExpressions {
+
+                        /** PubSubExpressions logicalOperator */
+                        logicalOperator?: (google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.PubSubLogicalOperator|keyof typeof google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.PubSubLogicalOperator|null);
+
+                        /** PubSubExpressions conditions */
+                        conditions?: (google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubCondition[]|null);
+                    }
+
+                    /** Represents a PubSubExpressions. */
+                    class PubSubExpressions implements IPubSubExpressions {
+
+                        /**
+                         * Constructs a new PubSubExpressions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubExpressions);
+
+                        /** PubSubExpressions logicalOperator. */
+                        public logicalOperator: (google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.PubSubLogicalOperator|keyof typeof google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.PubSubLogicalOperator);
+
+                        /** PubSubExpressions conditions. */
+                        public conditions: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubCondition[];
+
+                        /**
+                         * Creates a new PubSubExpressions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PubSubExpressions instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubExpressions): google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions;
+
+                        /**
+                         * Encodes the specified PubSubExpressions message. Does not implicitly {@link google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.verify|verify} messages.
+                         * @param message PubSubExpressions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubExpressions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PubSubExpressions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.verify|verify} messages.
+                         * @param message PubSubExpressions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfilePubSubCondition.IPubSubExpressions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PubSubExpressions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PubSubExpressions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions;
+
+                        /**
+                         * Decodes a PubSubExpressions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PubSubExpressions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions;
+
+                        /**
+                         * Verifies a PubSubExpressions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PubSubExpressions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PubSubExpressions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions;
+
+                        /**
+                         * Creates a plain object from a PubSubExpressions message. Also converts values to other types if specified.
+                         * @param message PubSubExpressions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PubSubExpressions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace PubSubExpressions {
+
+                        /** PubSubLogicalOperator enum. */
+                        enum PubSubLogicalOperator {
+                            LOGICAL_OPERATOR_UNSPECIFIED = 0,
+                            OR = 1,
+                            AND = 2
+                        }
+                    }
+                }
+
+                /** Properties of a DataProfilePubSubMessage. */
+                interface IDataProfilePubSubMessage {
+
+                    /** DataProfilePubSubMessage profile */
+                    profile?: (google.privacy.dlp.v2.ITableDataProfile|null);
+
+                    /** DataProfilePubSubMessage event */
+                    event?: (google.privacy.dlp.v2.DataProfileAction.EventType|keyof typeof google.privacy.dlp.v2.DataProfileAction.EventType|null);
+                }
+
+                /** Represents a DataProfilePubSubMessage. */
+                class DataProfilePubSubMessage implements IDataProfilePubSubMessage {
+
+                    /**
+                     * Constructs a new DataProfilePubSubMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfilePubSubMessage);
+
+                    /** DataProfilePubSubMessage profile. */
+                    public profile?: (google.privacy.dlp.v2.ITableDataProfile|null);
+
+                    /** DataProfilePubSubMessage event. */
+                    public event: (google.privacy.dlp.v2.DataProfileAction.EventType|keyof typeof google.privacy.dlp.v2.DataProfileAction.EventType);
+
+                    /**
+                     * Creates a new DataProfilePubSubMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfilePubSubMessage instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfilePubSubMessage): google.privacy.dlp.v2.DataProfilePubSubMessage;
+
+                    /**
+                     * Encodes the specified DataProfilePubSubMessage message. Does not implicitly {@link google.privacy.dlp.v2.DataProfilePubSubMessage.verify|verify} messages.
+                     * @param message DataProfilePubSubMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfilePubSubMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfilePubSubMessage message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfilePubSubMessage.verify|verify} messages.
+                     * @param message DataProfilePubSubMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfilePubSubMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfilePubSubMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfilePubSubMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfilePubSubMessage;
+
+                    /**
+                     * Decodes a DataProfilePubSubMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfilePubSubMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfilePubSubMessage;
+
+                    /**
+                     * Verifies a DataProfilePubSubMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfilePubSubMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfilePubSubMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfilePubSubMessage;
+
+                    /**
+                     * Creates a plain object from a DataProfilePubSubMessage message. Also converts values to other types if specified.
+                     * @param message DataProfilePubSubMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfilePubSubMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfilePubSubMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of an InfoType. */
