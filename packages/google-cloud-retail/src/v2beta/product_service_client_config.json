@@ -82,6 +82,16 @@
           "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
+        },
+        "AddLocalInventories": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
+        },
+        "RemoveLocalInventories": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         }
       }
     }

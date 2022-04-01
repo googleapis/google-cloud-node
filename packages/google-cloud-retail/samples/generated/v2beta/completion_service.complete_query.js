@@ -37,21 +37,21 @@ function main(catalog, query) {
    */
   // const query = 'abc123'
   /**
-   *  A unique identifier for tracking visitors. For example, this could be
-   *  implemented with an HTTP cookie, which should be able to uniquely identify
-   *  a visitor on a single device. This unique identifier should not change if
-   *  the visitor logs in or out of the website.
+   *  Required field. A unique identifier for tracking visitors. For example,
+   *  this could be implemented with an HTTP cookie, which should be able to
+   *  uniquely identify a visitor on a single device. This unique identifier
+   *  should not change if the visitor logs in or out of the website.
    *  The field must be a UTF-8 encoded string with a length limit of 128
    *  characters. Otherwise, an INVALID_ARGUMENT error is returned.
    */
   // const visitorId = 'abc123'
   /**
-   *  The list of languages of the query. This is
-   *  the BCP-47 language code, such as "en-US" or "sr-Latn".
-   *  For more information, see
-   *  Tags for Identifying Languages (https://tools.ietf.org/html/bcp47).
-   *  The maximum number of allowed characters is 255.
-   *  Only "en-US" is currently supported.
+   *  The language filters applied to the output suggestions. If set, it should
+   *  contain the language of the query. If not set, suggestions are returned
+   *  without considering language restrictions. This is the BCP-47 language
+   *  code, such as "en-US" or "sr-Latn". For more information, see Tags for
+   *  Identifying Languages (https://tools.ietf.org/html/bcp47). The maximum
+   *  number of language codes is 3.
    */
   // const languageCodes = 'abc123'
   /**
@@ -81,7 +81,8 @@ function main(catalog, query) {
   // const dataset = 'abc123'
   /**
    *  Completion max suggestions. If left unset or set to 0, then will fallback
-   *  to the configured value CompletionConfig.max_suggestions .
+   *  to the configured value
+   *  CompletionConfig.max_suggestions google.cloud.retail.v2beta.CompletionConfig.max_suggestions.
    *  The maximum allowed max suggestions is 20. If it is set higher, it will be
    *  capped by 20.
    */

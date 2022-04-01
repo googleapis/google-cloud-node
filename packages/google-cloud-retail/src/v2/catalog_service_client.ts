@@ -458,10 +458,6 @@ export class CatalogServiceClient {
    * * UserEventService will only join events with products from branch
    *   {newBranch}.
    *
-   * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.catalog
@@ -472,6 +468,10 @@ export class CatalogServiceClient {
    *
    *   This field must be one of "0", "1" or "2". Otherwise, an INVALID_ARGUMENT
    *   error is returned.
+   *
+   *   If there are no sufficient active products in the targeted branch and
+   *   {@link google.cloud.retail.v2.SetDefaultBranchRequest.force|force} is not set, a
+   *   FAILED_PRECONDITION error is returned.
    * @param {string} request.note
    *   Some note on this request, this can be retrieved by
    *   {@link google.cloud.retail.v2.CatalogService.GetDefaultBranch|CatalogService.GetDefaultBranch}
@@ -479,6 +479,10 @@ export class CatalogServiceClient {
    *
    *   This field must be a UTF-8 encoded string with a length limit of 1,000
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
+   * @param {boolean} request.force
+   *   If set to true, it permits switching to a branch with
+   *   {@link google.cloud.retail.v2.SetDefaultBranchRequest.branch_id|branch_id} even
+   *   if it has no sufficient active products.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -561,10 +565,6 @@ export class CatalogServiceClient {
    * Get which branch is currently default branch set by
    * {@link google.cloud.retail.v2.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
    * method under a specified parent catalog.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
    *
    * @param {Object} request
    *   The request object that will be sent.

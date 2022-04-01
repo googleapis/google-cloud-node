@@ -7,6 +7,7 @@
   "../../protos/google/cloud/retail/v2/prediction_service.proto",
   "../../protos/google/cloud/retail/v2/product.proto",
   "../../protos/google/cloud/retail/v2/product_service.proto",
+  "../../protos/google/cloud/retail/v2/promotion.proto",
   "../../protos/google/cloud/retail/v2/purge_config.proto",
   "../../protos/google/cloud/retail/v2/search_service.proto",
   "../../protos/google/cloud/retail/v2/user_event.proto",

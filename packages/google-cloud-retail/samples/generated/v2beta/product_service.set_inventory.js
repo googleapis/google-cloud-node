@@ -48,6 +48,20 @@ function main(inventory) {
    *  while respecting the last update time for each inventory field, using the
    *  provided or default value for
    *  SetInventoryRequest.set_time google.cloud.retail.v2beta.SetInventoryRequest.set_time.
+   *  The caller can replace place IDs for a subset of fulfillment types in the
+   *  following ways:
+   *  * Adds "fulfillment_info" in
+   *  SetInventoryRequest.set_mask google.cloud.retail.v2beta.SetInventoryRequest.set_mask 
+   *  * Specifies only the desired fulfillment types and corresponding place IDs
+   *  to update in SetInventoryRequest.inventory.fulfillment_info  
+   *  The caller can clear all place IDs from a subset of fulfillment types in
+   *  the following ways:
+   *  * Adds "fulfillment_info" in
+   *  SetInventoryRequest.set_mask google.cloud.retail.v2beta.SetInventoryRequest.set_mask 
+   *  * Specifies only the desired fulfillment types to clear in
+   *  SetInventoryRequest.inventory.fulfillment_info  
+   *  * Checks that only the desired fulfillment info types have empty
+   *  SetInventoryRequest.inventory.fulfillment_info.place_ids  
    *  The last update time is recorded for the following inventory fields:
    *  * Product.price_info google.cloud.retail.v2beta.Product.price_info 
    *  * Product.availability google.cloud.retail.v2beta.Product.availability 

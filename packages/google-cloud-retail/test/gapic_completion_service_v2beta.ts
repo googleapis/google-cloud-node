@@ -520,6 +520,75 @@ describe('v2beta.CompletionServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('attributesConfig', () => {
+      const fakePath = '/rendered/path/attributesConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+      };
+      const client = new completionserviceModule.v2beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.attributesConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.attributesConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('attributesConfigPath', () => {
+        const result = client.attributesConfigPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.attributesConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAttributesConfigName', () => {
+        const result = client.matchProjectFromAttributesConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAttributesConfigName', () => {
+        const result = client.matchLocationFromAttributesConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromAttributesConfigName', () => {
+        const result = client.matchCatalogFromAttributesConfigName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('catalog', () => {
       const fakePath = '/rendered/path/catalog';
       const expectedParameters = {
@@ -580,6 +649,153 @@ describe('v2beta.CompletionServiceClient', () => {
         assert.strictEqual(result, 'catalogValue');
         assert(
           (client.pathTemplates.catalogPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('completionConfig', () => {
+      const fakePath = '/rendered/path/completionConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+      };
+      const client = new completionserviceModule.v2beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.completionConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.completionConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('completionConfigPath', () => {
+        const result = client.completionConfigPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.completionConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCompletionConfigName', () => {
+        const result = client.matchProjectFromCompletionConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCompletionConfigName', () => {
+        const result = client.matchLocationFromCompletionConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromCompletionConfigName', () => {
+        const result = client.matchCatalogFromCompletionConfigName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('control', () => {
+      const fakePath = '/rendered/path/control';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+        control: 'controlValue',
+      };
+      const client = new completionserviceModule.v2beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.controlPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.controlPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('controlPath', () => {
+        const result = client.controlPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue',
+          'controlValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.controlPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromControlName', () => {
+        const result = client.matchProjectFromControlName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.controlPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromControlName', () => {
+        const result = client.matchLocationFromControlName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.controlPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromControlName', () => {
+        const result = client.matchCatalogFromControlName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (client.pathTemplates.controlPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchControlFromControlName', () => {
+        const result = client.matchControlFromControlName(fakePath);
+        assert.strictEqual(result, 'controlValue');
+        assert(
+          (client.pathTemplates.controlPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -670,6 +886,84 @@ describe('v2beta.CompletionServiceClient', () => {
         assert.strictEqual(result, 'productValue');
         assert(
           (client.pathTemplates.productPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('servingConfig', () => {
+      const fakePath = '/rendered/path/servingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+        serving_config: 'servingConfigValue',
+      };
+      const client = new completionserviceModule.v2beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.servingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.servingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('servingConfigPath', () => {
+        const result = client.servingConfigPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue',
+          'servingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.servingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromServingConfigName', () => {
+        const result = client.matchProjectFromServingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromServingConfigName', () => {
+        const result = client.matchLocationFromServingConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromServingConfigName', () => {
+        const result = client.matchCatalogFromServingConfigName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServingConfigFromServingConfigName', () => {
+        const result = client.matchServingConfigFromServingConfigName(fakePath);
+        assert.strictEqual(result, 'servingConfigValue');
+        assert(
+          (client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

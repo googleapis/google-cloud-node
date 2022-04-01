@@ -22,9 +22,11 @@ const retail = require('@google-cloud/retail');
 function main() {
   const catalogServiceClient = new retail.CatalogServiceClient();
   const completionServiceClient = new retail.CompletionServiceClient();
+  const controlServiceClient = new retail.ControlServiceClient();
   const predictionServiceClient = new retail.PredictionServiceClient();
   const productServiceClient = new retail.ProductServiceClient();
   const searchServiceClient = new retail.SearchServiceClient();
+  const servingConfigServiceClient = new retail.ServingConfigServiceClient();
   const userEventServiceClient = new retail.UserEventServiceClient();
 }
 

@@ -27,7 +27,7 @@ function main(placement, visitorId) {
    */
   /**
    *  Required. The resource name of the search engine placement, such as
-   *  `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+   *  `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
    *  This field is used to identify the serving configuration name and the set
    *  of models that will be used to make the search.
    */
@@ -95,6 +95,8 @@ function main(placement, visitorId) {
    */
   // const filter = 'abc123'
   /**
+   *  The default filter that is applied when a user performs a search without
+   *  checking any filters on the search page.
    *  The filter applied to every search request when quality improvement such as
    *  query expansion is needed. For example, if a query does not have enough
    *  results, an expanded query with
@@ -121,13 +123,6 @@ function main(placement, visitorId) {
    */
   // const facetSpecs = 1234
   /**
-   *  The specification for dynamically generated facets. Notice that only
-   *  textual facets can be dynamically generated.
-   *  This feature requires additional allowlisting. Contact Retail Search
-   *  support team if you are interested in using dynamic facet feature.
-   */
-  // const dynamicFacetSpec = {}
-  /**
    *  Boost specification to boost certain products. See more details at this
    *  user guide (https://cloud.google.com/retail/docs/boosting).
    *  Notice that if both
@@ -149,11 +144,13 @@ function main(placement, visitorId) {
    *  variant google.cloud.retail.v2beta.Product.Type.VARIANT 
    *  Product google.cloud.retail.v2beta.Product s attributes,
    *  FulfillmentInfo google.cloud.retail.v2beta.FulfillmentInfo  or
-   *  LocalInventory  s attributes. The attributes from all the matching
+   *  LocalInventory google.cloud.retail.v2beta.LocalInventory s attributes.
+   *  The attributes from all the matching
    *  variant google.cloud.retail.v2beta.Product.Type.VARIANT 
-   *  Product google.cloud.retail.v2beta.Product s or LocalInventory  s are
-   *  merged and de-duplicated. Notice that rollup attributes will lead to extra
-   *  query latency. Maximum number of keys is 30.
+   *  Product google.cloud.retail.v2beta.Product s or
+   *  LocalInventory google.cloud.retail.v2beta.LocalInventory s are merged and
+   *  de-duplicated. Notice that rollup attributes will lead to extra query
+   *  latency. Maximum number of keys is 30.
    *  For FulfillmentInfo google.cloud.retail.v2beta.FulfillmentInfo, a
    *  fulfillment type and a fulfillment ID must be provided in the format of
    *  "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123",
@@ -228,6 +225,10 @@ function main(placement, visitorId) {
    *  request triggers both product search and faceted search.
    */
   // const searchMode = {}
+  /**
+   *  The specification for personalization.
+   */
+  // const personalizationSpec = {}
 
   // Imports the Retail library
   const {SearchServiceClient} = require('@google-cloud/retail').v2beta;

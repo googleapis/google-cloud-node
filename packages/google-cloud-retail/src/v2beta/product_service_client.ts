@@ -167,14 +167,26 @@ export class ProductServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
+      ),
       branchPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}'
       ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}'
       ),
+      completionConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig'
+      ),
+      controlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      servingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
       ),
     };
 
@@ -225,6 +237,18 @@ export class ProductServiceClient {
     const removeFulfillmentPlacesMetadata = protoFilesRoot.lookup(
       '.google.cloud.retail.v2beta.RemoveFulfillmentPlacesMetadata'
     ) as gax.protobuf.Type;
+    const addLocalInventoriesResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2beta.AddLocalInventoriesResponse'
+    ) as gax.protobuf.Type;
+    const addLocalInventoriesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2beta.AddLocalInventoriesMetadata'
+    ) as gax.protobuf.Type;
+    const removeLocalInventoriesResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2beta.RemoveLocalInventoriesResponse'
+    ) as gax.protobuf.Type;
+    const removeLocalInventoriesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2beta.RemoveLocalInventoriesMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importProducts: new this._gaxModule.LongrunningDescriptor(
@@ -249,6 +273,20 @@ export class ProductServiceClient {
         ),
         removeFulfillmentPlacesMetadata.decode.bind(
           removeFulfillmentPlacesMetadata
+        )
+      ),
+      addLocalInventories: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        addLocalInventoriesResponse.decode.bind(addLocalInventoriesResponse),
+        addLocalInventoriesMetadata.decode.bind(addLocalInventoriesMetadata)
+      ),
+      removeLocalInventories: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        removeLocalInventoriesResponse.decode.bind(
+          removeLocalInventoriesResponse
+        ),
+        removeLocalInventoriesMetadata.decode.bind(
+          removeLocalInventoriesMetadata
         )
       ),
     };
@@ -312,6 +350,8 @@ export class ProductServiceClient {
       'setInventory',
       'addFulfillmentPlaces',
       'removeFulfillmentPlaces',
+      'addLocalInventories',
+      'removeLocalInventories',
     ];
     for (const methodName of productServiceStubMethods) {
       const callPromise = this.productServiceStub.then(
@@ -844,15 +884,7 @@ export class ProductServiceClient {
    *   If no updateMask is specified, requires products.create permission.
    *   If updateMask is specified, requires products.update permission.
    * @param {string} request.requestId
-   *   Unique identifier provided by client, within the ancestor
-   *   dataset scope. Ensures idempotency and used for request deduplication.
-   *   Server-generated if unspecified. Up to 128 characters long and must match
-   *   the pattern: `{@link |a-zA-Z0-9_]+`. This is returned as [Operation.name} in
-   *   {@link google.cloud.retail.v2beta.ImportMetadata|ImportMetadata}.
-   *
-   *   Only supported when
-   *   {@link google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
-   *   is set to `FULL`.
+   *   Deprecated. This field has no effect.
    * @param {google.cloud.retail.v2beta.ProductInputConfig} request.inputConfig
    *   Required. The desired input location of the data.
    * @param {google.cloud.retail.v2beta.ImportErrorsConfig} request.errorsConfig
@@ -1034,7 +1066,8 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.CreateProductRequest.product|CreateProductRequest.product},
    * then any pre-existing inventory information for this product will be used.
    *
-   * If no inventory fields are set in {@link |UpdateProductRequest.set_mask},
+   * If no inventory fields are set in
+   * {@link google.cloud.retail.v2beta.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask},
    * then any existing inventory information will be preserved.
    *
    * Pre-existing inventory information can only be updated with
@@ -1044,8 +1077,7 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces|RemoveFulfillmentPlaces}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1076,6 +1108,24 @@ export class ProductServiceClient {
    *   while respecting the last update time for each inventory field, using the
    *   provided or default value for
    *   {@link google.cloud.retail.v2beta.SetInventoryRequest.set_time|SetInventoryRequest.set_time}.
+   *
+   *   The caller can replace place IDs for a subset of fulfillment types in the
+   *   following ways:
+   *
+   *   * Adds "fulfillment_info" in
+   *   {@link google.cloud.retail.v2beta.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask}
+   *   * Specifies only the desired fulfillment types and corresponding place IDs
+   *   to update in {@link |SetInventoryRequest.inventory.fulfillment_info}
+   *
+   *   The caller can clear all place IDs from a subset of fulfillment types in
+   *   the following ways:
+   *
+   *   * Adds "fulfillment_info" in
+   *   {@link google.cloud.retail.v2beta.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask}
+   *   * Specifies only the desired fulfillment types to clear in
+   *   {@link |SetInventoryRequest.inventory.fulfillment_info}
+   *   * Checks that only the desired fulfillment info types have empty
+   *   {@link |SetInventoryRequest.inventory.fulfillment_info.place_ids}
    *
    *   The last update time is recorded for the following inventory fields:
    *   * {@link google.cloud.retail.v2beta.Product.price_info|Product.price_info}
@@ -1248,8 +1298,7 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1452,8 +1501,7 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1639,6 +1687,379 @@ export class ProductServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2beta.RemoveFulfillmentPlacesResponse,
       protos.google.cloud.retail.v2beta.RemoveFulfillmentPlacesMetadata
+    >;
+  }
+  /**
+   * Updates local inventory information for a
+   * {@link google.cloud.retail.v2beta.Product|Product} at a list of places, while
+   * respecting the last update timestamps of each inventory field.
+   *
+   * This process is asynchronous and does not require the
+   * {@link google.cloud.retail.v2beta.Product|Product} to exist before updating
+   * inventory information. If the request is valid, the update will be enqueued
+   * and processed downstream. As a consequence, when a response is returned,
+   * updates are not immediately manifested in the
+   * {@link google.cloud.retail.v2beta.Product|Product} queried by
+   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|GetProduct} or
+   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
+   *
+   * Local inventory information can only be modified using this method.
+   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|CreateProduct}
+   * and
+   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|UpdateProduct}
+   * has no effect on local inventories.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Please enable Retail Search on Cloud Console before using this feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.product
+   *   Required. Full resource name of
+   *   {@link google.cloud.retail.v2beta.Product|Product}, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link google.cloud.retail.v2beta.Product|Product}, regardless of whether or not
+   *   it exists, a PERMISSION_DENIED error is returned.
+   * @param {number[]} request.localInventories
+   *   Required. A list of inventory information at difference places. Each place
+   *   is identified by its place ID. At most 3000 inventories are allowed per
+   *   request.
+   * @param {google.protobuf.FieldMask} request.addMask
+   *   Indicates which inventory fields in the provided list of
+   *   {@link google.cloud.retail.v2beta.LocalInventory|LocalInventory} to update. The
+   *   field is updated to the provided value.
+   *
+   *   If a field is set while the place does not have a previous local inventory,
+   *   the local inventory at that store is created.
+   *
+   *   If a field is set while the value of that field is not provided, the
+   *   original field value, if it exists, is deleted.
+   *
+   *   If the mask is not set or set with empty paths, all inventory fields will
+   *   be updated.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned and the entire update will be ignored.
+   * @param {google.protobuf.Timestamp} request.addTime
+   *   The time when the inventory updates are issued. Used to prevent
+   *   out-of-order updates on local inventory fields. If not provided, the
+   *   internal system time will be used.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.retail.v2beta.Product|Product} is
+   *   not found, the local inventory will still be processed and retained for at
+   *   most 1 day and processed once the
+   *   {@link google.cloud.retail.v2beta.Product|Product} is created. If set to false,
+   *   a NOT_FOUND error is returned if the
+   *   {@link google.cloud.retail.v2beta.Product|Product} is not found.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/product_service.add_local_inventories.js</caption>
+   * region_tag:retail_v2beta_generated_ProductService_AddLocalInventories_async
+   */
+  addLocalInventories(
+    request?: protos.google.cloud.retail.v2beta.IAddLocalInventoriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  addLocalInventories(
+    request: protos.google.cloud.retail.v2beta.IAddLocalInventoriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addLocalInventories(
+    request: protos.google.cloud.retail.v2beta.IAddLocalInventoriesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addLocalInventories(
+    request?: protos.google.cloud.retail.v2beta.IAddLocalInventoriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2beta.IAddLocalInventoriesResponse,
+            protos.google.cloud.retail.v2beta.IAddLocalInventoriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        product: request.product || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.addLocalInventories(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `addLocalInventories()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/product_service.add_local_inventories.js</caption>
+   * region_tag:retail_v2beta_generated_ProductService_AddLocalInventories_async
+   */
+  async checkAddLocalInventoriesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2beta.AddLocalInventoriesResponse,
+      protos.google.cloud.retail.v2beta.AddLocalInventoriesMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.addLocalInventories,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2beta.AddLocalInventoriesResponse,
+      protos.google.cloud.retail.v2beta.AddLocalInventoriesMetadata
+    >;
+  }
+  /**
+   * Remove local inventory information for a
+   * {@link google.cloud.retail.v2beta.Product|Product} at a list of places at a
+   * removal timestamp.
+   *
+   * This process is asynchronous. If the request is valid, the removal will be
+   * enqueued and processed downstream. As a consequence, when a response is
+   * returned, removals are not immediately manifested in the
+   * {@link google.cloud.retail.v2beta.Product|Product} queried by
+   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|GetProduct} or
+   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
+   *
+   * Local inventory information can only be removed using this method.
+   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|CreateProduct}
+   * and
+   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|UpdateProduct}
+   * has no effect on local inventories.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Please enable Retail Search on Cloud Console before using this feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.product
+   *   Required. Full resource name of
+   *   {@link google.cloud.retail.v2beta.Product|Product}, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link google.cloud.retail.v2beta.Product|Product}, regardless of whether or not
+   *   it exists, a PERMISSION_DENIED error is returned.
+   * @param {string[]} request.placeIds
+   *   Required. A list of place IDs to have their inventory deleted.
+   *   At most 3000 place IDs are allowed per request.
+   * @param {google.protobuf.Timestamp} request.removeTime
+   *   The time when the inventory deletions are issued. Used to prevent
+   *   out-of-order updates and deletions on local inventory fields. If not
+   *   provided, the internal system time will be used.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.retail.v2beta.Product|Product} is
+   *   not found, the local inventory removal request will still be processed and
+   *   retained for at most 1 day and processed once the
+   *   {@link google.cloud.retail.v2beta.Product|Product} is created. If set to false,
+   *   a NOT_FOUND error is returned if the
+   *   {@link google.cloud.retail.v2beta.Product|Product} is not found.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/product_service.remove_local_inventories.js</caption>
+   * region_tag:retail_v2beta_generated_ProductService_RemoveLocalInventories_async
+   */
+  removeLocalInventories(
+    request?: protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  removeLocalInventories(
+    request: protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeLocalInventories(
+    request: protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeLocalInventories(
+    request?: protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesResponse,
+            protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2beta.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        product: request.product || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.removeLocalInventories(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `removeLocalInventories()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/product_service.remove_local_inventories.js</caption>
+   * region_tag:retail_v2beta_generated_ProductService_RemoveLocalInventories_async
+   */
+  async checkRemoveLocalInventoriesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2beta.RemoveLocalInventoriesResponse,
+      protos.google.cloud.retail.v2beta.RemoveLocalInventoriesMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.removeLocalInventories,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2beta.RemoveLocalInventoriesResponse,
+      protos.google.cloud.retail.v2beta.RemoveLocalInventoriesMetadata
     >;
   }
   /**
@@ -2042,6 +2463,61 @@ export class ProductServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified attributesConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  attributesConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).catalog;
+  }
+
+  /**
    * Return a fully-qualified branch resource name string.
    *
    * @param {string} project
@@ -2158,6 +2634,128 @@ export class ProductServiceClient {
   }
 
   /**
+   * Return a fully-qualified completionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  completionConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.completionConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).catalog;
+  }
+
+  /**
+   * Return a fully-qualified control resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  controlPath(
+    project: string,
+    location: string,
+    catalog: string,
+    control: string
+  ) {
+    return this.pathTemplates.controlPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the project from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).project;
+  }
+
+  /**
+   * Parse the location from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).location;
+  }
+
+  /**
+   * Parse the catalog from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).catalog;
+  }
+
+  /**
+   * Parse the control from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
    * Return a fully-qualified product resource name string.
    *
    * @param {string} project
@@ -2236,6 +2834,77 @@ export class ProductServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified servingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  servingConfigPath(
+    project: string,
+    location: string,
+    catalog: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.servingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      serving_config: servingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the catalog from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .catalog;
+  }
+
+  /**
+   * Parse the serving_config from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .serving_config;
   }
 
   /**

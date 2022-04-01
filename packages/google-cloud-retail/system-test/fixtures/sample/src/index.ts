@@ -19,9 +19,11 @@
 import {
   CatalogServiceClient,
   CompletionServiceClient,
+  ControlServiceClient,
   PredictionServiceClient,
   ProductServiceClient,
   SearchServiceClient,
+  ServingConfigServiceClient,
   UserEventServiceClient,
 } from '@google-cloud/retail';
 
@@ -32,6 +34,9 @@ function doStuffWithCatalogServiceClient(client: CatalogServiceClient) {
 function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
   client.close();
 }
+function doStuffWithControlServiceClient(client: ControlServiceClient) {
+  client.close();
+}
 function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
   client.close();
 }
@@ -39,6 +44,11 @@ function doStuffWithProductServiceClient(client: ProductServiceClient) {
   client.close();
 }
 function doStuffWithSearchServiceClient(client: SearchServiceClient) {
+  client.close();
+}
+function doStuffWithServingConfigServiceClient(
+  client: ServingConfigServiceClient
+) {
   client.close();
 }
 function doStuffWithUserEventServiceClient(client: UserEventServiceClient) {
@@ -53,6 +63,9 @@ function main() {
   const completionServiceClient = new CompletionServiceClient();
   doStuffWithCompletionServiceClient(completionServiceClient);
   // check that the client instance can be created
+  const controlServiceClient = new ControlServiceClient();
+  doStuffWithControlServiceClient(controlServiceClient);
+  // check that the client instance can be created
   const predictionServiceClient = new PredictionServiceClient();
   doStuffWithPredictionServiceClient(predictionServiceClient);
   // check that the client instance can be created
@@ -61,6 +74,9 @@ function main() {
   // check that the client instance can be created
   const searchServiceClient = new SearchServiceClient();
   doStuffWithSearchServiceClient(searchServiceClient);
+  // check that the client instance can be created
+  const servingConfigServiceClient = new ServingConfigServiceClient();
+  doStuffWithServingConfigServiceClient(servingConfigServiceClient);
   // check that the client instance can be created
   const userEventServiceClient = new UserEventServiceClient();
   doStuffWithUserEventServiceClient(userEventServiceClient);

@@ -25,6 +25,41 @@
                 "getDefaultBranch"
               ]
             },
+            "GetCompletionConfig": {
+              "methods": [
+                "getCompletionConfig"
+              ]
+            },
+            "UpdateCompletionConfig": {
+              "methods": [
+                "updateCompletionConfig"
+              ]
+            },
+            "GetAttributesConfig": {
+              "methods": [
+                "getAttributesConfig"
+              ]
+            },
+            "UpdateAttributesConfig": {
+              "methods": [
+                "updateAttributesConfig"
+              ]
+            },
+            "AddCatalogAttribute": {
+              "methods": [
+                "addCatalogAttribute"
+              ]
+            },
+            "RemoveCatalogAttribute": {
+              "methods": [
+                "removeCatalogAttribute"
+              ]
+            },
+            "ReplaceCatalogAttribute": {
+              "methods": [
+                "replaceCatalogAttribute"
+              ]
+            },
             "ListCatalogs": {
               "methods": [
                 "listCatalogs",
@@ -50,6 +85,41 @@
             "GetDefaultBranch": {
               "methods": [
                 "getDefaultBranch"
+              ]
+            },
+            "GetCompletionConfig": {
+              "methods": [
+                "getCompletionConfig"
+              ]
+            },
+            "UpdateCompletionConfig": {
+              "methods": [
+                "updateCompletionConfig"
+              ]
+            },
+            "GetAttributesConfig": {
+              "methods": [
+                "getAttributesConfig"
+              ]
+            },
+            "UpdateAttributesConfig": {
+              "methods": [
+                "updateAttributesConfig"
+              ]
+            },
+            "AddCatalogAttribute": {
+              "methods": [
+                "addCatalogAttribute"
+              ]
+            },
+            "RemoveCatalogAttribute": {
+              "methods": [
+                "removeCatalogAttribute"
+              ]
+            },
+            "ReplaceCatalogAttribute": {
+              "methods": [
+                "replaceCatalogAttribute"
               ]
             },
             "ListCatalogs": {
@@ -91,6 +161,74 @@
             "ImportCompletionData": {
               "methods": [
                 "importCompletionData"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ControlServiceClient",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "createControl"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "deleteControl"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "updateControl"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "getControl"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ControlServiceClient",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "createControl"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "deleteControl"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "updateControl"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "getControl"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
               ]
             }
           }
@@ -166,6 +304,16 @@
                 "removeFulfillmentPlaces"
               ]
             },
+            "AddLocalInventories": {
+              "methods": [
+                "addLocalInventories"
+              ]
+            },
+            "RemoveLocalInventories": {
+              "methods": [
+                "removeLocalInventories"
+              ]
+            },
             "ListProducts": {
               "methods": [
                 "listProducts",
@@ -218,6 +366,16 @@
                 "removeFulfillmentPlaces"
               ]
             },
+            "AddLocalInventories": {
+              "methods": [
+                "addLocalInventories"
+              ]
+            },
+            "RemoveLocalInventories": {
+              "methods": [
+                "removeLocalInventories"
+              ]
+            },
             "ListProducts": {
               "methods": [
                 "listProducts",
@@ -251,6 +409,94 @@
                 "search",
                 "searchStream",
                 "searchAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ServingConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServingConfigServiceClient",
+          "rpcs": {
+            "CreateServingConfig": {
+              "methods": [
+                "createServingConfig"
+              ]
+            },
+            "DeleteServingConfig": {
+              "methods": [
+                "deleteServingConfig"
+              ]
+            },
+            "UpdateServingConfig": {
+              "methods": [
+                "updateServingConfig"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "getServingConfig"
+              ]
+            },
+            "AddControl": {
+              "methods": [
+                "addControl"
+              ]
+            },
+            "RemoveControl": {
+              "methods": [
+                "removeControl"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "listServingConfigs",
+                "listServingConfigsStream",
+                "listServingConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServingConfigServiceClient",
+          "rpcs": {
+            "CreateServingConfig": {
+              "methods": [
+                "createServingConfig"
+              ]
+            },
+            "DeleteServingConfig": {
+              "methods": [
+                "deleteServingConfig"
+              ]
+            },
+            "UpdateServingConfig": {
+              "methods": [
+                "updateServingConfig"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "getServingConfig"
+              ]
+            },
+            "AddControl": {
+              "methods": [
+                "addControl"
+              ]
+            },
+            "RemoveControl": {
+              "methods": [
+                "removeControl"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "listServingConfigs",
+                "listServingConfigsStream",
+                "listServingConfigsAsync"
               ]
             }
           }

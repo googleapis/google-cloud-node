@@ -33,17 +33,6 @@ function main(parent, inputConfig) {
    */
   // const parent = 'abc123'
   /**
-   *  Unique identifier provided by client, within the ancestor
-   *  dataset scope. Ensures idempotency and used for request deduplication.
-   *  Server-generated if unspecified. Up to 128 characters long and must match
-   *  the pattern: `[a-zA-Z0-9_]+`. This is returned as [Operation.name][] in
-   *  ImportMetadata google.cloud.retail.v2beta.ImportMetadata.
-   *  Only supported when
-   *  ImportProductsRequest.reconciliation_mode google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode 
-   *  is set to `FULL`.
-   */
-  // const requestId = 'abc123'
-  /**
    *  Required. The desired input location of the data.
    */
   // const inputConfig = {}

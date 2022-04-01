@@ -44,8 +44,7 @@ const version = require('../../../package.json').version;
  *  Service for search.
  *
  *  This feature is only available for users who have Retail Search enabled.
- *  Please submit a form [here](https://cloud.google.com/contact) to contact
- *  cloud sales if you are interested in using Retail Search.
+ *  Please enable Retail Search on Cloud Console before using this feature.
  * @class
  * @memberof v2
  */
@@ -326,14 +325,13 @@ export class SearchServiceClient {
    * Performs a search.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.placement
    *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -349,6 +347,9 @@ export class SearchServiceClient {
    *   could be implemented with an HTTP cookie, which should be able to uniquely
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
+   *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2.UserEvent.visitor_id|UserEvent.visitor_id}.
    *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -387,6 +388,9 @@ export class SearchServiceClient {
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
    *   The filter applied to every search request when quality improvement such as
    *   query expansion is needed. For example, if a query does not have enough
    *   results, an expanded query with
@@ -410,11 +414,11 @@ export class SearchServiceClient {
    *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+   *   to enable dynamic facets. Do not set this field.
+   *
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
-   *
-   *   This feature requires additional allowlisting. Contact Retail Search
-   *   support team if you are interested in using dynamic facet feature.
    * @param {google.cloud.retail.v2.SearchRequest.BoostSpec} request.boostSpec
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
@@ -431,12 +435,15 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s attributes. The attributes from
-   *   all the matching {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s are merged and de-duplicated.
-   *   Notice that rollup {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s attributes will lead to extra
-   *   query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link google.cloud.retail.v2.LocalInventory|LocalInventory}s attributes. The
+   *   attributes from all the matching
+   *   {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
+   *   {@link google.cloud.retail.v2.Product|Product}s or
+   *   {@link google.cloud.retail.v2.LocalInventory|LocalInventory}s are merged and
+   *   de-duplicated. Notice that rollup attributes will lead to extra query
+   *   latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -451,6 +458,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the
@@ -510,6 +518,8 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2.SearchRequest.SearchMode} request.searchMode
    *   The search mode of the search request. If not specified, a single search
    *   request triggers both product search and faceted search.
+   * @param {google.cloud.retail.v2.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -596,7 +606,7 @@ export class SearchServiceClient {
    *   The request object that will be sent.
    * @param {string} request.placement
    *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -612,6 +622,9 @@ export class SearchServiceClient {
    *   could be implemented with an HTTP cookie, which should be able to uniquely
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
+   *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2.UserEvent.visitor_id|UserEvent.visitor_id}.
    *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -650,6 +663,9 @@ export class SearchServiceClient {
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
    *   The filter applied to every search request when quality improvement such as
    *   query expansion is needed. For example, if a query does not have enough
    *   results, an expanded query with
@@ -673,11 +689,11 @@ export class SearchServiceClient {
    *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+   *   to enable dynamic facets. Do not set this field.
+   *
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
-   *
-   *   This feature requires additional allowlisting. Contact Retail Search
-   *   support team if you are interested in using dynamic facet feature.
    * @param {google.cloud.retail.v2.SearchRequest.BoostSpec} request.boostSpec
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
@@ -694,12 +710,15 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s attributes. The attributes from
-   *   all the matching {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s are merged and de-duplicated.
-   *   Notice that rollup {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s attributes will lead to extra
-   *   query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link google.cloud.retail.v2.LocalInventory|LocalInventory}s attributes. The
+   *   attributes from all the matching
+   *   {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
+   *   {@link google.cloud.retail.v2.Product|Product}s or
+   *   {@link google.cloud.retail.v2.LocalInventory|LocalInventory}s are merged and
+   *   de-duplicated. Notice that rollup attributes will lead to extra query
+   *   latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -714,6 +733,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the
@@ -773,6 +793,8 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2.SearchRequest.SearchMode} request.searchMode
    *   The search mode of the search request. If not specified, a single search
    *   request triggers both product search and faceted search.
+   * @param {google.cloud.retail.v2.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -815,7 +837,7 @@ export class SearchServiceClient {
    *   The request object that will be sent.
    * @param {string} request.placement
    *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -831,6 +853,9 @@ export class SearchServiceClient {
    *   could be implemented with an HTTP cookie, which should be able to uniquely
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
+   *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2.UserEvent.visitor_id|UserEvent.visitor_id}.
    *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -869,6 +894,9 @@ export class SearchServiceClient {
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
    *   The filter applied to every search request when quality improvement such as
    *   query expansion is needed. For example, if a query does not have enough
    *   results, an expanded query with
@@ -892,11 +920,11 @@ export class SearchServiceClient {
    *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+   *   to enable dynamic facets. Do not set this field.
+   *
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
-   *
-   *   This feature requires additional allowlisting. Contact Retail Search
-   *   support team if you are interested in using dynamic facet feature.
    * @param {google.cloud.retail.v2.SearchRequest.BoostSpec} request.boostSpec
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
@@ -913,12 +941,15 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s attributes. The attributes from
-   *   all the matching {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s are merged and de-duplicated.
-   *   Notice that rollup {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2.Product|Product}s attributes will lead to extra
-   *   query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link google.cloud.retail.v2.LocalInventory|LocalInventory}s attributes. The
+   *   attributes from all the matching
+   *   {@link google.cloud.retail.v2.Product.Type.VARIANT|variant}
+   *   {@link google.cloud.retail.v2.Product|Product}s or
+   *   {@link google.cloud.retail.v2.LocalInventory|LocalInventory}s are merged and
+   *   de-duplicated. Notice that rollup attributes will lead to extra query
+   *   latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -933,6 +964,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the
@@ -992,6 +1024,8 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2.SearchRequest.SearchMode} request.searchMode
    *   The search mode of the search request. If not specified, a single search
    *   request triggers both product search and faceted search.
+   * @param {google.cloud.retail.v2.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

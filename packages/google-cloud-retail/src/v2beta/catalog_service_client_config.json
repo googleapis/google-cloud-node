@@ -48,6 +48,41 @@
           "timeout_millis": 5000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "GetCompletionConfig": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "UpdateCompletionConfig": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "GetAttributesConfig": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "UpdateAttributesConfig": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "AddCatalogAttribute": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "RemoveCatalogAttribute": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "ReplaceCatalogAttribute": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
         }
       }
     }
