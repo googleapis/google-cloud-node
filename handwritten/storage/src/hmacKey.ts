@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Metadata, ServiceObject, Methods} from '@google-cloud/common';
+import {Metadata, ServiceObject, Methods} from './nodejs-common';
 import {Storage} from './storage';
 
 export interface HmacKeyOptions {

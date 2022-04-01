@@ -16,7 +16,7 @@ import * as sinon from 'sinon';
 import * as proxyquire from 'proxyquire';
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
-import {util, ServiceObject} from '@google-cloud/common';
+import {util, ServiceObject} from '../src/nodejs-common';
 
 const sandbox = sinon.createSandbox();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,7 +42,7 @@ describe('HmacKey', () => {
       serviceObjectSpy = sandbox.spy(commonModule, 'ServiceObject');
 
       HmacKey = proxyquire('../src/hmacKey', {
-        '@google-cloud/common': commonModule,
+        './nodejs-common': commonModule,
       }).HmacKey;
 
       STORAGE = {

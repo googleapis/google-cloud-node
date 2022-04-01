@@ -20,7 +20,7 @@ import {
   DecorateRequestOptions,
   ServiceObject,
   ServiceObjectConfig,
-} from '@google-cloud/common';
+} from '../src/nodejs-common';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
@@ -56,7 +56,7 @@ describe('Channel', () => {
   before(() => {
     Channel = proxyquire('../src/channel.js', {
       '@google-cloud/promisify': fakePromisify,
-      '@google-cloud/common': {
+      './nodejs-common': {
         ServiceObject: FakeServiceObject,
       },
     }).Channel;

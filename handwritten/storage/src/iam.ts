@@ -16,7 +16,7 @@ import {
   BodyResponseCallback,
   DecorateRequestOptions,
   Metadata,
-} from '@google-cloud/common';
+} from './nodejs-common';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 

@@ -19,7 +19,7 @@ import {
   Service,
   ServiceConfig,
   util,
-} from '@google-cloud/common';
+} from '../src/nodejs-common';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as assert from 'assert';
@@ -100,7 +100,7 @@ describe('Storage', () => {
     Storage = proxyquire('../src/storage', {
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
-      '@google-cloud/common': {
+      './nodejs-common': {
         Service: FakeService,
       },
       './channel.js': {Channel: FakeChannel},

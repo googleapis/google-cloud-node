@@ -19,7 +19,7 @@ import {
   ServiceObject,
   ServiceObjectConfig,
   util,
-} from '@google-cloud/common';
+} from '../src/nodejs-common';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
 import {Readable, PassThrough, Stream, Duplex, Transform} from 'stream';
@@ -205,7 +205,7 @@ describe('File', () => {
 
   before(() => {
     File = proxyquire('../src/file.js', {
-      '@google-cloud/common': {
+      './nodejs-common': {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
       },

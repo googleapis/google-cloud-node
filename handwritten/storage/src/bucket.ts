@@ -23,7 +23,7 @@ import {
   ResponseBody,
   ServiceObject,
   util,
-} from '@google-cloud/common';
+} from './nodejs-common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');

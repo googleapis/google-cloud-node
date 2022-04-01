@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {DecorateRequestOptions, util} from '@google-cloud/common';
+import {DecorateRequestOptions, util} from '../src/nodejs-common';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';

@@ -14,7 +14,7 @@
 
 import {Bucket, File, Notification, Storage, HmacKey} from '../src';
 import * as path from 'path';
-import {ApiError} from '@google-cloud/common';
+import {ApiError} from '../src/nodejs-common';
 
 /////////////////////////////////////////////////
 //////////////////// BUCKET /////////////////////

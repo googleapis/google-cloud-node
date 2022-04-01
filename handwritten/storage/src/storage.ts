@@ -12,12 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-  ApiError,
-  Metadata,
-  Service,
-  ServiceOptions,
-} from '@google-cloud/common';
+import {ApiError, Metadata, Service, ServiceOptions} from './nodejs-common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');

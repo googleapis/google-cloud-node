@@ -18,7 +18,7 @@ import {
   ServiceObject,
   ServiceObjectConfig,
   util,
-} from '@google-cloud/common';
+} from '../src/nodejs-common';
 import arrify = require('arrify');
 import * as assert from 'assert';
 import * as extend from 'extend';
@@ -207,7 +207,7 @@ describe('Bucket', () => {
       'p-limit': fakePLimit,
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
-      '@google-cloud/common': {
+      './nodejs-common': {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
       },

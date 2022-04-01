@@ -20,7 +20,7 @@ import {
   Metadata,
   ServiceObject,
   util,
-} from '@google-cloud/common';
+} from './nodejs-common';
 import {promisifyAll} from '@google-cloud/promisify';
 
 import compressible = require('compressible');
@@ -63,7 +63,7 @@ import {
   ApiError,
   Duplexify,
   DuplexifyConstructor,
-} from '@google-cloud/common/build/src/util';
+} from './nodejs-common/util';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const duplexify: DuplexifyConstructor = require('duplexify');
 import {normalize, objectKeyToLowercase, unicodeJSONStringify} from './util';

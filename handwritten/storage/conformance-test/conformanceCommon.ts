@@ -18,7 +18,7 @@ import * as libraryMethods from './libraryMethods';
 import {Bucket, File, HmacKey, Notification, Storage} from '../src/';
 import * as uuid from 'uuid';
 import * as assert from 'assert';
-import {DecorateRequestOptions} from '@google-cloud/common';
+import {DecorateRequestOptions} from '../src/nodejs-common';
 import fetch from 'node-fetch';
 
 interface RetryCase {

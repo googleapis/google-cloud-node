@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Metadata, ServiceObject, util} from '@google-cloud/common';
+import {Metadata, ServiceObject, util} from './nodejs-common';
 import {promisifyAll} from '@google-cloud/promisify';
 
 import {Storage} from './storage';

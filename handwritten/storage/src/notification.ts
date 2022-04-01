@@ -18,8 +18,8 @@ import {
   MetadataCallback,
   ServiceObject,
   util,
-} from '@google-cloud/common';
-import {ResponseBody} from '@google-cloud/common/build/src/util';
+} from './nodejs-common';
+import {ResponseBody} from './nodejs-common/util';
 import {promisifyAll} from '@google-cloud/promisify';
 
 import {Bucket} from './bucket';

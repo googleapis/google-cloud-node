@@ -17,7 +17,7 @@ import {
   ServiceObject,
   ServiceObjectConfig,
   util,
-} from '@google-cloud/common';
+} from '../src/nodejs-common';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
@@ -58,7 +58,7 @@ describe('Notification', () => {
   before(() => {
     Notification = proxyquire('../src/notification.js', {
       '@google-cloud/promisify': fakePromisify,
-      '@google-cloud/common': {
+      './nodejs-common': {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
       },
