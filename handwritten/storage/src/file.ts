@@ -1547,6 +1547,7 @@ class File extends ServiceObject<File> {
    * @property {string} [configPath] A full JSON file path to use with
    *     `gcs-resumable-upload`. This maps to the {@link https://github.com/yeoman/configstore/tree/0df1ec950d952b1f0dfb39ce22af8e505dffc71a#configpath| configstore option by the same name}.
    * @property {object} [metadata] Metadata to set on the file.
+   * @property {number} [offset] The starting byte of the upload stream for resuming an interrupted upload.
    * @property {string} [origin] Origin header to set for the upload.
    * @property {string} [predefinedAcl] Apply a predefined set of access
    * controls to this object.
