@@ -2,7 +2,7 @@
   "name": "certificatemanager",
   "name_pretty": "Certificate Manager",
   "product_documentation": "https://cloud.google.com/certificate-manager/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/certificatemanager/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/certificate-manager/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-certificate-manager/issues",
   "release_level": "beta",
   "language": "nodejs",
