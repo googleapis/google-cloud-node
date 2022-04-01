@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [3.5.0](https://github.com/googleapis/nodejs-dlp/compare/v3.4.0...v3.5.0) (2022-04-01)
+
+
+### Features
+
+* add DataProfilePubSubMessage supporting pub/sub integration ([#695](https://github.com/googleapis/nodejs-dlp/issues/695)) ([918b6cd](https://github.com/googleapis/nodejs-dlp/commit/918b6cd8ba8669e7c029ae7b4d3d01858121b9f6))
+
 ## [3.4.0](https://github.com/googleapis/nodejs-dlp/compare/v3.3.0...v3.4.0) (2022-03-25)
 
 
