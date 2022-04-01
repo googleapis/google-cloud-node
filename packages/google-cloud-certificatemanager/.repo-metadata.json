@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/certificate-manager/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/certificate-manager/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-certificate-manager/issues",
-  "release_level": "beta",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/nodejs-certificate-manager",
   "distribution_name": "@google-cloud/certificate-manager",
