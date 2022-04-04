@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/googleapis/nodejs-retail/compare/v1.6.1...v1.7.0) (2022-04-01)
+
+
+### Features
+
+* users can skip validation, search personalization, return ids, and more; docs: suggest search users to not send IP, deprecate request_id, and more ([#160](https://github.com/googleapis/nodejs-retail/issues/160)) ([c793285](https://github.com/googleapis/nodejs-retail/commit/c7932857fc2326971041564094bb4b75802fc741))
+
 ### [1.6.1](https://github.com/googleapis/nodejs-retail/compare/v1.6.0...v1.6.1) (2022-03-15)
 
 
