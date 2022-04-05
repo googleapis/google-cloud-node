@@ -32,7 +32,7 @@ function main(resource) {
   // const resource = 'abc123'
   /**
    *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *  `GetIamPolicy`. This field is only used by Cloud IAM.
+   *  `GetIamPolicy`.
    */
   // const options = {}
 
