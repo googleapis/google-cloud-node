@@ -524,7 +524,7 @@ export class ProjectsClient {
    *   See the operation documentation for the appropriate value for this field.
    * @param {google.iam.v1.GetPolicyOptions} request.options
    *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *   `GetIamPolicy`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -657,6 +657,12 @@ export class ProjectsClient {
    *   the policy is limited to a few 10s of KB. An empty policy is a
    *   valid policy but certain Cloud Platform services (such as Projects)
    *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

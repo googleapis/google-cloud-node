@@ -37,6 +37,13 @@ function main(resource, policy) {
    *  might reject them.
    */
   // const policy = {}
+  /**
+   *  OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *  the fields in the mask will be modified. If no mask is provided, the
+   *  following default mask is used:
+   *  `paths: "bindings, etag"`
+   */
+  // const updateMask = {}
 
   // Imports the Resourcemanager library
   const {OrganizationsClient} = require('@google-cloud/resource-manager').v3;

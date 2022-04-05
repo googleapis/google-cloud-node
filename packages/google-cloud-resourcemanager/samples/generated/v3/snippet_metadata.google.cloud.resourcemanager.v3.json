@@ -414,7 +414,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -430,6 +430,10 @@
           {
             "name": "policy",
             "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
           }
         ],
         "resultType": ".google.iam.v1.Policy",
@@ -634,7 +638,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -650,6 +654,10 @@
           {
             "name": "policy",
             "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
           }
         ],
         "resultType": ".google.iam.v1.Policy",
@@ -1114,7 +1122,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -1130,6 +1138,10 @@
           {
             "name": "policy",
             "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
           }
         ],
         "resultType": ".google.iam.v1.Policy",
@@ -1606,7 +1618,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -1622,6 +1634,10 @@
           {
             "name": "policy",
             "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
           }
         ],
         "resultType": ".google.iam.v1.Policy",
@@ -1966,7 +1982,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -1982,6 +1998,10 @@
           {
             "name": "policy",
             "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
           }
         ],
         "resultType": ".google.iam.v1.Policy",
