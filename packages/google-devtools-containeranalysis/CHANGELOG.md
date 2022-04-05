@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [3.4.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v3.3.0...v3.4.0) (2022-04-05)
+
+
+### Features
+
+* AuditConfig for IAM v1 ([#388](https://github.com/googleapis/nodejs-containeranalysis/issues/388)) ([f4d14d7](https://github.com/googleapis/nodejs-containeranalysis/commit/f4d14d7734054b8bd7037b189e7af1876e119f51))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.2.0...v3.3.0) (2021-11-11)
 
 
