@@ -20,20 +20,32 @@
 
 'use strict';
 
-function main(jobName, projectId) {
-  // [START storagetransfer_v1_generated_StorageTransferService_GetTransferJob_async]
+function main(projectId) {
+  // [START storagetransfer_v1_generated_StorageTransferService_ListAgentPools_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The job to get.
-   */
-  // const jobName = 'abc123'
-  /**
-   *  Required. The ID of the Google Cloud project that owns the
-   *  job.
+   *  Required. The ID of the Google Cloud project that owns the job.
    */
   // const projectId = 'abc123'
+  /**
+   *  An optional list of query parameters specified as JSON text in the
+   *  form of:
+   *  `{"agentPoolNames":"agentpool1","agentpool2",... }`
+   *  Since `agentPoolNames` support multiple values, its values must be
+   *  specified with array notation. When the filter is either empty or not
+   *  provided, the list returns all agent pools for the project.
+   */
+  // const filter = 'abc123'
+  /**
+   *  The list page size. The max allowed value is `256`.
+   */
+  // const pageSize = 1234
+  /**
+   *  The list page token.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Storagetransfer library
   const {StorageTransferServiceClient} = require('@google-cloud/storage-transfer').v1;
@@ -41,20 +53,21 @@ function main(jobName, projectId) {
   // Instantiates a client
   const storagetransferClient = new StorageTransferServiceClient();
 
-  async function callGetTransferJob() {
+  async function callListAgentPools() {
     // Construct request
     const request = {
-      jobName,
       projectId,
     };
 
     // Run request
-    const response = await storagetransferClient.getTransferJob(request);
-    console.log(response);
+    const iterable = await storagetransferClient.listAgentPoolsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callGetTransferJob();
-  // [END storagetransfer_v1_generated_StorageTransferService_GetTransferJob_async]
+  callListAgentPools();
+  // [END storagetransfer_v1_generated_StorageTransferService_ListAgentPools_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -1026,6 +1026,530 @@ describe('v1.StorageTransferServiceClient', () => {
     });
   });
 
+  describe('createAgentPool', () => {
+    it('invokes createAgentPool without error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.CreateAgentPoolRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storagetransfer.v1.AgentPool()
+      );
+      client.innerApiCalls.createAgentPool = stubSimpleCall(expectedResponse);
+      const [response] = await client.createAgentPool(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createAgentPool without error using callback', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.CreateAgentPoolRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storagetransfer.v1.AgentPool()
+      );
+      client.innerApiCalls.createAgentPool =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAgentPool(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storagetransfer.v1.IAgentPool | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createAgentPool with error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.CreateAgentPoolRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAgentPool = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createAgentPool(request), expectedError);
+      assert(
+        (client.innerApiCalls.createAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createAgentPool with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.CreateAgentPoolRequest()
+      );
+      request.projectId = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createAgentPool(request), expectedError);
+    });
+  });
+
+  describe('updateAgentPool', () => {
+    it('invokes updateAgentPool without error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.UpdateAgentPoolRequest()
+      );
+      request.agentPool = {};
+      request.agentPool.name = '';
+      const expectedHeaderRequestParams = 'agent_pool.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storagetransfer.v1.AgentPool()
+      );
+      client.innerApiCalls.updateAgentPool = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAgentPool(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateAgentPool without error using callback', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.UpdateAgentPoolRequest()
+      );
+      request.agentPool = {};
+      request.agentPool.name = '';
+      const expectedHeaderRequestParams = 'agent_pool.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storagetransfer.v1.AgentPool()
+      );
+      client.innerApiCalls.updateAgentPool =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAgentPool(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storagetransfer.v1.IAgentPool | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateAgentPool with error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.UpdateAgentPoolRequest()
+      );
+      request.agentPool = {};
+      request.agentPool.name = '';
+      const expectedHeaderRequestParams = 'agent_pool.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAgentPool = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateAgentPool(request), expectedError);
+      assert(
+        (client.innerApiCalls.updateAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateAgentPool with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.UpdateAgentPoolRequest()
+      );
+      request.agentPool = {};
+      request.agentPool.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateAgentPool(request), expectedError);
+    });
+  });
+
+  describe('getAgentPool', () => {
+    it('invokes getAgentPool without error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.GetAgentPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storagetransfer.v1.AgentPool()
+      );
+      client.innerApiCalls.getAgentPool = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAgentPool(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getAgentPool without error using callback', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.GetAgentPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storagetransfer.v1.AgentPool()
+      );
+      client.innerApiCalls.getAgentPool =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAgentPool(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storagetransfer.v1.IAgentPool | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getAgentPool with error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.GetAgentPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAgentPool = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAgentPool(request), expectedError);
+      assert(
+        (client.innerApiCalls.getAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getAgentPool with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.GetAgentPoolRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAgentPool(request), expectedError);
+    });
+  });
+
+  describe('deleteAgentPool', () => {
+    it('invokes deleteAgentPool without error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.DeleteAgentPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAgentPool = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteAgentPool(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteAgentPool without error using callback', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.DeleteAgentPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAgentPool =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAgentPool(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteAgentPool with error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.DeleteAgentPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAgentPool = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteAgentPool(request), expectedError);
+      assert(
+        (client.innerApiCalls.deleteAgentPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteAgentPool with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.DeleteAgentPoolRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteAgentPool(request), expectedError);
+    });
+  });
+
   describe('runTransferJob', () => {
     it('invokes runTransferJob without error', async () => {
       const client =
@@ -1479,6 +2003,349 @@ describe('v1.StorageTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
+    });
+  });
+
+  describe('listAgentPools', () => {
+    it('invokes listAgentPools without error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+      ];
+      client.innerApiCalls.listAgentPools = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAgentPools(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listAgentPools as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listAgentPools without error using callback', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+      ];
+      client.innerApiCalls.listAgentPools =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAgentPools(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storagetransfer.v1.IAgentPool[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listAgentPools as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listAgentPools with error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAgentPools = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAgentPools(request), expectedError);
+      assert(
+        (client.innerApiCalls.listAgentPools as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listAgentPoolsStream without error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+      ];
+      client.descriptors.page.listAgentPools.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAgentPoolsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storagetransfer.v1.AgentPool[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storagetransfer.v1.AgentPool) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAgentPools.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAgentPools, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listAgentPools.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listAgentPoolsStream with error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAgentPools.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAgentPoolsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storagetransfer.v1.AgentPool[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storagetransfer.v1.AgentPool) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAgentPools.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAgentPools, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listAgentPools.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listAgentPools without error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+        generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
+      ];
+      client.descriptors.page.listAgentPools.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.storagetransfer.v1.IAgentPool[] = [];
+      const iterable = client.listAgentPoolsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAgentPools.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listAgentPools.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listAgentPools with error', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAgentPools.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAgentPoolsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.storagetransfer.v1.IAgentPool[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAgentPools.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listAgentPools.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('agentPools', () => {
+      const fakePath = '/rendered/path/agentPools';
+      const expectedParameters = {
+        project_id: 'projectIdValue',
+        agent_pool_id: 'agentPoolIdValue',
+      };
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.agentPoolsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.agentPoolsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('agentPoolsPath', () => {
+        const result = client.agentPoolsPath(
+          'projectIdValue',
+          'agentPoolIdValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.agentPoolsPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectIdFromAgentPoolsName', () => {
+        const result = client.matchProjectIdFromAgentPoolsName(fakePath);
+        assert.strictEqual(result, 'projectIdValue');
+        assert(
+          (client.pathTemplates.agentPoolsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentPoolIdFromAgentPoolsName', () => {
+        const result = client.matchAgentPoolIdFromAgentPoolsName(fakePath);
+        assert.strictEqual(result, 'agentPoolIdValue');
+        assert(
+          (client.pathTemplates.agentPoolsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
   });
 });

@@ -20,20 +20,30 @@
 
 'use strict';
 
-function main(jobName, projectId) {
-  // [START storagetransfer_v1_generated_StorageTransferService_GetTransferJob_async]
+function main(agentPool) {
+  // [START storagetransfer_v1_generated_StorageTransferService_UpdateAgentPool_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The job to get.
+   *  Required. The agent pool to update. `agent_pool` is expected to specify following
+   *  fields:
+   *  *  name google.storagetransfer.v1.AgentPool.name 
+   *  *  display_name google.storagetransfer.v1.AgentPool.display_name 
+   *  *  bandwidth_limit google.storagetransfer.v1.AgentPool.bandwidth_limit 
+   *  An `UpdateAgentPoolRequest` with any other fields is rejected
+   *  with the error INVALID_ARGUMENT google.rpc.Code.INVALID_ARGUMENT.
    */
-  // const jobName = 'abc123'
+  // const agentPool = {}
   /**
-   *  Required. The ID of the Google Cloud project that owns the
-   *  job.
+   *  The field mask 
+   *  (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf)
+   *  of the fields in `agentPool` to update in this request.
+   *  The following `agentPool` fields can be updated:
+   *  *  display_name google.storagetransfer.v1.AgentPool.display_name 
+   *  *  bandwidth_limit google.storagetransfer.v1.AgentPool.bandwidth_limit 
    */
-  // const projectId = 'abc123'
+  // const updateMask = {}
 
   // Imports the Storagetransfer library
   const {StorageTransferServiceClient} = require('@google-cloud/storage-transfer').v1;
@@ -41,20 +51,19 @@ function main(jobName, projectId) {
   // Instantiates a client
   const storagetransferClient = new StorageTransferServiceClient();
 
-  async function callGetTransferJob() {
+  async function callUpdateAgentPool() {
     // Construct request
     const request = {
-      jobName,
-      projectId,
+      agentPool,
     };
 
     // Run request
-    const response = await storagetransferClient.getTransferJob(request);
+    const response = await storagetransferClient.updateAgentPool(request);
     console.log(response);
   }
 
-  callGetTransferJob();
-  // [END storagetransfer_v1_generated_StorageTransferService_GetTransferJob_async]
+  callUpdateAgentPool();
+  // [END storagetransfer_v1_generated_StorageTransferService_UpdateAgentPool_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,20 +20,15 @@
 
 'use strict';
 
-function main(jobName, projectId) {
-  // [START storagetransfer_v1_generated_StorageTransferService_GetTransferJob_async]
+function main(name) {
+  // [START storagetransfer_v1_generated_StorageTransferService_GetAgentPool_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The job to get.
+   *  Required. The name of the agent pool to get.
    */
-  // const jobName = 'abc123'
-  /**
-   *  Required. The ID of the Google Cloud project that owns the
-   *  job.
-   */
-  // const projectId = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Storagetransfer library
   const {StorageTransferServiceClient} = require('@google-cloud/storage-transfer').v1;
@@ -41,20 +36,19 @@ function main(jobName, projectId) {
   // Instantiates a client
   const storagetransferClient = new StorageTransferServiceClient();
 
-  async function callGetTransferJob() {
+  async function callGetAgentPool() {
     // Construct request
     const request = {
-      jobName,
-      projectId,
+      name,
     };
 
     // Run request
-    const response = await storagetransferClient.getTransferJob(request);
+    const response = await storagetransferClient.getAgentPool(request);
     console.log(response);
   }
 
-  callGetTransferJob();
-  // [END storagetransfer_v1_generated_StorageTransferService_GetTransferJob_async]
+  callGetAgentPool();
+  // [END storagetransfer_v1_generated_StorageTransferService_GetAgentPool_async]
 }
 
 process.on('unhandledRejection', err => {

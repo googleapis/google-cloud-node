@@ -154,6 +154,76 @@ export namespace google {
                  * @returns Promise
                  */
                 public runTransferJob(request: google.storagetransfer.v1.IRunTransferJobRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls CreateAgentPool.
+                 * @param request CreateAgentPoolRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and AgentPool
+                 */
+                public createAgentPool(request: google.storagetransfer.v1.ICreateAgentPoolRequest, callback: google.storagetransfer.v1.StorageTransferService.CreateAgentPoolCallback): void;
+
+                /**
+                 * Calls CreateAgentPool.
+                 * @param request CreateAgentPoolRequest message or plain object
+                 * @returns Promise
+                 */
+                public createAgentPool(request: google.storagetransfer.v1.ICreateAgentPoolRequest): Promise<google.storagetransfer.v1.AgentPool>;
+
+                /**
+                 * Calls UpdateAgentPool.
+                 * @param request UpdateAgentPoolRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and AgentPool
+                 */
+                public updateAgentPool(request: google.storagetransfer.v1.IUpdateAgentPoolRequest, callback: google.storagetransfer.v1.StorageTransferService.UpdateAgentPoolCallback): void;
+
+                /**
+                 * Calls UpdateAgentPool.
+                 * @param request UpdateAgentPoolRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateAgentPool(request: google.storagetransfer.v1.IUpdateAgentPoolRequest): Promise<google.storagetransfer.v1.AgentPool>;
+
+                /**
+                 * Calls GetAgentPool.
+                 * @param request GetAgentPoolRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and AgentPool
+                 */
+                public getAgentPool(request: google.storagetransfer.v1.IGetAgentPoolRequest, callback: google.storagetransfer.v1.StorageTransferService.GetAgentPoolCallback): void;
+
+                /**
+                 * Calls GetAgentPool.
+                 * @param request GetAgentPoolRequest message or plain object
+                 * @returns Promise
+                 */
+                public getAgentPool(request: google.storagetransfer.v1.IGetAgentPoolRequest): Promise<google.storagetransfer.v1.AgentPool>;
+
+                /**
+                 * Calls ListAgentPools.
+                 * @param request ListAgentPoolsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListAgentPoolsResponse
+                 */
+                public listAgentPools(request: google.storagetransfer.v1.IListAgentPoolsRequest, callback: google.storagetransfer.v1.StorageTransferService.ListAgentPoolsCallback): void;
+
+                /**
+                 * Calls ListAgentPools.
+                 * @param request ListAgentPoolsRequest message or plain object
+                 * @returns Promise
+                 */
+                public listAgentPools(request: google.storagetransfer.v1.IListAgentPoolsRequest): Promise<google.storagetransfer.v1.ListAgentPoolsResponse>;
+
+                /**
+                 * Calls DeleteAgentPool.
+                 * @param request DeleteAgentPoolRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public deleteAgentPool(request: google.storagetransfer.v1.IDeleteAgentPoolRequest, callback: google.storagetransfer.v1.StorageTransferService.DeleteAgentPoolCallback): void;
+
+                /**
+                 * Calls DeleteAgentPool.
+                 * @param request DeleteAgentPoolRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteAgentPool(request: google.storagetransfer.v1.IDeleteAgentPoolRequest): Promise<google.protobuf.Empty>;
             }
 
             namespace StorageTransferService {
@@ -213,6 +283,41 @@ export namespace google {
                  * @param [response] Operation
                  */
                 type RunTransferJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#createAgentPool}.
+                 * @param error Error, if any
+                 * @param [response] AgentPool
+                 */
+                type CreateAgentPoolCallback = (error: (Error|null), response?: google.storagetransfer.v1.AgentPool) => void;
+
+                /**
+                 * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#updateAgentPool}.
+                 * @param error Error, if any
+                 * @param [response] AgentPool
+                 */
+                type UpdateAgentPoolCallback = (error: (Error|null), response?: google.storagetransfer.v1.AgentPool) => void;
+
+                /**
+                 * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#getAgentPool}.
+                 * @param error Error, if any
+                 * @param [response] AgentPool
+                 */
+                type GetAgentPoolCallback = (error: (Error|null), response?: google.storagetransfer.v1.AgentPool) => void;
+
+                /**
+                 * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#listAgentPools}.
+                 * @param error Error, if any
+                 * @param [response] ListAgentPoolsResponse
+                 */
+                type ListAgentPoolsCallback = (error: (Error|null), response?: google.storagetransfer.v1.ListAgentPoolsResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#deleteAgentPool}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type DeleteAgentPoolCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
             }
 
             /** Properties of a GetGoogleServiceAccountRequest. */
@@ -1073,6 +1178,588 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of a CreateAgentPoolRequest. */
+            interface ICreateAgentPoolRequest {
+
+                /** CreateAgentPoolRequest projectId */
+                projectId?: (string|null);
+
+                /** CreateAgentPoolRequest agentPool */
+                agentPool?: (google.storagetransfer.v1.IAgentPool|null);
+
+                /** CreateAgentPoolRequest agentPoolId */
+                agentPoolId?: (string|null);
+            }
+
+            /** Represents a CreateAgentPoolRequest. */
+            class CreateAgentPoolRequest implements ICreateAgentPoolRequest {
+
+                /**
+                 * Constructs a new CreateAgentPoolRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.ICreateAgentPoolRequest);
+
+                /** CreateAgentPoolRequest projectId. */
+                public projectId: string;
+
+                /** CreateAgentPoolRequest agentPool. */
+                public agentPool?: (google.storagetransfer.v1.IAgentPool|null);
+
+                /** CreateAgentPoolRequest agentPoolId. */
+                public agentPoolId: string;
+
+                /**
+                 * Creates a new CreateAgentPoolRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateAgentPoolRequest instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.ICreateAgentPoolRequest): google.storagetransfer.v1.CreateAgentPoolRequest;
+
+                /**
+                 * Encodes the specified CreateAgentPoolRequest message. Does not implicitly {@link google.storagetransfer.v1.CreateAgentPoolRequest.verify|verify} messages.
+                 * @param message CreateAgentPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.ICreateAgentPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateAgentPoolRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.CreateAgentPoolRequest.verify|verify} messages.
+                 * @param message CreateAgentPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.ICreateAgentPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateAgentPoolRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateAgentPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.CreateAgentPoolRequest;
+
+                /**
+                 * Decodes a CreateAgentPoolRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateAgentPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.CreateAgentPoolRequest;
+
+                /**
+                 * Verifies a CreateAgentPoolRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateAgentPoolRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateAgentPoolRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.CreateAgentPoolRequest;
+
+                /**
+                 * Creates a plain object from a CreateAgentPoolRequest message. Also converts values to other types if specified.
+                 * @param message CreateAgentPoolRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.CreateAgentPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateAgentPoolRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an UpdateAgentPoolRequest. */
+            interface IUpdateAgentPoolRequest {
+
+                /** UpdateAgentPoolRequest agentPool */
+                agentPool?: (google.storagetransfer.v1.IAgentPool|null);
+
+                /** UpdateAgentPoolRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents an UpdateAgentPoolRequest. */
+            class UpdateAgentPoolRequest implements IUpdateAgentPoolRequest {
+
+                /**
+                 * Constructs a new UpdateAgentPoolRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IUpdateAgentPoolRequest);
+
+                /** UpdateAgentPoolRequest agentPool. */
+                public agentPool?: (google.storagetransfer.v1.IAgentPool|null);
+
+                /** UpdateAgentPoolRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new UpdateAgentPoolRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateAgentPoolRequest instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IUpdateAgentPoolRequest): google.storagetransfer.v1.UpdateAgentPoolRequest;
+
+                /**
+                 * Encodes the specified UpdateAgentPoolRequest message. Does not implicitly {@link google.storagetransfer.v1.UpdateAgentPoolRequest.verify|verify} messages.
+                 * @param message UpdateAgentPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IUpdateAgentPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateAgentPoolRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.UpdateAgentPoolRequest.verify|verify} messages.
+                 * @param message UpdateAgentPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IUpdateAgentPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateAgentPoolRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateAgentPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.UpdateAgentPoolRequest;
+
+                /**
+                 * Decodes an UpdateAgentPoolRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateAgentPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.UpdateAgentPoolRequest;
+
+                /**
+                 * Verifies an UpdateAgentPoolRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateAgentPoolRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateAgentPoolRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.UpdateAgentPoolRequest;
+
+                /**
+                 * Creates a plain object from an UpdateAgentPoolRequest message. Also converts values to other types if specified.
+                 * @param message UpdateAgentPoolRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.UpdateAgentPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateAgentPoolRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a GetAgentPoolRequest. */
+            interface IGetAgentPoolRequest {
+
+                /** GetAgentPoolRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetAgentPoolRequest. */
+            class GetAgentPoolRequest implements IGetAgentPoolRequest {
+
+                /**
+                 * Constructs a new GetAgentPoolRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IGetAgentPoolRequest);
+
+                /** GetAgentPoolRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetAgentPoolRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetAgentPoolRequest instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IGetAgentPoolRequest): google.storagetransfer.v1.GetAgentPoolRequest;
+
+                /**
+                 * Encodes the specified GetAgentPoolRequest message. Does not implicitly {@link google.storagetransfer.v1.GetAgentPoolRequest.verify|verify} messages.
+                 * @param message GetAgentPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IGetAgentPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetAgentPoolRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.GetAgentPoolRequest.verify|verify} messages.
+                 * @param message GetAgentPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IGetAgentPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetAgentPoolRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetAgentPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.GetAgentPoolRequest;
+
+                /**
+                 * Decodes a GetAgentPoolRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetAgentPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.GetAgentPoolRequest;
+
+                /**
+                 * Verifies a GetAgentPoolRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetAgentPoolRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetAgentPoolRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.GetAgentPoolRequest;
+
+                /**
+                 * Creates a plain object from a GetAgentPoolRequest message. Also converts values to other types if specified.
+                 * @param message GetAgentPoolRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.GetAgentPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetAgentPoolRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a DeleteAgentPoolRequest. */
+            interface IDeleteAgentPoolRequest {
+
+                /** DeleteAgentPoolRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a DeleteAgentPoolRequest. */
+            class DeleteAgentPoolRequest implements IDeleteAgentPoolRequest {
+
+                /**
+                 * Constructs a new DeleteAgentPoolRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IDeleteAgentPoolRequest);
+
+                /** DeleteAgentPoolRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new DeleteAgentPoolRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DeleteAgentPoolRequest instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IDeleteAgentPoolRequest): google.storagetransfer.v1.DeleteAgentPoolRequest;
+
+                /**
+                 * Encodes the specified DeleteAgentPoolRequest message. Does not implicitly {@link google.storagetransfer.v1.DeleteAgentPoolRequest.verify|verify} messages.
+                 * @param message DeleteAgentPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IDeleteAgentPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DeleteAgentPoolRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.DeleteAgentPoolRequest.verify|verify} messages.
+                 * @param message DeleteAgentPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IDeleteAgentPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DeleteAgentPoolRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DeleteAgentPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.DeleteAgentPoolRequest;
+
+                /**
+                 * Decodes a DeleteAgentPoolRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DeleteAgentPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.DeleteAgentPoolRequest;
+
+                /**
+                 * Verifies a DeleteAgentPoolRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DeleteAgentPoolRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DeleteAgentPoolRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.DeleteAgentPoolRequest;
+
+                /**
+                 * Creates a plain object from a DeleteAgentPoolRequest message. Also converts values to other types if specified.
+                 * @param message DeleteAgentPoolRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.DeleteAgentPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DeleteAgentPoolRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a ListAgentPoolsRequest. */
+            interface IListAgentPoolsRequest {
+
+                /** ListAgentPoolsRequest projectId */
+                projectId?: (string|null);
+
+                /** ListAgentPoolsRequest filter */
+                filter?: (string|null);
+
+                /** ListAgentPoolsRequest pageSize */
+                pageSize?: (number|null);
+
+                /** ListAgentPoolsRequest pageToken */
+                pageToken?: (string|null);
+            }
+
+            /** Represents a ListAgentPoolsRequest. */
+            class ListAgentPoolsRequest implements IListAgentPoolsRequest {
+
+                /**
+                 * Constructs a new ListAgentPoolsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IListAgentPoolsRequest);
+
+                /** ListAgentPoolsRequest projectId. */
+                public projectId: string;
+
+                /** ListAgentPoolsRequest filter. */
+                public filter: string;
+
+                /** ListAgentPoolsRequest pageSize. */
+                public pageSize: number;
+
+                /** ListAgentPoolsRequest pageToken. */
+                public pageToken: string;
+
+                /**
+                 * Creates a new ListAgentPoolsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListAgentPoolsRequest instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IListAgentPoolsRequest): google.storagetransfer.v1.ListAgentPoolsRequest;
+
+                /**
+                 * Encodes the specified ListAgentPoolsRequest message. Does not implicitly {@link google.storagetransfer.v1.ListAgentPoolsRequest.verify|verify} messages.
+                 * @param message ListAgentPoolsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IListAgentPoolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListAgentPoolsRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.ListAgentPoolsRequest.verify|verify} messages.
+                 * @param message ListAgentPoolsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IListAgentPoolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListAgentPoolsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListAgentPoolsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.ListAgentPoolsRequest;
+
+                /**
+                 * Decodes a ListAgentPoolsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListAgentPoolsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.ListAgentPoolsRequest;
+
+                /**
+                 * Verifies a ListAgentPoolsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListAgentPoolsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListAgentPoolsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.ListAgentPoolsRequest;
+
+                /**
+                 * Creates a plain object from a ListAgentPoolsRequest message. Also converts values to other types if specified.
+                 * @param message ListAgentPoolsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.ListAgentPoolsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListAgentPoolsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a ListAgentPoolsResponse. */
+            interface IListAgentPoolsResponse {
+
+                /** ListAgentPoolsResponse agentPools */
+                agentPools?: (google.storagetransfer.v1.IAgentPool[]|null);
+
+                /** ListAgentPoolsResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a ListAgentPoolsResponse. */
+            class ListAgentPoolsResponse implements IListAgentPoolsResponse {
+
+                /**
+                 * Constructs a new ListAgentPoolsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IListAgentPoolsResponse);
+
+                /** ListAgentPoolsResponse agentPools. */
+                public agentPools: google.storagetransfer.v1.IAgentPool[];
+
+                /** ListAgentPoolsResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new ListAgentPoolsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListAgentPoolsResponse instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IListAgentPoolsResponse): google.storagetransfer.v1.ListAgentPoolsResponse;
+
+                /**
+                 * Encodes the specified ListAgentPoolsResponse message. Does not implicitly {@link google.storagetransfer.v1.ListAgentPoolsResponse.verify|verify} messages.
+                 * @param message ListAgentPoolsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IListAgentPoolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListAgentPoolsResponse message, length delimited. Does not implicitly {@link google.storagetransfer.v1.ListAgentPoolsResponse.verify|verify} messages.
+                 * @param message ListAgentPoolsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IListAgentPoolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListAgentPoolsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListAgentPoolsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.ListAgentPoolsResponse;
+
+                /**
+                 * Decodes a ListAgentPoolsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListAgentPoolsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.ListAgentPoolsResponse;
+
+                /**
+                 * Verifies a ListAgentPoolsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListAgentPoolsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListAgentPoolsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.ListAgentPoolsResponse;
+
+                /**
+                 * Creates a plain object from a ListAgentPoolsResponse message. Also converts values to other types if specified.
+                 * @param message ListAgentPoolsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.ListAgentPoolsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListAgentPoolsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
             /** Properties of a GoogleServiceAccount. */
             interface IGoogleServiceAccount {
 
@@ -1877,6 +2564,305 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of a PosixFilesystem. */
+            interface IPosixFilesystem {
+
+                /** PosixFilesystem rootDirectory */
+                rootDirectory?: (string|null);
+            }
+
+            /** Represents a PosixFilesystem. */
+            class PosixFilesystem implements IPosixFilesystem {
+
+                /**
+                 * Constructs a new PosixFilesystem.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IPosixFilesystem);
+
+                /** PosixFilesystem rootDirectory. */
+                public rootDirectory: string;
+
+                /**
+                 * Creates a new PosixFilesystem instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PosixFilesystem instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IPosixFilesystem): google.storagetransfer.v1.PosixFilesystem;
+
+                /**
+                 * Encodes the specified PosixFilesystem message. Does not implicitly {@link google.storagetransfer.v1.PosixFilesystem.verify|verify} messages.
+                 * @param message PosixFilesystem message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IPosixFilesystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PosixFilesystem message, length delimited. Does not implicitly {@link google.storagetransfer.v1.PosixFilesystem.verify|verify} messages.
+                 * @param message PosixFilesystem message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IPosixFilesystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PosixFilesystem message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PosixFilesystem
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.PosixFilesystem;
+
+                /**
+                 * Decodes a PosixFilesystem message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PosixFilesystem
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.PosixFilesystem;
+
+                /**
+                 * Verifies a PosixFilesystem message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PosixFilesystem message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PosixFilesystem
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.PosixFilesystem;
+
+                /**
+                 * Creates a plain object from a PosixFilesystem message. Also converts values to other types if specified.
+                 * @param message PosixFilesystem
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.PosixFilesystem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PosixFilesystem to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an AgentPool. */
+            interface IAgentPool {
+
+                /** AgentPool name */
+                name?: (string|null);
+
+                /** AgentPool displayName */
+                displayName?: (string|null);
+
+                /** AgentPool state */
+                state?: (google.storagetransfer.v1.AgentPool.State|keyof typeof google.storagetransfer.v1.AgentPool.State|null);
+
+                /** AgentPool bandwidthLimit */
+                bandwidthLimit?: (google.storagetransfer.v1.AgentPool.IBandwidthLimit|null);
+            }
+
+            /** Represents an AgentPool. */
+            class AgentPool implements IAgentPool {
+
+                /**
+                 * Constructs a new AgentPool.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IAgentPool);
+
+                /** AgentPool name. */
+                public name: string;
+
+                /** AgentPool displayName. */
+                public displayName: string;
+
+                /** AgentPool state. */
+                public state: (google.storagetransfer.v1.AgentPool.State|keyof typeof google.storagetransfer.v1.AgentPool.State);
+
+                /** AgentPool bandwidthLimit. */
+                public bandwidthLimit?: (google.storagetransfer.v1.AgentPool.IBandwidthLimit|null);
+
+                /**
+                 * Creates a new AgentPool instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AgentPool instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IAgentPool): google.storagetransfer.v1.AgentPool;
+
+                /**
+                 * Encodes the specified AgentPool message. Does not implicitly {@link google.storagetransfer.v1.AgentPool.verify|verify} messages.
+                 * @param message AgentPool message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IAgentPool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AgentPool message, length delimited. Does not implicitly {@link google.storagetransfer.v1.AgentPool.verify|verify} messages.
+                 * @param message AgentPool message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IAgentPool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AgentPool message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AgentPool
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.AgentPool;
+
+                /**
+                 * Decodes an AgentPool message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AgentPool
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.AgentPool;
+
+                /**
+                 * Verifies an AgentPool message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AgentPool message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AgentPool
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.AgentPool;
+
+                /**
+                 * Creates a plain object from an AgentPool message. Also converts values to other types if specified.
+                 * @param message AgentPool
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.AgentPool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AgentPool to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace AgentPool {
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    CREATING = 1,
+                    CREATED = 2,
+                    DELETING = 3
+                }
+
+                /** Properties of a BandwidthLimit. */
+                interface IBandwidthLimit {
+
+                    /** BandwidthLimit limitMbps */
+                    limitMbps?: (number|Long|string|null);
+                }
+
+                /** Represents a BandwidthLimit. */
+                class BandwidthLimit implements IBandwidthLimit {
+
+                    /**
+                     * Constructs a new BandwidthLimit.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storagetransfer.v1.AgentPool.IBandwidthLimit);
+
+                    /** BandwidthLimit limitMbps. */
+                    public limitMbps: (number|Long|string);
+
+                    /**
+                     * Creates a new BandwidthLimit instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BandwidthLimit instance
+                     */
+                    public static create(properties?: google.storagetransfer.v1.AgentPool.IBandwidthLimit): google.storagetransfer.v1.AgentPool.BandwidthLimit;
+
+                    /**
+                     * Encodes the specified BandwidthLimit message. Does not implicitly {@link google.storagetransfer.v1.AgentPool.BandwidthLimit.verify|verify} messages.
+                     * @param message BandwidthLimit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storagetransfer.v1.AgentPool.IBandwidthLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BandwidthLimit message, length delimited. Does not implicitly {@link google.storagetransfer.v1.AgentPool.BandwidthLimit.verify|verify} messages.
+                     * @param message BandwidthLimit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storagetransfer.v1.AgentPool.IBandwidthLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BandwidthLimit message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BandwidthLimit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.AgentPool.BandwidthLimit;
+
+                    /**
+                     * Decodes a BandwidthLimit message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BandwidthLimit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.AgentPool.BandwidthLimit;
+
+                    /**
+                     * Verifies a BandwidthLimit message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BandwidthLimit message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BandwidthLimit
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.AgentPool.BandwidthLimit;
+
+                    /**
+                     * Creates a plain object from a BandwidthLimit message. Also converts values to other types if specified.
+                     * @param message BandwidthLimit
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storagetransfer.v1.AgentPool.BandwidthLimit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BandwidthLimit to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Properties of a TransferOptions. */
             interface ITransferOptions {
 
@@ -1888,6 +2874,12 @@ export namespace google {
 
                 /** TransferOptions deleteObjectsFromSourceAfterTransfer */
                 deleteObjectsFromSourceAfterTransfer?: (boolean|null);
+
+                /** TransferOptions overwriteWhen */
+                overwriteWhen?: (google.storagetransfer.v1.TransferOptions.OverwriteWhen|keyof typeof google.storagetransfer.v1.TransferOptions.OverwriteWhen|null);
+
+                /** TransferOptions metadataOptions */
+                metadataOptions?: (google.storagetransfer.v1.IMetadataOptions|null);
             }
 
             /** Represents a TransferOptions. */
@@ -1907,6 +2899,12 @@ export namespace google {
 
                 /** TransferOptions deleteObjectsFromSourceAfterTransfer. */
                 public deleteObjectsFromSourceAfterTransfer: boolean;
+
+                /** TransferOptions overwriteWhen. */
+                public overwriteWhen: (google.storagetransfer.v1.TransferOptions.OverwriteWhen|keyof typeof google.storagetransfer.v1.TransferOptions.OverwriteWhen);
+
+                /** TransferOptions metadataOptions. */
+                public metadataOptions?: (google.storagetransfer.v1.IMetadataOptions|null);
 
                 /**
                  * Creates a new TransferOptions instance using the specified properties.
@@ -1979,11 +2977,25 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            namespace TransferOptions {
+
+                /** OverwriteWhen enum. */
+                enum OverwriteWhen {
+                    OVERWRITE_WHEN_UNSPECIFIED = 0,
+                    DIFFERENT = 1,
+                    NEVER = 2,
+                    ALWAYS = 3
+                }
+            }
+
             /** Properties of a TransferSpec. */
             interface ITransferSpec {
 
                 /** TransferSpec gcsDataSink */
                 gcsDataSink?: (google.storagetransfer.v1.IGcsData|null);
+
+                /** TransferSpec posixDataSink */
+                posixDataSink?: (google.storagetransfer.v1.IPosixFilesystem|null);
 
                 /** TransferSpec gcsDataSource */
                 gcsDataSource?: (google.storagetransfer.v1.IGcsData|null);
@@ -1994,14 +3006,29 @@ export namespace google {
                 /** TransferSpec httpDataSource */
                 httpDataSource?: (google.storagetransfer.v1.IHttpData|null);
 
+                /** TransferSpec posixDataSource */
+                posixDataSource?: (google.storagetransfer.v1.IPosixFilesystem|null);
+
                 /** TransferSpec azureBlobStorageDataSource */
                 azureBlobStorageDataSource?: (google.storagetransfer.v1.IAzureBlobStorageData|null);
+
+                /** TransferSpec gcsIntermediateDataLocation */
+                gcsIntermediateDataLocation?: (google.storagetransfer.v1.IGcsData|null);
 
                 /** TransferSpec objectConditions */
                 objectConditions?: (google.storagetransfer.v1.IObjectConditions|null);
 
                 /** TransferSpec transferOptions */
                 transferOptions?: (google.storagetransfer.v1.ITransferOptions|null);
+
+                /** TransferSpec transferManifest */
+                transferManifest?: (google.storagetransfer.v1.ITransferManifest|null);
+
+                /** TransferSpec sourceAgentPoolName */
+                sourceAgentPoolName?: (string|null);
+
+                /** TransferSpec sinkAgentPoolName */
+                sinkAgentPoolName?: (string|null);
             }
 
             /** Represents a TransferSpec. */
@@ -2016,6 +3043,9 @@ export namespace google {
                 /** TransferSpec gcsDataSink. */
                 public gcsDataSink?: (google.storagetransfer.v1.IGcsData|null);
 
+                /** TransferSpec posixDataSink. */
+                public posixDataSink?: (google.storagetransfer.v1.IPosixFilesystem|null);
+
                 /** TransferSpec gcsDataSource. */
                 public gcsDataSource?: (google.storagetransfer.v1.IGcsData|null);
 
@@ -2025,8 +3055,14 @@ export namespace google {
                 /** TransferSpec httpDataSource. */
                 public httpDataSource?: (google.storagetransfer.v1.IHttpData|null);
 
+                /** TransferSpec posixDataSource. */
+                public posixDataSource?: (google.storagetransfer.v1.IPosixFilesystem|null);
+
                 /** TransferSpec azureBlobStorageDataSource. */
                 public azureBlobStorageDataSource?: (google.storagetransfer.v1.IAzureBlobStorageData|null);
+
+                /** TransferSpec gcsIntermediateDataLocation. */
+                public gcsIntermediateDataLocation?: (google.storagetransfer.v1.IGcsData|null);
 
                 /** TransferSpec objectConditions. */
                 public objectConditions?: (google.storagetransfer.v1.IObjectConditions|null);
@@ -2034,11 +3070,23 @@ export namespace google {
                 /** TransferSpec transferOptions. */
                 public transferOptions?: (google.storagetransfer.v1.ITransferOptions|null);
 
+                /** TransferSpec transferManifest. */
+                public transferManifest?: (google.storagetransfer.v1.ITransferManifest|null);
+
+                /** TransferSpec sourceAgentPoolName. */
+                public sourceAgentPoolName: string;
+
+                /** TransferSpec sinkAgentPoolName. */
+                public sinkAgentPoolName: string;
+
                 /** TransferSpec dataSink. */
-                public dataSink?: "gcsDataSink";
+                public dataSink?: ("gcsDataSink"|"posixDataSink");
 
                 /** TransferSpec dataSource. */
-                public dataSource?: ("gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"azureBlobStorageDataSource");
+                public dataSource?: ("gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource");
+
+                /** TransferSpec intermediateDataLocation. */
+                public intermediateDataLocation?: "gcsIntermediateDataLocation";
 
                 /**
                  * Creates a new TransferSpec instance using the specified properties.
@@ -2106,6 +3154,304 @@ export namespace google {
 
                 /**
                  * Converts this TransferSpec to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MetadataOptions. */
+            interface IMetadataOptions {
+
+                /** MetadataOptions symlink */
+                symlink?: (google.storagetransfer.v1.MetadataOptions.Symlink|keyof typeof google.storagetransfer.v1.MetadataOptions.Symlink|null);
+
+                /** MetadataOptions mode */
+                mode?: (google.storagetransfer.v1.MetadataOptions.Mode|keyof typeof google.storagetransfer.v1.MetadataOptions.Mode|null);
+
+                /** MetadataOptions gid */
+                gid?: (google.storagetransfer.v1.MetadataOptions.GID|keyof typeof google.storagetransfer.v1.MetadataOptions.GID|null);
+
+                /** MetadataOptions uid */
+                uid?: (google.storagetransfer.v1.MetadataOptions.UID|keyof typeof google.storagetransfer.v1.MetadataOptions.UID|null);
+
+                /** MetadataOptions acl */
+                acl?: (google.storagetransfer.v1.MetadataOptions.Acl|keyof typeof google.storagetransfer.v1.MetadataOptions.Acl|null);
+
+                /** MetadataOptions storageClass */
+                storageClass?: (google.storagetransfer.v1.MetadataOptions.StorageClass|keyof typeof google.storagetransfer.v1.MetadataOptions.StorageClass|null);
+
+                /** MetadataOptions temporaryHold */
+                temporaryHold?: (google.storagetransfer.v1.MetadataOptions.TemporaryHold|keyof typeof google.storagetransfer.v1.MetadataOptions.TemporaryHold|null);
+
+                /** MetadataOptions kmsKey */
+                kmsKey?: (google.storagetransfer.v1.MetadataOptions.KmsKey|keyof typeof google.storagetransfer.v1.MetadataOptions.KmsKey|null);
+
+                /** MetadataOptions timeCreated */
+                timeCreated?: (google.storagetransfer.v1.MetadataOptions.TimeCreated|keyof typeof google.storagetransfer.v1.MetadataOptions.TimeCreated|null);
+            }
+
+            /** Represents a MetadataOptions. */
+            class MetadataOptions implements IMetadataOptions {
+
+                /**
+                 * Constructs a new MetadataOptions.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IMetadataOptions);
+
+                /** MetadataOptions symlink. */
+                public symlink: (google.storagetransfer.v1.MetadataOptions.Symlink|keyof typeof google.storagetransfer.v1.MetadataOptions.Symlink);
+
+                /** MetadataOptions mode. */
+                public mode: (google.storagetransfer.v1.MetadataOptions.Mode|keyof typeof google.storagetransfer.v1.MetadataOptions.Mode);
+
+                /** MetadataOptions gid. */
+                public gid: (google.storagetransfer.v1.MetadataOptions.GID|keyof typeof google.storagetransfer.v1.MetadataOptions.GID);
+
+                /** MetadataOptions uid. */
+                public uid: (google.storagetransfer.v1.MetadataOptions.UID|keyof typeof google.storagetransfer.v1.MetadataOptions.UID);
+
+                /** MetadataOptions acl. */
+                public acl: (google.storagetransfer.v1.MetadataOptions.Acl|keyof typeof google.storagetransfer.v1.MetadataOptions.Acl);
+
+                /** MetadataOptions storageClass. */
+                public storageClass: (google.storagetransfer.v1.MetadataOptions.StorageClass|keyof typeof google.storagetransfer.v1.MetadataOptions.StorageClass);
+
+                /** MetadataOptions temporaryHold. */
+                public temporaryHold: (google.storagetransfer.v1.MetadataOptions.TemporaryHold|keyof typeof google.storagetransfer.v1.MetadataOptions.TemporaryHold);
+
+                /** MetadataOptions kmsKey. */
+                public kmsKey: (google.storagetransfer.v1.MetadataOptions.KmsKey|keyof typeof google.storagetransfer.v1.MetadataOptions.KmsKey);
+
+                /** MetadataOptions timeCreated. */
+                public timeCreated: (google.storagetransfer.v1.MetadataOptions.TimeCreated|keyof typeof google.storagetransfer.v1.MetadataOptions.TimeCreated);
+
+                /**
+                 * Creates a new MetadataOptions instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MetadataOptions instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IMetadataOptions): google.storagetransfer.v1.MetadataOptions;
+
+                /**
+                 * Encodes the specified MetadataOptions message. Does not implicitly {@link google.storagetransfer.v1.MetadataOptions.verify|verify} messages.
+                 * @param message MetadataOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IMetadataOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MetadataOptions message, length delimited. Does not implicitly {@link google.storagetransfer.v1.MetadataOptions.verify|verify} messages.
+                 * @param message MetadataOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IMetadataOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MetadataOptions message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MetadataOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.MetadataOptions;
+
+                /**
+                 * Decodes a MetadataOptions message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MetadataOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.MetadataOptions;
+
+                /**
+                 * Verifies a MetadataOptions message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MetadataOptions message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MetadataOptions
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.MetadataOptions;
+
+                /**
+                 * Creates a plain object from a MetadataOptions message. Also converts values to other types if specified.
+                 * @param message MetadataOptions
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.MetadataOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MetadataOptions to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace MetadataOptions {
+
+                /** Symlink enum. */
+                enum Symlink {
+                    SYMLINK_UNSPECIFIED = 0,
+                    SYMLINK_SKIP = 1,
+                    SYMLINK_PRESERVE = 2
+                }
+
+                /** Mode enum. */
+                enum Mode {
+                    MODE_UNSPECIFIED = 0,
+                    MODE_SKIP = 1,
+                    MODE_PRESERVE = 2
+                }
+
+                /** GID enum. */
+                enum GID {
+                    GID_UNSPECIFIED = 0,
+                    GID_SKIP = 1,
+                    GID_NUMBER = 2
+                }
+
+                /** UID enum. */
+                enum UID {
+                    UID_UNSPECIFIED = 0,
+                    UID_SKIP = 1,
+                    UID_NUMBER = 2
+                }
+
+                /** Acl enum. */
+                enum Acl {
+                    ACL_UNSPECIFIED = 0,
+                    ACL_DESTINATION_BUCKET_DEFAULT = 1,
+                    ACL_PRESERVE = 2
+                }
+
+                /** StorageClass enum. */
+                enum StorageClass {
+                    STORAGE_CLASS_UNSPECIFIED = 0,
+                    STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT = 1,
+                    STORAGE_CLASS_PRESERVE = 2,
+                    STORAGE_CLASS_STANDARD = 3,
+                    STORAGE_CLASS_NEARLINE = 4,
+                    STORAGE_CLASS_COLDLINE = 5,
+                    STORAGE_CLASS_ARCHIVE = 6
+                }
+
+                /** TemporaryHold enum. */
+                enum TemporaryHold {
+                    TEMPORARY_HOLD_UNSPECIFIED = 0,
+                    TEMPORARY_HOLD_SKIP = 1,
+                    TEMPORARY_HOLD_PRESERVE = 2
+                }
+
+                /** KmsKey enum. */
+                enum KmsKey {
+                    KMS_KEY_UNSPECIFIED = 0,
+                    KMS_KEY_DESTINATION_BUCKET_DEFAULT = 1,
+                    KMS_KEY_PRESERVE = 2
+                }
+
+                /** TimeCreated enum. */
+                enum TimeCreated {
+                    TIME_CREATED_UNSPECIFIED = 0,
+                    TIME_CREATED_SKIP = 1,
+                    TIME_CREATED_PRESERVE_AS_CUSTOM_TIME = 2
+                }
+            }
+
+            /** Properties of a TransferManifest. */
+            interface ITransferManifest {
+
+                /** TransferManifest location */
+                location?: (string|null);
+            }
+
+            /** Represents a TransferManifest. */
+            class TransferManifest implements ITransferManifest {
+
+                /**
+                 * Constructs a new TransferManifest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.ITransferManifest);
+
+                /** TransferManifest location. */
+                public location: string;
+
+                /**
+                 * Creates a new TransferManifest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns TransferManifest instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.ITransferManifest): google.storagetransfer.v1.TransferManifest;
+
+                /**
+                 * Encodes the specified TransferManifest message. Does not implicitly {@link google.storagetransfer.v1.TransferManifest.verify|verify} messages.
+                 * @param message TransferManifest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.ITransferManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified TransferManifest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.TransferManifest.verify|verify} messages.
+                 * @param message TransferManifest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.ITransferManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a TransferManifest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns TransferManifest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.TransferManifest;
+
+                /**
+                 * Decodes a TransferManifest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns TransferManifest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.TransferManifest;
+
+                /**
+                 * Verifies a TransferManifest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a TransferManifest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns TransferManifest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.TransferManifest;
+
+                /**
+                 * Creates a plain object from a TransferManifest message. Also converts values to other types if specified.
+                 * @param message TransferManifest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.TransferManifest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this TransferManifest to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
@@ -2243,6 +3589,9 @@ export namespace google {
                 /** TransferJob notificationConfig */
                 notificationConfig?: (google.storagetransfer.v1.INotificationConfig|null);
 
+                /** TransferJob loggingConfig */
+                loggingConfig?: (google.storagetransfer.v1.ILoggingConfig|null);
+
                 /** TransferJob schedule */
                 schedule?: (google.storagetransfer.v1.ISchedule|null);
 
@@ -2285,6 +3634,9 @@ export namespace google {
 
                 /** TransferJob notificationConfig. */
                 public notificationConfig?: (google.storagetransfer.v1.INotificationConfig|null);
+
+                /** TransferJob loggingConfig. */
+                public loggingConfig?: (google.storagetransfer.v1.ILoggingConfig|null);
 
                 /** TransferJob schedule. */
                 public schedule?: (google.storagetransfer.v1.ISchedule|null);
@@ -2634,6 +3986,21 @@ export namespace google {
 
                 /** TransferCounters bytesFailedToDeleteFromSink */
                 bytesFailedToDeleteFromSink?: (number|Long|string|null);
+
+                /** TransferCounters directoriesFoundFromSource */
+                directoriesFoundFromSource?: (number|Long|string|null);
+
+                /** TransferCounters directoriesFailedToListFromSource */
+                directoriesFailedToListFromSource?: (number|Long|string|null);
+
+                /** TransferCounters directoriesSuccessfullyListedFromSource */
+                directoriesSuccessfullyListedFromSource?: (number|Long|string|null);
+
+                /** TransferCounters intermediateObjectsCleanedUp */
+                intermediateObjectsCleanedUp?: (number|Long|string|null);
+
+                /** TransferCounters intermediateObjectsFailedCleanedUp */
+                intermediateObjectsFailedCleanedUp?: (number|Long|string|null);
             }
 
             /** Represents a TransferCounters. */
@@ -2692,6 +4059,21 @@ export namespace google {
 
                 /** TransferCounters bytesFailedToDeleteFromSink. */
                 public bytesFailedToDeleteFromSink: (number|Long|string);
+
+                /** TransferCounters directoriesFoundFromSource. */
+                public directoriesFoundFromSource: (number|Long|string);
+
+                /** TransferCounters directoriesFailedToListFromSource. */
+                public directoriesFailedToListFromSource: (number|Long|string);
+
+                /** TransferCounters directoriesSuccessfullyListedFromSource. */
+                public directoriesSuccessfullyListedFromSource: (number|Long|string);
+
+                /** TransferCounters intermediateObjectsCleanedUp. */
+                public intermediateObjectsCleanedUp: (number|Long|string);
+
+                /** TransferCounters intermediateObjectsFailedCleanedUp. */
+                public intermediateObjectsFailedCleanedUp: (number|Long|string);
 
                 /**
                  * Creates a new TransferCounters instance using the specified properties.
@@ -2881,6 +4263,126 @@ export namespace google {
                     PAYLOAD_FORMAT_UNSPECIFIED = 0,
                     NONE = 1,
                     JSON = 2
+                }
+            }
+
+            /** Properties of a LoggingConfig. */
+            interface ILoggingConfig {
+
+                /** LoggingConfig logActions */
+                logActions?: (google.storagetransfer.v1.LoggingConfig.LoggableAction[]|null);
+
+                /** LoggingConfig logActionStates */
+                logActionStates?: (google.storagetransfer.v1.LoggingConfig.LoggableActionState[]|null);
+
+                /** LoggingConfig enableOnpremGcsTransferLogs */
+                enableOnpremGcsTransferLogs?: (boolean|null);
+            }
+
+            /** Represents a LoggingConfig. */
+            class LoggingConfig implements ILoggingConfig {
+
+                /**
+                 * Constructs a new LoggingConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.ILoggingConfig);
+
+                /** LoggingConfig logActions. */
+                public logActions: google.storagetransfer.v1.LoggingConfig.LoggableAction[];
+
+                /** LoggingConfig logActionStates. */
+                public logActionStates: google.storagetransfer.v1.LoggingConfig.LoggableActionState[];
+
+                /** LoggingConfig enableOnpremGcsTransferLogs. */
+                public enableOnpremGcsTransferLogs: boolean;
+
+                /**
+                 * Creates a new LoggingConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LoggingConfig instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.ILoggingConfig): google.storagetransfer.v1.LoggingConfig;
+
+                /**
+                 * Encodes the specified LoggingConfig message. Does not implicitly {@link google.storagetransfer.v1.LoggingConfig.verify|verify} messages.
+                 * @param message LoggingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.ILoggingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LoggingConfig message, length delimited. Does not implicitly {@link google.storagetransfer.v1.LoggingConfig.verify|verify} messages.
+                 * @param message LoggingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.ILoggingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LoggingConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LoggingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.LoggingConfig;
+
+                /**
+                 * Decodes a LoggingConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LoggingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.LoggingConfig;
+
+                /**
+                 * Verifies a LoggingConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LoggingConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LoggingConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.LoggingConfig;
+
+                /**
+                 * Creates a plain object from a LoggingConfig message. Also converts values to other types if specified.
+                 * @param message LoggingConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.LoggingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LoggingConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace LoggingConfig {
+
+                /** LoggableAction enum. */
+                enum LoggableAction {
+                    LOGGABLE_ACTION_UNSPECIFIED = 0,
+                    FIND = 1,
+                    DELETE = 2,
+                    COPY = 3
+                }
+
+                /** LoggableActionState enum. */
+                enum LoggableActionState {
+                    LOGGABLE_ACTION_STATE_UNSPECIFIED = 0,
+                    SUCCEEDED = 1,
+                    FAILED = 2
                 }
             }
 
@@ -3396,6 +4898,244 @@ export namespace google {
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
     }
 
@@ -4963,6 +6703,9 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */
@@ -5135,6 +6878,9 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -5258,6 +7004,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */

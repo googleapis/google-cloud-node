@@ -150,6 +150,100 @@
                           }
                         }
                       ]
+                    },
+                    "CreateAgentPool": {
+                      "requestType": "CreateAgentPoolRequest",
+                      "responseType": "AgentPool",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id=*}/agentPools",
+                        "(google.api.http).body": "agent_pool",
+                        "(google.api.method_signature)": "project_id,agent_pool,agent_pool_id"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id=*}/agentPools",
+                            "body": "agent_pool"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id,agent_pool,agent_pool_id"
+                        }
+                      ]
+                    },
+                    "UpdateAgentPool": {
+                      "requestType": "UpdateAgentPoolRequest",
+                      "responseType": "AgentPool",
+                      "options": {
+                        "(google.api.http).patch": "/v1/{agent_pool.name=projects/*/agentPools/*}",
+                        "(google.api.http).body": "agent_pool",
+                        "(google.api.method_signature)": "agent_pool,update_mask"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v1/{agent_pool.name=projects/*/agentPools/*}",
+                            "body": "agent_pool"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "agent_pool,update_mask"
+                        }
+                      ]
+                    },
+                    "GetAgentPool": {
+                      "requestType": "GetAgentPoolRequest",
+                      "responseType": "AgentPool",
+                      "options": {
+                        "(google.api.http).get": "/v1/{name=projects/*/agentPools/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{name=projects/*/agentPools/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "ListAgentPools": {
+                      "requestType": "ListAgentPoolsRequest",
+                      "responseType": "ListAgentPoolsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/projects/{project_id=*}/agentPools",
+                        "(google.api.method_signature)": "project_id"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/projects/{project_id=*}/agentPools"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id"
+                        }
+                      ]
+                    },
+                    "DeleteAgentPool": {
+                      "requestType": "DeleteAgentPoolRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1/{name=projects/*/agentPools/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1/{name=projects/*/agentPools/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     }
                   }
                 },
@@ -294,6 +388,104 @@
                     }
                   }
                 },
+                "CreateAgentPoolRequest": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "agentPool": {
+                      "type": "AgentPool",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "agentPoolId": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "UpdateAgentPoolRequest": {
+                  "fields": {
+                    "agentPool": {
+                      "type": "AgentPool",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetAgentPoolRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "DeleteAgentPoolRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "ListAgentPoolsRequest": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  }
+                },
+                "ListAgentPoolsResponse": {
+                  "fields": {
+                    "agentPools": {
+                      "rule": "repeated",
+                      "type": "AgentPool",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
                 "GoogleServiceAccount": {
                   "fields": {
                     "accountEmail": {
@@ -402,10 +594,7 @@
                     },
                     "roleArn": {
                       "type": "string",
-                      "id": 4,
-                      "options": {
-                        "(google.api.field_behavior)": "INPUT_ONLY"
-                      }
+                      "id": 4
                     }
                   }
                 },
@@ -449,6 +638,62 @@
                     }
                   }
                 },
+                "PosixFilesystem": {
+                  "fields": {
+                    "rootDirectory": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "AgentPool": {
+                  "options": {
+                    "(google.api.resource).type": "storagetransfer.googleapis.com/agentPools",
+                    "(google.api.resource).pattern": "projects/{project_id}/agentPools/{agent_pool_id}"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "bandwidthLimit": {
+                      "type": "BandwidthLimit",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "CREATING": 1,
+                        "CREATED": 2,
+                        "DELETING": 3
+                      }
+                    },
+                    "BandwidthLimit": {
+                      "fields": {
+                        "limitMbps": {
+                          "type": "int64",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
                 "TransferOptions": {
                   "fields": {
                     "overwriteObjectsAlreadyExistingInSink": {
@@ -462,6 +707,24 @@
                     "deleteObjectsFromSourceAfterTransfer": {
                       "type": "bool",
                       "id": 3
+                    },
+                    "overwriteWhen": {
+                      "type": "OverwriteWhen",
+                      "id": 4
+                    },
+                    "metadataOptions": {
+                      "type": "MetadataOptions",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "OverwriteWhen": {
+                      "values": {
+                        "OVERWRITE_WHEN_UNSPECIFIED": 0,
+                        "DIFFERENT": 1,
+                        "NEVER": 2,
+                        "ALWAYS": 3
+                      }
                     }
                   }
                 },
@@ -469,7 +732,8 @@
                   "oneofs": {
                     "dataSink": {
                       "oneof": [
-                        "gcsDataSink"
+                        "gcsDataSink",
+                        "posixDataSink"
                       ]
                     },
                     "dataSource": {
@@ -477,7 +741,13 @@
                         "gcsDataSource",
                         "awsS3DataSource",
                         "httpDataSource",
+                        "posixDataSource",
                         "azureBlobStorageDataSource"
+                      ]
+                    },
+                    "intermediateDataLocation": {
+                      "oneof": [
+                        "gcsIntermediateDataLocation"
                       ]
                     }
                   },
@@ -485,6 +755,10 @@
                     "gcsDataSink": {
                       "type": "GcsData",
                       "id": 4
+                    },
+                    "posixDataSink": {
+                      "type": "PosixFilesystem",
+                      "id": 13
                     },
                     "gcsDataSource": {
                       "type": "GcsData",
@@ -498,9 +772,17 @@
                       "type": "HttpData",
                       "id": 3
                     },
+                    "posixDataSource": {
+                      "type": "PosixFilesystem",
+                      "id": 14
+                    },
                     "azureBlobStorageDataSource": {
                       "type": "AzureBlobStorageData",
                       "id": 8
+                    },
+                    "gcsIntermediateDataLocation": {
+                      "type": "GcsData",
+                      "id": 16
                     },
                     "objectConditions": {
                       "type": "ObjectConditions",
@@ -509,6 +791,135 @@
                     "transferOptions": {
                       "type": "TransferOptions",
                       "id": 6
+                    },
+                    "transferManifest": {
+                      "type": "TransferManifest",
+                      "id": 15
+                    },
+                    "sourceAgentPoolName": {
+                      "type": "string",
+                      "id": 17
+                    },
+                    "sinkAgentPoolName": {
+                      "type": "string",
+                      "id": 18
+                    }
+                  }
+                },
+                "MetadataOptions": {
+                  "fields": {
+                    "symlink": {
+                      "type": "Symlink",
+                      "id": 1
+                    },
+                    "mode": {
+                      "type": "Mode",
+                      "id": 2
+                    },
+                    "gid": {
+                      "type": "GID",
+                      "id": 3
+                    },
+                    "uid": {
+                      "type": "UID",
+                      "id": 4
+                    },
+                    "acl": {
+                      "type": "Acl",
+                      "id": 5
+                    },
+                    "storageClass": {
+                      "type": "StorageClass",
+                      "id": 6
+                    },
+                    "temporaryHold": {
+                      "type": "TemporaryHold",
+                      "id": 7
+                    },
+                    "kmsKey": {
+                      "type": "KmsKey",
+                      "id": 8
+                    },
+                    "timeCreated": {
+                      "type": "TimeCreated",
+                      "id": 9
+                    }
+                  },
+                  "nested": {
+                    "Symlink": {
+                      "values": {
+                        "SYMLINK_UNSPECIFIED": 0,
+                        "SYMLINK_SKIP": 1,
+                        "SYMLINK_PRESERVE": 2
+                      }
+                    },
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "MODE_SKIP": 1,
+                        "MODE_PRESERVE": 2
+                      }
+                    },
+                    "GID": {
+                      "values": {
+                        "GID_UNSPECIFIED": 0,
+                        "GID_SKIP": 1,
+                        "GID_NUMBER": 2
+                      }
+                    },
+                    "UID": {
+                      "values": {
+                        "UID_UNSPECIFIED": 0,
+                        "UID_SKIP": 1,
+                        "UID_NUMBER": 2
+                      }
+                    },
+                    "Acl": {
+                      "values": {
+                        "ACL_UNSPECIFIED": 0,
+                        "ACL_DESTINATION_BUCKET_DEFAULT": 1,
+                        "ACL_PRESERVE": 2
+                      }
+                    },
+                    "StorageClass": {
+                      "values": {
+                        "STORAGE_CLASS_UNSPECIFIED": 0,
+                        "STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT": 1,
+                        "STORAGE_CLASS_PRESERVE": 2,
+                        "STORAGE_CLASS_STANDARD": 3,
+                        "STORAGE_CLASS_NEARLINE": 4,
+                        "STORAGE_CLASS_COLDLINE": 5,
+                        "STORAGE_CLASS_ARCHIVE": 6
+                      }
+                    },
+                    "TemporaryHold": {
+                      "values": {
+                        "TEMPORARY_HOLD_UNSPECIFIED": 0,
+                        "TEMPORARY_HOLD_SKIP": 1,
+                        "TEMPORARY_HOLD_PRESERVE": 2
+                      }
+                    },
+                    "KmsKey": {
+                      "values": {
+                        "KMS_KEY_UNSPECIFIED": 0,
+                        "KMS_KEY_DESTINATION_BUCKET_DEFAULT": 1,
+                        "KMS_KEY_PRESERVE": 2
+                      }
+                    },
+                    "TimeCreated": {
+                      "values": {
+                        "TIME_CREATED_UNSPECIFIED": 0,
+                        "TIME_CREATED_SKIP": 1,
+                        "TIME_CREATED_PRESERVE_AS_CUSTOM_TIME": 2
+                      }
+                    }
+                  }
+                },
+                "TransferManifest": {
+                  "fields": {
+                    "location": {
+                      "type": "string",
+                      "id": 1
                     }
                   }
                 },
@@ -560,6 +971,10 @@
                     "notificationConfig": {
                       "type": "NotificationConfig",
                       "id": 11
+                    },
+                    "loggingConfig": {
+                      "type": "LoggingConfig",
+                      "id": 14
                     },
                     "schedule": {
                       "type": "Schedule",
@@ -710,6 +1125,26 @@
                     "bytesFailedToDeleteFromSink": {
                       "type": "int64",
                       "id": 16
+                    },
+                    "directoriesFoundFromSource": {
+                      "type": "int64",
+                      "id": 17
+                    },
+                    "directoriesFailedToListFromSource": {
+                      "type": "int64",
+                      "id": 18
+                    },
+                    "directoriesSuccessfullyListedFromSource": {
+                      "type": "int64",
+                      "id": 19
+                    },
+                    "intermediateObjectsCleanedUp": {
+                      "type": "int64",
+                      "id": 22
+                    },
+                    "intermediateObjectsFailedCleanedUp": {
+                      "type": "int64",
+                      "id": 23
                     }
                   }
                 },
@@ -749,6 +1184,41 @@
                         "PAYLOAD_FORMAT_UNSPECIFIED": 0,
                         "NONE": 1,
                         "JSON": 2
+                      }
+                    }
+                  }
+                },
+                "LoggingConfig": {
+                  "fields": {
+                    "logActions": {
+                      "rule": "repeated",
+                      "type": "LoggableAction",
+                      "id": 1
+                    },
+                    "logActionStates": {
+                      "rule": "repeated",
+                      "type": "LoggableActionState",
+                      "id": 2
+                    },
+                    "enableOnpremGcsTransferLogs": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "LoggableAction": {
+                      "values": {
+                        "LOGGABLE_ACTION_UNSPECIFIED": 0,
+                        "FIND": 1,
+                        "DELETE": 2,
+                        "COPY": 3
+                      }
+                    },
+                    "LoggableActionState": {
+                      "values": {
+                        "LOGGABLE_ACTION_STATE_UNSPECIFIED": 0,
+                        "SUCCEEDED": 1,
+                        "FAILED": 2
                       }
                     }
                   }
@@ -819,7 +1289,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -944,6 +1414,83 @@
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }

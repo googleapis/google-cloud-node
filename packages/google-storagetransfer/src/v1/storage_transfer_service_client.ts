@@ -65,6 +65,7 @@ export class StorageTransferServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   storageTransferServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -164,6 +165,15 @@ export class StorageTransferServiceClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      agentPoolsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project_id}/agentPools/{agent_pool_id}'
+      ),
+    };
+
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
@@ -172,6 +182,11 @@ export class StorageTransferServiceClient {
         'pageToken',
         'nextPageToken',
         'transferJobs'
+      ),
+      listAgentPools: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'agentPools'
       ),
     };
 
@@ -261,6 +276,11 @@ export class StorageTransferServiceClient {
       'pauseTransferOperation',
       'resumeTransferOperation',
       'runTransferJob',
+      'createAgentPool',
+      'updateAgentPool',
+      'getAgentPool',
+      'listAgentPools',
+      'deleteAgentPool',
     ];
     for (const methodName of storageTransferServiceStubMethods) {
       const callPromise = this.storageTransferServiceStub.then(
@@ -350,7 +370,7 @@ export class StorageTransferServiceClient {
    * Returns the Google service account that is used by Storage Transfer
    * Service to access buckets in the project where transfers
    * run or in other projects. Each Google service account is associated
-   * with one Google Cloud Platform Console project. Users
+   * with one Google Cloud project. Users
    * should add this service account to the Google Cloud Storage bucket
    * ACLs to grant access to Storage Transfer Service. This service
    * account is created and owned by Storage Transfer Service and can
@@ -359,8 +379,8 @@ export class StorageTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform Console project that the
-   *   Google service account is associated with.
+   *   Required. The ID of the Google Cloud project that the Google service
+   *   account is associated with.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -546,8 +566,8 @@ export class StorageTransferServiceClient {
    * Updates a transfer job. Updating a job's transfer spec does not affect
    * transfer operations that are running already.
    *
-   * **Note:** The job's {@link google.storagetransfer.v1.TransferJob.status|status}
-   * field can be modified using this RPC (for example, to set a job's status to
+   * **Note:** The job's {@link google.storagetransfer.v1.TransferJob.status|status} field can be modified
+   * using this RPC (for example, to set a job's status to
    * {@link google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED},
    * {@link google.storagetransfer.v1.TransferJob.Status.DISABLED|DISABLED}, or
    * {@link google.storagetransfer.v1.TransferJob.Status.ENABLED|ENABLED}).
@@ -557,19 +577,18 @@ export class StorageTransferServiceClient {
    * @param {string} request.jobName
    *   Required. The name of job to update.
    * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform Console project that owns the
+   *   Required. The ID of the Google Cloud project that owns the
    *   job.
    * @param {google.storagetransfer.v1.TransferJob} request.transferJob
-   *   Required. The job to update. `transferJob` is expected to specify only
-   *   four fields:
-   *   {@link google.storagetransfer.v1.TransferJob.description|description},
+   *   Required. The job to update. `transferJob` is expected to specify one or more of
+   *   five fields: {@link google.storagetransfer.v1.TransferJob.description|description},
    *   {@link google.storagetransfer.v1.TransferJob.transfer_spec|transfer_spec},
    *   {@link google.storagetransfer.v1.TransferJob.notification_config|notification_config},
-   *   and {@link google.storagetransfer.v1.TransferJob.status|status}.  An
-   *   `UpdateTransferJobRequest` that specifies other fields are rejected with
-   *   the error {@link google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}. Updating a
-   *   job status to
-   *   {@link google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED} requires
+   *   {@link google.storagetransfer.v1.TransferJob.logging_config|logging_config}, and
+   *   {@link google.storagetransfer.v1.TransferJob.status|status}.  An `UpdateTransferJobRequest` that specifies
+   *   other fields are rejected with the error
+   *   {@link google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}. Updating a job status
+   *   to {@link google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED} requires
    *   `storagetransfer.jobs.delete` permissions.
    * @param {google.protobuf.FieldMask} request.updateTransferJobFieldMask
    *   The field mask of the fields in `transferJob` that are to be updated in
@@ -577,10 +596,10 @@ export class StorageTransferServiceClient {
    *   {@link google.storagetransfer.v1.TransferJob.description|description},
    *   {@link google.storagetransfer.v1.TransferJob.transfer_spec|transfer_spec},
    *   {@link google.storagetransfer.v1.TransferJob.notification_config|notification_config},
-   *   and {@link google.storagetransfer.v1.TransferJob.status|status}.  To update the
-   *   `transfer_spec` of the job, a complete transfer specification must be
-   *   provided. An incomplete specification missing any required fields is
-   *   rejected with the error
+   *   {@link google.storagetransfer.v1.TransferJob.logging_config|logging_config}, and
+   *   {@link google.storagetransfer.v1.TransferJob.status|status}.  To update the `transfer_spec` of the job, a
+   *   complete transfer specification must be provided. An incomplete
+   *   specification missing any required fields is rejected with the error
    *   {@link google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -672,10 +691,9 @@ export class StorageTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.jobName
-   *   Required.
-   *   The job to get.
+   *   Required. The job to get.
    * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform Console project that owns the
+   *   Required. The ID of the Google Cloud project that owns the
    *   job.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -963,19 +981,412 @@ export class StorageTransferServiceClient {
       callback
     );
   }
+  /**
+   * Creates an agent pool resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud project that owns the
+   *   agent pool.
+   * @param {google.storagetransfer.v1.AgentPool} request.agentPool
+   *   Required. The agent pool to create.
+   * @param {string} request.agentPoolId
+   *   Required. The ID of the agent pool to create.
+   *
+   *   The `agent_pool_id` must meet the following requirements:
+   *
+   *   *   Length of 128 characters or less.
+   *   *   Not start with the string `goog`.
+   *   *   Start with a lowercase ASCII character, followed by:
+   *       *   Zero or more: lowercase Latin alphabet characters, numerals,
+   *           hyphens (`-`), periods (`.`), underscores (`_`), or tildes (`~`).
+   *       *   One or more numerals or lowercase ASCII characters.
+   *
+   *   As expressed by the regular expression:
+   *   `^(?!goog)[a-z]([a-z0-9-._~]*[a-z0-9])?$`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AgentPool]{@link google.storagetransfer.v1.AgentPool}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.create_agent_pool.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_CreateAgentPool_async
+   */
+  createAgentPool(
+    request?: protos.google.storagetransfer.v1.ICreateAgentPoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.ICreateAgentPoolRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createAgentPool(
+    request: protos.google.storagetransfer.v1.ICreateAgentPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      | protos.google.storagetransfer.v1.ICreateAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAgentPool(
+    request: protos.google.storagetransfer.v1.ICreateAgentPoolRequest,
+    callback: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      | protos.google.storagetransfer.v1.ICreateAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAgentPool(
+    request?: protos.google.storagetransfer.v1.ICreateAgentPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storagetransfer.v1.IAgentPool,
+          | protos.google.storagetransfer.v1.ICreateAgentPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      | protos.google.storagetransfer.v1.ICreateAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.ICreateAgentPoolRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createAgentPool(request, options, callback);
+  }
+  /**
+   * Updates an existing agent pool resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storagetransfer.v1.AgentPool} request.agentPool
+   *   Required. The agent pool to update. `agent_pool` is expected to specify following
+   *   fields:
+   *
+   *   *  {@link google.storagetransfer.v1.AgentPool.name|name}
+   *
+   *   *  {@link google.storagetransfer.v1.AgentPool.display_name|display_name}
+   *
+   *   *  {@link google.storagetransfer.v1.AgentPool.bandwidth_limit|bandwidth_limit}
+   *   An `UpdateAgentPoolRequest` with any other fields is rejected
+   *   with the error {@link google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The [field mask]
+   *   (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf)
+   *   of the fields in `agentPool` to update in this request.
+   *   The following `agentPool` fields can be updated:
+   *
+   *   *  {@link google.storagetransfer.v1.AgentPool.display_name|display_name}
+   *
+   *   *  {@link google.storagetransfer.v1.AgentPool.bandwidth_limit|bandwidth_limit}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AgentPool]{@link google.storagetransfer.v1.AgentPool}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.update_agent_pool.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_UpdateAgentPool_async
+   */
+  updateAgentPool(
+    request?: protos.google.storagetransfer.v1.IUpdateAgentPoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.IUpdateAgentPoolRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateAgentPool(
+    request: protos.google.storagetransfer.v1.IUpdateAgentPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      | protos.google.storagetransfer.v1.IUpdateAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAgentPool(
+    request: protos.google.storagetransfer.v1.IUpdateAgentPoolRequest,
+    callback: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      | protos.google.storagetransfer.v1.IUpdateAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAgentPool(
+    request?: protos.google.storagetransfer.v1.IUpdateAgentPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storagetransfer.v1.IAgentPool,
+          | protos.google.storagetransfer.v1.IUpdateAgentPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      | protos.google.storagetransfer.v1.IUpdateAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.IUpdateAgentPoolRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'agent_pool.name': request.agentPool!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateAgentPool(request, options, callback);
+  }
+  /**
+   * Gets an agent pool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the agent pool to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AgentPool]{@link google.storagetransfer.v1.AgentPool}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.get_agent_pool.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_GetAgentPool_async
+   */
+  getAgentPool(
+    request?: protos.google.storagetransfer.v1.IGetAgentPoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.IGetAgentPoolRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getAgentPool(
+    request: protos.google.storagetransfer.v1.IGetAgentPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.IGetAgentPoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAgentPool(
+    request: protos.google.storagetransfer.v1.IGetAgentPoolRequest,
+    callback: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.IGetAgentPoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAgentPool(
+    request?: protos.google.storagetransfer.v1.IGetAgentPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storagetransfer.v1.IAgentPool,
+          | protos.google.storagetransfer.v1.IGetAgentPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.IGetAgentPoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.IAgentPool,
+      protos.google.storagetransfer.v1.IGetAgentPoolRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAgentPool(request, options, callback);
+  }
+  /**
+   * Deletes an agent pool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the agent pool to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.delete_agent_pool.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_DeleteAgentPool_async
+   */
+  deleteAgentPool(
+    request?: protos.google.storagetransfer.v1.IDeleteAgentPoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storagetransfer.v1.IDeleteAgentPoolRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteAgentPool(
+    request: protos.google.storagetransfer.v1.IDeleteAgentPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.storagetransfer.v1.IDeleteAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAgentPool(
+    request: protos.google.storagetransfer.v1.IDeleteAgentPoolRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.storagetransfer.v1.IDeleteAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAgentPool(
+    request?: protos.google.storagetransfer.v1.IDeleteAgentPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.storagetransfer.v1.IDeleteAgentPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.storagetransfer.v1.IDeleteAgentPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storagetransfer.v1.IDeleteAgentPoolRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteAgentPool(request, options, callback);
+  }
 
   /**
    * Attempts to start a new TransferOperation for the current TransferJob. A
    * TransferJob has a maximum of one active TransferOperation. If this method
-   * is called while a TransferOperation is active, an error wil be returned.
+   * is called while a TransferOperation is active, an error will be returned.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.jobName
    *   Required. The name of the transfer job.
    * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform Console project that owns the
-   *   transfer job.
+   *   Required. The ID of the Google Cloud project that owns the transfer
+   *   job.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1315,6 +1726,263 @@ export class StorageTransferServiceClient {
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.storagetransfer.v1.ITransferJob>;
+  }
+  /**
+   * Lists agent pools.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud project that owns the job.
+   * @param {string} request.filter
+   *   An optional list of query parameters specified as JSON text in the
+   *   form of:
+   *
+   *   `{"agentPoolNames":["agentpool1","agentpool2",...]}`
+   *
+   *   Since `agentPoolNames` support multiple values, its values must be
+   *   specified with array notation. When the filter is either empty or not
+   *   provided, the list returns all agent pools for the project.
+   * @param {number} request.pageSize
+   *   The list page size. The max allowed value is `256`.
+   * @param {string} request.pageToken
+   *   The list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [AgentPool]{@link google.storagetransfer.v1.AgentPool}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAgentPoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listAgentPools(
+    request?: protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.IAgentPool[],
+      protos.google.storagetransfer.v1.IListAgentPoolsRequest | null,
+      protos.google.storagetransfer.v1.IListAgentPoolsResponse
+    ]
+  >;
+  listAgentPools(
+    request: protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+      | protos.google.storagetransfer.v1.IListAgentPoolsResponse
+      | null
+      | undefined,
+      protos.google.storagetransfer.v1.IAgentPool
+    >
+  ): void;
+  listAgentPools(
+    request: protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+    callback: PaginationCallback<
+      protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+      | protos.google.storagetransfer.v1.IListAgentPoolsResponse
+      | null
+      | undefined,
+      protos.google.storagetransfer.v1.IAgentPool
+    >
+  ): void;
+  listAgentPools(
+    request?: protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+          | protos.google.storagetransfer.v1.IListAgentPoolsResponse
+          | null
+          | undefined,
+          protos.google.storagetransfer.v1.IAgentPool
+        >,
+    callback?: PaginationCallback<
+      protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+      | protos.google.storagetransfer.v1.IListAgentPoolsResponse
+      | null
+      | undefined,
+      protos.google.storagetransfer.v1.IAgentPool
+    >
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.IAgentPool[],
+      protos.google.storagetransfer.v1.IListAgentPoolsRequest | null,
+      protos.google.storagetransfer.v1.IListAgentPoolsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAgentPools(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud project that owns the job.
+   * @param {string} request.filter
+   *   An optional list of query parameters specified as JSON text in the
+   *   form of:
+   *
+   *   `{"agentPoolNames":["agentpool1","agentpool2",...]}`
+   *
+   *   Since `agentPoolNames` support multiple values, its values must be
+   *   specified with array notation. When the filter is either empty or not
+   *   provided, the list returns all agent pools for the project.
+   * @param {number} request.pageSize
+   *   The list page size. The max allowed value is `256`.
+   * @param {string} request.pageToken
+   *   The list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [AgentPool]{@link google.storagetransfer.v1.AgentPool} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAgentPoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listAgentPoolsStream(
+    request?: protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
+    const defaultCallSettings = this._defaults['listAgentPools'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAgentPools.createStream(
+      this.innerApiCalls.listAgentPools as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAgentPools`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud project that owns the job.
+   * @param {string} request.filter
+   *   An optional list of query parameters specified as JSON text in the
+   *   form of:
+   *
+   *   `{"agentPoolNames":["agentpool1","agentpool2",...]}`
+   *
+   *   Since `agentPoolNames` support multiple values, its values must be
+   *   specified with array notation. When the filter is either empty or not
+   *   provided, the list returns all agent pools for the project.
+   * @param {number} request.pageSize
+   *   The list page size. The max allowed value is `256`.
+   * @param {string} request.pageToken
+   *   The list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [AgentPool]{@link google.storagetransfer.v1.AgentPool}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.list_agent_pools.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_ListAgentPools_async
+   */
+  listAgentPoolsAsync(
+    request?: protos.google.storagetransfer.v1.IListAgentPoolsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.storagetransfer.v1.IAgentPool> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
+    const defaultCallSettings = this._defaults['listAgentPools'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAgentPools.asyncIterate(
+      this.innerApiCalls['listAgentPools'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.storagetransfer.v1.IAgentPool>;
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified agentPools resource name string.
+   *
+   * @param {string} project_id
+   * @param {string} agent_pool_id
+   * @returns {string} Resource name string.
+   */
+  agentPoolsPath(projectId: string, agentPoolId: string) {
+    return this.pathTemplates.agentPoolsPathTemplate.render({
+      project_id: projectId,
+      agent_pool_id: agentPoolId,
+    });
+  }
+
+  /**
+   * Parse the project_id from AgentPools resource.
+   *
+   * @param {string} agentPoolsName
+   *   A fully-qualified path representing agentPools resource.
+   * @returns {string} A string representing the project_id.
+   */
+  matchProjectIdFromAgentPoolsName(agentPoolsName: string) {
+    return this.pathTemplates.agentPoolsPathTemplate.match(agentPoolsName)
+      .project_id;
+  }
+
+  /**
+   * Parse the agent_pool_id from AgentPools resource.
+   *
+   * @param {string} agentPoolsName
+   *   A fully-qualified path representing agentPools resource.
+   * @returns {string} A string representing the agent_pool_id.
+   */
+  matchAgentPoolIdFromAgentPoolsName(agentPoolsName: string) {
+    return this.pathTemplates.agentPoolsPathTemplate.match(agentPoolsName)
+      .agent_pool_id;
   }
 
   /**

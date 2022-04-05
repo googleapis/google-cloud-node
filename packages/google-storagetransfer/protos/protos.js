@@ -353,6 +353,171 @@
                      * @variation 2
                      */
     
+                    /**
+                     * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#createAgentPool}.
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @typedef CreateAgentPoolCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.storagetransfer.v1.AgentPool} [response] AgentPool
+                     */
+    
+                    /**
+                     * Calls CreateAgentPool.
+                     * @function createAgentPool
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.ICreateAgentPoolRequest} request CreateAgentPoolRequest message or plain object
+                     * @param {google.storagetransfer.v1.StorageTransferService.CreateAgentPoolCallback} callback Node-style callback called with the error, if any, and AgentPool
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(StorageTransferService.prototype.createAgentPool = function createAgentPool(request, callback) {
+                        return this.rpcCall(createAgentPool, $root.google.storagetransfer.v1.CreateAgentPoolRequest, $root.google.storagetransfer.v1.AgentPool, request, callback);
+                    }, "name", { value: "CreateAgentPool" });
+    
+                    /**
+                     * Calls CreateAgentPool.
+                     * @function createAgentPool
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.ICreateAgentPoolRequest} request CreateAgentPoolRequest message or plain object
+                     * @returns {Promise<google.storagetransfer.v1.AgentPool>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#updateAgentPool}.
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @typedef UpdateAgentPoolCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.storagetransfer.v1.AgentPool} [response] AgentPool
+                     */
+    
+                    /**
+                     * Calls UpdateAgentPool.
+                     * @function updateAgentPool
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IUpdateAgentPoolRequest} request UpdateAgentPoolRequest message or plain object
+                     * @param {google.storagetransfer.v1.StorageTransferService.UpdateAgentPoolCallback} callback Node-style callback called with the error, if any, and AgentPool
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(StorageTransferService.prototype.updateAgentPool = function updateAgentPool(request, callback) {
+                        return this.rpcCall(updateAgentPool, $root.google.storagetransfer.v1.UpdateAgentPoolRequest, $root.google.storagetransfer.v1.AgentPool, request, callback);
+                    }, "name", { value: "UpdateAgentPool" });
+    
+                    /**
+                     * Calls UpdateAgentPool.
+                     * @function updateAgentPool
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IUpdateAgentPoolRequest} request UpdateAgentPoolRequest message or plain object
+                     * @returns {Promise<google.storagetransfer.v1.AgentPool>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#getAgentPool}.
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @typedef GetAgentPoolCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.storagetransfer.v1.AgentPool} [response] AgentPool
+                     */
+    
+                    /**
+                     * Calls GetAgentPool.
+                     * @function getAgentPool
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IGetAgentPoolRequest} request GetAgentPoolRequest message or plain object
+                     * @param {google.storagetransfer.v1.StorageTransferService.GetAgentPoolCallback} callback Node-style callback called with the error, if any, and AgentPool
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(StorageTransferService.prototype.getAgentPool = function getAgentPool(request, callback) {
+                        return this.rpcCall(getAgentPool, $root.google.storagetransfer.v1.GetAgentPoolRequest, $root.google.storagetransfer.v1.AgentPool, request, callback);
+                    }, "name", { value: "GetAgentPool" });
+    
+                    /**
+                     * Calls GetAgentPool.
+                     * @function getAgentPool
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IGetAgentPoolRequest} request GetAgentPoolRequest message or plain object
+                     * @returns {Promise<google.storagetransfer.v1.AgentPool>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#listAgentPools}.
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @typedef ListAgentPoolsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.storagetransfer.v1.ListAgentPoolsResponse} [response] ListAgentPoolsResponse
+                     */
+    
+                    /**
+                     * Calls ListAgentPools.
+                     * @function listAgentPools
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IListAgentPoolsRequest} request ListAgentPoolsRequest message or plain object
+                     * @param {google.storagetransfer.v1.StorageTransferService.ListAgentPoolsCallback} callback Node-style callback called with the error, if any, and ListAgentPoolsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(StorageTransferService.prototype.listAgentPools = function listAgentPools(request, callback) {
+                        return this.rpcCall(listAgentPools, $root.google.storagetransfer.v1.ListAgentPoolsRequest, $root.google.storagetransfer.v1.ListAgentPoolsResponse, request, callback);
+                    }, "name", { value: "ListAgentPools" });
+    
+                    /**
+                     * Calls ListAgentPools.
+                     * @function listAgentPools
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IListAgentPoolsRequest} request ListAgentPoolsRequest message or plain object
+                     * @returns {Promise<google.storagetransfer.v1.ListAgentPoolsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.storagetransfer.v1.StorageTransferService#deleteAgentPool}.
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @typedef DeleteAgentPoolCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteAgentPool.
+                     * @function deleteAgentPool
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IDeleteAgentPoolRequest} request DeleteAgentPoolRequest message or plain object
+                     * @param {google.storagetransfer.v1.StorageTransferService.DeleteAgentPoolCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(StorageTransferService.prototype.deleteAgentPool = function deleteAgentPool(request, callback) {
+                        return this.rpcCall(deleteAgentPool, $root.google.storagetransfer.v1.DeleteAgentPoolRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteAgentPool" });
+    
+                    /**
+                     * Calls DeleteAgentPool.
+                     * @function deleteAgentPool
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IDeleteAgentPoolRequest} request DeleteAgentPoolRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
                     return StorageTransferService;
                 })();
     
@@ -2256,6 +2421,1322 @@
                     return RunTransferJobRequest;
                 })();
     
+                v1.CreateAgentPoolRequest = (function() {
+    
+                    /**
+                     * Properties of a CreateAgentPoolRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @interface ICreateAgentPoolRequest
+                     * @property {string|null} [projectId] CreateAgentPoolRequest projectId
+                     * @property {google.storagetransfer.v1.IAgentPool|null} [agentPool] CreateAgentPoolRequest agentPool
+                     * @property {string|null} [agentPoolId] CreateAgentPoolRequest agentPoolId
+                     */
+    
+                    /**
+                     * Constructs a new CreateAgentPoolRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a CreateAgentPoolRequest.
+                     * @implements ICreateAgentPoolRequest
+                     * @constructor
+                     * @param {google.storagetransfer.v1.ICreateAgentPoolRequest=} [properties] Properties to set
+                     */
+                    function CreateAgentPoolRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateAgentPoolRequest projectId.
+                     * @member {string} projectId
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @instance
+                     */
+                    CreateAgentPoolRequest.prototype.projectId = "";
+    
+                    /**
+                     * CreateAgentPoolRequest agentPool.
+                     * @member {google.storagetransfer.v1.IAgentPool|null|undefined} agentPool
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @instance
+                     */
+                    CreateAgentPoolRequest.prototype.agentPool = null;
+    
+                    /**
+                     * CreateAgentPoolRequest agentPoolId.
+                     * @member {string} agentPoolId
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @instance
+                     */
+                    CreateAgentPoolRequest.prototype.agentPoolId = "";
+    
+                    /**
+                     * Creates a new CreateAgentPoolRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.ICreateAgentPoolRequest=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.CreateAgentPoolRequest} CreateAgentPoolRequest instance
+                     */
+                    CreateAgentPoolRequest.create = function create(properties) {
+                        return new CreateAgentPoolRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateAgentPoolRequest message. Does not implicitly {@link google.storagetransfer.v1.CreateAgentPoolRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.ICreateAgentPoolRequest} message CreateAgentPoolRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateAgentPoolRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                        if (message.agentPool != null && Object.hasOwnProperty.call(message, "agentPool"))
+                            $root.google.storagetransfer.v1.AgentPool.encode(message.agentPool, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.agentPoolId != null && Object.hasOwnProperty.call(message, "agentPoolId"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.agentPoolId);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateAgentPoolRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.CreateAgentPoolRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.ICreateAgentPoolRequest} message CreateAgentPoolRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateAgentPoolRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateAgentPoolRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.CreateAgentPoolRequest} CreateAgentPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateAgentPoolRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.CreateAgentPoolRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.projectId = reader.string();
+                                break;
+                            case 2:
+                                message.agentPool = $root.google.storagetransfer.v1.AgentPool.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.agentPoolId = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateAgentPoolRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.CreateAgentPoolRequest} CreateAgentPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateAgentPoolRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateAgentPoolRequest message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateAgentPoolRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            if (!$util.isString(message.projectId))
+                                return "projectId: string expected";
+                        if (message.agentPool != null && message.hasOwnProperty("agentPool")) {
+                            var error = $root.google.storagetransfer.v1.AgentPool.verify(message.agentPool);
+                            if (error)
+                                return "agentPool." + error;
+                        }
+                        if (message.agentPoolId != null && message.hasOwnProperty("agentPoolId"))
+                            if (!$util.isString(message.agentPoolId))
+                                return "agentPoolId: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateAgentPoolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.CreateAgentPoolRequest} CreateAgentPoolRequest
+                     */
+                    CreateAgentPoolRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.CreateAgentPoolRequest)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.CreateAgentPoolRequest();
+                        if (object.projectId != null)
+                            message.projectId = String(object.projectId);
+                        if (object.agentPool != null) {
+                            if (typeof object.agentPool !== "object")
+                                throw TypeError(".google.storagetransfer.v1.CreateAgentPoolRequest.agentPool: object expected");
+                            message.agentPool = $root.google.storagetransfer.v1.AgentPool.fromObject(object.agentPool);
+                        }
+                        if (object.agentPoolId != null)
+                            message.agentPoolId = String(object.agentPoolId);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateAgentPoolRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.CreateAgentPoolRequest} message CreateAgentPoolRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateAgentPoolRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.projectId = "";
+                            object.agentPool = null;
+                            object.agentPoolId = "";
+                        }
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            object.projectId = message.projectId;
+                        if (message.agentPool != null && message.hasOwnProperty("agentPool"))
+                            object.agentPool = $root.google.storagetransfer.v1.AgentPool.toObject(message.agentPool, options);
+                        if (message.agentPoolId != null && message.hasOwnProperty("agentPoolId"))
+                            object.agentPoolId = message.agentPoolId;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateAgentPoolRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.CreateAgentPoolRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateAgentPoolRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return CreateAgentPoolRequest;
+                })();
+    
+                v1.UpdateAgentPoolRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateAgentPoolRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IUpdateAgentPoolRequest
+                     * @property {google.storagetransfer.v1.IAgentPool|null} [agentPool] UpdateAgentPoolRequest agentPool
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAgentPoolRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdateAgentPoolRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents an UpdateAgentPoolRequest.
+                     * @implements IUpdateAgentPoolRequest
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IUpdateAgentPoolRequest=} [properties] Properties to set
+                     */
+                    function UpdateAgentPoolRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateAgentPoolRequest agentPool.
+                     * @member {google.storagetransfer.v1.IAgentPool|null|undefined} agentPool
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @instance
+                     */
+                    UpdateAgentPoolRequest.prototype.agentPool = null;
+    
+                    /**
+                     * UpdateAgentPoolRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @instance
+                     */
+                    UpdateAgentPoolRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdateAgentPoolRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IUpdateAgentPoolRequest=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.UpdateAgentPoolRequest} UpdateAgentPoolRequest instance
+                     */
+                    UpdateAgentPoolRequest.create = function create(properties) {
+                        return new UpdateAgentPoolRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateAgentPoolRequest message. Does not implicitly {@link google.storagetransfer.v1.UpdateAgentPoolRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IUpdateAgentPoolRequest} message UpdateAgentPoolRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateAgentPoolRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.agentPool != null && Object.hasOwnProperty.call(message, "agentPool"))
+                            $root.google.storagetransfer.v1.AgentPool.encode(message.agentPool, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateAgentPoolRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.UpdateAgentPoolRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IUpdateAgentPoolRequest} message UpdateAgentPoolRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateAgentPoolRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateAgentPoolRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.UpdateAgentPoolRequest} UpdateAgentPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateAgentPoolRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.UpdateAgentPoolRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.agentPool = $root.google.storagetransfer.v1.AgentPool.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateAgentPoolRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.UpdateAgentPoolRequest} UpdateAgentPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateAgentPoolRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateAgentPoolRequest message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateAgentPoolRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.agentPool != null && message.hasOwnProperty("agentPool")) {
+                            var error = $root.google.storagetransfer.v1.AgentPool.verify(message.agentPool);
+                            if (error)
+                                return "agentPool." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateAgentPoolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.UpdateAgentPoolRequest} UpdateAgentPoolRequest
+                     */
+                    UpdateAgentPoolRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.UpdateAgentPoolRequest)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.UpdateAgentPoolRequest();
+                        if (object.agentPool != null) {
+                            if (typeof object.agentPool !== "object")
+                                throw TypeError(".google.storagetransfer.v1.UpdateAgentPoolRequest.agentPool: object expected");
+                            message.agentPool = $root.google.storagetransfer.v1.AgentPool.fromObject(object.agentPool);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.storagetransfer.v1.UpdateAgentPoolRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateAgentPoolRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.UpdateAgentPoolRequest} message UpdateAgentPoolRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateAgentPoolRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.agentPool = null;
+                            object.updateMask = null;
+                        }
+                        if (message.agentPool != null && message.hasOwnProperty("agentPool"))
+                            object.agentPool = $root.google.storagetransfer.v1.AgentPool.toObject(message.agentPool, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateAgentPoolRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.UpdateAgentPoolRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateAgentPoolRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return UpdateAgentPoolRequest;
+                })();
+    
+                v1.GetAgentPoolRequest = (function() {
+    
+                    /**
+                     * Properties of a GetAgentPoolRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IGetAgentPoolRequest
+                     * @property {string|null} [name] GetAgentPoolRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetAgentPoolRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a GetAgentPoolRequest.
+                     * @implements IGetAgentPoolRequest
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IGetAgentPoolRequest=} [properties] Properties to set
+                     */
+                    function GetAgentPoolRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetAgentPoolRequest name.
+                     * @member {string} name
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @instance
+                     */
+                    GetAgentPoolRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetAgentPoolRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IGetAgentPoolRequest=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.GetAgentPoolRequest} GetAgentPoolRequest instance
+                     */
+                    GetAgentPoolRequest.create = function create(properties) {
+                        return new GetAgentPoolRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetAgentPoolRequest message. Does not implicitly {@link google.storagetransfer.v1.GetAgentPoolRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IGetAgentPoolRequest} message GetAgentPoolRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetAgentPoolRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetAgentPoolRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.GetAgentPoolRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IGetAgentPoolRequest} message GetAgentPoolRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetAgentPoolRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetAgentPoolRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.GetAgentPoolRequest} GetAgentPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetAgentPoolRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.GetAgentPoolRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetAgentPoolRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.GetAgentPoolRequest} GetAgentPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetAgentPoolRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetAgentPoolRequest message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetAgentPoolRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetAgentPoolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.GetAgentPoolRequest} GetAgentPoolRequest
+                     */
+                    GetAgentPoolRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.GetAgentPoolRequest)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.GetAgentPoolRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetAgentPoolRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.GetAgentPoolRequest} message GetAgentPoolRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetAgentPoolRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetAgentPoolRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.GetAgentPoolRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetAgentPoolRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetAgentPoolRequest;
+                })();
+    
+                v1.DeleteAgentPoolRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteAgentPoolRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IDeleteAgentPoolRequest
+                     * @property {string|null} [name] DeleteAgentPoolRequest name
+                     */
+    
+                    /**
+                     * Constructs a new DeleteAgentPoolRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a DeleteAgentPoolRequest.
+                     * @implements IDeleteAgentPoolRequest
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IDeleteAgentPoolRequest=} [properties] Properties to set
+                     */
+                    function DeleteAgentPoolRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteAgentPoolRequest name.
+                     * @member {string} name
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @instance
+                     */
+                    DeleteAgentPoolRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new DeleteAgentPoolRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IDeleteAgentPoolRequest=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.DeleteAgentPoolRequest} DeleteAgentPoolRequest instance
+                     */
+                    DeleteAgentPoolRequest.create = function create(properties) {
+                        return new DeleteAgentPoolRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteAgentPoolRequest message. Does not implicitly {@link google.storagetransfer.v1.DeleteAgentPoolRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IDeleteAgentPoolRequest} message DeleteAgentPoolRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteAgentPoolRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteAgentPoolRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.DeleteAgentPoolRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IDeleteAgentPoolRequest} message DeleteAgentPoolRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteAgentPoolRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteAgentPoolRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.DeleteAgentPoolRequest} DeleteAgentPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteAgentPoolRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.DeleteAgentPoolRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteAgentPoolRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.DeleteAgentPoolRequest} DeleteAgentPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteAgentPoolRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteAgentPoolRequest message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteAgentPoolRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteAgentPoolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.DeleteAgentPoolRequest} DeleteAgentPoolRequest
+                     */
+                    DeleteAgentPoolRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.DeleteAgentPoolRequest)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.DeleteAgentPoolRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteAgentPoolRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.DeleteAgentPoolRequest} message DeleteAgentPoolRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteAgentPoolRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteAgentPoolRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.DeleteAgentPoolRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteAgentPoolRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return DeleteAgentPoolRequest;
+                })();
+    
+                v1.ListAgentPoolsRequest = (function() {
+    
+                    /**
+                     * Properties of a ListAgentPoolsRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IListAgentPoolsRequest
+                     * @property {string|null} [projectId] ListAgentPoolsRequest projectId
+                     * @property {string|null} [filter] ListAgentPoolsRequest filter
+                     * @property {number|null} [pageSize] ListAgentPoolsRequest pageSize
+                     * @property {string|null} [pageToken] ListAgentPoolsRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListAgentPoolsRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a ListAgentPoolsRequest.
+                     * @implements IListAgentPoolsRequest
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IListAgentPoolsRequest=} [properties] Properties to set
+                     */
+                    function ListAgentPoolsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListAgentPoolsRequest projectId.
+                     * @member {string} projectId
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @instance
+                     */
+                    ListAgentPoolsRequest.prototype.projectId = "";
+    
+                    /**
+                     * ListAgentPoolsRequest filter.
+                     * @member {string} filter
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @instance
+                     */
+                    ListAgentPoolsRequest.prototype.filter = "";
+    
+                    /**
+                     * ListAgentPoolsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @instance
+                     */
+                    ListAgentPoolsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListAgentPoolsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @instance
+                     */
+                    ListAgentPoolsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new ListAgentPoolsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IListAgentPoolsRequest=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.ListAgentPoolsRequest} ListAgentPoolsRequest instance
+                     */
+                    ListAgentPoolsRequest.create = function create(properties) {
+                        return new ListAgentPoolsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListAgentPoolsRequest message. Does not implicitly {@link google.storagetransfer.v1.ListAgentPoolsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IListAgentPoolsRequest} message ListAgentPoolsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListAgentPoolsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListAgentPoolsRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.ListAgentPoolsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IListAgentPoolsRequest} message ListAgentPoolsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListAgentPoolsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListAgentPoolsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.ListAgentPoolsRequest} ListAgentPoolsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListAgentPoolsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.ListAgentPoolsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.projectId = reader.string();
+                                break;
+                            case 2:
+                                message.filter = reader.string();
+                                break;
+                            case 3:
+                                message.pageSize = reader.int32();
+                                break;
+                            case 4:
+                                message.pageToken = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListAgentPoolsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.ListAgentPoolsRequest} ListAgentPoolsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListAgentPoolsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListAgentPoolsRequest message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListAgentPoolsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            if (!$util.isString(message.projectId))
+                                return "projectId: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListAgentPoolsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.ListAgentPoolsRequest} ListAgentPoolsRequest
+                     */
+                    ListAgentPoolsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.ListAgentPoolsRequest)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.ListAgentPoolsRequest();
+                        if (object.projectId != null)
+                            message.projectId = String(object.projectId);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListAgentPoolsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.ListAgentPoolsRequest} message ListAgentPoolsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListAgentPoolsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.projectId = "";
+                            object.filter = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            object.projectId = message.projectId;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListAgentPoolsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListAgentPoolsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ListAgentPoolsRequest;
+                })();
+    
+                v1.ListAgentPoolsResponse = (function() {
+    
+                    /**
+                     * Properties of a ListAgentPoolsResponse.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IListAgentPoolsResponse
+                     * @property {Array.<google.storagetransfer.v1.IAgentPool>|null} [agentPools] ListAgentPoolsResponse agentPools
+                     * @property {string|null} [nextPageToken] ListAgentPoolsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListAgentPoolsResponse.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a ListAgentPoolsResponse.
+                     * @implements IListAgentPoolsResponse
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IListAgentPoolsResponse=} [properties] Properties to set
+                     */
+                    function ListAgentPoolsResponse(properties) {
+                        this.agentPools = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListAgentPoolsResponse agentPools.
+                     * @member {Array.<google.storagetransfer.v1.IAgentPool>} agentPools
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @instance
+                     */
+                    ListAgentPoolsResponse.prototype.agentPools = $util.emptyArray;
+    
+                    /**
+                     * ListAgentPoolsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @instance
+                     */
+                    ListAgentPoolsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListAgentPoolsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @static
+                     * @param {google.storagetransfer.v1.IListAgentPoolsResponse=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.ListAgentPoolsResponse} ListAgentPoolsResponse instance
+                     */
+                    ListAgentPoolsResponse.create = function create(properties) {
+                        return new ListAgentPoolsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListAgentPoolsResponse message. Does not implicitly {@link google.storagetransfer.v1.ListAgentPoolsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @static
+                     * @param {google.storagetransfer.v1.IListAgentPoolsResponse} message ListAgentPoolsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListAgentPoolsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.agentPools != null && message.agentPools.length)
+                            for (var i = 0; i < message.agentPools.length; ++i)
+                                $root.google.storagetransfer.v1.AgentPool.encode(message.agentPools[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListAgentPoolsResponse message, length delimited. Does not implicitly {@link google.storagetransfer.v1.ListAgentPoolsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @static
+                     * @param {google.storagetransfer.v1.IListAgentPoolsResponse} message ListAgentPoolsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListAgentPoolsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListAgentPoolsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.ListAgentPoolsResponse} ListAgentPoolsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListAgentPoolsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.ListAgentPoolsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.agentPools && message.agentPools.length))
+                                    message.agentPools = [];
+                                message.agentPools.push($root.google.storagetransfer.v1.AgentPool.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                message.nextPageToken = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListAgentPoolsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.ListAgentPoolsResponse} ListAgentPoolsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListAgentPoolsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListAgentPoolsResponse message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListAgentPoolsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.agentPools != null && message.hasOwnProperty("agentPools")) {
+                            if (!Array.isArray(message.agentPools))
+                                return "agentPools: array expected";
+                            for (var i = 0; i < message.agentPools.length; ++i) {
+                                var error = $root.google.storagetransfer.v1.AgentPool.verify(message.agentPools[i]);
+                                if (error)
+                                    return "agentPools." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListAgentPoolsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.ListAgentPoolsResponse} ListAgentPoolsResponse
+                     */
+                    ListAgentPoolsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.ListAgentPoolsResponse)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.ListAgentPoolsResponse();
+                        if (object.agentPools) {
+                            if (!Array.isArray(object.agentPools))
+                                throw TypeError(".google.storagetransfer.v1.ListAgentPoolsResponse.agentPools: array expected");
+                            message.agentPools = [];
+                            for (var i = 0; i < object.agentPools.length; ++i) {
+                                if (typeof object.agentPools[i] !== "object")
+                                    throw TypeError(".google.storagetransfer.v1.ListAgentPoolsResponse.agentPools: object expected");
+                                message.agentPools[i] = $root.google.storagetransfer.v1.AgentPool.fromObject(object.agentPools[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListAgentPoolsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @static
+                     * @param {google.storagetransfer.v1.ListAgentPoolsResponse} message ListAgentPoolsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListAgentPoolsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.agentPools = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.agentPools && message.agentPools.length) {
+                            object.agentPools = [];
+                            for (var j = 0; j < message.agentPools.length; ++j)
+                                object.agentPools[j] = $root.google.storagetransfer.v1.AgentPool.toObject(message.agentPools[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListAgentPoolsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.ListAgentPoolsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListAgentPoolsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ListAgentPoolsResponse;
+                })();
+    
                 v1.GoogleServiceAccount = (function() {
     
                     /**
@@ -4130,6 +5611,694 @@
                     return HttpData;
                 })();
     
+                v1.PosixFilesystem = (function() {
+    
+                    /**
+                     * Properties of a PosixFilesystem.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IPosixFilesystem
+                     * @property {string|null} [rootDirectory] PosixFilesystem rootDirectory
+                     */
+    
+                    /**
+                     * Constructs a new PosixFilesystem.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a PosixFilesystem.
+                     * @implements IPosixFilesystem
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IPosixFilesystem=} [properties] Properties to set
+                     */
+                    function PosixFilesystem(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PosixFilesystem rootDirectory.
+                     * @member {string} rootDirectory
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @instance
+                     */
+                    PosixFilesystem.prototype.rootDirectory = "";
+    
+                    /**
+                     * Creates a new PosixFilesystem instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @static
+                     * @param {google.storagetransfer.v1.IPosixFilesystem=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.PosixFilesystem} PosixFilesystem instance
+                     */
+                    PosixFilesystem.create = function create(properties) {
+                        return new PosixFilesystem(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PosixFilesystem message. Does not implicitly {@link google.storagetransfer.v1.PosixFilesystem.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @static
+                     * @param {google.storagetransfer.v1.IPosixFilesystem} message PosixFilesystem message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PosixFilesystem.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.rootDirectory != null && Object.hasOwnProperty.call(message, "rootDirectory"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.rootDirectory);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PosixFilesystem message, length delimited. Does not implicitly {@link google.storagetransfer.v1.PosixFilesystem.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @static
+                     * @param {google.storagetransfer.v1.IPosixFilesystem} message PosixFilesystem message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PosixFilesystem.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PosixFilesystem message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.PosixFilesystem} PosixFilesystem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PosixFilesystem.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.PosixFilesystem();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.rootDirectory = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PosixFilesystem message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.PosixFilesystem} PosixFilesystem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PosixFilesystem.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PosixFilesystem message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PosixFilesystem.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.rootDirectory != null && message.hasOwnProperty("rootDirectory"))
+                            if (!$util.isString(message.rootDirectory))
+                                return "rootDirectory: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PosixFilesystem message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.PosixFilesystem} PosixFilesystem
+                     */
+                    PosixFilesystem.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.PosixFilesystem)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.PosixFilesystem();
+                        if (object.rootDirectory != null)
+                            message.rootDirectory = String(object.rootDirectory);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PosixFilesystem message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @static
+                     * @param {google.storagetransfer.v1.PosixFilesystem} message PosixFilesystem
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PosixFilesystem.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.rootDirectory = "";
+                        if (message.rootDirectory != null && message.hasOwnProperty("rootDirectory"))
+                            object.rootDirectory = message.rootDirectory;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PosixFilesystem to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.PosixFilesystem
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PosixFilesystem.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return PosixFilesystem;
+                })();
+    
+                v1.AgentPool = (function() {
+    
+                    /**
+                     * Properties of an AgentPool.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IAgentPool
+                     * @property {string|null} [name] AgentPool name
+                     * @property {string|null} [displayName] AgentPool displayName
+                     * @property {google.storagetransfer.v1.AgentPool.State|null} [state] AgentPool state
+                     * @property {google.storagetransfer.v1.AgentPool.IBandwidthLimit|null} [bandwidthLimit] AgentPool bandwidthLimit
+                     */
+    
+                    /**
+                     * Constructs a new AgentPool.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents an AgentPool.
+                     * @implements IAgentPool
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IAgentPool=} [properties] Properties to set
+                     */
+                    function AgentPool(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AgentPool name.
+                     * @member {string} name
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @instance
+                     */
+                    AgentPool.prototype.name = "";
+    
+                    /**
+                     * AgentPool displayName.
+                     * @member {string} displayName
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @instance
+                     */
+                    AgentPool.prototype.displayName = "";
+    
+                    /**
+                     * AgentPool state.
+                     * @member {google.storagetransfer.v1.AgentPool.State} state
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @instance
+                     */
+                    AgentPool.prototype.state = 0;
+    
+                    /**
+                     * AgentPool bandwidthLimit.
+                     * @member {google.storagetransfer.v1.AgentPool.IBandwidthLimit|null|undefined} bandwidthLimit
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @instance
+                     */
+                    AgentPool.prototype.bandwidthLimit = null;
+    
+                    /**
+                     * Creates a new AgentPool instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @static
+                     * @param {google.storagetransfer.v1.IAgentPool=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.AgentPool} AgentPool instance
+                     */
+                    AgentPool.create = function create(properties) {
+                        return new AgentPool(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AgentPool message. Does not implicitly {@link google.storagetransfer.v1.AgentPool.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @static
+                     * @param {google.storagetransfer.v1.IAgentPool} message AgentPool message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AgentPool.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                        if (message.bandwidthLimit != null && Object.hasOwnProperty.call(message, "bandwidthLimit"))
+                            $root.google.storagetransfer.v1.AgentPool.BandwidthLimit.encode(message.bandwidthLimit, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AgentPool message, length delimited. Does not implicitly {@link google.storagetransfer.v1.AgentPool.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @static
+                     * @param {google.storagetransfer.v1.IAgentPool} message AgentPool message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AgentPool.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AgentPool message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.AgentPool} AgentPool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AgentPool.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.AgentPool();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 2:
+                                message.name = reader.string();
+                                break;
+                            case 3:
+                                message.displayName = reader.string();
+                                break;
+                            case 4:
+                                message.state = reader.int32();
+                                break;
+                            case 5:
+                                message.bandwidthLimit = $root.google.storagetransfer.v1.AgentPool.BandwidthLimit.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AgentPool message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.AgentPool} AgentPool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AgentPool.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AgentPool message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AgentPool.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.bandwidthLimit != null && message.hasOwnProperty("bandwidthLimit")) {
+                            var error = $root.google.storagetransfer.v1.AgentPool.BandwidthLimit.verify(message.bandwidthLimit);
+                            if (error)
+                                return "bandwidthLimit." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AgentPool message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.AgentPool} AgentPool
+                     */
+                    AgentPool.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.AgentPool)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.AgentPool();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        switch (object.state) {
+                        case "STATE_UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "CREATING":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "CREATED":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        case "DELETING":
+                        case 3:
+                            message.state = 3;
+                            break;
+                        }
+                        if (object.bandwidthLimit != null) {
+                            if (typeof object.bandwidthLimit !== "object")
+                                throw TypeError(".google.storagetransfer.v1.AgentPool.bandwidthLimit: object expected");
+                            message.bandwidthLimit = $root.google.storagetransfer.v1.AgentPool.BandwidthLimit.fromObject(object.bandwidthLimit);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AgentPool message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @static
+                     * @param {google.storagetransfer.v1.AgentPool} message AgentPool
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AgentPool.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.displayName = "";
+                            object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            object.bandwidthLimit = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            object.state = options.enums === String ? $root.google.storagetransfer.v1.AgentPool.State[message.state] : message.state;
+                        if (message.bandwidthLimit != null && message.hasOwnProperty("bandwidthLimit"))
+                            object.bandwidthLimit = $root.google.storagetransfer.v1.AgentPool.BandwidthLimit.toObject(message.bandwidthLimit, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AgentPool to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.AgentPool
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AgentPool.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * State enum.
+                     * @name google.storagetransfer.v1.AgentPool.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} CREATING=1 CREATING value
+                     * @property {number} CREATED=2 CREATED value
+                     * @property {number} DELETING=3 DELETING value
+                     */
+                    AgentPool.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CREATING"] = 1;
+                        values[valuesById[2] = "CREATED"] = 2;
+                        values[valuesById[3] = "DELETING"] = 3;
+                        return values;
+                    })();
+    
+                    AgentPool.BandwidthLimit = (function() {
+    
+                        /**
+                         * Properties of a BandwidthLimit.
+                         * @memberof google.storagetransfer.v1.AgentPool
+                         * @interface IBandwidthLimit
+                         * @property {number|Long|null} [limitMbps] BandwidthLimit limitMbps
+                         */
+    
+                        /**
+                         * Constructs a new BandwidthLimit.
+                         * @memberof google.storagetransfer.v1.AgentPool
+                         * @classdesc Represents a BandwidthLimit.
+                         * @implements IBandwidthLimit
+                         * @constructor
+                         * @param {google.storagetransfer.v1.AgentPool.IBandwidthLimit=} [properties] Properties to set
+                         */
+                        function BandwidthLimit(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BandwidthLimit limitMbps.
+                         * @member {number|Long} limitMbps
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @instance
+                         */
+                        BandwidthLimit.prototype.limitMbps = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new BandwidthLimit instance using the specified properties.
+                         * @function create
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @static
+                         * @param {google.storagetransfer.v1.AgentPool.IBandwidthLimit=} [properties] Properties to set
+                         * @returns {google.storagetransfer.v1.AgentPool.BandwidthLimit} BandwidthLimit instance
+                         */
+                        BandwidthLimit.create = function create(properties) {
+                            return new BandwidthLimit(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BandwidthLimit message. Does not implicitly {@link google.storagetransfer.v1.AgentPool.BandwidthLimit.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @static
+                         * @param {google.storagetransfer.v1.AgentPool.IBandwidthLimit} message BandwidthLimit message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BandwidthLimit.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.limitMbps != null && Object.hasOwnProperty.call(message, "limitMbps"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.limitMbps);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BandwidthLimit message, length delimited. Does not implicitly {@link google.storagetransfer.v1.AgentPool.BandwidthLimit.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @static
+                         * @param {google.storagetransfer.v1.AgentPool.IBandwidthLimit} message BandwidthLimit message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BandwidthLimit.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BandwidthLimit message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storagetransfer.v1.AgentPool.BandwidthLimit} BandwidthLimit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BandwidthLimit.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.AgentPool.BandwidthLimit();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.limitMbps = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BandwidthLimit message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storagetransfer.v1.AgentPool.BandwidthLimit} BandwidthLimit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BandwidthLimit.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BandwidthLimit message.
+                         * @function verify
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BandwidthLimit.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.limitMbps != null && message.hasOwnProperty("limitMbps"))
+                                if (!$util.isInteger(message.limitMbps) && !(message.limitMbps && $util.isInteger(message.limitMbps.low) && $util.isInteger(message.limitMbps.high)))
+                                    return "limitMbps: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BandwidthLimit message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storagetransfer.v1.AgentPool.BandwidthLimit} BandwidthLimit
+                         */
+                        BandwidthLimit.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storagetransfer.v1.AgentPool.BandwidthLimit)
+                                return object;
+                            var message = new $root.google.storagetransfer.v1.AgentPool.BandwidthLimit();
+                            if (object.limitMbps != null)
+                                if ($util.Long)
+                                    (message.limitMbps = $util.Long.fromValue(object.limitMbps)).unsigned = false;
+                                else if (typeof object.limitMbps === "string")
+                                    message.limitMbps = parseInt(object.limitMbps, 10);
+                                else if (typeof object.limitMbps === "number")
+                                    message.limitMbps = object.limitMbps;
+                                else if (typeof object.limitMbps === "object")
+                                    message.limitMbps = new $util.LongBits(object.limitMbps.low >>> 0, object.limitMbps.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BandwidthLimit message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @static
+                         * @param {google.storagetransfer.v1.AgentPool.BandwidthLimit} message BandwidthLimit
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BandwidthLimit.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.limitMbps = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.limitMbps = options.longs === String ? "0" : 0;
+                            if (message.limitMbps != null && message.hasOwnProperty("limitMbps"))
+                                if (typeof message.limitMbps === "number")
+                                    object.limitMbps = options.longs === String ? String(message.limitMbps) : message.limitMbps;
+                                else
+                                    object.limitMbps = options.longs === String ? $util.Long.prototype.toString.call(message.limitMbps) : options.longs === Number ? new $util.LongBits(message.limitMbps.low >>> 0, message.limitMbps.high >>> 0).toNumber() : message.limitMbps;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BandwidthLimit to JSON.
+                         * @function toJSON
+                         * @memberof google.storagetransfer.v1.AgentPool.BandwidthLimit
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BandwidthLimit.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BandwidthLimit;
+                    })();
+    
+                    return AgentPool;
+                })();
+    
                 v1.TransferOptions = (function() {
     
                     /**
@@ -4139,6 +6308,8 @@
                      * @property {boolean|null} [overwriteObjectsAlreadyExistingInSink] TransferOptions overwriteObjectsAlreadyExistingInSink
                      * @property {boolean|null} [deleteObjectsUniqueInSink] TransferOptions deleteObjectsUniqueInSink
                      * @property {boolean|null} [deleteObjectsFromSourceAfterTransfer] TransferOptions deleteObjectsFromSourceAfterTransfer
+                     * @property {google.storagetransfer.v1.TransferOptions.OverwriteWhen|null} [overwriteWhen] TransferOptions overwriteWhen
+                     * @property {google.storagetransfer.v1.IMetadataOptions|null} [metadataOptions] TransferOptions metadataOptions
                      */
     
                     /**
@@ -4181,6 +6352,22 @@
                     TransferOptions.prototype.deleteObjectsFromSourceAfterTransfer = false;
     
                     /**
+                     * TransferOptions overwriteWhen.
+                     * @member {google.storagetransfer.v1.TransferOptions.OverwriteWhen} overwriteWhen
+                     * @memberof google.storagetransfer.v1.TransferOptions
+                     * @instance
+                     */
+                    TransferOptions.prototype.overwriteWhen = 0;
+    
+                    /**
+                     * TransferOptions metadataOptions.
+                     * @member {google.storagetransfer.v1.IMetadataOptions|null|undefined} metadataOptions
+                     * @memberof google.storagetransfer.v1.TransferOptions
+                     * @instance
+                     */
+                    TransferOptions.prototype.metadataOptions = null;
+    
+                    /**
                      * Creates a new TransferOptions instance using the specified properties.
                      * @function create
                      * @memberof google.storagetransfer.v1.TransferOptions
@@ -4210,6 +6397,10 @@
                             writer.uint32(/* id 2, wireType 0 =*/16).bool(message.deleteObjectsUniqueInSink);
                         if (message.deleteObjectsFromSourceAfterTransfer != null && Object.hasOwnProperty.call(message, "deleteObjectsFromSourceAfterTransfer"))
                             writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deleteObjectsFromSourceAfterTransfer);
+                        if (message.overwriteWhen != null && Object.hasOwnProperty.call(message, "overwriteWhen"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.overwriteWhen);
+                        if (message.metadataOptions != null && Object.hasOwnProperty.call(message, "metadataOptions"))
+                            $root.google.storagetransfer.v1.MetadataOptions.encode(message.metadataOptions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -4252,6 +6443,12 @@
                                 break;
                             case 3:
                                 message.deleteObjectsFromSourceAfterTransfer = reader.bool();
+                                break;
+                            case 4:
+                                message.overwriteWhen = reader.int32();
+                                break;
+                            case 5:
+                                message.metadataOptions = $root.google.storagetransfer.v1.MetadataOptions.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -4297,6 +6494,21 @@
                         if (message.deleteObjectsFromSourceAfterTransfer != null && message.hasOwnProperty("deleteObjectsFromSourceAfterTransfer"))
                             if (typeof message.deleteObjectsFromSourceAfterTransfer !== "boolean")
                                 return "deleteObjectsFromSourceAfterTransfer: boolean expected";
+                        if (message.overwriteWhen != null && message.hasOwnProperty("overwriteWhen"))
+                            switch (message.overwriteWhen) {
+                            default:
+                                return "overwriteWhen: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions")) {
+                            var error = $root.google.storagetransfer.v1.MetadataOptions.verify(message.metadataOptions);
+                            if (error)
+                                return "metadataOptions." + error;
+                        }
                         return null;
                     };
     
@@ -4318,6 +6530,29 @@
                             message.deleteObjectsUniqueInSink = Boolean(object.deleteObjectsUniqueInSink);
                         if (object.deleteObjectsFromSourceAfterTransfer != null)
                             message.deleteObjectsFromSourceAfterTransfer = Boolean(object.deleteObjectsFromSourceAfterTransfer);
+                        switch (object.overwriteWhen) {
+                        case "OVERWRITE_WHEN_UNSPECIFIED":
+                        case 0:
+                            message.overwriteWhen = 0;
+                            break;
+                        case "DIFFERENT":
+                        case 1:
+                            message.overwriteWhen = 1;
+                            break;
+                        case "NEVER":
+                        case 2:
+                            message.overwriteWhen = 2;
+                            break;
+                        case "ALWAYS":
+                        case 3:
+                            message.overwriteWhen = 3;
+                            break;
+                        }
+                        if (object.metadataOptions != null) {
+                            if (typeof object.metadataOptions !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferOptions.metadataOptions: object expected");
+                            message.metadataOptions = $root.google.storagetransfer.v1.MetadataOptions.fromObject(object.metadataOptions);
+                        }
                         return message;
                     };
     
@@ -4338,6 +6573,8 @@
                             object.overwriteObjectsAlreadyExistingInSink = false;
                             object.deleteObjectsUniqueInSink = false;
                             object.deleteObjectsFromSourceAfterTransfer = false;
+                            object.overwriteWhen = options.enums === String ? "OVERWRITE_WHEN_UNSPECIFIED" : 0;
+                            object.metadataOptions = null;
                         }
                         if (message.overwriteObjectsAlreadyExistingInSink != null && message.hasOwnProperty("overwriteObjectsAlreadyExistingInSink"))
                             object.overwriteObjectsAlreadyExistingInSink = message.overwriteObjectsAlreadyExistingInSink;
@@ -4345,6 +6582,10 @@
                             object.deleteObjectsUniqueInSink = message.deleteObjectsUniqueInSink;
                         if (message.deleteObjectsFromSourceAfterTransfer != null && message.hasOwnProperty("deleteObjectsFromSourceAfterTransfer"))
                             object.deleteObjectsFromSourceAfterTransfer = message.deleteObjectsFromSourceAfterTransfer;
+                        if (message.overwriteWhen != null && message.hasOwnProperty("overwriteWhen"))
+                            object.overwriteWhen = options.enums === String ? $root.google.storagetransfer.v1.TransferOptions.OverwriteWhen[message.overwriteWhen] : message.overwriteWhen;
+                        if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions"))
+                            object.metadataOptions = $root.google.storagetransfer.v1.MetadataOptions.toObject(message.metadataOptions, options);
                         return object;
                     };
     
@@ -4359,6 +6600,24 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * OverwriteWhen enum.
+                     * @name google.storagetransfer.v1.TransferOptions.OverwriteWhen
+                     * @enum {number}
+                     * @property {number} OVERWRITE_WHEN_UNSPECIFIED=0 OVERWRITE_WHEN_UNSPECIFIED value
+                     * @property {number} DIFFERENT=1 DIFFERENT value
+                     * @property {number} NEVER=2 NEVER value
+                     * @property {number} ALWAYS=3 ALWAYS value
+                     */
+                    TransferOptions.OverwriteWhen = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OVERWRITE_WHEN_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DIFFERENT"] = 1;
+                        values[valuesById[2] = "NEVER"] = 2;
+                        values[valuesById[3] = "ALWAYS"] = 3;
+                        return values;
+                    })();
+    
                     return TransferOptions;
                 })();
     
@@ -4369,12 +6628,18 @@
                      * @memberof google.storagetransfer.v1
                      * @interface ITransferSpec
                      * @property {google.storagetransfer.v1.IGcsData|null} [gcsDataSink] TransferSpec gcsDataSink
+                     * @property {google.storagetransfer.v1.IPosixFilesystem|null} [posixDataSink] TransferSpec posixDataSink
                      * @property {google.storagetransfer.v1.IGcsData|null} [gcsDataSource] TransferSpec gcsDataSource
                      * @property {google.storagetransfer.v1.IAwsS3Data|null} [awsS3DataSource] TransferSpec awsS3DataSource
                      * @property {google.storagetransfer.v1.IHttpData|null} [httpDataSource] TransferSpec httpDataSource
+                     * @property {google.storagetransfer.v1.IPosixFilesystem|null} [posixDataSource] TransferSpec posixDataSource
                      * @property {google.storagetransfer.v1.IAzureBlobStorageData|null} [azureBlobStorageDataSource] TransferSpec azureBlobStorageDataSource
+                     * @property {google.storagetransfer.v1.IGcsData|null} [gcsIntermediateDataLocation] TransferSpec gcsIntermediateDataLocation
                      * @property {google.storagetransfer.v1.IObjectConditions|null} [objectConditions] TransferSpec objectConditions
                      * @property {google.storagetransfer.v1.ITransferOptions|null} [transferOptions] TransferSpec transferOptions
+                     * @property {google.storagetransfer.v1.ITransferManifest|null} [transferManifest] TransferSpec transferManifest
+                     * @property {string|null} [sourceAgentPoolName] TransferSpec sourceAgentPoolName
+                     * @property {string|null} [sinkAgentPoolName] TransferSpec sinkAgentPoolName
                      */
     
                     /**
@@ -4401,6 +6666,14 @@
                     TransferSpec.prototype.gcsDataSink = null;
     
                     /**
+                     * TransferSpec posixDataSink.
+                     * @member {google.storagetransfer.v1.IPosixFilesystem|null|undefined} posixDataSink
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    TransferSpec.prototype.posixDataSink = null;
+    
+                    /**
                      * TransferSpec gcsDataSource.
                      * @member {google.storagetransfer.v1.IGcsData|null|undefined} gcsDataSource
                      * @memberof google.storagetransfer.v1.TransferSpec
@@ -4425,12 +6698,28 @@
                     TransferSpec.prototype.httpDataSource = null;
     
                     /**
+                     * TransferSpec posixDataSource.
+                     * @member {google.storagetransfer.v1.IPosixFilesystem|null|undefined} posixDataSource
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    TransferSpec.prototype.posixDataSource = null;
+    
+                    /**
                      * TransferSpec azureBlobStorageDataSource.
                      * @member {google.storagetransfer.v1.IAzureBlobStorageData|null|undefined} azureBlobStorageDataSource
                      * @memberof google.storagetransfer.v1.TransferSpec
                      * @instance
                      */
                     TransferSpec.prototype.azureBlobStorageDataSource = null;
+    
+                    /**
+                     * TransferSpec gcsIntermediateDataLocation.
+                     * @member {google.storagetransfer.v1.IGcsData|null|undefined} gcsIntermediateDataLocation
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    TransferSpec.prototype.gcsIntermediateDataLocation = null;
     
                     /**
                      * TransferSpec objectConditions.
@@ -4448,28 +6737,63 @@
                      */
                     TransferSpec.prototype.transferOptions = null;
     
+                    /**
+                     * TransferSpec transferManifest.
+                     * @member {google.storagetransfer.v1.ITransferManifest|null|undefined} transferManifest
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    TransferSpec.prototype.transferManifest = null;
+    
+                    /**
+                     * TransferSpec sourceAgentPoolName.
+                     * @member {string} sourceAgentPoolName
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    TransferSpec.prototype.sourceAgentPoolName = "";
+    
+                    /**
+                     * TransferSpec sinkAgentPoolName.
+                     * @member {string} sinkAgentPoolName
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    TransferSpec.prototype.sinkAgentPoolName = "";
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
                     /**
                      * TransferSpec dataSink.
-                     * @member {"gcsDataSink"|undefined} dataSink
+                     * @member {"gcsDataSink"|"posixDataSink"|undefined} dataSink
                      * @memberof google.storagetransfer.v1.TransferSpec
                      * @instance
                      */
                     Object.defineProperty(TransferSpec.prototype, "dataSink", {
-                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSink"]),
+                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSink", "posixDataSink"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
                     /**
                      * TransferSpec dataSource.
-                     * @member {"gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"azureBlobStorageDataSource"|undefined} dataSource
+                     * @member {"gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource"|undefined} dataSource
                      * @memberof google.storagetransfer.v1.TransferSpec
                      * @instance
                      */
                     Object.defineProperty(TransferSpec.prototype, "dataSource", {
-                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSource", "awsS3DataSource", "httpDataSource", "azureBlobStorageDataSource"]),
+                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSource", "awsS3DataSource", "httpDataSource", "posixDataSource", "azureBlobStorageDataSource"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * TransferSpec intermediateDataLocation.
+                     * @member {"gcsIntermediateDataLocation"|undefined} intermediateDataLocation
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    Object.defineProperty(TransferSpec.prototype, "intermediateDataLocation", {
+                        get: $util.oneOfGetter($oneOfFields = ["gcsIntermediateDataLocation"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -4511,6 +6835,18 @@
                             $root.google.storagetransfer.v1.TransferOptions.encode(message.transferOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         if (message.azureBlobStorageDataSource != null && Object.hasOwnProperty.call(message, "azureBlobStorageDataSource"))
                             $root.google.storagetransfer.v1.AzureBlobStorageData.encode(message.azureBlobStorageDataSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        if (message.posixDataSink != null && Object.hasOwnProperty.call(message, "posixDataSink"))
+                            $root.google.storagetransfer.v1.PosixFilesystem.encode(message.posixDataSink, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                        if (message.posixDataSource != null && Object.hasOwnProperty.call(message, "posixDataSource"))
+                            $root.google.storagetransfer.v1.PosixFilesystem.encode(message.posixDataSource, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                        if (message.transferManifest != null && Object.hasOwnProperty.call(message, "transferManifest"))
+                            $root.google.storagetransfer.v1.TransferManifest.encode(message.transferManifest, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                        if (message.gcsIntermediateDataLocation != null && Object.hasOwnProperty.call(message, "gcsIntermediateDataLocation"))
+                            $root.google.storagetransfer.v1.GcsData.encode(message.gcsIntermediateDataLocation, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                        if (message.sourceAgentPoolName != null && Object.hasOwnProperty.call(message, "sourceAgentPoolName"))
+                            writer.uint32(/* id 17, wireType 2 =*/138).string(message.sourceAgentPoolName);
+                        if (message.sinkAgentPoolName != null && Object.hasOwnProperty.call(message, "sinkAgentPoolName"))
+                            writer.uint32(/* id 18, wireType 2 =*/146).string(message.sinkAgentPoolName);
                         return writer;
                     };
     
@@ -4548,6 +6884,9 @@
                             case 4:
                                 message.gcsDataSink = $root.google.storagetransfer.v1.GcsData.decode(reader, reader.uint32());
                                 break;
+                            case 13:
+                                message.posixDataSink = $root.google.storagetransfer.v1.PosixFilesystem.decode(reader, reader.uint32());
+                                break;
                             case 1:
                                 message.gcsDataSource = $root.google.storagetransfer.v1.GcsData.decode(reader, reader.uint32());
                                 break;
@@ -4557,14 +6896,29 @@
                             case 3:
                                 message.httpDataSource = $root.google.storagetransfer.v1.HttpData.decode(reader, reader.uint32());
                                 break;
+                            case 14:
+                                message.posixDataSource = $root.google.storagetransfer.v1.PosixFilesystem.decode(reader, reader.uint32());
+                                break;
                             case 8:
                                 message.azureBlobStorageDataSource = $root.google.storagetransfer.v1.AzureBlobStorageData.decode(reader, reader.uint32());
+                                break;
+                            case 16:
+                                message.gcsIntermediateDataLocation = $root.google.storagetransfer.v1.GcsData.decode(reader, reader.uint32());
                                 break;
                             case 5:
                                 message.objectConditions = $root.google.storagetransfer.v1.ObjectConditions.decode(reader, reader.uint32());
                                 break;
                             case 6:
                                 message.transferOptions = $root.google.storagetransfer.v1.TransferOptions.decode(reader, reader.uint32());
+                                break;
+                            case 15:
+                                message.transferManifest = $root.google.storagetransfer.v1.TransferManifest.decode(reader, reader.uint32());
+                                break;
+                            case 17:
+                                message.sourceAgentPoolName = reader.string();
+                                break;
+                            case 18:
+                                message.sinkAgentPoolName = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -4610,6 +6964,16 @@
                                     return "gcsDataSink." + error;
                             }
                         }
+                        if (message.posixDataSink != null && message.hasOwnProperty("posixDataSink")) {
+                            if (properties.dataSink === 1)
+                                return "dataSink: multiple values";
+                            properties.dataSink = 1;
+                            {
+                                var error = $root.google.storagetransfer.v1.PosixFilesystem.verify(message.posixDataSink);
+                                if (error)
+                                    return "posixDataSink." + error;
+                            }
+                        }
                         if (message.gcsDataSource != null && message.hasOwnProperty("gcsDataSource")) {
                             properties.dataSource = 1;
                             {
@@ -4638,6 +7002,16 @@
                                     return "httpDataSource." + error;
                             }
                         }
+                        if (message.posixDataSource != null && message.hasOwnProperty("posixDataSource")) {
+                            if (properties.dataSource === 1)
+                                return "dataSource: multiple values";
+                            properties.dataSource = 1;
+                            {
+                                var error = $root.google.storagetransfer.v1.PosixFilesystem.verify(message.posixDataSource);
+                                if (error)
+                                    return "posixDataSource." + error;
+                            }
+                        }
                         if (message.azureBlobStorageDataSource != null && message.hasOwnProperty("azureBlobStorageDataSource")) {
                             if (properties.dataSource === 1)
                                 return "dataSource: multiple values";
@@ -4646,6 +7020,14 @@
                                 var error = $root.google.storagetransfer.v1.AzureBlobStorageData.verify(message.azureBlobStorageDataSource);
                                 if (error)
                                     return "azureBlobStorageDataSource." + error;
+                            }
+                        }
+                        if (message.gcsIntermediateDataLocation != null && message.hasOwnProperty("gcsIntermediateDataLocation")) {
+                            properties.intermediateDataLocation = 1;
+                            {
+                                var error = $root.google.storagetransfer.v1.GcsData.verify(message.gcsIntermediateDataLocation);
+                                if (error)
+                                    return "gcsIntermediateDataLocation." + error;
                             }
                         }
                         if (message.objectConditions != null && message.hasOwnProperty("objectConditions")) {
@@ -4658,6 +7040,17 @@
                             if (error)
                                 return "transferOptions." + error;
                         }
+                        if (message.transferManifest != null && message.hasOwnProperty("transferManifest")) {
+                            var error = $root.google.storagetransfer.v1.TransferManifest.verify(message.transferManifest);
+                            if (error)
+                                return "transferManifest." + error;
+                        }
+                        if (message.sourceAgentPoolName != null && message.hasOwnProperty("sourceAgentPoolName"))
+                            if (!$util.isString(message.sourceAgentPoolName))
+                                return "sourceAgentPoolName: string expected";
+                        if (message.sinkAgentPoolName != null && message.hasOwnProperty("sinkAgentPoolName"))
+                            if (!$util.isString(message.sinkAgentPoolName))
+                                return "sinkAgentPoolName: string expected";
                         return null;
                     };
     
@@ -4678,6 +7071,11 @@
                                 throw TypeError(".google.storagetransfer.v1.TransferSpec.gcsDataSink: object expected");
                             message.gcsDataSink = $root.google.storagetransfer.v1.GcsData.fromObject(object.gcsDataSink);
                         }
+                        if (object.posixDataSink != null) {
+                            if (typeof object.posixDataSink !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferSpec.posixDataSink: object expected");
+                            message.posixDataSink = $root.google.storagetransfer.v1.PosixFilesystem.fromObject(object.posixDataSink);
+                        }
                         if (object.gcsDataSource != null) {
                             if (typeof object.gcsDataSource !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferSpec.gcsDataSource: object expected");
@@ -4693,10 +7091,20 @@
                                 throw TypeError(".google.storagetransfer.v1.TransferSpec.httpDataSource: object expected");
                             message.httpDataSource = $root.google.storagetransfer.v1.HttpData.fromObject(object.httpDataSource);
                         }
+                        if (object.posixDataSource != null) {
+                            if (typeof object.posixDataSource !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferSpec.posixDataSource: object expected");
+                            message.posixDataSource = $root.google.storagetransfer.v1.PosixFilesystem.fromObject(object.posixDataSource);
+                        }
                         if (object.azureBlobStorageDataSource != null) {
                             if (typeof object.azureBlobStorageDataSource !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferSpec.azureBlobStorageDataSource: object expected");
                             message.azureBlobStorageDataSource = $root.google.storagetransfer.v1.AzureBlobStorageData.fromObject(object.azureBlobStorageDataSource);
+                        }
+                        if (object.gcsIntermediateDataLocation != null) {
+                            if (typeof object.gcsIntermediateDataLocation !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferSpec.gcsIntermediateDataLocation: object expected");
+                            message.gcsIntermediateDataLocation = $root.google.storagetransfer.v1.GcsData.fromObject(object.gcsIntermediateDataLocation);
                         }
                         if (object.objectConditions != null) {
                             if (typeof object.objectConditions !== "object")
@@ -4708,6 +7116,15 @@
                                 throw TypeError(".google.storagetransfer.v1.TransferSpec.transferOptions: object expected");
                             message.transferOptions = $root.google.storagetransfer.v1.TransferOptions.fromObject(object.transferOptions);
                         }
+                        if (object.transferManifest != null) {
+                            if (typeof object.transferManifest !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferSpec.transferManifest: object expected");
+                            message.transferManifest = $root.google.storagetransfer.v1.TransferManifest.fromObject(object.transferManifest);
+                        }
+                        if (object.sourceAgentPoolName != null)
+                            message.sourceAgentPoolName = String(object.sourceAgentPoolName);
+                        if (object.sinkAgentPoolName != null)
+                            message.sinkAgentPoolName = String(object.sinkAgentPoolName);
                         return message;
                     };
     
@@ -4727,6 +7144,9 @@
                         if (options.defaults) {
                             object.objectConditions = null;
                             object.transferOptions = null;
+                            object.transferManifest = null;
+                            object.sourceAgentPoolName = "";
+                            object.sinkAgentPoolName = "";
                         }
                         if (message.gcsDataSource != null && message.hasOwnProperty("gcsDataSource")) {
                             object.gcsDataSource = $root.google.storagetransfer.v1.GcsData.toObject(message.gcsDataSource, options);
@@ -4757,6 +7177,27 @@
                             if (options.oneofs)
                                 object.dataSource = "azureBlobStorageDataSource";
                         }
+                        if (message.posixDataSink != null && message.hasOwnProperty("posixDataSink")) {
+                            object.posixDataSink = $root.google.storagetransfer.v1.PosixFilesystem.toObject(message.posixDataSink, options);
+                            if (options.oneofs)
+                                object.dataSink = "posixDataSink";
+                        }
+                        if (message.posixDataSource != null && message.hasOwnProperty("posixDataSource")) {
+                            object.posixDataSource = $root.google.storagetransfer.v1.PosixFilesystem.toObject(message.posixDataSource, options);
+                            if (options.oneofs)
+                                object.dataSource = "posixDataSource";
+                        }
+                        if (message.transferManifest != null && message.hasOwnProperty("transferManifest"))
+                            object.transferManifest = $root.google.storagetransfer.v1.TransferManifest.toObject(message.transferManifest, options);
+                        if (message.gcsIntermediateDataLocation != null && message.hasOwnProperty("gcsIntermediateDataLocation")) {
+                            object.gcsIntermediateDataLocation = $root.google.storagetransfer.v1.GcsData.toObject(message.gcsIntermediateDataLocation, options);
+                            if (options.oneofs)
+                                object.intermediateDataLocation = "gcsIntermediateDataLocation";
+                        }
+                        if (message.sourceAgentPoolName != null && message.hasOwnProperty("sourceAgentPoolName"))
+                            object.sourceAgentPoolName = message.sourceAgentPoolName;
+                        if (message.sinkAgentPoolName != null && message.hasOwnProperty("sinkAgentPoolName"))
+                            object.sinkAgentPoolName = message.sinkAgentPoolName;
                         return object;
                     };
     
@@ -4772,6 +7213,891 @@
                     };
     
                     return TransferSpec;
+                })();
+    
+                v1.MetadataOptions = (function() {
+    
+                    /**
+                     * Properties of a MetadataOptions.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IMetadataOptions
+                     * @property {google.storagetransfer.v1.MetadataOptions.Symlink|null} [symlink] MetadataOptions symlink
+                     * @property {google.storagetransfer.v1.MetadataOptions.Mode|null} [mode] MetadataOptions mode
+                     * @property {google.storagetransfer.v1.MetadataOptions.GID|null} [gid] MetadataOptions gid
+                     * @property {google.storagetransfer.v1.MetadataOptions.UID|null} [uid] MetadataOptions uid
+                     * @property {google.storagetransfer.v1.MetadataOptions.Acl|null} [acl] MetadataOptions acl
+                     * @property {google.storagetransfer.v1.MetadataOptions.StorageClass|null} [storageClass] MetadataOptions storageClass
+                     * @property {google.storagetransfer.v1.MetadataOptions.TemporaryHold|null} [temporaryHold] MetadataOptions temporaryHold
+                     * @property {google.storagetransfer.v1.MetadataOptions.KmsKey|null} [kmsKey] MetadataOptions kmsKey
+                     * @property {google.storagetransfer.v1.MetadataOptions.TimeCreated|null} [timeCreated] MetadataOptions timeCreated
+                     */
+    
+                    /**
+                     * Constructs a new MetadataOptions.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a MetadataOptions.
+                     * @implements IMetadataOptions
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IMetadataOptions=} [properties] Properties to set
+                     */
+                    function MetadataOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MetadataOptions symlink.
+                     * @member {google.storagetransfer.v1.MetadataOptions.Symlink} symlink
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.symlink = 0;
+    
+                    /**
+                     * MetadataOptions mode.
+                     * @member {google.storagetransfer.v1.MetadataOptions.Mode} mode
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.mode = 0;
+    
+                    /**
+                     * MetadataOptions gid.
+                     * @member {google.storagetransfer.v1.MetadataOptions.GID} gid
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.gid = 0;
+    
+                    /**
+                     * MetadataOptions uid.
+                     * @member {google.storagetransfer.v1.MetadataOptions.UID} uid
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.uid = 0;
+    
+                    /**
+                     * MetadataOptions acl.
+                     * @member {google.storagetransfer.v1.MetadataOptions.Acl} acl
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.acl = 0;
+    
+                    /**
+                     * MetadataOptions storageClass.
+                     * @member {google.storagetransfer.v1.MetadataOptions.StorageClass} storageClass
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.storageClass = 0;
+    
+                    /**
+                     * MetadataOptions temporaryHold.
+                     * @member {google.storagetransfer.v1.MetadataOptions.TemporaryHold} temporaryHold
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.temporaryHold = 0;
+    
+                    /**
+                     * MetadataOptions kmsKey.
+                     * @member {google.storagetransfer.v1.MetadataOptions.KmsKey} kmsKey
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.kmsKey = 0;
+    
+                    /**
+                     * MetadataOptions timeCreated.
+                     * @member {google.storagetransfer.v1.MetadataOptions.TimeCreated} timeCreated
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     */
+                    MetadataOptions.prototype.timeCreated = 0;
+    
+                    /**
+                     * Creates a new MetadataOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @static
+                     * @param {google.storagetransfer.v1.IMetadataOptions=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.MetadataOptions} MetadataOptions instance
+                     */
+                    MetadataOptions.create = function create(properties) {
+                        return new MetadataOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MetadataOptions message. Does not implicitly {@link google.storagetransfer.v1.MetadataOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @static
+                     * @param {google.storagetransfer.v1.IMetadataOptions} message MetadataOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MetadataOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.symlink != null && Object.hasOwnProperty.call(message, "symlink"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.symlink);
+                        if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.mode);
+                        if (message.gid != null && Object.hasOwnProperty.call(message, "gid"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.gid);
+                        if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.uid);
+                        if (message.acl != null && Object.hasOwnProperty.call(message, "acl"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.acl);
+                        if (message.storageClass != null && Object.hasOwnProperty.call(message, "storageClass"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).int32(message.storageClass);
+                        if (message.temporaryHold != null && Object.hasOwnProperty.call(message, "temporaryHold"))
+                            writer.uint32(/* id 7, wireType 0 =*/56).int32(message.temporaryHold);
+                        if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                            writer.uint32(/* id 8, wireType 0 =*/64).int32(message.kmsKey);
+                        if (message.timeCreated != null && Object.hasOwnProperty.call(message, "timeCreated"))
+                            writer.uint32(/* id 9, wireType 0 =*/72).int32(message.timeCreated);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MetadataOptions message, length delimited. Does not implicitly {@link google.storagetransfer.v1.MetadataOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @static
+                     * @param {google.storagetransfer.v1.IMetadataOptions} message MetadataOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MetadataOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MetadataOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.MetadataOptions} MetadataOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MetadataOptions.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.MetadataOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.symlink = reader.int32();
+                                break;
+                            case 2:
+                                message.mode = reader.int32();
+                                break;
+                            case 3:
+                                message.gid = reader.int32();
+                                break;
+                            case 4:
+                                message.uid = reader.int32();
+                                break;
+                            case 5:
+                                message.acl = reader.int32();
+                                break;
+                            case 6:
+                                message.storageClass = reader.int32();
+                                break;
+                            case 7:
+                                message.temporaryHold = reader.int32();
+                                break;
+                            case 8:
+                                message.kmsKey = reader.int32();
+                                break;
+                            case 9:
+                                message.timeCreated = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MetadataOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.MetadataOptions} MetadataOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MetadataOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MetadataOptions message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MetadataOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.symlink != null && message.hasOwnProperty("symlink"))
+                            switch (message.symlink) {
+                            default:
+                                return "symlink: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.mode != null && message.hasOwnProperty("mode"))
+                            switch (message.mode) {
+                            default:
+                                return "mode: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.gid != null && message.hasOwnProperty("gid"))
+                            switch (message.gid) {
+                            default:
+                                return "gid: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            switch (message.uid) {
+                            default:
+                                return "uid: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.acl != null && message.hasOwnProperty("acl"))
+                            switch (message.acl) {
+                            default:
+                                return "acl: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.storageClass != null && message.hasOwnProperty("storageClass"))
+                            switch (message.storageClass) {
+                            default:
+                                return "storageClass: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                                break;
+                            }
+                        if (message.temporaryHold != null && message.hasOwnProperty("temporaryHold"))
+                            switch (message.temporaryHold) {
+                            default:
+                                return "temporaryHold: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                            switch (message.kmsKey) {
+                            default:
+                                return "kmsKey: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.timeCreated != null && message.hasOwnProperty("timeCreated"))
+                            switch (message.timeCreated) {
+                            default:
+                                return "timeCreated: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MetadataOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.MetadataOptions} MetadataOptions
+                     */
+                    MetadataOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.MetadataOptions)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.MetadataOptions();
+                        switch (object.symlink) {
+                        case "SYMLINK_UNSPECIFIED":
+                        case 0:
+                            message.symlink = 0;
+                            break;
+                        case "SYMLINK_SKIP":
+                        case 1:
+                            message.symlink = 1;
+                            break;
+                        case "SYMLINK_PRESERVE":
+                        case 2:
+                            message.symlink = 2;
+                            break;
+                        }
+                        switch (object.mode) {
+                        case "MODE_UNSPECIFIED":
+                        case 0:
+                            message.mode = 0;
+                            break;
+                        case "MODE_SKIP":
+                        case 1:
+                            message.mode = 1;
+                            break;
+                        case "MODE_PRESERVE":
+                        case 2:
+                            message.mode = 2;
+                            break;
+                        }
+                        switch (object.gid) {
+                        case "GID_UNSPECIFIED":
+                        case 0:
+                            message.gid = 0;
+                            break;
+                        case "GID_SKIP":
+                        case 1:
+                            message.gid = 1;
+                            break;
+                        case "GID_NUMBER":
+                        case 2:
+                            message.gid = 2;
+                            break;
+                        }
+                        switch (object.uid) {
+                        case "UID_UNSPECIFIED":
+                        case 0:
+                            message.uid = 0;
+                            break;
+                        case "UID_SKIP":
+                        case 1:
+                            message.uid = 1;
+                            break;
+                        case "UID_NUMBER":
+                        case 2:
+                            message.uid = 2;
+                            break;
+                        }
+                        switch (object.acl) {
+                        case "ACL_UNSPECIFIED":
+                        case 0:
+                            message.acl = 0;
+                            break;
+                        case "ACL_DESTINATION_BUCKET_DEFAULT":
+                        case 1:
+                            message.acl = 1;
+                            break;
+                        case "ACL_PRESERVE":
+                        case 2:
+                            message.acl = 2;
+                            break;
+                        }
+                        switch (object.storageClass) {
+                        case "STORAGE_CLASS_UNSPECIFIED":
+                        case 0:
+                            message.storageClass = 0;
+                            break;
+                        case "STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT":
+                        case 1:
+                            message.storageClass = 1;
+                            break;
+                        case "STORAGE_CLASS_PRESERVE":
+                        case 2:
+                            message.storageClass = 2;
+                            break;
+                        case "STORAGE_CLASS_STANDARD":
+                        case 3:
+                            message.storageClass = 3;
+                            break;
+                        case "STORAGE_CLASS_NEARLINE":
+                        case 4:
+                            message.storageClass = 4;
+                            break;
+                        case "STORAGE_CLASS_COLDLINE":
+                        case 5:
+                            message.storageClass = 5;
+                            break;
+                        case "STORAGE_CLASS_ARCHIVE":
+                        case 6:
+                            message.storageClass = 6;
+                            break;
+                        }
+                        switch (object.temporaryHold) {
+                        case "TEMPORARY_HOLD_UNSPECIFIED":
+                        case 0:
+                            message.temporaryHold = 0;
+                            break;
+                        case "TEMPORARY_HOLD_SKIP":
+                        case 1:
+                            message.temporaryHold = 1;
+                            break;
+                        case "TEMPORARY_HOLD_PRESERVE":
+                        case 2:
+                            message.temporaryHold = 2;
+                            break;
+                        }
+                        switch (object.kmsKey) {
+                        case "KMS_KEY_UNSPECIFIED":
+                        case 0:
+                            message.kmsKey = 0;
+                            break;
+                        case "KMS_KEY_DESTINATION_BUCKET_DEFAULT":
+                        case 1:
+                            message.kmsKey = 1;
+                            break;
+                        case "KMS_KEY_PRESERVE":
+                        case 2:
+                            message.kmsKey = 2;
+                            break;
+                        }
+                        switch (object.timeCreated) {
+                        case "TIME_CREATED_UNSPECIFIED":
+                        case 0:
+                            message.timeCreated = 0;
+                            break;
+                        case "TIME_CREATED_SKIP":
+                        case 1:
+                            message.timeCreated = 1;
+                            break;
+                        case "TIME_CREATED_PRESERVE_AS_CUSTOM_TIME":
+                        case 2:
+                            message.timeCreated = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MetadataOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @static
+                     * @param {google.storagetransfer.v1.MetadataOptions} message MetadataOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MetadataOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.symlink = options.enums === String ? "SYMLINK_UNSPECIFIED" : 0;
+                            object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                            object.gid = options.enums === String ? "GID_UNSPECIFIED" : 0;
+                            object.uid = options.enums === String ? "UID_UNSPECIFIED" : 0;
+                            object.acl = options.enums === String ? "ACL_UNSPECIFIED" : 0;
+                            object.storageClass = options.enums === String ? "STORAGE_CLASS_UNSPECIFIED" : 0;
+                            object.temporaryHold = options.enums === String ? "TEMPORARY_HOLD_UNSPECIFIED" : 0;
+                            object.kmsKey = options.enums === String ? "KMS_KEY_UNSPECIFIED" : 0;
+                            object.timeCreated = options.enums === String ? "TIME_CREATED_UNSPECIFIED" : 0;
+                        }
+                        if (message.symlink != null && message.hasOwnProperty("symlink"))
+                            object.symlink = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Symlink[message.symlink] : message.symlink;
+                        if (message.mode != null && message.hasOwnProperty("mode"))
+                            object.mode = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Mode[message.mode] : message.mode;
+                        if (message.gid != null && message.hasOwnProperty("gid"))
+                            object.gid = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.GID[message.gid] : message.gid;
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            object.uid = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.UID[message.uid] : message.uid;
+                        if (message.acl != null && message.hasOwnProperty("acl"))
+                            object.acl = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Acl[message.acl] : message.acl;
+                        if (message.storageClass != null && message.hasOwnProperty("storageClass"))
+                            object.storageClass = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.StorageClass[message.storageClass] : message.storageClass;
+                        if (message.temporaryHold != null && message.hasOwnProperty("temporaryHold"))
+                            object.temporaryHold = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.TemporaryHold[message.temporaryHold] : message.temporaryHold;
+                        if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                            object.kmsKey = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.KmsKey[message.kmsKey] : message.kmsKey;
+                        if (message.timeCreated != null && message.hasOwnProperty("timeCreated"))
+                            object.timeCreated = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.TimeCreated[message.timeCreated] : message.timeCreated;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MetadataOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.MetadataOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MetadataOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Symlink enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.Symlink
+                     * @enum {number}
+                     * @property {number} SYMLINK_UNSPECIFIED=0 SYMLINK_UNSPECIFIED value
+                     * @property {number} SYMLINK_SKIP=1 SYMLINK_SKIP value
+                     * @property {number} SYMLINK_PRESERVE=2 SYMLINK_PRESERVE value
+                     */
+                    MetadataOptions.Symlink = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SYMLINK_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SYMLINK_SKIP"] = 1;
+                        values[valuesById[2] = "SYMLINK_PRESERVE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * Mode enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.Mode
+                     * @enum {number}
+                     * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                     * @property {number} MODE_SKIP=1 MODE_SKIP value
+                     * @property {number} MODE_PRESERVE=2 MODE_PRESERVE value
+                     */
+                    MetadataOptions.Mode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MODE_SKIP"] = 1;
+                        values[valuesById[2] = "MODE_PRESERVE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * GID enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.GID
+                     * @enum {number}
+                     * @property {number} GID_UNSPECIFIED=0 GID_UNSPECIFIED value
+                     * @property {number} GID_SKIP=1 GID_SKIP value
+                     * @property {number} GID_NUMBER=2 GID_NUMBER value
+                     */
+                    MetadataOptions.GID = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "GID_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GID_SKIP"] = 1;
+                        values[valuesById[2] = "GID_NUMBER"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * UID enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.UID
+                     * @enum {number}
+                     * @property {number} UID_UNSPECIFIED=0 UID_UNSPECIFIED value
+                     * @property {number} UID_SKIP=1 UID_SKIP value
+                     * @property {number} UID_NUMBER=2 UID_NUMBER value
+                     */
+                    MetadataOptions.UID = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UID_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "UID_SKIP"] = 1;
+                        values[valuesById[2] = "UID_NUMBER"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * Acl enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.Acl
+                     * @enum {number}
+                     * @property {number} ACL_UNSPECIFIED=0 ACL_UNSPECIFIED value
+                     * @property {number} ACL_DESTINATION_BUCKET_DEFAULT=1 ACL_DESTINATION_BUCKET_DEFAULT value
+                     * @property {number} ACL_PRESERVE=2 ACL_PRESERVE value
+                     */
+                    MetadataOptions.Acl = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ACL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ACL_DESTINATION_BUCKET_DEFAULT"] = 1;
+                        values[valuesById[2] = "ACL_PRESERVE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * StorageClass enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.StorageClass
+                     * @enum {number}
+                     * @property {number} STORAGE_CLASS_UNSPECIFIED=0 STORAGE_CLASS_UNSPECIFIED value
+                     * @property {number} STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT=1 STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT value
+                     * @property {number} STORAGE_CLASS_PRESERVE=2 STORAGE_CLASS_PRESERVE value
+                     * @property {number} STORAGE_CLASS_STANDARD=3 STORAGE_CLASS_STANDARD value
+                     * @property {number} STORAGE_CLASS_NEARLINE=4 STORAGE_CLASS_NEARLINE value
+                     * @property {number} STORAGE_CLASS_COLDLINE=5 STORAGE_CLASS_COLDLINE value
+                     * @property {number} STORAGE_CLASS_ARCHIVE=6 STORAGE_CLASS_ARCHIVE value
+                     */
+                    MetadataOptions.StorageClass = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STORAGE_CLASS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT"] = 1;
+                        values[valuesById[2] = "STORAGE_CLASS_PRESERVE"] = 2;
+                        values[valuesById[3] = "STORAGE_CLASS_STANDARD"] = 3;
+                        values[valuesById[4] = "STORAGE_CLASS_NEARLINE"] = 4;
+                        values[valuesById[5] = "STORAGE_CLASS_COLDLINE"] = 5;
+                        values[valuesById[6] = "STORAGE_CLASS_ARCHIVE"] = 6;
+                        return values;
+                    })();
+    
+                    /**
+                     * TemporaryHold enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.TemporaryHold
+                     * @enum {number}
+                     * @property {number} TEMPORARY_HOLD_UNSPECIFIED=0 TEMPORARY_HOLD_UNSPECIFIED value
+                     * @property {number} TEMPORARY_HOLD_SKIP=1 TEMPORARY_HOLD_SKIP value
+                     * @property {number} TEMPORARY_HOLD_PRESERVE=2 TEMPORARY_HOLD_PRESERVE value
+                     */
+                    MetadataOptions.TemporaryHold = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TEMPORARY_HOLD_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TEMPORARY_HOLD_SKIP"] = 1;
+                        values[valuesById[2] = "TEMPORARY_HOLD_PRESERVE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * KmsKey enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.KmsKey
+                     * @enum {number}
+                     * @property {number} KMS_KEY_UNSPECIFIED=0 KMS_KEY_UNSPECIFIED value
+                     * @property {number} KMS_KEY_DESTINATION_BUCKET_DEFAULT=1 KMS_KEY_DESTINATION_BUCKET_DEFAULT value
+                     * @property {number} KMS_KEY_PRESERVE=2 KMS_KEY_PRESERVE value
+                     */
+                    MetadataOptions.KmsKey = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "KMS_KEY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "KMS_KEY_DESTINATION_BUCKET_DEFAULT"] = 1;
+                        values[valuesById[2] = "KMS_KEY_PRESERVE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * TimeCreated enum.
+                     * @name google.storagetransfer.v1.MetadataOptions.TimeCreated
+                     * @enum {number}
+                     * @property {number} TIME_CREATED_UNSPECIFIED=0 TIME_CREATED_UNSPECIFIED value
+                     * @property {number} TIME_CREATED_SKIP=1 TIME_CREATED_SKIP value
+                     * @property {number} TIME_CREATED_PRESERVE_AS_CUSTOM_TIME=2 TIME_CREATED_PRESERVE_AS_CUSTOM_TIME value
+                     */
+                    MetadataOptions.TimeCreated = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TIME_CREATED_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TIME_CREATED_SKIP"] = 1;
+                        values[valuesById[2] = "TIME_CREATED_PRESERVE_AS_CUSTOM_TIME"] = 2;
+                        return values;
+                    })();
+    
+                    return MetadataOptions;
+                })();
+    
+                v1.TransferManifest = (function() {
+    
+                    /**
+                     * Properties of a TransferManifest.
+                     * @memberof google.storagetransfer.v1
+                     * @interface ITransferManifest
+                     * @property {string|null} [location] TransferManifest location
+                     */
+    
+                    /**
+                     * Constructs a new TransferManifest.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a TransferManifest.
+                     * @implements ITransferManifest
+                     * @constructor
+                     * @param {google.storagetransfer.v1.ITransferManifest=} [properties] Properties to set
+                     */
+                    function TransferManifest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TransferManifest location.
+                     * @member {string} location
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @instance
+                     */
+                    TransferManifest.prototype.location = "";
+    
+                    /**
+                     * Creates a new TransferManifest instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @static
+                     * @param {google.storagetransfer.v1.ITransferManifest=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.TransferManifest} TransferManifest instance
+                     */
+                    TransferManifest.create = function create(properties) {
+                        return new TransferManifest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TransferManifest message. Does not implicitly {@link google.storagetransfer.v1.TransferManifest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @static
+                     * @param {google.storagetransfer.v1.ITransferManifest} message TransferManifest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TransferManifest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TransferManifest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.TransferManifest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @static
+                     * @param {google.storagetransfer.v1.ITransferManifest} message TransferManifest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TransferManifest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TransferManifest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.TransferManifest} TransferManifest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TransferManifest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.TransferManifest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.location = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TransferManifest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.TransferManifest} TransferManifest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TransferManifest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TransferManifest message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TransferManifest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.location != null && message.hasOwnProperty("location"))
+                            if (!$util.isString(message.location))
+                                return "location: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TransferManifest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.TransferManifest} TransferManifest
+                     */
+                    TransferManifest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.TransferManifest)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.TransferManifest();
+                        if (object.location != null)
+                            message.location = String(object.location);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TransferManifest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @static
+                     * @param {google.storagetransfer.v1.TransferManifest} message TransferManifest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TransferManifest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.location = "";
+                        if (message.location != null && message.hasOwnProperty("location"))
+                            object.location = message.location;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TransferManifest to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.TransferManifest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TransferManifest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return TransferManifest;
                 })();
     
                 v1.Schedule = (function() {
@@ -5086,6 +8412,7 @@
                      * @property {string|null} [projectId] TransferJob projectId
                      * @property {google.storagetransfer.v1.ITransferSpec|null} [transferSpec] TransferJob transferSpec
                      * @property {google.storagetransfer.v1.INotificationConfig|null} [notificationConfig] TransferJob notificationConfig
+                     * @property {google.storagetransfer.v1.ILoggingConfig|null} [loggingConfig] TransferJob loggingConfig
                      * @property {google.storagetransfer.v1.ISchedule|null} [schedule] TransferJob schedule
                      * @property {google.storagetransfer.v1.TransferJob.Status|null} [status] TransferJob status
                      * @property {google.protobuf.ITimestamp|null} [creationTime] TransferJob creationTime
@@ -5148,6 +8475,14 @@
                      * @instance
                      */
                     TransferJob.prototype.notificationConfig = null;
+    
+                    /**
+                     * TransferJob loggingConfig.
+                     * @member {google.storagetransfer.v1.ILoggingConfig|null|undefined} loggingConfig
+                     * @memberof google.storagetransfer.v1.TransferJob
+                     * @instance
+                     */
+                    TransferJob.prototype.loggingConfig = null;
     
                     /**
                      * TransferJob schedule.
@@ -5243,6 +8578,8 @@
                             $root.google.storagetransfer.v1.NotificationConfig.encode(message.notificationConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         if (message.latestOperationName != null && Object.hasOwnProperty.call(message, "latestOperationName"))
                             writer.uint32(/* id 12, wireType 2 =*/98).string(message.latestOperationName);
+                        if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                            $root.google.storagetransfer.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         return writer;
                     };
     
@@ -5291,6 +8628,9 @@
                                 break;
                             case 11:
                                 message.notificationConfig = $root.google.storagetransfer.v1.NotificationConfig.decode(reader, reader.uint32());
+                                break;
+                            case 14:
+                                message.loggingConfig = $root.google.storagetransfer.v1.LoggingConfig.decode(reader, reader.uint32());
                                 break;
                             case 5:
                                 message.schedule = $root.google.storagetransfer.v1.Schedule.decode(reader, reader.uint32());
@@ -5364,6 +8704,11 @@
                             if (error)
                                 return "notificationConfig." + error;
                         }
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                            var error = $root.google.storagetransfer.v1.LoggingConfig.verify(message.loggingConfig);
+                            if (error)
+                                return "loggingConfig." + error;
+                        }
                         if (message.schedule != null && message.hasOwnProperty("schedule")) {
                             var error = $root.google.storagetransfer.v1.Schedule.verify(message.schedule);
                             if (error)
@@ -5427,6 +8772,11 @@
                             if (typeof object.notificationConfig !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferJob.notificationConfig: object expected");
                             message.notificationConfig = $root.google.storagetransfer.v1.NotificationConfig.fromObject(object.notificationConfig);
+                        }
+                        if (object.loggingConfig != null) {
+                            if (typeof object.loggingConfig !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferJob.loggingConfig: object expected");
+                            message.loggingConfig = $root.google.storagetransfer.v1.LoggingConfig.fromObject(object.loggingConfig);
                         }
                         if (object.schedule != null) {
                             if (typeof object.schedule !== "object")
@@ -5496,6 +8846,7 @@
                             object.deletionTime = null;
                             object.notificationConfig = null;
                             object.latestOperationName = "";
+                            object.loggingConfig = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -5519,6 +8870,8 @@
                             object.notificationConfig = $root.google.storagetransfer.v1.NotificationConfig.toObject(message.notificationConfig, options);
                         if (message.latestOperationName != null && message.hasOwnProperty("latestOperationName"))
                             object.latestOperationName = message.latestOperationName;
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                            object.loggingConfig = $root.google.storagetransfer.v1.LoggingConfig.toObject(message.loggingConfig, options);
                         return object;
                     };
     
@@ -6158,6 +9511,11 @@
                      * @property {number|Long|null} [bytesFromSourceFailed] TransferCounters bytesFromSourceFailed
                      * @property {number|Long|null} [objectsFailedToDeleteFromSink] TransferCounters objectsFailedToDeleteFromSink
                      * @property {number|Long|null} [bytesFailedToDeleteFromSink] TransferCounters bytesFailedToDeleteFromSink
+                     * @property {number|Long|null} [directoriesFoundFromSource] TransferCounters directoriesFoundFromSource
+                     * @property {number|Long|null} [directoriesFailedToListFromSource] TransferCounters directoriesFailedToListFromSource
+                     * @property {number|Long|null} [directoriesSuccessfullyListedFromSource] TransferCounters directoriesSuccessfullyListedFromSource
+                     * @property {number|Long|null} [intermediateObjectsCleanedUp] TransferCounters intermediateObjectsCleanedUp
+                     * @property {number|Long|null} [intermediateObjectsFailedCleanedUp] TransferCounters intermediateObjectsFailedCleanedUp
                      */
     
                     /**
@@ -6304,6 +9662,46 @@
                     TransferCounters.prototype.bytesFailedToDeleteFromSink = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                     /**
+                     * TransferCounters directoriesFoundFromSource.
+                     * @member {number|Long} directoriesFoundFromSource
+                     * @memberof google.storagetransfer.v1.TransferCounters
+                     * @instance
+                     */
+                    TransferCounters.prototype.directoriesFoundFromSource = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * TransferCounters directoriesFailedToListFromSource.
+                     * @member {number|Long} directoriesFailedToListFromSource
+                     * @memberof google.storagetransfer.v1.TransferCounters
+                     * @instance
+                     */
+                    TransferCounters.prototype.directoriesFailedToListFromSource = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * TransferCounters directoriesSuccessfullyListedFromSource.
+                     * @member {number|Long} directoriesSuccessfullyListedFromSource
+                     * @memberof google.storagetransfer.v1.TransferCounters
+                     * @instance
+                     */
+                    TransferCounters.prototype.directoriesSuccessfullyListedFromSource = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * TransferCounters intermediateObjectsCleanedUp.
+                     * @member {number|Long} intermediateObjectsCleanedUp
+                     * @memberof google.storagetransfer.v1.TransferCounters
+                     * @instance
+                     */
+                    TransferCounters.prototype.intermediateObjectsCleanedUp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * TransferCounters intermediateObjectsFailedCleanedUp.
+                     * @member {number|Long} intermediateObjectsFailedCleanedUp
+                     * @memberof google.storagetransfer.v1.TransferCounters
+                     * @instance
+                     */
+                    TransferCounters.prototype.intermediateObjectsFailedCleanedUp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
                      * Creates a new TransferCounters instance using the specified properties.
                      * @function create
                      * @memberof google.storagetransfer.v1.TransferCounters
@@ -6359,6 +9757,16 @@
                             writer.uint32(/* id 15, wireType 0 =*/120).int64(message.objectsFailedToDeleteFromSink);
                         if (message.bytesFailedToDeleteFromSink != null && Object.hasOwnProperty.call(message, "bytesFailedToDeleteFromSink"))
                             writer.uint32(/* id 16, wireType 0 =*/128).int64(message.bytesFailedToDeleteFromSink);
+                        if (message.directoriesFoundFromSource != null && Object.hasOwnProperty.call(message, "directoriesFoundFromSource"))
+                            writer.uint32(/* id 17, wireType 0 =*/136).int64(message.directoriesFoundFromSource);
+                        if (message.directoriesFailedToListFromSource != null && Object.hasOwnProperty.call(message, "directoriesFailedToListFromSource"))
+                            writer.uint32(/* id 18, wireType 0 =*/144).int64(message.directoriesFailedToListFromSource);
+                        if (message.directoriesSuccessfullyListedFromSource != null && Object.hasOwnProperty.call(message, "directoriesSuccessfullyListedFromSource"))
+                            writer.uint32(/* id 19, wireType 0 =*/152).int64(message.directoriesSuccessfullyListedFromSource);
+                        if (message.intermediateObjectsCleanedUp != null && Object.hasOwnProperty.call(message, "intermediateObjectsCleanedUp"))
+                            writer.uint32(/* id 22, wireType 0 =*/176).int64(message.intermediateObjectsCleanedUp);
+                        if (message.intermediateObjectsFailedCleanedUp != null && Object.hasOwnProperty.call(message, "intermediateObjectsFailedCleanedUp"))
+                            writer.uint32(/* id 23, wireType 0 =*/184).int64(message.intermediateObjectsFailedCleanedUp);
                         return writer;
                     };
     
@@ -6440,6 +9848,21 @@
                                 break;
                             case 16:
                                 message.bytesFailedToDeleteFromSink = reader.int64();
+                                break;
+                            case 17:
+                                message.directoriesFoundFromSource = reader.int64();
+                                break;
+                            case 18:
+                                message.directoriesFailedToListFromSource = reader.int64();
+                                break;
+                            case 19:
+                                message.directoriesSuccessfullyListedFromSource = reader.int64();
+                                break;
+                            case 22:
+                                message.intermediateObjectsCleanedUp = reader.int64();
+                                break;
+                            case 23:
+                                message.intermediateObjectsFailedCleanedUp = reader.int64();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -6524,6 +9947,21 @@
                         if (message.bytesFailedToDeleteFromSink != null && message.hasOwnProperty("bytesFailedToDeleteFromSink"))
                             if (!$util.isInteger(message.bytesFailedToDeleteFromSink) && !(message.bytesFailedToDeleteFromSink && $util.isInteger(message.bytesFailedToDeleteFromSink.low) && $util.isInteger(message.bytesFailedToDeleteFromSink.high)))
                                 return "bytesFailedToDeleteFromSink: integer|Long expected";
+                        if (message.directoriesFoundFromSource != null && message.hasOwnProperty("directoriesFoundFromSource"))
+                            if (!$util.isInteger(message.directoriesFoundFromSource) && !(message.directoriesFoundFromSource && $util.isInteger(message.directoriesFoundFromSource.low) && $util.isInteger(message.directoriesFoundFromSource.high)))
+                                return "directoriesFoundFromSource: integer|Long expected";
+                        if (message.directoriesFailedToListFromSource != null && message.hasOwnProperty("directoriesFailedToListFromSource"))
+                            if (!$util.isInteger(message.directoriesFailedToListFromSource) && !(message.directoriesFailedToListFromSource && $util.isInteger(message.directoriesFailedToListFromSource.low) && $util.isInteger(message.directoriesFailedToListFromSource.high)))
+                                return "directoriesFailedToListFromSource: integer|Long expected";
+                        if (message.directoriesSuccessfullyListedFromSource != null && message.hasOwnProperty("directoriesSuccessfullyListedFromSource"))
+                            if (!$util.isInteger(message.directoriesSuccessfullyListedFromSource) && !(message.directoriesSuccessfullyListedFromSource && $util.isInteger(message.directoriesSuccessfullyListedFromSource.low) && $util.isInteger(message.directoriesSuccessfullyListedFromSource.high)))
+                                return "directoriesSuccessfullyListedFromSource: integer|Long expected";
+                        if (message.intermediateObjectsCleanedUp != null && message.hasOwnProperty("intermediateObjectsCleanedUp"))
+                            if (!$util.isInteger(message.intermediateObjectsCleanedUp) && !(message.intermediateObjectsCleanedUp && $util.isInteger(message.intermediateObjectsCleanedUp.low) && $util.isInteger(message.intermediateObjectsCleanedUp.high)))
+                                return "intermediateObjectsCleanedUp: integer|Long expected";
+                        if (message.intermediateObjectsFailedCleanedUp != null && message.hasOwnProperty("intermediateObjectsFailedCleanedUp"))
+                            if (!$util.isInteger(message.intermediateObjectsFailedCleanedUp) && !(message.intermediateObjectsFailedCleanedUp && $util.isInteger(message.intermediateObjectsFailedCleanedUp.low) && $util.isInteger(message.intermediateObjectsFailedCleanedUp.high)))
+                                return "intermediateObjectsFailedCleanedUp: integer|Long expected";
                         return null;
                     };
     
@@ -6683,6 +10121,51 @@
                                 message.bytesFailedToDeleteFromSink = object.bytesFailedToDeleteFromSink;
                             else if (typeof object.bytesFailedToDeleteFromSink === "object")
                                 message.bytesFailedToDeleteFromSink = new $util.LongBits(object.bytesFailedToDeleteFromSink.low >>> 0, object.bytesFailedToDeleteFromSink.high >>> 0).toNumber();
+                        if (object.directoriesFoundFromSource != null)
+                            if ($util.Long)
+                                (message.directoriesFoundFromSource = $util.Long.fromValue(object.directoriesFoundFromSource)).unsigned = false;
+                            else if (typeof object.directoriesFoundFromSource === "string")
+                                message.directoriesFoundFromSource = parseInt(object.directoriesFoundFromSource, 10);
+                            else if (typeof object.directoriesFoundFromSource === "number")
+                                message.directoriesFoundFromSource = object.directoriesFoundFromSource;
+                            else if (typeof object.directoriesFoundFromSource === "object")
+                                message.directoriesFoundFromSource = new $util.LongBits(object.directoriesFoundFromSource.low >>> 0, object.directoriesFoundFromSource.high >>> 0).toNumber();
+                        if (object.directoriesFailedToListFromSource != null)
+                            if ($util.Long)
+                                (message.directoriesFailedToListFromSource = $util.Long.fromValue(object.directoriesFailedToListFromSource)).unsigned = false;
+                            else if (typeof object.directoriesFailedToListFromSource === "string")
+                                message.directoriesFailedToListFromSource = parseInt(object.directoriesFailedToListFromSource, 10);
+                            else if (typeof object.directoriesFailedToListFromSource === "number")
+                                message.directoriesFailedToListFromSource = object.directoriesFailedToListFromSource;
+                            else if (typeof object.directoriesFailedToListFromSource === "object")
+                                message.directoriesFailedToListFromSource = new $util.LongBits(object.directoriesFailedToListFromSource.low >>> 0, object.directoriesFailedToListFromSource.high >>> 0).toNumber();
+                        if (object.directoriesSuccessfullyListedFromSource != null)
+                            if ($util.Long)
+                                (message.directoriesSuccessfullyListedFromSource = $util.Long.fromValue(object.directoriesSuccessfullyListedFromSource)).unsigned = false;
+                            else if (typeof object.directoriesSuccessfullyListedFromSource === "string")
+                                message.directoriesSuccessfullyListedFromSource = parseInt(object.directoriesSuccessfullyListedFromSource, 10);
+                            else if (typeof object.directoriesSuccessfullyListedFromSource === "number")
+                                message.directoriesSuccessfullyListedFromSource = object.directoriesSuccessfullyListedFromSource;
+                            else if (typeof object.directoriesSuccessfullyListedFromSource === "object")
+                                message.directoriesSuccessfullyListedFromSource = new $util.LongBits(object.directoriesSuccessfullyListedFromSource.low >>> 0, object.directoriesSuccessfullyListedFromSource.high >>> 0).toNumber();
+                        if (object.intermediateObjectsCleanedUp != null)
+                            if ($util.Long)
+                                (message.intermediateObjectsCleanedUp = $util.Long.fromValue(object.intermediateObjectsCleanedUp)).unsigned = false;
+                            else if (typeof object.intermediateObjectsCleanedUp === "string")
+                                message.intermediateObjectsCleanedUp = parseInt(object.intermediateObjectsCleanedUp, 10);
+                            else if (typeof object.intermediateObjectsCleanedUp === "number")
+                                message.intermediateObjectsCleanedUp = object.intermediateObjectsCleanedUp;
+                            else if (typeof object.intermediateObjectsCleanedUp === "object")
+                                message.intermediateObjectsCleanedUp = new $util.LongBits(object.intermediateObjectsCleanedUp.low >>> 0, object.intermediateObjectsCleanedUp.high >>> 0).toNumber();
+                        if (object.intermediateObjectsFailedCleanedUp != null)
+                            if ($util.Long)
+                                (message.intermediateObjectsFailedCleanedUp = $util.Long.fromValue(object.intermediateObjectsFailedCleanedUp)).unsigned = false;
+                            else if (typeof object.intermediateObjectsFailedCleanedUp === "string")
+                                message.intermediateObjectsFailedCleanedUp = parseInt(object.intermediateObjectsFailedCleanedUp, 10);
+                            else if (typeof object.intermediateObjectsFailedCleanedUp === "number")
+                                message.intermediateObjectsFailedCleanedUp = object.intermediateObjectsFailedCleanedUp;
+                            else if (typeof object.intermediateObjectsFailedCleanedUp === "object")
+                                message.intermediateObjectsFailedCleanedUp = new $util.LongBits(object.intermediateObjectsFailedCleanedUp.low >>> 0, object.intermediateObjectsFailedCleanedUp.high >>> 0).toNumber();
                         return message;
                     };
     
@@ -6780,6 +10263,31 @@
                                 object.bytesFailedToDeleteFromSink = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.bytesFailedToDeleteFromSink = options.longs === String ? "0" : 0;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.directoriesFoundFromSource = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.directoriesFoundFromSource = options.longs === String ? "0" : 0;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.directoriesFailedToListFromSource = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.directoriesFailedToListFromSource = options.longs === String ? "0" : 0;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.directoriesSuccessfullyListedFromSource = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.directoriesSuccessfullyListedFromSource = options.longs === String ? "0" : 0;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.intermediateObjectsCleanedUp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.intermediateObjectsCleanedUp = options.longs === String ? "0" : 0;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.intermediateObjectsFailedCleanedUp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.intermediateObjectsFailedCleanedUp = options.longs === String ? "0" : 0;
                         }
                         if (message.objectsFoundFromSource != null && message.hasOwnProperty("objectsFoundFromSource"))
                             if (typeof message.objectsFoundFromSource === "number")
@@ -6861,6 +10369,31 @@
                                 object.bytesFailedToDeleteFromSink = options.longs === String ? String(message.bytesFailedToDeleteFromSink) : message.bytesFailedToDeleteFromSink;
                             else
                                 object.bytesFailedToDeleteFromSink = options.longs === String ? $util.Long.prototype.toString.call(message.bytesFailedToDeleteFromSink) : options.longs === Number ? new $util.LongBits(message.bytesFailedToDeleteFromSink.low >>> 0, message.bytesFailedToDeleteFromSink.high >>> 0).toNumber() : message.bytesFailedToDeleteFromSink;
+                        if (message.directoriesFoundFromSource != null && message.hasOwnProperty("directoriesFoundFromSource"))
+                            if (typeof message.directoriesFoundFromSource === "number")
+                                object.directoriesFoundFromSource = options.longs === String ? String(message.directoriesFoundFromSource) : message.directoriesFoundFromSource;
+                            else
+                                object.directoriesFoundFromSource = options.longs === String ? $util.Long.prototype.toString.call(message.directoriesFoundFromSource) : options.longs === Number ? new $util.LongBits(message.directoriesFoundFromSource.low >>> 0, message.directoriesFoundFromSource.high >>> 0).toNumber() : message.directoriesFoundFromSource;
+                        if (message.directoriesFailedToListFromSource != null && message.hasOwnProperty("directoriesFailedToListFromSource"))
+                            if (typeof message.directoriesFailedToListFromSource === "number")
+                                object.directoriesFailedToListFromSource = options.longs === String ? String(message.directoriesFailedToListFromSource) : message.directoriesFailedToListFromSource;
+                            else
+                                object.directoriesFailedToListFromSource = options.longs === String ? $util.Long.prototype.toString.call(message.directoriesFailedToListFromSource) : options.longs === Number ? new $util.LongBits(message.directoriesFailedToListFromSource.low >>> 0, message.directoriesFailedToListFromSource.high >>> 0).toNumber() : message.directoriesFailedToListFromSource;
+                        if (message.directoriesSuccessfullyListedFromSource != null && message.hasOwnProperty("directoriesSuccessfullyListedFromSource"))
+                            if (typeof message.directoriesSuccessfullyListedFromSource === "number")
+                                object.directoriesSuccessfullyListedFromSource = options.longs === String ? String(message.directoriesSuccessfullyListedFromSource) : message.directoriesSuccessfullyListedFromSource;
+                            else
+                                object.directoriesSuccessfullyListedFromSource = options.longs === String ? $util.Long.prototype.toString.call(message.directoriesSuccessfullyListedFromSource) : options.longs === Number ? new $util.LongBits(message.directoriesSuccessfullyListedFromSource.low >>> 0, message.directoriesSuccessfullyListedFromSource.high >>> 0).toNumber() : message.directoriesSuccessfullyListedFromSource;
+                        if (message.intermediateObjectsCleanedUp != null && message.hasOwnProperty("intermediateObjectsCleanedUp"))
+                            if (typeof message.intermediateObjectsCleanedUp === "number")
+                                object.intermediateObjectsCleanedUp = options.longs === String ? String(message.intermediateObjectsCleanedUp) : message.intermediateObjectsCleanedUp;
+                            else
+                                object.intermediateObjectsCleanedUp = options.longs === String ? $util.Long.prototype.toString.call(message.intermediateObjectsCleanedUp) : options.longs === Number ? new $util.LongBits(message.intermediateObjectsCleanedUp.low >>> 0, message.intermediateObjectsCleanedUp.high >>> 0).toNumber() : message.intermediateObjectsCleanedUp;
+                        if (message.intermediateObjectsFailedCleanedUp != null && message.hasOwnProperty("intermediateObjectsFailedCleanedUp"))
+                            if (typeof message.intermediateObjectsFailedCleanedUp === "number")
+                                object.intermediateObjectsFailedCleanedUp = options.longs === String ? String(message.intermediateObjectsFailedCleanedUp) : message.intermediateObjectsFailedCleanedUp;
+                            else
+                                object.intermediateObjectsFailedCleanedUp = options.longs === String ? $util.Long.prototype.toString.call(message.intermediateObjectsFailedCleanedUp) : options.longs === Number ? new $util.LongBits(message.intermediateObjectsFailedCleanedUp.low >>> 0, message.intermediateObjectsFailedCleanedUp.high >>> 0).toNumber() : message.intermediateObjectsFailedCleanedUp;
                         return object;
                     };
     
@@ -7210,6 +10743,366 @@
                     })();
     
                     return NotificationConfig;
+                })();
+    
+                v1.LoggingConfig = (function() {
+    
+                    /**
+                     * Properties of a LoggingConfig.
+                     * @memberof google.storagetransfer.v1
+                     * @interface ILoggingConfig
+                     * @property {Array.<google.storagetransfer.v1.LoggingConfig.LoggableAction>|null} [logActions] LoggingConfig logActions
+                     * @property {Array.<google.storagetransfer.v1.LoggingConfig.LoggableActionState>|null} [logActionStates] LoggingConfig logActionStates
+                     * @property {boolean|null} [enableOnpremGcsTransferLogs] LoggingConfig enableOnpremGcsTransferLogs
+                     */
+    
+                    /**
+                     * Constructs a new LoggingConfig.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a LoggingConfig.
+                     * @implements ILoggingConfig
+                     * @constructor
+                     * @param {google.storagetransfer.v1.ILoggingConfig=} [properties] Properties to set
+                     */
+                    function LoggingConfig(properties) {
+                        this.logActions = [];
+                        this.logActionStates = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * LoggingConfig logActions.
+                     * @member {Array.<google.storagetransfer.v1.LoggingConfig.LoggableAction>} logActions
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @instance
+                     */
+                    LoggingConfig.prototype.logActions = $util.emptyArray;
+    
+                    /**
+                     * LoggingConfig logActionStates.
+                     * @member {Array.<google.storagetransfer.v1.LoggingConfig.LoggableActionState>} logActionStates
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @instance
+                     */
+                    LoggingConfig.prototype.logActionStates = $util.emptyArray;
+    
+                    /**
+                     * LoggingConfig enableOnpremGcsTransferLogs.
+                     * @member {boolean} enableOnpremGcsTransferLogs
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @instance
+                     */
+                    LoggingConfig.prototype.enableOnpremGcsTransferLogs = false;
+    
+                    /**
+                     * Creates a new LoggingConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @static
+                     * @param {google.storagetransfer.v1.ILoggingConfig=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.LoggingConfig} LoggingConfig instance
+                     */
+                    LoggingConfig.create = function create(properties) {
+                        return new LoggingConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingConfig message. Does not implicitly {@link google.storagetransfer.v1.LoggingConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @static
+                     * @param {google.storagetransfer.v1.ILoggingConfig} message LoggingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.logActions != null && message.logActions.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.logActions.length; ++i)
+                                writer.int32(message.logActions[i]);
+                            writer.ldelim();
+                        }
+                        if (message.logActionStates != null && message.logActionStates.length) {
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                            for (var i = 0; i < message.logActionStates.length; ++i)
+                                writer.int32(message.logActionStates[i]);
+                            writer.ldelim();
+                        }
+                        if (message.enableOnpremGcsTransferLogs != null && Object.hasOwnProperty.call(message, "enableOnpremGcsTransferLogs"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableOnpremGcsTransferLogs);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingConfig message, length delimited. Does not implicitly {@link google.storagetransfer.v1.LoggingConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @static
+                     * @param {google.storagetransfer.v1.ILoggingConfig} message LoggingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a LoggingConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.LoggingConfig} LoggingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.LoggingConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.logActions && message.logActions.length))
+                                    message.logActions = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.logActions.push(reader.int32());
+                                } else
+                                    message.logActions.push(reader.int32());
+                                break;
+                            case 2:
+                                if (!(message.logActionStates && message.logActionStates.length))
+                                    message.logActionStates = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.logActionStates.push(reader.int32());
+                                } else
+                                    message.logActionStates.push(reader.int32());
+                                break;
+                            case 3:
+                                message.enableOnpremGcsTransferLogs = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a LoggingConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.LoggingConfig} LoggingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a LoggingConfig message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    LoggingConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.logActions != null && message.hasOwnProperty("logActions")) {
+                            if (!Array.isArray(message.logActions))
+                                return "logActions: array expected";
+                            for (var i = 0; i < message.logActions.length; ++i)
+                                switch (message.logActions[i]) {
+                                default:
+                                    return "logActions: enum value[] expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                        }
+                        if (message.logActionStates != null && message.hasOwnProperty("logActionStates")) {
+                            if (!Array.isArray(message.logActionStates))
+                                return "logActionStates: array expected";
+                            for (var i = 0; i < message.logActionStates.length; ++i)
+                                switch (message.logActionStates[i]) {
+                                default:
+                                    return "logActionStates: enum value[] expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                        }
+                        if (message.enableOnpremGcsTransferLogs != null && message.hasOwnProperty("enableOnpremGcsTransferLogs"))
+                            if (typeof message.enableOnpremGcsTransferLogs !== "boolean")
+                                return "enableOnpremGcsTransferLogs: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a LoggingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.LoggingConfig} LoggingConfig
+                     */
+                    LoggingConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.LoggingConfig)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.LoggingConfig();
+                        if (object.logActions) {
+                            if (!Array.isArray(object.logActions))
+                                throw TypeError(".google.storagetransfer.v1.LoggingConfig.logActions: array expected");
+                            message.logActions = [];
+                            for (var i = 0; i < object.logActions.length; ++i)
+                                switch (object.logActions[i]) {
+                                default:
+                                case "LOGGABLE_ACTION_UNSPECIFIED":
+                                case 0:
+                                    message.logActions[i] = 0;
+                                    break;
+                                case "FIND":
+                                case 1:
+                                    message.logActions[i] = 1;
+                                    break;
+                                case "DELETE":
+                                case 2:
+                                    message.logActions[i] = 2;
+                                    break;
+                                case "COPY":
+                                case 3:
+                                    message.logActions[i] = 3;
+                                    break;
+                                }
+                        }
+                        if (object.logActionStates) {
+                            if (!Array.isArray(object.logActionStates))
+                                throw TypeError(".google.storagetransfer.v1.LoggingConfig.logActionStates: array expected");
+                            message.logActionStates = [];
+                            for (var i = 0; i < object.logActionStates.length; ++i)
+                                switch (object.logActionStates[i]) {
+                                default:
+                                case "LOGGABLE_ACTION_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.logActionStates[i] = 0;
+                                    break;
+                                case "SUCCEEDED":
+                                case 1:
+                                    message.logActionStates[i] = 1;
+                                    break;
+                                case "FAILED":
+                                case 2:
+                                    message.logActionStates[i] = 2;
+                                    break;
+                                }
+                        }
+                        if (object.enableOnpremGcsTransferLogs != null)
+                            message.enableOnpremGcsTransferLogs = Boolean(object.enableOnpremGcsTransferLogs);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a LoggingConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @static
+                     * @param {google.storagetransfer.v1.LoggingConfig} message LoggingConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    LoggingConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.logActions = [];
+                            object.logActionStates = [];
+                        }
+                        if (options.defaults)
+                            object.enableOnpremGcsTransferLogs = false;
+                        if (message.logActions && message.logActions.length) {
+                            object.logActions = [];
+                            for (var j = 0; j < message.logActions.length; ++j)
+                                object.logActions[j] = options.enums === String ? $root.google.storagetransfer.v1.LoggingConfig.LoggableAction[message.logActions[j]] : message.logActions[j];
+                        }
+                        if (message.logActionStates && message.logActionStates.length) {
+                            object.logActionStates = [];
+                            for (var j = 0; j < message.logActionStates.length; ++j)
+                                object.logActionStates[j] = options.enums === String ? $root.google.storagetransfer.v1.LoggingConfig.LoggableActionState[message.logActionStates[j]] : message.logActionStates[j];
+                        }
+                        if (message.enableOnpremGcsTransferLogs != null && message.hasOwnProperty("enableOnpremGcsTransferLogs"))
+                            object.enableOnpremGcsTransferLogs = message.enableOnpremGcsTransferLogs;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this LoggingConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.LoggingConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    LoggingConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * LoggableAction enum.
+                     * @name google.storagetransfer.v1.LoggingConfig.LoggableAction
+                     * @enum {number}
+                     * @property {number} LOGGABLE_ACTION_UNSPECIFIED=0 LOGGABLE_ACTION_UNSPECIFIED value
+                     * @property {number} FIND=1 FIND value
+                     * @property {number} DELETE=2 DELETE value
+                     * @property {number} COPY=3 COPY value
+                     */
+                    LoggingConfig.LoggableAction = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOGGABLE_ACTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FIND"] = 1;
+                        values[valuesById[2] = "DELETE"] = 2;
+                        values[valuesById[3] = "COPY"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * LoggableActionState enum.
+                     * @name google.storagetransfer.v1.LoggingConfig.LoggableActionState
+                     * @enum {number}
+                     * @property {number} LOGGABLE_ACTION_STATE_UNSPECIFIED=0 LOGGABLE_ACTION_STATE_UNSPECIFIED value
+                     * @property {number} SUCCEEDED=1 SUCCEEDED value
+                     * @property {number} FAILED=2 FAILED value
+                     */
+                    LoggingConfig.LoggableActionState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOGGABLE_ACTION_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SUCCEEDED"] = 1;
+                        values[valuesById[2] = "FAILED"] = 2;
+                        return values;
+                    })();
+    
+                    return LoggingConfig;
                 })();
     
                 v1.TransferOperation = (function() {
@@ -8650,6 +12543,641 @@
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
                 return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        case 10:
+                            if (!(message.style && message.style.length))
+                                message.style = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.style.push(reader.int32());
+                            } else
+                                message.style.push(reader.int32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -12845,6 +17373,7 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -12857,6 +17386,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -13032,6 +17562,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -13098,6 +17636,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -13196,6 +17737,11 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                message[".google.api.resourceDefinition"] = [];
+                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -13307,6 +17853,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -13384,6 +17939,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -13400,8 +17965,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -13469,6 +18036,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -13513,6 +18085,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -13572,6 +18145,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -13606,6 +18187,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -13656,6 +18239,9 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -13713,6 +18299,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -13746,6 +18337,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -13769,6 +18365,7 @@
                         object.noStandardDescriptorAccessor = false;
                         object.deprecated = false;
                         object.mapEntry = false;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -13783,6 +18380,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -13814,6 +18413,7 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -13898,6 +18498,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -13942,6 +18550,8 @@
                             writer.int32(message[".google.api.fieldBehavior"][i]);
                         writer.ldelim();
                     }
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -14008,6 +18618,9 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -14100,6 +18713,11 @@
                             case 7:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -14203,6 +18821,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -14230,6 +18853,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -14253,6 +18877,8 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     

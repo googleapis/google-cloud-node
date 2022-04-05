@@ -30,8 +30,8 @@ function main(jobName, projectId) {
    */
   // const jobName = 'abc123'
   /**
-   *  Required. The ID of the Google Cloud Platform Console project that owns the
-   *  transfer job.
+   *  Required. The ID of the Google Cloud project that owns the transfer
+   *  job.
    */
   // const projectId = 'abc123'
 

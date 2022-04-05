@@ -26,8 +26,8 @@ function main(projectId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The ID of the Google Cloud Platform Console project that the
-   *  Google service account is associated with.
+   *  Required. The ID of the Google Cloud project that the Google service
+   *  account is associated with.
    */
   // const projectId = 'abc123'
 

@@ -40,6 +40,26 @@
                 "resumeTransferOperation"
               ]
             },
+            "CreateAgentPool": {
+              "methods": [
+                "createAgentPool"
+              ]
+            },
+            "UpdateAgentPool": {
+              "methods": [
+                "updateAgentPool"
+              ]
+            },
+            "GetAgentPool": {
+              "methods": [
+                "getAgentPool"
+              ]
+            },
+            "DeleteAgentPool": {
+              "methods": [
+                "deleteAgentPool"
+              ]
+            },
             "RunTransferJob": {
               "methods": [
                 "runTransferJob"
@@ -50,6 +70,13 @@
                 "listTransferJobs",
                 "listTransferJobsStream",
                 "listTransferJobsAsync"
+              ]
+            },
+            "ListAgentPools": {
+              "methods": [
+                "listAgentPools",
+                "listAgentPoolsStream",
+                "listAgentPoolsAsync"
               ]
             }
           }
@@ -87,6 +114,26 @@
                 "resumeTransferOperation"
               ]
             },
+            "CreateAgentPool": {
+              "methods": [
+                "createAgentPool"
+              ]
+            },
+            "UpdateAgentPool": {
+              "methods": [
+                "updateAgentPool"
+              ]
+            },
+            "GetAgentPool": {
+              "methods": [
+                "getAgentPool"
+              ]
+            },
+            "DeleteAgentPool": {
+              "methods": [
+                "deleteAgentPool"
+              ]
+            },
             "RunTransferJob": {
               "methods": [
                 "runTransferJob"
@@ -97,6 +144,13 @@
                 "listTransferJobs",
                 "listTransferJobsStream",
                 "listTransferJobsAsync"
+              ]
+            },
+            "ListAgentPools": {
+              "methods": [
+                "listAgentPools",
+                "listAgentPoolsStream",
+                "listAgentPoolsAsync"
               ]
             }
           }
