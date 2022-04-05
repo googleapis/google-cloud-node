@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/nodejs-dataflow/compare/v1.1.0...v1.2.0) (2022-04-04)
+
+
+### Features
+
+* Add the ability to plumb environment capabilities through v1beta3 protos. ([#53](https://github.com/googleapis/nodejs-dataflow/issues/53)) ([41c8fd6](https://github.com/googleapis/nodejs-dataflow/commit/41c8fd603155fd9158f88fdb95807c988f59875c))
+* new parameters in FlexTemplateRuntimeEnvironment ([f8bd01b](https://github.com/googleapis/nodejs-dataflow/commit/f8bd01b0c55f33e00ba33671ebeb2a8cabd51bbb))
+
+
+### Bug Fixes
+
+* Use http binding with location field as primary http bindings ([6bfb6bd](https://github.com/googleapis/nodejs-dataflow/commit/6bfb6bdee7f50b8353aa7fde8e4f764704ddb81a))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-dataflow/compare/v1.0.2...v1.1.0) (2021-08-23)
 
 
