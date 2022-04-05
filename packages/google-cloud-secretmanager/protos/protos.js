@@ -81,6 +81,7 @@
                          * @property {google.protobuf.IDuration|null} [ttl] Secret ttl
                          * @property {string|null} [etag] Secret etag
                          * @property {google.cloud.secretmanager.v1.IRotation|null} [rotation] Secret rotation
+                         * @property {Object.<string,number|Long>|null} [versionAliases] Secret versionAliases
                          */
     
                         /**
@@ -94,6 +95,7 @@
                         function Secret(properties) {
                             this.labels = {};
                             this.topics = [];
+                            this.versionAliases = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -172,6 +174,14 @@
                          */
                         Secret.prototype.rotation = null;
     
+                        /**
+                         * Secret versionAliases.
+                         * @member {Object.<string,number|Long>} versionAliases
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.versionAliases = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -230,6 +240,9 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.etag);
                             if (message.rotation != null && Object.hasOwnProperty.call(message, "rotation"))
                                 $root.google.cloud.secretmanager.v1.Rotation.encode(message.rotation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.versionAliases != null && Object.hasOwnProperty.call(message, "versionAliases"))
+                                for (var keys = Object.keys(message.versionAliases), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.versionAliases[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -311,6 +324,28 @@
                                     break;
                                 case 9:
                                     message.rotation = $root.google.cloud.secretmanager.v1.Rotation.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    if (message.versionAliases === $util.emptyObject)
+                                        message.versionAliases = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.versionAliases[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -404,6 +439,14 @@
                                 if (error)
                                     return "rotation." + error;
                             }
+                            if (message.versionAliases != null && message.hasOwnProperty("versionAliases")) {
+                                if (!$util.isObject(message.versionAliases))
+                                    return "versionAliases: object expected";
+                                var key = Object.keys(message.versionAliases);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isInteger(message.versionAliases[key[i]]) && !(message.versionAliases[key[i]] && $util.isInteger(message.versionAliases[key[i]].low) && $util.isInteger(message.versionAliases[key[i]].high)))
+                                        return "versionAliases: integer|Long{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -465,6 +508,20 @@
                                     throw TypeError(".google.cloud.secretmanager.v1.Secret.rotation: object expected");
                                 message.rotation = $root.google.cloud.secretmanager.v1.Rotation.fromObject(object.rotation);
                             }
+                            if (object.versionAliases) {
+                                if (typeof object.versionAliases !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.versionAliases: object expected");
+                                message.versionAliases = {};
+                                for (var keys = Object.keys(object.versionAliases), i = 0; i < keys.length; ++i)
+                                    if ($util.Long)
+                                        (message.versionAliases[keys[i]] = $util.Long.fromValue(object.versionAliases[keys[i]])).unsigned = false;
+                                    else if (typeof object.versionAliases[keys[i]] === "string")
+                                        message.versionAliases[keys[i]] = parseInt(object.versionAliases[keys[i]], 10);
+                                    else if (typeof object.versionAliases[keys[i]] === "number")
+                                        message.versionAliases[keys[i]] = object.versionAliases[keys[i]];
+                                    else if (typeof object.versionAliases[keys[i]] === "object")
+                                        message.versionAliases[keys[i]] = new $util.LongBits(object.versionAliases[keys[i]].low >>> 0, object.versionAliases[keys[i]].high >>> 0).toNumber();
+                            }
                             return message;
                         };
     
@@ -483,8 +540,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.topics = [];
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.labels = {};
+                                object.versionAliases = {};
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.replication = null;
@@ -523,6 +582,14 @@
                                 object.etag = message.etag;
                             if (message.rotation != null && message.hasOwnProperty("rotation"))
                                 object.rotation = $root.google.cloud.secretmanager.v1.Rotation.toObject(message.rotation, options);
+                            if (message.versionAliases && (keys2 = Object.keys(message.versionAliases)).length) {
+                                object.versionAliases = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    if (typeof message.versionAliases[keys2[j]] === "number")
+                                        object.versionAliases[keys2[j]] = options.longs === String ? String(message.versionAliases[keys2[j]]) : message.versionAliases[keys2[j]];
+                                    else
+                                        object.versionAliases[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.versionAliases[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.versionAliases[keys2[j]].low >>> 0, message.versionAliases[keys2[j]].high >>> 0).toNumber() : message.versionAliases[keys2[j]];
+                            }
                             return object;
                         };
     

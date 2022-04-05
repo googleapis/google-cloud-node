@@ -55,6 +55,9 @@ export namespace google {
 
                     /** Secret rotation */
                     rotation?: (google.cloud.secretmanager.v1.IRotation|null);
+
+                    /** Secret versionAliases */
+                    versionAliases?: ({ [k: string]: (number|Long|string) }|null);
                 }
 
                 /** Represents a Secret. */
@@ -92,6 +95,9 @@ export namespace google {
 
                     /** Secret rotation. */
                     public rotation?: (google.cloud.secretmanager.v1.IRotation|null);
+
+                    /** Secret versionAliases. */
+                    public versionAliases: { [k: string]: (number|Long|string) };
 
                     /** Secret expiration. */
                     public expiration?: ("expireTime"|"ttl");
