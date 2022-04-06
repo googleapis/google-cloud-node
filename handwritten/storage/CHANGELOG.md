@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [5.19.0](https://github.com/googleapis/nodejs-storage/compare/v5.18.3...v5.19.0) (2022-04-06)
+
+
+### Features
+
+* Dual Region Support ([#1814](https://github.com/googleapis/nodejs-storage/issues/1814)) ([caf7ee5](https://github.com/googleapis/nodejs-storage/commit/caf7ee561fd640b0daea92c7837c47e66070c30c))
+
 ### [5.18.3](https://github.com/googleapis/nodejs-storage/compare/v5.18.2...v5.18.3) (2022-03-28)
 
 
