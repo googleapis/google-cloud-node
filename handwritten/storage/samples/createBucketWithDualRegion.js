@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,31 +17,27 @@
 'use strict';
 
 // sample-metadata:
-//   title: Create Bucket With Storage Class and Location.
-//   description: Create Bucket With Storage Class and Location.
-//   usage: node createBucketWithStorageClassAndLocation.js <BUCKET_NAME> <CLASS_NAME> <LOCATION>
+//   title: Create a Dual-Region Bucket
+//   description: Create a Dual-Region Bucket with provided locations.
+//   usage: node createBucketWithDualRegion.js <BUCKET_NAME> <REGION1> <REGION2>
 
 function main(
   bucketName = 'my-bucket',
-  storageClass = 'coldline',
-  location = 'ASIA'
+  region1 = 'US-EAST1',
+  region2 = 'US-WEST1'
 ) {
-  // [START storage_create_bucket_class_location]
+  // [START storage_create_bucket_dual_region]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
   // The ID of your GCS bucket
   // const bucketName = 'your-unique-bucket-name';
 
-  // The name of a storage class
-  // See the StorageClass documentation for other valid storage classes:
-  // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/storage/StorageClass.html
-  // const storageClass = 'coldline';
-
-  // The name of a location
+  // The bucket's pair of regions. Case-insensitive.
   // See this documentation for other valid locations:
-  // http://g.co/cloud/storage/docs/locations#location-mr
-  // const location = 'ASIA';
+  // https://cloud.google.com/storage/docs/locations
+  // const region1 = 'US-EAST1';
+  // const region2 = 'US-WEST1';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -51,21 +47,17 @@ function main(
   // For more information, please see https://cloud.google.com/docs/authentication/production or https://googleapis.dev/nodejs/storage/latest/Storage.html
   const storage = new Storage();
 
-  async function createBucketWithStorageClassAndLocation() {
-    // For default values see: https://cloud.google.com/storage/docs/locations and
-    // https://cloud.google.com/storage/docs/storage-classes
+  async function createDualRegionBucket() {
+    // For regions supporting dual-regions see: https://cloud.google.com/storage/docs/locations
     const [bucket] = await storage.createBucket(bucketName, {
-      location,
-      [storageClass]: true,
+      location: `${region1}+${region2}`, // e.g. `US-EAST1+US-WEST1`
     });
 
-    console.log(
-      `${bucket.name} created with ${storageClass} class in ${location}`
-    );
+    console.log(`${bucket.name} created in '${region1}+${region2}'`);
   }
 
-  createBucketWithStorageClassAndLocation().catch(console.error);
-  // [END storage_create_bucket_class_location]
+  createDualRegionBucket().catch(console.error);
+  // [END storage_create_bucket_dual_region]
 }
 
 process.on('unhandledRejection', err => {

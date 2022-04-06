@@ -753,7 +753,9 @@ export class Storage extends Service {
    * @property {Cors[]} [cors=[]] Specify the CORS configuration to use.
    * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
    *     Availability.
-   * @property {string} [location] Specify the location / region in which to create the bucket.
+   * @property {string} [location] Specify the bucket's location(s). If specifying
+   *     a dual-region, can be specified as a string `"US-CENTRAL1+US-WEST1"`.
+   *     For more information, see {@link https://cloud.google.com/storage/docs/locations| Bucket Locations}.
    * @property {boolean} [multiRegional=false] Specify the storage class as
    *     Multi-Regional.
    * @property {boolean} [nearline=false] Specify the storage class as Nearline.
@@ -761,7 +763,7 @@ export class Storage extends Service {
    * @property {boolean} [requesterPays=false] **Early Access Testers Only**
    *     Force the use of the User Project metadata field to assign operational
    *     costs when an operation is made on a Bucket and its objects.
-   * @property {string} [rpo] For dual region buckets, controls whether turbo
+   * @property {string} [rpo] For dual-region buckets, controls whether turbo
    *      replication is enabled (`ASYNC_TURBO`) or disabled (`DEFAULT`).
    * @property {boolean} [standard=true] Specify the storage class as Standard.
    * @property {string} [storageClass] The new storage class. (`standard`,
