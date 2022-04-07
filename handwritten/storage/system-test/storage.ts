@@ -980,7 +980,7 @@ describe('storage', () => {
 
       it('can be written to the bucket by project owner w/o configuration', async () => {
         await setUniformBucketLevelAccess(bucket, true);
-        const file = bucket.file('file');
+        const file = bucket.file(`file-${uuid.v4()}`);
         return assert.doesNotReject(() => file.save('data'));
       });
     });
@@ -997,7 +997,7 @@ describe('storage', () => {
         await createBucket();
         await setUniformBucketLevelAccess(bucket, true);
 
-        file = bucket.file('file');
+        file = bucket.file(`file-${uuid.v4()}`);
         await file.save('data');
       });
 
@@ -1031,7 +1031,7 @@ describe('storage', () => {
       });
 
       it('should preserve file ACL', async () => {
-        const file = bucket.file('file');
+        const file = bucket.file(`file-${uuid.v4()}`);
         await file.save('data');
 
         await file.acl.update(customAcl);
