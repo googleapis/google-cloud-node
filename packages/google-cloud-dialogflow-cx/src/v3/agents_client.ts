@@ -1036,6 +1036,8 @@ export class AgentsClient {
    *   have write permissions for the object. For more information, see
    *   [Dialogflow access
    *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+   * @param {google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat} [request.dataFormat]
+   *   Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
    * @param {string} [request.environment]
    *   Optional. Environment name. If not set, draft environment is assumed.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent

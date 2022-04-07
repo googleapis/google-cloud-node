@@ -310,6 +310,10 @@
                               "type": "bool",
                               "id": 20
                             },
+                            "locked": {
+                              "type": "bool",
+                              "id": 27
+                            },
                             "advancedSettings": {
                               "type": "AdvancedSettings",
                               "id": 22
@@ -424,12 +428,27 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "dataFormat": {
+                              "type": "DataFormat",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "environment": {
                               "type": "string",
                               "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DataFormat": {
+                              "values": {
+                                "DATA_FORMAT_UNSPECIFIED": 0,
+                                "BLOB": 1
                               }
                             }
                           }
@@ -7788,6 +7807,10 @@
                               "type": "bool",
                               "id": 20
                             },
+                            "locked": {
+                              "type": "bool",
+                              "id": 27
+                            },
                             "advancedSettings": {
                               "type": "AdvancedSettings",
                               "id": 22
@@ -7902,12 +7925,27 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "dataFormat": {
+                              "type": "DataFormat",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "environment": {
                               "type": "string",
                               "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DataFormat": {
+                              "values": {
+                                "DATA_FORMAT_UNSPECIFIED": 0,
+                                "BLOB": 1
                               }
                             }
                           }
@@ -14980,24 +15018,6 @@
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -15100,6 +15120,24 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
             },
             "resourceReference": {
               "type": "google.api.ResourceReference",

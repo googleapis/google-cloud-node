@@ -560,6 +560,9 @@ export namespace google {
                         /** Agent enableSpellCorrection */
                         enableSpellCorrection?: (boolean|null);
 
+                        /** Agent locked */
+                        locked?: (boolean|null);
+
                         /** Agent advancedSettings */
                         advancedSettings?: (google.cloud.dialogflow.cx.v3.IAdvancedSettings|null);
                     }
@@ -608,6 +611,9 @@ export namespace google {
 
                         /** Agent enableSpellCorrection. */
                         public enableSpellCorrection: boolean;
+
+                        /** Agent locked. */
+                        public locked: boolean;
 
                         /** Agent advancedSettings. */
                         public advancedSettings?: (google.cloud.dialogflow.cx.v3.IAdvancedSettings|null);
@@ -1262,6 +1268,9 @@ export namespace google {
                         /** ExportAgentRequest agentUri */
                         agentUri?: (string|null);
 
+                        /** ExportAgentRequest dataFormat */
+                        dataFormat?: (google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat|null);
+
                         /** ExportAgentRequest environment */
                         environment?: (string|null);
                     }
@@ -1280,6 +1289,9 @@ export namespace google {
 
                         /** ExportAgentRequest agentUri. */
                         public agentUri: string;
+
+                        /** ExportAgentRequest dataFormat. */
+                        public dataFormat: (google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat);
 
                         /** ExportAgentRequest environment. */
                         public environment: string;
@@ -1353,6 +1365,15 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ExportAgentRequest {
+
+                        /** DataFormat enum. */
+                        enum DataFormat {
+                            DATA_FORMAT_UNSPECIFIED = 0,
+                            BLOB = 1
+                        }
                     }
 
                     /** Properties of an ExportAgentResponse. */
@@ -28460,6 +28481,9 @@ export namespace google {
                         /** Agent enableSpellCorrection */
                         enableSpellCorrection?: (boolean|null);
 
+                        /** Agent locked */
+                        locked?: (boolean|null);
+
                         /** Agent advancedSettings */
                         advancedSettings?: (google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null);
                     }
@@ -28508,6 +28532,9 @@ export namespace google {
 
                         /** Agent enableSpellCorrection. */
                         public enableSpellCorrection: boolean;
+
+                        /** Agent locked. */
+                        public locked: boolean;
 
                         /** Agent advancedSettings. */
                         public advancedSettings?: (google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null);
@@ -29162,6 +29189,9 @@ export namespace google {
                         /** ExportAgentRequest agentUri */
                         agentUri?: (string|null);
 
+                        /** ExportAgentRequest dataFormat */
+                        dataFormat?: (google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.DataFormat|null);
+
                         /** ExportAgentRequest environment */
                         environment?: (string|null);
                     }
@@ -29180,6 +29210,9 @@ export namespace google {
 
                         /** ExportAgentRequest agentUri. */
                         public agentUri: string;
+
+                        /** ExportAgentRequest dataFormat. */
+                        public dataFormat: (google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.DataFormat);
 
                         /** ExportAgentRequest environment. */
                         public environment: string;
@@ -29253,6 +29286,15 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ExportAgentRequest {
+
+                        /** DataFormat enum. */
+                        enum DataFormat {
+                            DATA_FORMAT_UNSPECIFIED = 0,
+                            BLOB = 1
+                        }
                     }
 
                     /** Properties of an ExportAgentResponse. */
@@ -55832,18 +55874,6 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
-        }
-
         /** Properties of a Http. */
         interface IHttp {
 
@@ -56181,6 +56211,18 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
         }
 
         /** Properties of a ResourceDescriptor. */

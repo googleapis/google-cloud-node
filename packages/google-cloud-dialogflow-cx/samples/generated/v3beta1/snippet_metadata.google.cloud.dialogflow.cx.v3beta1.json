@@ -238,7 +238,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 70,
+          "end": 74,
           "type": "FULL"
         }
       ],
@@ -254,6 +254,10 @@
           {
             "name": "agent_uri",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_format",
+            "type": ".google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.DataFormat"
           },
           {
             "name": "environment",

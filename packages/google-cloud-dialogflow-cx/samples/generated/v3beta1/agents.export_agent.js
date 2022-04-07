@@ -43,6 +43,10 @@ function main(name) {
    */
   // const agentUri = 'abc123'
   /**
+   *  Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
+   */
+  // const dataFormat = {}
+  /**
    *  Optional. Environment name. If not set, draft environment is assumed.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/environments/<Environment ID>`.
