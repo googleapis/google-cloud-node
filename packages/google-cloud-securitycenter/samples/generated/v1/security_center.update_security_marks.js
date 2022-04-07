@@ -40,7 +40,7 @@ function main(securityMarks) {
    *  The time at which the updated SecurityMarks take effect.
    *  If not set uses current server time.  Updates will be applied to the
    *  SecurityMarks that are active immediately preceding this time. Must be
-   *  smaller or equal to the server time.
+   *  earlier or equal to the server time.
    */
   // const startTime = {}
 

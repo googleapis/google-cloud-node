@@ -8,11 +8,11 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.SecurityCenter.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/securitycenter/v1;securitycenter",
                     "java_multiple_files": true,
                     "java_outer_classname": "ResourceProto",
                     "java_package": "com.google.cloud.securitycenter.v1",
-                    "csharp_namespace": "Google.Cloud.SecurityCenter.V1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1",
                     "ruby_package": "Google::Cloud::SecurityCenter::V1",
                     "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
@@ -362,6 +362,11 @@
                         "muteInitiator": {
                           "type": "string",
                           "id": 28
+                        },
+                        "iamBindings": {
+                          "rule": "repeated",
+                          "type": "IamBinding",
+                          "id": 39
                         }
                       },
                       "nested": {
@@ -397,6 +402,31 @@
                             "MISCONFIGURATION": 3,
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5
+                          }
+                        }
+                      }
+                    },
+                    "IamBinding": {
+                      "fields": {
+                        "action": {
+                          "type": "Action",
+                          "id": 1
+                        },
+                        "role": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "member": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Action": {
+                          "values": {
+                            "ACTION_UNSPECIFIED": 0,
+                            "ADD": 1,
+                            "REMOVE": 2
                           }
                         }
                       }
@@ -491,7 +521,8 @@
                             "STEAL_WEB_SESSION_COOKIE": 25,
                             "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE": 26,
                             "EXPLOIT_PUBLIC_FACING_APPLICATION": 27,
-                            "MODIFY_AUTHENTICATION_PROCESS": 28
+                            "MODIFY_AUTHENTICATION_PROCESS": 28,
+                            "DATA_DESTRUCTION": 29
                           }
                         }
                       }
@@ -756,6 +787,14 @@
                           "type": "string",
                           "id": 1
                         },
+                        "displayName": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 6
+                        },
                         "project": {
                           "type": "string",
                           "id": 2
@@ -772,10 +811,6 @@
                           "type": "string",
                           "id": 5
                         },
-                        "type": {
-                          "type": "string",
-                          "id": 6
-                        },
                         "folders": {
                           "rule": "repeated",
                           "type": "Folder",
@@ -783,10 +818,6 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 8
                         }
                       }
                     },
@@ -2430,6 +2461,14 @@
                                   "type": "string",
                                   "id": 1
                                 },
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 8
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "id": 6
+                                },
                                 "projectName": {
                                   "type": "string",
                                   "id": 2
@@ -2446,18 +2485,10 @@
                                   "type": "string",
                                   "id": 5
                                 },
-                                "type": {
-                                  "type": "string",
-                                  "id": 6
-                                },
                                 "folders": {
                                   "rule": "repeated",
                                   "type": "Folder",
                                   "id": 7
-                                },
-                                "displayName": {
-                                  "type": "string",
-                                  "id": 8
                                 }
                               }
                             }

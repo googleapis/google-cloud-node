@@ -2711,6 +2711,7 @@
                          * @property {google.cloud.securitycenter.v1.IMitreAttack|null} [mitreAttack] Finding mitreAttack
                          * @property {google.cloud.securitycenter.v1.IAccess|null} [access] Finding access
                          * @property {string|null} [muteInitiator] Finding muteInitiator
+                         * @property {Array.<google.cloud.securitycenter.v1.IIamBinding>|null} [iamBindings] Finding iamBindings
                          */
     
                         /**
@@ -2724,6 +2725,7 @@
                         function Finding(properties) {
                             this.sourceProperties = {};
                             this.externalSystems = {};
+                            this.iamBindings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2899,6 +2901,14 @@
                         Finding.prototype.muteInitiator = "";
     
                         /**
+                         * Finding iamBindings.
+                         * @member {Array.<google.cloud.securitycenter.v1.IIamBinding>} iamBindings
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.iamBindings = $util.emptyArray;
+    
+                        /**
                          * Creates a new Finding instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -2970,6 +2980,9 @@
                                 $root.google.cloud.securitycenter.v1.Access.encode(message.access, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.muteInitiator != null && Object.hasOwnProperty.call(message, "muteInitiator"))
                                 writer.uint32(/* id 28, wireType 2 =*/226).string(message.muteInitiator);
+                            if (message.iamBindings != null && message.iamBindings.length)
+                                for (var i = 0; i < message.iamBindings.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.IamBinding.encode(message.iamBindings[i], writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
                             return writer;
                         };
     
@@ -3104,6 +3117,11 @@
                                     break;
                                 case 28:
                                     message.muteInitiator = reader.string();
+                                    break;
+                                case 39:
+                                    if (!(message.iamBindings && message.iamBindings.length))
+                                        message.iamBindings = [];
+                                    message.iamBindings.push($root.google.cloud.securitycenter.v1.IamBinding.decode(reader, reader.uint32()));
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3263,6 +3281,15 @@
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
                                 if (!$util.isString(message.muteInitiator))
                                     return "muteInitiator: string expected";
+                            if (message.iamBindings != null && message.hasOwnProperty("iamBindings")) {
+                                if (!Array.isArray(message.iamBindings))
+                                    return "iamBindings: array expected";
+                                for (var i = 0; i < message.iamBindings.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.IamBinding.verify(message.iamBindings[i]);
+                                    if (error)
+                                        return "iamBindings." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -3432,6 +3459,16 @@
                             }
                             if (object.muteInitiator != null)
                                 message.muteInitiator = String(object.muteInitiator);
+                            if (object.iamBindings) {
+                                if (!Array.isArray(object.iamBindings))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.iamBindings: array expected");
+                                message.iamBindings = [];
+                                for (var i = 0; i < object.iamBindings.length; ++i) {
+                                    if (typeof object.iamBindings[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Finding.iamBindings: object expected");
+                                    message.iamBindings[i] = $root.google.cloud.securitycenter.v1.IamBinding.fromObject(object.iamBindings[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -3448,6 +3485,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.iamBindings = [];
                             if (options.objects || options.defaults) {
                                 object.sourceProperties = {};
                                 object.externalSystems = {};
@@ -3522,6 +3561,11 @@
                                 object.access = $root.google.cloud.securitycenter.v1.Access.toObject(message.access, options);
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
                                 object.muteInitiator = message.muteInitiator;
+                            if (message.iamBindings && message.iamBindings.length) {
+                                object.iamBindings = [];
+                                for (var j = 0; j < message.iamBindings.length; ++j)
+                                    object.iamBindings[j] = $root.google.cloud.securitycenter.v1.IamBinding.toObject(message.iamBindings[j], options);
+                            }
                             return object;
                         };
     
@@ -3613,6 +3657,272 @@
                         })();
     
                         return Finding;
+                    })();
+    
+                    v1.IamBinding = (function() {
+    
+                        /**
+                         * Properties of an IamBinding.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IIamBinding
+                         * @property {google.cloud.securitycenter.v1.IamBinding.Action|null} [action] IamBinding action
+                         * @property {string|null} [role] IamBinding role
+                         * @property {string|null} [member] IamBinding member
+                         */
+    
+                        /**
+                         * Constructs a new IamBinding.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an IamBinding.
+                         * @implements IIamBinding
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IIamBinding=} [properties] Properties to set
+                         */
+                        function IamBinding(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IamBinding action.
+                         * @member {google.cloud.securitycenter.v1.IamBinding.Action} action
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @instance
+                         */
+                        IamBinding.prototype.action = 0;
+    
+                        /**
+                         * IamBinding role.
+                         * @member {string} role
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @instance
+                         */
+                        IamBinding.prototype.role = "";
+    
+                        /**
+                         * IamBinding member.
+                         * @member {string} member
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @instance
+                         */
+                        IamBinding.prototype.member = "";
+    
+                        /**
+                         * Creates a new IamBinding instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IIamBinding=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.IamBinding} IamBinding instance
+                         */
+                        IamBinding.create = function create(properties) {
+                            return new IamBinding(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IamBinding message. Does not implicitly {@link google.cloud.securitycenter.v1.IamBinding.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IIamBinding} message IamBinding message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IamBinding.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.action);
+                            if (message.role != null && Object.hasOwnProperty.call(message, "role"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.role);
+                            if (message.member != null && Object.hasOwnProperty.call(message, "member"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.member);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IamBinding message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.IamBinding.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IIamBinding} message IamBinding message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IamBinding.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IamBinding message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.IamBinding} IamBinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IamBinding.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.IamBinding();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.action = reader.int32();
+                                    break;
+                                case 2:
+                                    message.role = reader.string();
+                                    break;
+                                case 3:
+                                    message.member = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IamBinding message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.IamBinding} IamBinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IamBinding.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IamBinding message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IamBinding.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                switch (message.action) {
+                                default:
+                                    return "action: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.role != null && message.hasOwnProperty("role"))
+                                if (!$util.isString(message.role))
+                                    return "role: string expected";
+                            if (message.member != null && message.hasOwnProperty("member"))
+                                if (!$util.isString(message.member))
+                                    return "member: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IamBinding message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.IamBinding} IamBinding
+                         */
+                        IamBinding.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.IamBinding)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.IamBinding();
+                            switch (object.action) {
+                            case "ACTION_UNSPECIFIED":
+                            case 0:
+                                message.action = 0;
+                                break;
+                            case "ADD":
+                            case 1:
+                                message.action = 1;
+                                break;
+                            case "REMOVE":
+                            case 2:
+                                message.action = 2;
+                                break;
+                            }
+                            if (object.role != null)
+                                message.role = String(object.role);
+                            if (object.member != null)
+                                message.member = String(object.member);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IamBinding message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IamBinding} message IamBinding
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IamBinding.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.action = options.enums === String ? "ACTION_UNSPECIFIED" : 0;
+                                object.role = "";
+                                object.member = "";
+                            }
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                object.action = options.enums === String ? $root.google.cloud.securitycenter.v1.IamBinding.Action[message.action] : message.action;
+                            if (message.role != null && message.hasOwnProperty("role"))
+                                object.role = message.role;
+                            if (message.member != null && message.hasOwnProperty("member"))
+                                object.member = message.member;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IamBinding to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.IamBinding
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IamBinding.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Action enum.
+                         * @name google.cloud.securitycenter.v1.IamBinding.Action
+                         * @enum {number}
+                         * @property {number} ACTION_UNSPECIFIED=0 ACTION_UNSPECIFIED value
+                         * @property {number} ADD=1 ADD value
+                         * @property {number} REMOVE=2 REMOVE value
+                         */
+                        IamBinding.Action = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ADD"] = 1;
+                            values[valuesById[2] = "REMOVE"] = 2;
+                            return values;
+                        })();
+    
+                        return IamBinding;
                     })();
     
                     v1.Indicator = (function() {
@@ -4136,6 +4446,7 @@
                                     case 26:
                                     case 27:
                                     case 28:
+                                    case 29:
                                         break;
                                     }
                             }
@@ -4200,6 +4511,7 @@
                                     case 26:
                                     case 27:
                                     case 28:
+                                    case 29:
                                         break;
                                     }
                             }
@@ -4406,6 +4718,10 @@
                                     case 28:
                                         message.primaryTechniques[i] = 28;
                                         break;
+                                    case "DATA_DESTRUCTION":
+                                    case 29:
+                                        message.primaryTechniques[i] = 29;
+                                        break;
                                     }
                             }
                             if (object.additionalTactics) {
@@ -4600,6 +4916,10 @@
                                     case 28:
                                         message.additionalTechniques[i] = 28;
                                         break;
+                                    case "DATA_DESTRUCTION":
+                                    case 29:
+                                        message.additionalTechniques[i] = 29;
+                                        break;
                                     }
                             }
                             if (object.version != null)
@@ -4735,6 +5055,7 @@
                          * @property {number} MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE=26 MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE value
                          * @property {number} EXPLOIT_PUBLIC_FACING_APPLICATION=27 EXPLOIT_PUBLIC_FACING_APPLICATION value
                          * @property {number} MODIFY_AUTHENTICATION_PROCESS=28 MODIFY_AUTHENTICATION_PROCESS value
+                         * @property {number} DATA_DESTRUCTION=29 DATA_DESTRUCTION value
                          */
                         MitreAttack.Technique = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4767,6 +5088,7 @@
                             values[valuesById[26] = "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE"] = 26;
                             values[valuesById[27] = "EXPLOIT_PUBLIC_FACING_APPLICATION"] = 27;
                             values[valuesById[28] = "MODIFY_AUTHENTICATION_PROCESS"] = 28;
+                            values[valuesById[29] = "DATA_DESTRUCTION"] = 29;
                             return values;
                         })();
     
@@ -7185,13 +7507,13 @@
                          * @memberof google.cloud.securitycenter.v1
                          * @interface IResource
                          * @property {string|null} [name] Resource name
+                         * @property {string|null} [displayName] Resource displayName
+                         * @property {string|null} [type] Resource type
                          * @property {string|null} [project] Resource project
                          * @property {string|null} [projectDisplayName] Resource projectDisplayName
                          * @property {string|null} [parent] Resource parent
                          * @property {string|null} [parentDisplayName] Resource parentDisplayName
-                         * @property {string|null} [type] Resource type
                          * @property {Array.<google.cloud.securitycenter.v1.IFolder>|null} [folders] Resource folders
-                         * @property {string|null} [displayName] Resource displayName
                          */
     
                         /**
@@ -7217,6 +7539,22 @@
                          * @instance
                          */
                         Resource.prototype.name = "";
+    
+                        /**
+                         * Resource displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.securitycenter.v1.Resource
+                         * @instance
+                         */
+                        Resource.prototype.displayName = "";
+    
+                        /**
+                         * Resource type.
+                         * @member {string} type
+                         * @memberof google.cloud.securitycenter.v1.Resource
+                         * @instance
+                         */
+                        Resource.prototype.type = "";
     
                         /**
                          * Resource project.
@@ -7251,28 +7589,12 @@
                         Resource.prototype.parentDisplayName = "";
     
                         /**
-                         * Resource type.
-                         * @member {string} type
-                         * @memberof google.cloud.securitycenter.v1.Resource
-                         * @instance
-                         */
-                        Resource.prototype.type = "";
-    
-                        /**
                          * Resource folders.
                          * @member {Array.<google.cloud.securitycenter.v1.IFolder>} folders
                          * @memberof google.cloud.securitycenter.v1.Resource
                          * @instance
                          */
                         Resource.prototype.folders = $util.emptyArray;
-    
-                        /**
-                         * Resource displayName.
-                         * @member {string} displayName
-                         * @memberof google.cloud.securitycenter.v1.Resource
-                         * @instance
-                         */
-                        Resource.prototype.displayName = "";
     
                         /**
                          * Creates a new Resource instance using the specified properties.
@@ -7352,6 +7674,12 @@
                                 case 1:
                                     message.name = reader.string();
                                     break;
+                                case 8:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 6:
+                                    message.type = reader.string();
+                                    break;
                                 case 2:
                                     message.project = reader.string();
                                     break;
@@ -7364,16 +7692,10 @@
                                 case 5:
                                     message.parentDisplayName = reader.string();
                                     break;
-                                case 6:
-                                    message.type = reader.string();
-                                    break;
                                 case 7:
                                     if (!(message.folders && message.folders.length))
                                         message.folders = [];
                                     message.folders.push($root.google.cloud.securitycenter.v1.Folder.decode(reader, reader.uint32()));
-                                    break;
-                                case 8:
-                                    message.displayName = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7413,6 +7735,12 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
@@ -7425,9 +7753,6 @@
                             if (message.parentDisplayName != null && message.hasOwnProperty("parentDisplayName"))
                                 if (!$util.isString(message.parentDisplayName))
                                     return "parentDisplayName: string expected";
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                if (!$util.isString(message.type))
-                                    return "type: string expected";
                             if (message.folders != null && message.hasOwnProperty("folders")) {
                                 if (!Array.isArray(message.folders))
                                     return "folders: array expected";
@@ -7437,9 +7762,6 @@
                                         return "folders." + error;
                                 }
                             }
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                if (!$util.isString(message.displayName))
-                                    return "displayName: string expected";
                             return null;
                         };
     
@@ -7457,6 +7779,10 @@
                             var message = new $root.google.cloud.securitycenter.v1.Resource();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.type != null)
+                                message.type = String(object.type);
                             if (object.project != null)
                                 message.project = String(object.project);
                             if (object.projectDisplayName != null)
@@ -7465,8 +7791,6 @@
                                 message.parent = String(object.parent);
                             if (object.parentDisplayName != null)
                                 message.parentDisplayName = String(object.parentDisplayName);
-                            if (object.type != null)
-                                message.type = String(object.type);
                             if (object.folders) {
                                 if (!Array.isArray(object.folders))
                                     throw TypeError(".google.cloud.securitycenter.v1.Resource.folders: array expected");
@@ -7477,8 +7801,6 @@
                                     message.folders[i] = $root.google.cloud.securitycenter.v1.Folder.fromObject(object.folders[i]);
                                 }
                             }
-                            if (object.displayName != null)
-                                message.displayName = String(object.displayName);
                             return message;
                         };
     
@@ -16884,13 +17206,13 @@
                                  * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult
                                  * @interface IResource
                                  * @property {string|null} [name] Resource name
+                                 * @property {string|null} [displayName] Resource displayName
+                                 * @property {string|null} [type] Resource type
                                  * @property {string|null} [projectName] Resource projectName
                                  * @property {string|null} [projectDisplayName] Resource projectDisplayName
                                  * @property {string|null} [parentName] Resource parentName
                                  * @property {string|null} [parentDisplayName] Resource parentDisplayName
-                                 * @property {string|null} [type] Resource type
                                  * @property {Array.<google.cloud.securitycenter.v1.IFolder>|null} [folders] Resource folders
-                                 * @property {string|null} [displayName] Resource displayName
                                  */
     
                                 /**
@@ -16916,6 +17238,22 @@
                                  * @instance
                                  */
                                 Resource.prototype.name = "";
+    
+                                /**
+                                 * Resource displayName.
+                                 * @member {string} displayName
+                                 * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.displayName = "";
+    
+                                /**
+                                 * Resource type.
+                                 * @member {string} type
+                                 * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.type = "";
     
                                 /**
                                  * Resource projectName.
@@ -16950,28 +17288,12 @@
                                 Resource.prototype.parentDisplayName = "";
     
                                 /**
-                                 * Resource type.
-                                 * @member {string} type
-                                 * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource
-                                 * @instance
-                                 */
-                                Resource.prototype.type = "";
-    
-                                /**
                                  * Resource folders.
                                  * @member {Array.<google.cloud.securitycenter.v1.IFolder>} folders
                                  * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource
                                  * @instance
                                  */
                                 Resource.prototype.folders = $util.emptyArray;
-    
-                                /**
-                                 * Resource displayName.
-                                 * @member {string} displayName
-                                 * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource
-                                 * @instance
-                                 */
-                                Resource.prototype.displayName = "";
     
                                 /**
                                  * Creates a new Resource instance using the specified properties.
@@ -17051,6 +17373,12 @@
                                         case 1:
                                             message.name = reader.string();
                                             break;
+                                        case 8:
+                                            message.displayName = reader.string();
+                                            break;
+                                        case 6:
+                                            message.type = reader.string();
+                                            break;
                                         case 2:
                                             message.projectName = reader.string();
                                             break;
@@ -17063,16 +17391,10 @@
                                         case 5:
                                             message.parentDisplayName = reader.string();
                                             break;
-                                        case 6:
-                                            message.type = reader.string();
-                                            break;
                                         case 7:
                                             if (!(message.folders && message.folders.length))
                                                 message.folders = [];
                                             message.folders.push($root.google.cloud.securitycenter.v1.Folder.decode(reader, reader.uint32()));
-                                            break;
-                                        case 8:
-                                            message.displayName = reader.string();
                                             break;
                                         default:
                                             reader.skipType(tag & 7);
@@ -17112,6 +17434,12 @@
                                     if (message.name != null && message.hasOwnProperty("name"))
                                         if (!$util.isString(message.name))
                                             return "name: string expected";
+                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                        if (!$util.isString(message.displayName))
+                                            return "displayName: string expected";
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        if (!$util.isString(message.type))
+                                            return "type: string expected";
                                     if (message.projectName != null && message.hasOwnProperty("projectName"))
                                         if (!$util.isString(message.projectName))
                                             return "projectName: string expected";
@@ -17124,9 +17452,6 @@
                                     if (message.parentDisplayName != null && message.hasOwnProperty("parentDisplayName"))
                                         if (!$util.isString(message.parentDisplayName))
                                             return "parentDisplayName: string expected";
-                                    if (message.type != null && message.hasOwnProperty("type"))
-                                        if (!$util.isString(message.type))
-                                            return "type: string expected";
                                     if (message.folders != null && message.hasOwnProperty("folders")) {
                                         if (!Array.isArray(message.folders))
                                             return "folders: array expected";
@@ -17136,9 +17461,6 @@
                                                 return "folders." + error;
                                         }
                                     }
-                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                        if (!$util.isString(message.displayName))
-                                            return "displayName: string expected";
                                     return null;
                                 };
     
@@ -17156,6 +17478,10 @@
                                     var message = new $root.google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource();
                                     if (object.name != null)
                                         message.name = String(object.name);
+                                    if (object.displayName != null)
+                                        message.displayName = String(object.displayName);
+                                    if (object.type != null)
+                                        message.type = String(object.type);
                                     if (object.projectName != null)
                                         message.projectName = String(object.projectName);
                                     if (object.projectDisplayName != null)
@@ -17164,8 +17490,6 @@
                                         message.parentName = String(object.parentName);
                                     if (object.parentDisplayName != null)
                                         message.parentDisplayName = String(object.parentDisplayName);
-                                    if (object.type != null)
-                                        message.type = String(object.type);
                                     if (object.folders) {
                                         if (!Array.isArray(object.folders))
                                             throw TypeError(".google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource.folders: array expected");
@@ -17176,8 +17500,6 @@
                                             message.folders[i] = $root.google.cloud.securitycenter.v1.Folder.fromObject(object.folders[i]);
                                         }
                                     }
-                                    if (object.displayName != null)
-                                        message.displayName = String(object.displayName);
                                     return message;
                                 };
     

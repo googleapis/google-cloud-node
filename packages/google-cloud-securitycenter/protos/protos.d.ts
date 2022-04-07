@@ -1108,6 +1108,9 @@ export namespace google {
 
                     /** Finding muteInitiator */
                     muteInitiator?: (string|null);
+
+                    /** Finding iamBindings */
+                    iamBindings?: (google.cloud.securitycenter.v1.IIamBinding[]|null);
                 }
 
                 /** Represents a Finding. */
@@ -1181,6 +1184,9 @@ export namespace google {
 
                     /** Finding muteInitiator. */
                     public muteInitiator: string;
+
+                    /** Finding iamBindings. */
+                    public iamBindings: google.cloud.securitycenter.v1.IIamBinding[];
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -1287,6 +1293,118 @@ export namespace google {
                         MISCONFIGURATION = 3,
                         OBSERVATION = 4,
                         SCC_ERROR = 5
+                    }
+                }
+
+                /** Properties of an IamBinding. */
+                interface IIamBinding {
+
+                    /** IamBinding action */
+                    action?: (google.cloud.securitycenter.v1.IamBinding.Action|keyof typeof google.cloud.securitycenter.v1.IamBinding.Action|null);
+
+                    /** IamBinding role */
+                    role?: (string|null);
+
+                    /** IamBinding member */
+                    member?: (string|null);
+                }
+
+                /** Represents an IamBinding. */
+                class IamBinding implements IIamBinding {
+
+                    /**
+                     * Constructs a new IamBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IIamBinding);
+
+                    /** IamBinding action. */
+                    public action: (google.cloud.securitycenter.v1.IamBinding.Action|keyof typeof google.cloud.securitycenter.v1.IamBinding.Action);
+
+                    /** IamBinding role. */
+                    public role: string;
+
+                    /** IamBinding member. */
+                    public member: string;
+
+                    /**
+                     * Creates a new IamBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IamBinding instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IIamBinding): google.cloud.securitycenter.v1.IamBinding;
+
+                    /**
+                     * Encodes the specified IamBinding message. Does not implicitly {@link google.cloud.securitycenter.v1.IamBinding.verify|verify} messages.
+                     * @param message IamBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IIamBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IamBinding message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.IamBinding.verify|verify} messages.
+                     * @param message IamBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IIamBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IamBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IamBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.IamBinding;
+
+                    /**
+                     * Decodes an IamBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IamBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.IamBinding;
+
+                    /**
+                     * Verifies an IamBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IamBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IamBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.IamBinding;
+
+                    /**
+                     * Creates a plain object from an IamBinding message. Also converts values to other types if specified.
+                     * @param message IamBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.IamBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IamBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace IamBinding {
+
+                    /** Action enum. */
+                    enum Action {
+                        ACTION_UNSPECIFIED = 0,
+                        ADD = 1,
+                        REMOVE = 2
                     }
                 }
 
@@ -1551,7 +1669,8 @@ export namespace google {
                         STEAL_WEB_SESSION_COOKIE = 25,
                         MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE = 26,
                         EXPLOIT_PUBLIC_FACING_APPLICATION = 27,
-                        MODIFY_AUTHENTICATION_PROCESS = 28
+                        MODIFY_AUTHENTICATION_PROCESS = 28,
+                        DATA_DESTRUCTION = 29
                     }
                 }
 
@@ -2483,6 +2602,12 @@ export namespace google {
                     /** Resource name */
                     name?: (string|null);
 
+                    /** Resource displayName */
+                    displayName?: (string|null);
+
+                    /** Resource type */
+                    type?: (string|null);
+
                     /** Resource project */
                     project?: (string|null);
 
@@ -2495,14 +2620,8 @@ export namespace google {
                     /** Resource parentDisplayName */
                     parentDisplayName?: (string|null);
 
-                    /** Resource type */
-                    type?: (string|null);
-
                     /** Resource folders */
                     folders?: (google.cloud.securitycenter.v1.IFolder[]|null);
-
-                    /** Resource displayName */
-                    displayName?: (string|null);
                 }
 
                 /** Represents a Resource. */
@@ -2517,6 +2636,12 @@ export namespace google {
                     /** Resource name. */
                     public name: string;
 
+                    /** Resource displayName. */
+                    public displayName: string;
+
+                    /** Resource type. */
+                    public type: string;
+
                     /** Resource project. */
                     public project: string;
 
@@ -2529,14 +2654,8 @@ export namespace google {
                     /** Resource parentDisplayName. */
                     public parentDisplayName: string;
 
-                    /** Resource type. */
-                    public type: string;
-
                     /** Resource folders. */
                     public folders: google.cloud.securitycenter.v1.IFolder[];
-
-                    /** Resource displayName. */
-                    public displayName: string;
 
                     /**
                      * Creates a new Resource instance using the specified properties.
@@ -6800,6 +6919,12 @@ export namespace google {
                             /** Resource name */
                             name?: (string|null);
 
+                            /** Resource displayName */
+                            displayName?: (string|null);
+
+                            /** Resource type */
+                            type?: (string|null);
+
                             /** Resource projectName */
                             projectName?: (string|null);
 
@@ -6812,14 +6937,8 @@ export namespace google {
                             /** Resource parentDisplayName */
                             parentDisplayName?: (string|null);
 
-                            /** Resource type */
-                            type?: (string|null);
-
                             /** Resource folders */
                             folders?: (google.cloud.securitycenter.v1.IFolder[]|null);
-
-                            /** Resource displayName */
-                            displayName?: (string|null);
                         }
 
                         /** Represents a Resource. */
@@ -6834,6 +6953,12 @@ export namespace google {
                             /** Resource name. */
                             public name: string;
 
+                            /** Resource displayName. */
+                            public displayName: string;
+
+                            /** Resource type. */
+                            public type: string;
+
                             /** Resource projectName. */
                             public projectName: string;
 
@@ -6846,14 +6971,8 @@ export namespace google {
                             /** Resource parentDisplayName. */
                             public parentDisplayName: string;
 
-                            /** Resource type. */
-                            public type: string;
-
                             /** Resource folders. */
                             public folders: google.cloud.securitycenter.v1.IFolder[];
-
-                            /** Resource displayName. */
-                            public displayName: string;
 
                             /**
                              * Creates a new Resource instance using the specified properties.
