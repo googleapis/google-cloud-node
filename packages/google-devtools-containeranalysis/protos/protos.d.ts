@@ -20,6 +20,391 @@ export namespace grafeas {
     /** Namespace v1. */
     namespace v1 {
 
+        /** Severity enum. */
+        enum Severity {
+            SEVERITY_UNSPECIFIED = 0,
+            MINIMAL = 1,
+            LOW = 2,
+            MEDIUM = 3,
+            HIGH = 4,
+            CRITICAL = 5
+        }
+
+        /** Properties of an AttestationNote. */
+        interface IAttestationNote {
+
+            /** AttestationNote hint */
+            hint?: (grafeas.v1.AttestationNote.IHint|null);
+        }
+
+        /** Represents an AttestationNote. */
+        class AttestationNote implements IAttestationNote {
+
+            /**
+             * Constructs a new AttestationNote.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IAttestationNote);
+
+            /** AttestationNote hint. */
+            public hint?: (grafeas.v1.AttestationNote.IHint|null);
+
+            /**
+             * Creates a new AttestationNote instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AttestationNote instance
+             */
+            public static create(properties?: grafeas.v1.IAttestationNote): grafeas.v1.AttestationNote;
+
+            /**
+             * Encodes the specified AttestationNote message. Does not implicitly {@link grafeas.v1.AttestationNote.verify|verify} messages.
+             * @param message AttestationNote message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IAttestationNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AttestationNote message, length delimited. Does not implicitly {@link grafeas.v1.AttestationNote.verify|verify} messages.
+             * @param message AttestationNote message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IAttestationNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an AttestationNote message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns AttestationNote
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.AttestationNote;
+
+            /**
+             * Decodes an AttestationNote message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AttestationNote
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.AttestationNote;
+
+            /**
+             * Verifies an AttestationNote message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an AttestationNote message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AttestationNote
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.AttestationNote;
+
+            /**
+             * Creates a plain object from an AttestationNote message. Also converts values to other types if specified.
+             * @param message AttestationNote
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.AttestationNote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AttestationNote to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace AttestationNote {
+
+            /** Properties of a Hint. */
+            interface IHint {
+
+                /** Hint humanReadableName */
+                humanReadableName?: (string|null);
+            }
+
+            /** Represents a Hint. */
+            class Hint implements IHint {
+
+                /**
+                 * Constructs a new Hint.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.AttestationNote.IHint);
+
+                /** Hint humanReadableName. */
+                public humanReadableName: string;
+
+                /**
+                 * Creates a new Hint instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Hint instance
+                 */
+                public static create(properties?: grafeas.v1.AttestationNote.IHint): grafeas.v1.AttestationNote.Hint;
+
+                /**
+                 * Encodes the specified Hint message. Does not implicitly {@link grafeas.v1.AttestationNote.Hint.verify|verify} messages.
+                 * @param message Hint message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.AttestationNote.IHint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Hint message, length delimited. Does not implicitly {@link grafeas.v1.AttestationNote.Hint.verify|verify} messages.
+                 * @param message Hint message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.AttestationNote.IHint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Hint message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Hint
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.AttestationNote.Hint;
+
+                /**
+                 * Decodes a Hint message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Hint
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.AttestationNote.Hint;
+
+                /**
+                 * Verifies a Hint message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Hint message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Hint
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.AttestationNote.Hint;
+
+                /**
+                 * Creates a plain object from a Hint message. Also converts values to other types if specified.
+                 * @param message Hint
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.AttestationNote.Hint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Hint to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+        }
+
+        /** Properties of a Jwt. */
+        interface IJwt {
+
+            /** Jwt compactJwt */
+            compactJwt?: (string|null);
+        }
+
+        /** Represents a Jwt. */
+        class Jwt implements IJwt {
+
+            /**
+             * Constructs a new Jwt.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IJwt);
+
+            /** Jwt compactJwt. */
+            public compactJwt: string;
+
+            /**
+             * Creates a new Jwt instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Jwt instance
+             */
+            public static create(properties?: grafeas.v1.IJwt): grafeas.v1.Jwt;
+
+            /**
+             * Encodes the specified Jwt message. Does not implicitly {@link grafeas.v1.Jwt.verify|verify} messages.
+             * @param message Jwt message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IJwt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Jwt message, length delimited. Does not implicitly {@link grafeas.v1.Jwt.verify|verify} messages.
+             * @param message Jwt message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IJwt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Jwt message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Jwt
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Jwt;
+
+            /**
+             * Decodes a Jwt message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Jwt
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Jwt;
+
+            /**
+             * Verifies a Jwt message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Jwt message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Jwt
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.Jwt;
+
+            /**
+             * Creates a plain object from a Jwt message. Also converts values to other types if specified.
+             * @param message Jwt
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.Jwt, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Jwt to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an AttestationOccurrence. */
+        interface IAttestationOccurrence {
+
+            /** AttestationOccurrence serializedPayload */
+            serializedPayload?: (Uint8Array|string|null);
+
+            /** AttestationOccurrence signatures */
+            signatures?: (grafeas.v1.ISignature[]|null);
+
+            /** AttestationOccurrence jwts */
+            jwts?: (grafeas.v1.IJwt[]|null);
+        }
+
+        /** Represents an AttestationOccurrence. */
+        class AttestationOccurrence implements IAttestationOccurrence {
+
+            /**
+             * Constructs a new AttestationOccurrence.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IAttestationOccurrence);
+
+            /** AttestationOccurrence serializedPayload. */
+            public serializedPayload: (Uint8Array|string);
+
+            /** AttestationOccurrence signatures. */
+            public signatures: grafeas.v1.ISignature[];
+
+            /** AttestationOccurrence jwts. */
+            public jwts: grafeas.v1.IJwt[];
+
+            /**
+             * Creates a new AttestationOccurrence instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AttestationOccurrence instance
+             */
+            public static create(properties?: grafeas.v1.IAttestationOccurrence): grafeas.v1.AttestationOccurrence;
+
+            /**
+             * Encodes the specified AttestationOccurrence message. Does not implicitly {@link grafeas.v1.AttestationOccurrence.verify|verify} messages.
+             * @param message AttestationOccurrence message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IAttestationOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AttestationOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.AttestationOccurrence.verify|verify} messages.
+             * @param message AttestationOccurrence message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IAttestationOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an AttestationOccurrence message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns AttestationOccurrence
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.AttestationOccurrence;
+
+            /**
+             * Decodes an AttestationOccurrence message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AttestationOccurrence
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.AttestationOccurrence;
+
+            /**
+             * Verifies an AttestationOccurrence message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an AttestationOccurrence message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AttestationOccurrence
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.AttestationOccurrence;
+
+            /**
+             * Creates a plain object from an AttestationOccurrence message. Also converts values to other types if specified.
+             * @param message AttestationOccurrence
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.AttestationOccurrence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AttestationOccurrence to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** NoteKind enum. */
         enum NoteKind {
             NOTE_KIND_UNSPECIFIED = 0,
@@ -420,2931 +805,6 @@ export namespace grafeas {
 
             /**
              * Converts this EnvelopeSignature to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Represents a Grafeas */
-        class Grafeas extends $protobuf.rpc.Service {
-
-            /**
-             * Constructs a new Grafeas service.
-             * @param rpcImpl RPC implementation
-             * @param [requestDelimited=false] Whether requests are length-delimited
-             * @param [responseDelimited=false] Whether responses are length-delimited
-             */
-            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-            /**
-             * Creates new Grafeas service using the specified rpc implementation.
-             * @param rpcImpl RPC implementation
-             * @param [requestDelimited=false] Whether requests are length-delimited
-             * @param [responseDelimited=false] Whether responses are length-delimited
-             * @returns RPC service. Useful where requests and/or responses are streamed.
-             */
-            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Grafeas;
-
-            /**
-             * Calls GetOccurrence.
-             * @param request GetOccurrenceRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Occurrence
-             */
-            public getOccurrence(request: grafeas.v1.IGetOccurrenceRequest, callback: grafeas.v1.Grafeas.GetOccurrenceCallback): void;
-
-            /**
-             * Calls GetOccurrence.
-             * @param request GetOccurrenceRequest message or plain object
-             * @returns Promise
-             */
-            public getOccurrence(request: grafeas.v1.IGetOccurrenceRequest): Promise<grafeas.v1.Occurrence>;
-
-            /**
-             * Calls ListOccurrences.
-             * @param request ListOccurrencesRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and ListOccurrencesResponse
-             */
-            public listOccurrences(request: grafeas.v1.IListOccurrencesRequest, callback: grafeas.v1.Grafeas.ListOccurrencesCallback): void;
-
-            /**
-             * Calls ListOccurrences.
-             * @param request ListOccurrencesRequest message or plain object
-             * @returns Promise
-             */
-            public listOccurrences(request: grafeas.v1.IListOccurrencesRequest): Promise<grafeas.v1.ListOccurrencesResponse>;
-
-            /**
-             * Calls DeleteOccurrence.
-             * @param request DeleteOccurrenceRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Empty
-             */
-            public deleteOccurrence(request: grafeas.v1.IDeleteOccurrenceRequest, callback: grafeas.v1.Grafeas.DeleteOccurrenceCallback): void;
-
-            /**
-             * Calls DeleteOccurrence.
-             * @param request DeleteOccurrenceRequest message or plain object
-             * @returns Promise
-             */
-            public deleteOccurrence(request: grafeas.v1.IDeleteOccurrenceRequest): Promise<google.protobuf.Empty>;
-
-            /**
-             * Calls CreateOccurrence.
-             * @param request CreateOccurrenceRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Occurrence
-             */
-            public createOccurrence(request: grafeas.v1.ICreateOccurrenceRequest, callback: grafeas.v1.Grafeas.CreateOccurrenceCallback): void;
-
-            /**
-             * Calls CreateOccurrence.
-             * @param request CreateOccurrenceRequest message or plain object
-             * @returns Promise
-             */
-            public createOccurrence(request: grafeas.v1.ICreateOccurrenceRequest): Promise<grafeas.v1.Occurrence>;
-
-            /**
-             * Calls BatchCreateOccurrences.
-             * @param request BatchCreateOccurrencesRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and BatchCreateOccurrencesResponse
-             */
-            public batchCreateOccurrences(request: grafeas.v1.IBatchCreateOccurrencesRequest, callback: grafeas.v1.Grafeas.BatchCreateOccurrencesCallback): void;
-
-            /**
-             * Calls BatchCreateOccurrences.
-             * @param request BatchCreateOccurrencesRequest message or plain object
-             * @returns Promise
-             */
-            public batchCreateOccurrences(request: grafeas.v1.IBatchCreateOccurrencesRequest): Promise<grafeas.v1.BatchCreateOccurrencesResponse>;
-
-            /**
-             * Calls UpdateOccurrence.
-             * @param request UpdateOccurrenceRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Occurrence
-             */
-            public updateOccurrence(request: grafeas.v1.IUpdateOccurrenceRequest, callback: grafeas.v1.Grafeas.UpdateOccurrenceCallback): void;
-
-            /**
-             * Calls UpdateOccurrence.
-             * @param request UpdateOccurrenceRequest message or plain object
-             * @returns Promise
-             */
-            public updateOccurrence(request: grafeas.v1.IUpdateOccurrenceRequest): Promise<grafeas.v1.Occurrence>;
-
-            /**
-             * Calls GetOccurrenceNote.
-             * @param request GetOccurrenceNoteRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Note
-             */
-            public getOccurrenceNote(request: grafeas.v1.IGetOccurrenceNoteRequest, callback: grafeas.v1.Grafeas.GetOccurrenceNoteCallback): void;
-
-            /**
-             * Calls GetOccurrenceNote.
-             * @param request GetOccurrenceNoteRequest message or plain object
-             * @returns Promise
-             */
-            public getOccurrenceNote(request: grafeas.v1.IGetOccurrenceNoteRequest): Promise<grafeas.v1.Note>;
-
-            /**
-             * Calls GetNote.
-             * @param request GetNoteRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Note
-             */
-            public getNote(request: grafeas.v1.IGetNoteRequest, callback: grafeas.v1.Grafeas.GetNoteCallback): void;
-
-            /**
-             * Calls GetNote.
-             * @param request GetNoteRequest message or plain object
-             * @returns Promise
-             */
-            public getNote(request: grafeas.v1.IGetNoteRequest): Promise<grafeas.v1.Note>;
-
-            /**
-             * Calls ListNotes.
-             * @param request ListNotesRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and ListNotesResponse
-             */
-            public listNotes(request: grafeas.v1.IListNotesRequest, callback: grafeas.v1.Grafeas.ListNotesCallback): void;
-
-            /**
-             * Calls ListNotes.
-             * @param request ListNotesRequest message or plain object
-             * @returns Promise
-             */
-            public listNotes(request: grafeas.v1.IListNotesRequest): Promise<grafeas.v1.ListNotesResponse>;
-
-            /**
-             * Calls DeleteNote.
-             * @param request DeleteNoteRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Empty
-             */
-            public deleteNote(request: grafeas.v1.IDeleteNoteRequest, callback: grafeas.v1.Grafeas.DeleteNoteCallback): void;
-
-            /**
-             * Calls DeleteNote.
-             * @param request DeleteNoteRequest message or plain object
-             * @returns Promise
-             */
-            public deleteNote(request: grafeas.v1.IDeleteNoteRequest): Promise<google.protobuf.Empty>;
-
-            /**
-             * Calls CreateNote.
-             * @param request CreateNoteRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Note
-             */
-            public createNote(request: grafeas.v1.ICreateNoteRequest, callback: grafeas.v1.Grafeas.CreateNoteCallback): void;
-
-            /**
-             * Calls CreateNote.
-             * @param request CreateNoteRequest message or plain object
-             * @returns Promise
-             */
-            public createNote(request: grafeas.v1.ICreateNoteRequest): Promise<grafeas.v1.Note>;
-
-            /**
-             * Calls BatchCreateNotes.
-             * @param request BatchCreateNotesRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and BatchCreateNotesResponse
-             */
-            public batchCreateNotes(request: grafeas.v1.IBatchCreateNotesRequest, callback: grafeas.v1.Grafeas.BatchCreateNotesCallback): void;
-
-            /**
-             * Calls BatchCreateNotes.
-             * @param request BatchCreateNotesRequest message or plain object
-             * @returns Promise
-             */
-            public batchCreateNotes(request: grafeas.v1.IBatchCreateNotesRequest): Promise<grafeas.v1.BatchCreateNotesResponse>;
-
-            /**
-             * Calls UpdateNote.
-             * @param request UpdateNoteRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and Note
-             */
-            public updateNote(request: grafeas.v1.IUpdateNoteRequest, callback: grafeas.v1.Grafeas.UpdateNoteCallback): void;
-
-            /**
-             * Calls UpdateNote.
-             * @param request UpdateNoteRequest message or plain object
-             * @returns Promise
-             */
-            public updateNote(request: grafeas.v1.IUpdateNoteRequest): Promise<grafeas.v1.Note>;
-
-            /**
-             * Calls ListNoteOccurrences.
-             * @param request ListNoteOccurrencesRequest message or plain object
-             * @param callback Node-style callback called with the error, if any, and ListNoteOccurrencesResponse
-             */
-            public listNoteOccurrences(request: grafeas.v1.IListNoteOccurrencesRequest, callback: grafeas.v1.Grafeas.ListNoteOccurrencesCallback): void;
-
-            /**
-             * Calls ListNoteOccurrences.
-             * @param request ListNoteOccurrencesRequest message or plain object
-             * @returns Promise
-             */
-            public listNoteOccurrences(request: grafeas.v1.IListNoteOccurrencesRequest): Promise<grafeas.v1.ListNoteOccurrencesResponse>;
-        }
-
-        namespace Grafeas {
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#getOccurrence}.
-             * @param error Error, if any
-             * @param [response] Occurrence
-             */
-            type GetOccurrenceCallback = (error: (Error|null), response?: grafeas.v1.Occurrence) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#listOccurrences}.
-             * @param error Error, if any
-             * @param [response] ListOccurrencesResponse
-             */
-            type ListOccurrencesCallback = (error: (Error|null), response?: grafeas.v1.ListOccurrencesResponse) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#deleteOccurrence}.
-             * @param error Error, if any
-             * @param [response] Empty
-             */
-            type DeleteOccurrenceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#createOccurrence}.
-             * @param error Error, if any
-             * @param [response] Occurrence
-             */
-            type CreateOccurrenceCallback = (error: (Error|null), response?: grafeas.v1.Occurrence) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#batchCreateOccurrences}.
-             * @param error Error, if any
-             * @param [response] BatchCreateOccurrencesResponse
-             */
-            type BatchCreateOccurrencesCallback = (error: (Error|null), response?: grafeas.v1.BatchCreateOccurrencesResponse) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#updateOccurrence}.
-             * @param error Error, if any
-             * @param [response] Occurrence
-             */
-            type UpdateOccurrenceCallback = (error: (Error|null), response?: grafeas.v1.Occurrence) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#getOccurrenceNote}.
-             * @param error Error, if any
-             * @param [response] Note
-             */
-            type GetOccurrenceNoteCallback = (error: (Error|null), response?: grafeas.v1.Note) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#getNote}.
-             * @param error Error, if any
-             * @param [response] Note
-             */
-            type GetNoteCallback = (error: (Error|null), response?: grafeas.v1.Note) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#listNotes}.
-             * @param error Error, if any
-             * @param [response] ListNotesResponse
-             */
-            type ListNotesCallback = (error: (Error|null), response?: grafeas.v1.ListNotesResponse) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#deleteNote}.
-             * @param error Error, if any
-             * @param [response] Empty
-             */
-            type DeleteNoteCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#createNote}.
-             * @param error Error, if any
-             * @param [response] Note
-             */
-            type CreateNoteCallback = (error: (Error|null), response?: grafeas.v1.Note) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#batchCreateNotes}.
-             * @param error Error, if any
-             * @param [response] BatchCreateNotesResponse
-             */
-            type BatchCreateNotesCallback = (error: (Error|null), response?: grafeas.v1.BatchCreateNotesResponse) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#updateNote}.
-             * @param error Error, if any
-             * @param [response] Note
-             */
-            type UpdateNoteCallback = (error: (Error|null), response?: grafeas.v1.Note) => void;
-
-            /**
-             * Callback as used by {@link grafeas.v1.Grafeas#listNoteOccurrences}.
-             * @param error Error, if any
-             * @param [response] ListNoteOccurrencesResponse
-             */
-            type ListNoteOccurrencesCallback = (error: (Error|null), response?: grafeas.v1.ListNoteOccurrencesResponse) => void;
-        }
-
-        /** Properties of an Occurrence. */
-        interface IOccurrence {
-
-            /** Occurrence name */
-            name?: (string|null);
-
-            /** Occurrence resourceUri */
-            resourceUri?: (string|null);
-
-            /** Occurrence noteName */
-            noteName?: (string|null);
-
-            /** Occurrence kind */
-            kind?: (grafeas.v1.NoteKind|keyof typeof grafeas.v1.NoteKind|null);
-
-            /** Occurrence remediation */
-            remediation?: (string|null);
-
-            /** Occurrence createTime */
-            createTime?: (google.protobuf.ITimestamp|null);
-
-            /** Occurrence updateTime */
-            updateTime?: (google.protobuf.ITimestamp|null);
-
-            /** Occurrence vulnerability */
-            vulnerability?: (grafeas.v1.IVulnerabilityOccurrence|null);
-
-            /** Occurrence build */
-            build?: (grafeas.v1.IBuildOccurrence|null);
-
-            /** Occurrence image */
-            image?: (grafeas.v1.IImageOccurrence|null);
-
-            /** Occurrence package */
-            "package"?: (grafeas.v1.IPackageOccurrence|null);
-
-            /** Occurrence deployment */
-            deployment?: (grafeas.v1.IDeploymentOccurrence|null);
-
-            /** Occurrence discovery */
-            discovery?: (grafeas.v1.IDiscoveryOccurrence|null);
-
-            /** Occurrence attestation */
-            attestation?: (grafeas.v1.IAttestationOccurrence|null);
-
-            /** Occurrence upgrade */
-            upgrade?: (grafeas.v1.IUpgradeOccurrence|null);
-
-            /** Occurrence compliance */
-            compliance?: (grafeas.v1.IComplianceOccurrence|null);
-
-            /** Occurrence dsseAttestation */
-            dsseAttestation?: (grafeas.v1.IDSSEAttestationOccurrence|null);
-
-            /** Occurrence envelope */
-            envelope?: (grafeas.v1.IEnvelope|null);
-        }
-
-        /** Represents an Occurrence. */
-        class Occurrence implements IOccurrence {
-
-            /**
-             * Constructs a new Occurrence.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IOccurrence);
-
-            /** Occurrence name. */
-            public name: string;
-
-            /** Occurrence resourceUri. */
-            public resourceUri: string;
-
-            /** Occurrence noteName. */
-            public noteName: string;
-
-            /** Occurrence kind. */
-            public kind: (grafeas.v1.NoteKind|keyof typeof grafeas.v1.NoteKind);
-
-            /** Occurrence remediation. */
-            public remediation: string;
-
-            /** Occurrence createTime. */
-            public createTime?: (google.protobuf.ITimestamp|null);
-
-            /** Occurrence updateTime. */
-            public updateTime?: (google.protobuf.ITimestamp|null);
-
-            /** Occurrence vulnerability. */
-            public vulnerability?: (grafeas.v1.IVulnerabilityOccurrence|null);
-
-            /** Occurrence build. */
-            public build?: (grafeas.v1.IBuildOccurrence|null);
-
-            /** Occurrence image. */
-            public image?: (grafeas.v1.IImageOccurrence|null);
-
-            /** Occurrence package. */
-            public package?: (grafeas.v1.IPackageOccurrence|null);
-
-            /** Occurrence deployment. */
-            public deployment?: (grafeas.v1.IDeploymentOccurrence|null);
-
-            /** Occurrence discovery. */
-            public discovery?: (grafeas.v1.IDiscoveryOccurrence|null);
-
-            /** Occurrence attestation. */
-            public attestation?: (grafeas.v1.IAttestationOccurrence|null);
-
-            /** Occurrence upgrade. */
-            public upgrade?: (grafeas.v1.IUpgradeOccurrence|null);
-
-            /** Occurrence compliance. */
-            public compliance?: (grafeas.v1.IComplianceOccurrence|null);
-
-            /** Occurrence dsseAttestation. */
-            public dsseAttestation?: (grafeas.v1.IDSSEAttestationOccurrence|null);
-
-            /** Occurrence envelope. */
-            public envelope?: (grafeas.v1.IEnvelope|null);
-
-            /** Occurrence details. */
-            public details?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation");
-
-            /**
-             * Creates a new Occurrence instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Occurrence instance
-             */
-            public static create(properties?: grafeas.v1.IOccurrence): grafeas.v1.Occurrence;
-
-            /**
-             * Encodes the specified Occurrence message. Does not implicitly {@link grafeas.v1.Occurrence.verify|verify} messages.
-             * @param message Occurrence message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Occurrence message, length delimited. Does not implicitly {@link grafeas.v1.Occurrence.verify|verify} messages.
-             * @param message Occurrence message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Occurrence message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Occurrence
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Occurrence;
-
-            /**
-             * Decodes an Occurrence message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Occurrence
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Occurrence;
-
-            /**
-             * Verifies an Occurrence message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Occurrence message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Occurrence
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.Occurrence;
-
-            /**
-             * Creates a plain object from an Occurrence message. Also converts values to other types if specified.
-             * @param message Occurrence
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.Occurrence, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Occurrence to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Note. */
-        interface INote {
-
-            /** Note name */
-            name?: (string|null);
-
-            /** Note shortDescription */
-            shortDescription?: (string|null);
-
-            /** Note longDescription */
-            longDescription?: (string|null);
-
-            /** Note kind */
-            kind?: (grafeas.v1.NoteKind|keyof typeof grafeas.v1.NoteKind|null);
-
-            /** Note relatedUrl */
-            relatedUrl?: (grafeas.v1.IRelatedUrl[]|null);
-
-            /** Note expirationTime */
-            expirationTime?: (google.protobuf.ITimestamp|null);
-
-            /** Note createTime */
-            createTime?: (google.protobuf.ITimestamp|null);
-
-            /** Note updateTime */
-            updateTime?: (google.protobuf.ITimestamp|null);
-
-            /** Note relatedNoteNames */
-            relatedNoteNames?: (string[]|null);
-
-            /** Note vulnerability */
-            vulnerability?: (grafeas.v1.IVulnerabilityNote|null);
-
-            /** Note build */
-            build?: (grafeas.v1.IBuildNote|null);
-
-            /** Note image */
-            image?: (grafeas.v1.IImageNote|null);
-
-            /** Note package */
-            "package"?: (grafeas.v1.IPackageNote|null);
-
-            /** Note deployment */
-            deployment?: (grafeas.v1.IDeploymentNote|null);
-
-            /** Note discovery */
-            discovery?: (grafeas.v1.IDiscoveryNote|null);
-
-            /** Note attestation */
-            attestation?: (grafeas.v1.IAttestationNote|null);
-
-            /** Note upgrade */
-            upgrade?: (grafeas.v1.IUpgradeNote|null);
-
-            /** Note compliance */
-            compliance?: (grafeas.v1.IComplianceNote|null);
-
-            /** Note dsseAttestation */
-            dsseAttestation?: (grafeas.v1.IDSSEAttestationNote|null);
-        }
-
-        /** Represents a Note. */
-        class Note implements INote {
-
-            /**
-             * Constructs a new Note.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.INote);
-
-            /** Note name. */
-            public name: string;
-
-            /** Note shortDescription. */
-            public shortDescription: string;
-
-            /** Note longDescription. */
-            public longDescription: string;
-
-            /** Note kind. */
-            public kind: (grafeas.v1.NoteKind|keyof typeof grafeas.v1.NoteKind);
-
-            /** Note relatedUrl. */
-            public relatedUrl: grafeas.v1.IRelatedUrl[];
-
-            /** Note expirationTime. */
-            public expirationTime?: (google.protobuf.ITimestamp|null);
-
-            /** Note createTime. */
-            public createTime?: (google.protobuf.ITimestamp|null);
-
-            /** Note updateTime. */
-            public updateTime?: (google.protobuf.ITimestamp|null);
-
-            /** Note relatedNoteNames. */
-            public relatedNoteNames: string[];
-
-            /** Note vulnerability. */
-            public vulnerability?: (grafeas.v1.IVulnerabilityNote|null);
-
-            /** Note build. */
-            public build?: (grafeas.v1.IBuildNote|null);
-
-            /** Note image. */
-            public image?: (grafeas.v1.IImageNote|null);
-
-            /** Note package. */
-            public package?: (grafeas.v1.IPackageNote|null);
-
-            /** Note deployment. */
-            public deployment?: (grafeas.v1.IDeploymentNote|null);
-
-            /** Note discovery. */
-            public discovery?: (grafeas.v1.IDiscoveryNote|null);
-
-            /** Note attestation. */
-            public attestation?: (grafeas.v1.IAttestationNote|null);
-
-            /** Note upgrade. */
-            public upgrade?: (grafeas.v1.IUpgradeNote|null);
-
-            /** Note compliance. */
-            public compliance?: (grafeas.v1.IComplianceNote|null);
-
-            /** Note dsseAttestation. */
-            public dsseAttestation?: (grafeas.v1.IDSSEAttestationNote|null);
-
-            /** Note type. */
-            public type?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation");
-
-            /**
-             * Creates a new Note instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Note instance
-             */
-            public static create(properties?: grafeas.v1.INote): grafeas.v1.Note;
-
-            /**
-             * Encodes the specified Note message. Does not implicitly {@link grafeas.v1.Note.verify|verify} messages.
-             * @param message Note message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.INote, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Note message, length delimited. Does not implicitly {@link grafeas.v1.Note.verify|verify} messages.
-             * @param message Note message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.INote, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Note message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Note
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Note;
-
-            /**
-             * Decodes a Note message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Note
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Note;
-
-            /**
-             * Verifies a Note message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Note message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Note
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.Note;
-
-            /**
-             * Creates a plain object from a Note message. Also converts values to other types if specified.
-             * @param message Note
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.Note, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Note to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a GetOccurrenceRequest. */
-        interface IGetOccurrenceRequest {
-
-            /** GetOccurrenceRequest name */
-            name?: (string|null);
-        }
-
-        /** Represents a GetOccurrenceRequest. */
-        class GetOccurrenceRequest implements IGetOccurrenceRequest {
-
-            /**
-             * Constructs a new GetOccurrenceRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IGetOccurrenceRequest);
-
-            /** GetOccurrenceRequest name. */
-            public name: string;
-
-            /**
-             * Creates a new GetOccurrenceRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns GetOccurrenceRequest instance
-             */
-            public static create(properties?: grafeas.v1.IGetOccurrenceRequest): grafeas.v1.GetOccurrenceRequest;
-
-            /**
-             * Encodes the specified GetOccurrenceRequest message. Does not implicitly {@link grafeas.v1.GetOccurrenceRequest.verify|verify} messages.
-             * @param message GetOccurrenceRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IGetOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified GetOccurrenceRequest message, length delimited. Does not implicitly {@link grafeas.v1.GetOccurrenceRequest.verify|verify} messages.
-             * @param message GetOccurrenceRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IGetOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a GetOccurrenceRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns GetOccurrenceRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.GetOccurrenceRequest;
-
-            /**
-             * Decodes a GetOccurrenceRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns GetOccurrenceRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.GetOccurrenceRequest;
-
-            /**
-             * Verifies a GetOccurrenceRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a GetOccurrenceRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns GetOccurrenceRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.GetOccurrenceRequest;
-
-            /**
-             * Creates a plain object from a GetOccurrenceRequest message. Also converts values to other types if specified.
-             * @param message GetOccurrenceRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.GetOccurrenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this GetOccurrenceRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ListOccurrencesRequest. */
-        interface IListOccurrencesRequest {
-
-            /** ListOccurrencesRequest parent */
-            parent?: (string|null);
-
-            /** ListOccurrencesRequest filter */
-            filter?: (string|null);
-
-            /** ListOccurrencesRequest pageSize */
-            pageSize?: (number|null);
-
-            /** ListOccurrencesRequest pageToken */
-            pageToken?: (string|null);
-        }
-
-        /** Represents a ListOccurrencesRequest. */
-        class ListOccurrencesRequest implements IListOccurrencesRequest {
-
-            /**
-             * Constructs a new ListOccurrencesRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IListOccurrencesRequest);
-
-            /** ListOccurrencesRequest parent. */
-            public parent: string;
-
-            /** ListOccurrencesRequest filter. */
-            public filter: string;
-
-            /** ListOccurrencesRequest pageSize. */
-            public pageSize: number;
-
-            /** ListOccurrencesRequest pageToken. */
-            public pageToken: string;
-
-            /**
-             * Creates a new ListOccurrencesRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ListOccurrencesRequest instance
-             */
-            public static create(properties?: grafeas.v1.IListOccurrencesRequest): grafeas.v1.ListOccurrencesRequest;
-
-            /**
-             * Encodes the specified ListOccurrencesRequest message. Does not implicitly {@link grafeas.v1.ListOccurrencesRequest.verify|verify} messages.
-             * @param message ListOccurrencesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IListOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ListOccurrencesRequest message, length delimited. Does not implicitly {@link grafeas.v1.ListOccurrencesRequest.verify|verify} messages.
-             * @param message ListOccurrencesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IListOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ListOccurrencesRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ListOccurrencesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListOccurrencesRequest;
-
-            /**
-             * Decodes a ListOccurrencesRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ListOccurrencesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListOccurrencesRequest;
-
-            /**
-             * Verifies a ListOccurrencesRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ListOccurrencesRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ListOccurrencesRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListOccurrencesRequest;
-
-            /**
-             * Creates a plain object from a ListOccurrencesRequest message. Also converts values to other types if specified.
-             * @param message ListOccurrencesRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.ListOccurrencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ListOccurrencesRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ListOccurrencesResponse. */
-        interface IListOccurrencesResponse {
-
-            /** ListOccurrencesResponse occurrences */
-            occurrences?: (grafeas.v1.IOccurrence[]|null);
-
-            /** ListOccurrencesResponse nextPageToken */
-            nextPageToken?: (string|null);
-        }
-
-        /** Represents a ListOccurrencesResponse. */
-        class ListOccurrencesResponse implements IListOccurrencesResponse {
-
-            /**
-             * Constructs a new ListOccurrencesResponse.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IListOccurrencesResponse);
-
-            /** ListOccurrencesResponse occurrences. */
-            public occurrences: grafeas.v1.IOccurrence[];
-
-            /** ListOccurrencesResponse nextPageToken. */
-            public nextPageToken: string;
-
-            /**
-             * Creates a new ListOccurrencesResponse instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ListOccurrencesResponse instance
-             */
-            public static create(properties?: grafeas.v1.IListOccurrencesResponse): grafeas.v1.ListOccurrencesResponse;
-
-            /**
-             * Encodes the specified ListOccurrencesResponse message. Does not implicitly {@link grafeas.v1.ListOccurrencesResponse.verify|verify} messages.
-             * @param message ListOccurrencesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IListOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ListOccurrencesResponse message, length delimited. Does not implicitly {@link grafeas.v1.ListOccurrencesResponse.verify|verify} messages.
-             * @param message ListOccurrencesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IListOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ListOccurrencesResponse message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ListOccurrencesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListOccurrencesResponse;
-
-            /**
-             * Decodes a ListOccurrencesResponse message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ListOccurrencesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListOccurrencesResponse;
-
-            /**
-             * Verifies a ListOccurrencesResponse message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ListOccurrencesResponse message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ListOccurrencesResponse
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListOccurrencesResponse;
-
-            /**
-             * Creates a plain object from a ListOccurrencesResponse message. Also converts values to other types if specified.
-             * @param message ListOccurrencesResponse
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.ListOccurrencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ListOccurrencesResponse to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a DeleteOccurrenceRequest. */
-        interface IDeleteOccurrenceRequest {
-
-            /** DeleteOccurrenceRequest name */
-            name?: (string|null);
-        }
-
-        /** Represents a DeleteOccurrenceRequest. */
-        class DeleteOccurrenceRequest implements IDeleteOccurrenceRequest {
-
-            /**
-             * Constructs a new DeleteOccurrenceRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IDeleteOccurrenceRequest);
-
-            /** DeleteOccurrenceRequest name. */
-            public name: string;
-
-            /**
-             * Creates a new DeleteOccurrenceRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns DeleteOccurrenceRequest instance
-             */
-            public static create(properties?: grafeas.v1.IDeleteOccurrenceRequest): grafeas.v1.DeleteOccurrenceRequest;
-
-            /**
-             * Encodes the specified DeleteOccurrenceRequest message. Does not implicitly {@link grafeas.v1.DeleteOccurrenceRequest.verify|verify} messages.
-             * @param message DeleteOccurrenceRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IDeleteOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified DeleteOccurrenceRequest message, length delimited. Does not implicitly {@link grafeas.v1.DeleteOccurrenceRequest.verify|verify} messages.
-             * @param message DeleteOccurrenceRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IDeleteOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a DeleteOccurrenceRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns DeleteOccurrenceRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DeleteOccurrenceRequest;
-
-            /**
-             * Decodes a DeleteOccurrenceRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns DeleteOccurrenceRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DeleteOccurrenceRequest;
-
-            /**
-             * Verifies a DeleteOccurrenceRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a DeleteOccurrenceRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns DeleteOccurrenceRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.DeleteOccurrenceRequest;
-
-            /**
-             * Creates a plain object from a DeleteOccurrenceRequest message. Also converts values to other types if specified.
-             * @param message DeleteOccurrenceRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.DeleteOccurrenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this DeleteOccurrenceRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a CreateOccurrenceRequest. */
-        interface ICreateOccurrenceRequest {
-
-            /** CreateOccurrenceRequest parent */
-            parent?: (string|null);
-
-            /** CreateOccurrenceRequest occurrence */
-            occurrence?: (grafeas.v1.IOccurrence|null);
-        }
-
-        /** Represents a CreateOccurrenceRequest. */
-        class CreateOccurrenceRequest implements ICreateOccurrenceRequest {
-
-            /**
-             * Constructs a new CreateOccurrenceRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.ICreateOccurrenceRequest);
-
-            /** CreateOccurrenceRequest parent. */
-            public parent: string;
-
-            /** CreateOccurrenceRequest occurrence. */
-            public occurrence?: (grafeas.v1.IOccurrence|null);
-
-            /**
-             * Creates a new CreateOccurrenceRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns CreateOccurrenceRequest instance
-             */
-            public static create(properties?: grafeas.v1.ICreateOccurrenceRequest): grafeas.v1.CreateOccurrenceRequest;
-
-            /**
-             * Encodes the specified CreateOccurrenceRequest message. Does not implicitly {@link grafeas.v1.CreateOccurrenceRequest.verify|verify} messages.
-             * @param message CreateOccurrenceRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.ICreateOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified CreateOccurrenceRequest message, length delimited. Does not implicitly {@link grafeas.v1.CreateOccurrenceRequest.verify|verify} messages.
-             * @param message CreateOccurrenceRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.ICreateOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a CreateOccurrenceRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns CreateOccurrenceRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CreateOccurrenceRequest;
-
-            /**
-             * Decodes a CreateOccurrenceRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns CreateOccurrenceRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CreateOccurrenceRequest;
-
-            /**
-             * Verifies a CreateOccurrenceRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a CreateOccurrenceRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns CreateOccurrenceRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.CreateOccurrenceRequest;
-
-            /**
-             * Creates a plain object from a CreateOccurrenceRequest message. Also converts values to other types if specified.
-             * @param message CreateOccurrenceRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.CreateOccurrenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this CreateOccurrenceRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an UpdateOccurrenceRequest. */
-        interface IUpdateOccurrenceRequest {
-
-            /** UpdateOccurrenceRequest name */
-            name?: (string|null);
-
-            /** UpdateOccurrenceRequest occurrence */
-            occurrence?: (grafeas.v1.IOccurrence|null);
-
-            /** UpdateOccurrenceRequest updateMask */
-            updateMask?: (google.protobuf.IFieldMask|null);
-        }
-
-        /** Represents an UpdateOccurrenceRequest. */
-        class UpdateOccurrenceRequest implements IUpdateOccurrenceRequest {
-
-            /**
-             * Constructs a new UpdateOccurrenceRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IUpdateOccurrenceRequest);
-
-            /** UpdateOccurrenceRequest name. */
-            public name: string;
-
-            /** UpdateOccurrenceRequest occurrence. */
-            public occurrence?: (grafeas.v1.IOccurrence|null);
-
-            /** UpdateOccurrenceRequest updateMask. */
-            public updateMask?: (google.protobuf.IFieldMask|null);
-
-            /**
-             * Creates a new UpdateOccurrenceRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns UpdateOccurrenceRequest instance
-             */
-            public static create(properties?: grafeas.v1.IUpdateOccurrenceRequest): grafeas.v1.UpdateOccurrenceRequest;
-
-            /**
-             * Encodes the specified UpdateOccurrenceRequest message. Does not implicitly {@link grafeas.v1.UpdateOccurrenceRequest.verify|verify} messages.
-             * @param message UpdateOccurrenceRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IUpdateOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified UpdateOccurrenceRequest message, length delimited. Does not implicitly {@link grafeas.v1.UpdateOccurrenceRequest.verify|verify} messages.
-             * @param message UpdateOccurrenceRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IUpdateOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an UpdateOccurrenceRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns UpdateOccurrenceRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.UpdateOccurrenceRequest;
-
-            /**
-             * Decodes an UpdateOccurrenceRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns UpdateOccurrenceRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.UpdateOccurrenceRequest;
-
-            /**
-             * Verifies an UpdateOccurrenceRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an UpdateOccurrenceRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns UpdateOccurrenceRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.UpdateOccurrenceRequest;
-
-            /**
-             * Creates a plain object from an UpdateOccurrenceRequest message. Also converts values to other types if specified.
-             * @param message UpdateOccurrenceRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.UpdateOccurrenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this UpdateOccurrenceRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a GetNoteRequest. */
-        interface IGetNoteRequest {
-
-            /** GetNoteRequest name */
-            name?: (string|null);
-        }
-
-        /** Represents a GetNoteRequest. */
-        class GetNoteRequest implements IGetNoteRequest {
-
-            /**
-             * Constructs a new GetNoteRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IGetNoteRequest);
-
-            /** GetNoteRequest name. */
-            public name: string;
-
-            /**
-             * Creates a new GetNoteRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns GetNoteRequest instance
-             */
-            public static create(properties?: grafeas.v1.IGetNoteRequest): grafeas.v1.GetNoteRequest;
-
-            /**
-             * Encodes the specified GetNoteRequest message. Does not implicitly {@link grafeas.v1.GetNoteRequest.verify|verify} messages.
-             * @param message GetNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IGetNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified GetNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.GetNoteRequest.verify|verify} messages.
-             * @param message GetNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IGetNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a GetNoteRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns GetNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.GetNoteRequest;
-
-            /**
-             * Decodes a GetNoteRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns GetNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.GetNoteRequest;
-
-            /**
-             * Verifies a GetNoteRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a GetNoteRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns GetNoteRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.GetNoteRequest;
-
-            /**
-             * Creates a plain object from a GetNoteRequest message. Also converts values to other types if specified.
-             * @param message GetNoteRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.GetNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this GetNoteRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a GetOccurrenceNoteRequest. */
-        interface IGetOccurrenceNoteRequest {
-
-            /** GetOccurrenceNoteRequest name */
-            name?: (string|null);
-        }
-
-        /** Represents a GetOccurrenceNoteRequest. */
-        class GetOccurrenceNoteRequest implements IGetOccurrenceNoteRequest {
-
-            /**
-             * Constructs a new GetOccurrenceNoteRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IGetOccurrenceNoteRequest);
-
-            /** GetOccurrenceNoteRequest name. */
-            public name: string;
-
-            /**
-             * Creates a new GetOccurrenceNoteRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns GetOccurrenceNoteRequest instance
-             */
-            public static create(properties?: grafeas.v1.IGetOccurrenceNoteRequest): grafeas.v1.GetOccurrenceNoteRequest;
-
-            /**
-             * Encodes the specified GetOccurrenceNoteRequest message. Does not implicitly {@link grafeas.v1.GetOccurrenceNoteRequest.verify|verify} messages.
-             * @param message GetOccurrenceNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IGetOccurrenceNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified GetOccurrenceNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.GetOccurrenceNoteRequest.verify|verify} messages.
-             * @param message GetOccurrenceNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IGetOccurrenceNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a GetOccurrenceNoteRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns GetOccurrenceNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.GetOccurrenceNoteRequest;
-
-            /**
-             * Decodes a GetOccurrenceNoteRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns GetOccurrenceNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.GetOccurrenceNoteRequest;
-
-            /**
-             * Verifies a GetOccurrenceNoteRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a GetOccurrenceNoteRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns GetOccurrenceNoteRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.GetOccurrenceNoteRequest;
-
-            /**
-             * Creates a plain object from a GetOccurrenceNoteRequest message. Also converts values to other types if specified.
-             * @param message GetOccurrenceNoteRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.GetOccurrenceNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this GetOccurrenceNoteRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ListNotesRequest. */
-        interface IListNotesRequest {
-
-            /** ListNotesRequest parent */
-            parent?: (string|null);
-
-            /** ListNotesRequest filter */
-            filter?: (string|null);
-
-            /** ListNotesRequest pageSize */
-            pageSize?: (number|null);
-
-            /** ListNotesRequest pageToken */
-            pageToken?: (string|null);
-        }
-
-        /** Represents a ListNotesRequest. */
-        class ListNotesRequest implements IListNotesRequest {
-
-            /**
-             * Constructs a new ListNotesRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IListNotesRequest);
-
-            /** ListNotesRequest parent. */
-            public parent: string;
-
-            /** ListNotesRequest filter. */
-            public filter: string;
-
-            /** ListNotesRequest pageSize. */
-            public pageSize: number;
-
-            /** ListNotesRequest pageToken. */
-            public pageToken: string;
-
-            /**
-             * Creates a new ListNotesRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ListNotesRequest instance
-             */
-            public static create(properties?: grafeas.v1.IListNotesRequest): grafeas.v1.ListNotesRequest;
-
-            /**
-             * Encodes the specified ListNotesRequest message. Does not implicitly {@link grafeas.v1.ListNotesRequest.verify|verify} messages.
-             * @param message ListNotesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IListNotesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ListNotesRequest message, length delimited. Does not implicitly {@link grafeas.v1.ListNotesRequest.verify|verify} messages.
-             * @param message ListNotesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IListNotesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ListNotesRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ListNotesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListNotesRequest;
-
-            /**
-             * Decodes a ListNotesRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ListNotesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListNotesRequest;
-
-            /**
-             * Verifies a ListNotesRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ListNotesRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ListNotesRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListNotesRequest;
-
-            /**
-             * Creates a plain object from a ListNotesRequest message. Also converts values to other types if specified.
-             * @param message ListNotesRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.ListNotesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ListNotesRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ListNotesResponse. */
-        interface IListNotesResponse {
-
-            /** ListNotesResponse notes */
-            notes?: (grafeas.v1.INote[]|null);
-
-            /** ListNotesResponse nextPageToken */
-            nextPageToken?: (string|null);
-        }
-
-        /** Represents a ListNotesResponse. */
-        class ListNotesResponse implements IListNotesResponse {
-
-            /**
-             * Constructs a new ListNotesResponse.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IListNotesResponse);
-
-            /** ListNotesResponse notes. */
-            public notes: grafeas.v1.INote[];
-
-            /** ListNotesResponse nextPageToken. */
-            public nextPageToken: string;
-
-            /**
-             * Creates a new ListNotesResponse instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ListNotesResponse instance
-             */
-            public static create(properties?: grafeas.v1.IListNotesResponse): grafeas.v1.ListNotesResponse;
-
-            /**
-             * Encodes the specified ListNotesResponse message. Does not implicitly {@link grafeas.v1.ListNotesResponse.verify|verify} messages.
-             * @param message ListNotesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IListNotesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ListNotesResponse message, length delimited. Does not implicitly {@link grafeas.v1.ListNotesResponse.verify|verify} messages.
-             * @param message ListNotesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IListNotesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ListNotesResponse message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ListNotesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListNotesResponse;
-
-            /**
-             * Decodes a ListNotesResponse message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ListNotesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListNotesResponse;
-
-            /**
-             * Verifies a ListNotesResponse message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ListNotesResponse message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ListNotesResponse
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListNotesResponse;
-
-            /**
-             * Creates a plain object from a ListNotesResponse message. Also converts values to other types if specified.
-             * @param message ListNotesResponse
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.ListNotesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ListNotesResponse to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a DeleteNoteRequest. */
-        interface IDeleteNoteRequest {
-
-            /** DeleteNoteRequest name */
-            name?: (string|null);
-        }
-
-        /** Represents a DeleteNoteRequest. */
-        class DeleteNoteRequest implements IDeleteNoteRequest {
-
-            /**
-             * Constructs a new DeleteNoteRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IDeleteNoteRequest);
-
-            /** DeleteNoteRequest name. */
-            public name: string;
-
-            /**
-             * Creates a new DeleteNoteRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns DeleteNoteRequest instance
-             */
-            public static create(properties?: grafeas.v1.IDeleteNoteRequest): grafeas.v1.DeleteNoteRequest;
-
-            /**
-             * Encodes the specified DeleteNoteRequest message. Does not implicitly {@link grafeas.v1.DeleteNoteRequest.verify|verify} messages.
-             * @param message DeleteNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IDeleteNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified DeleteNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.DeleteNoteRequest.verify|verify} messages.
-             * @param message DeleteNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IDeleteNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a DeleteNoteRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns DeleteNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DeleteNoteRequest;
-
-            /**
-             * Decodes a DeleteNoteRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns DeleteNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DeleteNoteRequest;
-
-            /**
-             * Verifies a DeleteNoteRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a DeleteNoteRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns DeleteNoteRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.DeleteNoteRequest;
-
-            /**
-             * Creates a plain object from a DeleteNoteRequest message. Also converts values to other types if specified.
-             * @param message DeleteNoteRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.DeleteNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this DeleteNoteRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a CreateNoteRequest. */
-        interface ICreateNoteRequest {
-
-            /** CreateNoteRequest parent */
-            parent?: (string|null);
-
-            /** CreateNoteRequest noteId */
-            noteId?: (string|null);
-
-            /** CreateNoteRequest note */
-            note?: (grafeas.v1.INote|null);
-        }
-
-        /** Represents a CreateNoteRequest. */
-        class CreateNoteRequest implements ICreateNoteRequest {
-
-            /**
-             * Constructs a new CreateNoteRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.ICreateNoteRequest);
-
-            /** CreateNoteRequest parent. */
-            public parent: string;
-
-            /** CreateNoteRequest noteId. */
-            public noteId: string;
-
-            /** CreateNoteRequest note. */
-            public note?: (grafeas.v1.INote|null);
-
-            /**
-             * Creates a new CreateNoteRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns CreateNoteRequest instance
-             */
-            public static create(properties?: grafeas.v1.ICreateNoteRequest): grafeas.v1.CreateNoteRequest;
-
-            /**
-             * Encodes the specified CreateNoteRequest message. Does not implicitly {@link grafeas.v1.CreateNoteRequest.verify|verify} messages.
-             * @param message CreateNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.ICreateNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified CreateNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.CreateNoteRequest.verify|verify} messages.
-             * @param message CreateNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.ICreateNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a CreateNoteRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns CreateNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CreateNoteRequest;
-
-            /**
-             * Decodes a CreateNoteRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns CreateNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CreateNoteRequest;
-
-            /**
-             * Verifies a CreateNoteRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a CreateNoteRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns CreateNoteRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.CreateNoteRequest;
-
-            /**
-             * Creates a plain object from a CreateNoteRequest message. Also converts values to other types if specified.
-             * @param message CreateNoteRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.CreateNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this CreateNoteRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an UpdateNoteRequest. */
-        interface IUpdateNoteRequest {
-
-            /** UpdateNoteRequest name */
-            name?: (string|null);
-
-            /** UpdateNoteRequest note */
-            note?: (grafeas.v1.INote|null);
-
-            /** UpdateNoteRequest updateMask */
-            updateMask?: (google.protobuf.IFieldMask|null);
-        }
-
-        /** Represents an UpdateNoteRequest. */
-        class UpdateNoteRequest implements IUpdateNoteRequest {
-
-            /**
-             * Constructs a new UpdateNoteRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IUpdateNoteRequest);
-
-            /** UpdateNoteRequest name. */
-            public name: string;
-
-            /** UpdateNoteRequest note. */
-            public note?: (grafeas.v1.INote|null);
-
-            /** UpdateNoteRequest updateMask. */
-            public updateMask?: (google.protobuf.IFieldMask|null);
-
-            /**
-             * Creates a new UpdateNoteRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns UpdateNoteRequest instance
-             */
-            public static create(properties?: grafeas.v1.IUpdateNoteRequest): grafeas.v1.UpdateNoteRequest;
-
-            /**
-             * Encodes the specified UpdateNoteRequest message. Does not implicitly {@link grafeas.v1.UpdateNoteRequest.verify|verify} messages.
-             * @param message UpdateNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IUpdateNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified UpdateNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.UpdateNoteRequest.verify|verify} messages.
-             * @param message UpdateNoteRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IUpdateNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an UpdateNoteRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns UpdateNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.UpdateNoteRequest;
-
-            /**
-             * Decodes an UpdateNoteRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns UpdateNoteRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.UpdateNoteRequest;
-
-            /**
-             * Verifies an UpdateNoteRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an UpdateNoteRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns UpdateNoteRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.UpdateNoteRequest;
-
-            /**
-             * Creates a plain object from an UpdateNoteRequest message. Also converts values to other types if specified.
-             * @param message UpdateNoteRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.UpdateNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this UpdateNoteRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ListNoteOccurrencesRequest. */
-        interface IListNoteOccurrencesRequest {
-
-            /** ListNoteOccurrencesRequest name */
-            name?: (string|null);
-
-            /** ListNoteOccurrencesRequest filter */
-            filter?: (string|null);
-
-            /** ListNoteOccurrencesRequest pageSize */
-            pageSize?: (number|null);
-
-            /** ListNoteOccurrencesRequest pageToken */
-            pageToken?: (string|null);
-        }
-
-        /** Represents a ListNoteOccurrencesRequest. */
-        class ListNoteOccurrencesRequest implements IListNoteOccurrencesRequest {
-
-            /**
-             * Constructs a new ListNoteOccurrencesRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IListNoteOccurrencesRequest);
-
-            /** ListNoteOccurrencesRequest name. */
-            public name: string;
-
-            /** ListNoteOccurrencesRequest filter. */
-            public filter: string;
-
-            /** ListNoteOccurrencesRequest pageSize. */
-            public pageSize: number;
-
-            /** ListNoteOccurrencesRequest pageToken. */
-            public pageToken: string;
-
-            /**
-             * Creates a new ListNoteOccurrencesRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ListNoteOccurrencesRequest instance
-             */
-            public static create(properties?: grafeas.v1.IListNoteOccurrencesRequest): grafeas.v1.ListNoteOccurrencesRequest;
-
-            /**
-             * Encodes the specified ListNoteOccurrencesRequest message. Does not implicitly {@link grafeas.v1.ListNoteOccurrencesRequest.verify|verify} messages.
-             * @param message ListNoteOccurrencesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IListNoteOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ListNoteOccurrencesRequest message, length delimited. Does not implicitly {@link grafeas.v1.ListNoteOccurrencesRequest.verify|verify} messages.
-             * @param message ListNoteOccurrencesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IListNoteOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ListNoteOccurrencesRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ListNoteOccurrencesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListNoteOccurrencesRequest;
-
-            /**
-             * Decodes a ListNoteOccurrencesRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ListNoteOccurrencesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListNoteOccurrencesRequest;
-
-            /**
-             * Verifies a ListNoteOccurrencesRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ListNoteOccurrencesRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ListNoteOccurrencesRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListNoteOccurrencesRequest;
-
-            /**
-             * Creates a plain object from a ListNoteOccurrencesRequest message. Also converts values to other types if specified.
-             * @param message ListNoteOccurrencesRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.ListNoteOccurrencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ListNoteOccurrencesRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ListNoteOccurrencesResponse. */
-        interface IListNoteOccurrencesResponse {
-
-            /** ListNoteOccurrencesResponse occurrences */
-            occurrences?: (grafeas.v1.IOccurrence[]|null);
-
-            /** ListNoteOccurrencesResponse nextPageToken */
-            nextPageToken?: (string|null);
-        }
-
-        /** Represents a ListNoteOccurrencesResponse. */
-        class ListNoteOccurrencesResponse implements IListNoteOccurrencesResponse {
-
-            /**
-             * Constructs a new ListNoteOccurrencesResponse.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IListNoteOccurrencesResponse);
-
-            /** ListNoteOccurrencesResponse occurrences. */
-            public occurrences: grafeas.v1.IOccurrence[];
-
-            /** ListNoteOccurrencesResponse nextPageToken. */
-            public nextPageToken: string;
-
-            /**
-             * Creates a new ListNoteOccurrencesResponse instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ListNoteOccurrencesResponse instance
-             */
-            public static create(properties?: grafeas.v1.IListNoteOccurrencesResponse): grafeas.v1.ListNoteOccurrencesResponse;
-
-            /**
-             * Encodes the specified ListNoteOccurrencesResponse message. Does not implicitly {@link grafeas.v1.ListNoteOccurrencesResponse.verify|verify} messages.
-             * @param message ListNoteOccurrencesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IListNoteOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ListNoteOccurrencesResponse message, length delimited. Does not implicitly {@link grafeas.v1.ListNoteOccurrencesResponse.verify|verify} messages.
-             * @param message ListNoteOccurrencesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IListNoteOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ListNoteOccurrencesResponse message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ListNoteOccurrencesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListNoteOccurrencesResponse;
-
-            /**
-             * Decodes a ListNoteOccurrencesResponse message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ListNoteOccurrencesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListNoteOccurrencesResponse;
-
-            /**
-             * Verifies a ListNoteOccurrencesResponse message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ListNoteOccurrencesResponse message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ListNoteOccurrencesResponse
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListNoteOccurrencesResponse;
-
-            /**
-             * Creates a plain object from a ListNoteOccurrencesResponse message. Also converts values to other types if specified.
-             * @param message ListNoteOccurrencesResponse
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.ListNoteOccurrencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ListNoteOccurrencesResponse to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a BatchCreateNotesRequest. */
-        interface IBatchCreateNotesRequest {
-
-            /** BatchCreateNotesRequest parent */
-            parent?: (string|null);
-
-            /** BatchCreateNotesRequest notes */
-            notes?: ({ [k: string]: grafeas.v1.INote }|null);
-        }
-
-        /** Represents a BatchCreateNotesRequest. */
-        class BatchCreateNotesRequest implements IBatchCreateNotesRequest {
-
-            /**
-             * Constructs a new BatchCreateNotesRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IBatchCreateNotesRequest);
-
-            /** BatchCreateNotesRequest parent. */
-            public parent: string;
-
-            /** BatchCreateNotesRequest notes. */
-            public notes: { [k: string]: grafeas.v1.INote };
-
-            /**
-             * Creates a new BatchCreateNotesRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns BatchCreateNotesRequest instance
-             */
-            public static create(properties?: grafeas.v1.IBatchCreateNotesRequest): grafeas.v1.BatchCreateNotesRequest;
-
-            /**
-             * Encodes the specified BatchCreateNotesRequest message. Does not implicitly {@link grafeas.v1.BatchCreateNotesRequest.verify|verify} messages.
-             * @param message BatchCreateNotesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IBatchCreateNotesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified BatchCreateNotesRequest message, length delimited. Does not implicitly {@link grafeas.v1.BatchCreateNotesRequest.verify|verify} messages.
-             * @param message BatchCreateNotesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IBatchCreateNotesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a BatchCreateNotesRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns BatchCreateNotesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BatchCreateNotesRequest;
-
-            /**
-             * Decodes a BatchCreateNotesRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns BatchCreateNotesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BatchCreateNotesRequest;
-
-            /**
-             * Verifies a BatchCreateNotesRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a BatchCreateNotesRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns BatchCreateNotesRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.BatchCreateNotesRequest;
-
-            /**
-             * Creates a plain object from a BatchCreateNotesRequest message. Also converts values to other types if specified.
-             * @param message BatchCreateNotesRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.BatchCreateNotesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this BatchCreateNotesRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a BatchCreateNotesResponse. */
-        interface IBatchCreateNotesResponse {
-
-            /** BatchCreateNotesResponse notes */
-            notes?: (grafeas.v1.INote[]|null);
-        }
-
-        /** Represents a BatchCreateNotesResponse. */
-        class BatchCreateNotesResponse implements IBatchCreateNotesResponse {
-
-            /**
-             * Constructs a new BatchCreateNotesResponse.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IBatchCreateNotesResponse);
-
-            /** BatchCreateNotesResponse notes. */
-            public notes: grafeas.v1.INote[];
-
-            /**
-             * Creates a new BatchCreateNotesResponse instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns BatchCreateNotesResponse instance
-             */
-            public static create(properties?: grafeas.v1.IBatchCreateNotesResponse): grafeas.v1.BatchCreateNotesResponse;
-
-            /**
-             * Encodes the specified BatchCreateNotesResponse message. Does not implicitly {@link grafeas.v1.BatchCreateNotesResponse.verify|verify} messages.
-             * @param message BatchCreateNotesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IBatchCreateNotesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified BatchCreateNotesResponse message, length delimited. Does not implicitly {@link grafeas.v1.BatchCreateNotesResponse.verify|verify} messages.
-             * @param message BatchCreateNotesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IBatchCreateNotesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a BatchCreateNotesResponse message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns BatchCreateNotesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BatchCreateNotesResponse;
-
-            /**
-             * Decodes a BatchCreateNotesResponse message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns BatchCreateNotesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BatchCreateNotesResponse;
-
-            /**
-             * Verifies a BatchCreateNotesResponse message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a BatchCreateNotesResponse message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns BatchCreateNotesResponse
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.BatchCreateNotesResponse;
-
-            /**
-             * Creates a plain object from a BatchCreateNotesResponse message. Also converts values to other types if specified.
-             * @param message BatchCreateNotesResponse
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.BatchCreateNotesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this BatchCreateNotesResponse to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a BatchCreateOccurrencesRequest. */
-        interface IBatchCreateOccurrencesRequest {
-
-            /** BatchCreateOccurrencesRequest parent */
-            parent?: (string|null);
-
-            /** BatchCreateOccurrencesRequest occurrences */
-            occurrences?: (grafeas.v1.IOccurrence[]|null);
-        }
-
-        /** Represents a BatchCreateOccurrencesRequest. */
-        class BatchCreateOccurrencesRequest implements IBatchCreateOccurrencesRequest {
-
-            /**
-             * Constructs a new BatchCreateOccurrencesRequest.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IBatchCreateOccurrencesRequest);
-
-            /** BatchCreateOccurrencesRequest parent. */
-            public parent: string;
-
-            /** BatchCreateOccurrencesRequest occurrences. */
-            public occurrences: grafeas.v1.IOccurrence[];
-
-            /**
-             * Creates a new BatchCreateOccurrencesRequest instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns BatchCreateOccurrencesRequest instance
-             */
-            public static create(properties?: grafeas.v1.IBatchCreateOccurrencesRequest): grafeas.v1.BatchCreateOccurrencesRequest;
-
-            /**
-             * Encodes the specified BatchCreateOccurrencesRequest message. Does not implicitly {@link grafeas.v1.BatchCreateOccurrencesRequest.verify|verify} messages.
-             * @param message BatchCreateOccurrencesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IBatchCreateOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified BatchCreateOccurrencesRequest message, length delimited. Does not implicitly {@link grafeas.v1.BatchCreateOccurrencesRequest.verify|verify} messages.
-             * @param message BatchCreateOccurrencesRequest message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IBatchCreateOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a BatchCreateOccurrencesRequest message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns BatchCreateOccurrencesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BatchCreateOccurrencesRequest;
-
-            /**
-             * Decodes a BatchCreateOccurrencesRequest message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns BatchCreateOccurrencesRequest
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BatchCreateOccurrencesRequest;
-
-            /**
-             * Verifies a BatchCreateOccurrencesRequest message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a BatchCreateOccurrencesRequest message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns BatchCreateOccurrencesRequest
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.BatchCreateOccurrencesRequest;
-
-            /**
-             * Creates a plain object from a BatchCreateOccurrencesRequest message. Also converts values to other types if specified.
-             * @param message BatchCreateOccurrencesRequest
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.BatchCreateOccurrencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this BatchCreateOccurrencesRequest to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a BatchCreateOccurrencesResponse. */
-        interface IBatchCreateOccurrencesResponse {
-
-            /** BatchCreateOccurrencesResponse occurrences */
-            occurrences?: (grafeas.v1.IOccurrence[]|null);
-        }
-
-        /** Represents a BatchCreateOccurrencesResponse. */
-        class BatchCreateOccurrencesResponse implements IBatchCreateOccurrencesResponse {
-
-            /**
-             * Constructs a new BatchCreateOccurrencesResponse.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IBatchCreateOccurrencesResponse);
-
-            /** BatchCreateOccurrencesResponse occurrences. */
-            public occurrences: grafeas.v1.IOccurrence[];
-
-            /**
-             * Creates a new BatchCreateOccurrencesResponse instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns BatchCreateOccurrencesResponse instance
-             */
-            public static create(properties?: grafeas.v1.IBatchCreateOccurrencesResponse): grafeas.v1.BatchCreateOccurrencesResponse;
-
-            /**
-             * Encodes the specified BatchCreateOccurrencesResponse message. Does not implicitly {@link grafeas.v1.BatchCreateOccurrencesResponse.verify|verify} messages.
-             * @param message BatchCreateOccurrencesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IBatchCreateOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified BatchCreateOccurrencesResponse message, length delimited. Does not implicitly {@link grafeas.v1.BatchCreateOccurrencesResponse.verify|verify} messages.
-             * @param message BatchCreateOccurrencesResponse message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IBatchCreateOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a BatchCreateOccurrencesResponse message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns BatchCreateOccurrencesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BatchCreateOccurrencesResponse;
-
-            /**
-             * Decodes a BatchCreateOccurrencesResponse message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns BatchCreateOccurrencesResponse
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BatchCreateOccurrencesResponse;
-
-            /**
-             * Verifies a BatchCreateOccurrencesResponse message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a BatchCreateOccurrencesResponse message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns BatchCreateOccurrencesResponse
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.BatchCreateOccurrencesResponse;
-
-            /**
-             * Creates a plain object from a BatchCreateOccurrencesResponse message. Also converts values to other types if specified.
-             * @param message BatchCreateOccurrencesResponse
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.BatchCreateOccurrencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this BatchCreateOccurrencesResponse to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an AttestationNote. */
-        interface IAttestationNote {
-
-            /** AttestationNote hint */
-            hint?: (grafeas.v1.AttestationNote.IHint|null);
-        }
-
-        /** Represents an AttestationNote. */
-        class AttestationNote implements IAttestationNote {
-
-            /**
-             * Constructs a new AttestationNote.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IAttestationNote);
-
-            /** AttestationNote hint. */
-            public hint?: (grafeas.v1.AttestationNote.IHint|null);
-
-            /**
-             * Creates a new AttestationNote instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns AttestationNote instance
-             */
-            public static create(properties?: grafeas.v1.IAttestationNote): grafeas.v1.AttestationNote;
-
-            /**
-             * Encodes the specified AttestationNote message. Does not implicitly {@link grafeas.v1.AttestationNote.verify|verify} messages.
-             * @param message AttestationNote message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IAttestationNote, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified AttestationNote message, length delimited. Does not implicitly {@link grafeas.v1.AttestationNote.verify|verify} messages.
-             * @param message AttestationNote message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IAttestationNote, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an AttestationNote message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns AttestationNote
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.AttestationNote;
-
-            /**
-             * Decodes an AttestationNote message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns AttestationNote
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.AttestationNote;
-
-            /**
-             * Verifies an AttestationNote message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an AttestationNote message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns AttestationNote
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.AttestationNote;
-
-            /**
-             * Creates a plain object from an AttestationNote message. Also converts values to other types if specified.
-             * @param message AttestationNote
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.AttestationNote, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this AttestationNote to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace AttestationNote {
-
-            /** Properties of a Hint. */
-            interface IHint {
-
-                /** Hint humanReadableName */
-                humanReadableName?: (string|null);
-            }
-
-            /** Represents a Hint. */
-            class Hint implements IHint {
-
-                /**
-                 * Constructs a new Hint.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: grafeas.v1.AttestationNote.IHint);
-
-                /** Hint humanReadableName. */
-                public humanReadableName: string;
-
-                /**
-                 * Creates a new Hint instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Hint instance
-                 */
-                public static create(properties?: grafeas.v1.AttestationNote.IHint): grafeas.v1.AttestationNote.Hint;
-
-                /**
-                 * Encodes the specified Hint message. Does not implicitly {@link grafeas.v1.AttestationNote.Hint.verify|verify} messages.
-                 * @param message Hint message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: grafeas.v1.AttestationNote.IHint, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Hint message, length delimited. Does not implicitly {@link grafeas.v1.AttestationNote.Hint.verify|verify} messages.
-                 * @param message Hint message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: grafeas.v1.AttestationNote.IHint, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Hint message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Hint
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.AttestationNote.Hint;
-
-                /**
-                 * Decodes a Hint message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Hint
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.AttestationNote.Hint;
-
-                /**
-                 * Verifies a Hint message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Hint message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Hint
-                 */
-                public static fromObject(object: { [k: string]: any }): grafeas.v1.AttestationNote.Hint;
-
-                /**
-                 * Creates a plain object from a Hint message. Also converts values to other types if specified.
-                 * @param message Hint
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: grafeas.v1.AttestationNote.Hint, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Hint to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
-        }
-
-        /** Properties of a Jwt. */
-        interface IJwt {
-
-            /** Jwt compactJwt */
-            compactJwt?: (string|null);
-        }
-
-        /** Represents a Jwt. */
-        class Jwt implements IJwt {
-
-            /**
-             * Constructs a new Jwt.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IJwt);
-
-            /** Jwt compactJwt. */
-            public compactJwt: string;
-
-            /**
-             * Creates a new Jwt instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Jwt instance
-             */
-            public static create(properties?: grafeas.v1.IJwt): grafeas.v1.Jwt;
-
-            /**
-             * Encodes the specified Jwt message. Does not implicitly {@link grafeas.v1.Jwt.verify|verify} messages.
-             * @param message Jwt message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IJwt, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Jwt message, length delimited. Does not implicitly {@link grafeas.v1.Jwt.verify|verify} messages.
-             * @param message Jwt message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IJwt, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Jwt message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Jwt
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Jwt;
-
-            /**
-             * Decodes a Jwt message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Jwt
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Jwt;
-
-            /**
-             * Verifies a Jwt message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Jwt message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Jwt
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.Jwt;
-
-            /**
-             * Creates a plain object from a Jwt message. Also converts values to other types if specified.
-             * @param message Jwt
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.Jwt, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Jwt to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an AttestationOccurrence. */
-        interface IAttestationOccurrence {
-
-            /** AttestationOccurrence serializedPayload */
-            serializedPayload?: (Uint8Array|string|null);
-
-            /** AttestationOccurrence signatures */
-            signatures?: (grafeas.v1.ISignature[]|null);
-
-            /** AttestationOccurrence jwts */
-            jwts?: (grafeas.v1.IJwt[]|null);
-        }
-
-        /** Represents an AttestationOccurrence. */
-        class AttestationOccurrence implements IAttestationOccurrence {
-
-            /**
-             * Constructs a new AttestationOccurrence.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.IAttestationOccurrence);
-
-            /** AttestationOccurrence serializedPayload. */
-            public serializedPayload: (Uint8Array|string);
-
-            /** AttestationOccurrence signatures. */
-            public signatures: grafeas.v1.ISignature[];
-
-            /** AttestationOccurrence jwts. */
-            public jwts: grafeas.v1.IJwt[];
-
-            /**
-             * Creates a new AttestationOccurrence instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns AttestationOccurrence instance
-             */
-            public static create(properties?: grafeas.v1.IAttestationOccurrence): grafeas.v1.AttestationOccurrence;
-
-            /**
-             * Encodes the specified AttestationOccurrence message. Does not implicitly {@link grafeas.v1.AttestationOccurrence.verify|verify} messages.
-             * @param message AttestationOccurrence message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.IAttestationOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified AttestationOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.AttestationOccurrence.verify|verify} messages.
-             * @param message AttestationOccurrence message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.IAttestationOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an AttestationOccurrence message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns AttestationOccurrence
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.AttestationOccurrence;
-
-            /**
-             * Decodes an AttestationOccurrence message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns AttestationOccurrence
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.AttestationOccurrence;
-
-            /**
-             * Verifies an AttestationOccurrence message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an AttestationOccurrence message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns AttestationOccurrence
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.AttestationOccurrence;
-
-            /**
-             * Creates a plain object from an AttestationOccurrence message. Also converts values to other types if specified.
-             * @param message AttestationOccurrence
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.AttestationOccurrence, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this AttestationOccurrence to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -6841,14 +4301,416 @@ export namespace grafeas {
             public toJSON(): { [k: string]: any };
         }
 
-        /** Severity enum. */
-        enum Severity {
-            SEVERITY_UNSPECIFIED = 0,
-            MINIMAL = 1,
-            LOW = 2,
-            MEDIUM = 3,
-            HIGH = 4,
-            CRITICAL = 5
+        /** Properties of a CVSSv3. */
+        interface ICVSSv3 {
+
+            /** CVSSv3 baseScore */
+            baseScore?: (number|null);
+
+            /** CVSSv3 exploitabilityScore */
+            exploitabilityScore?: (number|null);
+
+            /** CVSSv3 impactScore */
+            impactScore?: (number|null);
+
+            /** CVSSv3 attackVector */
+            attackVector?: (grafeas.v1.CVSSv3.AttackVector|keyof typeof grafeas.v1.CVSSv3.AttackVector|null);
+
+            /** CVSSv3 attackComplexity */
+            attackComplexity?: (grafeas.v1.CVSSv3.AttackComplexity|keyof typeof grafeas.v1.CVSSv3.AttackComplexity|null);
+
+            /** CVSSv3 privilegesRequired */
+            privilegesRequired?: (grafeas.v1.CVSSv3.PrivilegesRequired|keyof typeof grafeas.v1.CVSSv3.PrivilegesRequired|null);
+
+            /** CVSSv3 userInteraction */
+            userInteraction?: (grafeas.v1.CVSSv3.UserInteraction|keyof typeof grafeas.v1.CVSSv3.UserInteraction|null);
+
+            /** CVSSv3 scope */
+            scope?: (grafeas.v1.CVSSv3.Scope|keyof typeof grafeas.v1.CVSSv3.Scope|null);
+
+            /** CVSSv3 confidentialityImpact */
+            confidentialityImpact?: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact|null);
+
+            /** CVSSv3 integrityImpact */
+            integrityImpact?: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact|null);
+
+            /** CVSSv3 availabilityImpact */
+            availabilityImpact?: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact|null);
+        }
+
+        /** Represents a CVSSv3. */
+        class CVSSv3 implements ICVSSv3 {
+
+            /**
+             * Constructs a new CVSSv3.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ICVSSv3);
+
+            /** CVSSv3 baseScore. */
+            public baseScore: number;
+
+            /** CVSSv3 exploitabilityScore. */
+            public exploitabilityScore: number;
+
+            /** CVSSv3 impactScore. */
+            public impactScore: number;
+
+            /** CVSSv3 attackVector. */
+            public attackVector: (grafeas.v1.CVSSv3.AttackVector|keyof typeof grafeas.v1.CVSSv3.AttackVector);
+
+            /** CVSSv3 attackComplexity. */
+            public attackComplexity: (grafeas.v1.CVSSv3.AttackComplexity|keyof typeof grafeas.v1.CVSSv3.AttackComplexity);
+
+            /** CVSSv3 privilegesRequired. */
+            public privilegesRequired: (grafeas.v1.CVSSv3.PrivilegesRequired|keyof typeof grafeas.v1.CVSSv3.PrivilegesRequired);
+
+            /** CVSSv3 userInteraction. */
+            public userInteraction: (grafeas.v1.CVSSv3.UserInteraction|keyof typeof grafeas.v1.CVSSv3.UserInteraction);
+
+            /** CVSSv3 scope. */
+            public scope: (grafeas.v1.CVSSv3.Scope|keyof typeof grafeas.v1.CVSSv3.Scope);
+
+            /** CVSSv3 confidentialityImpact. */
+            public confidentialityImpact: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact);
+
+            /** CVSSv3 integrityImpact. */
+            public integrityImpact: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact);
+
+            /** CVSSv3 availabilityImpact. */
+            public availabilityImpact: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact);
+
+            /**
+             * Creates a new CVSSv3 instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CVSSv3 instance
+             */
+            public static create(properties?: grafeas.v1.ICVSSv3): grafeas.v1.CVSSv3;
+
+            /**
+             * Encodes the specified CVSSv3 message. Does not implicitly {@link grafeas.v1.CVSSv3.verify|verify} messages.
+             * @param message CVSSv3 message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ICVSSv3, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CVSSv3 message, length delimited. Does not implicitly {@link grafeas.v1.CVSSv3.verify|verify} messages.
+             * @param message CVSSv3 message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ICVSSv3, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CVSSv3 message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CVSSv3
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CVSSv3;
+
+            /**
+             * Decodes a CVSSv3 message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CVSSv3
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CVSSv3;
+
+            /**
+             * Verifies a CVSSv3 message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CVSSv3 message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CVSSv3
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.CVSSv3;
+
+            /**
+             * Creates a plain object from a CVSSv3 message. Also converts values to other types if specified.
+             * @param message CVSSv3
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.CVSSv3, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CVSSv3 to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace CVSSv3 {
+
+            /** AttackVector enum. */
+            enum AttackVector {
+                ATTACK_VECTOR_UNSPECIFIED = 0,
+                ATTACK_VECTOR_NETWORK = 1,
+                ATTACK_VECTOR_ADJACENT = 2,
+                ATTACK_VECTOR_LOCAL = 3,
+                ATTACK_VECTOR_PHYSICAL = 4
+            }
+
+            /** AttackComplexity enum. */
+            enum AttackComplexity {
+                ATTACK_COMPLEXITY_UNSPECIFIED = 0,
+                ATTACK_COMPLEXITY_LOW = 1,
+                ATTACK_COMPLEXITY_HIGH = 2
+            }
+
+            /** PrivilegesRequired enum. */
+            enum PrivilegesRequired {
+                PRIVILEGES_REQUIRED_UNSPECIFIED = 0,
+                PRIVILEGES_REQUIRED_NONE = 1,
+                PRIVILEGES_REQUIRED_LOW = 2,
+                PRIVILEGES_REQUIRED_HIGH = 3
+            }
+
+            /** UserInteraction enum. */
+            enum UserInteraction {
+                USER_INTERACTION_UNSPECIFIED = 0,
+                USER_INTERACTION_NONE = 1,
+                USER_INTERACTION_REQUIRED = 2
+            }
+
+            /** Scope enum. */
+            enum Scope {
+                SCOPE_UNSPECIFIED = 0,
+                SCOPE_UNCHANGED = 1,
+                SCOPE_CHANGED = 2
+            }
+
+            /** Impact enum. */
+            enum Impact {
+                IMPACT_UNSPECIFIED = 0,
+                IMPACT_HIGH = 1,
+                IMPACT_LOW = 2,
+                IMPACT_NONE = 3
+            }
+        }
+
+        /** Properties of a CVSS. */
+        interface ICVSS {
+
+            /** CVSS baseScore */
+            baseScore?: (number|null);
+
+            /** CVSS exploitabilityScore */
+            exploitabilityScore?: (number|null);
+
+            /** CVSS impactScore */
+            impactScore?: (number|null);
+
+            /** CVSS attackVector */
+            attackVector?: (grafeas.v1.CVSS.AttackVector|keyof typeof grafeas.v1.CVSS.AttackVector|null);
+
+            /** CVSS attackComplexity */
+            attackComplexity?: (grafeas.v1.CVSS.AttackComplexity|keyof typeof grafeas.v1.CVSS.AttackComplexity|null);
+
+            /** CVSS authentication */
+            authentication?: (grafeas.v1.CVSS.Authentication|keyof typeof grafeas.v1.CVSS.Authentication|null);
+
+            /** CVSS privilegesRequired */
+            privilegesRequired?: (grafeas.v1.CVSS.PrivilegesRequired|keyof typeof grafeas.v1.CVSS.PrivilegesRequired|null);
+
+            /** CVSS userInteraction */
+            userInteraction?: (grafeas.v1.CVSS.UserInteraction|keyof typeof grafeas.v1.CVSS.UserInteraction|null);
+
+            /** CVSS scope */
+            scope?: (grafeas.v1.CVSS.Scope|keyof typeof grafeas.v1.CVSS.Scope|null);
+
+            /** CVSS confidentialityImpact */
+            confidentialityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS integrityImpact */
+            integrityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS availabilityImpact */
+            availabilityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+        }
+
+        /** Represents a CVSS. */
+        class CVSS implements ICVSS {
+
+            /**
+             * Constructs a new CVSS.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ICVSS);
+
+            /** CVSS baseScore. */
+            public baseScore: number;
+
+            /** CVSS exploitabilityScore. */
+            public exploitabilityScore: number;
+
+            /** CVSS impactScore. */
+            public impactScore: number;
+
+            /** CVSS attackVector. */
+            public attackVector: (grafeas.v1.CVSS.AttackVector|keyof typeof grafeas.v1.CVSS.AttackVector);
+
+            /** CVSS attackComplexity. */
+            public attackComplexity: (grafeas.v1.CVSS.AttackComplexity|keyof typeof grafeas.v1.CVSS.AttackComplexity);
+
+            /** CVSS authentication. */
+            public authentication: (grafeas.v1.CVSS.Authentication|keyof typeof grafeas.v1.CVSS.Authentication);
+
+            /** CVSS privilegesRequired. */
+            public privilegesRequired: (grafeas.v1.CVSS.PrivilegesRequired|keyof typeof grafeas.v1.CVSS.PrivilegesRequired);
+
+            /** CVSS userInteraction. */
+            public userInteraction: (grafeas.v1.CVSS.UserInteraction|keyof typeof grafeas.v1.CVSS.UserInteraction);
+
+            /** CVSS scope. */
+            public scope: (grafeas.v1.CVSS.Scope|keyof typeof grafeas.v1.CVSS.Scope);
+
+            /** CVSS confidentialityImpact. */
+            public confidentialityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS integrityImpact. */
+            public integrityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS availabilityImpact. */
+            public availabilityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /**
+             * Creates a new CVSS instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CVSS instance
+             */
+            public static create(properties?: grafeas.v1.ICVSS): grafeas.v1.CVSS;
+
+            /**
+             * Encodes the specified CVSS message. Does not implicitly {@link grafeas.v1.CVSS.verify|verify} messages.
+             * @param message CVSS message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ICVSS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CVSS message, length delimited. Does not implicitly {@link grafeas.v1.CVSS.verify|verify} messages.
+             * @param message CVSS message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ICVSS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CVSS message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CVSS
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CVSS;
+
+            /**
+             * Decodes a CVSS message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CVSS
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CVSS;
+
+            /**
+             * Verifies a CVSS message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CVSS message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CVSS
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.CVSS;
+
+            /**
+             * Creates a plain object from a CVSS message. Also converts values to other types if specified.
+             * @param message CVSS
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.CVSS, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CVSS to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace CVSS {
+
+            /** AttackVector enum. */
+            enum AttackVector {
+                ATTACK_VECTOR_UNSPECIFIED = 0,
+                ATTACK_VECTOR_NETWORK = 1,
+                ATTACK_VECTOR_ADJACENT = 2,
+                ATTACK_VECTOR_LOCAL = 3,
+                ATTACK_VECTOR_PHYSICAL = 4
+            }
+
+            /** AttackComplexity enum. */
+            enum AttackComplexity {
+                ATTACK_COMPLEXITY_UNSPECIFIED = 0,
+                ATTACK_COMPLEXITY_LOW = 1,
+                ATTACK_COMPLEXITY_HIGH = 2
+            }
+
+            /** Authentication enum. */
+            enum Authentication {
+                AUTHENTICATION_UNSPECIFIED = 0,
+                AUTHENTICATION_MULTIPLE = 1,
+                AUTHENTICATION_SINGLE = 2,
+                AUTHENTICATION_NONE = 3
+            }
+
+            /** PrivilegesRequired enum. */
+            enum PrivilegesRequired {
+                PRIVILEGES_REQUIRED_UNSPECIFIED = 0,
+                PRIVILEGES_REQUIRED_NONE = 1,
+                PRIVILEGES_REQUIRED_LOW = 2,
+                PRIVILEGES_REQUIRED_HIGH = 3
+            }
+
+            /** UserInteraction enum. */
+            enum UserInteraction {
+                USER_INTERACTION_UNSPECIFIED = 0,
+                USER_INTERACTION_NONE = 1,
+                USER_INTERACTION_REQUIRED = 2
+            }
+
+            /** Scope enum. */
+            enum Scope {
+                SCOPE_UNSPECIFIED = 0,
+                SCOPE_UNCHANGED = 1,
+                SCOPE_CHANGED = 2
+            }
+
+            /** Impact enum. */
+            enum Impact {
+                IMPACT_UNSPECIFIED = 0,
+                IMPACT_HIGH = 1,
+                IMPACT_LOW = 2,
+                IMPACT_NONE = 3
+            }
         }
 
         /** Properties of a DeploymentNote. */
@@ -7585,6 +5447,2556 @@ export namespace grafeas {
 
             /**
              * Converts this DSSEAttestationOccurrence to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Represents a Grafeas */
+        class Grafeas extends $protobuf.rpc.Service {
+
+            /**
+             * Constructs a new Grafeas service.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             */
+            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+            /**
+             * Creates new Grafeas service using the specified rpc implementation.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             * @returns RPC service. Useful where requests and/or responses are streamed.
+             */
+            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Grafeas;
+
+            /**
+             * Calls GetOccurrence.
+             * @param request GetOccurrenceRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Occurrence
+             */
+            public getOccurrence(request: grafeas.v1.IGetOccurrenceRequest, callback: grafeas.v1.Grafeas.GetOccurrenceCallback): void;
+
+            /**
+             * Calls GetOccurrence.
+             * @param request GetOccurrenceRequest message or plain object
+             * @returns Promise
+             */
+            public getOccurrence(request: grafeas.v1.IGetOccurrenceRequest): Promise<grafeas.v1.Occurrence>;
+
+            /**
+             * Calls ListOccurrences.
+             * @param request ListOccurrencesRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListOccurrencesResponse
+             */
+            public listOccurrences(request: grafeas.v1.IListOccurrencesRequest, callback: grafeas.v1.Grafeas.ListOccurrencesCallback): void;
+
+            /**
+             * Calls ListOccurrences.
+             * @param request ListOccurrencesRequest message or plain object
+             * @returns Promise
+             */
+            public listOccurrences(request: grafeas.v1.IListOccurrencesRequest): Promise<grafeas.v1.ListOccurrencesResponse>;
+
+            /**
+             * Calls DeleteOccurrence.
+             * @param request DeleteOccurrenceRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteOccurrence(request: grafeas.v1.IDeleteOccurrenceRequest, callback: grafeas.v1.Grafeas.DeleteOccurrenceCallback): void;
+
+            /**
+             * Calls DeleteOccurrence.
+             * @param request DeleteOccurrenceRequest message or plain object
+             * @returns Promise
+             */
+            public deleteOccurrence(request: grafeas.v1.IDeleteOccurrenceRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CreateOccurrence.
+             * @param request CreateOccurrenceRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Occurrence
+             */
+            public createOccurrence(request: grafeas.v1.ICreateOccurrenceRequest, callback: grafeas.v1.Grafeas.CreateOccurrenceCallback): void;
+
+            /**
+             * Calls CreateOccurrence.
+             * @param request CreateOccurrenceRequest message or plain object
+             * @returns Promise
+             */
+            public createOccurrence(request: grafeas.v1.ICreateOccurrenceRequest): Promise<grafeas.v1.Occurrence>;
+
+            /**
+             * Calls BatchCreateOccurrences.
+             * @param request BatchCreateOccurrencesRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and BatchCreateOccurrencesResponse
+             */
+            public batchCreateOccurrences(request: grafeas.v1.IBatchCreateOccurrencesRequest, callback: grafeas.v1.Grafeas.BatchCreateOccurrencesCallback): void;
+
+            /**
+             * Calls BatchCreateOccurrences.
+             * @param request BatchCreateOccurrencesRequest message or plain object
+             * @returns Promise
+             */
+            public batchCreateOccurrences(request: grafeas.v1.IBatchCreateOccurrencesRequest): Promise<grafeas.v1.BatchCreateOccurrencesResponse>;
+
+            /**
+             * Calls UpdateOccurrence.
+             * @param request UpdateOccurrenceRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Occurrence
+             */
+            public updateOccurrence(request: grafeas.v1.IUpdateOccurrenceRequest, callback: grafeas.v1.Grafeas.UpdateOccurrenceCallback): void;
+
+            /**
+             * Calls UpdateOccurrence.
+             * @param request UpdateOccurrenceRequest message or plain object
+             * @returns Promise
+             */
+            public updateOccurrence(request: grafeas.v1.IUpdateOccurrenceRequest): Promise<grafeas.v1.Occurrence>;
+
+            /**
+             * Calls GetOccurrenceNote.
+             * @param request GetOccurrenceNoteRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Note
+             */
+            public getOccurrenceNote(request: grafeas.v1.IGetOccurrenceNoteRequest, callback: grafeas.v1.Grafeas.GetOccurrenceNoteCallback): void;
+
+            /**
+             * Calls GetOccurrenceNote.
+             * @param request GetOccurrenceNoteRequest message or plain object
+             * @returns Promise
+             */
+            public getOccurrenceNote(request: grafeas.v1.IGetOccurrenceNoteRequest): Promise<grafeas.v1.Note>;
+
+            /**
+             * Calls GetNote.
+             * @param request GetNoteRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Note
+             */
+            public getNote(request: grafeas.v1.IGetNoteRequest, callback: grafeas.v1.Grafeas.GetNoteCallback): void;
+
+            /**
+             * Calls GetNote.
+             * @param request GetNoteRequest message or plain object
+             * @returns Promise
+             */
+            public getNote(request: grafeas.v1.IGetNoteRequest): Promise<grafeas.v1.Note>;
+
+            /**
+             * Calls ListNotes.
+             * @param request ListNotesRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListNotesResponse
+             */
+            public listNotes(request: grafeas.v1.IListNotesRequest, callback: grafeas.v1.Grafeas.ListNotesCallback): void;
+
+            /**
+             * Calls ListNotes.
+             * @param request ListNotesRequest message or plain object
+             * @returns Promise
+             */
+            public listNotes(request: grafeas.v1.IListNotesRequest): Promise<grafeas.v1.ListNotesResponse>;
+
+            /**
+             * Calls DeleteNote.
+             * @param request DeleteNoteRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteNote(request: grafeas.v1.IDeleteNoteRequest, callback: grafeas.v1.Grafeas.DeleteNoteCallback): void;
+
+            /**
+             * Calls DeleteNote.
+             * @param request DeleteNoteRequest message or plain object
+             * @returns Promise
+             */
+            public deleteNote(request: grafeas.v1.IDeleteNoteRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CreateNote.
+             * @param request CreateNoteRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Note
+             */
+            public createNote(request: grafeas.v1.ICreateNoteRequest, callback: grafeas.v1.Grafeas.CreateNoteCallback): void;
+
+            /**
+             * Calls CreateNote.
+             * @param request CreateNoteRequest message or plain object
+             * @returns Promise
+             */
+            public createNote(request: grafeas.v1.ICreateNoteRequest): Promise<grafeas.v1.Note>;
+
+            /**
+             * Calls BatchCreateNotes.
+             * @param request BatchCreateNotesRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and BatchCreateNotesResponse
+             */
+            public batchCreateNotes(request: grafeas.v1.IBatchCreateNotesRequest, callback: grafeas.v1.Grafeas.BatchCreateNotesCallback): void;
+
+            /**
+             * Calls BatchCreateNotes.
+             * @param request BatchCreateNotesRequest message or plain object
+             * @returns Promise
+             */
+            public batchCreateNotes(request: grafeas.v1.IBatchCreateNotesRequest): Promise<grafeas.v1.BatchCreateNotesResponse>;
+
+            /**
+             * Calls UpdateNote.
+             * @param request UpdateNoteRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Note
+             */
+            public updateNote(request: grafeas.v1.IUpdateNoteRequest, callback: grafeas.v1.Grafeas.UpdateNoteCallback): void;
+
+            /**
+             * Calls UpdateNote.
+             * @param request UpdateNoteRequest message or plain object
+             * @returns Promise
+             */
+            public updateNote(request: grafeas.v1.IUpdateNoteRequest): Promise<grafeas.v1.Note>;
+
+            /**
+             * Calls ListNoteOccurrences.
+             * @param request ListNoteOccurrencesRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListNoteOccurrencesResponse
+             */
+            public listNoteOccurrences(request: grafeas.v1.IListNoteOccurrencesRequest, callback: grafeas.v1.Grafeas.ListNoteOccurrencesCallback): void;
+
+            /**
+             * Calls ListNoteOccurrences.
+             * @param request ListNoteOccurrencesRequest message or plain object
+             * @returns Promise
+             */
+            public listNoteOccurrences(request: grafeas.v1.IListNoteOccurrencesRequest): Promise<grafeas.v1.ListNoteOccurrencesResponse>;
+        }
+
+        namespace Grafeas {
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#getOccurrence}.
+             * @param error Error, if any
+             * @param [response] Occurrence
+             */
+            type GetOccurrenceCallback = (error: (Error|null), response?: grafeas.v1.Occurrence) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#listOccurrences}.
+             * @param error Error, if any
+             * @param [response] ListOccurrencesResponse
+             */
+            type ListOccurrencesCallback = (error: (Error|null), response?: grafeas.v1.ListOccurrencesResponse) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#deleteOccurrence}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteOccurrenceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#createOccurrence}.
+             * @param error Error, if any
+             * @param [response] Occurrence
+             */
+            type CreateOccurrenceCallback = (error: (Error|null), response?: grafeas.v1.Occurrence) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#batchCreateOccurrences}.
+             * @param error Error, if any
+             * @param [response] BatchCreateOccurrencesResponse
+             */
+            type BatchCreateOccurrencesCallback = (error: (Error|null), response?: grafeas.v1.BatchCreateOccurrencesResponse) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#updateOccurrence}.
+             * @param error Error, if any
+             * @param [response] Occurrence
+             */
+            type UpdateOccurrenceCallback = (error: (Error|null), response?: grafeas.v1.Occurrence) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#getOccurrenceNote}.
+             * @param error Error, if any
+             * @param [response] Note
+             */
+            type GetOccurrenceNoteCallback = (error: (Error|null), response?: grafeas.v1.Note) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#getNote}.
+             * @param error Error, if any
+             * @param [response] Note
+             */
+            type GetNoteCallback = (error: (Error|null), response?: grafeas.v1.Note) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#listNotes}.
+             * @param error Error, if any
+             * @param [response] ListNotesResponse
+             */
+            type ListNotesCallback = (error: (Error|null), response?: grafeas.v1.ListNotesResponse) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#deleteNote}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteNoteCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#createNote}.
+             * @param error Error, if any
+             * @param [response] Note
+             */
+            type CreateNoteCallback = (error: (Error|null), response?: grafeas.v1.Note) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#batchCreateNotes}.
+             * @param error Error, if any
+             * @param [response] BatchCreateNotesResponse
+             */
+            type BatchCreateNotesCallback = (error: (Error|null), response?: grafeas.v1.BatchCreateNotesResponse) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#updateNote}.
+             * @param error Error, if any
+             * @param [response] Note
+             */
+            type UpdateNoteCallback = (error: (Error|null), response?: grafeas.v1.Note) => void;
+
+            /**
+             * Callback as used by {@link grafeas.v1.Grafeas#listNoteOccurrences}.
+             * @param error Error, if any
+             * @param [response] ListNoteOccurrencesResponse
+             */
+            type ListNoteOccurrencesCallback = (error: (Error|null), response?: grafeas.v1.ListNoteOccurrencesResponse) => void;
+        }
+
+        /** Properties of an Occurrence. */
+        interface IOccurrence {
+
+            /** Occurrence name */
+            name?: (string|null);
+
+            /** Occurrence resourceUri */
+            resourceUri?: (string|null);
+
+            /** Occurrence noteName */
+            noteName?: (string|null);
+
+            /** Occurrence kind */
+            kind?: (grafeas.v1.NoteKind|keyof typeof grafeas.v1.NoteKind|null);
+
+            /** Occurrence remediation */
+            remediation?: (string|null);
+
+            /** Occurrence createTime */
+            createTime?: (google.protobuf.ITimestamp|null);
+
+            /** Occurrence updateTime */
+            updateTime?: (google.protobuf.ITimestamp|null);
+
+            /** Occurrence vulnerability */
+            vulnerability?: (grafeas.v1.IVulnerabilityOccurrence|null);
+
+            /** Occurrence build */
+            build?: (grafeas.v1.IBuildOccurrence|null);
+
+            /** Occurrence image */
+            image?: (grafeas.v1.IImageOccurrence|null);
+
+            /** Occurrence package */
+            "package"?: (grafeas.v1.IPackageOccurrence|null);
+
+            /** Occurrence deployment */
+            deployment?: (grafeas.v1.IDeploymentOccurrence|null);
+
+            /** Occurrence discovery */
+            discovery?: (grafeas.v1.IDiscoveryOccurrence|null);
+
+            /** Occurrence attestation */
+            attestation?: (grafeas.v1.IAttestationOccurrence|null);
+
+            /** Occurrence upgrade */
+            upgrade?: (grafeas.v1.IUpgradeOccurrence|null);
+
+            /** Occurrence compliance */
+            compliance?: (grafeas.v1.IComplianceOccurrence|null);
+
+            /** Occurrence dsseAttestation */
+            dsseAttestation?: (grafeas.v1.IDSSEAttestationOccurrence|null);
+
+            /** Occurrence envelope */
+            envelope?: (grafeas.v1.IEnvelope|null);
+        }
+
+        /** Represents an Occurrence. */
+        class Occurrence implements IOccurrence {
+
+            /**
+             * Constructs a new Occurrence.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IOccurrence);
+
+            /** Occurrence name. */
+            public name: string;
+
+            /** Occurrence resourceUri. */
+            public resourceUri: string;
+
+            /** Occurrence noteName. */
+            public noteName: string;
+
+            /** Occurrence kind. */
+            public kind: (grafeas.v1.NoteKind|keyof typeof grafeas.v1.NoteKind);
+
+            /** Occurrence remediation. */
+            public remediation: string;
+
+            /** Occurrence createTime. */
+            public createTime?: (google.protobuf.ITimestamp|null);
+
+            /** Occurrence updateTime. */
+            public updateTime?: (google.protobuf.ITimestamp|null);
+
+            /** Occurrence vulnerability. */
+            public vulnerability?: (grafeas.v1.IVulnerabilityOccurrence|null);
+
+            /** Occurrence build. */
+            public build?: (grafeas.v1.IBuildOccurrence|null);
+
+            /** Occurrence image. */
+            public image?: (grafeas.v1.IImageOccurrence|null);
+
+            /** Occurrence package. */
+            public package?: (grafeas.v1.IPackageOccurrence|null);
+
+            /** Occurrence deployment. */
+            public deployment?: (grafeas.v1.IDeploymentOccurrence|null);
+
+            /** Occurrence discovery. */
+            public discovery?: (grafeas.v1.IDiscoveryOccurrence|null);
+
+            /** Occurrence attestation. */
+            public attestation?: (grafeas.v1.IAttestationOccurrence|null);
+
+            /** Occurrence upgrade. */
+            public upgrade?: (grafeas.v1.IUpgradeOccurrence|null);
+
+            /** Occurrence compliance. */
+            public compliance?: (grafeas.v1.IComplianceOccurrence|null);
+
+            /** Occurrence dsseAttestation. */
+            public dsseAttestation?: (grafeas.v1.IDSSEAttestationOccurrence|null);
+
+            /** Occurrence envelope. */
+            public envelope?: (grafeas.v1.IEnvelope|null);
+
+            /** Occurrence details. */
+            public details?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation");
+
+            /**
+             * Creates a new Occurrence instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Occurrence instance
+             */
+            public static create(properties?: grafeas.v1.IOccurrence): grafeas.v1.Occurrence;
+
+            /**
+             * Encodes the specified Occurrence message. Does not implicitly {@link grafeas.v1.Occurrence.verify|verify} messages.
+             * @param message Occurrence message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Occurrence message, length delimited. Does not implicitly {@link grafeas.v1.Occurrence.verify|verify} messages.
+             * @param message Occurrence message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Occurrence message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Occurrence
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Occurrence;
+
+            /**
+             * Decodes an Occurrence message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Occurrence
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Occurrence;
+
+            /**
+             * Verifies an Occurrence message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Occurrence message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Occurrence
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.Occurrence;
+
+            /**
+             * Creates a plain object from an Occurrence message. Also converts values to other types if specified.
+             * @param message Occurrence
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.Occurrence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Occurrence to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Note. */
+        interface INote {
+
+            /** Note name */
+            name?: (string|null);
+
+            /** Note shortDescription */
+            shortDescription?: (string|null);
+
+            /** Note longDescription */
+            longDescription?: (string|null);
+
+            /** Note kind */
+            kind?: (grafeas.v1.NoteKind|keyof typeof grafeas.v1.NoteKind|null);
+
+            /** Note relatedUrl */
+            relatedUrl?: (grafeas.v1.IRelatedUrl[]|null);
+
+            /** Note expirationTime */
+            expirationTime?: (google.protobuf.ITimestamp|null);
+
+            /** Note createTime */
+            createTime?: (google.protobuf.ITimestamp|null);
+
+            /** Note updateTime */
+            updateTime?: (google.protobuf.ITimestamp|null);
+
+            /** Note relatedNoteNames */
+            relatedNoteNames?: (string[]|null);
+
+            /** Note vulnerability */
+            vulnerability?: (grafeas.v1.IVulnerabilityNote|null);
+
+            /** Note build */
+            build?: (grafeas.v1.IBuildNote|null);
+
+            /** Note image */
+            image?: (grafeas.v1.IImageNote|null);
+
+            /** Note package */
+            "package"?: (grafeas.v1.IPackageNote|null);
+
+            /** Note deployment */
+            deployment?: (grafeas.v1.IDeploymentNote|null);
+
+            /** Note discovery */
+            discovery?: (grafeas.v1.IDiscoveryNote|null);
+
+            /** Note attestation */
+            attestation?: (grafeas.v1.IAttestationNote|null);
+
+            /** Note upgrade */
+            upgrade?: (grafeas.v1.IUpgradeNote|null);
+
+            /** Note compliance */
+            compliance?: (grafeas.v1.IComplianceNote|null);
+
+            /** Note dsseAttestation */
+            dsseAttestation?: (grafeas.v1.IDSSEAttestationNote|null);
+        }
+
+        /** Represents a Note. */
+        class Note implements INote {
+
+            /**
+             * Constructs a new Note.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.INote);
+
+            /** Note name. */
+            public name: string;
+
+            /** Note shortDescription. */
+            public shortDescription: string;
+
+            /** Note longDescription. */
+            public longDescription: string;
+
+            /** Note kind. */
+            public kind: (grafeas.v1.NoteKind|keyof typeof grafeas.v1.NoteKind);
+
+            /** Note relatedUrl. */
+            public relatedUrl: grafeas.v1.IRelatedUrl[];
+
+            /** Note expirationTime. */
+            public expirationTime?: (google.protobuf.ITimestamp|null);
+
+            /** Note createTime. */
+            public createTime?: (google.protobuf.ITimestamp|null);
+
+            /** Note updateTime. */
+            public updateTime?: (google.protobuf.ITimestamp|null);
+
+            /** Note relatedNoteNames. */
+            public relatedNoteNames: string[];
+
+            /** Note vulnerability. */
+            public vulnerability?: (grafeas.v1.IVulnerabilityNote|null);
+
+            /** Note build. */
+            public build?: (grafeas.v1.IBuildNote|null);
+
+            /** Note image. */
+            public image?: (grafeas.v1.IImageNote|null);
+
+            /** Note package. */
+            public package?: (grafeas.v1.IPackageNote|null);
+
+            /** Note deployment. */
+            public deployment?: (grafeas.v1.IDeploymentNote|null);
+
+            /** Note discovery. */
+            public discovery?: (grafeas.v1.IDiscoveryNote|null);
+
+            /** Note attestation. */
+            public attestation?: (grafeas.v1.IAttestationNote|null);
+
+            /** Note upgrade. */
+            public upgrade?: (grafeas.v1.IUpgradeNote|null);
+
+            /** Note compliance. */
+            public compliance?: (grafeas.v1.IComplianceNote|null);
+
+            /** Note dsseAttestation. */
+            public dsseAttestation?: (grafeas.v1.IDSSEAttestationNote|null);
+
+            /** Note type. */
+            public type?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation");
+
+            /**
+             * Creates a new Note instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Note instance
+             */
+            public static create(properties?: grafeas.v1.INote): grafeas.v1.Note;
+
+            /**
+             * Encodes the specified Note message. Does not implicitly {@link grafeas.v1.Note.verify|verify} messages.
+             * @param message Note message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.INote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Note message, length delimited. Does not implicitly {@link grafeas.v1.Note.verify|verify} messages.
+             * @param message Note message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.INote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Note message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Note
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Note;
+
+            /**
+             * Decodes a Note message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Note
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Note;
+
+            /**
+             * Verifies a Note message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Note message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Note
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.Note;
+
+            /**
+             * Creates a plain object from a Note message. Also converts values to other types if specified.
+             * @param message Note
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.Note, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Note to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a GetOccurrenceRequest. */
+        interface IGetOccurrenceRequest {
+
+            /** GetOccurrenceRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOccurrenceRequest. */
+        class GetOccurrenceRequest implements IGetOccurrenceRequest {
+
+            /**
+             * Constructs a new GetOccurrenceRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IGetOccurrenceRequest);
+
+            /** GetOccurrenceRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOccurrenceRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOccurrenceRequest instance
+             */
+            public static create(properties?: grafeas.v1.IGetOccurrenceRequest): grafeas.v1.GetOccurrenceRequest;
+
+            /**
+             * Encodes the specified GetOccurrenceRequest message. Does not implicitly {@link grafeas.v1.GetOccurrenceRequest.verify|verify} messages.
+             * @param message GetOccurrenceRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IGetOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOccurrenceRequest message, length delimited. Does not implicitly {@link grafeas.v1.GetOccurrenceRequest.verify|verify} messages.
+             * @param message GetOccurrenceRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IGetOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOccurrenceRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOccurrenceRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.GetOccurrenceRequest;
+
+            /**
+             * Decodes a GetOccurrenceRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOccurrenceRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.GetOccurrenceRequest;
+
+            /**
+             * Verifies a GetOccurrenceRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOccurrenceRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOccurrenceRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.GetOccurrenceRequest;
+
+            /**
+             * Creates a plain object from a GetOccurrenceRequest message. Also converts values to other types if specified.
+             * @param message GetOccurrenceRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.GetOccurrenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOccurrenceRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ListOccurrencesRequest. */
+        interface IListOccurrencesRequest {
+
+            /** ListOccurrencesRequest parent */
+            parent?: (string|null);
+
+            /** ListOccurrencesRequest filter */
+            filter?: (string|null);
+
+            /** ListOccurrencesRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListOccurrencesRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListOccurrencesRequest. */
+        class ListOccurrencesRequest implements IListOccurrencesRequest {
+
+            /**
+             * Constructs a new ListOccurrencesRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IListOccurrencesRequest);
+
+            /** ListOccurrencesRequest parent. */
+            public parent: string;
+
+            /** ListOccurrencesRequest filter. */
+            public filter: string;
+
+            /** ListOccurrencesRequest pageSize. */
+            public pageSize: number;
+
+            /** ListOccurrencesRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListOccurrencesRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOccurrencesRequest instance
+             */
+            public static create(properties?: grafeas.v1.IListOccurrencesRequest): grafeas.v1.ListOccurrencesRequest;
+
+            /**
+             * Encodes the specified ListOccurrencesRequest message. Does not implicitly {@link grafeas.v1.ListOccurrencesRequest.verify|verify} messages.
+             * @param message ListOccurrencesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IListOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOccurrencesRequest message, length delimited. Does not implicitly {@link grafeas.v1.ListOccurrencesRequest.verify|verify} messages.
+             * @param message ListOccurrencesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IListOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOccurrencesRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOccurrencesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListOccurrencesRequest;
+
+            /**
+             * Decodes a ListOccurrencesRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOccurrencesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListOccurrencesRequest;
+
+            /**
+             * Verifies a ListOccurrencesRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOccurrencesRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOccurrencesRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListOccurrencesRequest;
+
+            /**
+             * Creates a plain object from a ListOccurrencesRequest message. Also converts values to other types if specified.
+             * @param message ListOccurrencesRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.ListOccurrencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOccurrencesRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ListOccurrencesResponse. */
+        interface IListOccurrencesResponse {
+
+            /** ListOccurrencesResponse occurrences */
+            occurrences?: (grafeas.v1.IOccurrence[]|null);
+
+            /** ListOccurrencesResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListOccurrencesResponse. */
+        class ListOccurrencesResponse implements IListOccurrencesResponse {
+
+            /**
+             * Constructs a new ListOccurrencesResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IListOccurrencesResponse);
+
+            /** ListOccurrencesResponse occurrences. */
+            public occurrences: grafeas.v1.IOccurrence[];
+
+            /** ListOccurrencesResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListOccurrencesResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOccurrencesResponse instance
+             */
+            public static create(properties?: grafeas.v1.IListOccurrencesResponse): grafeas.v1.ListOccurrencesResponse;
+
+            /**
+             * Encodes the specified ListOccurrencesResponse message. Does not implicitly {@link grafeas.v1.ListOccurrencesResponse.verify|verify} messages.
+             * @param message ListOccurrencesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IListOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOccurrencesResponse message, length delimited. Does not implicitly {@link grafeas.v1.ListOccurrencesResponse.verify|verify} messages.
+             * @param message ListOccurrencesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IListOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOccurrencesResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOccurrencesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListOccurrencesResponse;
+
+            /**
+             * Decodes a ListOccurrencesResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOccurrencesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListOccurrencesResponse;
+
+            /**
+             * Verifies a ListOccurrencesResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOccurrencesResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOccurrencesResponse
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListOccurrencesResponse;
+
+            /**
+             * Creates a plain object from a ListOccurrencesResponse message. Also converts values to other types if specified.
+             * @param message ListOccurrencesResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.ListOccurrencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOccurrencesResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a DeleteOccurrenceRequest. */
+        interface IDeleteOccurrenceRequest {
+
+            /** DeleteOccurrenceRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteOccurrenceRequest. */
+        class DeleteOccurrenceRequest implements IDeleteOccurrenceRequest {
+
+            /**
+             * Constructs a new DeleteOccurrenceRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IDeleteOccurrenceRequest);
+
+            /** DeleteOccurrenceRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteOccurrenceRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteOccurrenceRequest instance
+             */
+            public static create(properties?: grafeas.v1.IDeleteOccurrenceRequest): grafeas.v1.DeleteOccurrenceRequest;
+
+            /**
+             * Encodes the specified DeleteOccurrenceRequest message. Does not implicitly {@link grafeas.v1.DeleteOccurrenceRequest.verify|verify} messages.
+             * @param message DeleteOccurrenceRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IDeleteOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteOccurrenceRequest message, length delimited. Does not implicitly {@link grafeas.v1.DeleteOccurrenceRequest.verify|verify} messages.
+             * @param message DeleteOccurrenceRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IDeleteOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteOccurrenceRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteOccurrenceRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DeleteOccurrenceRequest;
+
+            /**
+             * Decodes a DeleteOccurrenceRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteOccurrenceRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DeleteOccurrenceRequest;
+
+            /**
+             * Verifies a DeleteOccurrenceRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteOccurrenceRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteOccurrenceRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.DeleteOccurrenceRequest;
+
+            /**
+             * Creates a plain object from a DeleteOccurrenceRequest message. Also converts values to other types if specified.
+             * @param message DeleteOccurrenceRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.DeleteOccurrenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteOccurrenceRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a CreateOccurrenceRequest. */
+        interface ICreateOccurrenceRequest {
+
+            /** CreateOccurrenceRequest parent */
+            parent?: (string|null);
+
+            /** CreateOccurrenceRequest occurrence */
+            occurrence?: (grafeas.v1.IOccurrence|null);
+        }
+
+        /** Represents a CreateOccurrenceRequest. */
+        class CreateOccurrenceRequest implements ICreateOccurrenceRequest {
+
+            /**
+             * Constructs a new CreateOccurrenceRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ICreateOccurrenceRequest);
+
+            /** CreateOccurrenceRequest parent. */
+            public parent: string;
+
+            /** CreateOccurrenceRequest occurrence. */
+            public occurrence?: (grafeas.v1.IOccurrence|null);
+
+            /**
+             * Creates a new CreateOccurrenceRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CreateOccurrenceRequest instance
+             */
+            public static create(properties?: grafeas.v1.ICreateOccurrenceRequest): grafeas.v1.CreateOccurrenceRequest;
+
+            /**
+             * Encodes the specified CreateOccurrenceRequest message. Does not implicitly {@link grafeas.v1.CreateOccurrenceRequest.verify|verify} messages.
+             * @param message CreateOccurrenceRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ICreateOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CreateOccurrenceRequest message, length delimited. Does not implicitly {@link grafeas.v1.CreateOccurrenceRequest.verify|verify} messages.
+             * @param message CreateOccurrenceRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ICreateOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CreateOccurrenceRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CreateOccurrenceRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CreateOccurrenceRequest;
+
+            /**
+             * Decodes a CreateOccurrenceRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CreateOccurrenceRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CreateOccurrenceRequest;
+
+            /**
+             * Verifies a CreateOccurrenceRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CreateOccurrenceRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CreateOccurrenceRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.CreateOccurrenceRequest;
+
+            /**
+             * Creates a plain object from a CreateOccurrenceRequest message. Also converts values to other types if specified.
+             * @param message CreateOccurrenceRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.CreateOccurrenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CreateOccurrenceRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an UpdateOccurrenceRequest. */
+        interface IUpdateOccurrenceRequest {
+
+            /** UpdateOccurrenceRequest name */
+            name?: (string|null);
+
+            /** UpdateOccurrenceRequest occurrence */
+            occurrence?: (grafeas.v1.IOccurrence|null);
+
+            /** UpdateOccurrenceRequest updateMask */
+            updateMask?: (google.protobuf.IFieldMask|null);
+        }
+
+        /** Represents an UpdateOccurrenceRequest. */
+        class UpdateOccurrenceRequest implements IUpdateOccurrenceRequest {
+
+            /**
+             * Constructs a new UpdateOccurrenceRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IUpdateOccurrenceRequest);
+
+            /** UpdateOccurrenceRequest name. */
+            public name: string;
+
+            /** UpdateOccurrenceRequest occurrence. */
+            public occurrence?: (grafeas.v1.IOccurrence|null);
+
+            /** UpdateOccurrenceRequest updateMask. */
+            public updateMask?: (google.protobuf.IFieldMask|null);
+
+            /**
+             * Creates a new UpdateOccurrenceRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns UpdateOccurrenceRequest instance
+             */
+            public static create(properties?: grafeas.v1.IUpdateOccurrenceRequest): grafeas.v1.UpdateOccurrenceRequest;
+
+            /**
+             * Encodes the specified UpdateOccurrenceRequest message. Does not implicitly {@link grafeas.v1.UpdateOccurrenceRequest.verify|verify} messages.
+             * @param message UpdateOccurrenceRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IUpdateOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified UpdateOccurrenceRequest message, length delimited. Does not implicitly {@link grafeas.v1.UpdateOccurrenceRequest.verify|verify} messages.
+             * @param message UpdateOccurrenceRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IUpdateOccurrenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an UpdateOccurrenceRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns UpdateOccurrenceRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.UpdateOccurrenceRequest;
+
+            /**
+             * Decodes an UpdateOccurrenceRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns UpdateOccurrenceRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.UpdateOccurrenceRequest;
+
+            /**
+             * Verifies an UpdateOccurrenceRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an UpdateOccurrenceRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns UpdateOccurrenceRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.UpdateOccurrenceRequest;
+
+            /**
+             * Creates a plain object from an UpdateOccurrenceRequest message. Also converts values to other types if specified.
+             * @param message UpdateOccurrenceRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.UpdateOccurrenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this UpdateOccurrenceRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a GetNoteRequest. */
+        interface IGetNoteRequest {
+
+            /** GetNoteRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetNoteRequest. */
+        class GetNoteRequest implements IGetNoteRequest {
+
+            /**
+             * Constructs a new GetNoteRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IGetNoteRequest);
+
+            /** GetNoteRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetNoteRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetNoteRequest instance
+             */
+            public static create(properties?: grafeas.v1.IGetNoteRequest): grafeas.v1.GetNoteRequest;
+
+            /**
+             * Encodes the specified GetNoteRequest message. Does not implicitly {@link grafeas.v1.GetNoteRequest.verify|verify} messages.
+             * @param message GetNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IGetNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.GetNoteRequest.verify|verify} messages.
+             * @param message GetNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IGetNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetNoteRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.GetNoteRequest;
+
+            /**
+             * Decodes a GetNoteRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.GetNoteRequest;
+
+            /**
+             * Verifies a GetNoteRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetNoteRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetNoteRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.GetNoteRequest;
+
+            /**
+             * Creates a plain object from a GetNoteRequest message. Also converts values to other types if specified.
+             * @param message GetNoteRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.GetNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetNoteRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a GetOccurrenceNoteRequest. */
+        interface IGetOccurrenceNoteRequest {
+
+            /** GetOccurrenceNoteRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOccurrenceNoteRequest. */
+        class GetOccurrenceNoteRequest implements IGetOccurrenceNoteRequest {
+
+            /**
+             * Constructs a new GetOccurrenceNoteRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IGetOccurrenceNoteRequest);
+
+            /** GetOccurrenceNoteRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOccurrenceNoteRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOccurrenceNoteRequest instance
+             */
+            public static create(properties?: grafeas.v1.IGetOccurrenceNoteRequest): grafeas.v1.GetOccurrenceNoteRequest;
+
+            /**
+             * Encodes the specified GetOccurrenceNoteRequest message. Does not implicitly {@link grafeas.v1.GetOccurrenceNoteRequest.verify|verify} messages.
+             * @param message GetOccurrenceNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IGetOccurrenceNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOccurrenceNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.GetOccurrenceNoteRequest.verify|verify} messages.
+             * @param message GetOccurrenceNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IGetOccurrenceNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOccurrenceNoteRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOccurrenceNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.GetOccurrenceNoteRequest;
+
+            /**
+             * Decodes a GetOccurrenceNoteRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOccurrenceNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.GetOccurrenceNoteRequest;
+
+            /**
+             * Verifies a GetOccurrenceNoteRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOccurrenceNoteRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOccurrenceNoteRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.GetOccurrenceNoteRequest;
+
+            /**
+             * Creates a plain object from a GetOccurrenceNoteRequest message. Also converts values to other types if specified.
+             * @param message GetOccurrenceNoteRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.GetOccurrenceNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOccurrenceNoteRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ListNotesRequest. */
+        interface IListNotesRequest {
+
+            /** ListNotesRequest parent */
+            parent?: (string|null);
+
+            /** ListNotesRequest filter */
+            filter?: (string|null);
+
+            /** ListNotesRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListNotesRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListNotesRequest. */
+        class ListNotesRequest implements IListNotesRequest {
+
+            /**
+             * Constructs a new ListNotesRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IListNotesRequest);
+
+            /** ListNotesRequest parent. */
+            public parent: string;
+
+            /** ListNotesRequest filter. */
+            public filter: string;
+
+            /** ListNotesRequest pageSize. */
+            public pageSize: number;
+
+            /** ListNotesRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListNotesRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListNotesRequest instance
+             */
+            public static create(properties?: grafeas.v1.IListNotesRequest): grafeas.v1.ListNotesRequest;
+
+            /**
+             * Encodes the specified ListNotesRequest message. Does not implicitly {@link grafeas.v1.ListNotesRequest.verify|verify} messages.
+             * @param message ListNotesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IListNotesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListNotesRequest message, length delimited. Does not implicitly {@link grafeas.v1.ListNotesRequest.verify|verify} messages.
+             * @param message ListNotesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IListNotesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListNotesRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListNotesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListNotesRequest;
+
+            /**
+             * Decodes a ListNotesRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListNotesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListNotesRequest;
+
+            /**
+             * Verifies a ListNotesRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListNotesRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListNotesRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListNotesRequest;
+
+            /**
+             * Creates a plain object from a ListNotesRequest message. Also converts values to other types if specified.
+             * @param message ListNotesRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.ListNotesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListNotesRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ListNotesResponse. */
+        interface IListNotesResponse {
+
+            /** ListNotesResponse notes */
+            notes?: (grafeas.v1.INote[]|null);
+
+            /** ListNotesResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListNotesResponse. */
+        class ListNotesResponse implements IListNotesResponse {
+
+            /**
+             * Constructs a new ListNotesResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IListNotesResponse);
+
+            /** ListNotesResponse notes. */
+            public notes: grafeas.v1.INote[];
+
+            /** ListNotesResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListNotesResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListNotesResponse instance
+             */
+            public static create(properties?: grafeas.v1.IListNotesResponse): grafeas.v1.ListNotesResponse;
+
+            /**
+             * Encodes the specified ListNotesResponse message. Does not implicitly {@link grafeas.v1.ListNotesResponse.verify|verify} messages.
+             * @param message ListNotesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IListNotesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListNotesResponse message, length delimited. Does not implicitly {@link grafeas.v1.ListNotesResponse.verify|verify} messages.
+             * @param message ListNotesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IListNotesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListNotesResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListNotesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListNotesResponse;
+
+            /**
+             * Decodes a ListNotesResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListNotesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListNotesResponse;
+
+            /**
+             * Verifies a ListNotesResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListNotesResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListNotesResponse
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListNotesResponse;
+
+            /**
+             * Creates a plain object from a ListNotesResponse message. Also converts values to other types if specified.
+             * @param message ListNotesResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.ListNotesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListNotesResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a DeleteNoteRequest. */
+        interface IDeleteNoteRequest {
+
+            /** DeleteNoteRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteNoteRequest. */
+        class DeleteNoteRequest implements IDeleteNoteRequest {
+
+            /**
+             * Constructs a new DeleteNoteRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IDeleteNoteRequest);
+
+            /** DeleteNoteRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteNoteRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteNoteRequest instance
+             */
+            public static create(properties?: grafeas.v1.IDeleteNoteRequest): grafeas.v1.DeleteNoteRequest;
+
+            /**
+             * Encodes the specified DeleteNoteRequest message. Does not implicitly {@link grafeas.v1.DeleteNoteRequest.verify|verify} messages.
+             * @param message DeleteNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IDeleteNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.DeleteNoteRequest.verify|verify} messages.
+             * @param message DeleteNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IDeleteNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteNoteRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DeleteNoteRequest;
+
+            /**
+             * Decodes a DeleteNoteRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DeleteNoteRequest;
+
+            /**
+             * Verifies a DeleteNoteRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteNoteRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteNoteRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.DeleteNoteRequest;
+
+            /**
+             * Creates a plain object from a DeleteNoteRequest message. Also converts values to other types if specified.
+             * @param message DeleteNoteRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.DeleteNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteNoteRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a CreateNoteRequest. */
+        interface ICreateNoteRequest {
+
+            /** CreateNoteRequest parent */
+            parent?: (string|null);
+
+            /** CreateNoteRequest noteId */
+            noteId?: (string|null);
+
+            /** CreateNoteRequest note */
+            note?: (grafeas.v1.INote|null);
+        }
+
+        /** Represents a CreateNoteRequest. */
+        class CreateNoteRequest implements ICreateNoteRequest {
+
+            /**
+             * Constructs a new CreateNoteRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ICreateNoteRequest);
+
+            /** CreateNoteRequest parent. */
+            public parent: string;
+
+            /** CreateNoteRequest noteId. */
+            public noteId: string;
+
+            /** CreateNoteRequest note. */
+            public note?: (grafeas.v1.INote|null);
+
+            /**
+             * Creates a new CreateNoteRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CreateNoteRequest instance
+             */
+            public static create(properties?: grafeas.v1.ICreateNoteRequest): grafeas.v1.CreateNoteRequest;
+
+            /**
+             * Encodes the specified CreateNoteRequest message. Does not implicitly {@link grafeas.v1.CreateNoteRequest.verify|verify} messages.
+             * @param message CreateNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ICreateNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CreateNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.CreateNoteRequest.verify|verify} messages.
+             * @param message CreateNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ICreateNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CreateNoteRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CreateNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CreateNoteRequest;
+
+            /**
+             * Decodes a CreateNoteRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CreateNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CreateNoteRequest;
+
+            /**
+             * Verifies a CreateNoteRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CreateNoteRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CreateNoteRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.CreateNoteRequest;
+
+            /**
+             * Creates a plain object from a CreateNoteRequest message. Also converts values to other types if specified.
+             * @param message CreateNoteRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.CreateNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CreateNoteRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an UpdateNoteRequest. */
+        interface IUpdateNoteRequest {
+
+            /** UpdateNoteRequest name */
+            name?: (string|null);
+
+            /** UpdateNoteRequest note */
+            note?: (grafeas.v1.INote|null);
+
+            /** UpdateNoteRequest updateMask */
+            updateMask?: (google.protobuf.IFieldMask|null);
+        }
+
+        /** Represents an UpdateNoteRequest. */
+        class UpdateNoteRequest implements IUpdateNoteRequest {
+
+            /**
+             * Constructs a new UpdateNoteRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IUpdateNoteRequest);
+
+            /** UpdateNoteRequest name. */
+            public name: string;
+
+            /** UpdateNoteRequest note. */
+            public note?: (grafeas.v1.INote|null);
+
+            /** UpdateNoteRequest updateMask. */
+            public updateMask?: (google.protobuf.IFieldMask|null);
+
+            /**
+             * Creates a new UpdateNoteRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns UpdateNoteRequest instance
+             */
+            public static create(properties?: grafeas.v1.IUpdateNoteRequest): grafeas.v1.UpdateNoteRequest;
+
+            /**
+             * Encodes the specified UpdateNoteRequest message. Does not implicitly {@link grafeas.v1.UpdateNoteRequest.verify|verify} messages.
+             * @param message UpdateNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IUpdateNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified UpdateNoteRequest message, length delimited. Does not implicitly {@link grafeas.v1.UpdateNoteRequest.verify|verify} messages.
+             * @param message UpdateNoteRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IUpdateNoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an UpdateNoteRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns UpdateNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.UpdateNoteRequest;
+
+            /**
+             * Decodes an UpdateNoteRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns UpdateNoteRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.UpdateNoteRequest;
+
+            /**
+             * Verifies an UpdateNoteRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an UpdateNoteRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns UpdateNoteRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.UpdateNoteRequest;
+
+            /**
+             * Creates a plain object from an UpdateNoteRequest message. Also converts values to other types if specified.
+             * @param message UpdateNoteRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.UpdateNoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this UpdateNoteRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ListNoteOccurrencesRequest. */
+        interface IListNoteOccurrencesRequest {
+
+            /** ListNoteOccurrencesRequest name */
+            name?: (string|null);
+
+            /** ListNoteOccurrencesRequest filter */
+            filter?: (string|null);
+
+            /** ListNoteOccurrencesRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListNoteOccurrencesRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListNoteOccurrencesRequest. */
+        class ListNoteOccurrencesRequest implements IListNoteOccurrencesRequest {
+
+            /**
+             * Constructs a new ListNoteOccurrencesRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IListNoteOccurrencesRequest);
+
+            /** ListNoteOccurrencesRequest name. */
+            public name: string;
+
+            /** ListNoteOccurrencesRequest filter. */
+            public filter: string;
+
+            /** ListNoteOccurrencesRequest pageSize. */
+            public pageSize: number;
+
+            /** ListNoteOccurrencesRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListNoteOccurrencesRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListNoteOccurrencesRequest instance
+             */
+            public static create(properties?: grafeas.v1.IListNoteOccurrencesRequest): grafeas.v1.ListNoteOccurrencesRequest;
+
+            /**
+             * Encodes the specified ListNoteOccurrencesRequest message. Does not implicitly {@link grafeas.v1.ListNoteOccurrencesRequest.verify|verify} messages.
+             * @param message ListNoteOccurrencesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IListNoteOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListNoteOccurrencesRequest message, length delimited. Does not implicitly {@link grafeas.v1.ListNoteOccurrencesRequest.verify|verify} messages.
+             * @param message ListNoteOccurrencesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IListNoteOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListNoteOccurrencesRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListNoteOccurrencesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListNoteOccurrencesRequest;
+
+            /**
+             * Decodes a ListNoteOccurrencesRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListNoteOccurrencesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListNoteOccurrencesRequest;
+
+            /**
+             * Verifies a ListNoteOccurrencesRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListNoteOccurrencesRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListNoteOccurrencesRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListNoteOccurrencesRequest;
+
+            /**
+             * Creates a plain object from a ListNoteOccurrencesRequest message. Also converts values to other types if specified.
+             * @param message ListNoteOccurrencesRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.ListNoteOccurrencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListNoteOccurrencesRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ListNoteOccurrencesResponse. */
+        interface IListNoteOccurrencesResponse {
+
+            /** ListNoteOccurrencesResponse occurrences */
+            occurrences?: (grafeas.v1.IOccurrence[]|null);
+
+            /** ListNoteOccurrencesResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListNoteOccurrencesResponse. */
+        class ListNoteOccurrencesResponse implements IListNoteOccurrencesResponse {
+
+            /**
+             * Constructs a new ListNoteOccurrencesResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IListNoteOccurrencesResponse);
+
+            /** ListNoteOccurrencesResponse occurrences. */
+            public occurrences: grafeas.v1.IOccurrence[];
+
+            /** ListNoteOccurrencesResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListNoteOccurrencesResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListNoteOccurrencesResponse instance
+             */
+            public static create(properties?: grafeas.v1.IListNoteOccurrencesResponse): grafeas.v1.ListNoteOccurrencesResponse;
+
+            /**
+             * Encodes the specified ListNoteOccurrencesResponse message. Does not implicitly {@link grafeas.v1.ListNoteOccurrencesResponse.verify|verify} messages.
+             * @param message ListNoteOccurrencesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IListNoteOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListNoteOccurrencesResponse message, length delimited. Does not implicitly {@link grafeas.v1.ListNoteOccurrencesResponse.verify|verify} messages.
+             * @param message ListNoteOccurrencesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IListNoteOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListNoteOccurrencesResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListNoteOccurrencesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ListNoteOccurrencesResponse;
+
+            /**
+             * Decodes a ListNoteOccurrencesResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListNoteOccurrencesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ListNoteOccurrencesResponse;
+
+            /**
+             * Verifies a ListNoteOccurrencesResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListNoteOccurrencesResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListNoteOccurrencesResponse
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.ListNoteOccurrencesResponse;
+
+            /**
+             * Creates a plain object from a ListNoteOccurrencesResponse message. Also converts values to other types if specified.
+             * @param message ListNoteOccurrencesResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.ListNoteOccurrencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListNoteOccurrencesResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a BatchCreateNotesRequest. */
+        interface IBatchCreateNotesRequest {
+
+            /** BatchCreateNotesRequest parent */
+            parent?: (string|null);
+
+            /** BatchCreateNotesRequest notes */
+            notes?: ({ [k: string]: grafeas.v1.INote }|null);
+        }
+
+        /** Represents a BatchCreateNotesRequest. */
+        class BatchCreateNotesRequest implements IBatchCreateNotesRequest {
+
+            /**
+             * Constructs a new BatchCreateNotesRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IBatchCreateNotesRequest);
+
+            /** BatchCreateNotesRequest parent. */
+            public parent: string;
+
+            /** BatchCreateNotesRequest notes. */
+            public notes: { [k: string]: grafeas.v1.INote };
+
+            /**
+             * Creates a new BatchCreateNotesRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchCreateNotesRequest instance
+             */
+            public static create(properties?: grafeas.v1.IBatchCreateNotesRequest): grafeas.v1.BatchCreateNotesRequest;
+
+            /**
+             * Encodes the specified BatchCreateNotesRequest message. Does not implicitly {@link grafeas.v1.BatchCreateNotesRequest.verify|verify} messages.
+             * @param message BatchCreateNotesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IBatchCreateNotesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchCreateNotesRequest message, length delimited. Does not implicitly {@link grafeas.v1.BatchCreateNotesRequest.verify|verify} messages.
+             * @param message BatchCreateNotesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IBatchCreateNotesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchCreateNotesRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchCreateNotesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BatchCreateNotesRequest;
+
+            /**
+             * Decodes a BatchCreateNotesRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchCreateNotesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BatchCreateNotesRequest;
+
+            /**
+             * Verifies a BatchCreateNotesRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchCreateNotesRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchCreateNotesRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.BatchCreateNotesRequest;
+
+            /**
+             * Creates a plain object from a BatchCreateNotesRequest message. Also converts values to other types if specified.
+             * @param message BatchCreateNotesRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.BatchCreateNotesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchCreateNotesRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a BatchCreateNotesResponse. */
+        interface IBatchCreateNotesResponse {
+
+            /** BatchCreateNotesResponse notes */
+            notes?: (grafeas.v1.INote[]|null);
+        }
+
+        /** Represents a BatchCreateNotesResponse. */
+        class BatchCreateNotesResponse implements IBatchCreateNotesResponse {
+
+            /**
+             * Constructs a new BatchCreateNotesResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IBatchCreateNotesResponse);
+
+            /** BatchCreateNotesResponse notes. */
+            public notes: grafeas.v1.INote[];
+
+            /**
+             * Creates a new BatchCreateNotesResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchCreateNotesResponse instance
+             */
+            public static create(properties?: grafeas.v1.IBatchCreateNotesResponse): grafeas.v1.BatchCreateNotesResponse;
+
+            /**
+             * Encodes the specified BatchCreateNotesResponse message. Does not implicitly {@link grafeas.v1.BatchCreateNotesResponse.verify|verify} messages.
+             * @param message BatchCreateNotesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IBatchCreateNotesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchCreateNotesResponse message, length delimited. Does not implicitly {@link grafeas.v1.BatchCreateNotesResponse.verify|verify} messages.
+             * @param message BatchCreateNotesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IBatchCreateNotesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchCreateNotesResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchCreateNotesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BatchCreateNotesResponse;
+
+            /**
+             * Decodes a BatchCreateNotesResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchCreateNotesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BatchCreateNotesResponse;
+
+            /**
+             * Verifies a BatchCreateNotesResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchCreateNotesResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchCreateNotesResponse
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.BatchCreateNotesResponse;
+
+            /**
+             * Creates a plain object from a BatchCreateNotesResponse message. Also converts values to other types if specified.
+             * @param message BatchCreateNotesResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.BatchCreateNotesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchCreateNotesResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a BatchCreateOccurrencesRequest. */
+        interface IBatchCreateOccurrencesRequest {
+
+            /** BatchCreateOccurrencesRequest parent */
+            parent?: (string|null);
+
+            /** BatchCreateOccurrencesRequest occurrences */
+            occurrences?: (grafeas.v1.IOccurrence[]|null);
+        }
+
+        /** Represents a BatchCreateOccurrencesRequest. */
+        class BatchCreateOccurrencesRequest implements IBatchCreateOccurrencesRequest {
+
+            /**
+             * Constructs a new BatchCreateOccurrencesRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IBatchCreateOccurrencesRequest);
+
+            /** BatchCreateOccurrencesRequest parent. */
+            public parent: string;
+
+            /** BatchCreateOccurrencesRequest occurrences. */
+            public occurrences: grafeas.v1.IOccurrence[];
+
+            /**
+             * Creates a new BatchCreateOccurrencesRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchCreateOccurrencesRequest instance
+             */
+            public static create(properties?: grafeas.v1.IBatchCreateOccurrencesRequest): grafeas.v1.BatchCreateOccurrencesRequest;
+
+            /**
+             * Encodes the specified BatchCreateOccurrencesRequest message. Does not implicitly {@link grafeas.v1.BatchCreateOccurrencesRequest.verify|verify} messages.
+             * @param message BatchCreateOccurrencesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IBatchCreateOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchCreateOccurrencesRequest message, length delimited. Does not implicitly {@link grafeas.v1.BatchCreateOccurrencesRequest.verify|verify} messages.
+             * @param message BatchCreateOccurrencesRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IBatchCreateOccurrencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchCreateOccurrencesRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchCreateOccurrencesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BatchCreateOccurrencesRequest;
+
+            /**
+             * Decodes a BatchCreateOccurrencesRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchCreateOccurrencesRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BatchCreateOccurrencesRequest;
+
+            /**
+             * Verifies a BatchCreateOccurrencesRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchCreateOccurrencesRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchCreateOccurrencesRequest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.BatchCreateOccurrencesRequest;
+
+            /**
+             * Creates a plain object from a BatchCreateOccurrencesRequest message. Also converts values to other types if specified.
+             * @param message BatchCreateOccurrencesRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.BatchCreateOccurrencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchCreateOccurrencesRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a BatchCreateOccurrencesResponse. */
+        interface IBatchCreateOccurrencesResponse {
+
+            /** BatchCreateOccurrencesResponse occurrences */
+            occurrences?: (grafeas.v1.IOccurrence[]|null);
+        }
+
+        /** Represents a BatchCreateOccurrencesResponse. */
+        class BatchCreateOccurrencesResponse implements IBatchCreateOccurrencesResponse {
+
+            /**
+             * Constructs a new BatchCreateOccurrencesResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IBatchCreateOccurrencesResponse);
+
+            /** BatchCreateOccurrencesResponse occurrences. */
+            public occurrences: grafeas.v1.IOccurrence[];
+
+            /**
+             * Creates a new BatchCreateOccurrencesResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchCreateOccurrencesResponse instance
+             */
+            public static create(properties?: grafeas.v1.IBatchCreateOccurrencesResponse): grafeas.v1.BatchCreateOccurrencesResponse;
+
+            /**
+             * Encodes the specified BatchCreateOccurrencesResponse message. Does not implicitly {@link grafeas.v1.BatchCreateOccurrencesResponse.verify|verify} messages.
+             * @param message BatchCreateOccurrencesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IBatchCreateOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchCreateOccurrencesResponse message, length delimited. Does not implicitly {@link grafeas.v1.BatchCreateOccurrencesResponse.verify|verify} messages.
+             * @param message BatchCreateOccurrencesResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IBatchCreateOccurrencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchCreateOccurrencesResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchCreateOccurrencesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BatchCreateOccurrencesResponse;
+
+            /**
+             * Decodes a BatchCreateOccurrencesResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchCreateOccurrencesResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BatchCreateOccurrencesResponse;
+
+            /**
+             * Verifies a BatchCreateOccurrencesResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchCreateOccurrencesResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchCreateOccurrencesResponse
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.BatchCreateOccurrencesResponse;
+
+            /**
+             * Creates a plain object from a BatchCreateOccurrencesResponse message. Also converts values to other types if specified.
+             * @param message BatchCreateOccurrencesResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.BatchCreateOccurrencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchCreateOccurrencesResponse to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -9969,418 +10381,6 @@ export namespace grafeas {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
-            }
-        }
-
-        /** Properties of a CVSSv3. */
-        interface ICVSSv3 {
-
-            /** CVSSv3 baseScore */
-            baseScore?: (number|null);
-
-            /** CVSSv3 exploitabilityScore */
-            exploitabilityScore?: (number|null);
-
-            /** CVSSv3 impactScore */
-            impactScore?: (number|null);
-
-            /** CVSSv3 attackVector */
-            attackVector?: (grafeas.v1.CVSSv3.AttackVector|keyof typeof grafeas.v1.CVSSv3.AttackVector|null);
-
-            /** CVSSv3 attackComplexity */
-            attackComplexity?: (grafeas.v1.CVSSv3.AttackComplexity|keyof typeof grafeas.v1.CVSSv3.AttackComplexity|null);
-
-            /** CVSSv3 privilegesRequired */
-            privilegesRequired?: (grafeas.v1.CVSSv3.PrivilegesRequired|keyof typeof grafeas.v1.CVSSv3.PrivilegesRequired|null);
-
-            /** CVSSv3 userInteraction */
-            userInteraction?: (grafeas.v1.CVSSv3.UserInteraction|keyof typeof grafeas.v1.CVSSv3.UserInteraction|null);
-
-            /** CVSSv3 scope */
-            scope?: (grafeas.v1.CVSSv3.Scope|keyof typeof grafeas.v1.CVSSv3.Scope|null);
-
-            /** CVSSv3 confidentialityImpact */
-            confidentialityImpact?: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact|null);
-
-            /** CVSSv3 integrityImpact */
-            integrityImpact?: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact|null);
-
-            /** CVSSv3 availabilityImpact */
-            availabilityImpact?: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact|null);
-        }
-
-        /** Represents a CVSSv3. */
-        class CVSSv3 implements ICVSSv3 {
-
-            /**
-             * Constructs a new CVSSv3.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.ICVSSv3);
-
-            /** CVSSv3 baseScore. */
-            public baseScore: number;
-
-            /** CVSSv3 exploitabilityScore. */
-            public exploitabilityScore: number;
-
-            /** CVSSv3 impactScore. */
-            public impactScore: number;
-
-            /** CVSSv3 attackVector. */
-            public attackVector: (grafeas.v1.CVSSv3.AttackVector|keyof typeof grafeas.v1.CVSSv3.AttackVector);
-
-            /** CVSSv3 attackComplexity. */
-            public attackComplexity: (grafeas.v1.CVSSv3.AttackComplexity|keyof typeof grafeas.v1.CVSSv3.AttackComplexity);
-
-            /** CVSSv3 privilegesRequired. */
-            public privilegesRequired: (grafeas.v1.CVSSv3.PrivilegesRequired|keyof typeof grafeas.v1.CVSSv3.PrivilegesRequired);
-
-            /** CVSSv3 userInteraction. */
-            public userInteraction: (grafeas.v1.CVSSv3.UserInteraction|keyof typeof grafeas.v1.CVSSv3.UserInteraction);
-
-            /** CVSSv3 scope. */
-            public scope: (grafeas.v1.CVSSv3.Scope|keyof typeof grafeas.v1.CVSSv3.Scope);
-
-            /** CVSSv3 confidentialityImpact. */
-            public confidentialityImpact: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact);
-
-            /** CVSSv3 integrityImpact. */
-            public integrityImpact: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact);
-
-            /** CVSSv3 availabilityImpact. */
-            public availabilityImpact: (grafeas.v1.CVSSv3.Impact|keyof typeof grafeas.v1.CVSSv3.Impact);
-
-            /**
-             * Creates a new CVSSv3 instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns CVSSv3 instance
-             */
-            public static create(properties?: grafeas.v1.ICVSSv3): grafeas.v1.CVSSv3;
-
-            /**
-             * Encodes the specified CVSSv3 message. Does not implicitly {@link grafeas.v1.CVSSv3.verify|verify} messages.
-             * @param message CVSSv3 message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.ICVSSv3, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified CVSSv3 message, length delimited. Does not implicitly {@link grafeas.v1.CVSSv3.verify|verify} messages.
-             * @param message CVSSv3 message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.ICVSSv3, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a CVSSv3 message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns CVSSv3
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CVSSv3;
-
-            /**
-             * Decodes a CVSSv3 message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns CVSSv3
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CVSSv3;
-
-            /**
-             * Verifies a CVSSv3 message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a CVSSv3 message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns CVSSv3
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.CVSSv3;
-
-            /**
-             * Creates a plain object from a CVSSv3 message. Also converts values to other types if specified.
-             * @param message CVSSv3
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.CVSSv3, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this CVSSv3 to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace CVSSv3 {
-
-            /** AttackVector enum. */
-            enum AttackVector {
-                ATTACK_VECTOR_UNSPECIFIED = 0,
-                ATTACK_VECTOR_NETWORK = 1,
-                ATTACK_VECTOR_ADJACENT = 2,
-                ATTACK_VECTOR_LOCAL = 3,
-                ATTACK_VECTOR_PHYSICAL = 4
-            }
-
-            /** AttackComplexity enum. */
-            enum AttackComplexity {
-                ATTACK_COMPLEXITY_UNSPECIFIED = 0,
-                ATTACK_COMPLEXITY_LOW = 1,
-                ATTACK_COMPLEXITY_HIGH = 2
-            }
-
-            /** PrivilegesRequired enum. */
-            enum PrivilegesRequired {
-                PRIVILEGES_REQUIRED_UNSPECIFIED = 0,
-                PRIVILEGES_REQUIRED_NONE = 1,
-                PRIVILEGES_REQUIRED_LOW = 2,
-                PRIVILEGES_REQUIRED_HIGH = 3
-            }
-
-            /** UserInteraction enum. */
-            enum UserInteraction {
-                USER_INTERACTION_UNSPECIFIED = 0,
-                USER_INTERACTION_NONE = 1,
-                USER_INTERACTION_REQUIRED = 2
-            }
-
-            /** Scope enum. */
-            enum Scope {
-                SCOPE_UNSPECIFIED = 0,
-                SCOPE_UNCHANGED = 1,
-                SCOPE_CHANGED = 2
-            }
-
-            /** Impact enum. */
-            enum Impact {
-                IMPACT_UNSPECIFIED = 0,
-                IMPACT_HIGH = 1,
-                IMPACT_LOW = 2,
-                IMPACT_NONE = 3
-            }
-        }
-
-        /** Properties of a CVSS. */
-        interface ICVSS {
-
-            /** CVSS baseScore */
-            baseScore?: (number|null);
-
-            /** CVSS exploitabilityScore */
-            exploitabilityScore?: (number|null);
-
-            /** CVSS impactScore */
-            impactScore?: (number|null);
-
-            /** CVSS attackVector */
-            attackVector?: (grafeas.v1.CVSS.AttackVector|keyof typeof grafeas.v1.CVSS.AttackVector|null);
-
-            /** CVSS attackComplexity */
-            attackComplexity?: (grafeas.v1.CVSS.AttackComplexity|keyof typeof grafeas.v1.CVSS.AttackComplexity|null);
-
-            /** CVSS authentication */
-            authentication?: (grafeas.v1.CVSS.Authentication|keyof typeof grafeas.v1.CVSS.Authentication|null);
-
-            /** CVSS privilegesRequired */
-            privilegesRequired?: (grafeas.v1.CVSS.PrivilegesRequired|keyof typeof grafeas.v1.CVSS.PrivilegesRequired|null);
-
-            /** CVSS userInteraction */
-            userInteraction?: (grafeas.v1.CVSS.UserInteraction|keyof typeof grafeas.v1.CVSS.UserInteraction|null);
-
-            /** CVSS scope */
-            scope?: (grafeas.v1.CVSS.Scope|keyof typeof grafeas.v1.CVSS.Scope|null);
-
-            /** CVSS confidentialityImpact */
-            confidentialityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
-
-            /** CVSS integrityImpact */
-            integrityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
-
-            /** CVSS availabilityImpact */
-            availabilityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
-        }
-
-        /** Represents a CVSS. */
-        class CVSS implements ICVSS {
-
-            /**
-             * Constructs a new CVSS.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1.ICVSS);
-
-            /** CVSS baseScore. */
-            public baseScore: number;
-
-            /** CVSS exploitabilityScore. */
-            public exploitabilityScore: number;
-
-            /** CVSS impactScore. */
-            public impactScore: number;
-
-            /** CVSS attackVector. */
-            public attackVector: (grafeas.v1.CVSS.AttackVector|keyof typeof grafeas.v1.CVSS.AttackVector);
-
-            /** CVSS attackComplexity. */
-            public attackComplexity: (grafeas.v1.CVSS.AttackComplexity|keyof typeof grafeas.v1.CVSS.AttackComplexity);
-
-            /** CVSS authentication. */
-            public authentication: (grafeas.v1.CVSS.Authentication|keyof typeof grafeas.v1.CVSS.Authentication);
-
-            /** CVSS privilegesRequired. */
-            public privilegesRequired: (grafeas.v1.CVSS.PrivilegesRequired|keyof typeof grafeas.v1.CVSS.PrivilegesRequired);
-
-            /** CVSS userInteraction. */
-            public userInteraction: (grafeas.v1.CVSS.UserInteraction|keyof typeof grafeas.v1.CVSS.UserInteraction);
-
-            /** CVSS scope. */
-            public scope: (grafeas.v1.CVSS.Scope|keyof typeof grafeas.v1.CVSS.Scope);
-
-            /** CVSS confidentialityImpact. */
-            public confidentialityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
-
-            /** CVSS integrityImpact. */
-            public integrityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
-
-            /** CVSS availabilityImpact. */
-            public availabilityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
-
-            /**
-             * Creates a new CVSS instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns CVSS instance
-             */
-            public static create(properties?: grafeas.v1.ICVSS): grafeas.v1.CVSS;
-
-            /**
-             * Encodes the specified CVSS message. Does not implicitly {@link grafeas.v1.CVSS.verify|verify} messages.
-             * @param message CVSS message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1.ICVSS, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified CVSS message, length delimited. Does not implicitly {@link grafeas.v1.CVSS.verify|verify} messages.
-             * @param message CVSS message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1.ICVSS, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a CVSS message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns CVSS
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CVSS;
-
-            /**
-             * Decodes a CVSS message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns CVSS
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CVSS;
-
-            /**
-             * Verifies a CVSS message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a CVSS message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns CVSS
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1.CVSS;
-
-            /**
-             * Creates a plain object from a CVSS message. Also converts values to other types if specified.
-             * @param message CVSS
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1.CVSS, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this CVSS to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace CVSS {
-
-            /** AttackVector enum. */
-            enum AttackVector {
-                ATTACK_VECTOR_UNSPECIFIED = 0,
-                ATTACK_VECTOR_NETWORK = 1,
-                ATTACK_VECTOR_ADJACENT = 2,
-                ATTACK_VECTOR_LOCAL = 3,
-                ATTACK_VECTOR_PHYSICAL = 4
-            }
-
-            /** AttackComplexity enum. */
-            enum AttackComplexity {
-                ATTACK_COMPLEXITY_UNSPECIFIED = 0,
-                ATTACK_COMPLEXITY_LOW = 1,
-                ATTACK_COMPLEXITY_HIGH = 2
-            }
-
-            /** Authentication enum. */
-            enum Authentication {
-                AUTHENTICATION_UNSPECIFIED = 0,
-                AUTHENTICATION_MULTIPLE = 1,
-                AUTHENTICATION_SINGLE = 2,
-                AUTHENTICATION_NONE = 3
-            }
-
-            /** PrivilegesRequired enum. */
-            enum PrivilegesRequired {
-                PRIVILEGES_REQUIRED_UNSPECIFIED = 0,
-                PRIVILEGES_REQUIRED_NONE = 1,
-                PRIVILEGES_REQUIRED_LOW = 2,
-                PRIVILEGES_REQUIRED_HIGH = 3
-            }
-
-            /** UserInteraction enum. */
-            enum UserInteraction {
-                USER_INTERACTION_UNSPECIFIED = 0,
-                USER_INTERACTION_NONE = 1,
-                USER_INTERACTION_REQUIRED = 2
-            }
-
-            /** Scope enum. */
-            enum Scope {
-                SCOPE_UNSPECIFIED = 0,
-                SCOPE_UNCHANGED = 1,
-                SCOPE_CHANGED = 2
-            }
-
-            /** Impact enum. */
-            enum Impact {
-                IMPACT_UNSPECIFIED = 0,
-                IMPACT_HIGH = 1,
-                IMPACT_LOW = 2,
-                IMPACT_NONE = 3
             }
         }
     }
@@ -23468,6 +23468,102 @@ export namespace google {
             }
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -23733,102 +23829,6 @@ export namespace google {
 
             /**
              * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an Any. */
-        interface IAny {
-
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|string|null);
-        }
-
-        /** Represents an Any. */
-        class Any implements IAny {
-
-            /**
-             * Constructs a new Any.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IAny);
-
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|string);
-
-            /**
-             * Creates a new Any instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Any instance
-             */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
-
-            /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
-
-            /**
-             * Verifies an Any message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Any
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
-
-            /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Any to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
