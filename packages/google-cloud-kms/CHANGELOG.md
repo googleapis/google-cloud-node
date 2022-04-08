@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.11.1](https://github.com/googleapis/nodejs-kms/compare/v2.11.0...v2.11.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* **docs:** document that fast-crc32c must be installed ([#546](https://github.com/googleapis/nodejs-kms/issues/546)) ([57253bb](https://github.com/googleapis/nodejs-kms/commit/57253bb85e91d8d1273cea9ec170a910247b61ab))
+
 ## [2.11.0](https://github.com/googleapis/nodejs-kms/compare/v2.10.0...v2.11.0) (2022-02-03)
 
 
