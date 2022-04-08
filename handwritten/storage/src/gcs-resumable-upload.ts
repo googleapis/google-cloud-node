@@ -1016,6 +1016,7 @@ export class Upload extends Pumpify {
    */
   private onResponse(resp: GaxiosResponse) {
     if (
+      resp.status !== 200 &&
       this.retryOptions.retryableErrorFn!({
         code: resp.status,
         message: resp.statusText,
