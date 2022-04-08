@@ -94,9 +94,6 @@ To run commands against the clusters created, you will need to use the
 (and the associated kubectl command-line interface).
 
 
-
-This library is built on top of google-gax as its transport layer. To customize the common behavior of this client library (timeout, retry, etc), see [Client Library Howto](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md).
-
 ## Samples
 
 Samples are in the [`samples/`](https://github.com/googleapis/nodejs-cloud-container/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
