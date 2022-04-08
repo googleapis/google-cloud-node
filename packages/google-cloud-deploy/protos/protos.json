@@ -10,10 +10,10 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/deploy/v1;deploy",
                     "java_multiple_files": true,
-                    "java_outer_classname": "CloudDeployProto",
+                    "java_outer_classname": "TargetNotificationPayloadProto",
                     "java_package": "com.google.cloud.deploy.v1",
-                    "(google.api.resource_definition).type": "cloudbuild.googleapis.com/WorkerPool",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/workerPools/{worker_pool}"
+                    "(google.api.resource_definition).type": "gkehub.googleapis.com/Membership",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/memberships/{membership}"
                   },
                   "nested": {
                     "CloudDeploy": {
@@ -756,7 +756,8 @@
                       "oneofs": {
                         "deploymentTarget": {
                           "oneof": [
-                            "gke"
+                            "gke",
+                            "anthosCluster"
                           ]
                         }
                       },
@@ -830,6 +831,10 @@
                           "type": "GkeCluster",
                           "id": 15
                         },
+                        "anthosCluster": {
+                          "type": "AnthosCluster",
+                          "id": 17
+                        },
                         "etag": {
                           "type": "string",
                           "id": 12,
@@ -872,6 +877,28 @@
                         "privatePool": {
                           "type": "PrivatePool",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workerPool": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "artifactStorage": {
+                          "type": "string",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -938,6 +965,24 @@
                           "id": 1,
                           "options": {
                             "(google.api.resource_reference).type": "container.googleapis.com/Cluster"
+                          }
+                        },
+                        "internalIp": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AnthosCluster": {
+                      "fields": {
+                        "membership": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         }
                       }
@@ -1247,6 +1292,14 @@
                         }
                       },
                       "nested": {
+                        "RenderState": {
+                          "values": {
+                            "RENDER_STATE_UNSPECIFIED": 0,
+                            "SUCCEEDED": 1,
+                            "FAILED": 2,
+                            "IN_PROGRESS": 3
+                          }
+                        },
                         "TargetRender": {
                           "fields": {
                             "renderingBuild": {
@@ -1263,6 +1316,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "failureCause": {
+                              "type": "FailureCause",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -1273,15 +1333,14 @@
                                 "FAILED": 2,
                                 "IN_PROGRESS": 3
                               }
+                            },
+                            "FailureCause": {
+                              "values": {
+                                "FAILURE_CAUSE_UNSPECIFIED": 0,
+                                "CLOUD_BUILD_UNAVAILABLE": 1,
+                                "EXECUTION_FAILED": 2
+                              }
                             }
-                          }
-                        },
-                        "RenderState": {
-                          "values": {
-                            "RENDER_STATE_UNSPECIFIED": 0,
-                            "SUCCEEDED": 1,
-                            "FAILED": 2,
-                            "IN_PROGRESS": 3
                           }
                         }
                       }
@@ -1548,6 +1607,13 @@
                         "etag": {
                           "type": "string",
                           "id": 16
+                        },
+                        "deployFailureCause": {
+                          "type": "FailureCause",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1570,6 +1636,15 @@
                             "APPROVAL_REJECTED": 5,
                             "PENDING": 6,
                             "PENDING_RELEASE": 7
+                          }
+                        },
+                        "FailureCause": {
+                          "values": {
+                            "FAILURE_CAUSE_UNSPECIFIED": 0,
+                            "CLOUD_BUILD_UNAVAILABLE": 1,
+                            "EXECUTION_FAILED": 2,
+                            "DEADLINE_EXCEEDED": 3,
+                            "RELEASE_FAILED": 4
                           }
                         }
                       }
@@ -1807,6 +1882,101 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "clouddeploy.googleapis.com/Config"
                           }
+                        }
+                      }
+                    },
+                    "DeliveryPipelineNotificationEvent": {
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "deliveryPipeline": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Type": {
+                      "values": {
+                        "TYPE_UNSPECIFIED": 0,
+                        "TYPE_PUBSUB_NOTIFICATION_FAILURE": 1,
+                        "TYPE_RENDER_STATUES_CHANGE": 2
+                      }
+                    },
+                    "ReleaseNotificationEvent": {
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "release": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ReleaseRenderEvent": {
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "release": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RolloutNotificationEvent": {
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pipelineUid": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "releaseUid": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "rollout": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 5
+                        },
+                        "targetId": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "TargetNotificationEvent": {
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 3
                         }
                       }
                     }

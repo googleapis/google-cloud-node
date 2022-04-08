@@ -3997,6 +3997,70 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
+    describe('membership', () => {
+      const fakePath = '/rendered/path/membership';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        membership: 'membershipValue',
+      };
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.membershipPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.membershipPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('membershipPath', () => {
+        const result = client.membershipPath(
+          'projectValue',
+          'locationValue',
+          'membershipValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.membershipPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMembershipName', () => {
+        const result = client.matchProjectFromMembershipName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.membershipPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMembershipName', () => {
+        const result = client.matchLocationFromMembershipName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.membershipPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMembershipFromMembershipName', () => {
+        const result = client.matchMembershipFromMembershipName(fakePath);
+        assert.strictEqual(result, 'membershipValue');
+        assert(
+          (client.pathTemplates.membershipPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {

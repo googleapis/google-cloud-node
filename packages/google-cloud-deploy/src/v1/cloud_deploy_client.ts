@@ -182,6 +182,9 @@ export class CloudDeployClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      membershipPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/memberships/{membership}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -2336,7 +2339,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} request.filter
-   *   Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Filter pipelines to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} request.orderBy
    *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2447,7 +2450,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} request.filter
-   *   Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Filter pipelines to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} request.orderBy
    *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2506,7 +2509,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} request.filter
-   *   Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Filter pipelines to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} request.orderBy
    *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2563,7 +2566,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2665,7 +2668,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2723,7 +2726,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2779,7 +2782,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2882,7 +2885,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2939,7 +2942,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -2995,7 +2998,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -3098,7 +3101,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -3155,7 +3158,7 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
    *   details.
    * @param {string} [request.orderBy]
    *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -3424,6 +3427,58 @@ export class CloudDeployClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified membership resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} membership
+   * @returns {string} Resource name string.
+   */
+  membershipPath(project: string, location: string, membership: string) {
+    return this.pathTemplates.membershipPathTemplate.render({
+      project: project,
+      location: location,
+      membership: membership,
+    });
+  }
+
+  /**
+   * Parse the project from Membership resource.
+   *
+   * @param {string} membershipName
+   *   A fully-qualified path representing Membership resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMembershipName(membershipName: string) {
+    return this.pathTemplates.membershipPathTemplate.match(membershipName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Membership resource.
+   *
+   * @param {string} membershipName
+   *   A fully-qualified path representing Membership resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMembershipName(membershipName: string) {
+    return this.pathTemplates.membershipPathTemplate.match(membershipName)
+      .location;
+  }
+
+  /**
+   * Parse the membership from Membership resource.
+   *
+   * @param {string} membershipName
+   *   A fully-qualified path representing Membership resource.
+   * @returns {string} A string representing the membership.
+   */
+  matchMembershipFromMembershipName(membershipName: string) {
+    return this.pathTemplates.membershipPathTemplate.match(membershipName)
+      .membership;
   }
 
   /**

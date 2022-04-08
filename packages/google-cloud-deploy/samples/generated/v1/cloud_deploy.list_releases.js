@@ -43,7 +43,7 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+   *  Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
    *  details.
    */
   // const filter = 'abc123'

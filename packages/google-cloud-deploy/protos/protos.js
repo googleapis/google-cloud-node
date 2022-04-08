@@ -3929,6 +3929,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Target createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Target updateTime
                          * @property {google.cloud.deploy.v1.IGkeCluster|null} [gke] Target gke
+                         * @property {google.cloud.deploy.v1.IAnthosCluster|null} [anthosCluster] Target anthosCluster
                          * @property {string|null} [etag] Target etag
                          * @property {Array.<google.cloud.deploy.v1.IExecutionConfig>|null} [executionConfigs] Target executionConfigs
                          */
@@ -4032,6 +4033,14 @@
                         Target.prototype.gke = null;
     
                         /**
+                         * Target anthosCluster.
+                         * @member {google.cloud.deploy.v1.IAnthosCluster|null|undefined} anthosCluster
+                         * @memberof google.cloud.deploy.v1.Target
+                         * @instance
+                         */
+                        Target.prototype.anthosCluster = null;
+    
+                        /**
                          * Target etag.
                          * @member {string} etag
                          * @memberof google.cloud.deploy.v1.Target
@@ -4052,12 +4061,12 @@
     
                         /**
                          * Target deploymentTarget.
-                         * @member {"gke"|undefined} deploymentTarget
+                         * @member {"gke"|"anthosCluster"|undefined} deploymentTarget
                          * @memberof google.cloud.deploy.v1.Target
                          * @instance
                          */
                         Object.defineProperty(Target.prototype, "deploymentTarget", {
-                            get: $util.oneOfGetter($oneOfFields = ["gke"]),
+                            get: $util.oneOfGetter($oneOfFields = ["gke", "anthosCluster"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4112,6 +4121,8 @@
                             if (message.executionConfigs != null && message.executionConfigs.length)
                                 for (var i = 0; i < message.executionConfigs.length; ++i)
                                     $root.google.cloud.deploy.v1.ExecutionConfig.encode(message.executionConfigs[i], writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.anthosCluster != null && Object.hasOwnProperty.call(message, "anthosCluster"))
+                                $root.google.cloud.deploy.v1.AnthosCluster.encode(message.anthosCluster, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -4214,6 +4225,9 @@
                                 case 15:
                                     message.gke = $root.google.cloud.deploy.v1.GkeCluster.decode(reader, reader.uint32());
                                     break;
+                                case 17:
+                                    message.anthosCluster = $root.google.cloud.deploy.v1.AnthosCluster.decode(reader, reader.uint32());
+                                    break;
                                 case 12:
                                     message.etag = reader.string();
                                     break;
@@ -4307,6 +4321,16 @@
                                         return "gke." + error;
                                 }
                             }
+                            if (message.anthosCluster != null && message.hasOwnProperty("anthosCluster")) {
+                                if (properties.deploymentTarget === 1)
+                                    return "deploymentTarget: multiple values";
+                                properties.deploymentTarget = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.AnthosCluster.verify(message.anthosCluster);
+                                    if (error)
+                                        return "anthosCluster." + error;
+                                }
+                            }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -4372,6 +4396,11 @@
                                 if (typeof object.gke !== "object")
                                     throw TypeError(".google.cloud.deploy.v1.Target.gke: object expected");
                                 message.gke = $root.google.cloud.deploy.v1.GkeCluster.fromObject(object.gke);
+                            }
+                            if (object.anthosCluster != null) {
+                                if (typeof object.anthosCluster !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Target.anthosCluster: object expected");
+                                message.anthosCluster = $root.google.cloud.deploy.v1.AnthosCluster.fromObject(object.anthosCluster);
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
@@ -4454,6 +4483,11 @@
                                 for (var j = 0; j < message.executionConfigs.length; ++j)
                                     object.executionConfigs[j] = $root.google.cloud.deploy.v1.ExecutionConfig.toObject(message.executionConfigs[j], options);
                             }
+                            if (message.anthosCluster != null && message.hasOwnProperty("anthosCluster")) {
+                                object.anthosCluster = $root.google.cloud.deploy.v1.AnthosCluster.toObject(message.anthosCluster, options);
+                                if (options.oneofs)
+                                    object.deploymentTarget = "anthosCluster";
+                            }
                             return object;
                         };
     
@@ -4480,6 +4514,9 @@
                          * @property {Array.<google.cloud.deploy.v1.ExecutionConfig.ExecutionEnvironmentUsage>|null} [usages] ExecutionConfig usages
                          * @property {google.cloud.deploy.v1.IDefaultPool|null} [defaultPool] ExecutionConfig defaultPool
                          * @property {google.cloud.deploy.v1.IPrivatePool|null} [privatePool] ExecutionConfig privatePool
+                         * @property {string|null} [workerPool] ExecutionConfig workerPool
+                         * @property {string|null} [serviceAccount] ExecutionConfig serviceAccount
+                         * @property {string|null} [artifactStorage] ExecutionConfig artifactStorage
                          */
     
                         /**
@@ -4521,6 +4558,30 @@
                          * @instance
                          */
                         ExecutionConfig.prototype.privatePool = null;
+    
+                        /**
+                         * ExecutionConfig workerPool.
+                         * @member {string} workerPool
+                         * @memberof google.cloud.deploy.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.workerPool = "";
+    
+                        /**
+                         * ExecutionConfig serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.deploy.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.serviceAccount = "";
+    
+                        /**
+                         * ExecutionConfig artifactStorage.
+                         * @member {string} artifactStorage
+                         * @memberof google.cloud.deploy.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.artifactStorage = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -4570,6 +4631,12 @@
                                 $root.google.cloud.deploy.v1.DefaultPool.encode(message.defaultPool, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.privatePool != null && Object.hasOwnProperty.call(message, "privatePool"))
                                 $root.google.cloud.deploy.v1.PrivatePool.encode(message.privatePool, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.workerPool != null && Object.hasOwnProperty.call(message, "workerPool"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.workerPool);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
+                            if (message.artifactStorage != null && Object.hasOwnProperty.call(message, "artifactStorage"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.artifactStorage);
                             return writer;
                         };
     
@@ -4619,6 +4686,15 @@
                                     break;
                                 case 3:
                                     message.privatePool = $root.google.cloud.deploy.v1.PrivatePool.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.workerPool = reader.string();
+                                    break;
+                                case 5:
+                                    message.serviceAccount = reader.string();
+                                    break;
+                                case 6:
+                                    message.artifactStorage = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4687,6 +4763,15 @@
                                         return "privatePool." + error;
                                 }
                             }
+                            if (message.workerPool != null && message.hasOwnProperty("workerPool"))
+                                if (!$util.isString(message.workerPool))
+                                    return "workerPool: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            if (message.artifactStorage != null && message.hasOwnProperty("artifactStorage"))
+                                if (!$util.isString(message.artifactStorage))
+                                    return "artifactStorage: string expected";
                             return null;
                         };
     
@@ -4733,6 +4818,12 @@
                                     throw TypeError(".google.cloud.deploy.v1.ExecutionConfig.privatePool: object expected");
                                 message.privatePool = $root.google.cloud.deploy.v1.PrivatePool.fromObject(object.privatePool);
                             }
+                            if (object.workerPool != null)
+                                message.workerPool = String(object.workerPool);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            if (object.artifactStorage != null)
+                                message.artifactStorage = String(object.artifactStorage);
                             return message;
                         };
     
@@ -4751,6 +4842,11 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.usages = [];
+                            if (options.defaults) {
+                                object.workerPool = "";
+                                object.serviceAccount = "";
+                                object.artifactStorage = "";
+                            }
                             if (message.usages && message.usages.length) {
                                 object.usages = [];
                                 for (var j = 0; j < message.usages.length; ++j)
@@ -4766,6 +4862,12 @@
                                 if (options.oneofs)
                                     object.executionEnvironment = "privatePool";
                             }
+                            if (message.workerPool != null && message.hasOwnProperty("workerPool"))
+                                object.workerPool = message.workerPool;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.artifactStorage != null && message.hasOwnProperty("artifactStorage"))
+                                object.artifactStorage = message.artifactStorage;
                             return object;
                         };
     
@@ -5248,6 +5350,7 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface IGkeCluster
                          * @property {string|null} [cluster] GkeCluster cluster
+                         * @property {boolean|null} [internalIp] GkeCluster internalIp
                          */
     
                         /**
@@ -5272,6 +5375,14 @@
                          * @instance
                          */
                         GkeCluster.prototype.cluster = "";
+    
+                        /**
+                         * GkeCluster internalIp.
+                         * @member {boolean} internalIp
+                         * @memberof google.cloud.deploy.v1.GkeCluster
+                         * @instance
+                         */
+                        GkeCluster.prototype.internalIp = false;
     
                         /**
                          * Creates a new GkeCluster instance using the specified properties.
@@ -5299,6 +5410,8 @@
                                 writer = $Writer.create();
                             if (message.cluster != null && Object.hasOwnProperty.call(message, "cluster"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.cluster);
+                            if (message.internalIp != null && Object.hasOwnProperty.call(message, "internalIp"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.internalIp);
                             return writer;
                         };
     
@@ -5335,6 +5448,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.cluster = reader.string();
+                                    break;
+                                case 2:
+                                    message.internalIp = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5374,6 +5490,9 @@
                             if (message.cluster != null && message.hasOwnProperty("cluster"))
                                 if (!$util.isString(message.cluster))
                                     return "cluster: string expected";
+                            if (message.internalIp != null && message.hasOwnProperty("internalIp"))
+                                if (typeof message.internalIp !== "boolean")
+                                    return "internalIp: boolean expected";
                             return null;
                         };
     
@@ -5391,6 +5510,8 @@
                             var message = new $root.google.cloud.deploy.v1.GkeCluster();
                             if (object.cluster != null)
                                 message.cluster = String(object.cluster);
+                            if (object.internalIp != null)
+                                message.internalIp = Boolean(object.internalIp);
                             return message;
                         };
     
@@ -5407,10 +5528,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.cluster = "";
+                                object.internalIp = false;
+                            }
                             if (message.cluster != null && message.hasOwnProperty("cluster"))
                                 object.cluster = message.cluster;
+                            if (message.internalIp != null && message.hasOwnProperty("internalIp"))
+                                object.internalIp = message.internalIp;
                             return object;
                         };
     
@@ -5426,6 +5551,193 @@
                         };
     
                         return GkeCluster;
+                    })();
+    
+                    v1.AnthosCluster = (function() {
+    
+                        /**
+                         * Properties of an AnthosCluster.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAnthosCluster
+                         * @property {string|null} [membership] AnthosCluster membership
+                         */
+    
+                        /**
+                         * Constructs a new AnthosCluster.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AnthosCluster.
+                         * @implements IAnthosCluster
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAnthosCluster=} [properties] Properties to set
+                         */
+                        function AnthosCluster(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AnthosCluster membership.
+                         * @member {string} membership
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @instance
+                         */
+                        AnthosCluster.prototype.membership = "";
+    
+                        /**
+                         * Creates a new AnthosCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAnthosCluster=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AnthosCluster} AnthosCluster instance
+                         */
+                        AnthosCluster.create = function create(properties) {
+                            return new AnthosCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AnthosCluster message. Does not implicitly {@link google.cloud.deploy.v1.AnthosCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAnthosCluster} message AnthosCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnthosCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.membership);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AnthosCluster message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AnthosCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAnthosCluster} message AnthosCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnthosCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AnthosCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AnthosCluster} AnthosCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnthosCluster.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AnthosCluster();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.membership = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AnthosCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AnthosCluster} AnthosCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnthosCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AnthosCluster message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AnthosCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.membership != null && message.hasOwnProperty("membership"))
+                                if (!$util.isString(message.membership))
+                                    return "membership: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AnthosCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AnthosCluster} AnthosCluster
+                         */
+                        AnthosCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AnthosCluster)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AnthosCluster();
+                            if (object.membership != null)
+                                message.membership = String(object.membership);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AnthosCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @static
+                         * @param {google.cloud.deploy.v1.AnthosCluster} message AnthosCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AnthosCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.membership = "";
+                            if (message.membership != null && message.hasOwnProperty("membership"))
+                                object.membership = message.membership;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AnthosCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AnthosCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AnthosCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AnthosCluster;
                     })();
     
                     v1.ListTargetsRequest = (function() {
@@ -7803,6 +8115,24 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * RenderState enum.
+                         * @name google.cloud.deploy.v1.Release.RenderState
+                         * @enum {number}
+                         * @property {number} RENDER_STATE_UNSPECIFIED=0 RENDER_STATE_UNSPECIFIED value
+                         * @property {number} SUCCEEDED=1 SUCCEEDED value
+                         * @property {number} FAILED=2 FAILED value
+                         * @property {number} IN_PROGRESS=3 IN_PROGRESS value
+                         */
+                        Release.RenderState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RENDER_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SUCCEEDED"] = 1;
+                            values[valuesById[2] = "FAILED"] = 2;
+                            values[valuesById[3] = "IN_PROGRESS"] = 3;
+                            return values;
+                        })();
+    
                         Release.TargetRender = (function() {
     
                             /**
@@ -7811,6 +8141,7 @@
                              * @interface ITargetRender
                              * @property {string|null} [renderingBuild] TargetRender renderingBuild
                              * @property {google.cloud.deploy.v1.Release.TargetRender.TargetRenderState|null} [renderingState] TargetRender renderingState
+                             * @property {google.cloud.deploy.v1.Release.TargetRender.FailureCause|null} [failureCause] TargetRender failureCause
                              */
     
                             /**
@@ -7845,6 +8176,14 @@
                             TargetRender.prototype.renderingState = 0;
     
                             /**
+                             * TargetRender failureCause.
+                             * @member {google.cloud.deploy.v1.Release.TargetRender.FailureCause} failureCause
+                             * @memberof google.cloud.deploy.v1.Release.TargetRender
+                             * @instance
+                             */
+                            TargetRender.prototype.failureCause = 0;
+    
+                            /**
                              * Creates a new TargetRender instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.deploy.v1.Release.TargetRender
@@ -7872,6 +8211,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.renderingBuild);
                                 if (message.renderingState != null && Object.hasOwnProperty.call(message, "renderingState"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.renderingState);
+                                if (message.failureCause != null && Object.hasOwnProperty.call(message, "failureCause"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.failureCause);
                                 return writer;
                             };
     
@@ -7911,6 +8252,9 @@
                                         break;
                                     case 2:
                                         message.renderingState = reader.int32();
+                                        break;
+                                    case 4:
+                                        message.failureCause = reader.int32();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -7960,6 +8304,15 @@
                                     case 3:
                                         break;
                                     }
+                                if (message.failureCause != null && message.hasOwnProperty("failureCause"))
+                                    switch (message.failureCause) {
+                                    default:
+                                        return "failureCause: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -7995,6 +8348,20 @@
                                     message.renderingState = 3;
                                     break;
                                 }
+                                switch (object.failureCause) {
+                                case "FAILURE_CAUSE_UNSPECIFIED":
+                                case 0:
+                                    message.failureCause = 0;
+                                    break;
+                                case "CLOUD_BUILD_UNAVAILABLE":
+                                case 1:
+                                    message.failureCause = 1;
+                                    break;
+                                case "EXECUTION_FAILED":
+                                case 2:
+                                    message.failureCause = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -8014,11 +8381,14 @@
                                 if (options.defaults) {
                                     object.renderingBuild = "";
                                     object.renderingState = options.enums === String ? "TARGET_RENDER_STATE_UNSPECIFIED" : 0;
+                                    object.failureCause = options.enums === String ? "FAILURE_CAUSE_UNSPECIFIED" : 0;
                                 }
                                 if (message.renderingBuild != null && message.hasOwnProperty("renderingBuild"))
                                     object.renderingBuild = message.renderingBuild;
                                 if (message.renderingState != null && message.hasOwnProperty("renderingState"))
                                     object.renderingState = options.enums === String ? $root.google.cloud.deploy.v1.Release.TargetRender.TargetRenderState[message.renderingState] : message.renderingState;
+                                if (message.failureCause != null && message.hasOwnProperty("failureCause"))
+                                    object.failureCause = options.enums === String ? $root.google.cloud.deploy.v1.Release.TargetRender.FailureCause[message.failureCause] : message.failureCause;
                                 return object;
                             };
     
@@ -8051,25 +8421,23 @@
                                 return values;
                             })();
     
-                            return TargetRender;
-                        })();
+                            /**
+                             * FailureCause enum.
+                             * @name google.cloud.deploy.v1.Release.TargetRender.FailureCause
+                             * @enum {number}
+                             * @property {number} FAILURE_CAUSE_UNSPECIFIED=0 FAILURE_CAUSE_UNSPECIFIED value
+                             * @property {number} CLOUD_BUILD_UNAVAILABLE=1 CLOUD_BUILD_UNAVAILABLE value
+                             * @property {number} EXECUTION_FAILED=2 EXECUTION_FAILED value
+                             */
+                            TargetRender.FailureCause = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "FAILURE_CAUSE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CLOUD_BUILD_UNAVAILABLE"] = 1;
+                                values[valuesById[2] = "EXECUTION_FAILED"] = 2;
+                                return values;
+                            })();
     
-                        /**
-                         * RenderState enum.
-                         * @name google.cloud.deploy.v1.Release.RenderState
-                         * @enum {number}
-                         * @property {number} RENDER_STATE_UNSPECIFIED=0 RENDER_STATE_UNSPECIFIED value
-                         * @property {number} SUCCEEDED=1 SUCCEEDED value
-                         * @property {number} FAILED=2 FAILED value
-                         * @property {number} IN_PROGRESS=3 IN_PROGRESS value
-                         */
-                        Release.RenderState = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "RENDER_STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "SUCCEEDED"] = 1;
-                            values[valuesById[2] = "FAILED"] = 2;
-                            values[valuesById[3] = "IN_PROGRESS"] = 3;
-                            return values;
+                            return TargetRender;
                         })();
     
                         return Release;
@@ -9572,6 +9940,7 @@
                          * @property {string|null} [failureReason] Rollout failureReason
                          * @property {string|null} [deployingBuild] Rollout deployingBuild
                          * @property {string|null} [etag] Rollout etag
+                         * @property {google.cloud.deploy.v1.Rollout.FailureCause|null} [deployFailureCause] Rollout deployFailureCause
                          */
     
                         /**
@@ -9720,6 +10089,14 @@
                         Rollout.prototype.etag = "";
     
                         /**
+                         * Rollout deployFailureCause.
+                         * @member {google.cloud.deploy.v1.Rollout.FailureCause} deployFailureCause
+                         * @memberof google.cloud.deploy.v1.Rollout
+                         * @instance
+                         */
+                        Rollout.prototype.deployFailureCause = 0;
+    
+                        /**
                          * Creates a new Rollout instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.Rollout
@@ -9777,6 +10154,8 @@
                                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.deployingBuild);
                             if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.targetId);
+                            if (message.deployFailureCause != null && Object.hasOwnProperty.call(message, "deployFailureCause"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).int32(message.deployFailureCause);
                             return writer;
                         };
     
@@ -9896,6 +10275,9 @@
                                     break;
                                 case 16:
                                     message.etag = reader.string();
+                                    break;
+                                case 19:
+                                    message.deployFailureCause = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10019,6 +10401,17 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.deployFailureCause != null && message.hasOwnProperty("deployFailureCause"))
+                                switch (message.deployFailureCause) {
+                                default:
+                                    return "deployFailureCause: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -10143,6 +10536,28 @@
                                 message.deployingBuild = String(object.deployingBuild);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            switch (object.deployFailureCause) {
+                            case "FAILURE_CAUSE_UNSPECIFIED":
+                            case 0:
+                                message.deployFailureCause = 0;
+                                break;
+                            case "CLOUD_BUILD_UNAVAILABLE":
+                            case 1:
+                                message.deployFailureCause = 1;
+                                break;
+                            case "EXECUTION_FAILED":
+                            case 2:
+                                message.deployFailureCause = 2;
+                                break;
+                            case "DEADLINE_EXCEEDED":
+                            case 3:
+                                message.deployFailureCause = 3;
+                                break;
+                            case "RELEASE_FAILED":
+                            case 4:
+                                message.deployFailureCause = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -10178,6 +10593,7 @@
                                 object.etag = "";
                                 object.deployingBuild = "";
                                 object.targetId = "";
+                                object.deployFailureCause = options.enums === String ? "FAILURE_CAUSE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10218,6 +10634,8 @@
                                 object.deployingBuild = message.deployingBuild;
                             if (message.targetId != null && message.hasOwnProperty("targetId"))
                                 object.targetId = message.targetId;
+                            if (message.deployFailureCause != null && message.hasOwnProperty("deployFailureCause"))
+                                object.deployFailureCause = options.enums === String ? $root.google.cloud.deploy.v1.Rollout.FailureCause[message.deployFailureCause] : message.deployFailureCause;
                             return object;
                         };
     
@@ -10275,6 +10693,26 @@
                             values[valuesById[5] = "APPROVAL_REJECTED"] = 5;
                             values[valuesById[6] = "PENDING"] = 6;
                             values[valuesById[7] = "PENDING_RELEASE"] = 7;
+                            return values;
+                        })();
+    
+                        /**
+                         * FailureCause enum.
+                         * @name google.cloud.deploy.v1.Rollout.FailureCause
+                         * @enum {number}
+                         * @property {number} FAILURE_CAUSE_UNSPECIFIED=0 FAILURE_CAUSE_UNSPECIFIED value
+                         * @property {number} CLOUD_BUILD_UNAVAILABLE=1 CLOUD_BUILD_UNAVAILABLE value
+                         * @property {number} EXECUTION_FAILED=2 EXECUTION_FAILED value
+                         * @property {number} DEADLINE_EXCEEDED=3 DEADLINE_EXCEEDED value
+                         * @property {number} RELEASE_FAILED=4 RELEASE_FAILED value
+                         */
+                        Rollout.FailureCause = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FAILURE_CAUSE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLOUD_BUILD_UNAVAILABLE"] = 1;
+                            values[valuesById[2] = "EXECUTION_FAILED"] = 2;
+                            values[valuesById[3] = "DEADLINE_EXCEEDED"] = 3;
+                            values[valuesById[4] = "RELEASE_FAILED"] = 4;
                             return values;
                         })();
     
@@ -12649,6 +13087,1298 @@
                         };
     
                         return GetConfigRequest;
+                    })();
+    
+                    v1.DeliveryPipelineNotificationEvent = (function() {
+    
+                        /**
+                         * Properties of a DeliveryPipelineNotificationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IDeliveryPipelineNotificationEvent
+                         * @property {string|null} [message] DeliveryPipelineNotificationEvent message
+                         * @property {string|null} [deliveryPipeline] DeliveryPipelineNotificationEvent deliveryPipeline
+                         * @property {google.cloud.deploy.v1.Type|null} [type] DeliveryPipelineNotificationEvent type
+                         */
+    
+                        /**
+                         * Constructs a new DeliveryPipelineNotificationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a DeliveryPipelineNotificationEvent.
+                         * @implements IDeliveryPipelineNotificationEvent
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IDeliveryPipelineNotificationEvent=} [properties] Properties to set
+                         */
+                        function DeliveryPipelineNotificationEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeliveryPipelineNotificationEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @instance
+                         */
+                        DeliveryPipelineNotificationEvent.prototype.message = "";
+    
+                        /**
+                         * DeliveryPipelineNotificationEvent deliveryPipeline.
+                         * @member {string} deliveryPipeline
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @instance
+                         */
+                        DeliveryPipelineNotificationEvent.prototype.deliveryPipeline = "";
+    
+                        /**
+                         * DeliveryPipelineNotificationEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @instance
+                         */
+                        DeliveryPipelineNotificationEvent.prototype.type = 0;
+    
+                        /**
+                         * Creates a new DeliveryPipelineNotificationEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeliveryPipelineNotificationEvent=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.DeliveryPipelineNotificationEvent} DeliveryPipelineNotificationEvent instance
+                         */
+                        DeliveryPipelineNotificationEvent.create = function create(properties) {
+                            return new DeliveryPipelineNotificationEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeliveryPipelineNotificationEvent message. Does not implicitly {@link google.cloud.deploy.v1.DeliveryPipelineNotificationEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeliveryPipelineNotificationEvent} message DeliveryPipelineNotificationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeliveryPipelineNotificationEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                            if (message.deliveryPipeline != null && Object.hasOwnProperty.call(message, "deliveryPipeline"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deliveryPipeline);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeliveryPipelineNotificationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeliveryPipelineNotificationEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeliveryPipelineNotificationEvent} message DeliveryPipelineNotificationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeliveryPipelineNotificationEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeliveryPipelineNotificationEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.DeliveryPipelineNotificationEvent} DeliveryPipelineNotificationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeliveryPipelineNotificationEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.DeliveryPipelineNotificationEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.message = reader.string();
+                                    break;
+                                case 2:
+                                    message.deliveryPipeline = reader.string();
+                                    break;
+                                case 3:
+                                    message.type = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeliveryPipelineNotificationEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.DeliveryPipelineNotificationEvent} DeliveryPipelineNotificationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeliveryPipelineNotificationEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeliveryPipelineNotificationEvent message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeliveryPipelineNotificationEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.deliveryPipeline != null && message.hasOwnProperty("deliveryPipeline"))
+                                if (!$util.isString(message.deliveryPipeline))
+                                    return "deliveryPipeline: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeliveryPipelineNotificationEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.DeliveryPipelineNotificationEvent} DeliveryPipelineNotificationEvent
+                         */
+                        DeliveryPipelineNotificationEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.DeliveryPipelineNotificationEvent)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.DeliveryPipelineNotificationEvent();
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.deliveryPipeline != null)
+                                message.deliveryPipeline = String(object.deliveryPipeline);
+                            switch (object.type) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeliveryPipelineNotificationEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.DeliveryPipelineNotificationEvent} message DeliveryPipelineNotificationEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeliveryPipelineNotificationEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.message = "";
+                                object.deliveryPipeline = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.deliveryPipeline != null && message.hasOwnProperty("deliveryPipeline"))
+                                object.deliveryPipeline = message.deliveryPipeline;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeliveryPipelineNotificationEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeliveryPipelineNotificationEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeliveryPipelineNotificationEvent;
+                    })();
+    
+                    /**
+                     * Type enum.
+                     * @name google.cloud.deploy.v1.Type
+                     * @enum {number}
+                     * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                     * @property {number} TYPE_PUBSUB_NOTIFICATION_FAILURE=1 TYPE_PUBSUB_NOTIFICATION_FAILURE value
+                     * @property {number} TYPE_RENDER_STATUES_CHANGE=2 TYPE_RENDER_STATUES_CHANGE value
+                     */
+                    v1.Type = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TYPE_PUBSUB_NOTIFICATION_FAILURE"] = 1;
+                        values[valuesById[2] = "TYPE_RENDER_STATUES_CHANGE"] = 2;
+                        return values;
+                    })();
+    
+                    v1.ReleaseNotificationEvent = (function() {
+    
+                        /**
+                         * Properties of a ReleaseNotificationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IReleaseNotificationEvent
+                         * @property {string|null} [message] ReleaseNotificationEvent message
+                         * @property {string|null} [release] ReleaseNotificationEvent release
+                         * @property {google.cloud.deploy.v1.Type|null} [type] ReleaseNotificationEvent type
+                         */
+    
+                        /**
+                         * Constructs a new ReleaseNotificationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a ReleaseNotificationEvent.
+                         * @implements IReleaseNotificationEvent
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IReleaseNotificationEvent=} [properties] Properties to set
+                         */
+                        function ReleaseNotificationEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReleaseNotificationEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @instance
+                         */
+                        ReleaseNotificationEvent.prototype.message = "";
+    
+                        /**
+                         * ReleaseNotificationEvent release.
+                         * @member {string} release
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @instance
+                         */
+                        ReleaseNotificationEvent.prototype.release = "";
+    
+                        /**
+                         * ReleaseNotificationEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @instance
+                         */
+                        ReleaseNotificationEvent.prototype.type = 0;
+    
+                        /**
+                         * Creates a new ReleaseNotificationEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IReleaseNotificationEvent=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.ReleaseNotificationEvent} ReleaseNotificationEvent instance
+                         */
+                        ReleaseNotificationEvent.create = function create(properties) {
+                            return new ReleaseNotificationEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReleaseNotificationEvent message. Does not implicitly {@link google.cloud.deploy.v1.ReleaseNotificationEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IReleaseNotificationEvent} message ReleaseNotificationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReleaseNotificationEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                            if (message.release != null && Object.hasOwnProperty.call(message, "release"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.release);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReleaseNotificationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ReleaseNotificationEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IReleaseNotificationEvent} message ReleaseNotificationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReleaseNotificationEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReleaseNotificationEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.ReleaseNotificationEvent} ReleaseNotificationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReleaseNotificationEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.ReleaseNotificationEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.message = reader.string();
+                                    break;
+                                case 2:
+                                    message.release = reader.string();
+                                    break;
+                                case 3:
+                                    message.type = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReleaseNotificationEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.ReleaseNotificationEvent} ReleaseNotificationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReleaseNotificationEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReleaseNotificationEvent message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReleaseNotificationEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                if (!$util.isString(message.release))
+                                    return "release: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReleaseNotificationEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.ReleaseNotificationEvent} ReleaseNotificationEvent
+                         */
+                        ReleaseNotificationEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.ReleaseNotificationEvent)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.ReleaseNotificationEvent();
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.release != null)
+                                message.release = String(object.release);
+                            switch (object.type) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReleaseNotificationEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.ReleaseNotificationEvent} message ReleaseNotificationEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReleaseNotificationEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.message = "";
+                                object.release = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                object.release = message.release;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReleaseNotificationEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReleaseNotificationEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ReleaseNotificationEvent;
+                    })();
+    
+                    v1.ReleaseRenderEvent = (function() {
+    
+                        /**
+                         * Properties of a ReleaseRenderEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IReleaseRenderEvent
+                         * @property {string|null} [message] ReleaseRenderEvent message
+                         * @property {string|null} [release] ReleaseRenderEvent release
+                         */
+    
+                        /**
+                         * Constructs a new ReleaseRenderEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a ReleaseRenderEvent.
+                         * @implements IReleaseRenderEvent
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IReleaseRenderEvent=} [properties] Properties to set
+                         */
+                        function ReleaseRenderEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReleaseRenderEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @instance
+                         */
+                        ReleaseRenderEvent.prototype.message = "";
+    
+                        /**
+                         * ReleaseRenderEvent release.
+                         * @member {string} release
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @instance
+                         */
+                        ReleaseRenderEvent.prototype.release = "";
+    
+                        /**
+                         * Creates a new ReleaseRenderEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IReleaseRenderEvent=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.ReleaseRenderEvent} ReleaseRenderEvent instance
+                         */
+                        ReleaseRenderEvent.create = function create(properties) {
+                            return new ReleaseRenderEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReleaseRenderEvent message. Does not implicitly {@link google.cloud.deploy.v1.ReleaseRenderEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IReleaseRenderEvent} message ReleaseRenderEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReleaseRenderEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                            if (message.release != null && Object.hasOwnProperty.call(message, "release"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.release);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReleaseRenderEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ReleaseRenderEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IReleaseRenderEvent} message ReleaseRenderEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReleaseRenderEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReleaseRenderEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.ReleaseRenderEvent} ReleaseRenderEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReleaseRenderEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.ReleaseRenderEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.message = reader.string();
+                                    break;
+                                case 2:
+                                    message.release = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReleaseRenderEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.ReleaseRenderEvent} ReleaseRenderEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReleaseRenderEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReleaseRenderEvent message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReleaseRenderEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                if (!$util.isString(message.release))
+                                    return "release: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReleaseRenderEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.ReleaseRenderEvent} ReleaseRenderEvent
+                         */
+                        ReleaseRenderEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.ReleaseRenderEvent)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.ReleaseRenderEvent();
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.release != null)
+                                message.release = String(object.release);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReleaseRenderEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.ReleaseRenderEvent} message ReleaseRenderEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReleaseRenderEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.message = "";
+                                object.release = "";
+                            }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                object.release = message.release;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReleaseRenderEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReleaseRenderEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ReleaseRenderEvent;
+                    })();
+    
+                    v1.RolloutNotificationEvent = (function() {
+    
+                        /**
+                         * Properties of a RolloutNotificationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRolloutNotificationEvent
+                         * @property {string|null} [message] RolloutNotificationEvent message
+                         * @property {string|null} [pipelineUid] RolloutNotificationEvent pipelineUid
+                         * @property {string|null} [releaseUid] RolloutNotificationEvent releaseUid
+                         * @property {string|null} [rollout] RolloutNotificationEvent rollout
+                         * @property {google.cloud.deploy.v1.Type|null} [type] RolloutNotificationEvent type
+                         * @property {string|null} [targetId] RolloutNotificationEvent targetId
+                         */
+    
+                        /**
+                         * Constructs a new RolloutNotificationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RolloutNotificationEvent.
+                         * @implements IRolloutNotificationEvent
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRolloutNotificationEvent=} [properties] Properties to set
+                         */
+                        function RolloutNotificationEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RolloutNotificationEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.message = "";
+    
+                        /**
+                         * RolloutNotificationEvent pipelineUid.
+                         * @member {string} pipelineUid
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.pipelineUid = "";
+    
+                        /**
+                         * RolloutNotificationEvent releaseUid.
+                         * @member {string} releaseUid
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.releaseUid = "";
+    
+                        /**
+                         * RolloutNotificationEvent rollout.
+                         * @member {string} rollout
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.rollout = "";
+    
+                        /**
+                         * RolloutNotificationEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.type = 0;
+    
+                        /**
+                         * RolloutNotificationEvent targetId.
+                         * @member {string} targetId
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.targetId = "";
+    
+                        /**
+                         * Creates a new RolloutNotificationEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRolloutNotificationEvent=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RolloutNotificationEvent} RolloutNotificationEvent instance
+                         */
+                        RolloutNotificationEvent.create = function create(properties) {
+                            return new RolloutNotificationEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RolloutNotificationEvent message. Does not implicitly {@link google.cloud.deploy.v1.RolloutNotificationEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRolloutNotificationEvent} message RolloutNotificationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RolloutNotificationEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                            if (message.pipelineUid != null && Object.hasOwnProperty.call(message, "pipelineUid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pipelineUid);
+                            if (message.releaseUid != null && Object.hasOwnProperty.call(message, "releaseUid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.releaseUid);
+                            if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.rollout);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
+                            if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.targetId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RolloutNotificationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RolloutNotificationEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRolloutNotificationEvent} message RolloutNotificationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RolloutNotificationEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RolloutNotificationEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RolloutNotificationEvent} RolloutNotificationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RolloutNotificationEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RolloutNotificationEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.message = reader.string();
+                                    break;
+                                case 2:
+                                    message.pipelineUid = reader.string();
+                                    break;
+                                case 3:
+                                    message.releaseUid = reader.string();
+                                    break;
+                                case 4:
+                                    message.rollout = reader.string();
+                                    break;
+                                case 5:
+                                    message.type = reader.int32();
+                                    break;
+                                case 6:
+                                    message.targetId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RolloutNotificationEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RolloutNotificationEvent} RolloutNotificationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RolloutNotificationEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RolloutNotificationEvent message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RolloutNotificationEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                if (!$util.isString(message.pipelineUid))
+                                    return "pipelineUid: string expected";
+                            if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
+                                if (!$util.isString(message.releaseUid))
+                                    return "releaseUid: string expected";
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                if (!$util.isString(message.rollout))
+                                    return "rollout: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                if (!$util.isString(message.targetId))
+                                    return "targetId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RolloutNotificationEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RolloutNotificationEvent} RolloutNotificationEvent
+                         */
+                        RolloutNotificationEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RolloutNotificationEvent)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RolloutNotificationEvent();
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.pipelineUid != null)
+                                message.pipelineUid = String(object.pipelineUid);
+                            if (object.releaseUid != null)
+                                message.releaseUid = String(object.releaseUid);
+                            if (object.rollout != null)
+                                message.rollout = String(object.rollout);
+                            switch (object.type) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            if (object.targetId != null)
+                                message.targetId = String(object.targetId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RolloutNotificationEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.RolloutNotificationEvent} message RolloutNotificationEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RolloutNotificationEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.message = "";
+                                object.pipelineUid = "";
+                                object.releaseUid = "";
+                                object.rollout = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.targetId = "";
+                            }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                object.pipelineUid = message.pipelineUid;
+                            if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
+                                object.releaseUid = message.releaseUid;
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                object.rollout = message.rollout;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                object.targetId = message.targetId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RolloutNotificationEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RolloutNotificationEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RolloutNotificationEvent;
+                    })();
+    
+                    v1.TargetNotificationEvent = (function() {
+    
+                        /**
+                         * Properties of a TargetNotificationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ITargetNotificationEvent
+                         * @property {string|null} [message] TargetNotificationEvent message
+                         * @property {string|null} [target] TargetNotificationEvent target
+                         * @property {google.cloud.deploy.v1.Type|null} [type] TargetNotificationEvent type
+                         */
+    
+                        /**
+                         * Constructs a new TargetNotificationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a TargetNotificationEvent.
+                         * @implements ITargetNotificationEvent
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ITargetNotificationEvent=} [properties] Properties to set
+                         */
+                        function TargetNotificationEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TargetNotificationEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @instance
+                         */
+                        TargetNotificationEvent.prototype.message = "";
+    
+                        /**
+                         * TargetNotificationEvent target.
+                         * @member {string} target
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @instance
+                         */
+                        TargetNotificationEvent.prototype.target = "";
+    
+                        /**
+                         * TargetNotificationEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @instance
+                         */
+                        TargetNotificationEvent.prototype.type = 0;
+    
+                        /**
+                         * Creates a new TargetNotificationEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.ITargetNotificationEvent=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.TargetNotificationEvent} TargetNotificationEvent instance
+                         */
+                        TargetNotificationEvent.create = function create(properties) {
+                            return new TargetNotificationEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TargetNotificationEvent message. Does not implicitly {@link google.cloud.deploy.v1.TargetNotificationEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.ITargetNotificationEvent} message TargetNotificationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TargetNotificationEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.target);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TargetNotificationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.TargetNotificationEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.ITargetNotificationEvent} message TargetNotificationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TargetNotificationEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TargetNotificationEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.TargetNotificationEvent} TargetNotificationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TargetNotificationEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.TargetNotificationEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.message = reader.string();
+                                    break;
+                                case 2:
+                                    message.target = reader.string();
+                                    break;
+                                case 3:
+                                    message.type = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TargetNotificationEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.TargetNotificationEvent} TargetNotificationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TargetNotificationEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TargetNotificationEvent message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TargetNotificationEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TargetNotificationEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.TargetNotificationEvent} TargetNotificationEvent
+                         */
+                        TargetNotificationEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.TargetNotificationEvent)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.TargetNotificationEvent();
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            switch (object.type) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TargetNotificationEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.TargetNotificationEvent} message TargetNotificationEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TargetNotificationEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.message = "";
+                                object.target = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TargetNotificationEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.TargetNotificationEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TargetNotificationEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TargetNotificationEvent;
                     })();
     
                     return v1;
