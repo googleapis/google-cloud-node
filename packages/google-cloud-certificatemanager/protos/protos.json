@@ -16,7 +16,7 @@
                     "php_namespace": "Google\\Cloud\\CertificateManager\\V1",
                     "ruby_package": "Google::Cloud::CertificateManager::V1",
                     "(google.api.resource_definition).type": "compute.googleapis.com/TargetSslProxies",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/targetSslProxies/{targetSslProxy}"
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/targetSslProxies/{target_ssl_proxy}"
                   },
                   "nested": {
                     "CertificateManager": {
