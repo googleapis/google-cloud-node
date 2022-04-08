@@ -898,6 +898,7 @@ class File extends ServiceObject<File> {
    * A helper method for determining if a request should be retried based on preconditions.
    * This should only be used for methods where the idempotency is determined by
    * `ifGenerationMatch`
+   * @private
    *
    * A request should not be retried under the following conditions:
    * - if precondition option `ifGenerationMatch` is not set OR
