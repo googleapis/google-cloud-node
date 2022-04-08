@@ -253,6 +253,193 @@
                         return AlertChart;
                     })();
     
+                    v1.CollapsibleGroup = (function() {
+    
+                        /**
+                         * Properties of a CollapsibleGroup.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface ICollapsibleGroup
+                         * @property {boolean|null} [collapsed] CollapsibleGroup collapsed
+                         */
+    
+                        /**
+                         * Constructs a new CollapsibleGroup.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a CollapsibleGroup.
+                         * @implements ICollapsibleGroup
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.ICollapsibleGroup=} [properties] Properties to set
+                         */
+                        function CollapsibleGroup(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CollapsibleGroup collapsed.
+                         * @member {boolean} collapsed
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @instance
+                         */
+                        CollapsibleGroup.prototype.collapsed = false;
+    
+                        /**
+                         * Creates a new CollapsibleGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ICollapsibleGroup=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.CollapsibleGroup} CollapsibleGroup instance
+                         */
+                        CollapsibleGroup.create = function create(properties) {
+                            return new CollapsibleGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CollapsibleGroup message. Does not implicitly {@link google.monitoring.dashboard.v1.CollapsibleGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ICollapsibleGroup} message CollapsibleGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CollapsibleGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.collapsed != null && Object.hasOwnProperty.call(message, "collapsed"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.collapsed);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CollapsibleGroup message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.CollapsibleGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ICollapsibleGroup} message CollapsibleGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CollapsibleGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CollapsibleGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.CollapsibleGroup} CollapsibleGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CollapsibleGroup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.CollapsibleGroup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.collapsed = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CollapsibleGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.CollapsibleGroup} CollapsibleGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CollapsibleGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CollapsibleGroup message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CollapsibleGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.collapsed != null && message.hasOwnProperty("collapsed"))
+                                if (typeof message.collapsed !== "boolean")
+                                    return "collapsed: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CollapsibleGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.CollapsibleGroup} CollapsibleGroup
+                         */
+                        CollapsibleGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.CollapsibleGroup)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.CollapsibleGroup();
+                            if (object.collapsed != null)
+                                message.collapsed = Boolean(object.collapsed);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CollapsibleGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.CollapsibleGroup} message CollapsibleGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CollapsibleGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.collapsed = false;
+                            if (message.collapsed != null && message.hasOwnProperty("collapsed"))
+                                object.collapsed = message.collapsed;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CollapsibleGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.CollapsibleGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CollapsibleGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CollapsibleGroup;
+                    })();
+    
                     v1.Aggregation = (function() {
     
                         /**
@@ -1357,6 +1544,8 @@
                          * @property {google.monitoring.dashboard.v1.IMosaicLayout|null} [mosaicLayout] Dashboard mosaicLayout
                          * @property {google.monitoring.dashboard.v1.IRowLayout|null} [rowLayout] Dashboard rowLayout
                          * @property {google.monitoring.dashboard.v1.IColumnLayout|null} [columnLayout] Dashboard columnLayout
+                         * @property {Array.<google.monitoring.dashboard.v1.IDashboardFilter>|null} [dashboardFilters] Dashboard dashboardFilters
+                         * @property {Object.<string,string>|null} [labels] Dashboard labels
                          */
     
                         /**
@@ -1368,6 +1557,8 @@
                          * @param {google.monitoring.dashboard.v1.IDashboard=} [properties] Properties to set
                          */
                         function Dashboard(properties) {
+                            this.dashboardFilters = [];
+                            this.labels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1430,6 +1621,22 @@
                          */
                         Dashboard.prototype.columnLayout = null;
     
+                        /**
+                         * Dashboard dashboardFilters.
+                         * @member {Array.<google.monitoring.dashboard.v1.IDashboardFilter>} dashboardFilters
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.dashboardFilters = $util.emptyArray;
+    
+                        /**
+                         * Dashboard labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.labels = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1482,6 +1689,12 @@
                                 $root.google.monitoring.dashboard.v1.RowLayout.encode(message.rowLayout, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.columnLayout != null && Object.hasOwnProperty.call(message, "columnLayout"))
                                 $root.google.monitoring.dashboard.v1.ColumnLayout.encode(message.columnLayout, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.dashboardFilters != null && message.dashboardFilters.length)
+                                for (var i = 0; i < message.dashboardFilters.length; ++i)
+                                    $root.google.monitoring.dashboard.v1.DashboardFilter.encode(message.dashboardFilters[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -1512,7 +1725,7 @@
                         Dashboard.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Dashboard();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Dashboard(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1536,6 +1749,33 @@
                                     break;
                                 case 9:
                                     message.columnLayout = $root.google.monitoring.dashboard.v1.ColumnLayout.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    if (!(message.dashboardFilters && message.dashboardFilters.length))
+                                        message.dashboardFilters = [];
+                                    message.dashboardFilters.push($root.google.monitoring.dashboard.v1.DashboardFilter.decode(reader, reader.uint32()));
+                                    break;
+                                case 12:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1620,6 +1860,23 @@
                                         return "columnLayout." + error;
                                 }
                             }
+                            if (message.dashboardFilters != null && message.hasOwnProperty("dashboardFilters")) {
+                                if (!Array.isArray(message.dashboardFilters))
+                                    return "dashboardFilters: array expected";
+                                for (var i = 0; i < message.dashboardFilters.length; ++i) {
+                                    var error = $root.google.monitoring.dashboard.v1.DashboardFilter.verify(message.dashboardFilters[i]);
+                                    if (error)
+                                        return "dashboardFilters." + error;
+                                }
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -1661,6 +1918,23 @@
                                     throw TypeError(".google.monitoring.dashboard.v1.Dashboard.columnLayout: object expected");
                                 message.columnLayout = $root.google.monitoring.dashboard.v1.ColumnLayout.fromObject(object.columnLayout);
                             }
+                            if (object.dashboardFilters) {
+                                if (!Array.isArray(object.dashboardFilters))
+                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.dashboardFilters: array expected");
+                                message.dashboardFilters = [];
+                                for (var i = 0; i < object.dashboardFilters.length; ++i) {
+                                    if (typeof object.dashboardFilters[i] !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.Dashboard.dashboardFilters: object expected");
+                                    message.dashboardFilters[i] = $root.google.monitoring.dashboard.v1.DashboardFilter.fromObject(object.dashboardFilters[i]);
+                                }
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -1677,6 +1951,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dashboardFilters = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
                             if (options.defaults) {
                                 object.name = "";
                                 object.displayName = "";
@@ -1708,6 +1986,17 @@
                                 if (options.oneofs)
                                     object.layout = "columnLayout";
                             }
+                            if (message.dashboardFilters && message.dashboardFilters.length) {
+                                object.dashboardFilters = [];
+                                for (var j = 0; j < message.dashboardFilters.length; ++j)
+                                    object.dashboardFilters[j] = $root.google.monitoring.dashboard.v1.DashboardFilter.toObject(message.dashboardFilters[j], options);
+                            }
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -1723,6 +2012,334 @@
                         };
     
                         return Dashboard;
+                    })();
+    
+                    v1.DashboardFilter = (function() {
+    
+                        /**
+                         * Properties of a DashboardFilter.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IDashboardFilter
+                         * @property {string|null} [labelKey] DashboardFilter labelKey
+                         * @property {string|null} [templateVariable] DashboardFilter templateVariable
+                         * @property {string|null} [stringValue] DashboardFilter stringValue
+                         * @property {google.monitoring.dashboard.v1.DashboardFilter.FilterType|null} [filterType] DashboardFilter filterType
+                         */
+    
+                        /**
+                         * Constructs a new DashboardFilter.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a DashboardFilter.
+                         * @implements IDashboardFilter
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IDashboardFilter=} [properties] Properties to set
+                         */
+                        function DashboardFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DashboardFilter labelKey.
+                         * @member {string} labelKey
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @instance
+                         */
+                        DashboardFilter.prototype.labelKey = "";
+    
+                        /**
+                         * DashboardFilter templateVariable.
+                         * @member {string} templateVariable
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @instance
+                         */
+                        DashboardFilter.prototype.templateVariable = "";
+    
+                        /**
+                         * DashboardFilter stringValue.
+                         * @member {string|null|undefined} stringValue
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @instance
+                         */
+                        DashboardFilter.prototype.stringValue = null;
+    
+                        /**
+                         * DashboardFilter filterType.
+                         * @member {google.monitoring.dashboard.v1.DashboardFilter.FilterType} filterType
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @instance
+                         */
+                        DashboardFilter.prototype.filterType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DashboardFilter defaultValue.
+                         * @member {"stringValue"|undefined} defaultValue
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @instance
+                         */
+                        Object.defineProperty(DashboardFilter.prototype, "defaultValue", {
+                            get: $util.oneOfGetter($oneOfFields = ["stringValue"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DashboardFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IDashboardFilter=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.DashboardFilter} DashboardFilter instance
+                         */
+                        DashboardFilter.create = function create(properties) {
+                            return new DashboardFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DashboardFilter message. Does not implicitly {@link google.monitoring.dashboard.v1.DashboardFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IDashboardFilter} message DashboardFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DashboardFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.labelKey != null && Object.hasOwnProperty.call(message, "labelKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.labelKey);
+                            if (message.templateVariable != null && Object.hasOwnProperty.call(message, "templateVariable"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.templateVariable);
+                            if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.stringValue);
+                            if (message.filterType != null && Object.hasOwnProperty.call(message, "filterType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.filterType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DashboardFilter message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.DashboardFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IDashboardFilter} message DashboardFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DashboardFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DashboardFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.DashboardFilter} DashboardFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DashboardFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.DashboardFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.labelKey = reader.string();
+                                    break;
+                                case 3:
+                                    message.templateVariable = reader.string();
+                                    break;
+                                case 4:
+                                    message.stringValue = reader.string();
+                                    break;
+                                case 5:
+                                    message.filterType = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DashboardFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.DashboardFilter} DashboardFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DashboardFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DashboardFilter message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DashboardFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.labelKey != null && message.hasOwnProperty("labelKey"))
+                                if (!$util.isString(message.labelKey))
+                                    return "labelKey: string expected";
+                            if (message.templateVariable != null && message.hasOwnProperty("templateVariable"))
+                                if (!$util.isString(message.templateVariable))
+                                    return "templateVariable: string expected";
+                            if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                                properties.defaultValue = 1;
+                                if (!$util.isString(message.stringValue))
+                                    return "stringValue: string expected";
+                            }
+                            if (message.filterType != null && message.hasOwnProperty("filterType"))
+                                switch (message.filterType) {
+                                default:
+                                    return "filterType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DashboardFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.DashboardFilter} DashboardFilter
+                         */
+                        DashboardFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.DashboardFilter)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.DashboardFilter();
+                            if (object.labelKey != null)
+                                message.labelKey = String(object.labelKey);
+                            if (object.templateVariable != null)
+                                message.templateVariable = String(object.templateVariable);
+                            if (object.stringValue != null)
+                                message.stringValue = String(object.stringValue);
+                            switch (object.filterType) {
+                            case "FILTER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.filterType = 0;
+                                break;
+                            case "RESOURCE_LABEL":
+                            case 1:
+                                message.filterType = 1;
+                                break;
+                            case "METRIC_LABEL":
+                            case 2:
+                                message.filterType = 2;
+                                break;
+                            case "USER_METADATA_LABEL":
+                            case 3:
+                                message.filterType = 3;
+                                break;
+                            case "SYSTEM_METADATA_LABEL":
+                            case 4:
+                                message.filterType = 4;
+                                break;
+                            case "GROUP":
+                            case 5:
+                                message.filterType = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DashboardFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.DashboardFilter} message DashboardFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DashboardFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.labelKey = "";
+                                object.templateVariable = "";
+                                object.filterType = options.enums === String ? "FILTER_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.labelKey != null && message.hasOwnProperty("labelKey"))
+                                object.labelKey = message.labelKey;
+                            if (message.templateVariable != null && message.hasOwnProperty("templateVariable"))
+                                object.templateVariable = message.templateVariable;
+                            if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                                object.stringValue = message.stringValue;
+                                if (options.oneofs)
+                                    object.defaultValue = "stringValue";
+                            }
+                            if (message.filterType != null && message.hasOwnProperty("filterType"))
+                                object.filterType = options.enums === String ? $root.google.monitoring.dashboard.v1.DashboardFilter.FilterType[message.filterType] : message.filterType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DashboardFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.DashboardFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DashboardFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * FilterType enum.
+                         * @name google.monitoring.dashboard.v1.DashboardFilter.FilterType
+                         * @enum {number}
+                         * @property {number} FILTER_TYPE_UNSPECIFIED=0 FILTER_TYPE_UNSPECIFIED value
+                         * @property {number} RESOURCE_LABEL=1 RESOURCE_LABEL value
+                         * @property {number} METRIC_LABEL=2 METRIC_LABEL value
+                         * @property {number} USER_METADATA_LABEL=3 USER_METADATA_LABEL value
+                         * @property {number} SYSTEM_METADATA_LABEL=4 SYSTEM_METADATA_LABEL value
+                         * @property {number} GROUP=5 GROUP value
+                         */
+                        DashboardFilter.FilterType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FILTER_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RESOURCE_LABEL"] = 1;
+                            values[valuesById[2] = "METRIC_LABEL"] = 2;
+                            values[valuesById[3] = "USER_METADATA_LABEL"] = 3;
+                            values[valuesById[4] = "SYSTEM_METADATA_LABEL"] = 4;
+                            values[valuesById[5] = "GROUP"] = 5;
+                            return values;
+                        })();
+    
+                        return DashboardFilter;
                     })();
     
                     v1.GridLayout = (function() {
@@ -3400,6 +4017,9 @@
                          * @property {google.monitoring.dashboard.v1.IText|null} [text] Widget text
                          * @property {google.protobuf.IEmpty|null} [blank] Widget blank
                          * @property {google.monitoring.dashboard.v1.IAlertChart|null} [alertChart] Widget alertChart
+                         * @property {google.monitoring.dashboard.v1.ITimeSeriesTable|null} [timeSeriesTable] Widget timeSeriesTable
+                         * @property {google.monitoring.dashboard.v1.ICollapsibleGroup|null} [collapsibleGroup] Widget collapsibleGroup
+                         * @property {google.monitoring.dashboard.v1.ILogsPanel|null} [logsPanel] Widget logsPanel
                          */
     
                         /**
@@ -3465,17 +4085,41 @@
                          */
                         Widget.prototype.alertChart = null;
     
+                        /**
+                         * Widget timeSeriesTable.
+                         * @member {google.monitoring.dashboard.v1.ITimeSeriesTable|null|undefined} timeSeriesTable
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.timeSeriesTable = null;
+    
+                        /**
+                         * Widget collapsibleGroup.
+                         * @member {google.monitoring.dashboard.v1.ICollapsibleGroup|null|undefined} collapsibleGroup
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.collapsibleGroup = null;
+    
+                        /**
+                         * Widget logsPanel.
+                         * @member {google.monitoring.dashboard.v1.ILogsPanel|null|undefined} logsPanel
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.logsPanel = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Widget content.
-                         * @member {"xyChart"|"scorecard"|"text"|"blank"|"alertChart"|undefined} content
+                         * @member {"xyChart"|"scorecard"|"text"|"blank"|"alertChart"|"timeSeriesTable"|"collapsibleGroup"|"logsPanel"|undefined} content
                          * @memberof google.monitoring.dashboard.v1.Widget
                          * @instance
                          */
                         Object.defineProperty(Widget.prototype, "content", {
-                            get: $util.oneOfGetter($oneOfFields = ["xyChart", "scorecard", "text", "blank", "alertChart"]),
+                            get: $util.oneOfGetter($oneOfFields = ["xyChart", "scorecard", "text", "blank", "alertChart", "timeSeriesTable", "collapsibleGroup", "logsPanel"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -3515,6 +4159,12 @@
                                 $root.google.protobuf.Empty.encode(message.blank, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.alertChart != null && Object.hasOwnProperty.call(message, "alertChart"))
                                 $root.google.monitoring.dashboard.v1.AlertChart.encode(message.alertChart, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.timeSeriesTable != null && Object.hasOwnProperty.call(message, "timeSeriesTable"))
+                                $root.google.monitoring.dashboard.v1.TimeSeriesTable.encode(message.timeSeriesTable, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.collapsibleGroup != null && Object.hasOwnProperty.call(message, "collapsibleGroup"))
+                                $root.google.monitoring.dashboard.v1.CollapsibleGroup.encode(message.collapsibleGroup, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.logsPanel != null && Object.hasOwnProperty.call(message, "logsPanel"))
+                                $root.google.monitoring.dashboard.v1.LogsPanel.encode(message.logsPanel, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -3566,6 +4216,15 @@
                                     break;
                                 case 7:
                                     message.alertChart = $root.google.monitoring.dashboard.v1.AlertChart.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.timeSeriesTable = $root.google.monitoring.dashboard.v1.TimeSeriesTable.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.collapsibleGroup = $root.google.monitoring.dashboard.v1.CollapsibleGroup.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.logsPanel = $root.google.monitoring.dashboard.v1.LogsPanel.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3654,6 +4313,36 @@
                                         return "alertChart." + error;
                                 }
                             }
+                            if (message.timeSeriesTable != null && message.hasOwnProperty("timeSeriesTable")) {
+                                if (properties.content === 1)
+                                    return "content: multiple values";
+                                properties.content = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.TimeSeriesTable.verify(message.timeSeriesTable);
+                                    if (error)
+                                        return "timeSeriesTable." + error;
+                                }
+                            }
+                            if (message.collapsibleGroup != null && message.hasOwnProperty("collapsibleGroup")) {
+                                if (properties.content === 1)
+                                    return "content: multiple values";
+                                properties.content = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.CollapsibleGroup.verify(message.collapsibleGroup);
+                                    if (error)
+                                        return "collapsibleGroup." + error;
+                                }
+                            }
+                            if (message.logsPanel != null && message.hasOwnProperty("logsPanel")) {
+                                if (properties.content === 1)
+                                    return "content: multiple values";
+                                properties.content = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.LogsPanel.verify(message.logsPanel);
+                                    if (error)
+                                        return "logsPanel." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -3695,6 +4384,21 @@
                                 if (typeof object.alertChart !== "object")
                                     throw TypeError(".google.monitoring.dashboard.v1.Widget.alertChart: object expected");
                                 message.alertChart = $root.google.monitoring.dashboard.v1.AlertChart.fromObject(object.alertChart);
+                            }
+                            if (object.timeSeriesTable != null) {
+                                if (typeof object.timeSeriesTable !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.timeSeriesTable: object expected");
+                                message.timeSeriesTable = $root.google.monitoring.dashboard.v1.TimeSeriesTable.fromObject(object.timeSeriesTable);
+                            }
+                            if (object.collapsibleGroup != null) {
+                                if (typeof object.collapsibleGroup !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.collapsibleGroup: object expected");
+                                message.collapsibleGroup = $root.google.monitoring.dashboard.v1.CollapsibleGroup.fromObject(object.collapsibleGroup);
+                            }
+                            if (object.logsPanel != null) {
+                                if (typeof object.logsPanel !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.logsPanel: object expected");
+                                message.logsPanel = $root.google.monitoring.dashboard.v1.LogsPanel.fromObject(object.logsPanel);
                             }
                             return message;
                         };
@@ -3741,6 +4445,21 @@
                                 if (options.oneofs)
                                     object.content = "alertChart";
                             }
+                            if (message.timeSeriesTable != null && message.hasOwnProperty("timeSeriesTable")) {
+                                object.timeSeriesTable = $root.google.monitoring.dashboard.v1.TimeSeriesTable.toObject(message.timeSeriesTable, options);
+                                if (options.oneofs)
+                                    object.content = "timeSeriesTable";
+                            }
+                            if (message.collapsibleGroup != null && message.hasOwnProperty("collapsibleGroup")) {
+                                object.collapsibleGroup = $root.google.monitoring.dashboard.v1.CollapsibleGroup.toObject(message.collapsibleGroup, options);
+                                if (options.oneofs)
+                                    object.content = "collapsibleGroup";
+                            }
+                            if (message.logsPanel != null && message.hasOwnProperty("logsPanel")) {
+                                object.logsPanel = $root.google.monitoring.dashboard.v1.LogsPanel.toObject(message.logsPanel, options);
+                                if (options.oneofs)
+                                    object.content = "logsPanel";
+                            }
                             return object;
                         };
     
@@ -3756,6 +4475,232 @@
                         };
     
                         return Widget;
+                    })();
+    
+                    v1.LogsPanel = (function() {
+    
+                        /**
+                         * Properties of a LogsPanel.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface ILogsPanel
+                         * @property {string|null} [filter] LogsPanel filter
+                         * @property {Array.<string>|null} [resourceNames] LogsPanel resourceNames
+                         */
+    
+                        /**
+                         * Constructs a new LogsPanel.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a LogsPanel.
+                         * @implements ILogsPanel
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.ILogsPanel=} [properties] Properties to set
+                         */
+                        function LogsPanel(properties) {
+                            this.resourceNames = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LogsPanel filter.
+                         * @member {string} filter
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @instance
+                         */
+                        LogsPanel.prototype.filter = "";
+    
+                        /**
+                         * LogsPanel resourceNames.
+                         * @member {Array.<string>} resourceNames
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @instance
+                         */
+                        LogsPanel.prototype.resourceNames = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LogsPanel instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ILogsPanel=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.LogsPanel} LogsPanel instance
+                         */
+                        LogsPanel.create = function create(properties) {
+                            return new LogsPanel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LogsPanel message. Does not implicitly {@link google.monitoring.dashboard.v1.LogsPanel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ILogsPanel} message LogsPanel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LogsPanel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                            if (message.resourceNames != null && message.resourceNames.length)
+                                for (var i = 0; i < message.resourceNames.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceNames[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LogsPanel message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.LogsPanel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ILogsPanel} message LogsPanel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LogsPanel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LogsPanel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.LogsPanel} LogsPanel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LogsPanel.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.LogsPanel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.filter = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.resourceNames && message.resourceNames.length))
+                                        message.resourceNames = [];
+                                    message.resourceNames.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LogsPanel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.LogsPanel} LogsPanel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LogsPanel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LogsPanel message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LogsPanel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.resourceNames != null && message.hasOwnProperty("resourceNames")) {
+                                if (!Array.isArray(message.resourceNames))
+                                    return "resourceNames: array expected";
+                                for (var i = 0; i < message.resourceNames.length; ++i)
+                                    if (!$util.isString(message.resourceNames[i]))
+                                        return "resourceNames: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LogsPanel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.LogsPanel} LogsPanel
+                         */
+                        LogsPanel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.LogsPanel)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.LogsPanel();
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.resourceNames) {
+                                if (!Array.isArray(object.resourceNames))
+                                    throw TypeError(".google.monitoring.dashboard.v1.LogsPanel.resourceNames: array expected");
+                                message.resourceNames = [];
+                                for (var i = 0; i < object.resourceNames.length; ++i)
+                                    message.resourceNames[i] = String(object.resourceNames[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LogsPanel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.LogsPanel} message LogsPanel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LogsPanel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resourceNames = [];
+                            if (options.defaults)
+                                object.filter = "";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.resourceNames && message.resourceNames.length) {
+                                object.resourceNames = [];
+                                for (var j = 0; j < message.resourceNames.length; ++j)
+                                    object.resourceNames[j] = message.resourceNames[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LogsPanel to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.LogsPanel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LogsPanel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return LogsPanel;
                     })();
     
                     v1.Scorecard = (function() {
@@ -5690,6 +6635,7 @@
                          * @property {number|null} [value] Threshold value
                          * @property {google.monitoring.dashboard.v1.Threshold.Color|null} [color] Threshold color
                          * @property {google.monitoring.dashboard.v1.Threshold.Direction|null} [direction] Threshold direction
+                         * @property {google.monitoring.dashboard.v1.Threshold.TargetAxis|null} [targetAxis] Threshold targetAxis
                          */
     
                         /**
@@ -5740,6 +6686,14 @@
                         Threshold.prototype.direction = 0;
     
                         /**
+                         * Threshold targetAxis.
+                         * @member {google.monitoring.dashboard.v1.Threshold.TargetAxis} targetAxis
+                         * @memberof google.monitoring.dashboard.v1.Threshold
+                         * @instance
+                         */
+                        Threshold.prototype.targetAxis = 0;
+    
+                        /**
                          * Creates a new Threshold instance using the specified properties.
                          * @function create
                          * @memberof google.monitoring.dashboard.v1.Threshold
@@ -5771,6 +6725,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.color);
                             if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.direction);
+                            if (message.targetAxis != null && Object.hasOwnProperty.call(message, "targetAxis"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetAxis);
                             return writer;
                         };
     
@@ -5816,6 +6772,9 @@
                                     break;
                                 case 4:
                                     message.direction = reader.int32();
+                                    break;
+                                case 5:
+                                    message.targetAxis = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5876,6 +6835,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.targetAxis != null && message.hasOwnProperty("targetAxis"))
+                                switch (message.targetAxis) {
+                                default:
+                                    return "targetAxis: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -5923,6 +6891,20 @@
                                 message.direction = 2;
                                 break;
                             }
+                            switch (object.targetAxis) {
+                            case "TARGET_AXIS_UNSPECIFIED":
+                            case 0:
+                                message.targetAxis = 0;
+                                break;
+                            case "Y1":
+                            case 1:
+                                message.targetAxis = 1;
+                                break;
+                            case "Y2":
+                            case 2:
+                                message.targetAxis = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -5944,6 +6926,7 @@
                                 object.value = 0;
                                 object.color = options.enums === String ? "COLOR_UNSPECIFIED" : 0;
                                 object.direction = options.enums === String ? "DIRECTION_UNSPECIFIED" : 0;
+                                object.targetAxis = options.enums === String ? "TARGET_AXIS_UNSPECIFIED" : 0;
                             }
                             if (message.label != null && message.hasOwnProperty("label"))
                                 object.label = message.label;
@@ -5953,6 +6936,8 @@
                                 object.color = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.Color[message.color] : message.color;
                             if (message.direction != null && message.hasOwnProperty("direction"))
                                 object.direction = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.Direction[message.direction] : message.direction;
+                            if (message.targetAxis != null && message.hasOwnProperty("targetAxis"))
+                                object.targetAxis = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.TargetAxis[message.targetAxis] : message.targetAxis;
                             return object;
                         };
     
@@ -5999,6 +6984,22 @@
                             return values;
                         })();
     
+                        /**
+                         * TargetAxis enum.
+                         * @name google.monitoring.dashboard.v1.Threshold.TargetAxis
+                         * @enum {number}
+                         * @property {number} TARGET_AXIS_UNSPECIFIED=0 TARGET_AXIS_UNSPECIFIED value
+                         * @property {number} Y1=1 Y1 value
+                         * @property {number} Y2=2 Y2 value
+                         */
+                        Threshold.TargetAxis = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TARGET_AXIS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "Y1"] = 1;
+                            values[valuesById[2] = "Y2"] = 2;
+                            return values;
+                        })();
+    
                         return Threshold;
                     })();
     
@@ -6016,6 +7017,686 @@
                         values[valuesById[1] = "SPARK_LINE"] = 1;
                         values[valuesById[2] = "SPARK_BAR"] = 2;
                         return values;
+                    })();
+    
+                    v1.TimeSeriesTable = (function() {
+    
+                        /**
+                         * Properties of a TimeSeriesTable.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface ITimeSeriesTable
+                         * @property {Array.<google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet>|null} [dataSets] TimeSeriesTable dataSets
+                         */
+    
+                        /**
+                         * Constructs a new TimeSeriesTable.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a TimeSeriesTable.
+                         * @implements ITimeSeriesTable
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.ITimeSeriesTable=} [properties] Properties to set
+                         */
+                        function TimeSeriesTable(properties) {
+                            this.dataSets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TimeSeriesTable dataSets.
+                         * @member {Array.<google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet>} dataSets
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @instance
+                         */
+                        TimeSeriesTable.prototype.dataSets = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TimeSeriesTable instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ITimeSeriesTable=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.TimeSeriesTable} TimeSeriesTable instance
+                         */
+                        TimeSeriesTable.create = function create(properties) {
+                            return new TimeSeriesTable(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TimeSeriesTable message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesTable.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ITimeSeriesTable} message TimeSeriesTable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TimeSeriesTable.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataSets != null && message.dataSets.length)
+                                for (var i = 0; i < message.dataSets.length; ++i)
+                                    $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.encode(message.dataSets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TimeSeriesTable message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesTable.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ITimeSeriesTable} message TimeSeriesTable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TimeSeriesTable.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TimeSeriesTable message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.TimeSeriesTable} TimeSeriesTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TimeSeriesTable.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.TimeSeriesTable();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dataSets && message.dataSets.length))
+                                        message.dataSets = [];
+                                    message.dataSets.push($root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TimeSeriesTable message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.TimeSeriesTable} TimeSeriesTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TimeSeriesTable.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TimeSeriesTable message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TimeSeriesTable.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataSets != null && message.hasOwnProperty("dataSets")) {
+                                if (!Array.isArray(message.dataSets))
+                                    return "dataSets: array expected";
+                                for (var i = 0; i < message.dataSets.length; ++i) {
+                                    var error = $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.verify(message.dataSets[i]);
+                                    if (error)
+                                        return "dataSets." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TimeSeriesTable message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.TimeSeriesTable} TimeSeriesTable
+                         */
+                        TimeSeriesTable.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.TimeSeriesTable)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.TimeSeriesTable();
+                            if (object.dataSets) {
+                                if (!Array.isArray(object.dataSets))
+                                    throw TypeError(".google.monitoring.dashboard.v1.TimeSeriesTable.dataSets: array expected");
+                                message.dataSets = [];
+                                for (var i = 0; i < object.dataSets.length; ++i) {
+                                    if (typeof object.dataSets[i] !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.TimeSeriesTable.dataSets: object expected");
+                                    message.dataSets[i] = $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.fromObject(object.dataSets[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TimeSeriesTable message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.TimeSeriesTable} message TimeSeriesTable
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TimeSeriesTable.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataSets = [];
+                            if (message.dataSets && message.dataSets.length) {
+                                object.dataSets = [];
+                                for (var j = 0; j < message.dataSets.length; ++j)
+                                    object.dataSets[j] = $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.toObject(message.dataSets[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TimeSeriesTable to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TimeSeriesTable.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        TimeSeriesTable.TableDataSet = (function() {
+    
+                            /**
+                             * Properties of a TableDataSet.
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                             * @interface ITableDataSet
+                             * @property {google.monitoring.dashboard.v1.ITimeSeriesQuery|null} [timeSeriesQuery] TableDataSet timeSeriesQuery
+                             * @property {string|null} [tableTemplate] TableDataSet tableTemplate
+                             * @property {google.protobuf.IDuration|null} [minAlignmentPeriod] TableDataSet minAlignmentPeriod
+                             * @property {google.monitoring.dashboard.v1.ITableDisplayOptions|null} [tableDisplayOptions] TableDataSet tableDisplayOptions
+                             */
+    
+                            /**
+                             * Constructs a new TableDataSet.
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                             * @classdesc Represents a TableDataSet.
+                             * @implements ITableDataSet
+                             * @constructor
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet=} [properties] Properties to set
+                             */
+                            function TableDataSet(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TableDataSet timeSeriesQuery.
+                             * @member {google.monitoring.dashboard.v1.ITimeSeriesQuery|null|undefined} timeSeriesQuery
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @instance
+                             */
+                            TableDataSet.prototype.timeSeriesQuery = null;
+    
+                            /**
+                             * TableDataSet tableTemplate.
+                             * @member {string} tableTemplate
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @instance
+                             */
+                            TableDataSet.prototype.tableTemplate = "";
+    
+                            /**
+                             * TableDataSet minAlignmentPeriod.
+                             * @member {google.protobuf.IDuration|null|undefined} minAlignmentPeriod
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @instance
+                             */
+                            TableDataSet.prototype.minAlignmentPeriod = null;
+    
+                            /**
+                             * TableDataSet tableDisplayOptions.
+                             * @member {google.monitoring.dashboard.v1.ITableDisplayOptions|null|undefined} tableDisplayOptions
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @instance
+                             */
+                            TableDataSet.prototype.tableDisplayOptions = null;
+    
+                            /**
+                             * Creates a new TableDataSet instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet=} [properties] Properties to set
+                             * @returns {google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet} TableDataSet instance
+                             */
+                            TableDataSet.create = function create(properties) {
+                                return new TableDataSet(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TableDataSet message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet} message TableDataSet message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TableDataSet.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.timeSeriesQuery != null && Object.hasOwnProperty.call(message, "timeSeriesQuery"))
+                                    $root.google.monitoring.dashboard.v1.TimeSeriesQuery.encode(message.timeSeriesQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.tableTemplate != null && Object.hasOwnProperty.call(message, "tableTemplate"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.tableTemplate);
+                                if (message.minAlignmentPeriod != null && Object.hasOwnProperty.call(message, "minAlignmentPeriod"))
+                                    $root.google.protobuf.Duration.encode(message.minAlignmentPeriod, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.tableDisplayOptions != null && Object.hasOwnProperty.call(message, "tableDisplayOptions"))
+                                    $root.google.monitoring.dashboard.v1.TableDisplayOptions.encode(message.tableDisplayOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TableDataSet message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet} message TableDataSet message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TableDataSet.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TableDataSet message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet} TableDataSet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TableDataSet.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.tableTemplate = reader.string();
+                                        break;
+                                    case 3:
+                                        message.minAlignmentPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    case 4:
+                                        message.tableDisplayOptions = $root.google.monitoring.dashboard.v1.TableDisplayOptions.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TableDataSet message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet} TableDataSet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TableDataSet.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TableDataSet message.
+                             * @function verify
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TableDataSet.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery")) {
+                                    var error = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.verify(message.timeSeriesQuery);
+                                    if (error)
+                                        return "timeSeriesQuery." + error;
+                                }
+                                if (message.tableTemplate != null && message.hasOwnProperty("tableTemplate"))
+                                    if (!$util.isString(message.tableTemplate))
+                                        return "tableTemplate: string expected";
+                                if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.minAlignmentPeriod);
+                                    if (error)
+                                        return "minAlignmentPeriod." + error;
+                                }
+                                if (message.tableDisplayOptions != null && message.hasOwnProperty("tableDisplayOptions")) {
+                                    var error = $root.google.monitoring.dashboard.v1.TableDisplayOptions.verify(message.tableDisplayOptions);
+                                    if (error)
+                                        return "tableDisplayOptions." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TableDataSet message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet} TableDataSet
+                             */
+                            TableDataSet.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet)
+                                    return object;
+                                var message = new $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet();
+                                if (object.timeSeriesQuery != null) {
+                                    if (typeof object.timeSeriesQuery !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.timeSeriesQuery: object expected");
+                                    message.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.fromObject(object.timeSeriesQuery);
+                                }
+                                if (object.tableTemplate != null)
+                                    message.tableTemplate = String(object.tableTemplate);
+                                if (object.minAlignmentPeriod != null) {
+                                    if (typeof object.minAlignmentPeriod !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.minAlignmentPeriod: object expected");
+                                    message.minAlignmentPeriod = $root.google.protobuf.Duration.fromObject(object.minAlignmentPeriod);
+                                }
+                                if (object.tableDisplayOptions != null) {
+                                    if (typeof object.tableDisplayOptions !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.tableDisplayOptions: object expected");
+                                    message.tableDisplayOptions = $root.google.monitoring.dashboard.v1.TableDisplayOptions.fromObject(object.tableDisplayOptions);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TableDataSet message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet} message TableDataSet
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TableDataSet.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.timeSeriesQuery = null;
+                                    object.tableTemplate = "";
+                                    object.minAlignmentPeriod = null;
+                                    object.tableDisplayOptions = null;
+                                }
+                                if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery"))
+                                    object.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.toObject(message.timeSeriesQuery, options);
+                                if (message.tableTemplate != null && message.hasOwnProperty("tableTemplate"))
+                                    object.tableTemplate = message.tableTemplate;
+                                if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod"))
+                                    object.minAlignmentPeriod = $root.google.protobuf.Duration.toObject(message.minAlignmentPeriod, options);
+                                if (message.tableDisplayOptions != null && message.hasOwnProperty("tableDisplayOptions"))
+                                    object.tableDisplayOptions = $root.google.monitoring.dashboard.v1.TableDisplayOptions.toObject(message.tableDisplayOptions, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TableDataSet to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TableDataSet.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return TableDataSet;
+                        })();
+    
+                        return TimeSeriesTable;
+                    })();
+    
+                    v1.TableDisplayOptions = (function() {
+    
+                        /**
+                         * Properties of a TableDisplayOptions.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface ITableDisplayOptions
+                         * @property {Array.<string>|null} [shownColumns] TableDisplayOptions shownColumns
+                         */
+    
+                        /**
+                         * Constructs a new TableDisplayOptions.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a TableDisplayOptions.
+                         * @implements ITableDisplayOptions
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.ITableDisplayOptions=} [properties] Properties to set
+                         */
+                        function TableDisplayOptions(properties) {
+                            this.shownColumns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TableDisplayOptions shownColumns.
+                         * @member {Array.<string>} shownColumns
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @instance
+                         */
+                        TableDisplayOptions.prototype.shownColumns = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TableDisplayOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ITableDisplayOptions=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.TableDisplayOptions} TableDisplayOptions instance
+                         */
+                        TableDisplayOptions.create = function create(properties) {
+                            return new TableDisplayOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TableDisplayOptions message. Does not implicitly {@link google.monitoring.dashboard.v1.TableDisplayOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ITableDisplayOptions} message TableDisplayOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableDisplayOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.shownColumns != null && message.shownColumns.length)
+                                for (var i = 0; i < message.shownColumns.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.shownColumns[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TableDisplayOptions message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TableDisplayOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ITableDisplayOptions} message TableDisplayOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableDisplayOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TableDisplayOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.TableDisplayOptions} TableDisplayOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableDisplayOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.TableDisplayOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.shownColumns && message.shownColumns.length))
+                                        message.shownColumns = [];
+                                    message.shownColumns.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TableDisplayOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.TableDisplayOptions} TableDisplayOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableDisplayOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TableDisplayOptions message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TableDisplayOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.shownColumns != null && message.hasOwnProperty("shownColumns")) {
+                                if (!Array.isArray(message.shownColumns))
+                                    return "shownColumns: array expected";
+                                for (var i = 0; i < message.shownColumns.length; ++i)
+                                    if (!$util.isString(message.shownColumns[i]))
+                                        return "shownColumns: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TableDisplayOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.TableDisplayOptions} TableDisplayOptions
+                         */
+                        TableDisplayOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.TableDisplayOptions)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.TableDisplayOptions();
+                            if (object.shownColumns) {
+                                if (!Array.isArray(object.shownColumns))
+                                    throw TypeError(".google.monitoring.dashboard.v1.TableDisplayOptions.shownColumns: array expected");
+                                message.shownColumns = [];
+                                for (var i = 0; i < object.shownColumns.length; ++i)
+                                    message.shownColumns[i] = String(object.shownColumns[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TableDisplayOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.TableDisplayOptions} message TableDisplayOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TableDisplayOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.shownColumns = [];
+                            if (message.shownColumns && message.shownColumns.length) {
+                                object.shownColumns = [];
+                                for (var j = 0; j < message.shownColumns.length; ++j)
+                                    object.shownColumns[j] = message.shownColumns[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TableDisplayOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.TableDisplayOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TableDisplayOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TableDisplayOptions;
                     })();
     
                     v1.Text = (function() {
@@ -6273,6 +7954,7 @@
                          * @property {Array.<google.monitoring.dashboard.v1.IThreshold>|null} [thresholds] XyChart thresholds
                          * @property {google.monitoring.dashboard.v1.XyChart.IAxis|null} [xAxis] XyChart xAxis
                          * @property {google.monitoring.dashboard.v1.XyChart.IAxis|null} [yAxis] XyChart yAxis
+                         * @property {google.monitoring.dashboard.v1.XyChart.IAxis|null} [y2Axis] XyChart y2Axis
                          * @property {google.monitoring.dashboard.v1.IChartOptions|null} [chartOptions] XyChart chartOptions
                          */
     
@@ -6334,6 +8016,14 @@
                         XyChart.prototype.yAxis = null;
     
                         /**
+                         * XyChart y2Axis.
+                         * @member {google.monitoring.dashboard.v1.XyChart.IAxis|null|undefined} y2Axis
+                         * @memberof google.monitoring.dashboard.v1.XyChart
+                         * @instance
+                         */
+                        XyChart.prototype.y2Axis = null;
+    
+                        /**
                          * XyChart chartOptions.
                          * @member {google.monitoring.dashboard.v1.IChartOptions|null|undefined} chartOptions
                          * @memberof google.monitoring.dashboard.v1.XyChart
@@ -6379,6 +8069,8 @@
                                 $root.google.monitoring.dashboard.v1.XyChart.Axis.encode(message.yAxis, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.chartOptions != null && Object.hasOwnProperty.call(message, "chartOptions"))
                                 $root.google.monitoring.dashboard.v1.ChartOptions.encode(message.chartOptions, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.y2Axis != null && Object.hasOwnProperty.call(message, "y2Axis"))
+                                $root.google.monitoring.dashboard.v1.XyChart.Axis.encode(message.y2Axis, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -6431,6 +8123,9 @@
                                     break;
                                 case 7:
                                     message.yAxis = $root.google.monitoring.dashboard.v1.XyChart.Axis.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.y2Axis = $root.google.monitoring.dashboard.v1.XyChart.Axis.decode(reader, reader.uint32());
                                     break;
                                 case 8:
                                     message.chartOptions = $root.google.monitoring.dashboard.v1.ChartOptions.decode(reader, reader.uint32());
@@ -6503,6 +8198,11 @@
                                 if (error)
                                     return "yAxis." + error;
                             }
+                            if (message.y2Axis != null && message.hasOwnProperty("y2Axis")) {
+                                var error = $root.google.monitoring.dashboard.v1.XyChart.Axis.verify(message.y2Axis);
+                                if (error)
+                                    return "y2Axis." + error;
+                            }
                             if (message.chartOptions != null && message.hasOwnProperty("chartOptions")) {
                                 var error = $root.google.monitoring.dashboard.v1.ChartOptions.verify(message.chartOptions);
                                 if (error)
@@ -6558,6 +8258,11 @@
                                     throw TypeError(".google.monitoring.dashboard.v1.XyChart.yAxis: object expected");
                                 message.yAxis = $root.google.monitoring.dashboard.v1.XyChart.Axis.fromObject(object.yAxis);
                             }
+                            if (object.y2Axis != null) {
+                                if (typeof object.y2Axis !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.XyChart.y2Axis: object expected");
+                                message.y2Axis = $root.google.monitoring.dashboard.v1.XyChart.Axis.fromObject(object.y2Axis);
+                            }
                             if (object.chartOptions != null) {
                                 if (typeof object.chartOptions !== "object")
                                     throw TypeError(".google.monitoring.dashboard.v1.XyChart.chartOptions: object expected");
@@ -6588,6 +8293,7 @@
                                 object.xAxis = null;
                                 object.yAxis = null;
                                 object.chartOptions = null;
+                                object.y2Axis = null;
                             }
                             if (message.dataSets && message.dataSets.length) {
                                 object.dataSets = [];
@@ -6607,6 +8313,8 @@
                                 object.yAxis = $root.google.monitoring.dashboard.v1.XyChart.Axis.toObject(message.yAxis, options);
                             if (message.chartOptions != null && message.hasOwnProperty("chartOptions"))
                                 object.chartOptions = $root.google.monitoring.dashboard.v1.ChartOptions.toObject(message.chartOptions, options);
+                            if (message.y2Axis != null && message.hasOwnProperty("y2Axis"))
+                                object.y2Axis = $root.google.monitoring.dashboard.v1.XyChart.Axis.toObject(message.y2Axis, options);
                             return object;
                         };
     
@@ -6631,6 +8339,7 @@
                              * @property {google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|null} [plotType] DataSet plotType
                              * @property {string|null} [legendTemplate] DataSet legendTemplate
                              * @property {google.protobuf.IDuration|null} [minAlignmentPeriod] DataSet minAlignmentPeriod
+                             * @property {google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis|null} [targetAxis] DataSet targetAxis
                              */
     
                             /**
@@ -6681,6 +8390,14 @@
                             DataSet.prototype.minAlignmentPeriod = null;
     
                             /**
+                             * DataSet targetAxis.
+                             * @member {google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis} targetAxis
+                             * @memberof google.monitoring.dashboard.v1.XyChart.DataSet
+                             * @instance
+                             */
+                            DataSet.prototype.targetAxis = 0;
+    
+                            /**
                              * Creates a new DataSet instance using the specified properties.
                              * @function create
                              * @memberof google.monitoring.dashboard.v1.XyChart.DataSet
@@ -6712,6 +8429,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.legendTemplate);
                                 if (message.minAlignmentPeriod != null && Object.hasOwnProperty.call(message, "minAlignmentPeriod"))
                                     $root.google.protobuf.Duration.encode(message.minAlignmentPeriod, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.targetAxis != null && Object.hasOwnProperty.call(message, "targetAxis"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetAxis);
                                 return writer;
                             };
     
@@ -6757,6 +8476,9 @@
                                         break;
                                     case 4:
                                         message.minAlignmentPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.targetAxis = reader.int32();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -6817,6 +8539,15 @@
                                     if (error)
                                         return "minAlignmentPeriod." + error;
                                 }
+                                if (message.targetAxis != null && message.hasOwnProperty("targetAxis"))
+                                    switch (message.targetAxis) {
+                                    default:
+                                        return "targetAxis: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -6866,6 +8597,20 @@
                                         throw TypeError(".google.monitoring.dashboard.v1.XyChart.DataSet.minAlignmentPeriod: object expected");
                                     message.minAlignmentPeriod = $root.google.protobuf.Duration.fromObject(object.minAlignmentPeriod);
                                 }
+                                switch (object.targetAxis) {
+                                case "TARGET_AXIS_UNSPECIFIED":
+                                case 0:
+                                    message.targetAxis = 0;
+                                    break;
+                                case "Y1":
+                                case 1:
+                                    message.targetAxis = 1;
+                                    break;
+                                case "Y2":
+                                case 2:
+                                    message.targetAxis = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -6887,6 +8632,7 @@
                                     object.plotType = options.enums === String ? "PLOT_TYPE_UNSPECIFIED" : 0;
                                     object.legendTemplate = "";
                                     object.minAlignmentPeriod = null;
+                                    object.targetAxis = options.enums === String ? "TARGET_AXIS_UNSPECIFIED" : 0;
                                 }
                                 if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery"))
                                     object.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.toObject(message.timeSeriesQuery, options);
@@ -6896,6 +8642,8 @@
                                     object.legendTemplate = message.legendTemplate;
                                 if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod"))
                                     object.minAlignmentPeriod = $root.google.protobuf.Duration.toObject(message.minAlignmentPeriod, options);
+                                if (message.targetAxis != null && message.hasOwnProperty("targetAxis"))
+                                    object.targetAxis = options.enums === String ? $root.google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis[message.targetAxis] : message.targetAxis;
                                 return object;
                             };
     
@@ -6927,6 +8675,22 @@
                                 values[valuesById[2] = "STACKED_AREA"] = 2;
                                 values[valuesById[3] = "STACKED_BAR"] = 3;
                                 values[valuesById[4] = "HEATMAP"] = 4;
+                                return values;
+                            })();
+    
+                            /**
+                             * TargetAxis enum.
+                             * @name google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis
+                             * @enum {number}
+                             * @property {number} TARGET_AXIS_UNSPECIFIED=0 TARGET_AXIS_UNSPECIFIED value
+                             * @property {number} Y1=1 Y1 value
+                             * @property {number} Y2=2 Y2 value
+                             */
+                            DataSet.TargetAxis = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "TARGET_AXIS_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "Y1"] = 1;
+                                values[valuesById[2] = "Y2"] = 2;
                                 return values;
                             })();
     

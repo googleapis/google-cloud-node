@@ -32,6 +32,14 @@
                         }
                       }
                     },
+                    "CollapsibleGroup": {
+                      "fields": {
+                        "collapsed": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
                     "Aggregation": {
                       "fields": {
                         "alignmentPeriod": {
@@ -200,6 +208,58 @@
                         "columnLayout": {
                           "type": "ColumnLayout",
                           "id": 9
+                        },
+                        "dashboardFilters": {
+                          "rule": "repeated",
+                          "type": "DashboardFilter",
+                          "id": 11
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12
+                        }
+                      }
+                    },
+                    "DashboardFilter": {
+                      "oneofs": {
+                        "defaultValue": {
+                          "oneof": [
+                            "stringValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "labelKey": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "templateVariable": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "stringValue": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filterType": {
+                          "type": "FilterType",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "FilterType": {
+                          "values": {
+                            "FILTER_TYPE_UNSPECIFIED": 0,
+                            "RESOURCE_LABEL": 1,
+                            "METRIC_LABEL": 2,
+                            "USER_METADATA_LABEL": 3,
+                            "SYSTEM_METADATA_LABEL": 4,
+                            "GROUP": 5
+                          }
                         }
                       }
                     },
@@ -311,7 +371,10 @@
                             "scorecard",
                             "text",
                             "blank",
-                            "alertChart"
+                            "alertChart",
+                            "timeSeriesTable",
+                            "collapsibleGroup",
+                            "logsPanel"
                           ]
                         }
                       },
@@ -342,6 +405,31 @@
                         "alertChart": {
                           "type": "AlertChart",
                           "id": 7
+                        },
+                        "timeSeriesTable": {
+                          "type": "TimeSeriesTable",
+                          "id": 8
+                        },
+                        "collapsibleGroup": {
+                          "type": "CollapsibleGroup",
+                          "id": 9
+                        },
+                        "logsPanel": {
+                          "type": "LogsPanel",
+                          "id": 10
+                        }
+                      }
+                    },
+                    "LogsPanel": {
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resourceNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -542,6 +630,10 @@
                         "direction": {
                           "type": "Direction",
                           "id": 4
+                        },
+                        "targetAxis": {
+                          "type": "TargetAxis",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -558,6 +650,13 @@
                             "ABOVE": 1,
                             "BELOW": 2
                           }
+                        },
+                        "TargetAxis": {
+                          "values": {
+                            "TARGET_AXIS_UNSPECIFIED": 0,
+                            "Y1": 1,
+                            "Y2": 2
+                          }
                         }
                       }
                     },
@@ -566,6 +665,64 @@
                         "SPARK_CHART_TYPE_UNSPECIFIED": 0,
                         "SPARK_LINE": 1,
                         "SPARK_BAR": 2
+                      }
+                    },
+                    "TimeSeriesTable": {
+                      "fields": {
+                        "dataSets": {
+                          "rule": "repeated",
+                          "type": "TableDataSet",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TableDataSet": {
+                          "fields": {
+                            "timeSeriesQuery": {
+                              "type": "TimeSeriesQuery",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "tableTemplate": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "minAlignmentPeriod": {
+                              "type": "google.protobuf.Duration",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "tableDisplayOptions": {
+                              "type": "TableDisplayOptions",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TableDisplayOptions": {
+                      "fields": {
+                        "shownColumns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
                       }
                     },
                     "Text": {
@@ -616,6 +773,10 @@
                           "type": "Axis",
                           "id": 7
                         },
+                        "y2Axis": {
+                          "type": "Axis",
+                          "id": 9
+                        },
                         "chartOptions": {
                           "type": "ChartOptions",
                           "id": 8
@@ -645,6 +806,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "targetAxis": {
+                              "type": "TargetAxis",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -655,6 +823,13 @@
                                 "STACKED_AREA": 2,
                                 "STACKED_BAR": 3,
                                 "HEATMAP": 4
+                              }
+                            },
+                            "TargetAxis": {
+                              "values": {
+                                "TARGET_AXIS_UNSPECIFIED": 0,
+                                "Y1": 1,
+                                "Y2": 2
                               }
                             }
                           }

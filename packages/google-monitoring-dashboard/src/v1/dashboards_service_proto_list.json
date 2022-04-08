@@ -1,13 +1,18 @@
 [
   "../../protos/google/monitoring/dashboard/v1/alertchart.proto",
+  "../../protos/google/monitoring/dashboard/v1/collapsible_group.proto",
   "../../protos/google/monitoring/dashboard/v1/common.proto",
   "../../protos/google/monitoring/dashboard/v1/dashboard.proto",
+  "../../protos/google/monitoring/dashboard/v1/dashboard_filter.proto",
   "../../protos/google/monitoring/dashboard/v1/dashboards_service.proto",
   "../../protos/google/monitoring/dashboard/v1/drilldowns.proto",
   "../../protos/google/monitoring/dashboard/v1/layouts.proto",
+  "../../protos/google/monitoring/dashboard/v1/logs_panel.proto",
   "../../protos/google/monitoring/dashboard/v1/metrics.proto",
   "../../protos/google/monitoring/dashboard/v1/scorecard.proto",
   "../../protos/google/monitoring/dashboard/v1/service.proto",
+  "../../protos/google/monitoring/dashboard/v1/table.proto",
+  "../../protos/google/monitoring/dashboard/v1/table_display_options.proto",
   "../../protos/google/monitoring/dashboard/v1/text.proto",
   "../../protos/google/monitoring/dashboard/v1/widget.proto",
   "../../protos/google/monitoring/dashboard/v1/xychart.proto"
