@@ -44,8 +44,7 @@ const version = require('../../../package.json').version;
  *  Service for search.
  *
  *  This feature is only available for users who have Retail Search enabled.
- *  Please submit a form [here](https://cloud.google.com/contact) to contact
- *  cloud sales if you are interested in using Retail Search.
+ *  Please enable Retail Search on Cloud Console before using this feature.
  * @class
  * @memberof v2alpha
  */
@@ -168,14 +167,26 @@ export class SearchServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
+      ),
       branchPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}'
       ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}'
       ),
+      completionConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig'
+      ),
+      controlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      servingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
       ),
     };
 
@@ -326,14 +337,13 @@ export class SearchServiceClient {
    * Performs a search.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.placement
    *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -391,6 +401,9 @@ export class SearchServiceClient {
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
    *   The filter applied to every search request when quality improvement such as
    *   query expansion is needed. For example, if a query does not have enough
    *   results, an expanded query with
@@ -415,11 +428,11 @@ export class SearchServiceClient {
    *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+   *   to enable dynamic facets. Do not set this field.
+   *
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
-   *
-   *   This feature requires additional allowlisting. Contact Retail Search
-   *   support team if you are interested in using dynamic facet feature.
    * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
@@ -537,6 +550,8 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
    *   The search mode of the search request. If not specified, a single search
    *   request triggers both product search and faceted search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -623,7 +638,7 @@ export class SearchServiceClient {
    *   The request object that will be sent.
    * @param {string} request.placement
    *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -681,6 +696,9 @@ export class SearchServiceClient {
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
    *   The filter applied to every search request when quality improvement such as
    *   query expansion is needed. For example, if a query does not have enough
    *   results, an expanded query with
@@ -705,11 +723,11 @@ export class SearchServiceClient {
    *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+   *   to enable dynamic facets. Do not set this field.
+   *
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
-   *
-   *   This feature requires additional allowlisting. Contact Retail Search
-   *   support team if you are interested in using dynamic facet feature.
    * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
@@ -827,6 +845,8 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
    *   The search mode of the search request. If not specified, a single search
    *   request triggers both product search and faceted search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -869,7 +889,7 @@ export class SearchServiceClient {
    *   The request object that will be sent.
    * @param {string} request.placement
    *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -927,6 +947,9 @@ export class SearchServiceClient {
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
    *   The filter applied to every search request when quality improvement such as
    *   query expansion is needed. For example, if a query does not have enough
    *   results, an expanded query with
@@ -951,11 +974,11 @@ export class SearchServiceClient {
    *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+   *   to enable dynamic facets. Do not set this field.
+   *
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
-   *
-   *   This feature requires additional allowlisting. Contact Retail Search
-   *   support team if you are interested in using dynamic facet feature.
    * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
@@ -1073,6 +1096,8 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
    *   The search mode of the search request. If not specified, a single search
    *   request triggers both product search and faceted search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1110,6 +1135,61 @@ export class SearchServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified attributesConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  attributesConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).catalog;
+  }
 
   /**
    * Return a fully-qualified branch resource name string.
@@ -1228,6 +1308,128 @@ export class SearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified completionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  completionConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.completionConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).catalog;
+  }
+
+  /**
+   * Return a fully-qualified control resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  controlPath(
+    project: string,
+    location: string,
+    catalog: string,
+    control: string
+  ) {
+    return this.pathTemplates.controlPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the project from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).project;
+  }
+
+  /**
+   * Parse the location from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).location;
+  }
+
+  /**
+   * Parse the catalog from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).catalog;
+  }
+
+  /**
+   * Parse the control from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
    * Return a fully-qualified product resource name string.
    *
    * @param {string} project
@@ -1306,6 +1508,77 @@ export class SearchServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified servingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  servingConfigPath(
+    project: string,
+    location: string,
+    catalog: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.servingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      serving_config: servingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the catalog from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .catalog;
+  }
+
+  /**
+   * Parse the serving_config from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .serving_config;
   }
 
   /**

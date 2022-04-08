@@ -167,14 +167,26 @@ export class ProductServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
+      ),
       branchPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}'
       ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}'
       ),
+      completionConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig'
+      ),
+      controlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      servingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
       ),
     };
 
@@ -201,6 +213,12 @@ export class ProductServiceClient {
         grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
+    const purgeProductsResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.PurgeProductsResponse'
+    ) as gax.protobuf.Type;
+    const purgeProductsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.PurgeProductsMetadata'
+    ) as gax.protobuf.Type;
     const importProductsResponse = protoFilesRoot.lookup(
       '.google.cloud.retail.v2alpha.ImportProductsResponse'
     ) as gax.protobuf.Type;
@@ -239,6 +257,11 @@ export class ProductServiceClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      purgeProducts: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeProductsResponse.decode.bind(purgeProductsResponse),
+        purgeProductsMetadata.decode.bind(purgeProductsMetadata)
+      ),
       importProducts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importProductsResponse.decode.bind(importProductsResponse),
@@ -334,6 +357,7 @@ export class ProductServiceClient {
       'listProducts',
       'updateProduct',
       'deleteProduct',
+      'purgeProducts',
       'importProducts',
       'setInventory',
       'addFulfillmentPlaces',
@@ -855,6 +879,205 @@ export class ProductServiceClient {
   }
 
   /**
+   * Permanently deletes all selected
+   * {@link google.cloud.retail.v2alpha.Product|Product}s under a branch.
+   *
+   * This process is asynchronous. If the request is valid, the removal will be
+   * enqueued and processed offline. Depending on the number of
+   * {@link google.cloud.retail.v2alpha.Product|Product}s, this operation could take
+   * hours to complete. Before the operation completes, some
+   * {@link google.cloud.retail.v2alpha.Product|Product}s may still be returned by
+   * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|GetProduct} or
+   * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
+   *
+   * Depending on the number of {@link google.cloud.retail.v2alpha.Product|Product}s,
+   * this operation could take hours to complete. To get a sample of
+   * {@link google.cloud.retail.v2alpha.Product|Product}s that would be deleted, set
+   * {@link google.cloud.retail.v2alpha.PurgeProductsRequest.force|PurgeProductsRequest.force}
+   * to false.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the branch under which the products are
+   *   created. The format is
+   *   `projects/${projectId}/locations/global/catalogs/${catalogId}/branches/${branchId}`
+   * @param {string} request.filter
+   *   Required. The filter string to specify the products to be deleted with a
+   *   length limit of 5,000 characters.
+   *
+   *   Empty string filter is not allowed. "*" implies delete all items in a
+   *   branch.
+   *
+   *   The eligible fields for filtering are:
+   *
+   *   * `availability`: Double quoted
+   *   {@link google.cloud.retail.v2alpha.Product.availability|Product.availability}
+   *   string.
+   *   * `create_time` : in ISO 8601 "zulu" format.
+   *
+   *   Supported syntax:
+   *
+   *   * Comparators (">", "<", ">=", "<=", "=").
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z"
+   *     * availability = "IN_STOCK"
+   *
+   *   * Conjunctions ("AND")
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER"
+   *
+   *   * Disjunctions ("OR")
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z" OR availability = "IN_STOCK"
+   *
+   *   * Can support nested queries.
+   *     Examples:
+   *     * (create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER")
+   *     OR (create_time >= "2015-02-14T13:03:32Z" AND availability = "IN_STOCK")
+   *
+   *   * Filter Limits:
+   *     * Filter should not contain more than 6 conditions.
+   *     * Max nesting depth should not exceed 2 levels.
+   *
+   *   Examples queries:
+   *   * Delete back order products created before a timestamp.
+   *     create_time <= "2015-02-13T17:05:46Z" OR availability = "BACKORDER"
+   * @param {boolean} request.force
+   *   Actually perform the purge.
+   *   If `force` is set to false, the method will return the expected purge count
+   *   without deleting any products.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/product_service.purge_products.js</caption>
+   * region_tag:retail_v2alpha_generated_ProductService_PurgeProducts_async
+   */
+  purgeProducts(
+    request?: protos.google.cloud.retail.v2alpha.IPurgeProductsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  purgeProducts(
+    request: protos.google.cloud.retail.v2alpha.IPurgeProductsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeProducts(
+    request: protos.google.cloud.retail.v2alpha.IPurgeProductsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeProducts(
+    request?: protos.google.cloud.retail.v2alpha.IPurgeProductsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IPurgeProductsResponse,
+            protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeProducts(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeProducts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/product_service.purge_products.js</caption>
+   * region_tag:retail_v2alpha_generated_ProductService_PurgeProducts_async
+   */
+  async checkPurgeProductsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2alpha.PurgeProductsResponse,
+      protos.google.cloud.retail.v2alpha.PurgeProductsMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.purgeProducts,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2alpha.PurgeProductsResponse,
+      protos.google.cloud.retail.v2alpha.PurgeProductsMetadata
+    >;
+  }
+  /**
    * Bulk import of multiple {@link google.cloud.retail.v2alpha.Product|Product}s.
    *
    * Request processing may be synchronous. No partial updating is supported.
@@ -872,15 +1095,7 @@ export class ProductServiceClient {
    *   If no updateMask is specified, requires products.create permission.
    *   If updateMask is specified, requires products.update permission.
    * @param {string} request.requestId
-   *   Unique identifier provided by client, within the ancestor
-   *   dataset scope. Ensures idempotency and used for request deduplication.
-   *   Server-generated if unspecified. Up to 128 characters long and must match
-   *   the pattern: `{@link |a-zA-Z0-9_]+`. This is returned as [Operation.name} in
-   *   {@link google.cloud.retail.v2alpha.ImportMetadata|ImportMetadata}.
-   *
-   *   Only supported when
-   *   {@link google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
-   *   is set to `FULL`.
+   *   Deprecated. This field has no effect.
    * @param {google.cloud.retail.v2alpha.ProductInputConfig} request.inputConfig
    *   Required. The desired input location of the data.
    * @param {google.cloud.retail.v2alpha.ImportErrorsConfig} request.errorsConfig
@@ -1063,7 +1278,8 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.CreateProductRequest.product|CreateProductRequest.product},
    * then any pre-existing inventory information for this product will be used.
    *
-   * If no inventory fields are set in {@link |UpdateProductRequest.set_mask},
+   * If no inventory fields are set in
+   * {@link google.cloud.retail.v2alpha.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask},
    * then any existing inventory information will be preserved.
    *
    * Pre-existing inventory information can only be updated with
@@ -1073,8 +1289,7 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces|RemoveFulfillmentPlaces}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1105,6 +1320,24 @@ export class ProductServiceClient {
    *   merged while respecting the last update time for each inventory field,
    *   using the provided or default value for
    *   {@link google.cloud.retail.v2alpha.SetInventoryRequest.set_time|SetInventoryRequest.set_time}.
+   *
+   *   The caller can replace place IDs for a subset of fulfillment types in the
+   *   following ways:
+   *
+   *   * Adds "fulfillment_info" in
+   *   {@link google.cloud.retail.v2alpha.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask}
+   *   * Specifies only the desired fulfillment types and corresponding place IDs
+   *   to update in {@link |SetInventoryRequest.inventory.fulfillment_info}
+   *
+   *   The caller can clear all place IDs from a subset of fulfillment types in
+   *   the following ways:
+   *
+   *   * Adds "fulfillment_info" in
+   *   {@link google.cloud.retail.v2alpha.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask}
+   *   * Specifies only the desired fulfillment types to clear in
+   *   {@link |SetInventoryRequest.inventory.fulfillment_info}
+   *   * Checks that only the desired fulfillment info types have empty
+   *   {@link |SetInventoryRequest.inventory.fulfillment_info.place_ids}
    *
    *   The last update time is recorded for the following inventory fields:
    *   * {@link google.cloud.retail.v2alpha.Product.price_info|Product.price_info}
@@ -1277,8 +1510,7 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1481,8 +1713,7 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1691,8 +1922,7 @@ export class ProductServiceClient {
    * has no effect on local inventories.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * Cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1884,8 +2114,7 @@ export class ProductServiceClient {
    * has no effect on local inventories.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * Cloud sales if you are interested in using Retail Search.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2470,6 +2699,61 @@ export class ProductServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified attributesConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  attributesConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).catalog;
+  }
+
+  /**
    * Return a fully-qualified branch resource name string.
    *
    * @param {string} project
@@ -2586,6 +2870,128 @@ export class ProductServiceClient {
   }
 
   /**
+   * Return a fully-qualified completionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  completionConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.completionConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).catalog;
+  }
+
+  /**
+   * Return a fully-qualified control resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  controlPath(
+    project: string,
+    location: string,
+    catalog: string,
+    control: string
+  ) {
+    return this.pathTemplates.controlPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the project from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).project;
+  }
+
+  /**
+   * Parse the location from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).location;
+  }
+
+  /**
+   * Parse the catalog from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).catalog;
+  }
+
+  /**
+   * Parse the control from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
    * Return a fully-qualified product resource name string.
    *
    * @param {string} project
@@ -2664,6 +3070,77 @@ export class ProductServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified servingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  servingConfigPath(
+    project: string,
+    location: string,
+    catalog: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.servingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      serving_config: servingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the catalog from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .catalog;
+  }
+
+  /**
+   * Parse the serving_config from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .serving_config;
   }
 
   /**
