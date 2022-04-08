@@ -198,6 +198,13 @@
                       }
                     },
                     "BasicAutoscalingAlgorithm": {
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "yarnConfig"
+                          ]
+                        }
+                      },
                       "fields": {
                         "yarnConfig": {
                           "type": "BasicYarnAutoscalingConfig",
@@ -1666,13 +1673,6 @@
                         "stagingBucket": {
                           "type": "string",
                           "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "tempBucket": {
-                          "type": "string",
-                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
