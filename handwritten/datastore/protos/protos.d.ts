@@ -2666,6 +2666,9 @@ export namespace google {
 
                 /** LookupResponse deferred */
                 deferred?: (google.datastore.v1.IKey[]|null);
+
+                /** LookupResponse readTime */
+                readTime?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a LookupResponse. */
@@ -2685,6 +2688,9 @@ export namespace google {
 
                 /** LookupResponse deferred. */
                 public deferred: google.datastore.v1.IKey[];
+
+                /** LookupResponse readTime. */
+                public readTime?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new LookupResponse instance using the specified properties.
@@ -3465,6 +3471,9 @@ export namespace google {
 
                 /** CommitResponse indexUpdates */
                 indexUpdates?: (number|null);
+
+                /** CommitResponse commitTime */
+                commitTime?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a CommitResponse. */
@@ -3481,6 +3490,9 @@ export namespace google {
 
                 /** CommitResponse indexUpdates. */
                 public indexUpdates: number;
+
+                /** CommitResponse commitTime. */
+                public commitTime?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new CommitResponse instance using the specified properties.
@@ -3942,6 +3954,9 @@ export namespace google {
 
                 /** Mutation baseVersion */
                 baseVersion?: (number|Long|string|null);
+
+                /** Mutation updateTime */
+                updateTime?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a Mutation. */
@@ -3968,11 +3983,14 @@ export namespace google {
                 /** Mutation baseVersion. */
                 public baseVersion?: (number|Long|string|null);
 
+                /** Mutation updateTime. */
+                public updateTime?: (google.protobuf.ITimestamp|null);
+
                 /** Mutation operation. */
                 public operation?: ("insert"|"update"|"upsert"|"delete");
 
                 /** Mutation conflictDetectionStrategy. */
-                public conflictDetectionStrategy?: "baseVersion";
+                public conflictDetectionStrategy?: ("baseVersion"|"updateTime");
 
                 /**
                  * Creates a new Mutation instance using the specified properties.
@@ -4054,6 +4072,9 @@ export namespace google {
                 /** MutationResult version */
                 version?: (number|Long|string|null);
 
+                /** MutationResult updateTime */
+                updateTime?: (google.protobuf.ITimestamp|null);
+
                 /** MutationResult conflictDetected */
                 conflictDetected?: (boolean|null);
             }
@@ -4072,6 +4093,9 @@ export namespace google {
 
                 /** MutationResult version. */
                 public version: (number|Long|string);
+
+                /** MutationResult updateTime. */
+                public updateTime?: (google.protobuf.ITimestamp|null);
 
                 /** MutationResult conflictDetected. */
                 public conflictDetected: boolean;
@@ -4155,6 +4179,9 @@ export namespace google {
 
                 /** ReadOptions transaction */
                 transaction?: (Uint8Array|string|null);
+
+                /** ReadOptions readTime */
+                readTime?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a ReadOptions. */
@@ -4172,8 +4199,11 @@ export namespace google {
                 /** ReadOptions transaction. */
                 public transaction?: (Uint8Array|string|null);
 
+                /** ReadOptions readTime. */
+                public readTime?: (google.protobuf.ITimestamp|null);
+
                 /** ReadOptions consistencyType. */
-                public consistencyType?: ("readConsistency"|"transaction");
+                public consistencyType?: ("readConsistency"|"transaction"|"readTime");
 
                 /**
                  * Creates a new ReadOptions instance using the specified properties.
@@ -4449,6 +4479,9 @@ export namespace google {
 
                 /** Properties of a ReadOnly. */
                 interface IReadOnly {
+
+                    /** ReadOnly readTime */
+                    readTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a ReadOnly. */
@@ -4459,6 +4492,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.datastore.v1.TransactionOptions.IReadOnly);
+
+                    /** ReadOnly readTime. */
+                    public readTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new ReadOnly instance using the specified properties.
@@ -5192,6 +5228,9 @@ export namespace google {
                 /** EntityResult version */
                 version?: (number|Long|string|null);
 
+                /** EntityResult updateTime */
+                updateTime?: (google.protobuf.ITimestamp|null);
+
                 /** EntityResult cursor */
                 cursor?: (Uint8Array|string|null);
             }
@@ -5210,6 +5249,9 @@ export namespace google {
 
                 /** EntityResult version. */
                 public version: (number|Long|string);
+
+                /** EntityResult updateTime. */
+                public updateTime?: (google.protobuf.ITimestamp|null);
 
                 /** EntityResult cursor. */
                 public cursor: (Uint8Array|string);
@@ -6363,6 +6405,9 @@ export namespace google {
 
                 /** QueryResultBatch snapshotVersion */
                 snapshotVersion?: (number|Long|string|null);
+
+                /** QueryResultBatch readTime */
+                readTime?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a QueryResultBatch. */
@@ -6394,6 +6439,9 @@ export namespace google {
 
                 /** QueryResultBatch snapshotVersion. */
                 public snapshotVersion: (number|Long|string);
+
+                /** QueryResultBatch readTime. */
+                public readTime?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new QueryResultBatch instance using the specified properties.
