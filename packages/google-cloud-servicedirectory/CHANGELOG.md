@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/nodejs-service-directory/compare/v3.3.2...v3.4.0) (2022-04-11)
+
+
+### Features
+
+* AuditConfig for IAM v1 ([#216](https://github.com/googleapis/nodejs-service-directory/issues/216)) ([bb8b0b8](https://github.com/googleapis/nodejs-service-directory/commit/bb8b0b81a61c939f0601d7c02ef90d1e3688b7a6))
+
 ### [3.3.2](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.3.1...v3.3.2) (2021-11-12)
 
 
