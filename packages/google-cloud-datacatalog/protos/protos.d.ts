@@ -443,7 +443,8 @@ export namespace google {
                     INTEGRATED_SYSTEM_UNSPECIFIED = 0,
                     BIGQUERY = 1,
                     CLOUD_PUBSUB = 2,
-                    DATAPROC_METASTORE = 3
+                    DATAPROC_METASTORE = 3,
+                    DATAPLEX = 4
                 }
 
                 /** Properties of a DataSource. */
@@ -454,6 +455,12 @@ export namespace google {
 
                     /** DataSource resource */
                     resource?: (string|null);
+
+                    /** DataSource sourceEntry */
+                    sourceEntry?: (string|null);
+
+                    /** DataSource storageProperties */
+                    storageProperties?: (google.cloud.datacatalog.v1.IStorageProperties|null);
                 }
 
                 /** Represents a DataSource. */
@@ -470,6 +477,15 @@ export namespace google {
 
                     /** DataSource resource. */
                     public resource: string;
+
+                    /** DataSource sourceEntry. */
+                    public sourceEntry: string;
+
+                    /** DataSource storageProperties. */
+                    public storageProperties?: (google.cloud.datacatalog.v1.IStorageProperties|null);
+
+                    /** DataSource properties. */
+                    public properties?: "storageProperties";
 
                     /**
                      * Creates a new DataSource instance using the specified properties.
@@ -550,6 +566,102 @@ export namespace google {
                         CLOUD_STORAGE = 1,
                         BIGQUERY = 2
                     }
+                }
+
+                /** Properties of a StorageProperties. */
+                interface IStorageProperties {
+
+                    /** StorageProperties filePattern */
+                    filePattern?: (string[]|null);
+
+                    /** StorageProperties fileType */
+                    fileType?: (string|null);
+                }
+
+                /** Represents a StorageProperties. */
+                class StorageProperties implements IStorageProperties {
+
+                    /**
+                     * Constructs a new StorageProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IStorageProperties);
+
+                    /** StorageProperties filePattern. */
+                    public filePattern: string[];
+
+                    /** StorageProperties fileType. */
+                    public fileType: string;
+
+                    /**
+                     * Creates a new StorageProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageProperties instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IStorageProperties): google.cloud.datacatalog.v1.StorageProperties;
+
+                    /**
+                     * Encodes the specified StorageProperties message. Does not implicitly {@link google.cloud.datacatalog.v1.StorageProperties.verify|verify} messages.
+                     * @param message StorageProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IStorageProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageProperties message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.StorageProperties.verify|verify} messages.
+                     * @param message StorageProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IStorageProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.StorageProperties;
+
+                    /**
+                     * Decodes a StorageProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.StorageProperties;
+
+                    /**
+                     * Verifies a StorageProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.StorageProperties;
+
+                    /**
+                     * Creates a plain object from a StorageProperties message. Also converts values to other types if specified.
+                     * @param message StorageProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.StorageProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Represents a DataCatalog */
@@ -2700,6 +2812,9 @@ export namespace google {
                     /** Entry routineSpec */
                     routineSpec?: (google.cloud.datacatalog.v1.IRoutineSpec|null);
 
+                    /** Entry filesetSpec */
+                    filesetSpec?: (google.cloud.datacatalog.v1.IFilesetSpec|null);
+
                     /** Entry displayName */
                     displayName?: (string|null);
 
@@ -2776,6 +2891,9 @@ export namespace google {
                     /** Entry routineSpec. */
                     public routineSpec?: (google.cloud.datacatalog.v1.IRoutineSpec|null);
 
+                    /** Entry filesetSpec. */
+                    public filesetSpec?: (google.cloud.datacatalog.v1.IFilesetSpec|null);
+
                     /** Entry displayName. */
                     public displayName: string;
 
@@ -2813,7 +2931,7 @@ export namespace google {
                     public typeSpec?: ("gcsFilesetSpec"|"bigqueryTableSpec"|"bigqueryDateShardedSpec");
 
                     /** Entry spec. */
-                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec");
+                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec"|"filesetSpec");
 
                     /**
                      * Creates a new Entry instance using the specified properties.
@@ -2891,6 +3009,9 @@ export namespace google {
 
                     /** DatabaseTableSpec type */
                     type?: (google.cloud.datacatalog.v1.DatabaseTableSpec.TableType|keyof typeof google.cloud.datacatalog.v1.DatabaseTableSpec.TableType|null);
+
+                    /** DatabaseTableSpec dataplexTable */
+                    dataplexTable?: (google.cloud.datacatalog.v1.IDataplexTableSpec|null);
                 }
 
                 /** Represents a DatabaseTableSpec. */
@@ -2904,6 +3025,9 @@ export namespace google {
 
                     /** DatabaseTableSpec type. */
                     public type: (google.cloud.datacatalog.v1.DatabaseTableSpec.TableType|keyof typeof google.cloud.datacatalog.v1.DatabaseTableSpec.TableType);
+
+                    /** DatabaseTableSpec dataplexTable. */
+                    public dataplexTable?: (google.cloud.datacatalog.v1.IDataplexTableSpec|null);
 
                     /**
                      * Creates a new DatabaseTableSpec instance using the specified properties.
@@ -2984,6 +3108,96 @@ export namespace google {
                         NATIVE = 1,
                         EXTERNAL = 2
                     }
+                }
+
+                /** Properties of a FilesetSpec. */
+                interface IFilesetSpec {
+
+                    /** FilesetSpec dataplexFileset */
+                    dataplexFileset?: (google.cloud.datacatalog.v1.IDataplexFilesetSpec|null);
+                }
+
+                /** Represents a FilesetSpec. */
+                class FilesetSpec implements IFilesetSpec {
+
+                    /**
+                     * Constructs a new FilesetSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IFilesetSpec);
+
+                    /** FilesetSpec dataplexFileset. */
+                    public dataplexFileset?: (google.cloud.datacatalog.v1.IDataplexFilesetSpec|null);
+
+                    /**
+                     * Creates a new FilesetSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FilesetSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IFilesetSpec): google.cloud.datacatalog.v1.FilesetSpec;
+
+                    /**
+                     * Encodes the specified FilesetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.FilesetSpec.verify|verify} messages.
+                     * @param message FilesetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FilesetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.FilesetSpec.verify|verify} messages.
+                     * @param message FilesetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FilesetSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FilesetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.FilesetSpec;
+
+                    /**
+                     * Decodes a FilesetSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FilesetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.FilesetSpec;
+
+                    /**
+                     * Verifies a FilesetSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FilesetSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FilesetSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.FilesetSpec;
+
+                    /**
+                     * Creates a plain object from a FilesetSpec message. Also converts values to other types if specified.
+                     * @param message FilesetSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.FilesetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FilesetSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a DataSourceConnectionSpec. */
@@ -5916,7 +6130,1065 @@ export namespace google {
                     DATABASE = 7,
                     DATA_SOURCE_CONNECTION = 8,
                     ROUTINE = 9,
+                    LAKE = 10,
+                    ZONE = 11,
                     SERVICE = 14
+                }
+
+                /** Properties of a DataplexSpec. */
+                interface IDataplexSpec {
+
+                    /** DataplexSpec asset */
+                    asset?: (string|null);
+
+                    /** DataplexSpec dataFormat */
+                    dataFormat?: (google.cloud.datacatalog.v1.IPhysicalSchema|null);
+
+                    /** DataplexSpec compressionFormat */
+                    compressionFormat?: (string|null);
+
+                    /** DataplexSpec projectId */
+                    projectId?: (string|null);
+                }
+
+                /** Represents a DataplexSpec. */
+                class DataplexSpec implements IDataplexSpec {
+
+                    /**
+                     * Constructs a new DataplexSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IDataplexSpec);
+
+                    /** DataplexSpec asset. */
+                    public asset: string;
+
+                    /** DataplexSpec dataFormat. */
+                    public dataFormat?: (google.cloud.datacatalog.v1.IPhysicalSchema|null);
+
+                    /** DataplexSpec compressionFormat. */
+                    public compressionFormat: string;
+
+                    /** DataplexSpec projectId. */
+                    public projectId: string;
+
+                    /**
+                     * Creates a new DataplexSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataplexSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IDataplexSpec): google.cloud.datacatalog.v1.DataplexSpec;
+
+                    /**
+                     * Encodes the specified DataplexSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.DataplexSpec.verify|verify} messages.
+                     * @param message DataplexSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IDataplexSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataplexSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.DataplexSpec.verify|verify} messages.
+                     * @param message DataplexSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IDataplexSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataplexSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataplexSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.DataplexSpec;
+
+                    /**
+                     * Decodes a DataplexSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataplexSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.DataplexSpec;
+
+                    /**
+                     * Verifies a DataplexSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataplexSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataplexSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.DataplexSpec;
+
+                    /**
+                     * Creates a plain object from a DataplexSpec message. Also converts values to other types if specified.
+                     * @param message DataplexSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.DataplexSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataplexSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DataplexFilesetSpec. */
+                interface IDataplexFilesetSpec {
+
+                    /** DataplexFilesetSpec dataplexSpec */
+                    dataplexSpec?: (google.cloud.datacatalog.v1.IDataplexSpec|null);
+                }
+
+                /** Represents a DataplexFilesetSpec. */
+                class DataplexFilesetSpec implements IDataplexFilesetSpec {
+
+                    /**
+                     * Constructs a new DataplexFilesetSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IDataplexFilesetSpec);
+
+                    /** DataplexFilesetSpec dataplexSpec. */
+                    public dataplexSpec?: (google.cloud.datacatalog.v1.IDataplexSpec|null);
+
+                    /**
+                     * Creates a new DataplexFilesetSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataplexFilesetSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IDataplexFilesetSpec): google.cloud.datacatalog.v1.DataplexFilesetSpec;
+
+                    /**
+                     * Encodes the specified DataplexFilesetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.DataplexFilesetSpec.verify|verify} messages.
+                     * @param message DataplexFilesetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IDataplexFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataplexFilesetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.DataplexFilesetSpec.verify|verify} messages.
+                     * @param message DataplexFilesetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IDataplexFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataplexFilesetSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataplexFilesetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.DataplexFilesetSpec;
+
+                    /**
+                     * Decodes a DataplexFilesetSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataplexFilesetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.DataplexFilesetSpec;
+
+                    /**
+                     * Verifies a DataplexFilesetSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataplexFilesetSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataplexFilesetSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.DataplexFilesetSpec;
+
+                    /**
+                     * Creates a plain object from a DataplexFilesetSpec message. Also converts values to other types if specified.
+                     * @param message DataplexFilesetSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.DataplexFilesetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataplexFilesetSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DataplexTableSpec. */
+                interface IDataplexTableSpec {
+
+                    /** DataplexTableSpec externalTables */
+                    externalTables?: (google.cloud.datacatalog.v1.IDataplexExternalTable[]|null);
+
+                    /** DataplexTableSpec dataplexSpec */
+                    dataplexSpec?: (google.cloud.datacatalog.v1.IDataplexSpec|null);
+
+                    /** DataplexTableSpec userManaged */
+                    userManaged?: (boolean|null);
+                }
+
+                /** Represents a DataplexTableSpec. */
+                class DataplexTableSpec implements IDataplexTableSpec {
+
+                    /**
+                     * Constructs a new DataplexTableSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IDataplexTableSpec);
+
+                    /** DataplexTableSpec externalTables. */
+                    public externalTables: google.cloud.datacatalog.v1.IDataplexExternalTable[];
+
+                    /** DataplexTableSpec dataplexSpec. */
+                    public dataplexSpec?: (google.cloud.datacatalog.v1.IDataplexSpec|null);
+
+                    /** DataplexTableSpec userManaged. */
+                    public userManaged: boolean;
+
+                    /**
+                     * Creates a new DataplexTableSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataplexTableSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IDataplexTableSpec): google.cloud.datacatalog.v1.DataplexTableSpec;
+
+                    /**
+                     * Encodes the specified DataplexTableSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.DataplexTableSpec.verify|verify} messages.
+                     * @param message DataplexTableSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IDataplexTableSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataplexTableSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.DataplexTableSpec.verify|verify} messages.
+                     * @param message DataplexTableSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IDataplexTableSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataplexTableSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataplexTableSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.DataplexTableSpec;
+
+                    /**
+                     * Decodes a DataplexTableSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataplexTableSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.DataplexTableSpec;
+
+                    /**
+                     * Verifies a DataplexTableSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataplexTableSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataplexTableSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.DataplexTableSpec;
+
+                    /**
+                     * Creates a plain object from a DataplexTableSpec message. Also converts values to other types if specified.
+                     * @param message DataplexTableSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.DataplexTableSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataplexTableSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DataplexExternalTable. */
+                interface IDataplexExternalTable {
+
+                    /** DataplexExternalTable system */
+                    system?: (google.cloud.datacatalog.v1.IntegratedSystem|keyof typeof google.cloud.datacatalog.v1.IntegratedSystem|null);
+
+                    /** DataplexExternalTable fullyQualifiedName */
+                    fullyQualifiedName?: (string|null);
+
+                    /** DataplexExternalTable googleCloudResource */
+                    googleCloudResource?: (string|null);
+
+                    /** DataplexExternalTable dataCatalogEntry */
+                    dataCatalogEntry?: (string|null);
+                }
+
+                /** Represents a DataplexExternalTable. */
+                class DataplexExternalTable implements IDataplexExternalTable {
+
+                    /**
+                     * Constructs a new DataplexExternalTable.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IDataplexExternalTable);
+
+                    /** DataplexExternalTable system. */
+                    public system: (google.cloud.datacatalog.v1.IntegratedSystem|keyof typeof google.cloud.datacatalog.v1.IntegratedSystem);
+
+                    /** DataplexExternalTable fullyQualifiedName. */
+                    public fullyQualifiedName: string;
+
+                    /** DataplexExternalTable googleCloudResource. */
+                    public googleCloudResource: string;
+
+                    /** DataplexExternalTable dataCatalogEntry. */
+                    public dataCatalogEntry: string;
+
+                    /**
+                     * Creates a new DataplexExternalTable instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataplexExternalTable instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IDataplexExternalTable): google.cloud.datacatalog.v1.DataplexExternalTable;
+
+                    /**
+                     * Encodes the specified DataplexExternalTable message. Does not implicitly {@link google.cloud.datacatalog.v1.DataplexExternalTable.verify|verify} messages.
+                     * @param message DataplexExternalTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IDataplexExternalTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataplexExternalTable message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.DataplexExternalTable.verify|verify} messages.
+                     * @param message DataplexExternalTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IDataplexExternalTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataplexExternalTable message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataplexExternalTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.DataplexExternalTable;
+
+                    /**
+                     * Decodes a DataplexExternalTable message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataplexExternalTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.DataplexExternalTable;
+
+                    /**
+                     * Verifies a DataplexExternalTable message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataplexExternalTable message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataplexExternalTable
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.DataplexExternalTable;
+
+                    /**
+                     * Creates a plain object from a DataplexExternalTable message. Also converts values to other types if specified.
+                     * @param message DataplexExternalTable
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.DataplexExternalTable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataplexExternalTable to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PhysicalSchema. */
+                interface IPhysicalSchema {
+
+                    /** PhysicalSchema avro */
+                    avro?: (google.cloud.datacatalog.v1.PhysicalSchema.IAvroSchema|null);
+
+                    /** PhysicalSchema thrift */
+                    thrift?: (google.cloud.datacatalog.v1.PhysicalSchema.IThriftSchema|null);
+
+                    /** PhysicalSchema protobuf */
+                    protobuf?: (google.cloud.datacatalog.v1.PhysicalSchema.IProtobufSchema|null);
+
+                    /** PhysicalSchema parquet */
+                    parquet?: (google.cloud.datacatalog.v1.PhysicalSchema.IParquetSchema|null);
+
+                    /** PhysicalSchema orc */
+                    orc?: (google.cloud.datacatalog.v1.PhysicalSchema.IOrcSchema|null);
+
+                    /** PhysicalSchema csv */
+                    csv?: (google.cloud.datacatalog.v1.PhysicalSchema.ICsvSchema|null);
+                }
+
+                /** Represents a PhysicalSchema. */
+                class PhysicalSchema implements IPhysicalSchema {
+
+                    /**
+                     * Constructs a new PhysicalSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IPhysicalSchema);
+
+                    /** PhysicalSchema avro. */
+                    public avro?: (google.cloud.datacatalog.v1.PhysicalSchema.IAvroSchema|null);
+
+                    /** PhysicalSchema thrift. */
+                    public thrift?: (google.cloud.datacatalog.v1.PhysicalSchema.IThriftSchema|null);
+
+                    /** PhysicalSchema protobuf. */
+                    public protobuf?: (google.cloud.datacatalog.v1.PhysicalSchema.IProtobufSchema|null);
+
+                    /** PhysicalSchema parquet. */
+                    public parquet?: (google.cloud.datacatalog.v1.PhysicalSchema.IParquetSchema|null);
+
+                    /** PhysicalSchema orc. */
+                    public orc?: (google.cloud.datacatalog.v1.PhysicalSchema.IOrcSchema|null);
+
+                    /** PhysicalSchema csv. */
+                    public csv?: (google.cloud.datacatalog.v1.PhysicalSchema.ICsvSchema|null);
+
+                    /** PhysicalSchema schema. */
+                    public schema?: ("avro"|"thrift"|"protobuf"|"parquet"|"orc"|"csv");
+
+                    /**
+                     * Creates a new PhysicalSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PhysicalSchema instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IPhysicalSchema): google.cloud.datacatalog.v1.PhysicalSchema;
+
+                    /**
+                     * Encodes the specified PhysicalSchema message. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.verify|verify} messages.
+                     * @param message PhysicalSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IPhysicalSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PhysicalSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.verify|verify} messages.
+                     * @param message PhysicalSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IPhysicalSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PhysicalSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PhysicalSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.PhysicalSchema;
+
+                    /**
+                     * Decodes a PhysicalSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PhysicalSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.PhysicalSchema;
+
+                    /**
+                     * Verifies a PhysicalSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PhysicalSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PhysicalSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.PhysicalSchema;
+
+                    /**
+                     * Creates a plain object from a PhysicalSchema message. Also converts values to other types if specified.
+                     * @param message PhysicalSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.PhysicalSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PhysicalSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace PhysicalSchema {
+
+                    /** Properties of an AvroSchema. */
+                    interface IAvroSchema {
+
+                        /** AvroSchema text */
+                        text?: (string|null);
+                    }
+
+                    /** Represents an AvroSchema. */
+                    class AvroSchema implements IAvroSchema {
+
+                        /**
+                         * Constructs a new AvroSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IAvroSchema);
+
+                        /** AvroSchema text. */
+                        public text: string;
+
+                        /**
+                         * Creates a new AvroSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AvroSchema instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IAvroSchema): google.cloud.datacatalog.v1.PhysicalSchema.AvroSchema;
+
+                        /**
+                         * Encodes the specified AvroSchema message. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.AvroSchema.verify|verify} messages.
+                         * @param message AvroSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.PhysicalSchema.IAvroSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AvroSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.AvroSchema.verify|verify} messages.
+                         * @param message AvroSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.PhysicalSchema.IAvroSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AvroSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AvroSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.PhysicalSchema.AvroSchema;
+
+                        /**
+                         * Decodes an AvroSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AvroSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.PhysicalSchema.AvroSchema;
+
+                        /**
+                         * Verifies an AvroSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AvroSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AvroSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.PhysicalSchema.AvroSchema;
+
+                        /**
+                         * Creates a plain object from an AvroSchema message. Also converts values to other types if specified.
+                         * @param message AvroSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.PhysicalSchema.AvroSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AvroSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ThriftSchema. */
+                    interface IThriftSchema {
+
+                        /** ThriftSchema text */
+                        text?: (string|null);
+                    }
+
+                    /** Represents a ThriftSchema. */
+                    class ThriftSchema implements IThriftSchema {
+
+                        /**
+                         * Constructs a new ThriftSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IThriftSchema);
+
+                        /** ThriftSchema text. */
+                        public text: string;
+
+                        /**
+                         * Creates a new ThriftSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ThriftSchema instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IThriftSchema): google.cloud.datacatalog.v1.PhysicalSchema.ThriftSchema;
+
+                        /**
+                         * Encodes the specified ThriftSchema message. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.ThriftSchema.verify|verify} messages.
+                         * @param message ThriftSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.PhysicalSchema.IThriftSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ThriftSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.ThriftSchema.verify|verify} messages.
+                         * @param message ThriftSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.PhysicalSchema.IThriftSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ThriftSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ThriftSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.PhysicalSchema.ThriftSchema;
+
+                        /**
+                         * Decodes a ThriftSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ThriftSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.PhysicalSchema.ThriftSchema;
+
+                        /**
+                         * Verifies a ThriftSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ThriftSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ThriftSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.PhysicalSchema.ThriftSchema;
+
+                        /**
+                         * Creates a plain object from a ThriftSchema message. Also converts values to other types if specified.
+                         * @param message ThriftSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.PhysicalSchema.ThriftSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ThriftSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ProtobufSchema. */
+                    interface IProtobufSchema {
+
+                        /** ProtobufSchema text */
+                        text?: (string|null);
+                    }
+
+                    /** Represents a ProtobufSchema. */
+                    class ProtobufSchema implements IProtobufSchema {
+
+                        /**
+                         * Constructs a new ProtobufSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IProtobufSchema);
+
+                        /** ProtobufSchema text. */
+                        public text: string;
+
+                        /**
+                         * Creates a new ProtobufSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProtobufSchema instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IProtobufSchema): google.cloud.datacatalog.v1.PhysicalSchema.ProtobufSchema;
+
+                        /**
+                         * Encodes the specified ProtobufSchema message. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.ProtobufSchema.verify|verify} messages.
+                         * @param message ProtobufSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.PhysicalSchema.IProtobufSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProtobufSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.ProtobufSchema.verify|verify} messages.
+                         * @param message ProtobufSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.PhysicalSchema.IProtobufSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProtobufSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProtobufSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.PhysicalSchema.ProtobufSchema;
+
+                        /**
+                         * Decodes a ProtobufSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProtobufSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.PhysicalSchema.ProtobufSchema;
+
+                        /**
+                         * Verifies a ProtobufSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProtobufSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProtobufSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.PhysicalSchema.ProtobufSchema;
+
+                        /**
+                         * Creates a plain object from a ProtobufSchema message. Also converts values to other types if specified.
+                         * @param message ProtobufSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.PhysicalSchema.ProtobufSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProtobufSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ParquetSchema. */
+                    interface IParquetSchema {
+                    }
+
+                    /** Represents a ParquetSchema. */
+                    class ParquetSchema implements IParquetSchema {
+
+                        /**
+                         * Constructs a new ParquetSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IParquetSchema);
+
+                        /**
+                         * Creates a new ParquetSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParquetSchema instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IParquetSchema): google.cloud.datacatalog.v1.PhysicalSchema.ParquetSchema;
+
+                        /**
+                         * Encodes the specified ParquetSchema message. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.ParquetSchema.verify|verify} messages.
+                         * @param message ParquetSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.PhysicalSchema.IParquetSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParquetSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.ParquetSchema.verify|verify} messages.
+                         * @param message ParquetSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.PhysicalSchema.IParquetSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParquetSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParquetSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.PhysicalSchema.ParquetSchema;
+
+                        /**
+                         * Decodes a ParquetSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParquetSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.PhysicalSchema.ParquetSchema;
+
+                        /**
+                         * Verifies a ParquetSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParquetSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParquetSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.PhysicalSchema.ParquetSchema;
+
+                        /**
+                         * Creates a plain object from a ParquetSchema message. Also converts values to other types if specified.
+                         * @param message ParquetSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.PhysicalSchema.ParquetSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParquetSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an OrcSchema. */
+                    interface IOrcSchema {
+                    }
+
+                    /** Represents an OrcSchema. */
+                    class OrcSchema implements IOrcSchema {
+
+                        /**
+                         * Constructs a new OrcSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IOrcSchema);
+
+                        /**
+                         * Creates a new OrcSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OrcSchema instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.PhysicalSchema.IOrcSchema): google.cloud.datacatalog.v1.PhysicalSchema.OrcSchema;
+
+                        /**
+                         * Encodes the specified OrcSchema message. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.OrcSchema.verify|verify} messages.
+                         * @param message OrcSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.PhysicalSchema.IOrcSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OrcSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.OrcSchema.verify|verify} messages.
+                         * @param message OrcSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.PhysicalSchema.IOrcSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OrcSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OrcSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.PhysicalSchema.OrcSchema;
+
+                        /**
+                         * Decodes an OrcSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OrcSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.PhysicalSchema.OrcSchema;
+
+                        /**
+                         * Verifies an OrcSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OrcSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OrcSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.PhysicalSchema.OrcSchema;
+
+                        /**
+                         * Creates a plain object from an OrcSchema message. Also converts values to other types if specified.
+                         * @param message OrcSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.PhysicalSchema.OrcSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OrcSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CsvSchema. */
+                    interface ICsvSchema {
+                    }
+
+                    /** Represents a CsvSchema. */
+                    class CsvSchema implements ICsvSchema {
+
+                        /**
+                         * Constructs a new CsvSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.PhysicalSchema.ICsvSchema);
+
+                        /**
+                         * Creates a new CsvSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CsvSchema instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.PhysicalSchema.ICsvSchema): google.cloud.datacatalog.v1.PhysicalSchema.CsvSchema;
+
+                        /**
+                         * Encodes the specified CsvSchema message. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.CsvSchema.verify|verify} messages.
+                         * @param message CsvSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.PhysicalSchema.ICsvSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CsvSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.PhysicalSchema.CsvSchema.verify|verify} messages.
+                         * @param message CsvSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.PhysicalSchema.ICsvSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CsvSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CsvSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.PhysicalSchema.CsvSchema;
+
+                        /**
+                         * Decodes a CsvSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CsvSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.PhysicalSchema.CsvSchema;
+
+                        /**
+                         * Verifies a CsvSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CsvSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CsvSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.PhysicalSchema.CsvSchema;
+
+                        /**
+                         * Creates a plain object from a CsvSchema message. Also converts values to other types if specified.
+                         * @param message CsvSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.PhysicalSchema.CsvSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CsvSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Properties of a GcsFilesetSpec. */

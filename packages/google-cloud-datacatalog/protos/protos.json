@@ -102,10 +102,18 @@
                         "INTEGRATED_SYSTEM_UNSPECIFIED": 0,
                         "BIGQUERY": 1,
                         "CLOUD_PUBSUB": 2,
-                        "DATAPROC_METASTORE": 3
+                        "DATAPROC_METASTORE": 3,
+                        "DATAPLEX": 4
                       }
                     },
                     "DataSource": {
+                      "oneofs": {
+                        "properties": {
+                          "oneof": [
+                            "storageProperties"
+                          ]
+                        }
+                      },
                       "fields": {
                         "service": {
                           "type": "Service",
@@ -114,6 +122,17 @@
                         "resource": {
                           "type": "string",
                           "id": 2
+                        },
+                        "sourceEntry": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "storageProperties": {
+                          "type": "StorageProperties",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -123,6 +142,19 @@
                             "CLOUD_STORAGE": 1,
                             "BIGQUERY": 2
                           }
+                        }
+                      }
+                    },
+                    "StorageProperties": {
+                      "fields": {
+                        "filePattern": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileType": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1127,7 +1159,8 @@
                           "oneof": [
                             "databaseTableSpec",
                             "dataSourceConnectionSpec",
-                            "routineSpec"
+                            "routineSpec",
+                            "filesetSpec"
                           ]
                         }
                       },
@@ -1191,6 +1224,10 @@
                           "type": "RoutineSpec",
                           "id": 28
                         },
+                        "filesetSpec": {
+                          "type": "FilesetSpec",
+                          "id": 33
+                        },
                         "displayName": {
                           "type": "string",
                           "id": 3
@@ -1244,6 +1281,10 @@
                         "type": {
                           "type": "TableType",
                           "id": 1
+                        },
+                        "dataplexTable": {
+                          "type": "DataplexTableSpec",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -1253,6 +1294,14 @@
                             "NATIVE": 1,
                             "EXTERNAL": 2
                           }
+                        }
+                      }
+                    },
+                    "FilesetSpec": {
+                      "fields": {
+                        "dataplexFileset": {
+                          "type": "DataplexFilesetSpec",
+                          "id": 1
                         }
                       }
                     },
@@ -1781,7 +1830,149 @@
                         "DATABASE": 7,
                         "DATA_SOURCE_CONNECTION": 8,
                         "ROUTINE": 9,
+                        "LAKE": 10,
+                        "ZONE": 11,
                         "SERVICE": 14
+                      }
+                    },
+                    "DataplexSpec": {
+                      "fields": {
+                        "asset": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataFormat": {
+                          "type": "PhysicalSchema",
+                          "id": 2
+                        },
+                        "compressionFormat": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DataplexFilesetSpec": {
+                      "fields": {
+                        "dataplexSpec": {
+                          "type": "DataplexSpec",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DataplexTableSpec": {
+                      "fields": {
+                        "externalTables": {
+                          "rule": "repeated",
+                          "type": "DataplexExternalTable",
+                          "id": 1
+                        },
+                        "dataplexSpec": {
+                          "type": "DataplexSpec",
+                          "id": 2
+                        },
+                        "userManaged": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DataplexExternalTable": {
+                      "fields": {
+                        "system": {
+                          "type": "IntegratedSystem",
+                          "id": 1
+                        },
+                        "fullyQualifiedName": {
+                          "type": "string",
+                          "id": 28
+                        },
+                        "googleCloudResource": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataCatalogEntry": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PhysicalSchema": {
+                      "oneofs": {
+                        "schema": {
+                          "oneof": [
+                            "avro",
+                            "thrift",
+                            "protobuf",
+                            "parquet",
+                            "orc",
+                            "csv"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "avro": {
+                          "type": "AvroSchema",
+                          "id": 1
+                        },
+                        "thrift": {
+                          "type": "ThriftSchema",
+                          "id": 2
+                        },
+                        "protobuf": {
+                          "type": "ProtobufSchema",
+                          "id": 3
+                        },
+                        "parquet": {
+                          "type": "ParquetSchema",
+                          "id": 4
+                        },
+                        "orc": {
+                          "type": "OrcSchema",
+                          "id": 5
+                        },
+                        "csv": {
+                          "type": "CsvSchema",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "AvroSchema": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ThriftSchema": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ProtobufSchema": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ParquetSchema": {
+                          "fields": {}
+                        },
+                        "OrcSchema": {
+                          "fields": {}
+                        },
+                        "CsvSchema": {
+                          "fields": {}
+                        }
                       }
                     },
                     "GcsFilesetSpec": {
