@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/nodejs-storage-transfer/compare/v1.1.1...v1.2.0) (2022-04-06)
+
+
+### Features
+
+* add support for Agent Pools ([#51](https://github.com/googleapis/nodejs-storage-transfer/issues/51)) ([0baf572](https://github.com/googleapis/nodejs-storage-transfer/commit/0baf5721ce0d8a49059ec75e3b57f63c0e381e36))
+* Increase STS Sample Coverage ([#42](https://github.com/googleapis/nodejs-storage-transfer/issues/42)) ([e10a3e4](https://github.com/googleapis/nodejs-storage-transfer/commit/e10a3e4fa5c712f9f857748eec98b7e0317460d9))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-storage-transfer/compare/v1.1.0...v1.1.1) (2021-09-10)
 
 
