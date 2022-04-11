@@ -1898,6 +1898,136 @@ describe('v1.ReservationServiceClient', () => {
     });
   });
 
+  describe('updateAssignment', () => {
+    it('invokes updateAssignment without error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
+      );
+      request.assignment = {};
+      request.assignment.name = '';
+      const expectedHeaderRequestParams = 'assignment.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.Assignment()
+      );
+      client.innerApiCalls.updateAssignment = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAssignment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateAssignment without error using callback', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
+      );
+      request.assignment = {};
+      request.assignment.name = '';
+      const expectedHeaderRequestParams = 'assignment.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.Assignment()
+      );
+      client.innerApiCalls.updateAssignment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.bigquery.reservation.v1.IAssignment | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateAssignment with error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
+      );
+      request.assignment = {};
+      request.assignment.name = '';
+      const expectedHeaderRequestParams = 'assignment.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAssignment = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateAssignment(request), expectedError);
+      assert(
+        (client.innerApiCalls.updateAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateAssignment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
+      );
+      request.assignment = {};
+      request.assignment.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateAssignment(request), expectedError);
+    });
+  });
+
   describe('getBiReservation', () => {
     it('invokes getBiReservation without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({

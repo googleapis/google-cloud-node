@@ -298,6 +298,7 @@ export class ReservationServiceClient {
       'searchAssignments',
       'searchAllAssignments',
       'moveAssignment',
+      'updateAssignment',
       'getBiReservation',
       'updateBiReservation',
     ];
@@ -394,8 +395,9 @@ export class ReservationServiceClient {
    *   Required. Project, location. E.g.,
    *   `projects/myproject/locations/US`
    * @param {string} request.reservationId
-   *   The reservation ID. This field must only contain lower case alphanumeric
-   *   characters or dash. Max length is 64 characters.
+   *   The reservation ID. It must only contain lower case alphanumeric
+   *   characters or dashes. It must start with a letter and must not end
+   *   with a dash. Its maximum length is 64 characters.
    * @param {google.cloud.bigquery.reservation.v1.Reservation} request.reservation
    *   Definition of the new reservation to create.
    * @param {object} [options]
@@ -801,8 +803,8 @@ export class ReservationServiceClient {
    * @param {string} request.capacityCommitmentId
    *   The optional capacity commitment ID. Capacity commitment name will be
    *   generated automatically if this field is empty.
-   *   This field must only contain lower case alphanumeric characters or dash.
-   *   Max length is 64 characters.
+   *   This field must only contain lower case alphanumeric characters or dashes.
+   *   The first and last character cannot be a dash. Max length is 64 characters.
    *   NOTE: this ID won't be kept if the capacity commitment is split or merged.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1221,7 +1223,7 @@ export class ReservationServiceClient {
    *
    * For example, in order to downgrade from 10000 slots to 8000, you might
    * split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
-   * you would change the plan of the first one to `FLEX` and then delete it.
+   * you delete the first one after the commitment end time passes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1485,7 +1487,7 @@ export class ReservationServiceClient {
    * @param {string} request.assignmentId
    *   The optional assignment ID. Assignment name will be generated automatically
    *   if this field is empty.
-   *   This field must only contain lower case alphanumeric characters or dash.
+   *   This field must only contain lower case alphanumeric characters or dashes.
    *   Max length is 64 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1794,6 +1796,107 @@ export class ReservationServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.moveAssignment(request, options, callback);
+  }
+  /**
+   * Updates an existing assignment.
+   *
+   * Only the `priority` field can be updated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.bigquery.reservation.v1.Assignment} request.assignment
+   *   Content of the assignment to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Standard field mask for the set of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reservation_service.update_assignment.js</caption>
+   * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateAssignment_async
+   */
+  updateAssignment(
+    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.reservation.v1.IAssignment,
+      (
+        | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateAssignment(
+    request: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IAssignment,
+      | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAssignment(
+    request: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IAssignment,
+      | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAssignment(
+    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IAssignment,
+      | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.reservation.v1.IAssignment,
+      (
+        | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'assignment.name': request.assignment!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateAssignment(request, options, callback);
   }
   /**
    * Retrieves a BI reservation.
@@ -2616,8 +2719,8 @@ export class ReservationServiceClient {
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;
   }
   /**
-   * Deprecated: Looks up assignments for a specified resource for a particular region.
-   * If the request is about a project:
+   * Deprecated: Looks up assignments for a specified resource for a particular
+   * region. If the request is about a project:
    *
    * 1. Assignments created on the project will be returned if they exist.
    * 2. Otherwise assignments created on the closest ancestor will be

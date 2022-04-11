@@ -702,6 +702,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService#updateAssignment}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef UpdateAssignmentCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.reservation.v1.Assignment} [response] Assignment
+                             */
+    
+                            /**
+                             * Calls UpdateAssignment.
+                             * @function updateAssignment
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest} request UpdateAssignmentRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.UpdateAssignmentCallback} callback Node-style callback called with the error, if any, and Assignment
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.updateAssignment = function updateAssignment(request, callback) {
+                                return this.rpcCall(updateAssignment, $root.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest, $root.google.cloud.bigquery.reservation.v1.Assignment, request, callback);
+                            }, "name", { value: "UpdateAssignment" });
+    
+                            /**
+                             * Calls UpdateAssignment.
+                             * @function updateAssignment
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest} request UpdateAssignmentRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.reservation.v1.Assignment>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService#getBiReservation}.
                              * @memberof google.cloud.bigquery.reservation.v1.ReservationService
                              * @typedef GetBiReservationCallback
@@ -779,8 +812,10 @@
                              * @property {string|null} [name] Reservation name
                              * @property {number|Long|null} [slotCapacity] Reservation slotCapacity
                              * @property {boolean|null} [ignoreIdleSlots] Reservation ignoreIdleSlots
+                             * @property {number|Long|null} [concurrency] Reservation concurrency
                              * @property {google.protobuf.ITimestamp|null} [creationTime] Reservation creationTime
                              * @property {google.protobuf.ITimestamp|null} [updateTime] Reservation updateTime
+                             * @property {boolean|null} [multiRegionAuxiliary] Reservation multiRegionAuxiliary
                              */
     
                             /**
@@ -823,6 +858,14 @@
                             Reservation.prototype.ignoreIdleSlots = false;
     
                             /**
+                             * Reservation concurrency.
+                             * @member {number|Long} concurrency
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.concurrency = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
                              * Reservation creationTime.
                              * @member {google.protobuf.ITimestamp|null|undefined} creationTime
                              * @memberof google.cloud.bigquery.reservation.v1.Reservation
@@ -837,6 +880,14 @@
                              * @instance
                              */
                             Reservation.prototype.updateTime = null;
+    
+                            /**
+                             * Reservation multiRegionAuxiliary.
+                             * @member {boolean} multiRegionAuxiliary
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.multiRegionAuxiliary = false;
     
                             /**
                              * Creates a new Reservation instance using the specified properties.
@@ -872,6 +923,10 @@
                                     $root.google.protobuf.Timestamp.encode(message.creationTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                     $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.multiRegionAuxiliary != null && Object.hasOwnProperty.call(message, "multiRegionAuxiliary"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).bool(message.multiRegionAuxiliary);
+                                if (message.concurrency != null && Object.hasOwnProperty.call(message, "concurrency"))
+                                    writer.uint32(/* id 16, wireType 0 =*/128).int64(message.concurrency);
                                 return writer;
                             };
     
@@ -915,11 +970,17 @@
                                     case 4:
                                         message.ignoreIdleSlots = reader.bool();
                                         break;
+                                    case 16:
+                                        message.concurrency = reader.int64();
+                                        break;
                                     case 8:
                                         message.creationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     case 9:
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    case 14:
+                                        message.multiRegionAuxiliary = reader.bool();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -965,6 +1026,9 @@
                                 if (message.ignoreIdleSlots != null && message.hasOwnProperty("ignoreIdleSlots"))
                                     if (typeof message.ignoreIdleSlots !== "boolean")
                                         return "ignoreIdleSlots: boolean expected";
+                                if (message.concurrency != null && message.hasOwnProperty("concurrency"))
+                                    if (!$util.isInteger(message.concurrency) && !(message.concurrency && $util.isInteger(message.concurrency.low) && $util.isInteger(message.concurrency.high)))
+                                        return "concurrency: integer|Long expected";
                                 if (message.creationTime != null && message.hasOwnProperty("creationTime")) {
                                     var error = $root.google.protobuf.Timestamp.verify(message.creationTime);
                                     if (error)
@@ -975,6 +1039,9 @@
                                     if (error)
                                         return "updateTime." + error;
                                 }
+                                if (message.multiRegionAuxiliary != null && message.hasOwnProperty("multiRegionAuxiliary"))
+                                    if (typeof message.multiRegionAuxiliary !== "boolean")
+                                        return "multiRegionAuxiliary: boolean expected";
                                 return null;
                             };
     
@@ -1003,6 +1070,15 @@
                                         message.slotCapacity = new $util.LongBits(object.slotCapacity.low >>> 0, object.slotCapacity.high >>> 0).toNumber();
                                 if (object.ignoreIdleSlots != null)
                                     message.ignoreIdleSlots = Boolean(object.ignoreIdleSlots);
+                                if (object.concurrency != null)
+                                    if ($util.Long)
+                                        (message.concurrency = $util.Long.fromValue(object.concurrency)).unsigned = false;
+                                    else if (typeof object.concurrency === "string")
+                                        message.concurrency = parseInt(object.concurrency, 10);
+                                    else if (typeof object.concurrency === "number")
+                                        message.concurrency = object.concurrency;
+                                    else if (typeof object.concurrency === "object")
+                                        message.concurrency = new $util.LongBits(object.concurrency.low >>> 0, object.concurrency.high >>> 0).toNumber();
                                 if (object.creationTime != null) {
                                     if (typeof object.creationTime !== "object")
                                         throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.creationTime: object expected");
@@ -1013,6 +1089,8 @@
                                         throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.updateTime: object expected");
                                     message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                                 }
+                                if (object.multiRegionAuxiliary != null)
+                                    message.multiRegionAuxiliary = Boolean(object.multiRegionAuxiliary);
                                 return message;
                             };
     
@@ -1039,6 +1117,12 @@
                                     object.ignoreIdleSlots = false;
                                     object.creationTime = null;
                                     object.updateTime = null;
+                                    object.multiRegionAuxiliary = false;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.concurrency = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.concurrency = options.longs === String ? "0" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -1053,6 +1137,13 @@
                                     object.creationTime = $root.google.protobuf.Timestamp.toObject(message.creationTime, options);
                                 if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                     object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                if (message.multiRegionAuxiliary != null && message.hasOwnProperty("multiRegionAuxiliary"))
+                                    object.multiRegionAuxiliary = message.multiRegionAuxiliary;
+                                if (message.concurrency != null && message.hasOwnProperty("concurrency"))
+                                    if (typeof message.concurrency === "number")
+                                        object.concurrency = options.longs === String ? String(message.concurrency) : message.concurrency;
+                                    else
+                                        object.concurrency = options.longs === String ? $util.Long.prototype.toString.call(message.concurrency) : options.longs === Number ? new $util.LongBits(message.concurrency.low >>> 0, message.concurrency.high >>> 0).toNumber() : message.concurrency;
                                 return object;
                             };
     
@@ -1084,6 +1175,7 @@
                              * @property {google.protobuf.ITimestamp|null} [commitmentEndTime] CapacityCommitment commitmentEndTime
                              * @property {google.rpc.IStatus|null} [failureStatus] CapacityCommitment failureStatus
                              * @property {google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan|null} [renewalPlan] CapacityCommitment renewalPlan
+                             * @property {boolean|null} [multiRegionAuxiliary] CapacityCommitment multiRegionAuxiliary
                              */
     
                             /**
@@ -1166,6 +1258,14 @@
                             CapacityCommitment.prototype.renewalPlan = 0;
     
                             /**
+                             * CapacityCommitment multiRegionAuxiliary.
+                             * @member {boolean} multiRegionAuxiliary
+                             * @memberof google.cloud.bigquery.reservation.v1.CapacityCommitment
+                             * @instance
+                             */
+                            CapacityCommitment.prototype.multiRegionAuxiliary = false;
+    
+                            /**
                              * Creates a new CapacityCommitment instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.CapacityCommitment
@@ -1205,6 +1305,8 @@
                                     writer.uint32(/* id 8, wireType 0 =*/64).int32(message.renewalPlan);
                                 if (message.commitmentStartTime != null && Object.hasOwnProperty.call(message, "commitmentStartTime"))
                                     $root.google.protobuf.Timestamp.encode(message.commitmentStartTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.multiRegionAuxiliary != null && Object.hasOwnProperty.call(message, "multiRegionAuxiliary"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.multiRegionAuxiliary);
                                 return writer;
                             };
     
@@ -1262,6 +1364,9 @@
                                         break;
                                     case 8:
                                         message.renewalPlan = reader.int32();
+                                        break;
+                                    case 10:
+                                        message.multiRegionAuxiliary = reader.bool();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -1351,6 +1456,9 @@
                                     case 4:
                                         break;
                                     }
+                                if (message.multiRegionAuxiliary != null && message.hasOwnProperty("multiRegionAuxiliary"))
+                                    if (typeof message.multiRegionAuxiliary !== "boolean")
+                                        return "multiRegionAuxiliary: boolean expected";
                                 return null;
                             };
     
@@ -1454,6 +1562,8 @@
                                     message.renewalPlan = 4;
                                     break;
                                 }
+                                if (object.multiRegionAuxiliary != null)
+                                    message.multiRegionAuxiliary = Boolean(object.multiRegionAuxiliary);
                                 return message;
                             };
     
@@ -1483,6 +1593,7 @@
                                     object.failureStatus = null;
                                     object.renewalPlan = options.enums === String ? "COMMITMENT_PLAN_UNSPECIFIED" : 0;
                                     object.commitmentStartTime = null;
+                                    object.multiRegionAuxiliary = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -1503,6 +1614,8 @@
                                     object.renewalPlan = options.enums === String ? $root.google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan[message.renewalPlan] : message.renewalPlan;
                                 if (message.commitmentStartTime != null && message.hasOwnProperty("commitmentStartTime"))
                                     object.commitmentStartTime = $root.google.protobuf.Timestamp.toObject(message.commitmentStartTime, options);
+                                if (message.multiRegionAuxiliary != null && message.hasOwnProperty("multiRegionAuxiliary"))
+                                    object.multiRegionAuxiliary = message.multiRegionAuxiliary;
                                 return object;
                             };
     
@@ -7257,6 +7370,458 @@
                             return MoveAssignmentRequest;
                         })();
     
+                        v1.UpdateAssignmentRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateAssignmentRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface IUpdateAssignmentRequest
+                             * @property {google.cloud.bigquery.reservation.v1.IAssignment|null} [assignment] UpdateAssignmentRequest assignment
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAssignmentRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateAssignmentRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents an UpdateAssignmentRequest.
+                             * @implements IUpdateAssignmentRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest=} [properties] Properties to set
+                             */
+                            function UpdateAssignmentRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateAssignmentRequest assignment.
+                             * @member {google.cloud.bigquery.reservation.v1.IAssignment|null|undefined} assignment
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @instance
+                             */
+                            UpdateAssignmentRequest.prototype.assignment = null;
+    
+                            /**
+                             * UpdateAssignmentRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @instance
+                             */
+                            UpdateAssignmentRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateAssignmentRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest} UpdateAssignmentRequest instance
+                             */
+                            UpdateAssignmentRequest.create = function create(properties) {
+                                return new UpdateAssignmentRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateAssignmentRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest} message UpdateAssignmentRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateAssignmentRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.assignment != null && Object.hasOwnProperty.call(message, "assignment"))
+                                    $root.google.cloud.bigquery.reservation.v1.Assignment.encode(message.assignment, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest} message UpdateAssignmentRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateAssignmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateAssignmentRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest} UpdateAssignmentRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateAssignmentRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.assignment = $root.google.cloud.bigquery.reservation.v1.Assignment.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateAssignmentRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest} UpdateAssignmentRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateAssignmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateAssignmentRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateAssignmentRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.assignment != null && message.hasOwnProperty("assignment")) {
+                                    var error = $root.google.cloud.bigquery.reservation.v1.Assignment.verify(message.assignment);
+                                    if (error)
+                                        return "assignment." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest} UpdateAssignmentRequest
+                             */
+                            UpdateAssignmentRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest();
+                                if (object.assignment != null) {
+                                    if (typeof object.assignment !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest.assignment: object expected");
+                                    message.assignment = $root.google.cloud.bigquery.reservation.v1.Assignment.fromObject(object.assignment);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateAssignmentRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest} message UpdateAssignmentRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateAssignmentRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.assignment = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.assignment != null && message.hasOwnProperty("assignment"))
+                                    object.assignment = $root.google.cloud.bigquery.reservation.v1.Assignment.toObject(message.assignment, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateAssignmentRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateAssignmentRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return UpdateAssignmentRequest;
+                        })();
+    
+                        v1.TableReference = (function() {
+    
+                            /**
+                             * Properties of a TableReference.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface ITableReference
+                             * @property {string|null} [projectId] TableReference projectId
+                             * @property {string|null} [datasetId] TableReference datasetId
+                             * @property {string|null} [tableId] TableReference tableId
+                             */
+    
+                            /**
+                             * Constructs a new TableReference.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a TableReference.
+                             * @implements ITableReference
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.ITableReference=} [properties] Properties to set
+                             */
+                            function TableReference(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TableReference projectId.
+                             * @member {string} projectId
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @instance
+                             */
+                            TableReference.prototype.projectId = "";
+    
+                            /**
+                             * TableReference datasetId.
+                             * @member {string} datasetId
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @instance
+                             */
+                            TableReference.prototype.datasetId = "";
+    
+                            /**
+                             * TableReference tableId.
+                             * @member {string} tableId
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @instance
+                             */
+                            TableReference.prototype.tableId = "";
+    
+                            /**
+                             * Creates a new TableReference instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ITableReference=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.TableReference} TableReference instance
+                             */
+                            TableReference.create = function create(properties) {
+                                return new TableReference(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TableReference message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.TableReference.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ITableReference} message TableReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TableReference.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                                if (message.datasetId != null && Object.hasOwnProperty.call(message, "datasetId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.datasetId);
+                                if (message.tableId != null && Object.hasOwnProperty.call(message, "tableId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.tableId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TableReference message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.TableReference.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ITableReference} message TableReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TableReference.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TableReference message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.TableReference} TableReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TableReference.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.TableReference();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.projectId = reader.string();
+                                        break;
+                                    case 2:
+                                        message.datasetId = reader.string();
+                                        break;
+                                    case 3:
+                                        message.tableId = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TableReference message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.TableReference} TableReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TableReference.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TableReference message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TableReference.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                    if (!$util.isString(message.projectId))
+                                        return "projectId: string expected";
+                                if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                    if (!$util.isString(message.datasetId))
+                                        return "datasetId: string expected";
+                                if (message.tableId != null && message.hasOwnProperty("tableId"))
+                                    if (!$util.isString(message.tableId))
+                                        return "tableId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TableReference message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.TableReference} TableReference
+                             */
+                            TableReference.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.TableReference)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.TableReference();
+                                if (object.projectId != null)
+                                    message.projectId = String(object.projectId);
+                                if (object.datasetId != null)
+                                    message.datasetId = String(object.datasetId);
+                                if (object.tableId != null)
+                                    message.tableId = String(object.tableId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TableReference message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.TableReference} message TableReference
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TableReference.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.projectId = "";
+                                    object.datasetId = "";
+                                    object.tableId = "";
+                                }
+                                if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                    object.projectId = message.projectId;
+                                if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                    object.datasetId = message.datasetId;
+                                if (message.tableId != null && message.hasOwnProperty("tableId"))
+                                    object.tableId = message.tableId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TableReference to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.TableReference
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TableReference.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return TableReference;
+                        })();
+    
                         v1.BiReservation = (function() {
     
                             /**
@@ -7266,6 +7831,7 @@
                              * @property {string|null} [name] BiReservation name
                              * @property {google.protobuf.ITimestamp|null} [updateTime] BiReservation updateTime
                              * @property {number|Long|null} [size] BiReservation size
+                             * @property {Array.<google.cloud.bigquery.reservation.v1.ITableReference>|null} [preferredTables] BiReservation preferredTables
                              */
     
                             /**
@@ -7277,6 +7843,7 @@
                              * @param {google.cloud.bigquery.reservation.v1.IBiReservation=} [properties] Properties to set
                              */
                             function BiReservation(properties) {
+                                this.preferredTables = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -7308,6 +7875,14 @@
                             BiReservation.prototype.size = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                             /**
+                             * BiReservation preferredTables.
+                             * @member {Array.<google.cloud.bigquery.reservation.v1.ITableReference>} preferredTables
+                             * @memberof google.cloud.bigquery.reservation.v1.BiReservation
+                             * @instance
+                             */
+                            BiReservation.prototype.preferredTables = $util.emptyArray;
+    
+                            /**
                              * Creates a new BiReservation instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.BiReservation
@@ -7337,6 +7912,9 @@
                                     $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.size != null && Object.hasOwnProperty.call(message, "size"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).int64(message.size);
+                                if (message.preferredTables != null && message.preferredTables.length)
+                                    for (var i = 0; i < message.preferredTables.length; ++i)
+                                        $root.google.cloud.bigquery.reservation.v1.TableReference.encode(message.preferredTables[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -7379,6 +7957,11 @@
                                         break;
                                     case 4:
                                         message.size = reader.int64();
+                                        break;
+                                    case 5:
+                                        if (!(message.preferredTables && message.preferredTables.length))
+                                            message.preferredTables = [];
+                                        message.preferredTables.push($root.google.cloud.bigquery.reservation.v1.TableReference.decode(reader, reader.uint32()));
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -7426,6 +8009,15 @@
                                 if (message.size != null && message.hasOwnProperty("size"))
                                     if (!$util.isInteger(message.size) && !(message.size && $util.isInteger(message.size.low) && $util.isInteger(message.size.high)))
                                         return "size: integer|Long expected";
+                                if (message.preferredTables != null && message.hasOwnProperty("preferredTables")) {
+                                    if (!Array.isArray(message.preferredTables))
+                                        return "preferredTables: array expected";
+                                    for (var i = 0; i < message.preferredTables.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.reservation.v1.TableReference.verify(message.preferredTables[i]);
+                                        if (error)
+                                            return "preferredTables." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -7457,6 +8049,16 @@
                                         message.size = object.size;
                                     else if (typeof object.size === "object")
                                         message.size = new $util.LongBits(object.size.low >>> 0, object.size.high >>> 0).toNumber();
+                                if (object.preferredTables) {
+                                    if (!Array.isArray(object.preferredTables))
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.BiReservation.preferredTables: array expected");
+                                    message.preferredTables = [];
+                                    for (var i = 0; i < object.preferredTables.length; ++i) {
+                                        if (typeof object.preferredTables[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.reservation.v1.BiReservation.preferredTables: object expected");
+                                        message.preferredTables[i] = $root.google.cloud.bigquery.reservation.v1.TableReference.fromObject(object.preferredTables[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -7473,6 +8075,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.preferredTables = [];
                                 if (options.defaults) {
                                     object.name = "";
                                     object.updateTime = null;
@@ -7491,6 +8095,11 @@
                                         object.size = options.longs === String ? String(message.size) : message.size;
                                     else
                                         object.size = options.longs === String ? $util.Long.prototype.toString.call(message.size) : options.longs === Number ? new $util.LongBits(message.size.low >>> 0, message.size.high >>> 0).toNumber() : message.size;
+                                if (message.preferredTables && message.preferredTables.length) {
+                                    object.preferredTables = [];
+                                    for (var j = 0; j < message.preferredTables.length; ++j)
+                                        object.preferredTables[j] = $root.google.cloud.bigquery.reservation.v1.TableReference.toObject(message.preferredTables[j], options);
+                                }
                                 return object;
                             };
     

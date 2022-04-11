@@ -302,6 +302,20 @@ export namespace google {
                         public moveAssignment(request: google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest): Promise<google.cloud.bigquery.reservation.v1.Assignment>;
 
                         /**
+                         * Calls UpdateAssignment.
+                         * @param request UpdateAssignmentRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Assignment
+                         */
+                        public updateAssignment(request: google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.UpdateAssignmentCallback): void;
+
+                        /**
+                         * Calls UpdateAssignment.
+                         * @param request UpdateAssignmentRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateAssignment(request: google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest): Promise<google.cloud.bigquery.reservation.v1.Assignment>;
+
+                        /**
                          * Calls GetBiReservation.
                          * @param request GetBiReservationRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and BiReservation
@@ -459,6 +473,13 @@ export namespace google {
                         type MoveAssignmentCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.Assignment) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService#updateAssignment}.
+                         * @param error Error, if any
+                         * @param [response] Assignment
+                         */
+                        type UpdateAssignmentCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.Assignment) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService#getBiReservation}.
                          * @param error Error, if any
                          * @param [response] BiReservation
@@ -485,11 +506,17 @@ export namespace google {
                         /** Reservation ignoreIdleSlots */
                         ignoreIdleSlots?: (boolean|null);
 
+                        /** Reservation concurrency */
+                        concurrency?: (number|Long|string|null);
+
                         /** Reservation creationTime */
                         creationTime?: (google.protobuf.ITimestamp|null);
 
                         /** Reservation updateTime */
                         updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Reservation multiRegionAuxiliary */
+                        multiRegionAuxiliary?: (boolean|null);
                     }
 
                     /** Represents a Reservation. */
@@ -510,11 +537,17 @@ export namespace google {
                         /** Reservation ignoreIdleSlots. */
                         public ignoreIdleSlots: boolean;
 
+                        /** Reservation concurrency. */
+                        public concurrency: (number|Long|string);
+
                         /** Reservation creationTime. */
                         public creationTime?: (google.protobuf.ITimestamp|null);
 
                         /** Reservation updateTime. */
                         public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Reservation multiRegionAuxiliary. */
+                        public multiRegionAuxiliary: boolean;
 
                         /**
                          * Creates a new Reservation instance using the specified properties.
@@ -613,6 +646,9 @@ export namespace google {
 
                         /** CapacityCommitment renewalPlan */
                         renewalPlan?: (google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan|keyof typeof google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan|null);
+
+                        /** CapacityCommitment multiRegionAuxiliary */
+                        multiRegionAuxiliary?: (boolean|null);
                     }
 
                     /** Represents a CapacityCommitment. */
@@ -647,6 +683,9 @@ export namespace google {
 
                         /** CapacityCommitment renewalPlan. */
                         public renewalPlan: (google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan|keyof typeof google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan);
+
+                        /** CapacityCommitment multiRegionAuxiliary. */
+                        public multiRegionAuxiliary: boolean;
 
                         /**
                          * Creates a new CapacityCommitment instance using the specified properties.
@@ -3211,6 +3250,204 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of an UpdateAssignmentRequest. */
+                    interface IUpdateAssignmentRequest {
+
+                        /** UpdateAssignmentRequest assignment */
+                        assignment?: (google.cloud.bigquery.reservation.v1.IAssignment|null);
+
+                        /** UpdateAssignmentRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateAssignmentRequest. */
+                    class UpdateAssignmentRequest implements IUpdateAssignmentRequest {
+
+                        /**
+                         * Constructs a new UpdateAssignmentRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest);
+
+                        /** UpdateAssignmentRequest assignment. */
+                        public assignment?: (google.cloud.bigquery.reservation.v1.IAssignment|null);
+
+                        /** UpdateAssignmentRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateAssignmentRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateAssignmentRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest): google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest;
+
+                        /**
+                         * Encodes the specified UpdateAssignmentRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest.verify|verify} messages.
+                         * @param message UpdateAssignmentRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest.verify|verify} messages.
+                         * @param message UpdateAssignmentRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateAssignmentRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest;
+
+                        /**
+                         * Decodes an UpdateAssignmentRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest;
+
+                        /**
+                         * Verifies an UpdateAssignmentRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateAssignmentRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateAssignmentRequest message. Also converts values to other types if specified.
+                         * @param message UpdateAssignmentRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateAssignmentRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a TableReference. */
+                    interface ITableReference {
+
+                        /** TableReference projectId */
+                        projectId?: (string|null);
+
+                        /** TableReference datasetId */
+                        datasetId?: (string|null);
+
+                        /** TableReference tableId */
+                        tableId?: (string|null);
+                    }
+
+                    /** Represents a TableReference. */
+                    class TableReference implements ITableReference {
+
+                        /**
+                         * Constructs a new TableReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.ITableReference);
+
+                        /** TableReference projectId. */
+                        public projectId: string;
+
+                        /** TableReference datasetId. */
+                        public datasetId: string;
+
+                        /** TableReference tableId. */
+                        public tableId: string;
+
+                        /**
+                         * Creates a new TableReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TableReference instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.ITableReference): google.cloud.bigquery.reservation.v1.TableReference;
+
+                        /**
+                         * Encodes the specified TableReference message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.TableReference.verify|verify} messages.
+                         * @param message TableReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.ITableReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TableReference message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.TableReference.verify|verify} messages.
+                         * @param message TableReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.ITableReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TableReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TableReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.TableReference;
+
+                        /**
+                         * Decodes a TableReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TableReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.TableReference;
+
+                        /**
+                         * Verifies a TableReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TableReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TableReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.TableReference;
+
+                        /**
+                         * Creates a plain object from a TableReference message. Also converts values to other types if specified.
+                         * @param message TableReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.TableReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TableReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** Properties of a BiReservation. */
                     interface IBiReservation {
 
@@ -3222,6 +3459,9 @@ export namespace google {
 
                         /** BiReservation size */
                         size?: (number|Long|string|null);
+
+                        /** BiReservation preferredTables */
+                        preferredTables?: (google.cloud.bigquery.reservation.v1.ITableReference[]|null);
                     }
 
                     /** Represents a BiReservation. */
@@ -3241,6 +3481,9 @@ export namespace google {
 
                         /** BiReservation size. */
                         public size: (number|Long|string);
+
+                        /** BiReservation preferredTables. */
+                        public preferredTables: google.cloud.bigquery.reservation.v1.ITableReference[];
 
                         /**
                          * Creates a new BiReservation instance using the specified properties.

@@ -368,6 +368,26 @@
                                 }
                               ]
                             },
+                            "UpdateAssignment": {
+                              "requestType": "UpdateAssignmentRequest",
+                              "responseType": "Assignment",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{assignment.name=projects/*/locations/*/reservations/*/assignments/*}",
+                                "(google.api.http).body": "assignment",
+                                "(google.api.method_signature)": "assignment,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{assignment.name=projects/*/locations/*/reservations/*/assignments/*}",
+                                    "body": "assignment"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "assignment,update_mask"
+                                }
+                              ]
+                            },
                             "GetBiReservation": {
                               "requestType": "GetBiReservationRequest",
                               "responseType": "BiReservation",
@@ -426,6 +446,10 @@
                               "type": "bool",
                               "id": 4
                             },
+                            "concurrency": {
+                              "type": "int64",
+                              "id": 16
+                            },
                             "creationTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 8,
@@ -439,6 +463,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "multiRegionAuxiliary": {
+                              "type": "bool",
+                              "id": 14
                             }
                           }
                         },
@@ -494,6 +522,10 @@
                             "renewalPlan": {
                               "type": "CommitmentPlan",
                               "id": 8
+                            },
+                            "multiRegionAuxiliary": {
+                              "type": "bool",
+                              "id": 10
                             }
                           },
                           "nested": {
@@ -951,6 +983,34 @@
                             }
                           }
                         },
+                        "UpdateAssignmentRequest": {
+                          "fields": {
+                            "assignment": {
+                              "type": "Assignment",
+                              "id": 1
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "TableReference": {
+                          "fields": {
+                            "projectId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "datasetId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "tableId": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
                         "BiReservation": {
                           "options": {
                             "(google.api.resource).type": "bigqueryreservation.googleapis.com/BiReservation",
@@ -971,6 +1031,11 @@
                             "size": {
                               "type": "int64",
                               "id": 4
+                            },
+                            "preferredTables": {
+                              "rule": "repeated",
+                              "type": "TableReference",
+                              "id": 5
                             }
                           }
                         },

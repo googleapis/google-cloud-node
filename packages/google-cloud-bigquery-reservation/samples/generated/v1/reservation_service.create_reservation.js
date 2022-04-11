@@ -31,8 +31,9 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The reservation ID. This field must only contain lower case alphanumeric
-   *  characters or dash. Max length is 64 characters.
+   *  The reservation ID. It must only contain lower case alphanumeric
+   *  characters or dashes. It must start with a letter and must not end
+   *  with a dash. Its maximum length is 64 characters.
    */
   // const reservationId = 'abc123'
   /**

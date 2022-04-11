@@ -42,8 +42,8 @@ function main(parent) {
   /**
    *  The optional capacity commitment ID. Capacity commitment name will be
    *  generated automatically if this field is empty.
-   *  This field must only contain lower case alphanumeric characters or dash.
-   *  Max length is 64 characters.
+   *  This field must only contain lower case alphanumeric characters or dashes.
+   *  The first and last character cannot be a dash. Max length is 64 characters.
    *  NOTE: this ID won't be kept if the capacity commitment is split or merged.
    */
   // const capacityCommitmentId = 'abc123'

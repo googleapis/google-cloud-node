@@ -20,27 +20,19 @@
 
 'use strict';
 
-function main(parent) {
-  // [START bigqueryreservation_v1_generated_ReservationService_CreateAssignment_async]
+function main() {
+  // [START bigqueryreservation_v1_generated_ReservationService_UpdateAssignment_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource name of the assignment
-   *  E.g. `projects/myproject/locations/US/reservations/team1-prod`
-   */
-  // const parent = 'abc123'
-  /**
-   *  Assignment resource to create.
+   *  Content of the assignment to update.
    */
   // const assignment = {}
   /**
-   *  The optional assignment ID. Assignment name will be generated automatically
-   *  if this field is empty.
-   *  This field must only contain lower case alphanumeric characters or dashes.
-   *  Max length is 64 characters.
+   *  Standard field mask for the set of fields to be updated.
    */
-  // const assignmentId = 'abc123'
+  // const updateMask = {}
 
   // Imports the Reservation library
   const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation').v1;
@@ -48,19 +40,18 @@ function main(parent) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function callCreateAssignment() {
+  async function callUpdateAssignment() {
     // Construct request
     const request = {
-      parent,
     };
 
     // Run request
-    const response = await reservationClient.createAssignment(request);
+    const response = await reservationClient.updateAssignment(request);
     console.log(response);
   }
 
-  callCreateAssignment();
-  // [END bigqueryreservation_v1_generated_ReservationService_CreateAssignment_async]
+  callUpdateAssignment();
+  // [END bigqueryreservation_v1_generated_ReservationService_UpdateAssignment_async]
 }
 
 process.on('unhandledRejection', err => {

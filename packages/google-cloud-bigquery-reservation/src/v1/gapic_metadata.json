@@ -75,6 +75,11 @@
                 "moveAssignment"
               ]
             },
+            "UpdateAssignment": {
+              "methods": [
+                "updateAssignment"
+              ]
+            },
             "GetBiReservation": {
               "methods": [
                 "getBiReservation"
@@ -188,6 +193,11 @@
             "MoveAssignment": {
               "methods": [
                 "moveAssignment"
+              ]
+            },
+            "UpdateAssignment": {
+              "methods": [
+                "updateAssignment"
               ]
             },
             "GetBiReservation": {
