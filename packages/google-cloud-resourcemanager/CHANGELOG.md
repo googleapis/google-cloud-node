@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [3.2.0](https://github.com/googleapis/nodejs-resource-manager/compare/v3.1.0...v3.2.0) (2022-04-06)
+
+
+### Features
+
+* AuditConfig for IAM v1 ([#439](https://github.com/googleapis/nodejs-resource-manager/issues/439)) ([58e5893](https://github.com/googleapis/nodejs-resource-manager/commit/58e5893b40f3e27a7037291ba8d5470e1b2d2715))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-resource-manager/compare/v3.0.0...v3.1.0) (2022-03-23)
 
 
