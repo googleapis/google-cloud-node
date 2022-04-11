@@ -1111,6 +1111,9 @@ export namespace google {
 
                     /** Finding iamBindings */
                     iamBindings?: (google.cloud.securitycenter.v1.IIamBinding[]|null);
+
+                    /** Finding nextSteps */
+                    nextSteps?: (string|null);
                 }
 
                 /** Represents a Finding. */
@@ -1187,6 +1190,9 @@ export namespace google {
 
                     /** Finding iamBindings. */
                     public iamBindings: google.cloud.securitycenter.v1.IIamBinding[];
+
+                    /** Finding nextSteps. */
+                    public nextSteps: string;
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -1670,7 +1676,8 @@ export namespace google {
                         MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE = 26,
                         EXPLOIT_PUBLIC_FACING_APPLICATION = 27,
                         MODIFY_AUTHENTICATION_PROCESS = 28,
-                        DATA_DESTRUCTION = 29
+                        DATA_DESTRUCTION = 29,
+                        DOMAIN_POLICY_MODIFICATION = 30
                     }
                 }
 

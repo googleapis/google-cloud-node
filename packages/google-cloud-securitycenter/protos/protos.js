@@ -2712,6 +2712,7 @@
                          * @property {google.cloud.securitycenter.v1.IAccess|null} [access] Finding access
                          * @property {string|null} [muteInitiator] Finding muteInitiator
                          * @property {Array.<google.cloud.securitycenter.v1.IIamBinding>|null} [iamBindings] Finding iamBindings
+                         * @property {string|null} [nextSteps] Finding nextSteps
                          */
     
                         /**
@@ -2909,6 +2910,14 @@
                         Finding.prototype.iamBindings = $util.emptyArray;
     
                         /**
+                         * Finding nextSteps.
+                         * @member {string} nextSteps
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.nextSteps = "";
+    
+                        /**
                          * Creates a new Finding instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -2983,6 +2992,8 @@
                             if (message.iamBindings != null && message.iamBindings.length)
                                 for (var i = 0; i < message.iamBindings.length; ++i)
                                     $root.google.cloud.securitycenter.v1.IamBinding.encode(message.iamBindings[i], writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
+                            if (message.nextSteps != null && Object.hasOwnProperty.call(message, "nextSteps"))
+                                writer.uint32(/* id 40, wireType 2 =*/322).string(message.nextSteps);
                             return writer;
                         };
     
@@ -3122,6 +3133,9 @@
                                     if (!(message.iamBindings && message.iamBindings.length))
                                         message.iamBindings = [];
                                     message.iamBindings.push($root.google.cloud.securitycenter.v1.IamBinding.decode(reader, reader.uint32()));
+                                    break;
+                                case 40:
+                                    message.nextSteps = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3290,6 +3304,9 @@
                                         return "iamBindings." + error;
                                 }
                             }
+                            if (message.nextSteps != null && message.hasOwnProperty("nextSteps"))
+                                if (!$util.isString(message.nextSteps))
+                                    return "nextSteps: string expected";
                             return null;
                         };
     
@@ -3469,6 +3486,8 @@
                                     message.iamBindings[i] = $root.google.cloud.securitycenter.v1.IamBinding.fromObject(object.iamBindings[i]);
                                 }
                             }
+                            if (object.nextSteps != null)
+                                message.nextSteps = String(object.nextSteps);
                             return message;
                         };
     
@@ -3511,6 +3530,7 @@
                                 object.mitreAttack = null;
                                 object.access = null;
                                 object.muteInitiator = "";
+                                object.nextSteps = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3566,6 +3586,8 @@
                                 for (var j = 0; j < message.iamBindings.length; ++j)
                                     object.iamBindings[j] = $root.google.cloud.securitycenter.v1.IamBinding.toObject(message.iamBindings[j], options);
                             }
+                            if (message.nextSteps != null && message.hasOwnProperty("nextSteps"))
+                                object.nextSteps = message.nextSteps;
                             return object;
                         };
     
@@ -4447,6 +4469,7 @@
                                     case 27:
                                     case 28:
                                     case 29:
+                                    case 30:
                                         break;
                                     }
                             }
@@ -4512,6 +4535,7 @@
                                     case 27:
                                     case 28:
                                     case 29:
+                                    case 30:
                                         break;
                                     }
                             }
@@ -4722,6 +4746,10 @@
                                     case 29:
                                         message.primaryTechniques[i] = 29;
                                         break;
+                                    case "DOMAIN_POLICY_MODIFICATION":
+                                    case 30:
+                                        message.primaryTechniques[i] = 30;
+                                        break;
                                     }
                             }
                             if (object.additionalTactics) {
@@ -4920,6 +4948,10 @@
                                     case 29:
                                         message.additionalTechniques[i] = 29;
                                         break;
+                                    case "DOMAIN_POLICY_MODIFICATION":
+                                    case 30:
+                                        message.additionalTechniques[i] = 30;
+                                        break;
                                     }
                             }
                             if (object.version != null)
@@ -5056,6 +5088,7 @@
                          * @property {number} EXPLOIT_PUBLIC_FACING_APPLICATION=27 EXPLOIT_PUBLIC_FACING_APPLICATION value
                          * @property {number} MODIFY_AUTHENTICATION_PROCESS=28 MODIFY_AUTHENTICATION_PROCESS value
                          * @property {number} DATA_DESTRUCTION=29 DATA_DESTRUCTION value
+                         * @property {number} DOMAIN_POLICY_MODIFICATION=30 DOMAIN_POLICY_MODIFICATION value
                          */
                         MitreAttack.Technique = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -5089,6 +5122,7 @@
                             values[valuesById[27] = "EXPLOIT_PUBLIC_FACING_APPLICATION"] = 27;
                             values[valuesById[28] = "MODIFY_AUTHENTICATION_PROCESS"] = 28;
                             values[valuesById[29] = "DATA_DESTRUCTION"] = 29;
+                            values[valuesById[30] = "DOMAIN_POLICY_MODIFICATION"] = 30;
                             return values;
                         })();
     

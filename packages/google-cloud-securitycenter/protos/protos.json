@@ -367,6 +367,10 @@
                           "rule": "repeated",
                           "type": "IamBinding",
                           "id": 39
+                        },
+                        "nextSteps": {
+                          "type": "string",
+                          "id": 40
                         }
                       },
                       "nested": {
@@ -522,7 +526,8 @@
                             "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE": 26,
                             "EXPLOIT_PUBLIC_FACING_APPLICATION": 27,
                             "MODIFY_AUTHENTICATION_PROCESS": 28,
-                            "DATA_DESTRUCTION": 29
+                            "DATA_DESTRUCTION": 29,
+                            "DOMAIN_POLICY_MODIFICATION": 30
                           }
                         }
                       }
