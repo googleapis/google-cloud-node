@@ -804,6 +804,10 @@
                       "rule": "repeated",
                       "type": "Key",
                       "id": 3
+                    },
+                    "readTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 7
                     }
                   }
                 },
@@ -948,6 +952,10 @@
                     "indexUpdates": {
                       "type": "int32",
                       "id": 4
+                    },
+                    "commitTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 8
                     }
                   }
                 },
@@ -1017,7 +1025,8 @@
                     },
                     "conflictDetectionStrategy": {
                       "oneof": [
-                        "baseVersion"
+                        "baseVersion",
+                        "updateTime"
                       ]
                     }
                   },
@@ -1041,6 +1050,10 @@
                     "baseVersion": {
                       "type": "int64",
                       "id": 8
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 11
                     }
                   }
                 },
@@ -1054,6 +1067,10 @@
                       "type": "int64",
                       "id": 4
                     },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 6
+                    },
                     "conflictDetected": {
                       "type": "bool",
                       "id": 5
@@ -1065,7 +1082,8 @@
                     "consistencyType": {
                       "oneof": [
                         "readConsistency",
-                        "transaction"
+                        "transaction",
+                        "readTime"
                       ]
                     }
                   },
@@ -1077,6 +1095,10 @@
                     "transaction": {
                       "type": "bytes",
                       "id": 2
+                    },
+                    "readTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 4
                     }
                   },
                   "nested": {
@@ -1118,7 +1140,12 @@
                       }
                     },
                     "ReadOnly": {
-                      "fields": {}
+                      "fields": {
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        }
+                      }
                     }
                   }
                 },
@@ -1277,6 +1304,10 @@
                     "version": {
                       "type": "int64",
                       "id": 4
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 5
                     },
                     "cursor": {
                       "type": "bytes",
@@ -1528,6 +1559,10 @@
                     "snapshotVersion": {
                       "type": "int64",
                       "id": 7
+                    },
+                    "readTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 8
                     }
                   },
                   "nested": {

@@ -6411,6 +6411,7 @@
                      * @property {Array.<google.datastore.v1.IEntityResult>|null} [found] LookupResponse found
                      * @property {Array.<google.datastore.v1.IEntityResult>|null} [missing] LookupResponse missing
                      * @property {Array.<google.datastore.v1.IKey>|null} [deferred] LookupResponse deferred
+                     * @property {google.protobuf.ITimestamp|null} [readTime] LookupResponse readTime
                      */
     
                     /**
@@ -6456,6 +6457,14 @@
                     LookupResponse.prototype.deferred = $util.emptyArray;
     
                     /**
+                     * LookupResponse readTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} readTime
+                     * @memberof google.datastore.v1.LookupResponse
+                     * @instance
+                     */
+                    LookupResponse.prototype.readTime = null;
+    
+                    /**
                      * Creates a new LookupResponse instance using the specified properties.
                      * @function create
                      * @memberof google.datastore.v1.LookupResponse
@@ -6488,6 +6497,8 @@
                         if (message.deferred != null && message.deferred.length)
                             for (var i = 0; i < message.deferred.length; ++i)
                                 $root.google.datastore.v1.Key.encode(message.deferred[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
+                            $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         return writer;
                     };
     
@@ -6536,6 +6547,9 @@
                                 if (!(message.deferred && message.deferred.length))
                                     message.deferred = [];
                                 message.deferred.push($root.google.datastore.v1.Key.decode(reader, reader.uint32()));
+                                break;
+                            case 7:
+                                message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -6599,6 +6613,11 @@
                                     return "deferred." + error;
                             }
                         }
+                        if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.readTime);
+                            if (error)
+                                return "readTime." + error;
+                        }
                         return null;
                     };
     
@@ -6644,6 +6663,11 @@
                                 message.deferred[i] = $root.google.datastore.v1.Key.fromObject(object.deferred[i]);
                             }
                         }
+                        if (object.readTime != null) {
+                            if (typeof object.readTime !== "object")
+                                throw TypeError(".google.datastore.v1.LookupResponse.readTime: object expected");
+                            message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime);
+                        }
                         return message;
                     };
     
@@ -6665,6 +6689,8 @@
                             object.missing = [];
                             object.deferred = [];
                         }
+                        if (options.defaults)
+                            object.readTime = null;
                         if (message.found && message.found.length) {
                             object.found = [];
                             for (var j = 0; j < message.found.length; ++j)
@@ -6680,6 +6706,8 @@
                             for (var j = 0; j < message.deferred.length; ++j)
                                 object.deferred[j] = $root.google.datastore.v1.Key.toObject(message.deferred[j], options);
                         }
+                        if (message.readTime != null && message.hasOwnProperty("readTime"))
+                            object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
                         return object;
                     };
     
@@ -8370,6 +8398,7 @@
                      * @interface ICommitResponse
                      * @property {Array.<google.datastore.v1.IMutationResult>|null} [mutationResults] CommitResponse mutationResults
                      * @property {number|null} [indexUpdates] CommitResponse indexUpdates
+                     * @property {google.protobuf.ITimestamp|null} [commitTime] CommitResponse commitTime
                      */
     
                     /**
@@ -8405,6 +8434,14 @@
                     CommitResponse.prototype.indexUpdates = 0;
     
                     /**
+                     * CommitResponse commitTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} commitTime
+                     * @memberof google.datastore.v1.CommitResponse
+                     * @instance
+                     */
+                    CommitResponse.prototype.commitTime = null;
+    
+                    /**
                      * Creates a new CommitResponse instance using the specified properties.
                      * @function create
                      * @memberof google.datastore.v1.CommitResponse
@@ -8433,6 +8470,8 @@
                                 $root.google.datastore.v1.MutationResult.encode(message.mutationResults[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         if (message.indexUpdates != null && Object.hasOwnProperty.call(message, "indexUpdates"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.indexUpdates);
+                        if (message.commitTime != null && Object.hasOwnProperty.call(message, "commitTime"))
+                            $root.google.protobuf.Timestamp.encode(message.commitTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         return writer;
                     };
     
@@ -8474,6 +8513,9 @@
                                 break;
                             case 4:
                                 message.indexUpdates = reader.int32();
+                                break;
+                            case 8:
+                                message.commitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -8522,6 +8564,11 @@
                         if (message.indexUpdates != null && message.hasOwnProperty("indexUpdates"))
                             if (!$util.isInteger(message.indexUpdates))
                                 return "indexUpdates: integer expected";
+                        if (message.commitTime != null && message.hasOwnProperty("commitTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.commitTime);
+                            if (error)
+                                return "commitTime." + error;
+                        }
                         return null;
                     };
     
@@ -8549,6 +8596,11 @@
                         }
                         if (object.indexUpdates != null)
                             message.indexUpdates = object.indexUpdates | 0;
+                        if (object.commitTime != null) {
+                            if (typeof object.commitTime !== "object")
+                                throw TypeError(".google.datastore.v1.CommitResponse.commitTime: object expected");
+                            message.commitTime = $root.google.protobuf.Timestamp.fromObject(object.commitTime);
+                        }
                         return message;
                     };
     
@@ -8567,8 +8619,10 @@
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.mutationResults = [];
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.indexUpdates = 0;
+                            object.commitTime = null;
+                        }
                         if (message.mutationResults && message.mutationResults.length) {
                             object.mutationResults = [];
                             for (var j = 0; j < message.mutationResults.length; ++j)
@@ -8576,6 +8630,8 @@
                         }
                         if (message.indexUpdates != null && message.hasOwnProperty("indexUpdates"))
                             object.indexUpdates = message.indexUpdates;
+                        if (message.commitTime != null && message.hasOwnProperty("commitTime"))
+                            object.commitTime = $root.google.protobuf.Timestamp.toObject(message.commitTime, options);
                         return object;
                     };
     
@@ -9457,6 +9513,7 @@
                      * @property {google.datastore.v1.IEntity|null} [upsert] Mutation upsert
                      * @property {google.datastore.v1.IKey|null} ["delete"] Mutation delete
                      * @property {number|Long|null} [baseVersion] Mutation baseVersion
+                     * @property {google.protobuf.ITimestamp|null} [updateTime] Mutation updateTime
                      */
     
                     /**
@@ -9514,6 +9571,14 @@
                      */
                     Mutation.prototype.baseVersion = null;
     
+                    /**
+                     * Mutation updateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                     * @memberof google.datastore.v1.Mutation
+                     * @instance
+                     */
+                    Mutation.prototype.updateTime = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -9530,12 +9595,12 @@
     
                     /**
                      * Mutation conflictDetectionStrategy.
-                     * @member {"baseVersion"|undefined} conflictDetectionStrategy
+                     * @member {"baseVersion"|"updateTime"|undefined} conflictDetectionStrategy
                      * @memberof google.datastore.v1.Mutation
                      * @instance
                      */
                     Object.defineProperty(Mutation.prototype, "conflictDetectionStrategy", {
-                        get: $util.oneOfGetter($oneOfFields = ["baseVersion"]),
+                        get: $util.oneOfGetter($oneOfFields = ["baseVersion", "updateTime"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -9573,6 +9638,8 @@
                             $root.google.datastore.v1.Key.encode(message["delete"], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         if (message.baseVersion != null && Object.hasOwnProperty.call(message, "baseVersion"))
                             writer.uint32(/* id 8, wireType 0 =*/64).int64(message.baseVersion);
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         return writer;
                     };
     
@@ -9621,6 +9688,9 @@
                                 break;
                             case 8:
                                 message.baseVersion = reader.int64();
+                                break;
+                            case 11:
+                                message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -9701,6 +9771,16 @@
                             if (!$util.isInteger(message.baseVersion) && !(message.baseVersion && $util.isInteger(message.baseVersion.low) && $util.isInteger(message.baseVersion.high)))
                                 return "baseVersion: integer|Long expected";
                         }
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            if (properties.conflictDetectionStrategy === 1)
+                                return "conflictDetectionStrategy: multiple values";
+                            properties.conflictDetectionStrategy = 1;
+                            {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -9745,6 +9825,11 @@
                                 message.baseVersion = object.baseVersion;
                             else if (typeof object.baseVersion === "object")
                                 message.baseVersion = new $util.LongBits(object.baseVersion.low >>> 0, object.baseVersion.high >>> 0).toNumber();
+                        if (object.updateTime != null) {
+                            if (typeof object.updateTime !== "object")
+                                throw TypeError(".google.datastore.v1.Mutation.updateTime: object expected");
+                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                        }
                         return message;
                     };
     
@@ -9789,6 +9874,11 @@
                             if (options.oneofs)
                                 object.conflictDetectionStrategy = "baseVersion";
                         }
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (options.oneofs)
+                                object.conflictDetectionStrategy = "updateTime";
+                        }
                         return object;
                     };
     
@@ -9814,6 +9904,7 @@
                      * @interface IMutationResult
                      * @property {google.datastore.v1.IKey|null} [key] MutationResult key
                      * @property {number|Long|null} [version] MutationResult version
+                     * @property {google.protobuf.ITimestamp|null} [updateTime] MutationResult updateTime
                      * @property {boolean|null} [conflictDetected] MutationResult conflictDetected
                      */
     
@@ -9847,6 +9938,14 @@
                      * @instance
                      */
                     MutationResult.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * MutationResult updateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                     * @memberof google.datastore.v1.MutationResult
+                     * @instance
+                     */
+                    MutationResult.prototype.updateTime = null;
     
                     /**
                      * MutationResult conflictDetected.
@@ -9886,6 +9985,8 @@
                             writer.uint32(/* id 4, wireType 0 =*/32).int64(message.version);
                         if (message.conflictDetected != null && Object.hasOwnProperty.call(message, "conflictDetected"))
                             writer.uint32(/* id 5, wireType 0 =*/40).bool(message.conflictDetected);
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -9925,6 +10026,9 @@
                                 break;
                             case 4:
                                 message.version = reader.int64();
+                                break;
+                            case 6:
+                                message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             case 5:
                                 message.conflictDetected = reader.bool();
@@ -9972,6 +10076,11 @@
                         if (message.version != null && message.hasOwnProperty("version"))
                             if (!$util.isInteger(message.version) && !(message.version && $util.isInteger(message.version.low) && $util.isInteger(message.version.high)))
                                 return "version: integer|Long expected";
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                            if (error)
+                                return "updateTime." + error;
+                        }
                         if (message.conflictDetected != null && message.hasOwnProperty("conflictDetected"))
                             if (typeof message.conflictDetected !== "boolean")
                                 return "conflictDetected: boolean expected";
@@ -10004,6 +10113,11 @@
                                 message.version = object.version;
                             else if (typeof object.version === "object")
                                 message.version = new $util.LongBits(object.version.low >>> 0, object.version.high >>> 0).toNumber();
+                        if (object.updateTime != null) {
+                            if (typeof object.updateTime !== "object")
+                                throw TypeError(".google.datastore.v1.MutationResult.updateTime: object expected");
+                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                        }
                         if (object.conflictDetected != null)
                             message.conflictDetected = Boolean(object.conflictDetected);
                         return message;
@@ -10030,6 +10144,7 @@
                             } else
                                 object.version = options.longs === String ? "0" : 0;
                             object.conflictDetected = false;
+                            object.updateTime = null;
                         }
                         if (message.key != null && message.hasOwnProperty("key"))
                             object.key = $root.google.datastore.v1.Key.toObject(message.key, options);
@@ -10040,6 +10155,8 @@
                                 object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
                         if (message.conflictDetected != null && message.hasOwnProperty("conflictDetected"))
                             object.conflictDetected = message.conflictDetected;
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                         return object;
                     };
     
@@ -10065,6 +10182,7 @@
                      * @interface IReadOptions
                      * @property {google.datastore.v1.ReadOptions.ReadConsistency|null} [readConsistency] ReadOptions readConsistency
                      * @property {Uint8Array|null} [transaction] ReadOptions transaction
+                     * @property {google.protobuf.ITimestamp|null} [readTime] ReadOptions readTime
                      */
     
                     /**
@@ -10098,17 +10216,25 @@
                      */
                     ReadOptions.prototype.transaction = null;
     
+                    /**
+                     * ReadOptions readTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} readTime
+                     * @memberof google.datastore.v1.ReadOptions
+                     * @instance
+                     */
+                    ReadOptions.prototype.readTime = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
                     /**
                      * ReadOptions consistencyType.
-                     * @member {"readConsistency"|"transaction"|undefined} consistencyType
+                     * @member {"readConsistency"|"transaction"|"readTime"|undefined} consistencyType
                      * @memberof google.datastore.v1.ReadOptions
                      * @instance
                      */
                     Object.defineProperty(ReadOptions.prototype, "consistencyType", {
-                        get: $util.oneOfGetter($oneOfFields = ["readConsistency", "transaction"]),
+                        get: $util.oneOfGetter($oneOfFields = ["readConsistency", "transaction", "readTime"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -10140,6 +10266,8 @@
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.readConsistency);
                         if (message.transaction != null && Object.hasOwnProperty.call(message, "transaction"))
                             writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.transaction);
+                        if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
+                            $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         return writer;
                     };
     
@@ -10179,6 +10307,9 @@
                                 break;
                             case 2:
                                 message.transaction = reader.bytes();
+                                break;
+                            case 4:
+                                message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -10234,6 +10365,16 @@
                             if (!(message.transaction && typeof message.transaction.length === "number" || $util.isString(message.transaction)))
                                 return "transaction: buffer expected";
                         }
+                        if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                            if (properties.consistencyType === 1)
+                                return "consistencyType: multiple values";
+                            properties.consistencyType = 1;
+                            {
+                                var error = $root.google.protobuf.Timestamp.verify(message.readTime);
+                                if (error)
+                                    return "readTime." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -10268,6 +10409,11 @@
                                 $util.base64.decode(object.transaction, message.transaction = $util.newBuffer($util.base64.length(object.transaction)), 0);
                             else if (object.transaction.length)
                                 message.transaction = object.transaction;
+                        if (object.readTime != null) {
+                            if (typeof object.readTime !== "object")
+                                throw TypeError(".google.datastore.v1.ReadOptions.readTime: object expected");
+                            message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime);
+                        }
                         return message;
                     };
     
@@ -10293,6 +10439,11 @@
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
                             if (options.oneofs)
                                 object.consistencyType = "transaction";
+                        }
+                        if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                            object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
+                            if (options.oneofs)
+                                object.consistencyType = "readTime";
                         }
                         return object;
                     };
@@ -10771,6 +10922,7 @@
                          * Properties of a ReadOnly.
                          * @memberof google.datastore.v1.TransactionOptions
                          * @interface IReadOnly
+                         * @property {google.protobuf.ITimestamp|null} [readTime] ReadOnly readTime
                          */
     
                         /**
@@ -10787,6 +10939,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ReadOnly readTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} readTime
+                         * @memberof google.datastore.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         */
+                        ReadOnly.prototype.readTime = null;
     
                         /**
                          * Creates a new ReadOnly instance using the specified properties.
@@ -10812,6 +10972,8 @@
                         ReadOnly.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
+                                $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             return writer;
                         };
     
@@ -10846,6 +11008,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 1:
+                                    message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10881,6 +11046,11 @@
                         ReadOnly.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.readTime);
+                                if (error)
+                                    return "readTime." + error;
+                            }
                             return null;
                         };
     
@@ -10895,7 +11065,13 @@
                         ReadOnly.fromObject = function fromObject(object) {
                             if (object instanceof $root.google.datastore.v1.TransactionOptions.ReadOnly)
                                 return object;
-                            return new $root.google.datastore.v1.TransactionOptions.ReadOnly();
+                            var message = new $root.google.datastore.v1.TransactionOptions.ReadOnly();
+                            if (object.readTime != null) {
+                                if (typeof object.readTime !== "object")
+                                    throw TypeError(".google.datastore.v1.TransactionOptions.ReadOnly.readTime: object expected");
+                                message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime);
+                            }
+                            return message;
                         };
     
                         /**
@@ -10907,8 +11083,15 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        ReadOnly.toObject = function toObject() {
-                            return {};
+                        ReadOnly.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.readTime = null;
+                            if (message.readTime != null && message.hasOwnProperty("readTime"))
+                                object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
+                            return object;
                         };
     
                         /**
@@ -12695,6 +12878,7 @@
                      * @interface IEntityResult
                      * @property {google.datastore.v1.IEntity|null} [entity] EntityResult entity
                      * @property {number|Long|null} [version] EntityResult version
+                     * @property {google.protobuf.ITimestamp|null} [updateTime] EntityResult updateTime
                      * @property {Uint8Array|null} [cursor] EntityResult cursor
                      */
     
@@ -12728,6 +12912,14 @@
                      * @instance
                      */
                     EntityResult.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * EntityResult updateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                     * @memberof google.datastore.v1.EntityResult
+                     * @instance
+                     */
+                    EntityResult.prototype.updateTime = null;
     
                     /**
                      * EntityResult cursor.
@@ -12767,6 +12959,8 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.cursor);
                         if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int64(message.version);
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -12806,6 +13000,9 @@
                                 break;
                             case 4:
                                 message.version = reader.int64();
+                                break;
+                            case 5:
+                                message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             case 3:
                                 message.cursor = reader.bytes();
@@ -12853,6 +13050,11 @@
                         if (message.version != null && message.hasOwnProperty("version"))
                             if (!$util.isInteger(message.version) && !(message.version && $util.isInteger(message.version.low) && $util.isInteger(message.version.high)))
                                 return "version: integer|Long expected";
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                            if (error)
+                                return "updateTime." + error;
+                        }
                         if (message.cursor != null && message.hasOwnProperty("cursor"))
                             if (!(message.cursor && typeof message.cursor.length === "number" || $util.isString(message.cursor)))
                                 return "cursor: buffer expected";
@@ -12885,6 +13087,11 @@
                                 message.version = object.version;
                             else if (typeof object.version === "object")
                                 message.version = new $util.LongBits(object.version.low >>> 0, object.version.high >>> 0).toNumber();
+                        if (object.updateTime != null) {
+                            if (typeof object.updateTime !== "object")
+                                throw TypeError(".google.datastore.v1.EntityResult.updateTime: object expected");
+                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                        }
                         if (object.cursor != null)
                             if (typeof object.cursor === "string")
                                 $util.base64.decode(object.cursor, message.cursor = $util.newBuffer($util.base64.length(object.cursor)), 0);
@@ -12920,6 +13127,7 @@
                                 object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.version = options.longs === String ? "0" : 0;
+                            object.updateTime = null;
                         }
                         if (message.entity != null && message.hasOwnProperty("entity"))
                             object.entity = $root.google.datastore.v1.Entity.toObject(message.entity, options);
@@ -12930,6 +13138,8 @@
                                 object.version = options.longs === String ? String(message.version) : message.version;
                             else
                                 object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                         return object;
                     };
     
@@ -15660,6 +15870,7 @@
                      * @property {Uint8Array|null} [endCursor] QueryResultBatch endCursor
                      * @property {google.datastore.v1.QueryResultBatch.MoreResultsType|null} [moreResults] QueryResultBatch moreResults
                      * @property {number|Long|null} [snapshotVersion] QueryResultBatch snapshotVersion
+                     * @property {google.protobuf.ITimestamp|null} [readTime] QueryResultBatch readTime
                      */
     
                     /**
@@ -15735,6 +15946,14 @@
                     QueryResultBatch.prototype.snapshotVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                     /**
+                     * QueryResultBatch readTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} readTime
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.readTime = null;
+    
+                    /**
                      * Creates a new QueryResultBatch instance using the specified properties.
                      * @function create
                      * @memberof google.datastore.v1.QueryResultBatch
@@ -15773,6 +15992,8 @@
                             writer.uint32(/* id 6, wireType 0 =*/48).int32(message.skippedResults);
                         if (message.snapshotVersion != null && Object.hasOwnProperty.call(message, "snapshotVersion"))
                             writer.uint32(/* id 7, wireType 0 =*/56).int64(message.snapshotVersion);
+                        if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
+                            $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         return writer;
                     };
     
@@ -15829,6 +16050,9 @@
                                 break;
                             case 7:
                                 message.snapshotVersion = reader.int64();
+                                break;
+                            case 8:
+                                message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -15907,6 +16131,11 @@
                         if (message.snapshotVersion != null && message.hasOwnProperty("snapshotVersion"))
                             if (!$util.isInteger(message.snapshotVersion) && !(message.snapshotVersion && $util.isInteger(message.snapshotVersion.low) && $util.isInteger(message.snapshotVersion.high)))
                                 return "snapshotVersion: integer|Long expected";
+                        if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.readTime);
+                            if (error)
+                                return "readTime." + error;
+                        }
                         return null;
                     };
     
@@ -15993,6 +16222,11 @@
                                 message.snapshotVersion = object.snapshotVersion;
                             else if (typeof object.snapshotVersion === "object")
                                 message.snapshotVersion = new $util.LongBits(object.snapshotVersion.low >>> 0, object.snapshotVersion.high >>> 0).toNumber();
+                        if (object.readTime != null) {
+                            if (typeof object.readTime !== "object")
+                                throw TypeError(".google.datastore.v1.QueryResultBatch.readTime: object expected");
+                            message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime);
+                        }
                         return message;
                     };
     
@@ -16034,6 +16268,7 @@
                                 object.snapshotVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.snapshotVersion = options.longs === String ? "0" : 0;
+                            object.readTime = null;
                         }
                         if (message.entityResultType != null && message.hasOwnProperty("entityResultType"))
                             object.entityResultType = options.enums === String ? $root.google.datastore.v1.EntityResult.ResultType[message.entityResultType] : message.entityResultType;
@@ -16055,6 +16290,8 @@
                                 object.snapshotVersion = options.longs === String ? String(message.snapshotVersion) : message.snapshotVersion;
                             else
                                 object.snapshotVersion = options.longs === String ? $util.Long.prototype.toString.call(message.snapshotVersion) : options.longs === Number ? new $util.LongBits(message.snapshotVersion.low >>> 0, message.snapshotVersion.high >>> 0).toNumber() : message.snapshotVersion;
+                        if (message.readTime != null && message.hasOwnProperty("readTime"))
+                            object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
                         return object;
                     };
     
