@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.10.0](https://github.com/googleapis/nodejs-security-center/compare/v5.9.0...v5.10.0) (2022-04-11)
+
+
+### Features
+
+* Add iam_binding field to findings attributes. It represents particular IAM bindings, which captures a member's role addition, removal, or state ([#474](https://github.com/googleapis/nodejs-security-center/issues/474)) ([b29893c](https://github.com/googleapis/nodejs-security-center/commit/b29893c112a346a3277620a01e5ce391097f3c40))
+* Add next_steps field to finding's list of attributes ([#476](https://github.com/googleapis/nodejs-security-center/issues/476)) ([326e8d2](https://github.com/googleapis/nodejs-security-center/commit/326e8d2242d0852df593474dbc028ea17fb8d600))
+* AuditConfig for IAM v1 ([#470](https://github.com/googleapis/nodejs-security-center/issues/470)) ([2ec070f](https://github.com/googleapis/nodejs-security-center/commit/2ec070f504fe85bd1c9adf7436b7d8c902ec167b))
+
 ## [5.9.0](https://github.com/googleapis/nodejs-security-center/compare/v5.8.0...v5.9.0) (2022-02-04)
 
 
