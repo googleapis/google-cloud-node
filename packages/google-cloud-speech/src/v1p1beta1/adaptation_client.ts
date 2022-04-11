@@ -344,15 +344,16 @@ export class AdaptationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource where this phrase set will be created. Format:
+   *   Required. The parent resource where this phrase set will be created.
+   *   Format:
    *
    *   `projects/{project}/locations/{location}/phraseSets`
    *
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {string} request.phraseSetId
    *   Required. The ID to use for the phrase set, which will become the final
    *   component of the phrase set's resource name.
@@ -458,8 +459,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -560,8 +561,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The list of fields to be updated.
    * @param {object} [options]
@@ -747,15 +748,16 @@ export class AdaptationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource where this custom class will be created. Format:
+   *   Required. The parent resource where this custom class will be created.
+   *   Format:
    *
    *   `projects/{project}/locations/{location}/customClasses`
    *
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {string} request.customClassId
    *   Required. The ID to use for the custom class, which will become the final
    *   component of the custom class' resource name.
@@ -963,8 +965,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The list of fields to be updated.
    * @param {object} [options]
@@ -1070,8 +1072,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1176,8 +1178,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {number} request.pageSize
    *   The maximum number of phrase sets to return. The service may return
    *   fewer than this value. If unspecified, at most 50 phrase sets will be
@@ -1289,8 +1291,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {number} request.pageSize
    *   The maximum number of phrase sets to return. The service may return
    *   fewer than this value. If unspecified, at most 50 phrase sets will be
@@ -1350,8 +1352,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {number} request.pageSize
    *   The maximum number of phrase sets to return. The service may return
    *   fewer than this value. If unspecified, at most 50 phrase sets will be
@@ -1410,8 +1412,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {number} request.pageSize
    *   The maximum number of custom classes to return. The service may return
    *   fewer than this value. If unspecified, at most 50 custom classes will be
@@ -1523,8 +1525,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {number} request.pageSize
    *   The maximum number of custom classes to return. The service may return
    *   fewer than this value. If unspecified, at most 50 custom classes will be
@@ -1584,8 +1586,8 @@ export class AdaptationClient {
    *   Speech-to-Text supports three locations: `global`, `us` (US North America),
    *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-   *   `eu` location value.
+   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+   *   with matching `us` or `eu` location value.
    * @param {number} request.pageSize
    *   The maximum number of custom classes to return. The service may return
    *   fewer than this value. If unspecified, at most 50 custom classes will be
@@ -1805,9 +1807,8 @@ export class AdaptationClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.adaptationStub!.then(stub => {
+    if (this.adaptationStub && !this._terminated) {
+      return this.adaptationStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

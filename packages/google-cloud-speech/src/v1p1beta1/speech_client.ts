@@ -24,8 +24,10 @@ import {
   Descriptors,
   ClientOptions,
   LROperation,
+  GoogleError,
 } from 'google-gax';
 
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -264,6 +266,16 @@ export class SpeechClient {
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new GoogleError('The client has already been closed.')
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -447,7 +459,7 @@ export class SpeechClient {
    */
   _streamingRecognize(options?: CallOptions): gax.CancellableStream {
     this.initialize();
-    return this.innerApiCalls.streamingRecognize(options);
+    return this.innerApiCalls.streamingRecognize(null, options);
   }
 
   /**
@@ -708,9 +720,8 @@ export class SpeechClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.speechStub!.then(stub => {
+    if (this.speechStub && !this._terminated) {
+      return this.speechStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

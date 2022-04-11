@@ -151,12 +151,27 @@ describe('v1p1beta1.AdaptationClient', () => {
     assert(client.adaptationStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new adaptationModule.v1p1beta1.AdaptationClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.adaptationStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new adaptationModule.v1p1beta1.AdaptationClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.adaptationStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -302,6 +317,21 @@ describe('v1p1beta1.AdaptationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createPhraseSet with closed client', async () => {
+      const client = new adaptationModule.v1p1beta1.AdaptationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createPhraseSet(request), expectedError);
+    });
   });
 
   describe('getPhraseSet', () => {
@@ -412,6 +442,21 @@ describe('v1p1beta1.AdaptationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getPhraseSet with closed client', async () => {
+      const client = new adaptationModule.v1p1beta1.AdaptationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1p1beta1.GetPhraseSetRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPhraseSet(request), expectedError);
     });
   });
 
@@ -527,6 +572,22 @@ describe('v1p1beta1.AdaptationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updatePhraseSet with closed client', async () => {
+      const client = new adaptationModule.v1p1beta1.AdaptationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest()
+      );
+      request.phraseSet = {};
+      request.phraseSet.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updatePhraseSet(request), expectedError);
+    });
   });
 
   describe('deletePhraseSet', () => {
@@ -637,6 +698,21 @@ describe('v1p1beta1.AdaptationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deletePhraseSet with closed client', async () => {
+      const client = new adaptationModule.v1p1beta1.AdaptationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deletePhraseSet(request), expectedError);
     });
   });
 
@@ -749,6 +825,21 @@ describe('v1p1beta1.AdaptationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createCustomClass with closed client', async () => {
+      const client = new adaptationModule.v1p1beta1.AdaptationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1p1beta1.CreateCustomClassRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createCustomClass(request), expectedError);
+    });
   });
 
   describe('getCustomClass', () => {
@@ -859,6 +950,21 @@ describe('v1p1beta1.AdaptationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getCustomClass with closed client', async () => {
+      const client = new adaptationModule.v1p1beta1.AdaptationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1p1beta1.GetCustomClassRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCustomClass(request), expectedError);
     });
   });
 
@@ -974,6 +1080,22 @@ describe('v1p1beta1.AdaptationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateCustomClass with closed client', async () => {
+      const client = new adaptationModule.v1p1beta1.AdaptationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest()
+      );
+      request.customClass = {};
+      request.customClass.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateCustomClass(request), expectedError);
+    });
   });
 
   describe('deleteCustomClass', () => {
@@ -1084,6 +1206,21 @@ describe('v1p1beta1.AdaptationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteCustomClass with closed client', async () => {
+      const client = new adaptationModule.v1p1beta1.AdaptationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteCustomClass(request), expectedError);
     });
   });
 

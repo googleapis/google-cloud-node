@@ -136,12 +136,27 @@ describe('v1.SpeechClient', () => {
     assert(client.speechStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new speechModule.v1.SpeechClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.speechStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new speechModule.v1.SpeechClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.speechStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -259,6 +274,20 @@ describe('v1.SpeechClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes recognize with closed client', async () => {
+      const client = new speechModule.v1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.speech.v1.RecognizeRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.recognize(request), expectedError);
     });
   });
 
@@ -460,7 +489,7 @@ describe('v1.SpeechClient', () => {
       assert(
         (client.innerApiCalls.streamingRecognize as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
@@ -503,7 +532,7 @@ describe('v1.SpeechClient', () => {
       assert(
         (client.innerApiCalls.streamingRecognize as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)

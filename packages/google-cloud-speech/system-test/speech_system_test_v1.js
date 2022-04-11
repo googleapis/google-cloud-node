@@ -97,7 +97,7 @@ describe('SpeechClient system test v1', () => {
     stream.on('data', response => {
       assert.strictEqual(
         response.results[0].alternatives[0].transcript,
-        'test of streaming recognize call'
+        'test of streaming recognized call'
       );
       gotResponse = true;
     });

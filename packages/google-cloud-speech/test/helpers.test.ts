@@ -57,7 +57,7 @@ describe('Speech helper methods', () => {
       // Establish that the underlying streamingRecognize was called with
       // the options.
       assert(sr.calledOnce);
-      assert(sr.calledWithExactly(OPTIONS));
+      assert(sr.calledWithExactly(null, OPTIONS));
 
       requestStream._write = (data, enc, next) => {
         assert.deepStrictEqual(data, {
@@ -89,7 +89,7 @@ describe('Speech helper methods', () => {
       userStream.emit('writing');
 
       assert(sr.calledOnce);
-      assert(sr.calledWithExactly({}));
+      assert(sr.calledWithExactly(null, {}));
     });
 
     it('destroys the user stream when the request stream errors', done => {
