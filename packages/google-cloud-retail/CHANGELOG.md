@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/nodejs-retail/compare/v1.7.0...v1.8.0) (2022-04-08)
+
+
+### Features
+
+* allow search users to skip validation for invalid boost specs (v2alpha) ([3c6ffc1](https://github.com/googleapis/nodejs-retail/commit/3c6ffc1d6fee7095213824d45c3ca5bb0f974a1b))
+* Retail Tutorials. If create BQ table is requested, check if it exists and remove  before creation ([#157](https://github.com/googleapis/nodejs-retail/issues/157)) ([349e171](https://github.com/googleapis/nodejs-retail/commit/349e171baacff751044665389e92e67f02ebc22c))
+* search returns applied control ids in the response (v2alpha) ([3c6ffc1](https://github.com/googleapis/nodejs-retail/commit/3c6ffc1d6fee7095213824d45c3ca5bb0f974a1b))
+* support batch products purge (v2alpha) ([#167](https://github.com/googleapis/nodejs-retail/issues/167)) ([3c6ffc1](https://github.com/googleapis/nodejs-retail/commit/3c6ffc1d6fee7095213824d45c3ca5bb0f974a1b))
+* support search personalization (v2alpha) ([3c6ffc1](https://github.com/googleapis/nodejs-retail/commit/3c6ffc1d6fee7095213824d45c3ca5bb0f974a1b))
+* users cannot switch to empty default branch unless force override (v2alpha) ([3c6ffc1](https://github.com/googleapis/nodejs-retail/commit/3c6ffc1d6fee7095213824d45c3ca5bb0f974a1b))
+
 ## [1.7.0](https://github.com/googleapis/nodejs-retail/compare/v1.6.1...v1.7.0) (2022-04-01)
 
 
