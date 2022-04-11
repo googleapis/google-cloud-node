@@ -104,12 +104,27 @@ describe('v1.BigQueryWriteClient', () => {
     assert(client.bigQueryWriteStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new bigquerywriteModule.v1.BigQueryWriteClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.bigQueryWriteStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.bigQueryWriteStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -255,6 +270,21 @@ describe('v1.BigQueryWriteClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createWriteStream with closed client', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createWriteStream(request), expectedError);
+    });
   });
 
   describe('getWriteStream', () => {
@@ -365,6 +395,21 @@ describe('v1.BigQueryWriteClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getWriteStream with closed client', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.GetWriteStreamRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getWriteStream(request), expectedError);
     });
   });
 
@@ -477,6 +522,21 @@ describe('v1.BigQueryWriteClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes finalizeWriteStream with closed client', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.finalizeWriteStream(request), expectedError);
     });
   });
 
@@ -593,6 +653,24 @@ describe('v1.BigQueryWriteClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchCommitWriteStreams with closed client', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.batchCommitWriteStreams(request),
+        expectedError
+      );
+    });
   });
 
   describe('flushRows', () => {
@@ -701,6 +779,21 @@ describe('v1.BigQueryWriteClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes flushRows with closed client', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FlushRowsRequest()
+      );
+      request.writeStream = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.flushRows(request), expectedError);
+    });
   });
 
   describe('appendRows', () => {
@@ -738,7 +831,7 @@ describe('v1.BigQueryWriteClient', () => {
       assert(
         (client.innerApiCalls.appendRows as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
@@ -756,8 +849,6 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.AppendRowsRequest()
       );
-      request.writeStream = '';
-      const expectedHeaderRequestParams = 'write_stream=';
       const expectedError = new Error('expected');
       client.innerApiCalls.appendRows = stubBidiStreamingCall(
         undefined,
@@ -783,7 +874,7 @@ describe('v1.BigQueryWriteClient', () => {
       assert(
         (client.innerApiCalls.appendRows as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)

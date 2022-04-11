@@ -6611,6 +6611,8 @@
                                     case 5:
                                     case 6:
                                     case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.entity != null && message.hasOwnProperty("entity"))
@@ -6666,6 +6668,14 @@
                                 case "SCHEMA_MISMATCH_EXTRA_FIELDS":
                                 case 7:
                                     message.code = 7;
+                                    break;
+                                case "OFFSET_ALREADY_EXISTS":
+                                case 8:
+                                    message.code = 8;
+                                    break;
+                                case "OFFSET_OUT_OF_RANGE":
+                                case 9:
+                                    message.code = 9;
                                     break;
                                 }
                                 if (object.entity != null)
@@ -6725,6 +6735,8 @@
                              * @property {number} INVALID_STREAM_STATE=5 INVALID_STREAM_STATE value
                              * @property {number} STREAM_FINALIZED=6 STREAM_FINALIZED value
                              * @property {number} SCHEMA_MISMATCH_EXTRA_FIELDS=7 SCHEMA_MISMATCH_EXTRA_FIELDS value
+                             * @property {number} OFFSET_ALREADY_EXISTS=8 OFFSET_ALREADY_EXISTS value
+                             * @property {number} OFFSET_OUT_OF_RANGE=9 OFFSET_OUT_OF_RANGE value
                              */
                             StorageError.StorageErrorCode = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -6736,6 +6748,8 @@
                                 values[valuesById[5] = "INVALID_STREAM_STATE"] = 5;
                                 values[valuesById[6] = "STREAM_FINALIZED"] = 6;
                                 values[valuesById[7] = "SCHEMA_MISMATCH_EXTRA_FIELDS"] = 7;
+                                values[valuesById[8] = "OFFSET_ALREADY_EXISTS"] = 8;
+                                values[valuesById[9] = "OFFSET_OUT_OF_RANGE"] = 9;
                                 return values;
                             })();
     
@@ -6774,6 +6788,7 @@
                              * @property {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions|null} [readOptions] ReadSession readOptions
                              * @property {Array.<google.cloud.bigquery.storage.v1.IReadStream>|null} [streams] ReadSession streams
                              * @property {number|Long|null} [estimatedTotalBytesScanned] ReadSession estimatedTotalBytesScanned
+                             * @property {string|null} [traceId] ReadSession traceId
                              */
     
                             /**
@@ -6872,6 +6887,14 @@
                              */
                             ReadSession.prototype.estimatedTotalBytesScanned = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
+                            /**
+                             * ReadSession traceId.
+                             * @member {string} traceId
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.traceId = "";
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -6931,6 +6954,8 @@
                                         $root.google.cloud.bigquery.storage.v1.ReadStream.encode(message.streams[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                 if (message.estimatedTotalBytesScanned != null && Object.hasOwnProperty.call(message, "estimatedTotalBytesScanned"))
                                     writer.uint32(/* id 12, wireType 0 =*/96).int64(message.estimatedTotalBytesScanned);
+                                if (message.traceId != null && Object.hasOwnProperty.call(message, "traceId"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.traceId);
                                 return writer;
                             };
     
@@ -6996,6 +7021,9 @@
                                         break;
                                     case 12:
                                         message.estimatedTotalBytesScanned = reader.int64();
+                                        break;
+                                    case 13:
+                                        message.traceId = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -7093,6 +7121,9 @@
                                 if (message.estimatedTotalBytesScanned != null && message.hasOwnProperty("estimatedTotalBytesScanned"))
                                     if (!$util.isInteger(message.estimatedTotalBytesScanned) && !(message.estimatedTotalBytesScanned && $util.isInteger(message.estimatedTotalBytesScanned.low) && $util.isInteger(message.estimatedTotalBytesScanned.high)))
                                         return "estimatedTotalBytesScanned: integer|Long expected";
+                                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                                    if (!$util.isString(message.traceId))
+                                        return "traceId: string expected";
                                 return null;
                             };
     
@@ -7170,6 +7201,8 @@
                                         message.estimatedTotalBytesScanned = object.estimatedTotalBytesScanned;
                                     else if (typeof object.estimatedTotalBytesScanned === "object")
                                         message.estimatedTotalBytesScanned = new $util.LongBits(object.estimatedTotalBytesScanned.low >>> 0, object.estimatedTotalBytesScanned.high >>> 0).toNumber();
+                                if (object.traceId != null)
+                                    message.traceId = String(object.traceId);
                                 return message;
                             };
     
@@ -7200,6 +7233,7 @@
                                         object.estimatedTotalBytesScanned = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                     } else
                                         object.estimatedTotalBytesScanned = options.longs === String ? "0" : 0;
+                                    object.traceId = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -7233,6 +7267,8 @@
                                         object.estimatedTotalBytesScanned = options.longs === String ? String(message.estimatedTotalBytesScanned) : message.estimatedTotalBytesScanned;
                                     else
                                         object.estimatedTotalBytesScanned = options.longs === String ? $util.Long.prototype.toString.call(message.estimatedTotalBytesScanned) : options.longs === Number ? new $util.LongBits(message.estimatedTotalBytesScanned.low >>> 0, message.estimatedTotalBytesScanned.high >>> 0).toNumber() : message.estimatedTotalBytesScanned;
+                                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                                    object.traceId = message.traceId;
                                 return object;
                             };
     

@@ -2984,7 +2984,9 @@ export namespace google {
                             INVALID_STREAM_TYPE = 4,
                             INVALID_STREAM_STATE = 5,
                             STREAM_FINALIZED = 6,
-                            SCHEMA_MISMATCH_EXTRA_FIELDS = 7
+                            SCHEMA_MISMATCH_EXTRA_FIELDS = 7,
+                            OFFSET_ALREADY_EXISTS = 8,
+                            OFFSET_OUT_OF_RANGE = 9
                         }
                     }
 
@@ -3027,6 +3029,9 @@ export namespace google {
 
                         /** ReadSession estimatedTotalBytesScanned */
                         estimatedTotalBytesScanned?: (number|Long|string|null);
+
+                        /** ReadSession traceId */
+                        traceId?: (string|null);
                     }
 
                     /** Represents a ReadSession. */
@@ -3067,6 +3072,9 @@ export namespace google {
 
                         /** ReadSession estimatedTotalBytesScanned. */
                         public estimatedTotalBytesScanned: (number|Long|string);
+
+                        /** ReadSession traceId. */
+                        public traceId: string;
 
                         /** ReadSession schema. */
                         public schema?: ("avroSchema"|"arrowSchema");

@@ -18,8 +18,15 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GoogleError,
+} from 'google-gax';
 
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -238,6 +245,16 @@ export class BigQueryStorageClient {
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new GoogleError('The client has already been closed.')
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -294,7 +311,6 @@ export class BigQueryStorageClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/bigquery',
-      'https://www.googleapis.com/auth/bigquery.readonly',
       'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
@@ -962,9 +978,8 @@ export class BigQueryStorageClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.bigQueryStorageStub!.then(stub => {
+    if (this.bigQueryStorageStub && !this._terminated) {
+      return this.bigQueryStorageStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

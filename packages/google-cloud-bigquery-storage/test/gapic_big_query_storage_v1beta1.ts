@@ -113,12 +113,27 @@ describe('v1beta1.BigQueryStorageClient', () => {
     assert(client.bigQueryStorageStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.bigQueryStorageStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.bigQueryStorageStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -276,6 +291,24 @@ describe('v1beta1.BigQueryStorageClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createReadSession with closed client', async () => {
+      const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1beta1.CreateReadSessionRequest()
+      );
+      request.tableReference = {};
+      request.tableReference.projectId = '';
+      request.tableReference = {};
+      request.tableReference.datasetId = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createReadSession(request), expectedError);
+    });
   });
 
   describe('batchCreateReadSessionStreams', () => {
@@ -394,6 +427,25 @@ describe('v1beta1.BigQueryStorageClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchCreateReadSessionStreams with closed client', async () => {
+      const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsRequest()
+      );
+      request.session = {};
+      request.session.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.batchCreateReadSessionStreams(request),
+        expectedError
+      );
+    });
   });
 
   describe('finalizeStream', () => {
@@ -507,6 +559,22 @@ describe('v1beta1.BigQueryStorageClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes finalizeStream with closed client', async () => {
+      const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1beta1.FinalizeStreamRequest()
+      );
+      request.stream = {};
+      request.stream.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.finalizeStream(request), expectedError);
     });
   });
 
@@ -622,6 +690,22 @@ describe('v1beta1.BigQueryStorageClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes splitReadStream with closed client', async () => {
+      const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1beta1.SplitReadStreamRequest()
+      );
+      request.originalStream = {};
+      request.originalStream.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.splitReadStream(request), expectedError);
+    });
   });
 
   describe('readRows', () => {
@@ -717,6 +801,37 @@ describe('v1beta1.BigQueryStorageClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions)
       );
+    });
+
+    it('invokes readRows with closed client', async () => {
+      const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1beta1.ReadRowsRequest()
+      );
+      request.readPosition = {};
+      request.readPosition.stream = {};
+      request.readPosition.stream.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      const stream = client.readRows(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.bigquery.storage.v1beta1.ReadRowsResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
     });
   });
 

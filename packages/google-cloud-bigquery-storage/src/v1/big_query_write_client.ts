@@ -18,8 +18,15 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GoogleError,
+} from 'google-gax';
 
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -247,6 +254,16 @@ export class BigQueryWriteClient {
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new GoogleError('The client has already been closed.')
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -873,6 +890,13 @@ export class BigQueryWriteClient {
    * finalized (via the `FinalizeWriteStream` rpc), and the stream is explicitly
    * committed via the `BatchCommitWriteStreams` rpc.
    *
+   * Note: For users coding against the gRPC api directly, it may be
+   * necessary to supply the x-goog-request-params system parameter
+   * with `write_stream=<full_write_stream_name>`.
+   *
+   * More information about system parameters:
+   * https://cloud.google.com/apis/docs/system-parameters
+   *
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -887,7 +911,7 @@ export class BigQueryWriteClient {
    */
   appendRows(options?: CallOptions): gax.CancellableStream {
     this.initialize();
-    return this.innerApiCalls.appendRows(options);
+    return this.innerApiCalls.appendRows(null, options);
   }
 
   // --------------------
@@ -1167,9 +1191,8 @@ export class BigQueryWriteClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.bigQueryWriteStub!.then(stub => {
+    if (this.bigQueryWriteStub && !this._terminated) {
+      return this.bigQueryWriteStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

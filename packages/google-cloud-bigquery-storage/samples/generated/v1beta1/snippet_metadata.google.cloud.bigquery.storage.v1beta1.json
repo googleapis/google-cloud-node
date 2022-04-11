@@ -1,0 +1,247 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-storage",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.bigquery.storage.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "bigquerystorage_v1beta1_generated_BigQueryStorage_CreateReadSession_async",
+      "title": "BigQueryStorage createReadSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new read session. A read session divides the contents of a BigQuery table into one or more streams, which can then be used to read data from the table. The read session also specifies properties of the data to be read, such as a list of columns or a push-down filter describing the rows to be returned. A particular row can be read by at most one stream. When the caller has reached the end of each stream in the session, then all the data in the table has been read. Read sessions automatically expire 24 hours after they are created and do not require manual clean-up by the caller.",
+      "canonical": true,
+      "file": "big_query_storage.create_read_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReadSession",
+        "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.CreateReadSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "table_reference",
+            "type": ".google.cloud.bigquery.storage.v1beta1.TableReference"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table_modifiers",
+            "type": ".google.cloud.bigquery.storage.v1beta1.TableModifiers"
+          },
+          {
+            "name": "requested_streams",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "read_options",
+            "type": ".google.cloud.bigquery.storage.v1beta1.TableReadOptions"
+          },
+          {
+            "name": "format",
+            "type": ".google.cloud.bigquery.storage.v1beta1.DataFormat"
+          },
+          {
+            "name": "sharding_strategy",
+            "type": ".google.cloud.bigquery.storage.v1beta1.ShardingStrategy"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.storage.v1beta1.ReadSession",
+        "client": {
+          "shortName": "BigQueryStorageClient",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorageClient"
+        },
+        "method": {
+          "shortName": "CreateReadSession",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.CreateReadSession",
+          "service": {
+            "shortName": "BigQueryStorage",
+            "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerystorage_v1beta1_generated_BigQueryStorage_ReadRows_async",
+      "title": "BigQueryStorage readRows Sample",
+      "origin": "API_DEFINITION",
+      "description": " Reads rows from the table in the format prescribed by the read session. Each response contains one or more table rows, up to a maximum of 10 MiB per response; read requests which attempt to read individual rows larger than this will fail. Each request also returns a set of stream statistics reflecting the estimated total number of rows in the read stream. This number is computed based on the total table size and the number of active streams in the read session, and may change as other streams continue to read data.",
+      "canonical": true,
+      "file": "big_query_storage.read_rows.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReadRows",
+        "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.ReadRows",
+        "async": true,
+        "parameters": [
+          {
+            "name": "read_position",
+            "type": ".google.cloud.bigquery.storage.v1beta1.StreamPosition"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.storage.v1beta1.ReadRowsResponse",
+        "client": {
+          "shortName": "BigQueryStorageClient",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorageClient"
+        },
+        "method": {
+          "shortName": "ReadRows",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.ReadRows",
+          "service": {
+            "shortName": "BigQueryStorage",
+            "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerystorage_v1beta1_generated_BigQueryStorage_BatchCreateReadSessionStreams_async",
+      "title": "BigQueryStorage batchCreateReadSessionStreams Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates additional streams for a ReadSession. This API can be used to dynamically adjust the parallelism of a batch processing task upwards by adding additional workers.",
+      "canonical": true,
+      "file": "big_query_storage.batch_create_read_session_streams.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateReadSessionStreams",
+        "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.BatchCreateReadSessionStreams",
+        "async": true,
+        "parameters": [
+          {
+            "name": "session",
+            "type": ".google.cloud.bigquery.storage.v1beta1.ReadSession"
+          },
+          {
+            "name": "requested_streams",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsResponse",
+        "client": {
+          "shortName": "BigQueryStorageClient",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorageClient"
+        },
+        "method": {
+          "shortName": "BatchCreateReadSessionStreams",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.BatchCreateReadSessionStreams",
+          "service": {
+            "shortName": "BigQueryStorage",
+            "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerystorage_v1beta1_generated_BigQueryStorage_FinalizeStream_async",
+      "title": "BigQueryStorage finalizeStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Triggers the graceful termination of a single stream in a ReadSession. This API can be used to dynamically adjust the parallelism of a batch processing task downwards without losing data. This API does not delete the stream -- it remains visible in the ReadSession, and any data processed by the stream is not released to other streams. However, no additional data will be assigned to the stream once this call completes. Callers must continue reading data on the stream until the end of the stream is reached so that data which has already been assigned to the stream will be processed. This method will return an error if there are no other live streams in the Session, or if SplitReadStream() has been called on the given Stream.",
+      "canonical": true,
+      "file": "big_query_storage.finalize_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FinalizeStream",
+        "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.FinalizeStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "stream",
+            "type": ".google.cloud.bigquery.storage.v1beta1.Stream"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "BigQueryStorageClient",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorageClient"
+        },
+        "method": {
+          "shortName": "FinalizeStream",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.FinalizeStream",
+          "service": {
+            "shortName": "BigQueryStorage",
+            "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerystorage_v1beta1_generated_BigQueryStorage_SplitReadStream_async",
+      "title": "BigQueryStorage splitReadStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Splits a given read stream into two Streams. These streams are referred to as the primary and the residual of the split. The original stream can still be read from in the same manner as before. Both of the returned streams can also be read from, and the total rows return by both child streams will be the same as the rows read from the original stream. Moreover, the two child streams will be allocated back to back in the original Stream. Concretely, it is guaranteed that for streams Original, Primary, and Residual, that Original[0-j] = Primary[0-j] and Original[j-n] = Residual[0-m] once the streams have been read to completion. This method is guaranteed to be idempotent.",
+      "canonical": true,
+      "file": "big_query_storage.split_read_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SplitReadStream",
+        "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.SplitReadStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "original_stream",
+            "type": ".google.cloud.bigquery.storage.v1beta1.Stream"
+          },
+          {
+            "name": "fraction",
+            "type": "TYPE_FLOAT"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.storage.v1beta1.SplitReadStreamResponse",
+        "client": {
+          "shortName": "BigQueryStorageClient",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorageClient"
+        },
+        "method": {
+          "shortName": "SplitReadStream",
+          "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage.SplitReadStream",
+          "service": {
+            "shortName": "BigQueryStorage",
+            "fullName": "google.cloud.bigquery.storage.v1beta1.BigQueryStorage"
+          }
+        }
+      }
+    }
+  ]
+}
