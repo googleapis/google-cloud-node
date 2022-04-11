@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.6.1...v2.7.0) (2022-04-08)
+
+
+### Features
+
+* Sync public protos with latests public api state. This adds support for collapsible groups, filters, labels, drilldowns, logs panels and tables ([#257](https://github.com/googleapis/nodejs-monitoring-dashboards/issues/257)) ([5f539c1](https://github.com/googleapis/nodejs-monitoring-dashboards/commit/5f539c1957a448bf475e568f2b4fe76fa5d4c3a8))
+
 ### [2.6.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.6.0...v2.6.1) (2021-09-08)
 
 
