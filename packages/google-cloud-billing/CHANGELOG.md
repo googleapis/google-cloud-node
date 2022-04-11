@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/nodejs-billing/compare/v2.3.0...v2.4.0) (2022-04-06)
+
+
+### Features
+
+* AuditConfig for IAM v1 ([#218](https://github.com/googleapis/nodejs-billing/issues/218)) ([88e6535](https://github.com/googleapis/nodejs-billing/commit/88e6535e6c356534884c09f7d781a53f330bfef3))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-billing/compare/v2.2.7...v2.3.0) (2021-08-23)
 
 
