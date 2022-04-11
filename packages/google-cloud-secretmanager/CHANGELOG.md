@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.0](https://github.com/googleapis/nodejs-secret-manager/compare/v3.11.0...v3.12.0) (2022-04-06)
+
+
+### Features
+
+* AuditConfig for IAM v1 ([#356](https://github.com/googleapis/nodejs-secret-manager/issues/356)) ([4cbc15b](https://github.com/googleapis/nodejs-secret-manager/commit/4cbc15b20bfb0a4d1db79f609086f7159c4c4ed0))
+
 ## [3.11.0](https://github.com/googleapis/nodejs-secret-manager/compare/v3.10.1...v3.11.0) (2022-02-05)
 
 
