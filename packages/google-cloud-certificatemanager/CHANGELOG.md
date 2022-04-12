@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.1.0...v0.2.0) (2022-04-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Updated resource patterns to comply with https://google.aip.dev/123#annotating-resource-types
+
+### Bug Fixes
+
+* Updated resource patterns to comply with https://google.aip.dev/123#annotating-resource-types ([32bfafc](https://github.com/googleapis/nodejs-certificate-manager/commit/32bfafc79bcfef7e0edaf00155ab71eaa2db0720))
+
 ## 0.1.0 (2022-03-22)
 
 
