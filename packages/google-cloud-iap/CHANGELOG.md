@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/nodejs-iap/compare/v1.1.1...v1.2.0) (2022-04-08)
+
+
+### Features
+
+* AuditConfig for IAM v1 ([#48](https://github.com/googleapis/nodejs-iap/issues/48)) ([47af8d4](https://github.com/googleapis/nodejs-iap/commit/47af8d42fa116d8da4defd9a23312a4fe9c035c8))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-iap/compare/v1.1.0...v1.1.1) (2021-09-03)
 
 
