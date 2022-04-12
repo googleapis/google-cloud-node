@@ -3175,6 +3175,74 @@
         }
       }
     },
+    "NetworkEdgeSecurityServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NetworkEdgeSecurityServicesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NetworkEdgeSecurityServicesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkEndpointGroups": {
       "clients": {
         "grpc": {
@@ -3285,6 +3353,184 @@
                 "listNetworkEndpoints",
                 "listNetworkEndpointsStream",
                 "listNetworkEndpointsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NetworkFirewallPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NetworkFirewallPoliciesClient",
+          "rpcs": {
+            "AddAssociation": {
+              "methods": [
+                "addAssociation"
+              ]
+            },
+            "AddRule": {
+              "methods": [
+                "addRule"
+              ]
+            },
+            "CloneRules": {
+              "methods": [
+                "cloneRules"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetAssociation": {
+              "methods": [
+                "getAssociation"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patchRule"
+              ]
+            },
+            "RemoveAssociation": {
+              "methods": [
+                "removeAssociation"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "removeRule"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NetworkFirewallPoliciesClient",
+          "rpcs": {
+            "AddAssociation": {
+              "methods": [
+                "addAssociation"
+              ]
+            },
+            "AddRule": {
+              "methods": [
+                "addRule"
+              ]
+            },
+            "CloneRules": {
+              "methods": [
+                "cloneRules"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetAssociation": {
+              "methods": [
+                "getAssociation"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patchRule"
+              ]
+            },
+            "RemoveAssociation": {
+              "methods": [
+                "removeAssociation"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "removeRule"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
               ]
             }
           }
@@ -5051,6 +5297,194 @@
         }
       }
     },
+    "RegionNetworkFirewallPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionNetworkFirewallPoliciesClient",
+          "rpcs": {
+            "AddAssociation": {
+              "methods": [
+                "addAssociation"
+              ]
+            },
+            "AddRule": {
+              "methods": [
+                "addRule"
+              ]
+            },
+            "CloneRules": {
+              "methods": [
+                "cloneRules"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetAssociation": {
+              "methods": [
+                "getAssociation"
+              ]
+            },
+            "GetEffectiveFirewalls": {
+              "methods": [
+                "getEffectiveFirewalls"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patchRule"
+              ]
+            },
+            "RemoveAssociation": {
+              "methods": [
+                "removeAssociation"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "removeRule"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionNetworkFirewallPoliciesClient",
+          "rpcs": {
+            "AddAssociation": {
+              "methods": [
+                "addAssociation"
+              ]
+            },
+            "AddRule": {
+              "methods": [
+                "addRule"
+              ]
+            },
+            "CloneRules": {
+              "methods": [
+                "cloneRules"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetAssociation": {
+              "methods": [
+                "getAssociation"
+              ]
+            },
+            "GetEffectiveFirewalls": {
+              "methods": [
+                "getEffectiveFirewalls"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patchRule"
+              ]
+            },
+            "RemoveAssociation": {
+              "methods": [
+                "removeAssociation"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "removeRule"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "RegionNotificationEndpoints": {
       "clients": {
         "grpc": {
@@ -5192,6 +5626,74 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionSecurityPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionSecurityPoliciesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionSecurityPoliciesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
               ]
             },
             "List": {
@@ -5351,6 +5853,11 @@
                 "insert"
               ]
             },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
             "SetSslCertificates": {
               "methods": [
                 "setSslCertificates"
@@ -5386,6 +5893,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
               ]
             },
             "SetSslCertificates": {
@@ -5955,6 +6467,13 @@
                 "removeRule"
               ]
             },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -6010,6 +6529,13 @@
             "RemoveRule": {
               "methods": [
                 "removeRule"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
               ]
             },
             "List": {

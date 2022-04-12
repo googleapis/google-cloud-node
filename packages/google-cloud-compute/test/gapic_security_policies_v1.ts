@@ -1341,6 +1341,100 @@ describe('v1.SecurityPoliciesClient', () => {
     });
   });
 
+  describe('aggregatedList', () => {
+    it('uses async iteration with aggregatedList without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedResponse = [
+        [
+          'tuple_key_1',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.SecurityPoliciesScopedList()
+          ),
+        ],
+        [
+          'tuple_key_2',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.SecurityPoliciesScopedList()
+          ),
+        ],
+        [
+          'tuple_key_3',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.SecurityPoliciesScopedList()
+          ),
+        ],
+      ];
+      client.descriptors.page.aggregatedList.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: Array<
+        [string, protos.google.cloud.compute.v1.ISecurityPoliciesScopedList]
+      > = [];
+      const iterable = client.aggregatedListAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with aggregatedList with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.aggregatedList.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.aggregatedListAsync(request);
+      await assert.rejects(async () => {
+        const responses: Array<
+          [string, protos.google.cloud.compute.v1.ISecurityPoliciesScopedList]
+        > = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('list', () => {
     it('invokes list without error', async () => {
       const client = new securitypoliciesModule.v1.SecurityPoliciesClient({

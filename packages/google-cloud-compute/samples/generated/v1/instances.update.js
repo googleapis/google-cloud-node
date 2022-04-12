@@ -35,10 +35,12 @@ function main(instance, instanceResource, project, zone) {
   // const instanceResource = {}
   /**
    *  Specifies the action to take when updating an instance even if the updated properties do not require it. If not specified, then Compute Engine acts based on the minimum action that the updated properties require.
+   *  Check the MinimalAction enum for the list of possible values.
    */
   // const minimalAction = 'abc123'
   /**
    *  Specifies the most disruptive action that can be taken on the instance as part of the update. Compute Engine returns an error if the instance properties require a more disruptive action as part of the instance update. Valid options from lowest to highest are NO_EFFECT, REFRESH, and RESTART.
+   *  Check the MostDisruptiveAllowedAction enum for the list of possible values.
    */
   // const mostDisruptiveAllowedAction = 'abc123'
   /**

@@ -55,7 +55,11 @@ function main() {
   const licensesClient = new compute.LicensesClient();
   const machineImagesClient = new compute.MachineImagesClient();
   const machineTypesClient = new compute.MachineTypesClient();
+  const networkEdgeSecurityServicesClient =
+    new compute.NetworkEdgeSecurityServicesClient();
   const networkEndpointGroupsClient = new compute.NetworkEndpointGroupsClient();
+  const networkFirewallPoliciesClient =
+    new compute.NetworkFirewallPoliciesClient();
   const networksClient = new compute.NetworksClient();
   const nodeGroupsClient = new compute.NodeGroupsClient();
   const nodeTemplatesClient = new compute.NodeTemplatesClient();
@@ -80,10 +84,14 @@ function main() {
   const regionInstancesClient = new compute.RegionInstancesClient();
   const regionNetworkEndpointGroupsClient =
     new compute.RegionNetworkEndpointGroupsClient();
+  const regionNetworkFirewallPoliciesClient =
+    new compute.RegionNetworkFirewallPoliciesClient();
   const regionNotificationEndpointsClient =
     new compute.RegionNotificationEndpointsClient();
   const regionOperationsClient = new compute.RegionOperationsClient();
   const regionsClient = new compute.RegionsClient();
+  const regionSecurityPoliciesClient =
+    new compute.RegionSecurityPoliciesClient();
   const regionSslCertificatesClient = new compute.RegionSslCertificatesClient();
   const regionTargetHttpProxiesClient =
     new compute.RegionTargetHttpProxiesClient();

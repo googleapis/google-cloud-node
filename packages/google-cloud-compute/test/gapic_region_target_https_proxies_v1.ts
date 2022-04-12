@@ -613,6 +613,132 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
     });
   });
 
+  describe('patch', () => {
+    it('invokes patch without error', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
+      const [response] = await client.patch(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      assert(
+        (client.innerApiCalls.patch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes patch without error using callback', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.patch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.patch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes patch with error', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.patch(request), expectedError);
+      assert(
+        (client.innerApiCalls.patch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes patch with closed client', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patch(request), expectedError);
+    });
+  });
+
   describe('setSslCertificates', () => {
     it('invokes setSslCertificates without error', async () => {
       const client =

@@ -2170,7 +2170,7 @@ export class InstancesClient {
       );
   }
   /**
-   * Performs a reset on the instance. This is a hard reset the VM does not do a graceful shutdown. For more information, see Resetting an instance.
+   * Performs a reset on the instance. This is a hard reset. The VM does not do a graceful shutdown. For more information, see Resetting an instance.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4669,8 +4669,10 @@ export class InstancesClient {
    *   The body resource for this request
    * @param {string} request.minimalAction
    *   Specifies the action to take when updating an instance even if the updated properties do not require it. If not specified, then Compute Engine acts based on the minimum action that the updated properties require.
+   *   Check the MinimalAction enum for the list of possible values.
    * @param {string} request.mostDisruptiveAllowedAction
    *   Specifies the most disruptive action that can be taken on the instance as part of the update. Compute Engine returns an error if the instance properties require a more disruptive action as part of the instance update. Valid options from lowest to highest are NO_EFFECT, REFRESH, and RESTART.
+   *   Check the MostDisruptiveAllowedAction enum for the list of possible values.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

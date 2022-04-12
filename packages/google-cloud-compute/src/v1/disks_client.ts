@@ -459,7 +459,7 @@ export class DisksClient {
    * @param {string} request.disk
    *   Name of the persistent disk to snapshot.
    * @param {boolean} request.guestFlush
-   *   [Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS).
+   *   [Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

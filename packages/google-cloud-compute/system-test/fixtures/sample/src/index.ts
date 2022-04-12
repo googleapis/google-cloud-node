@@ -48,7 +48,9 @@ import {
   LicensesClient,
   MachineImagesClient,
   MachineTypesClient,
+  NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
+  NetworkFirewallPoliciesClient,
   NetworksClient,
   NodeGroupsClient,
   NodeTemplatesClient,
@@ -68,9 +70,11 @@ import {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionNetworkEndpointGroupsClient,
+  RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
   RegionOperationsClient,
   RegionsClient,
+  RegionSecurityPoliciesClient,
   RegionSslCertificatesClient,
   RegionTargetHttpProxiesClient,
   RegionTargetHttpsProxiesClient,
@@ -210,8 +214,18 @@ function doStuffWithMachineImagesClient(client: MachineImagesClient) {
 function doStuffWithMachineTypesClient(client: MachineTypesClient) {
   client.close();
 }
+function doStuffWithNetworkEdgeSecurityServicesClient(
+  client: NetworkEdgeSecurityServicesClient
+) {
+  client.close();
+}
 function doStuffWithNetworkEndpointGroupsClient(
   client: NetworkEndpointGroupsClient
+) {
+  client.close();
+}
+function doStuffWithNetworkFirewallPoliciesClient(
+  client: NetworkFirewallPoliciesClient
 ) {
   client.close();
 }
@@ -286,6 +300,11 @@ function doStuffWithRegionNetworkEndpointGroupsClient(
 ) {
   client.close();
 }
+function doStuffWithRegionNetworkFirewallPoliciesClient(
+  client: RegionNetworkFirewallPoliciesClient
+) {
+  client.close();
+}
 function doStuffWithRegionNotificationEndpointsClient(
   client: RegionNotificationEndpointsClient
 ) {
@@ -295,6 +314,11 @@ function doStuffWithRegionOperationsClient(client: RegionOperationsClient) {
   client.close();
 }
 function doStuffWithRegionsClient(client: RegionsClient) {
+  client.close();
+}
+function doStuffWithRegionSecurityPoliciesClient(
+  client: RegionSecurityPoliciesClient
+) {
   client.close();
 }
 function doStuffWithRegionSslCertificatesClient(
@@ -489,8 +513,17 @@ function main() {
   const machineTypesClient = new MachineTypesClient();
   doStuffWithMachineTypesClient(machineTypesClient);
   // check that the client instance can be created
+  const networkEdgeSecurityServicesClient =
+    new NetworkEdgeSecurityServicesClient();
+  doStuffWithNetworkEdgeSecurityServicesClient(
+    networkEdgeSecurityServicesClient
+  );
+  // check that the client instance can be created
   const networkEndpointGroupsClient = new NetworkEndpointGroupsClient();
   doStuffWithNetworkEndpointGroupsClient(networkEndpointGroupsClient);
+  // check that the client instance can be created
+  const networkFirewallPoliciesClient = new NetworkFirewallPoliciesClient();
+  doStuffWithNetworkFirewallPoliciesClient(networkFirewallPoliciesClient);
   // check that the client instance can be created
   const networksClient = new NetworksClient();
   doStuffWithNetworksClient(networksClient);
@@ -555,6 +588,12 @@ function main() {
     regionNetworkEndpointGroupsClient
   );
   // check that the client instance can be created
+  const regionNetworkFirewallPoliciesClient =
+    new RegionNetworkFirewallPoliciesClient();
+  doStuffWithRegionNetworkFirewallPoliciesClient(
+    regionNetworkFirewallPoliciesClient
+  );
+  // check that the client instance can be created
   const regionNotificationEndpointsClient =
     new RegionNotificationEndpointsClient();
   doStuffWithRegionNotificationEndpointsClient(
@@ -566,6 +605,9 @@ function main() {
   // check that the client instance can be created
   const regionsClient = new RegionsClient();
   doStuffWithRegionsClient(regionsClient);
+  // check that the client instance can be created
+  const regionSecurityPoliciesClient = new RegionSecurityPoliciesClient();
+  doStuffWithRegionSecurityPoliciesClient(regionSecurityPoliciesClient);
   // check that the client instance can be created
   const regionSslCertificatesClient = new RegionSslCertificatesClient();
   doStuffWithRegionSslCertificatesClient(regionSslCertificatesClient);

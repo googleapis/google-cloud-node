@@ -230,6 +230,7 @@ export class RegionTargetHttpsProxiesClient {
       'get',
       'insert',
       'list',
+      'patch',
       'setSslCertificates',
       'setUrlMap',
     ];
@@ -642,6 +643,130 @@ export class RegionTargetHttpsProxiesClient {
     this.initialize();
     return this.innerApiCalls
       .insert(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Patches the specified regional TargetHttpsProxy resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.targetHttpsProxy
+   *   Name of the TargetHttpsProxy resource to patch.
+   * @param {google.cloud.compute.v1.TargetHttpsProxy} request.targetHttpsProxyResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_target_https_proxies.patch.js</caption>
+   * region_tag:compute_v1_generated_RegionTargetHttpsProxies_Patch_async
+   */
+  patch(
+    request?: protos.google.cloud.compute.v1.IPatchRegionTargetHttpsProxyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  patch(
+    request: protos.google.cloud.compute.v1.IPatchRegionTargetHttpsProxyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRegionTargetHttpsProxyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patch(
+    request: protos.google.cloud.compute.v1.IPatchRegionTargetHttpsProxyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRegionTargetHttpsProxyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patch(
+    request?: protos.google.cloud.compute.v1.IPatchRegionTargetHttpsProxyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchRegionTargetHttpsProxyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRegionTargetHttpsProxyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .patch(request, options, callback)
       .then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,

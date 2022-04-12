@@ -84,8 +84,12 @@ const MachineImagesClient = v1.MachineImagesClient;
 type MachineImagesClient = v1.MachineImagesClient;
 const MachineTypesClient = v1.MachineTypesClient;
 type MachineTypesClient = v1.MachineTypesClient;
+const NetworkEdgeSecurityServicesClient = v1.NetworkEdgeSecurityServicesClient;
+type NetworkEdgeSecurityServicesClient = v1.NetworkEdgeSecurityServicesClient;
 const NetworkEndpointGroupsClient = v1.NetworkEndpointGroupsClient;
 type NetworkEndpointGroupsClient = v1.NetworkEndpointGroupsClient;
+const NetworkFirewallPoliciesClient = v1.NetworkFirewallPoliciesClient;
+type NetworkFirewallPoliciesClient = v1.NetworkFirewallPoliciesClient;
 const NetworksClient = v1.NetworksClient;
 type NetworksClient = v1.NetworksClient;
 const NodeGroupsClient = v1.NodeGroupsClient;
@@ -124,12 +128,18 @@ const RegionInstancesClient = v1.RegionInstancesClient;
 type RegionInstancesClient = v1.RegionInstancesClient;
 const RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 type RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
+const RegionNetworkFirewallPoliciesClient =
+  v1.RegionNetworkFirewallPoliciesClient;
+type RegionNetworkFirewallPoliciesClient =
+  v1.RegionNetworkFirewallPoliciesClient;
 const RegionNotificationEndpointsClient = v1.RegionNotificationEndpointsClient;
 type RegionNotificationEndpointsClient = v1.RegionNotificationEndpointsClient;
 const RegionOperationsClient = v1.RegionOperationsClient;
 type RegionOperationsClient = v1.RegionOperationsClient;
 const RegionsClient = v1.RegionsClient;
 type RegionsClient = v1.RegionsClient;
+const RegionSecurityPoliciesClient = v1.RegionSecurityPoliciesClient;
+type RegionSecurityPoliciesClient = v1.RegionSecurityPoliciesClient;
 const RegionSslCertificatesClient = v1.RegionSslCertificatesClient;
 type RegionSslCertificatesClient = v1.RegionSslCertificatesClient;
 const RegionTargetHttpProxiesClient = v1.RegionTargetHttpProxiesClient;
@@ -219,7 +229,9 @@ export {
   LicensesClient,
   MachineImagesClient,
   MachineTypesClient,
+  NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
+  NetworkFirewallPoliciesClient,
   NetworksClient,
   NodeGroupsClient,
   NodeTemplatesClient,
@@ -239,9 +251,11 @@ export {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionNetworkEndpointGroupsClient,
+  RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
   RegionOperationsClient,
   RegionsClient,
+  RegionSecurityPoliciesClient,
   RegionSslCertificatesClient,
   RegionTargetHttpProxiesClient,
   RegionTargetHttpsProxiesClient,
@@ -304,7 +318,9 @@ export default {
   LicensesClient,
   MachineImagesClient,
   MachineTypesClient,
+  NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
+  NetworkFirewallPoliciesClient,
   NetworksClient,
   NodeGroupsClient,
   NodeTemplatesClient,
@@ -324,9 +340,11 @@ export default {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionNetworkEndpointGroupsClient,
+  RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
   RegionOperationsClient,
   RegionsClient,
+  RegionSecurityPoliciesClient,
   RegionSslCertificatesClient,
   RegionTargetHttpProxiesClient,
   RegionTargetHttpsProxiesClient,
