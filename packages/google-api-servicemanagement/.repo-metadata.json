@@ -11,6 +11,6 @@
   "requires_billing": true,
   "language": "nodejs",
   "repo": "googleapis/nodejs-service-management",
-  "api_shortname": "service-management",
+  "api_shortname": "servicemanagement",
   "library_type": "GAPIC_AUTO"
 }
