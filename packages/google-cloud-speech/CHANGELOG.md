@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.10.1](https://github.com/googleapis/nodejs-speech/compare/v4.10.0...v4.10.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* use full link in comment to fix JSDoc broken link ([#851](https://github.com/googleapis/nodejs-speech/issues/851)) ([1f34087](https://github.com/googleapis/nodejs-speech/commit/1f340874241da12a32308ccba64193205c65a459))
+
 ## [4.10.0](https://github.com/googleapis/nodejs-speech/compare/v4.9.0...v4.10.0) (2022-01-17)
 
 
