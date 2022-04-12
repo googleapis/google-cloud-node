@@ -6,6 +6,13 @@
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
+🔔 **AutoML API NodeJS Client is now available in Vertex AI. Please visit** 
+[node-js-aiplatform](https://github.com/googleapis/nodejs-ai-platform) **for the new NodeJS Vertex AI client.** 
+Vertex AI is our next generation AI Platform, with many new features that are unavailable in the current platform. 
+[Migrate your resources to Vertex AI](https://cloud.google.com/vertex-ai/docs/start/migrating-to-vertex-ai) to get 
+the latest machine learning features, simplify end-to-end journeys, and productionize models with MLOps.
+
+Cloud AutoML API client for Node.js
 
 
 ## Table of Contents
