@@ -19,7 +19,10 @@
 //   description: Uploads full hierarchy of a local directory to a bucket.
 //   usage: node files.js upload-directory <bucketName> <directoryPath>
 
-async function main(bucketName, directoryPath) {
+function main(
+  bucketName = 'your-unique-bucket-name',
+  directoryPath = './local/path/to/directory'
+) {
   // [START upload_directory]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
@@ -36,68 +39,53 @@ async function main(bucketName, directoryPath) {
   // Creates a client
   const storage = new Storage();
 
+  const {promisify} = require('util');
   const fs = require('fs');
   const path = require('path');
-  const fileList = [];
+
+  const readdir = promisify(fs.readdir);
+  const stat = promisify(fs.stat);
+
+  async function* getFiles(directory = '.') {
+    for (const file of await readdir(directory)) {
+      const fullPath = path.join(directory, file);
+      const stats = await stat(fullPath);
+
+      if (stats.isDirectory()) {
+        yield* getFiles(fullPath);
+      }
+
+      if (stats.isFile()) {
+        yield fullPath;
+      }
+    }
+  }
 
   async function uploadDirectory() {
-    // Get a list of files from the specified directory
-    let dirCtr = 1;
-    let itemCtr = 0;
-    const pathDirName = path.dirname(directoryPath);
+    const bucket = storage.bucket(bucketName);
+    let successfulUploads = 0;
 
-    getFiles(directoryPath);
+    for await (const filePath of getFiles(directoryPath)) {
+      try {
+        const dirname = path.dirname(directoryPath);
+        const destination = path.relative(dirname, filePath);
 
-    function getFiles(directory) {
-      fs.readdir(directory, (err, items) => {
-        dirCtr--;
-        itemCtr += items.length;
-        items.forEach(item => {
-          const fullPath = path.join(directory, item);
-          fs.stat(fullPath, (err, stat) => {
-            itemCtr--;
-            if (stat.isFile()) {
-              fileList.push(fullPath);
-            } else if (stat.isDirectory()) {
-              dirCtr++;
-              getFiles(fullPath);
-            }
-            if (dirCtr === 0 && itemCtr === 0) {
-              onComplete();
-            }
-          });
-        });
-      });
+        await bucket.upload(filePath, {destination});
+
+        console.log(`Successfully uploaded: ${filePath}`);
+        successfulUploads++;
+      } catch (e) {
+        console.error(`Error uploading ${filePath}:`, e);
+      }
     }
 
-    async function onComplete() {
-      const resp = await Promise.all(
-        fileList.map(filePath => {
-          let destination = path.relative(pathDirName, filePath);
-          // If running on Windows
-          if (process.platform === 'win32') {
-            destination = destination.replace(/\\/g, '/');
-          }
-          return storage
-            .bucket(bucketName)
-            .upload(filePath, {destination})
-            .then(
-              uploadResp => ({fileName: destination, status: uploadResp[0]}),
-              err => ({fileName: destination, response: err})
-            );
-        })
-      );
-
-      const successfulUploads =
-        fileList.length - resp.filter(r => r.status instanceof Error).length;
-      console.log(
-        `${successfulUploads} files uploaded to ${bucketName} successfully.`
-      );
-    }
+    console.log(
+      `${successfulUploads} files uploaded to ${bucketName} successfully.`
+    );
   }
 
   uploadDirectory().catch(console.error);
   // [END upload_directory]
 }
 
-main(...process.argv.slice(2)).catch(console.error);
+main(...process.argv.slice(2));
