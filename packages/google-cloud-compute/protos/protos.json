@@ -23162,11 +23162,6 @@
                     },
                     "InsertFirewallPolicyRequest": {
                       "oneofs": {
-                        "_parentId": {
-                          "oneof": [
-                            "parentId"
-                          ]
-                        },
                         "_requestId": {
                           "oneof": [
                             "requestId"
@@ -23186,7 +23181,7 @@
                           "id": 459714768,
                           "options": {
                             "(google.cloud.operation_request_field)": "parent_id",
-                            "proto3_optional": true
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "requestId": {

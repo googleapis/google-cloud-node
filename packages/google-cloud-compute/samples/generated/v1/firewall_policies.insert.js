@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(firewallPolicyResource) {
+function main(firewallPolicyResource, parentId) {
   // [START compute_v1_generated_FirewallPolicies_Insert_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -48,6 +48,7 @@ function main(firewallPolicyResource) {
     // Construct request
     const request = {
       firewallPolicyResource,
+      parentId,
     };
 
     // Run request
