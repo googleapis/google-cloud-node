@@ -256,6 +256,9 @@ class ServiceObject<T = any> extends EventEmitter {
       const [err, instance] = args;
       if (!err) {
         self.metadata = instance.metadata;
+        if (self.id && instance.metadata) {
+          self.id = instance.metadata.id;
+        }
         args[1] = self; // replace the created `instance` with this one.
       }
       callback!(...(args as {} as [Error, T]));

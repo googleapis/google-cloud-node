@@ -73,13 +73,16 @@
         "createReadStream"
     ],
     "storage.notifications.delete": [
+        "notificationDelete"
     ],
     "storage.notifications.insert": [
         "createNotification",
         "notificationCreate"
     ],
     "storage.notifications.get": [
-        "notificationExists"
+        "notificationExists",
+        "notificationGet",
+        "notificationGetMetadata"
     ],
     "storage.buckets.getIamPolicy": [
         "iamGetPolicy"
