@@ -277,6 +277,11 @@ export class ModelServiceClient {
         'nextPageToken',
         'models'
       ),
+      listModelVersions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'models'
+      ),
       listModelEvaluations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -313,6 +318,12 @@ export class ModelServiceClient {
     const deleteModelMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteModelVersionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteModelVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
     const exportModelResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.ExportModelResponse'
     ) as gax.protobuf.Type;
@@ -330,6 +341,11 @@ export class ModelServiceClient {
         this.operationsClient,
         deleteModelResponse.decode.bind(deleteModelResponse),
         deleteModelMetadata.decode.bind(deleteModelMetadata)
+      ),
+      deleteModelVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteModelVersionResponse.decode.bind(deleteModelVersionResponse),
+        deleteModelVersionMetadata.decode.bind(deleteModelVersionMetadata)
       ),
       exportModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -391,8 +407,11 @@ export class ModelServiceClient {
       'uploadModel',
       'getModel',
       'listModels',
+      'listModelVersions',
       'updateModel',
       'deleteModel',
+      'deleteModelVersion',
+      'mergeVersionAliases',
       'exportModel',
       'importModelEvaluation',
       'getModelEvaluation',
@@ -583,6 +602,23 @@ export class ModelServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1beta1.Model} request.model
    *   Required. The Model which replaces the resource on the server.
+   *   When Model Versioning is enabled, the model.name will be used to determine
+   *   whether to update the model or model version.
+   *   1. model.name with the @ value, e.g. models/123@1, refers to a version
+   *   specific update.
+   *   2. model.name without the @ value, e.g. models/123, refers to a model
+   *   update.
+   *   3. model.name with @-, e.g. models/123@-, refers to a model update.
+   *   4. Supported model fields: display_name, description; supported
+   *   version-specific fields: version_description. Labels are supported in both
+   *   scenarios. Both the model labels and the version labels are merged when a
+   *   model is returned. When updating labels, if the request is for
+   *   model-specific update, model label gets updated. Otherwise, version labels
+   *   get updated.
+   *   5. A model name or model version name fields update mismatch will cause a
+   *   precondition error.
+   *   6. One request cannot update both the model and the version fields. You
+   *   must update them separately.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource.
    *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
@@ -669,6 +705,119 @@ export class ModelServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateModel(request, options, callback);
+  }
+  /**
+   * Merges a set of aliases for a Model version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model version to merge aliases, with a version ID
+   *   explicitly included.
+   *
+   *   Example: `projects/{project}/locations/{location}/models/{model}@1234`
+   * @param {string[]} request.versionAliases
+   *   Required. The set of version aliases to merge.
+   *   The alias should be at most 128 characters, and match
+   *   `{@link a-z0-9-|a-z}{0,126}[a-z-0-9]`.
+   *   Add the `-` prefix to an alias means removing that alias from the version.
+   *   `-` is NOT counted in the 128 characters. Example: `-golden` means removing
+   *   the `golden` alias from the version.
+   *
+   *   There is NO ordering in aliases, which means
+   *   1) The aliases returned from GetModel API might not have the exactly same
+   *   order from this MergeVersionAliases API. 2) Adding and deleting the same
+   *   alias in the request is not recommended, and the 2 operations will be
+   *   cancelled out.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Model]{@link google.cloud.aiplatform.v1beta1.Model}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_service.merge_version_aliases.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelService_MergeVersionAliases_async
+   */
+  mergeVersionAliases(
+    request?: protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModel,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  mergeVersionAliases(
+    request: protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModel,
+      | protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  mergeVersionAliases(
+    request: protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModel,
+      | protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  mergeVersionAliases(
+    request?: protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModel,
+          | protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModel,
+      | protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModel,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IMergeVersionAliasesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.mergeVersionAliases(request, options, callback);
   }
   /**
    * Imports an externally generated ModelEvaluation.
@@ -981,6 +1130,15 @@ export class ModelServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Location into which to upload the Model.
    *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.parentModel]
+   *   Optional. The resource name of the model into which to upload the version. Only
+   *   specify this field when uploading a new version.
+   * @param {string} [request.modelId]
+   *   Optional. The ID to use for the uploaded Model, which will become the final
+   *   component of the model resource name.
+   *
+   *   This value may be up to 63 characters, and valid characters are
+   *   `[a-z0-9_-]`. The first character cannot be a number or hyphen.
    * @param {google.cloud.aiplatform.v1beta1.Model} request.model
    *   Required. The Model to create.
    * @param {object} [options]
@@ -1248,6 +1406,150 @@ export class ModelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Deletes a Model version.
+   *
+   * Model version can only be deleted if there are no {@link |DeployedModels}
+   * created from it. Deleting the only version in the Model is not allowed. Use
+   * {@link google.cloud.aiplatform.v1beta1.ModelService.DeleteModel|DeleteModel} for deleting the Model instead.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model version to be deleted, with a version ID explicitly
+   *   included.
+   *
+   *   Example: `projects/{project}/locations/{location}/models/{model}@1234`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_service.delete_model_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelService_DeleteModelVersion_async
+   */
+  deleteModelVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteModelVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteModelVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteModelVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteModelVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteModelVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteModelVersion(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteModelVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_service.delete_model_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelService_DeleteModelVersion_async
+   */
+  async checkDeleteModelVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteModelVersion,
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -1647,6 +1949,243 @@ export class ModelServiceClient {
     this.initialize();
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModel>;
+  }
+  /**
+   * Lists versions of the specified model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model to list versions for.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token} of the previous
+   *   {@link |ModelService.ListModelversions} call.
+   * @param {string} request.filter
+   *   An expression for filtering the results of the request. For field names
+   *   both snake_case and camelCase are supported.
+   *
+   *     * `labels` supports general map functions that is:
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *
+   *   Some examples:
+   *     * `labels.myKey="myValue"`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Model]{@link google.cloud.aiplatform.v1beta1.Model}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listModelVersions(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModel[],
+      protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListModelVersionsResponse
+    ]
+  >;
+  listModelVersions(
+    request: protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListModelVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModel
+    >
+  ): void;
+  listModelVersions(
+    request: protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListModelVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModel
+    >
+  ): void;
+  listModelVersions(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListModelVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModel
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListModelVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModel
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModel[],
+      protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListModelVersionsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listModelVersions(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model to list versions for.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token} of the previous
+   *   {@link |ModelService.ListModelversions} call.
+   * @param {string} request.filter
+   *   An expression for filtering the results of the request. For field names
+   *   both snake_case and camelCase are supported.
+   *
+   *     * `labels` supports general map functions that is:
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *
+   *   Some examples:
+   *     * `labels.myKey="myValue"`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Model]{@link google.cloud.aiplatform.v1beta1.Model} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listModelVersionsStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    const defaultCallSettings = this._defaults['listModelVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listModelVersions.createStream(
+      this.innerApiCalls.listModelVersions as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listModelVersions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model to list versions for.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token} of the previous
+   *   {@link |ModelService.ListModelversions} call.
+   * @param {string} request.filter
+   *   An expression for filtering the results of the request. For field names
+   *   both snake_case and camelCase are supported.
+   *
+   *     * `labels` supports general map functions that is:
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *
+   *   Some examples:
+   *     * `labels.myKey="myValue"`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Model]{@link google.cloud.aiplatform.v1beta1.Model}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_service.list_model_versions.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelService_ListModelVersions_async
+   */
+  listModelVersionsAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListModelVersionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModel> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    const defaultCallSettings = this._defaults['listModelVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listModelVersions.asyncIterate(
+      this.innerApiCalls['listModelVersions'] as GaxCall,
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModel>;

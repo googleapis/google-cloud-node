@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(execution, updateMask) {
+function main(execution) {
   // [START aiplatform_v1beta1_generated_MetadataService_UpdateExecution_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -34,7 +34,7 @@ function main(execution, updateMask) {
    */
   // const execution = {}
   /**
-   *  Required. A FieldMask indicating which fields should be updated.
+   *  Optional. A FieldMask indicating which fields should be updated.
    *  Functionality of this field is not yet supported.
    */
   // const updateMask = {}
@@ -54,7 +54,6 @@ function main(execution, updateMask) {
     // Construct request
     const request = {
       execution,
-      updateMask,
     };
 
     // Run request

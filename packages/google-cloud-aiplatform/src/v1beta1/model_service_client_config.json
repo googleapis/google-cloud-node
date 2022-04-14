@@ -35,6 +35,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListModelVersions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateModel": {
           "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
@@ -42,6 +46,14 @@
         },
         "DeleteModel": {
           "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteModelVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "MergeVersionAliases": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

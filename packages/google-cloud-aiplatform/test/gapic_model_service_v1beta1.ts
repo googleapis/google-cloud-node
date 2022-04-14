@@ -495,6 +495,133 @@ describe('v1beta1.ModelServiceClient', () => {
     });
   });
 
+  describe('mergeVersionAliases', () => {
+    it('invokes mergeVersionAliases without error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.MergeVersionAliasesRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.Model()
+      );
+      client.innerApiCalls.mergeVersionAliases =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.mergeVersionAliases(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.mergeVersionAliases as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes mergeVersionAliases without error using callback', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.MergeVersionAliasesRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.Model()
+      );
+      client.innerApiCalls.mergeVersionAliases =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.mergeVersionAliases(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IModel | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.mergeVersionAliases as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes mergeVersionAliases with error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.MergeVersionAliasesRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.mergeVersionAliases = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.mergeVersionAliases(request), expectedError);
+      assert(
+        (client.innerApiCalls.mergeVersionAliases as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes mergeVersionAliases with closed client', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.MergeVersionAliasesRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.mergeVersionAliases(request), expectedError);
+    });
+  });
+
   describe('importModelEvaluation', () => {
     it('invokes importModelEvaluation without error', async () => {
       const client = new modelserviceModule.v1beta1.ModelServiceClient({
@@ -1268,6 +1395,200 @@ describe('v1beta1.ModelServiceClient', () => {
     });
   });
 
+  describe('deleteModelVersion', () => {
+    it('invokes deleteModelVersion without error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteModelVersion =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteModelVersion(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteModelVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteModelVersion without error using callback', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteModelVersion =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteModelVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteModelVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteModelVersion with call error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteModelVersion = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteModelVersion(request), expectedError);
+      assert(
+        (client.innerApiCalls.deleteModelVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteModelVersion with LRO error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteModelVersion = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteModelVersion(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.deleteModelVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkDeleteModelVersionProgress without error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteModelVersionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteModelVersionProgress with error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteModelVersionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('exportModel', () => {
     it('invokes exportModel without error', async () => {
       const client = new modelserviceModule.v1beta1.ModelServiceClient({
@@ -1762,6 +2083,311 @@ describe('v1beta1.ModelServiceClient', () => {
         (client.descriptors.page.listModels.asyncIterate as SinonStub).getCall(
           0
         ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listModelVersions', () => {
+    it('invokes listModelVersions without error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelVersionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+      ];
+      client.innerApiCalls.listModelVersions = stubSimpleCall(expectedResponse);
+      const [response] = await client.listModelVersions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listModelVersions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listModelVersions without error using callback', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelVersionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+      ];
+      client.innerApiCalls.listModelVersions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listModelVersions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IModel[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listModelVersions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listModelVersions with error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelVersionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listModelVersions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listModelVersions(request), expectedError);
+      assert(
+        (client.innerApiCalls.listModelVersions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listModelVersionsStream without error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelVersionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+      ];
+      client.descriptors.page.listModelVersions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listModelVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.Model[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.Model) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listModelVersions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listModelVersions, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listModelVersions.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listModelVersionsStream with error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelVersionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listModelVersions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listModelVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.Model[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.Model) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listModelVersions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listModelVersions, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listModelVersions.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listModelVersions without error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelVersionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Model()
+        ),
+      ];
+      client.descriptors.page.listModelVersions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IModel[] = [];
+      const iterable = client.listModelVersionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listModelVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listModelVersions.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listModelVersions with error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelVersionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listModelVersions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listModelVersionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.IModel[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listModelVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listModelVersions.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

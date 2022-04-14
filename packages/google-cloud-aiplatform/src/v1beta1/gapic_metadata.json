@@ -1359,6 +1359,11 @@
                 "updateModel"
               ]
             },
+            "MergeVersionAliases": {
+              "methods": [
+                "mergeVersionAliases"
+              ]
+            },
             "ImportModelEvaluation": {
               "methods": [
                 "importModelEvaluation"
@@ -1384,6 +1389,11 @@
                 "deleteModel"
               ]
             },
+            "DeleteModelVersion": {
+              "methods": [
+                "deleteModelVersion"
+              ]
+            },
             "ExportModel": {
               "methods": [
                 "exportModel"
@@ -1394,6 +1404,13 @@
                 "listModels",
                 "listModelsStream",
                 "listModelsAsync"
+              ]
+            },
+            "ListModelVersions": {
+              "methods": [
+                "listModelVersions",
+                "listModelVersionsStream",
+                "listModelVersionsAsync"
               ]
             },
             "ListModelEvaluations": {
@@ -1425,6 +1442,11 @@
                 "updateModel"
               ]
             },
+            "MergeVersionAliases": {
+              "methods": [
+                "mergeVersionAliases"
+              ]
+            },
             "ImportModelEvaluation": {
               "methods": [
                 "importModelEvaluation"
@@ -1450,6 +1472,11 @@
                 "deleteModel"
               ]
             },
+            "DeleteModelVersion": {
+              "methods": [
+                "deleteModelVersion"
+              ]
+            },
             "ExportModel": {
               "methods": [
                 "exportModel"
@@ -1460,6 +1487,13 @@
                 "listModels",
                 "listModelsStream",
                 "listModelsAsync"
+              ]
+            },
+            "ListModelVersions": {
+              "methods": [
+                "listModelVersions",
+                "listModelVersionsStream",
+                "listModelVersionsAsync"
               ]
             },
             "ListModelEvaluations": {

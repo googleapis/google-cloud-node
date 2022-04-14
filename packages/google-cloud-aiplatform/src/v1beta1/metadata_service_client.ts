@@ -879,8 +879,8 @@ export class MetadataServiceClient {
    *   be updated.
    *   Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A FieldMask indicating which fields should be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. A FieldMask indicating which fields should be updated.
    *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
    *   If set to true, and the {@link google.cloud.aiplatform.v1beta1.Artifact|Artifact} is not found, a new {@link google.cloud.aiplatform.v1beta1.Artifact|Artifact} is
@@ -1177,8 +1177,8 @@ export class MetadataServiceClient {
    *   updated.
    *   Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A FieldMask indicating which fields should be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. A FieldMask indicating which fields should be updated.
    *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
    *   If set to true, and the {@link google.cloud.aiplatform.v1beta1.Context|Context} is not found, a new {@link google.cloud.aiplatform.v1beta1.Context|Context} is
@@ -1814,8 +1814,8 @@ export class MetadataServiceClient {
    *   to be updated.
    *   Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A FieldMask indicating which fields should be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. A FieldMask indicating which fields should be updated.
    *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
    *   If set to true, and the {@link google.cloud.aiplatform.v1beta1.Execution|Execution} is not found, a new {@link google.cloud.aiplatform.v1beta1.Execution|Execution}
