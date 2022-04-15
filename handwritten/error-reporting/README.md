@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Error Reporting: Node.js Client](https://github.com/googleapis/nodejs-error-reporting)
+# [Error Reporting: Node.js Client](https://github.com/googleapis/nodejs-error-reporting)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/error-reporting.svg)](https://www.npmjs.org/package/@google-cloud/error-reporting)
@@ -18,8 +18,8 @@
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-error-reporting/blob/main/CHANGELOG.md).
 
-* [Cloud Error Reporting Node.js Client API Reference][client-docs]
-* [Cloud Error Reporting Documentation][product-docs]
+* [Error Reporting Node.js Client API Reference][client-docs]
+* [Error Reporting Documentation][product-docs]
 * [github.com/googleapis/nodejs-error-reporting](https://github.com/googleapis/nodejs-error-reporting)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -44,7 +44,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
-1.  [Enable the Cloud Error Reporting API][enable_api].
+1.  [Enable the Error Reporting API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -361,7 +361,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-error-repor
 
 
 
-The [Cloud Error Reporting Node.js Client API Reference][client-docs] documentation
+The [Error Reporting Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
