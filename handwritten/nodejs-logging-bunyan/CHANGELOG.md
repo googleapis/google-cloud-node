@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [3.3.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v3.3.0...v3.3.1) (2022-04-15)
+
+
+### Bug Fixes
+
+* Reenable staleness bot ([#613](https://github.com/googleapis/nodejs-logging-bunyan/issues/613)) ([1b3f273](https://github.com/googleapis/nodejs-logging-bunyan/commit/1b3f273ea84475ae2d6fabed435775bfea253ae9))
+
 ## [3.3.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v3.2.2...v3.3.0) (2022-03-21)
 
 
