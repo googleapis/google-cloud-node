@@ -36,7 +36,7 @@ function main(
    * TODO(developer): Uncomment these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library. v1 is for the lower level
   // proto access.
@@ -46,10 +46,11 @@ function main(
   const subClient = new v1.SubscriberClient();
 
   async function synchronousPull() {
-    const formattedSubscription = subClient.subscriptionPath(
-      projectId,
-      subscriptionNameOrId
-    );
+    // The low level API client requires a name only.
+    const formattedSubscription =
+      subscriptionNameOrId.indexOf('/') >= 0
+        ? subscriptionNameOrId
+        : subClient.subscriptionPath(projectId, subscriptionNameOrId);
 
     // The maximum number of messages returned for this request.
     // Pub/Sub may return fewer than the number specified.

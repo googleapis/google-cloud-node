@@ -23,7 +23,7 @@ import {
   Topic,
 } from '@google-cloud/pubsub';
 import {assert} from 'chai';
-import {describe, it, after} from 'mocha';
+import {describe, it, afterEach} from 'mocha';
 import * as cp from 'child_process';
 import * as uuid from 'uuid';
 import * as path from 'path';
@@ -39,7 +39,7 @@ describe('schema', () => {
   const projectId = process.env.GCLOUD_PROJECT;
   const pubsub = new PubSub({projectId});
   const runId = uuid.v4();
-  console.log(`Topics runId: ${runId}`);
+  console.log(`Schema runId: ${runId}`);
   const topicIdStem = `schema-top-${runId}-`;
   const subscriptionIdStem = `schema-sub-${runId}-`;
   const schemaIdStem = `schema-${runId}-`;
@@ -90,7 +90,7 @@ describe('schema', () => {
     );
   }
 
-  after(async () => {
+  afterEach(async () => {
     await cleanAllSubs();
     await cleanAllTopics();
     await cleanAllSchemas();

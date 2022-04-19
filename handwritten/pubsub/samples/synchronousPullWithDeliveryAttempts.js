@@ -46,10 +46,11 @@ function main(
   const subClient = new v1.SubscriberClient();
 
   async function synchronousPullWithDeliveryAttempts() {
-    const formattedSubscription = subClient.subscriptionPath(
-      projectId,
-      subscriptionNameOrId
-    );
+    // The low level API client requires a name only.
+    const formattedSubscription =
+      subscriptionNameOrId.indexOf('/') >= 0
+        ? subscriptionNameOrId
+        : subClient.subscriptionPath(projectId, subscriptionNameOrId);
 
     // The maximum number of messages returned for this request.
     // Pub/Sub may return fewer than the number specified.
