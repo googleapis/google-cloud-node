@@ -1,59 +1,59 @@
 {
-  "clientLibrary": {
-    "name": "nodejs-publishing",
-    "version": "0.1.0",
-    "language": "TYPESCRIPT",
-    "apis": [
-      {
-        "id": "google.cloud.eventarc.publishing.v1",
-        "version": "v1"
-      }
-    ]
-  },
-  "snippets": [
-    {
-      "regionTag": "eventarcpublishing_v1_generated_Publisher_PublishChannelConnectionEvents_async",
-      "title": "Publisher publishChannelConnectionEvents Sample",
-      "origin": "API_DEFINITION",
-      "description": " Publish events to a ChannelConnection in a partner's project.",
-      "canonical": true,
-      "file": "publisher.publish_channel_connection_events.js",
-      "language": "JAVASCRIPT",
-      "segments": [
+    "clientLibrary": {
+        "name": "nodejs-publishing",
+        "version": "1.1.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.cloud.eventarc.publishing.v1",
+                "version": "v1"
+            }
+        ]
+    },
+    "snippets": [
         {
-          "start": 25,
-          "end": 54,
-          "type": "FULL"
+            "regionTag": "eventarcpublishing_v1_generated_Publisher_PublishChannelConnectionEvents_async",
+            "title": "Publisher publishChannelConnectionEvents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Publish events to a ChannelConnection in a partner's project.",
+            "canonical": true,
+            "file": "publisher.publish_channel_connection_events.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PublishChannelConnectionEvents",
+                "fullName": "google.cloud.eventarc.publishing.v1.Publisher.PublishChannelConnectionEvents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "channel_connection",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "events",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse",
+                "client": {
+                    "shortName": "PublisherClient",
+                    "fullName": "google.cloud.eventarc.publishing.v1.PublisherClient"
+                },
+                "method": {
+                    "shortName": "PublishChannelConnectionEvents",
+                    "fullName": "google.cloud.eventarc.publishing.v1.Publisher.PublishChannelConnectionEvents",
+                    "service": {
+                        "shortName": "Publisher",
+                        "fullName": "google.cloud.eventarc.publishing.v1.Publisher"
+                    }
+                }
+            }
         }
-      ],
-      "clientMethod": {
-        "shortName": "PublishChannelConnectionEvents",
-        "fullName": "google.cloud.eventarc.publishing.v1.Publisher.PublishChannelConnectionEvents",
-        "async": true,
-        "parameters": [
-          {
-            "name": "channel_connection",
-            "type": "TYPE_STRING"
-          },
-          {
-            "name": "events",
-            "type": "TYPE_MESSAGE[]"
-          }
-        ],
-        "resultType": ".google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse",
-        "client": {
-          "shortName": "PublisherClient",
-          "fullName": "google.cloud.eventarc.publishing.v1.PublisherClient"
-        },
-        "method": {
-          "shortName": "PublishChannelConnectionEvents",
-          "fullName": "google.cloud.eventarc.publishing.v1.Publisher.PublishChannelConnectionEvents",
-          "service": {
-            "shortName": "Publisher",
-            "fullName": "google.cloud.eventarc.publishing.v1.Publisher"
-          }
-        }
-      }
-    }
-  ]
+    ]
 }
