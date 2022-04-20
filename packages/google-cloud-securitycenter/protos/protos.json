@@ -233,6 +233,42 @@
                         }
                       }
                     },
+                    "Connection": {
+                      "fields": {
+                        "destinationIp": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "destinationPort": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "sourceIp": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "sourcePort": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "protocol": {
+                          "type": "Protocol",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Protocol": {
+                          "values": {
+                            "PROTOCOL_UNSPECIFIED": 0,
+                            "ICMP": 1,
+                            "TCP": 6,
+                            "UDP": 17,
+                            "GRE": 47,
+                            "ESP": 50
+                          }
+                        }
+                      }
+                    },
                     "ExternalSystem": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ExternalSystem",
@@ -359,9 +395,18 @@
                           "type": "Access",
                           "id": 26
                         },
+                        "connections": {
+                          "rule": "repeated",
+                          "type": "Connection",
+                          "id": 31
+                        },
                         "muteInitiator": {
                           "type": "string",
                           "id": 28
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 37
                         },
                         "iamBindings": {
                           "rule": "repeated",

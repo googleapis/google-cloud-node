@@ -26,8 +26,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the organization to get organization settings for. Its
-   *  format is "organizations/[organization_id]/organizationSettings".
+   *  Required. Name of the organization to get organization settings for. Its format is
+   *  "organizations/[organization_id]/organizationSettings".
    */
   // const name = 'abc123'
 

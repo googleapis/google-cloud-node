@@ -2,6 +2,7 @@
   "../../protos/google/cloud/securitycenter/v1/access.proto",
   "../../protos/google/cloud/securitycenter/v1/asset.proto",
   "../../protos/google/cloud/securitycenter/v1/bigquery_export.proto",
+  "../../protos/google/cloud/securitycenter/v1/connection.proto",
   "../../protos/google/cloud/securitycenter/v1/external_system.proto",
   "../../protos/google/cloud/securitycenter/v1/finding.proto",
   "../../protos/google/cloud/securitycenter/v1/folder.proto",

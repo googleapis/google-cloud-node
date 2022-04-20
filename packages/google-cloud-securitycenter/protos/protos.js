@@ -2386,6 +2386,337 @@
                         return BigQueryExport;
                     })();
     
+                    v1.Connection = (function() {
+    
+                        /**
+                         * Properties of a Connection.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IConnection
+                         * @property {string|null} [destinationIp] Connection destinationIp
+                         * @property {number|null} [destinationPort] Connection destinationPort
+                         * @property {string|null} [sourceIp] Connection sourceIp
+                         * @property {number|null} [sourcePort] Connection sourcePort
+                         * @property {google.cloud.securitycenter.v1.Connection.Protocol|null} [protocol] Connection protocol
+                         */
+    
+                        /**
+                         * Constructs a new Connection.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Connection.
+                         * @implements IConnection
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IConnection=} [properties] Properties to set
+                         */
+                        function Connection(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Connection destinationIp.
+                         * @member {string} destinationIp
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.destinationIp = "";
+    
+                        /**
+                         * Connection destinationPort.
+                         * @member {number} destinationPort
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.destinationPort = 0;
+    
+                        /**
+                         * Connection sourceIp.
+                         * @member {string} sourceIp
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.sourceIp = "";
+    
+                        /**
+                         * Connection sourcePort.
+                         * @member {number} sourcePort
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.sourcePort = 0;
+    
+                        /**
+                         * Connection protocol.
+                         * @member {google.cloud.securitycenter.v1.Connection.Protocol} protocol
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.protocol = 0;
+    
+                        /**
+                         * Creates a new Connection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IConnection=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Connection} Connection instance
+                         */
+                        Connection.create = function create(properties) {
+                            return new Connection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Connection message. Does not implicitly {@link google.cloud.securitycenter.v1.Connection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IConnection} message Connection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Connection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.destinationIp != null && Object.hasOwnProperty.call(message, "destinationIp"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.destinationIp);
+                            if (message.destinationPort != null && Object.hasOwnProperty.call(message, "destinationPort"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.destinationPort);
+                            if (message.sourceIp != null && Object.hasOwnProperty.call(message, "sourceIp"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.sourceIp);
+                            if (message.sourcePort != null && Object.hasOwnProperty.call(message, "sourcePort"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sourcePort);
+                            if (message.protocol != null && Object.hasOwnProperty.call(message, "protocol"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.protocol);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Connection message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Connection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IConnection} message Connection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Connection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Connection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Connection} Connection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Connection.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Connection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.destinationIp = reader.string();
+                                    break;
+                                case 2:
+                                    message.destinationPort = reader.int32();
+                                    break;
+                                case 3:
+                                    message.sourceIp = reader.string();
+                                    break;
+                                case 4:
+                                    message.sourcePort = reader.int32();
+                                    break;
+                                case 5:
+                                    message.protocol = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Connection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Connection} Connection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Connection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Connection message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Connection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.destinationIp != null && message.hasOwnProperty("destinationIp"))
+                                if (!$util.isString(message.destinationIp))
+                                    return "destinationIp: string expected";
+                            if (message.destinationPort != null && message.hasOwnProperty("destinationPort"))
+                                if (!$util.isInteger(message.destinationPort))
+                                    return "destinationPort: integer expected";
+                            if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
+                                if (!$util.isString(message.sourceIp))
+                                    return "sourceIp: string expected";
+                            if (message.sourcePort != null && message.hasOwnProperty("sourcePort"))
+                                if (!$util.isInteger(message.sourcePort))
+                                    return "sourcePort: integer expected";
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                switch (message.protocol) {
+                                default:
+                                    return "protocol: enum value expected";
+                                case 0:
+                                case 1:
+                                case 6:
+                                case 17:
+                                case 47:
+                                case 50:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Connection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Connection} Connection
+                         */
+                        Connection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Connection)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Connection();
+                            if (object.destinationIp != null)
+                                message.destinationIp = String(object.destinationIp);
+                            if (object.destinationPort != null)
+                                message.destinationPort = object.destinationPort | 0;
+                            if (object.sourceIp != null)
+                                message.sourceIp = String(object.sourceIp);
+                            if (object.sourcePort != null)
+                                message.sourcePort = object.sourcePort | 0;
+                            switch (object.protocol) {
+                            case "PROTOCOL_UNSPECIFIED":
+                            case 0:
+                                message.protocol = 0;
+                                break;
+                            case "ICMP":
+                            case 1:
+                                message.protocol = 1;
+                                break;
+                            case "TCP":
+                            case 6:
+                                message.protocol = 6;
+                                break;
+                            case "UDP":
+                            case 17:
+                                message.protocol = 17;
+                                break;
+                            case "GRE":
+                            case 47:
+                                message.protocol = 47;
+                                break;
+                            case "ESP":
+                            case 50:
+                                message.protocol = 50;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Connection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Connection} message Connection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Connection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.destinationIp = "";
+                                object.destinationPort = 0;
+                                object.sourceIp = "";
+                                object.sourcePort = 0;
+                                object.protocol = options.enums === String ? "PROTOCOL_UNSPECIFIED" : 0;
+                            }
+                            if (message.destinationIp != null && message.hasOwnProperty("destinationIp"))
+                                object.destinationIp = message.destinationIp;
+                            if (message.destinationPort != null && message.hasOwnProperty("destinationPort"))
+                                object.destinationPort = message.destinationPort;
+                            if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
+                                object.sourceIp = message.sourceIp;
+                            if (message.sourcePort != null && message.hasOwnProperty("sourcePort"))
+                                object.sourcePort = message.sourcePort;
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                object.protocol = options.enums === String ? $root.google.cloud.securitycenter.v1.Connection.Protocol[message.protocol] : message.protocol;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Connection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Connection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Connection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Protocol enum.
+                         * @name google.cloud.securitycenter.v1.Connection.Protocol
+                         * @enum {number}
+                         * @property {number} PROTOCOL_UNSPECIFIED=0 PROTOCOL_UNSPECIFIED value
+                         * @property {number} ICMP=1 ICMP value
+                         * @property {number} TCP=6 TCP value
+                         * @property {number} UDP=17 UDP value
+                         * @property {number} GRE=47 GRE value
+                         * @property {number} ESP=50 ESP value
+                         */
+                        Connection.Protocol = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROTOCOL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ICMP"] = 1;
+                            values[valuesById[6] = "TCP"] = 6;
+                            values[valuesById[17] = "UDP"] = 17;
+                            values[valuesById[47] = "GRE"] = 47;
+                            values[valuesById[50] = "ESP"] = 50;
+                            return values;
+                        })();
+    
+                        return Connection;
+                    })();
+    
                     v1.ExternalSystem = (function() {
     
                         /**
@@ -2710,7 +3041,9 @@
                          * @property {Object.<string,google.cloud.securitycenter.v1.IExternalSystem>|null} [externalSystems] Finding externalSystems
                          * @property {google.cloud.securitycenter.v1.IMitreAttack|null} [mitreAttack] Finding mitreAttack
                          * @property {google.cloud.securitycenter.v1.IAccess|null} [access] Finding access
+                         * @property {Array.<google.cloud.securitycenter.v1.IConnection>|null} [connections] Finding connections
                          * @property {string|null} [muteInitiator] Finding muteInitiator
+                         * @property {string|null} [description] Finding description
                          * @property {Array.<google.cloud.securitycenter.v1.IIamBinding>|null} [iamBindings] Finding iamBindings
                          * @property {string|null} [nextSteps] Finding nextSteps
                          */
@@ -2726,6 +3059,7 @@
                         function Finding(properties) {
                             this.sourceProperties = {};
                             this.externalSystems = {};
+                            this.connections = [];
                             this.iamBindings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -2894,12 +3228,28 @@
                         Finding.prototype.access = null;
     
                         /**
+                         * Finding connections.
+                         * @member {Array.<google.cloud.securitycenter.v1.IConnection>} connections
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.connections = $util.emptyArray;
+    
+                        /**
                          * Finding muteInitiator.
                          * @member {string} muteInitiator
                          * @memberof google.cloud.securitycenter.v1.Finding
                          * @instance
                          */
                         Finding.prototype.muteInitiator = "";
+    
+                        /**
+                         * Finding description.
+                         * @member {string} description
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.description = "";
     
                         /**
                          * Finding iamBindings.
@@ -2989,6 +3339,11 @@
                                 $root.google.cloud.securitycenter.v1.Access.encode(message.access, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.muteInitiator != null && Object.hasOwnProperty.call(message, "muteInitiator"))
                                 writer.uint32(/* id 28, wireType 2 =*/226).string(message.muteInitiator);
+                            if (message.connections != null && message.connections.length)
+                                for (var i = 0; i < message.connections.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Connection.encode(message.connections[i], writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 37, wireType 2 =*/298).string(message.description);
                             if (message.iamBindings != null && message.iamBindings.length)
                                 for (var i = 0; i < message.iamBindings.length; ++i)
                                     $root.google.cloud.securitycenter.v1.IamBinding.encode(message.iamBindings[i], writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
@@ -3126,8 +3481,16 @@
                                 case 26:
                                     message.access = $root.google.cloud.securitycenter.v1.Access.decode(reader, reader.uint32());
                                     break;
+                                case 31:
+                                    if (!(message.connections && message.connections.length))
+                                        message.connections = [];
+                                    message.connections.push($root.google.cloud.securitycenter.v1.Connection.decode(reader, reader.uint32()));
+                                    break;
                                 case 28:
                                     message.muteInitiator = reader.string();
+                                    break;
+                                case 37:
+                                    message.description = reader.string();
                                     break;
                                 case 39:
                                     if (!(message.iamBindings && message.iamBindings.length))
@@ -3292,9 +3655,21 @@
                                 if (error)
                                     return "access." + error;
                             }
+                            if (message.connections != null && message.hasOwnProperty("connections")) {
+                                if (!Array.isArray(message.connections))
+                                    return "connections: array expected";
+                                for (var i = 0; i < message.connections.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Connection.verify(message.connections[i]);
+                                    if (error)
+                                        return "connections." + error;
+                                }
+                            }
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
                                 if (!$util.isString(message.muteInitiator))
                                     return "muteInitiator: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
                             if (message.iamBindings != null && message.hasOwnProperty("iamBindings")) {
                                 if (!Array.isArray(message.iamBindings))
                                     return "iamBindings: array expected";
@@ -3474,8 +3849,20 @@
                                     throw TypeError(".google.cloud.securitycenter.v1.Finding.access: object expected");
                                 message.access = $root.google.cloud.securitycenter.v1.Access.fromObject(object.access);
                             }
+                            if (object.connections) {
+                                if (!Array.isArray(object.connections))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.connections: array expected");
+                                message.connections = [];
+                                for (var i = 0; i < object.connections.length; ++i) {
+                                    if (typeof object.connections[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Finding.connections: object expected");
+                                    message.connections[i] = $root.google.cloud.securitycenter.v1.Connection.fromObject(object.connections[i]);
+                                }
+                            }
                             if (object.muteInitiator != null)
                                 message.muteInitiator = String(object.muteInitiator);
+                            if (object.description != null)
+                                message.description = String(object.description);
                             if (object.iamBindings) {
                                 if (!Array.isArray(object.iamBindings))
                                     throw TypeError(".google.cloud.securitycenter.v1.Finding.iamBindings: array expected");
@@ -3504,8 +3891,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
+                                object.connections = [];
                                 object.iamBindings = [];
+                            }
                             if (options.objects || options.defaults) {
                                 object.sourceProperties = {};
                                 object.externalSystems = {};
@@ -3530,6 +3919,7 @@
                                 object.mitreAttack = null;
                                 object.access = null;
                                 object.muteInitiator = "";
+                                object.description = "";
                                 object.nextSteps = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -3581,6 +3971,13 @@
                                 object.access = $root.google.cloud.securitycenter.v1.Access.toObject(message.access, options);
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
                                 object.muteInitiator = message.muteInitiator;
+                            if (message.connections && message.connections.length) {
+                                object.connections = [];
+                                for (var j = 0; j < message.connections.length; ++j)
+                                    object.connections[j] = $root.google.cloud.securitycenter.v1.Connection.toObject(message.connections[j], options);
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
                             if (message.iamBindings && message.iamBindings.length) {
                                 object.iamBindings = [];
                                 for (var j = 0; j < message.iamBindings.length; ++j)

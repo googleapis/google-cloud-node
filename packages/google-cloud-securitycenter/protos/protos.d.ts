@@ -929,6 +929,133 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a Connection. */
+                interface IConnection {
+
+                    /** Connection destinationIp */
+                    destinationIp?: (string|null);
+
+                    /** Connection destinationPort */
+                    destinationPort?: (number|null);
+
+                    /** Connection sourceIp */
+                    sourceIp?: (string|null);
+
+                    /** Connection sourcePort */
+                    sourcePort?: (number|null);
+
+                    /** Connection protocol */
+                    protocol?: (google.cloud.securitycenter.v1.Connection.Protocol|keyof typeof google.cloud.securitycenter.v1.Connection.Protocol|null);
+                }
+
+                /** Represents a Connection. */
+                class Connection implements IConnection {
+
+                    /**
+                     * Constructs a new Connection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IConnection);
+
+                    /** Connection destinationIp. */
+                    public destinationIp: string;
+
+                    /** Connection destinationPort. */
+                    public destinationPort: number;
+
+                    /** Connection sourceIp. */
+                    public sourceIp: string;
+
+                    /** Connection sourcePort. */
+                    public sourcePort: number;
+
+                    /** Connection protocol. */
+                    public protocol: (google.cloud.securitycenter.v1.Connection.Protocol|keyof typeof google.cloud.securitycenter.v1.Connection.Protocol);
+
+                    /**
+                     * Creates a new Connection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Connection instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IConnection): google.cloud.securitycenter.v1.Connection;
+
+                    /**
+                     * Encodes the specified Connection message. Does not implicitly {@link google.cloud.securitycenter.v1.Connection.verify|verify} messages.
+                     * @param message Connection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Connection message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Connection.verify|verify} messages.
+                     * @param message Connection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Connection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Connection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Connection;
+
+                    /**
+                     * Decodes a Connection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Connection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Connection;
+
+                    /**
+                     * Verifies a Connection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Connection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Connection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Connection;
+
+                    /**
+                     * Creates a plain object from a Connection message. Also converts values to other types if specified.
+                     * @param message Connection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Connection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Connection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Connection {
+
+                    /** Protocol enum. */
+                    enum Protocol {
+                        PROTOCOL_UNSPECIFIED = 0,
+                        ICMP = 1,
+                        TCP = 6,
+                        UDP = 17,
+                        GRE = 47,
+                        ESP = 50
+                    }
+                }
+
                 /** Properties of an ExternalSystem. */
                 interface IExternalSystem {
 
@@ -1106,8 +1233,14 @@ export namespace google {
                     /** Finding access */
                     access?: (google.cloud.securitycenter.v1.IAccess|null);
 
+                    /** Finding connections */
+                    connections?: (google.cloud.securitycenter.v1.IConnection[]|null);
+
                     /** Finding muteInitiator */
                     muteInitiator?: (string|null);
+
+                    /** Finding description */
+                    description?: (string|null);
 
                     /** Finding iamBindings */
                     iamBindings?: (google.cloud.securitycenter.v1.IIamBinding[]|null);
@@ -1185,8 +1318,14 @@ export namespace google {
                     /** Finding access. */
                     public access?: (google.cloud.securitycenter.v1.IAccess|null);
 
+                    /** Finding connections. */
+                    public connections: google.cloud.securitycenter.v1.IConnection[];
+
                     /** Finding muteInitiator. */
                     public muteInitiator: string;
+
+                    /** Finding description. */
+                    public description: string;
 
                     /** Finding iamBindings. */
                     public iamBindings: google.cloud.securitycenter.v1.IIamBinding[];
