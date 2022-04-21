@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+### [2.0.5](https://github.com/googleapis/nodejs-error-reporting/compare/v2.0.4...v2.0.5) (2022-04-21)
+
+
+### Bug Fixes
+
+* Reenable staleness bot ([#632](https://github.com/googleapis/nodejs-error-reporting/issues/632)) ([b56836e](https://github.com/googleapis/nodejs-error-reporting/commit/b56836e8b16b79ae7969096e2166efce3125fc89))
+
 ### [2.0.4](https://www.github.com/googleapis/nodejs-error-reporting/compare/v2.0.3...v2.0.4) (2021-10-04)
 
 
