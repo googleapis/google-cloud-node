@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/error-reporting",
   "description": "Error Reporting Client Library for Node.js",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
