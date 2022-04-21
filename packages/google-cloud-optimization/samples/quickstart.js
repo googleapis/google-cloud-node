@@ -11,40 +11,167 @@
 // limitations under the License.
 //
 
-'use strict';
+function main(parent, latitude, longitude, duration, date, amount, maxLoad) {
+  // [START cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_async]
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  /**
+   *  Required. Target project and location to make a call.
+   *  Format: `projects/{project-id}/locations/{location-id}`.
+   *  If no location is specified, a region will be chosen automatically.
+   */
+  // const parent = 'abc123'
+  /**
+   *  Required. Input/Output information each purchase model, such as file paths and data
+   *  formats.
+   */
+  // const modelConfigs = 1234
 
-async function main() {
+  // Imports the Optimization library
+  const {FleetRoutingClient} = require('@google-cloud/optimization').v1;
 
-  // [START nodejs_cloud_optimization_quickstart]
-  // Imports the Google Cloud client library
+  // Instantiates a client
+  const optimizationClient = new FleetRoutingClient();
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
-  const {FleetRoutingClient} = require('@google-cloud/optimization');
+  async function callBatchOptimizeTours() {
+    // Construct request
+    const request = {
+      parent,
+      timeout: {
+        seconds: '1000',
+      },
+      model: {
+        shipments: [
+          {
+            deliveries: [
+              {
+                arrivalLocation: {
+                  latitude,
+                  longitude,
+                },
+                duration: {
+                  seconds: duration,
+                },
+                timeWindows: [
+                  {
+                    endTime: new Date(date),
+                    startTime: new Date(date),
+                  },
+                ],
+              },
+            ],
+            loadDemands: {
+              weight: {
+                amount,
+              },
+            },
+            pickups: [
+              {
+                arrivalLocation: {
+                  latitude,
+                  longitude,
+                },
+                duration: {
+                  seconds: duration,
+                },
+                timeWindows: [
+                  {
+                    endTime: new Date(date),
+                    startTime: new Date(date),
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            deliveries: [
+              {
+                arrivalLocation: {
+                  latitude,
+                  longitude,
+                },
+                duration: {
+                  seconds: duration,
+                },
+                timeWindows: [
+                  {
+                    endTime: new Date(date),
+                    startTime: new Date(date),
+                  },
+                ],
+              },
+            ],
+            loadDemands: {
+              weight: {
+                amount,
+              },
+            },
+            pickups: [
+              {
+                arrivalLocation: {
+                  latitude,
+                  longitude,
+                },
+                duration: {
+                  seconds: duration,
+                },
+                timeWindows: [
+                  {
+                    endTime: new Date(date),
+                    startTime: new Date(date),
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        vehicles: [
+          {
+            loadLimits: {
+              weight: {
+                maxLoad,
+              },
+            },
+            endLocation: {
+              latitude,
+              longitude,
+            },
+            startLocation: {
+              latitude,
+              longitude,
+            },
+          },
+          {
+            loadLimits: {
+              weight: {
+                maxLoad,
+              },
+            },
+            endLocation: {
+              latitude,
+              longitude,
+            },
+            startLocation: {
+              latitude,
+              longitude,
+            },
+          },
+        ],
+      },
+    };
 
-  // TODO(developer): replace with your prefered project ID.
-  // const projectId = 'my-project'
-
-  // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {FleetRoutingClient}();
-
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-   console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
-   // const [thing] = await client.methodName({
-   // });
-   // console.info(thing);
+    // Run request
+    const [operation] = await optimizationClient.optimizeTours(request);
+    console.log(operation);
   }
-  doSomething();
-  // [END nodejs_cloud_optimization_quickstart]
+
+  callBatchOptimizeTours();
+  // [END cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_async]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err.message);
-  process.exitCode = 1;
-});
 process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });
+main(...process.argv.slice(2));

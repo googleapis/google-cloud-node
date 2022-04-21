@@ -29,10 +29,16 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const client = new {FleetRoutingClient}();
+const client = new FleetRoutingClient();
 
+const latitude = 48.880942;
+const longitude = 2.323866;
+const duration = '250s';
+const date = '1970-01-01T00:50:00Z';
+const amount = 20;
+const maxLoad = 5;
 describe('Quickstart', () => {
-  //TODO: remove this if not using the projectId 
+  //TODO: remove this if not using the projectId
   // eslint-disable-next-line no-unused-vars
   let projectId;
 
@@ -42,12 +48,10 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-  //TODO: remove this line 
-  // eslint-disable-next-line no-unused-vars  
     const stdout = execSync(
-      `node ./quickstart.js`,
+      `node ./quickstart.js projects/${projectId} ${latitude} ${longitude} ${duration} ${date} ${amount} ${maxLoad}`,
       {cwd}
     );
-    //assert(stdout, stdout !== null);
+    assert(stdout, stdout !== null);
   });
 });

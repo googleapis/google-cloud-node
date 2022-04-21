@@ -1,1 +1,19 @@
-{"recurse":true,"skip":["https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":5,"retry":true,"retryErrors":true,"retryErrorsCount":5,"retryErrorsJitter":3000}
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io",
+    "https://console.cloud.google.com/cloudshell",
+    "https://support.google.com",
+    "https://github.com/googleapis/nodejs-cloud-optimization",
+    "https://googleapis.dev/nodejs/cloudoptimization/latest/",
+    "https://cloud.google.com/optimization/"
+  ],
+  "silent": true,
+  "concurrency": 5,
+  "retry": true,
+  "retryErrors": true,
+  "retryErrorsCount": 5,
+  "retryErrorsJitter": 3000
+}
