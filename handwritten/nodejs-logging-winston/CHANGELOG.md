@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [4.2.3](https://github.com/googleapis/nodejs-logging-winston/compare/v4.2.2...v4.2.3) (2022-04-21)
+
+
+### Bug Fixes
+
+* Reenable staleness bot ([#691](https://github.com/googleapis/nodejs-logging-winston/issues/691)) ([2470dbc](https://github.com/googleapis/nodejs-logging-winston/commit/2470dbc2b225e77b78f8066477a2f63126e3b1cd))
+
 ### [4.2.2](https://github.com/googleapis/nodejs-logging-winston/compare/v4.2.1...v4.2.2) (2022-03-23)
 
 
