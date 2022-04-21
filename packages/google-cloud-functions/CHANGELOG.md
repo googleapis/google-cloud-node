@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/nodejs-functions/compare/v1.2.0...v1.3.0) (2022-04-21)
+
+
+### Features
+
+* AuditConfig for IAM v1 ([#148](https://github.com/googleapis/nodejs-functions/issues/148)) ([3c9131b](https://github.com/googleapis/nodejs-functions/commit/3c9131b24985f5e69501c51f068a68a7fea5e588))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.9...v1.2.0) (2021-09-16)
 
 
