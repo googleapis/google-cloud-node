@@ -29,12 +29,12 @@ describe('translate', () => {
         expectedLanguage: 'en',
       },
       {
-        content: '¡Hola!',
+        content: 'Esto es una prueba.',
         expectedLanguage: 'es',
       },
     ];
 
-    it('should detect a langauge', async () => {
+    it('should detect a language', async () => {
       const projectId = await translate.getProjectId();
       for (const input of INPUT) {
         const [result] = await translate.detectLanguage({
