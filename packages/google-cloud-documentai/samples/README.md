@@ -12,12 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Batch-parse-form.v1beta2](#batch-parse-form.v1beta2)
-  * [Batch-parse-table.v1beta2](#batch-parse-table.v1beta2)
   * [Batch-process-document](#batch-process-document)
-  * [Parse-form.v1beta2](#parse-form.v1beta2)
-  * [Parse-table.v1beta2](#parse-table.v1beta2)
-  * [Parse-with-model.v1beta2](#parse-with-model.v1beta2)
   * [Process-document-form](#process-document-form)
   * [Process-document-ocr](#process-document-ocr)
   * [Process-document-quality](#process-document-quality)
@@ -25,7 +20,6 @@
   * [Process-document-splitter](#process-document-splitter)
   * [Process-document](#process-document)
   * [Quickstart](#quickstart)
-  * [Set-endpoint.v1beta2](#set-endpoint.v1beta2)
 
 ## Before you begin
 
@@ -42,40 +36,6 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Batch-parse-form.v1beta2
-
-View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/batch-parse-form.v1beta2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/batch-parse-form.v1beta2.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/batch-parse-form.v1beta2.js`
-
-
------
-
-
-
-
-### Batch-parse-table.v1beta2
-
-View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/batch-parse-table.v1beta2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/batch-parse-table.v1beta2.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/batch-parse-table.v1beta2.js`
-
-
------
-
-
-
-
 ### Batch-process-document
 
 View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/batch-process-document.js).
@@ -86,57 +46,6 @@ __Usage:__
 
 
 `node samples/batch-process-document.js`
-
-
------
-
-
-
-
-### Parse-form.v1beta2
-
-View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/parse-form.v1beta2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse-form.v1beta2.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/parse-form.v1beta2.js`
-
-
------
-
-
-
-
-### Parse-table.v1beta2
-
-View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/parse-table.v1beta2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse-table.v1beta2.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/parse-table.v1beta2.js`
-
-
------
-
-
-
-
-### Parse-with-model.v1beta2
-
-View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/parse-with-model.v1beta2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse-with-model.v1beta2.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/parse-with-model.v1beta2.js`
 
 
 -----
@@ -256,23 +165,6 @@ __Usage:__
 
 
 `node samples/quickstart.js`
-
-
------
-
-
-
-
-### Set-endpoint.v1beta2
-
-View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/set-endpoint.v1beta2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/set-endpoint.v1beta2.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/set-endpoint.v1beta2.js`
 
 
 
