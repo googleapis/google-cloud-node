@@ -42,7 +42,8 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  [Google Service Management API](/service-management/overview)
+ *  [Google Service Management
+ *  API](https://cloud.google.com/service-infrastructure/docs/overview)
  * @class
  * @memberof v1
  */
@@ -413,8 +414,8 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the `ServiceManager` overview for naming
-   *   requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the `ServiceManager` overview for
+   *   naming requirements.  For example: `example.googleapis.com`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -505,8 +506,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {string} request.configId
    *   Required. The id of the service configuration resource.
    *
@@ -618,8 +620,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {google.api.Service} request.serviceConfig
    *   Required. The service configuration resource.
    * @param {object} [options]
@@ -713,13 +716,15 @@ export class ServiceManagerClient {
     return this.innerApiCalls.createServiceConfig(request, options, callback);
   }
   /**
-   * Gets a service configuration {@link google.api.servicemanagement.v1.Rollout|rollout}.
+   * Gets a service configuration
+   * {@link google.api.servicemanagement.v1.Rollout|rollout}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {string} request.rolloutId
    *   Required. The id of the rollout resource.
    * @param {object} [options]
@@ -1072,16 +1077,19 @@ export class ServiceManagerClient {
   /**
    * Deletes a managed service. This method will change the service to the
    * `Soft-Delete` state for 30 days. Within this period, service producers may
-   * call {@link google.api.servicemanagement.v1.ServiceManager.UndeleteService|UndeleteService} to restore the service.
-   * After 30 days, the service will be permanently deleted.
+   * call
+   * {@link google.api.servicemanagement.v1.ServiceManager.UndeleteService|UndeleteService}
+   * to restore the service. After 30 days, the service will be permanently
+   * deleted.
    *
    * Operation<response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1223,8 +1231,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service. See the [overview](/service-management/overview)
-   *   for naming requirements. For example: `example.googleapis.com`.
+   *   Required. The name of the service. See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements. For
+   *   example: `example.googleapis.com`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1362,7 +1371,8 @@ export class ServiceManagerClient {
    * Specification). This method stores the source configurations as well as the
    * generated service configuration. To rollout the service configuration to
    * other services,
-   * please call {@link google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout|CreateServiceRollout}.
+   * please call
+   * {@link google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout|CreateServiceRollout}.
    *
    * Only the 100 most recent configuration sources and ones referenced by
    * existing service configurtions are kept for each service. The rest will be
@@ -1373,8 +1383,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {google.api.servicemanagement.v1.ConfigSource} request.configSource
    *   Required. The source configuration for the service.
    * @param {boolean} [request.validateOnly]
@@ -1530,8 +1541,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {google.api.servicemanagement.v1.Rollout} request.rollout
    *   Required. The rollout resource. The `service_name` field is output only.
    * @param {object} [options]
@@ -1876,8 +1888,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
    * @param {number} request.pageSize
@@ -1976,8 +1989,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
    * @param {number} request.pageSize
@@ -2024,8 +2038,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
    * @param {number} request.pageSize
@@ -2072,8 +2087,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
    * @param {number} request.pageSize
@@ -2083,10 +2099,10 @@ export class ServiceManagerClient {
    *   Required. Use `filter` to return subset of rollouts.
    *   The following filters are supported:
    *     -- To limit the results to only those in
-   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   *        status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
    *        use filter='status=SUCCESS'
    *     -- To limit the results to those in
-   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   *        status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
    *        or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2181,8 +2197,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
    * @param {number} request.pageSize
@@ -2192,10 +2209,10 @@ export class ServiceManagerClient {
    *   Required. Use `filter` to return subset of rollouts.
    *   The following filters are supported:
    *     -- To limit the results to only those in
-   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   *        status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
    *        use filter='status=SUCCESS'
    *     -- To limit the results to those in
-   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   *        status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
    *        or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2238,8 +2255,9 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](/service-management/overview)
-   *   for naming requirements.  For example: `example.googleapis.com`.
+   *   Required. The name of the service.  See the
+   *   [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
+   *   example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
    * @param {number} request.pageSize
@@ -2249,10 +2267,10 @@ export class ServiceManagerClient {
    *   Required. Use `filter` to return subset of rollouts.
    *   The following filters are supported:
    *     -- To limit the results to only those in
-   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   *        status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
    *        use filter='status=SUCCESS'
    *     -- To limit the results to those in
-   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   *        status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
    *        or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

@@ -26,8 +26,8 @@ function main(serviceName) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the service.  See the `ServiceManager` overview for naming
-   *  requirements.  For example: `example.googleapis.com`.
+   *  Required. The name of the service.  See the `ServiceManager` overview for
+   *  naming requirements.  For example: `example.googleapis.com`.
    */
   // const serviceName = 'abc123'
 
