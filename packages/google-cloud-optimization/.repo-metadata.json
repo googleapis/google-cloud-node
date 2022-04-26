@@ -8,8 +8,10 @@
   "language": "nodejs",
   "repo": "googleapis/nodejs-cloud-optimization",
   "distribution_name": "@google-cloud/optimization",
-  "api_id": "optimization.googleapis.com",
+  "api_id": "cloudoptimization.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "cloudoptimization",
+  "library_type": "GAPIC_AUTO"
 }
 
