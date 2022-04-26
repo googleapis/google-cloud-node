@@ -11,6 +11,6 @@
   "api_id": "certificatemanager.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
-  "api_shortname": "secretmanager",
+  "api_shortname": "certificatemanager",
   "library_type": "GAPIC_AUTO"
 }
