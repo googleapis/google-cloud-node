@@ -20,35 +20,21 @@
 
 'use strict';
 
-function main(parent) {
-  // [START cloudchannel_v1_generated_CloudChannelService_ListCustomers_async]
+function main(parent, channelPartnerRepricingConfig) {
+  // [START cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerRepricingConfig_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the reseller account to list customers from.
-   *  Parent uses the format: accounts/{account_id}.
+   *  Required. The resource name of the ChannelPartner that will receive the repricing
+   *  config. Parent uses the format:
+   *  accounts/{account_id}/channelPartnerLinks/{channel_partner_id}
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of customers to return. The service may return fewer
-   *  than this value. If unspecified, returns at most 10 customers. The
-   *  maximum value is 50.
+   *  Required. The ChannelPartnerRepricingConfig object to update.
    */
-  // const pageSize = 1234
-  /**
-   *  Optional. A token identifying a page of results other than the first page.
-   *  Obtained through
-   *  ListCustomersResponse.next_page_token google.cloud.channel.v1.ListCustomersResponse.next_page_token  of the previous
-   *  CloudChannelService.ListCustomers google.cloud.channel.v1.CloudChannelService.ListCustomers  call.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Optional. Filters applied to the CloudChannelService.ListCustomers  results. See
-   *  https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
-   *  for more information.
-   */
-  // const filter = 'abc123'
+  // const channelPartnerRepricingConfig = {}
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;
@@ -56,21 +42,20 @@ function main(parent) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function callListCustomers() {
+  async function callCreateChannelPartnerRepricingConfig() {
     // Construct request
     const request = {
       parent,
+      channelPartnerRepricingConfig,
     };
 
     // Run request
-    const iterable = await channelClient.listCustomersAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await channelClient.createChannelPartnerRepricingConfig(request);
+    console.log(response);
   }
 
-  callListCustomers();
-  // [END cloudchannel_v1_generated_CloudChannelService_ListCustomers_async]
+  callCreateChannelPartnerRepricingConfig();
+  // [END cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerRepricingConfig_async]
 }
 
 process.on('unhandledRejection', err => {

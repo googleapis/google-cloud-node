@@ -187,8 +187,15 @@ export class CloudChannelServiceClient {
       channelPartnerLinkPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/channelPartnerLinks/{channel_partner_link}'
       ),
+      channelPartnerRepricingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'accounts/{account}/channelPartnerLinks/{channel_partner}/channelPartnerRepricingConfigs/{channel_partner_repricing_config}'
+        ),
       customerPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/customers/{customer}'
+      ),
+      customerRepricingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/customers/{customer}/customerRepricingConfigs/{customer_repricing_config}'
       ),
       entitlementPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/customers/{customer}/entitlements/{entitlement}'
@@ -232,6 +239,16 @@ export class CloudChannelServiceClient {
         'pageToken',
         'nextPageToken',
         'channelPartnerLinks'
+      ),
+      listCustomerRepricingConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'customerRepricingConfigs'
+      ),
+      listChannelPartnerRepricingConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'channelPartnerRepricingConfigs'
       ),
       listProducts: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -488,6 +505,16 @@ export class CloudChannelServiceClient {
       'getChannelPartnerLink',
       'createChannelPartnerLink',
       'updateChannelPartnerLink',
+      'getCustomerRepricingConfig',
+      'listCustomerRepricingConfigs',
+      'createCustomerRepricingConfig',
+      'updateCustomerRepricingConfig',
+      'deleteCustomerRepricingConfig',
+      'getChannelPartnerRepricingConfig',
+      'listChannelPartnerRepricingConfigs',
+      'createChannelPartnerRepricingConfig',
+      'updateChannelPartnerRepricingConfig',
+      'deleteChannelPartnerRepricingConfig',
       'lookupOffer',
       'listProducts',
       'listSkus',
@@ -1668,6 +1695,1008 @@ export class CloudChannelServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateChannelPartnerLink(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets information about how a Reseller modifies their bill before sending
+   * it to a Customer.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different.
+   * * NOT_FOUND: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} was not found.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} resource, otherwise returns
+   * an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the CustomerRepricingConfig.
+   *   Format:
+   *   accounts/{account_id}/customers/{customer_id}/customerRepricingConfigs/{id}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomerRepricingConfig]{@link google.cloud.channel.v1.CustomerRepricingConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.get_customer_repricing_config.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_GetCustomerRepricingConfig_async
+   */
+  getCustomerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getCustomerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCustomerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCustomerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getCustomerRepricingConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Creates a CustomerRepricingConfig. Call this method to set modifications
+   * for a specific customer's bill. You can only create configs if the
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is a
+   * future month. If needed, you can create a config for the current month,
+   * with some restrictions.
+   *
+   * When creating a config for a future month, make sure there are no existing
+   * configs for that
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   *
+   * The following restrictions are for creating configs in the current month.
+   *
+   * * This functionality is reserved for recovering from an erroneous config,
+   * and should not be used for regular business cases.
+   * * The new config will not modify exports used with other configs.
+   * Changes to the config may be immediate, but may take up to 24 hours.
+   * * There is a limit of ten configs for any
+   * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
+   * or {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * * The contained {@link google.cloud.channel.v1.CustomerRepricingConfig.repricing_config|CustomerRepricingConfig.repricing_config} vaule must be
+   * different from the value used in the current config for a
+   * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different.
+   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
+   * request. Also displays if the updated config is for the current month or
+   * past months.
+   * * NOT_FOUND: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} specified does not exist or is
+   * not associated with the given account.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the updated {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} resource, otherwise
+   * returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the customer that will receive this repricing config.
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
+   * @param {google.cloud.channel.v1.CustomerRepricingConfig} request.customerRepricingConfig
+   *   Required. The CustomerRepricingConfig object to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomerRepricingConfig]{@link google.cloud.channel.v1.CustomerRepricingConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.create_customer_repricing_config.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateCustomerRepricingConfig_async
+   */
+  createCustomerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createCustomerRepricingConfig(
+    request: protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomerRepricingConfig(
+    request: protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createCustomerRepricingConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a CustomerRepricingConfig. Call this method to set modifications
+   * for a specific customer's bill. This method overwrites the existing
+   * CustomerRepricingConfig.
+   *
+   * You can only update configs if the
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is a
+   * future month. To make changes to configs for the current month, use
+   * {@link google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig|CreateCustomerRepricingConfig}, taking note of its restrictions. You
+   * cannot update the {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   *
+   * When updating a config in the future:
+   *
+   * * This config must already exist.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different.
+   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
+   * request. Also displays if the updated config is for the current month or
+   * past months.
+   * * NOT_FOUND: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} specified does not exist or is
+   * not associated with the given account.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the updated {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} resource, otherwise
+   * returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.channel.v1.CustomerRepricingConfig} request.customerRepricingConfig
+   *   Required. The CustomerRepricingConfig object to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomerRepricingConfig]{@link google.cloud.channel.v1.CustomerRepricingConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.update_customer_repricing_config.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_UpdateCustomerRepricingConfig_async
+   */
+  updateCustomerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateCustomerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'customer_repricing_config.name':
+          request.customerRepricingConfig!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateCustomerRepricingConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes the given {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} permanently. You can only
+   * delete configs if their {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is set
+   * to a date after the current month.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The account making the request does not own
+   * this customer.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * FAILED_PRECONDITION: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} is active or in the
+   * past.
+   * * NOT_FOUND: No {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} found for the name in the
+   * request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the customer repricing config rule to delete.
+   *   Format:
+   *   accounts/{account_id}/customers/{customer_id}/customerRepricingConfigs/{id}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.delete_customer_repricing_config.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_DeleteCustomerRepricingConfig_async
+   */
+  deleteCustomerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteCustomerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCustomerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCustomerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteCustomerRepricingConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets information about how a Distributor modifies their bill before sending
+   * it to a ChannelPartner.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different.
+   * * NOT_FOUND: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} was not found.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} resource, otherwise
+   * returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ChannelPartnerRepricingConfig
+   *   Format:
+   *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}/channelPartnerRepricingConfigs/{id}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ChannelPartnerRepricingConfig]{@link google.cloud.channel.v1.ChannelPartnerRepricingConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.get_channel_partner_repricing_config.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerRepricingConfig_async
+   */
+  getChannelPartnerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getChannelPartnerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getChannelPartnerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getChannelPartnerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getChannelPartnerRepricingConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Creates a ChannelPartnerRepricingConfig. Call this method to set
+   * modifications for a specific ChannelPartner's bill. You can only create
+   * configs if the {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is a future
+   * month. If needed, you can create a config for the current month, with some
+   * restrictions.
+   *
+   * When creating a config for a future month, make sure there are no existing
+   * configs for that
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   *
+   * The following restrictions are for creating configs in the current month.
+   *
+   * * This functionality is reserved for recovering from an erroneous config,
+   * and should not be used for regular business cases.
+   * * The new config will not modify exports used with other configs.
+   * Changes to the config may be immediate, but may take up to 24 hours.
+   * * There is a limit of ten configs for any ChannelPartner or
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * * The contained {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config|ChannelPartnerRepricingConfig.repricing_config} vaule
+   * must be different from the value used in the current config for a
+   * ChannelPartner.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different.
+   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
+   * request. Also displays if the updated config is for the current month or
+   * past months.
+   * * NOT_FOUND: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} specified does not exist
+   * or is not associated with the given account.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the updated {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} resource,
+   * otherwise returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the ChannelPartner that will receive the repricing
+   *   config. Parent uses the format:
+   *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}
+   * @param {google.cloud.channel.v1.ChannelPartnerRepricingConfig} request.channelPartnerRepricingConfig
+   *   Required. The ChannelPartnerRepricingConfig object to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ChannelPartnerRepricingConfig]{@link google.cloud.channel.v1.ChannelPartnerRepricingConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.create_channel_partner_repricing_config.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerRepricingConfig_async
+   */
+  createChannelPartnerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createChannelPartnerRepricingConfig(
+    request: protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannelPartnerRepricingConfig(
+    request: protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannelPartnerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createChannelPartnerRepricingConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a ChannelPartnerRepricingConfig. Call this method to set
+   * modifications for a specific ChannelPartner's bill. This method overwrites
+   * the existing CustomerRepricingConfig.
+   *
+   * You can only update configs if the
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is a
+   * future month. To make changes to configs for the current month, use
+   * {@link google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerRepricingConfig|CreateChannelPartnerRepricingConfig}, taking note of its restrictions.
+   * You cannot update the {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   *
+   * When updating a config in the future:
+   *
+   * * This config must already exist.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different.
+   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
+   * request. Also displays if the updated config is for the current month or
+   * past months.
+   * * NOT_FOUND: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} specified does not exist
+   * or is not associated with the given account.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the updated {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} resource,
+   * otherwise returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.channel.v1.ChannelPartnerRepricingConfig} request.channelPartnerRepricingConfig
+   *   Required. The ChannelPartnerRepricingConfig object to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ChannelPartnerRepricingConfig]{@link google.cloud.channel.v1.ChannelPartnerRepricingConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.update_channel_partner_repricing_config.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerRepricingConfig_async
+   */
+  updateChannelPartnerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateChannelPartnerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateChannelPartnerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateChannelPartnerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+      (
+        | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'channel_partner_repricing_config.name':
+          request.channelPartnerRepricingConfig!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateChannelPartnerRepricingConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes the given {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} permanently. You can
+   * only delete configs if their {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is
+   * set to a date after the current month.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The account making the request does not own
+   * this customer.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * FAILED_PRECONDITION: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} is active or
+   * in the past.
+   * * NOT_FOUND: No {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} found for the name in the
+   * request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the channel partner repricing config rule to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.delete_channel_partner_repricing_config.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_DeleteChannelPartnerRepricingConfig_async
+   */
+  deleteChannelPartnerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteChannelPartnerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteChannelPartnerRepricingConfig(
+    request: protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteChannelPartnerRepricingConfig(
+    request?: protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteChannelPartnerRepricingConfig(
       request,
       options,
       callback
@@ -3975,6 +5004,10 @@ export class CloudChannelServiceClient {
    *   Obtained through
    *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+   *   https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
+   *   for more information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4073,6 +5106,10 @@ export class CloudChannelServiceClient {
    *   Obtained through
    *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+   *   https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
+   *   for more information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4125,6 +5162,10 @@ export class CloudChannelServiceClient {
    *   Obtained through
    *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+   *   https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
+   *   for more information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5145,6 +6186,538 @@ export class CloudChannelServiceClient {
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IChannelPartnerLink>;
+  }
+  /**
+   * Lists information about how a Reseller modifies their bill before sending
+   * it to a Customer.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different.
+   * * NOT_FOUND: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} specified does not exist or is
+   * not associated with the given account.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} resources. The
+   * data for each resource is displayed in the ascending order of:
+   * * customer ID
+   * * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
+   * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * * {@link google.cloud.channel.v1.CustomerRepricingConfig.update_time|CustomerRepricingConfig.update_time}
+   *
+   * If unsuccessful, returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the customer.
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}.
+   *   Supports accounts/{account_id}/customers/- to retrieve configs for all
+   *   customers.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of repricing configs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *   maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs} call.
+   * @param {string} [request.filter]
+   *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
+   *   results (customer only). You can use this filter when you support
+   *   a BatchGet-like query.
+   *   To use the filter, you must set `parent=accounts/{account_id}/customers/-`.
+   *
+   *   Example: customer = accounts/account_id/customers/c1 OR
+   *   customer = accounts/account_id/customers/c2.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [CustomerRepricingConfig]{@link google.cloud.channel.v1.CustomerRepricingConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCustomerRepricingConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listCustomerRepricingConfigs(
+    request?: protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig[],
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest | null,
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+    ]
+  >;
+  listCustomerRepricingConfigs(
+    request: protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+      | protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig
+    >
+  ): void;
+  listCustomerRepricingConfigs(
+    request: protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+      | protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig
+    >
+  ): void;
+  listCustomerRepricingConfigs(
+    request?: protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+          | protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+      | protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomerRepricingConfig[],
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest | null,
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listCustomerRepricingConfigs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the customer.
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}.
+   *   Supports accounts/{account_id}/customers/- to retrieve configs for all
+   *   customers.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of repricing configs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *   maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs} call.
+   * @param {string} [request.filter]
+   *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
+   *   results (customer only). You can use this filter when you support
+   *   a BatchGet-like query.
+   *   To use the filter, you must set `parent=accounts/{account_id}/customers/-`.
+   *
+   *   Example: customer = accounts/account_id/customers/c1 OR
+   *   customer = accounts/account_id/customers/c2.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [CustomerRepricingConfig]{@link google.cloud.channel.v1.CustomerRepricingConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCustomerRepricingConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listCustomerRepricingConfigsStream(
+    request?: protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listCustomerRepricingConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listCustomerRepricingConfigs.createStream(
+      this.innerApiCalls.listCustomerRepricingConfigs as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listCustomerRepricingConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the customer.
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}.
+   *   Supports accounts/{account_id}/customers/- to retrieve configs for all
+   *   customers.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of repricing configs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *   maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs} call.
+   * @param {string} [request.filter]
+   *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
+   *   results (customer only). You can use this filter when you support
+   *   a BatchGet-like query.
+   *   To use the filter, you must set `parent=accounts/{account_id}/customers/-`.
+   *
+   *   Example: customer = accounts/account_id/customers/c1 OR
+   *   customer = accounts/account_id/customers/c2.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [CustomerRepricingConfig]{@link google.cloud.channel.v1.CustomerRepricingConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_customer_repricing_configs.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListCustomerRepricingConfigs_async
+   */
+  listCustomerRepricingConfigsAsync(
+    request?: protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.channel.v1.ICustomerRepricingConfig> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listCustomerRepricingConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listCustomerRepricingConfigs.asyncIterate(
+      this.innerApiCalls['listCustomerRepricingConfigs'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.channel.v1.ICustomerRepricingConfig>;
+  }
+  /**
+   * Lists information about how a Reseller modifies their bill before sending
+   * it to a ChannelPartner.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different.
+   * * NOT_FOUND: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} specified does not exist
+   * or is not associated with the given account.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} resources.
+   * The data for each resource is displayed in the ascending order of:
+   * * channel partner ID
+   * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.update_time|ChannelPartnerRepricingConfig.update_time}
+   *
+   * If unsuccessful, returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the account's {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
+   *   Parent uses the format:
+   *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
+   *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
+   *   for all channel partners.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of repricing configs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *   maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token} of the
+   *   previous {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs} call.
+   * @param {string} [request.filter]
+   *   Optional. A filter for [CloudChannelService.ListChannelPartnerRepricingConfigs]
+   *   results (channel_partner_link only). You can use this filter when you
+   *   support a BatchGet-like query.
+   *   To use the filter, you must set
+   *   `parent=accounts/{account_id}/channelPartnerLinks/-`.
+   *
+   *   Example: `channel_partner_link =
+   *   accounts/account_id/channelPartnerLinks/c1` OR `channel_partner_link =
+   *   accounts/account_id/channelPartnerLinks/c2`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ChannelPartnerRepricingConfig]{@link google.cloud.channel.v1.ChannelPartnerRepricingConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listChannelPartnerRepricingConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listChannelPartnerRepricingConfigs(
+    request?: protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig[],
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest | null,
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+    ]
+  >;
+  listChannelPartnerRepricingConfigs(
+    request: protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+      | protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig
+    >
+  ): void;
+  listChannelPartnerRepricingConfigs(
+    request: protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+      | protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig
+    >
+  ): void;
+  listChannelPartnerRepricingConfigs(
+    request?: protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+          | protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+      | protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig[],
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest | null,
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listChannelPartnerRepricingConfigs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the account's {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
+   *   Parent uses the format:
+   *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
+   *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
+   *   for all channel partners.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of repricing configs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *   maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token} of the
+   *   previous {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs} call.
+   * @param {string} [request.filter]
+   *   Optional. A filter for [CloudChannelService.ListChannelPartnerRepricingConfigs]
+   *   results (channel_partner_link only). You can use this filter when you
+   *   support a BatchGet-like query.
+   *   To use the filter, you must set
+   *   `parent=accounts/{account_id}/channelPartnerLinks/-`.
+   *
+   *   Example: `channel_partner_link =
+   *   accounts/account_id/channelPartnerLinks/c1` OR `channel_partner_link =
+   *   accounts/account_id/channelPartnerLinks/c2`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ChannelPartnerRepricingConfig]{@link google.cloud.channel.v1.ChannelPartnerRepricingConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listChannelPartnerRepricingConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listChannelPartnerRepricingConfigsStream(
+    request?: protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings =
+      this._defaults['listChannelPartnerRepricingConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listChannelPartnerRepricingConfigs.createStream(
+      this.innerApiCalls.listChannelPartnerRepricingConfigs as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listChannelPartnerRepricingConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the account's {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
+   *   Parent uses the format:
+   *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
+   *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
+   *   for all channel partners.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of repricing configs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *   maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token} of the
+   *   previous {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs} call.
+   * @param {string} [request.filter]
+   *   Optional. A filter for [CloudChannelService.ListChannelPartnerRepricingConfigs]
+   *   results (channel_partner_link only). You can use this filter when you
+   *   support a BatchGet-like query.
+   *   To use the filter, you must set
+   *   `parent=accounts/{account_id}/channelPartnerLinks/-`.
+   *
+   *   Example: `channel_partner_link =
+   *   accounts/account_id/channelPartnerLinks/c1` OR `channel_partner_link =
+   *   accounts/account_id/channelPartnerLinks/c2`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ChannelPartnerRepricingConfig]{@link google.cloud.channel.v1.ChannelPartnerRepricingConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_channel_partner_repricing_configs.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerRepricingConfigs_async
+   */
+  listChannelPartnerRepricingConfigsAsync(
+    request?: protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings =
+      this._defaults['listChannelPartnerRepricingConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listChannelPartnerRepricingConfigs.asyncIterate(
+      this.innerApiCalls['listChannelPartnerRepricingConfigs'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig>;
   }
   /**
    * Lists the Products the reseller is authorized to sell.
@@ -6520,6 +8093,71 @@ export class CloudChannelServiceClient {
   }
 
   /**
+   * Return a fully-qualified channelPartnerRepricingConfig resource name string.
+   *
+   * @param {string} account
+   * @param {string} channel_partner
+   * @param {string} channel_partner_repricing_config
+   * @returns {string} Resource name string.
+   */
+  channelPartnerRepricingConfigPath(
+    account: string,
+    channelPartner: string,
+    channelPartnerRepricingConfig: string
+  ) {
+    return this.pathTemplates.channelPartnerRepricingConfigPathTemplate.render({
+      account: account,
+      channel_partner: channelPartner,
+      channel_partner_repricing_config: channelPartnerRepricingConfig,
+    });
+  }
+
+  /**
+   * Parse the account from ChannelPartnerRepricingConfig resource.
+   *
+   * @param {string} channelPartnerRepricingConfigName
+   *   A fully-qualified path representing ChannelPartnerRepricingConfig resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromChannelPartnerRepricingConfigName(
+    channelPartnerRepricingConfigName: string
+  ) {
+    return this.pathTemplates.channelPartnerRepricingConfigPathTemplate.match(
+      channelPartnerRepricingConfigName
+    ).account;
+  }
+
+  /**
+   * Parse the channel_partner from ChannelPartnerRepricingConfig resource.
+   *
+   * @param {string} channelPartnerRepricingConfigName
+   *   A fully-qualified path representing ChannelPartnerRepricingConfig resource.
+   * @returns {string} A string representing the channel_partner.
+   */
+  matchChannelPartnerFromChannelPartnerRepricingConfigName(
+    channelPartnerRepricingConfigName: string
+  ) {
+    return this.pathTemplates.channelPartnerRepricingConfigPathTemplate.match(
+      channelPartnerRepricingConfigName
+    ).channel_partner;
+  }
+
+  /**
+   * Parse the channel_partner_repricing_config from ChannelPartnerRepricingConfig resource.
+   *
+   * @param {string} channelPartnerRepricingConfigName
+   *   A fully-qualified path representing ChannelPartnerRepricingConfig resource.
+   * @returns {string} A string representing the channel_partner_repricing_config.
+   */
+  matchChannelPartnerRepricingConfigFromChannelPartnerRepricingConfigName(
+    channelPartnerRepricingConfigName: string
+  ) {
+    return this.pathTemplates.channelPartnerRepricingConfigPathTemplate.match(
+      channelPartnerRepricingConfigName
+    ).channel_partner_repricing_config;
+  }
+
+  /**
    * Return a fully-qualified customer resource name string.
    *
    * @param {string} account
@@ -6553,6 +8191,71 @@ export class CloudChannelServiceClient {
    */
   matchCustomerFromCustomerName(customerName: string) {
     return this.pathTemplates.customerPathTemplate.match(customerName).customer;
+  }
+
+  /**
+   * Return a fully-qualified customerRepricingConfig resource name string.
+   *
+   * @param {string} account
+   * @param {string} customer
+   * @param {string} customer_repricing_config
+   * @returns {string} Resource name string.
+   */
+  customerRepricingConfigPath(
+    account: string,
+    customer: string,
+    customerRepricingConfig: string
+  ) {
+    return this.pathTemplates.customerRepricingConfigPathTemplate.render({
+      account: account,
+      customer: customer,
+      customer_repricing_config: customerRepricingConfig,
+    });
+  }
+
+  /**
+   * Parse the account from CustomerRepricingConfig resource.
+   *
+   * @param {string} customerRepricingConfigName
+   *   A fully-qualified path representing CustomerRepricingConfig resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromCustomerRepricingConfigName(
+    customerRepricingConfigName: string
+  ) {
+    return this.pathTemplates.customerRepricingConfigPathTemplate.match(
+      customerRepricingConfigName
+    ).account;
+  }
+
+  /**
+   * Parse the customer from CustomerRepricingConfig resource.
+   *
+   * @param {string} customerRepricingConfigName
+   *   A fully-qualified path representing CustomerRepricingConfig resource.
+   * @returns {string} A string representing the customer.
+   */
+  matchCustomerFromCustomerRepricingConfigName(
+    customerRepricingConfigName: string
+  ) {
+    return this.pathTemplates.customerRepricingConfigPathTemplate.match(
+      customerRepricingConfigName
+    ).customer;
+  }
+
+  /**
+   * Parse the customer_repricing_config from CustomerRepricingConfig resource.
+   *
+   * @param {string} customerRepricingConfigName
+   *   A fully-qualified path representing CustomerRepricingConfig resource.
+   * @returns {string} A string representing the customer_repricing_config.
+   */
+  matchCustomerRepricingConfigFromCustomerRepricingConfigName(
+    customerRepricingConfigName: string
+  ) {
+    return this.pathTemplates.customerRepricingConfigPathTemplate.match(
+      customerRepricingConfigName
+    ).customer_repricing_config;
   }
 
   /**

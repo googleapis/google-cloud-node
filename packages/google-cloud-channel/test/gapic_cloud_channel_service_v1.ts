@@ -1614,6 +1614,1151 @@ describe('v1.CloudChannelServiceClient', () => {
     });
   });
 
+  describe('getCustomerRepricingConfig', () => {
+    it('invokes getCustomerRepricingConfig without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+      );
+      client.innerApiCalls.getCustomerRepricingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getCustomerRepricingConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getCustomerRepricingConfig without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+      );
+      client.innerApiCalls.getCustomerRepricingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getCustomerRepricingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.ICustomerRepricingConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getCustomerRepricingConfig with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getCustomerRepricingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getCustomerRepricingConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getCustomerRepricingConfig with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getCustomerRepricingConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createCustomerRepricingConfig', () => {
+    it('invokes createCustomerRepricingConfig without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+      );
+      client.innerApiCalls.createCustomerRepricingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createCustomerRepricingConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createCustomerRepricingConfig without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+      );
+      client.innerApiCalls.createCustomerRepricingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createCustomerRepricingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.ICustomerRepricingConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createCustomerRepricingConfig with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCustomerRepricingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createCustomerRepricingConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.createCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createCustomerRepricingConfig with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createCustomerRepricingConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateCustomerRepricingConfig', () => {
+    it('invokes updateCustomerRepricingConfig without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest()
+      );
+      request.customerRepricingConfig = {};
+      request.customerRepricingConfig.name = '';
+      const expectedHeaderRequestParams = 'customer_repricing_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+      );
+      client.innerApiCalls.updateCustomerRepricingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCustomerRepricingConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateCustomerRepricingConfig without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest()
+      );
+      request.customerRepricingConfig = {};
+      request.customerRepricingConfig.name = '';
+      const expectedHeaderRequestParams = 'customer_repricing_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+      );
+      client.innerApiCalls.updateCustomerRepricingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateCustomerRepricingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.ICustomerRepricingConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateCustomerRepricingConfig with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest()
+      );
+      request.customerRepricingConfig = {};
+      request.customerRepricingConfig.name = '';
+      const expectedHeaderRequestParams = 'customer_repricing_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateCustomerRepricingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateCustomerRepricingConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateCustomerRepricingConfig with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest()
+      );
+      request.customerRepricingConfig = {};
+      request.customerRepricingConfig.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateCustomerRepricingConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteCustomerRepricingConfig', () => {
+    it('invokes deleteCustomerRepricingConfig without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCustomerRepricingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteCustomerRepricingConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteCustomerRepricingConfig without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCustomerRepricingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteCustomerRepricingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteCustomerRepricingConfig with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteCustomerRepricingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteCustomerRepricingConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteCustomerRepricingConfig with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteCustomerRepricingConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getChannelPartnerRepricingConfig', () => {
+    it('invokes getChannelPartnerRepricingConfig without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+      );
+      client.innerApiCalls.getChannelPartnerRepricingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getChannelPartnerRepricingConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getChannelPartnerRepricingConfig without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+      );
+      client.innerApiCalls.getChannelPartnerRepricingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getChannelPartnerRepricingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getChannelPartnerRepricingConfig with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getChannelPartnerRepricingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getChannelPartnerRepricingConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getChannelPartnerRepricingConfig with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getChannelPartnerRepricingConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createChannelPartnerRepricingConfig', () => {
+    it('invokes createChannelPartnerRepricingConfig without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+      );
+      client.innerApiCalls.createChannelPartnerRepricingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createChannelPartnerRepricingConfig(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createChannelPartnerRepricingConfig without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+      );
+      client.innerApiCalls.createChannelPartnerRepricingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createChannelPartnerRepricingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createChannelPartnerRepricingConfig with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createChannelPartnerRepricingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createChannelPartnerRepricingConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createChannelPartnerRepricingConfig with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createChannelPartnerRepricingConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateChannelPartnerRepricingConfig', () => {
+    it('invokes updateChannelPartnerRepricingConfig without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest()
+      );
+      request.channelPartnerRepricingConfig = {};
+      request.channelPartnerRepricingConfig.name = '';
+      const expectedHeaderRequestParams =
+        'channel_partner_repricing_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+      );
+      client.innerApiCalls.updateChannelPartnerRepricingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateChannelPartnerRepricingConfig(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateChannelPartnerRepricingConfig without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest()
+      );
+      request.channelPartnerRepricingConfig = {};
+      request.channelPartnerRepricingConfig.name = '';
+      const expectedHeaderRequestParams =
+        'channel_partner_repricing_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+      );
+      client.innerApiCalls.updateChannelPartnerRepricingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateChannelPartnerRepricingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateChannelPartnerRepricingConfig with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest()
+      );
+      request.channelPartnerRepricingConfig = {};
+      request.channelPartnerRepricingConfig.name = '';
+      const expectedHeaderRequestParams =
+        'channel_partner_repricing_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateChannelPartnerRepricingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateChannelPartnerRepricingConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateChannelPartnerRepricingConfig with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest()
+      );
+      request.channelPartnerRepricingConfig = {};
+      request.channelPartnerRepricingConfig.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateChannelPartnerRepricingConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteChannelPartnerRepricingConfig', () => {
+    it('invokes deleteChannelPartnerRepricingConfig without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteChannelPartnerRepricingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteChannelPartnerRepricingConfig(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteChannelPartnerRepricingConfig without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteChannelPartnerRepricingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteChannelPartnerRepricingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteChannelPartnerRepricingConfig with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteChannelPartnerRepricingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteChannelPartnerRepricingConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteChannelPartnerRepricingConfig with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteChannelPartnerRepricingConfig(request),
+        expectedError
+      );
+    });
+  });
+
   describe('lookupOffer', () => {
     it('invokes lookupOffer without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
@@ -5877,6 +7022,710 @@ describe('v1.CloudChannelServiceClient', () => {
     });
   });
 
+  describe('listCustomerRepricingConfigs', () => {
+    it('invokes listCustomerRepricingConfigs without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+      ];
+      client.innerApiCalls.listCustomerRepricingConfigs =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listCustomerRepricingConfigs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listCustomerRepricingConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listCustomerRepricingConfigs without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+      ];
+      client.innerApiCalls.listCustomerRepricingConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listCustomerRepricingConfigs(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.channel.v1.ICustomerRepricingConfig[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listCustomerRepricingConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listCustomerRepricingConfigs with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listCustomerRepricingConfigs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listCustomerRepricingConfigs(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listCustomerRepricingConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listCustomerRepricingConfigsStream without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+      ];
+      client.descriptors.page.listCustomerRepricingConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listCustomerRepricingConfigsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.channel.v1.CustomerRepricingConfig[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.channel.v1.CustomerRepricingConfig
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listCustomerRepricingConfigs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listCustomerRepricingConfigs,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listCustomerRepricingConfigs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listCustomerRepricingConfigsStream with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listCustomerRepricingConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listCustomerRepricingConfigsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.channel.v1.CustomerRepricingConfig[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.channel.v1.CustomerRepricingConfig
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listCustomerRepricingConfigs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listCustomerRepricingConfigs,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listCustomerRepricingConfigs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listCustomerRepricingConfigs without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.CustomerRepricingConfig()
+        ),
+      ];
+      client.descriptors.page.listCustomerRepricingConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.channel.v1.ICustomerRepricingConfig[] =
+        [];
+      const iterable = client.listCustomerRepricingConfigsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listCustomerRepricingConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listCustomerRepricingConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listCustomerRepricingConfigs with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listCustomerRepricingConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listCustomerRepricingConfigsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.channel.v1.ICustomerRepricingConfig[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listCustomerRepricingConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listCustomerRepricingConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listChannelPartnerRepricingConfigs', () => {
+    it('invokes listChannelPartnerRepricingConfigs without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+      ];
+      client.innerApiCalls.listChannelPartnerRepricingConfigs =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listChannelPartnerRepricingConfigs(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listChannelPartnerRepricingConfigs without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+      ];
+      client.innerApiCalls.listChannelPartnerRepricingConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listChannelPartnerRepricingConfigs(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listChannelPartnerRepricingConfigs with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listChannelPartnerRepricingConfigs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listChannelPartnerRepricingConfigs(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listChannelPartnerRepricingConfigsStream without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+      ];
+      client.descriptors.page.listChannelPartnerRepricingConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listChannelPartnerRepricingConfigsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listChannelPartnerRepricingConfigs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listChannelPartnerRepricingConfigs,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannelPartnerRepricingConfigs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listChannelPartnerRepricingConfigsStream with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listChannelPartnerRepricingConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listChannelPartnerRepricingConfigsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listChannelPartnerRepricingConfigs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listChannelPartnerRepricingConfigs,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannelPartnerRepricingConfigs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listChannelPartnerRepricingConfigs without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
+        ),
+      ];
+      client.descriptors.page.listChannelPartnerRepricingConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig[] =
+        [];
+      const iterable = client.listChannelPartnerRepricingConfigsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listChannelPartnerRepricingConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannelPartnerRepricingConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listChannelPartnerRepricingConfigs with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listChannelPartnerRepricingConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listChannelPartnerRepricingConfigsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listChannelPartnerRepricingConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannelPartnerRepricingConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('listProducts', () => {
     it('invokes listProducts without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
@@ -7686,6 +9535,89 @@ describe('v1.CloudChannelServiceClient', () => {
       });
     });
 
+    describe('channelPartnerRepricingConfig', () => {
+      const fakePath = '/rendered/path/channelPartnerRepricingConfig';
+      const expectedParameters = {
+        account: 'accountValue',
+        channel_partner: 'channelPartnerValue',
+        channel_partner_repricing_config: 'channelPartnerRepricingConfigValue',
+      };
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.channelPartnerRepricingConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.channelPartnerRepricingConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('channelPartnerRepricingConfigPath', () => {
+        const result = client.channelPartnerRepricingConfigPath(
+          'accountValue',
+          'channelPartnerValue',
+          'channelPartnerRepricingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.channelPartnerRepricingConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromChannelPartnerRepricingConfigName', () => {
+        const result =
+          client.matchAccountFromChannelPartnerRepricingConfigName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (
+            client.pathTemplates.channelPartnerRepricingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChannelPartnerFromChannelPartnerRepricingConfigName', () => {
+        const result =
+          client.matchChannelPartnerFromChannelPartnerRepricingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'channelPartnerValue');
+        assert(
+          (
+            client.pathTemplates.channelPartnerRepricingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChannelPartnerRepricingConfigFromChannelPartnerRepricingConfigName', () => {
+        const result =
+          client.matchChannelPartnerRepricingConfigFromChannelPartnerRepricingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'channelPartnerRepricingConfigValue');
+        assert(
+          (
+            client.pathTemplates.channelPartnerRepricingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('customer', () => {
       const fakePath = '/rendered/path/customer';
       const expectedParameters = {
@@ -7731,6 +9663,89 @@ describe('v1.CloudChannelServiceClient', () => {
         assert.strictEqual(result, 'customerValue');
         assert(
           (client.pathTemplates.customerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('customerRepricingConfig', () => {
+      const fakePath = '/rendered/path/customerRepricingConfig';
+      const expectedParameters = {
+        account: 'accountValue',
+        customer: 'customerValue',
+        customer_repricing_config: 'customerRepricingConfigValue',
+      };
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.customerRepricingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.customerRepricingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('customerRepricingConfigPath', () => {
+        const result = client.customerRepricingConfigPath(
+          'accountValue',
+          'customerValue',
+          'customerRepricingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.customerRepricingConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromCustomerRepricingConfigName', () => {
+        const result =
+          client.matchAccountFromCustomerRepricingConfigName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (
+            client.pathTemplates.customerRepricingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomerFromCustomerRepricingConfigName', () => {
+        const result =
+          client.matchCustomerFromCustomerRepricingConfigName(fakePath);
+        assert.strictEqual(result, 'customerValue');
+        assert(
+          (
+            client.pathTemplates.customerRepricingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomerRepricingConfigFromCustomerRepricingConfigName', () => {
+        const result =
+          client.matchCustomerRepricingConfigFromCustomerRepricingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'customerRepricingConfigValue');
+        assert(
+          (
+            client.pathTemplates.customerRepricingConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

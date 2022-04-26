@@ -21,32 +21,37 @@
 'use strict';
 
 function main(parent) {
-  // [START cloudchannel_v1_generated_CloudChannelService_ListCustomers_async]
+  // [START cloudchannel_v1_generated_CloudChannelService_ListCustomerRepricingConfigs_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the reseller account to list customers from.
-   *  Parent uses the format: accounts/{account_id}.
+   *  Required. The resource name of the customer.
+   *  Parent uses the format: accounts/{account_id}/customers/{customer_id}.
+   *  Supports accounts/{account_id}/customers/- to retrieve configs for all
+   *  customers.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of customers to return. The service may return fewer
-   *  than this value. If unspecified, returns at most 10 customers. The
-   *  maximum value is 50.
+   *  Optional. The maximum number of repricing configs to return. The service may return
+   *  fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *  maximum value is 100; values above 100 will be coerced to 100.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A token identifying a page of results other than the first page.
+   *  Optional. A token identifying a page of results beyond the first page.
    *  Obtained through
-   *  ListCustomersResponse.next_page_token google.cloud.channel.v1.ListCustomersResponse.next_page_token  of the previous
-   *  CloudChannelService.ListCustomers google.cloud.channel.v1.CloudChannelService.ListCustomers  call.
+   *  ListCustomerRepricingConfigsResponse.next_page_token google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token  of the previous
+   *  CloudChannelService.ListCustomerRepricingConfigs google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs  call.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Filters applied to the CloudChannelService.ListCustomers  results. See
-   *  https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
-   *  for more information.
+   *  Optional. A filter for CloudChannelService.ListCustomerRepricingConfigs 
+   *  results (customer only). You can use this filter when you support
+   *  a BatchGet-like query.
+   *  To use the filter, you must set `parent=accounts/{account_id}/customers/-`.
+   *  Example: customer = accounts/account_id/customers/c1 OR
+   *  customer = accounts/account_id/customers/c2.
    */
   // const filter = 'abc123'
 
@@ -56,21 +61,21 @@ function main(parent) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function callListCustomers() {
+  async function callListCustomerRepricingConfigs() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await channelClient.listCustomersAsync(request);
+    const iterable = await channelClient.listCustomerRepricingConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListCustomers();
-  // [END cloudchannel_v1_generated_CloudChannelService_ListCustomers_async]
+  callListCustomerRepricingConfigs();
+  // [END cloudchannel_v1_generated_CloudChannelService_ListCustomerRepricingConfigs_async]
 }
 
 process.on('unhandledRejection', err => {

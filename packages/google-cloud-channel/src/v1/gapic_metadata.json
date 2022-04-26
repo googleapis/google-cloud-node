@@ -60,6 +60,46 @@
                 "updateChannelPartnerLink"
               ]
             },
+            "GetCustomerRepricingConfig": {
+              "methods": [
+                "getCustomerRepricingConfig"
+              ]
+            },
+            "CreateCustomerRepricingConfig": {
+              "methods": [
+                "createCustomerRepricingConfig"
+              ]
+            },
+            "UpdateCustomerRepricingConfig": {
+              "methods": [
+                "updateCustomerRepricingConfig"
+              ]
+            },
+            "DeleteCustomerRepricingConfig": {
+              "methods": [
+                "deleteCustomerRepricingConfig"
+              ]
+            },
+            "GetChannelPartnerRepricingConfig": {
+              "methods": [
+                "getChannelPartnerRepricingConfig"
+              ]
+            },
+            "CreateChannelPartnerRepricingConfig": {
+              "methods": [
+                "createChannelPartnerRepricingConfig"
+              ]
+            },
+            "UpdateChannelPartnerRepricingConfig": {
+              "methods": [
+                "updateChannelPartnerRepricingConfig"
+              ]
+            },
+            "DeleteChannelPartnerRepricingConfig": {
+              "methods": [
+                "deleteChannelPartnerRepricingConfig"
+              ]
+            },
             "LookupOffer": {
               "methods": [
                 "lookupOffer"
@@ -163,6 +203,20 @@
                 "listChannelPartnerLinks",
                 "listChannelPartnerLinksStream",
                 "listChannelPartnerLinksAsync"
+              ]
+            },
+            "ListCustomerRepricingConfigs": {
+              "methods": [
+                "listCustomerRepricingConfigs",
+                "listCustomerRepricingConfigsStream",
+                "listCustomerRepricingConfigsAsync"
+              ]
+            },
+            "ListChannelPartnerRepricingConfigs": {
+              "methods": [
+                "listChannelPartnerRepricingConfigs",
+                "listChannelPartnerRepricingConfigsStream",
+                "listChannelPartnerRepricingConfigsAsync"
               ]
             },
             "ListProducts": {
@@ -262,6 +316,46 @@
                 "updateChannelPartnerLink"
               ]
             },
+            "GetCustomerRepricingConfig": {
+              "methods": [
+                "getCustomerRepricingConfig"
+              ]
+            },
+            "CreateCustomerRepricingConfig": {
+              "methods": [
+                "createCustomerRepricingConfig"
+              ]
+            },
+            "UpdateCustomerRepricingConfig": {
+              "methods": [
+                "updateCustomerRepricingConfig"
+              ]
+            },
+            "DeleteCustomerRepricingConfig": {
+              "methods": [
+                "deleteCustomerRepricingConfig"
+              ]
+            },
+            "GetChannelPartnerRepricingConfig": {
+              "methods": [
+                "getChannelPartnerRepricingConfig"
+              ]
+            },
+            "CreateChannelPartnerRepricingConfig": {
+              "methods": [
+                "createChannelPartnerRepricingConfig"
+              ]
+            },
+            "UpdateChannelPartnerRepricingConfig": {
+              "methods": [
+                "updateChannelPartnerRepricingConfig"
+              ]
+            },
+            "DeleteChannelPartnerRepricingConfig": {
+              "methods": [
+                "deleteChannelPartnerRepricingConfig"
+              ]
+            },
             "LookupOffer": {
               "methods": [
                 "lookupOffer"
@@ -365,6 +459,20 @@
                 "listChannelPartnerLinks",
                 "listChannelPartnerLinksStream",
                 "listChannelPartnerLinksAsync"
+              ]
+            },
+            "ListCustomerRepricingConfigs": {
+              "methods": [
+                "listCustomerRepricingConfigs",
+                "listCustomerRepricingConfigsStream",
+                "listCustomerRepricingConfigsAsync"
+              ]
+            },
+            "ListChannelPartnerRepricingConfigs": {
+              "methods": [
+                "listChannelPartnerRepricingConfigs",
+                "listChannelPartnerRepricingConfigsStream",
+                "listChannelPartnerRepricingConfigsAsync"
               ]
             },
             "ListProducts": {

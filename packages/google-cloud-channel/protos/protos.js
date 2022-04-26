@@ -9427,6 +9427,1597 @@
                         return OperationMetadata;
                     })();
     
+                    /**
+                     * RebillingBasis enum.
+                     * @name google.cloud.channel.v1.RebillingBasis
+                     * @enum {number}
+                     * @property {number} REBILLING_BASIS_UNSPECIFIED=0 REBILLING_BASIS_UNSPECIFIED value
+                     * @property {number} COST_AT_LIST=1 COST_AT_LIST value
+                     * @property {number} DIRECT_CUSTOMER_COST=2 DIRECT_CUSTOMER_COST value
+                     */
+                    v1.RebillingBasis = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REBILLING_BASIS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "COST_AT_LIST"] = 1;
+                        values[valuesById[2] = "DIRECT_CUSTOMER_COST"] = 2;
+                        return values;
+                    })();
+    
+                    v1.CustomerRepricingConfig = (function() {
+    
+                        /**
+                         * Properties of a CustomerRepricingConfig.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ICustomerRepricingConfig
+                         * @property {string|null} [name] CustomerRepricingConfig name
+                         * @property {google.cloud.channel.v1.IRepricingConfig|null} [repricingConfig] CustomerRepricingConfig repricingConfig
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CustomerRepricingConfig updateTime
+                         */
+    
+                        /**
+                         * Constructs a new CustomerRepricingConfig.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a CustomerRepricingConfig.
+                         * @implements ICustomerRepricingConfig
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ICustomerRepricingConfig=} [properties] Properties to set
+                         */
+                        function CustomerRepricingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerRepricingConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @instance
+                         */
+                        CustomerRepricingConfig.prototype.name = "";
+    
+                        /**
+                         * CustomerRepricingConfig repricingConfig.
+                         * @member {google.cloud.channel.v1.IRepricingConfig|null|undefined} repricingConfig
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @instance
+                         */
+                        CustomerRepricingConfig.prototype.repricingConfig = null;
+    
+                        /**
+                         * CustomerRepricingConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @instance
+                         */
+                        CustomerRepricingConfig.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new CustomerRepricingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.ICustomerRepricingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.CustomerRepricingConfig} CustomerRepricingConfig instance
+                         */
+                        CustomerRepricingConfig.create = function create(properties) {
+                            return new CustomerRepricingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerRepricingConfig message. Does not implicitly {@link google.cloud.channel.v1.CustomerRepricingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.ICustomerRepricingConfig} message CustomerRepricingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerRepricingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.repricingConfig != null && Object.hasOwnProperty.call(message, "repricingConfig"))
+                                $root.google.cloud.channel.v1.RepricingConfig.encode(message.repricingConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerRepricingConfig message, length delimited. Does not implicitly {@link google.cloud.channel.v1.CustomerRepricingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.ICustomerRepricingConfig} message CustomerRepricingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerRepricingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerRepricingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.CustomerRepricingConfig} CustomerRepricingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerRepricingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.CustomerRepricingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.repricingConfig = $root.google.cloud.channel.v1.RepricingConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerRepricingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.CustomerRepricingConfig} CustomerRepricingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerRepricingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerRepricingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerRepricingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.repricingConfig != null && message.hasOwnProperty("repricingConfig")) {
+                                var error = $root.google.cloud.channel.v1.RepricingConfig.verify(message.repricingConfig);
+                                if (error)
+                                    return "repricingConfig." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerRepricingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.CustomerRepricingConfig} CustomerRepricingConfig
+                         */
+                        CustomerRepricingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.CustomerRepricingConfig)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.CustomerRepricingConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.repricingConfig != null) {
+                                if (typeof object.repricingConfig !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.CustomerRepricingConfig.repricingConfig: object expected");
+                                message.repricingConfig = $root.google.cloud.channel.v1.RepricingConfig.fromObject(object.repricingConfig);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.CustomerRepricingConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerRepricingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.CustomerRepricingConfig} message CustomerRepricingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerRepricingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.repricingConfig = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.repricingConfig != null && message.hasOwnProperty("repricingConfig"))
+                                object.repricingConfig = $root.google.cloud.channel.v1.RepricingConfig.toObject(message.repricingConfig, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerRepricingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.CustomerRepricingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerRepricingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CustomerRepricingConfig;
+                    })();
+    
+                    v1.ChannelPartnerRepricingConfig = (function() {
+    
+                        /**
+                         * Properties of a ChannelPartnerRepricingConfig.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IChannelPartnerRepricingConfig
+                         * @property {string|null} [name] ChannelPartnerRepricingConfig name
+                         * @property {google.cloud.channel.v1.IRepricingConfig|null} [repricingConfig] ChannelPartnerRepricingConfig repricingConfig
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ChannelPartnerRepricingConfig updateTime
+                         */
+    
+                        /**
+                         * Constructs a new ChannelPartnerRepricingConfig.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ChannelPartnerRepricingConfig.
+                         * @implements IChannelPartnerRepricingConfig
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IChannelPartnerRepricingConfig=} [properties] Properties to set
+                         */
+                        function ChannelPartnerRepricingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ChannelPartnerRepricingConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @instance
+                         */
+                        ChannelPartnerRepricingConfig.prototype.name = "";
+    
+                        /**
+                         * ChannelPartnerRepricingConfig repricingConfig.
+                         * @member {google.cloud.channel.v1.IRepricingConfig|null|undefined} repricingConfig
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @instance
+                         */
+                        ChannelPartnerRepricingConfig.prototype.repricingConfig = null;
+    
+                        /**
+                         * ChannelPartnerRepricingConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @instance
+                         */
+                        ChannelPartnerRepricingConfig.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new ChannelPartnerRepricingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.IChannelPartnerRepricingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ChannelPartnerRepricingConfig} ChannelPartnerRepricingConfig instance
+                         */
+                        ChannelPartnerRepricingConfig.create = function create(properties) {
+                            return new ChannelPartnerRepricingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ChannelPartnerRepricingConfig message. Does not implicitly {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.IChannelPartnerRepricingConfig} message ChannelPartnerRepricingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChannelPartnerRepricingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.repricingConfig != null && Object.hasOwnProperty.call(message, "repricingConfig"))
+                                $root.google.cloud.channel.v1.RepricingConfig.encode(message.repricingConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ChannelPartnerRepricingConfig message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.IChannelPartnerRepricingConfig} message ChannelPartnerRepricingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChannelPartnerRepricingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ChannelPartnerRepricingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ChannelPartnerRepricingConfig} ChannelPartnerRepricingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChannelPartnerRepricingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.repricingConfig = $root.google.cloud.channel.v1.RepricingConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ChannelPartnerRepricingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ChannelPartnerRepricingConfig} ChannelPartnerRepricingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChannelPartnerRepricingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ChannelPartnerRepricingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ChannelPartnerRepricingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.repricingConfig != null && message.hasOwnProperty("repricingConfig")) {
+                                var error = $root.google.cloud.channel.v1.RepricingConfig.verify(message.repricingConfig);
+                                if (error)
+                                    return "repricingConfig." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ChannelPartnerRepricingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ChannelPartnerRepricingConfig} ChannelPartnerRepricingConfig
+                         */
+                        ChannelPartnerRepricingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.repricingConfig != null) {
+                                if (typeof object.repricingConfig !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricingConfig: object expected");
+                                message.repricingConfig = $root.google.cloud.channel.v1.RepricingConfig.fromObject(object.repricingConfig);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ChannelPartnerRepricingConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ChannelPartnerRepricingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.ChannelPartnerRepricingConfig} message ChannelPartnerRepricingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ChannelPartnerRepricingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.repricingConfig = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.repricingConfig != null && message.hasOwnProperty("repricingConfig"))
+                                object.repricingConfig = $root.google.cloud.channel.v1.RepricingConfig.toObject(message.repricingConfig, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ChannelPartnerRepricingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ChannelPartnerRepricingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ChannelPartnerRepricingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ChannelPartnerRepricingConfig;
+                    })();
+    
+                    v1.RepricingConfig = (function() {
+    
+                        /**
+                         * Properties of a RepricingConfig.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IRepricingConfig
+                         * @property {google.cloud.channel.v1.RepricingConfig.IEntitlementGranularity|null} [entitlementGranularity] RepricingConfig entitlementGranularity
+                         * @property {google.cloud.channel.v1.RepricingConfig.IChannelPartnerGranularity|null} [channelPartnerGranularity] RepricingConfig channelPartnerGranularity
+                         * @property {google.type.IDate|null} [effectiveInvoiceMonth] RepricingConfig effectiveInvoiceMonth
+                         * @property {google.cloud.channel.v1.IRepricingAdjustment|null} [adjustment] RepricingConfig adjustment
+                         * @property {google.cloud.channel.v1.RebillingBasis|null} [rebillingBasis] RepricingConfig rebillingBasis
+                         */
+    
+                        /**
+                         * Constructs a new RepricingConfig.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a RepricingConfig.
+                         * @implements IRepricingConfig
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IRepricingConfig=} [properties] Properties to set
+                         */
+                        function RepricingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RepricingConfig entitlementGranularity.
+                         * @member {google.cloud.channel.v1.RepricingConfig.IEntitlementGranularity|null|undefined} entitlementGranularity
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @instance
+                         */
+                        RepricingConfig.prototype.entitlementGranularity = null;
+    
+                        /**
+                         * RepricingConfig channelPartnerGranularity.
+                         * @member {google.cloud.channel.v1.RepricingConfig.IChannelPartnerGranularity|null|undefined} channelPartnerGranularity
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @instance
+                         */
+                        RepricingConfig.prototype.channelPartnerGranularity = null;
+    
+                        /**
+                         * RepricingConfig effectiveInvoiceMonth.
+                         * @member {google.type.IDate|null|undefined} effectiveInvoiceMonth
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @instance
+                         */
+                        RepricingConfig.prototype.effectiveInvoiceMonth = null;
+    
+                        /**
+                         * RepricingConfig adjustment.
+                         * @member {google.cloud.channel.v1.IRepricingAdjustment|null|undefined} adjustment
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @instance
+                         */
+                        RepricingConfig.prototype.adjustment = null;
+    
+                        /**
+                         * RepricingConfig rebillingBasis.
+                         * @member {google.cloud.channel.v1.RebillingBasis} rebillingBasis
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @instance
+                         */
+                        RepricingConfig.prototype.rebillingBasis = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RepricingConfig granularity.
+                         * @member {"entitlementGranularity"|"channelPartnerGranularity"|undefined} granularity
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RepricingConfig.prototype, "granularity", {
+                            get: $util.oneOfGetter($oneOfFields = ["entitlementGranularity", "channelPartnerGranularity"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RepricingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.RepricingConfig} RepricingConfig instance
+                         */
+                        RepricingConfig.create = function create(properties) {
+                            return new RepricingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RepricingConfig message. Does not implicitly {@link google.cloud.channel.v1.RepricingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingConfig} message RepricingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepricingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.effectiveInvoiceMonth != null && Object.hasOwnProperty.call(message, "effectiveInvoiceMonth"))
+                                $root.google.type.Date.encode(message.effectiveInvoiceMonth, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.adjustment != null && Object.hasOwnProperty.call(message, "adjustment"))
+                                $root.google.cloud.channel.v1.RepricingAdjustment.encode(message.adjustment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.rebillingBasis != null && Object.hasOwnProperty.call(message, "rebillingBasis"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.rebillingBasis);
+                            if (message.entitlementGranularity != null && Object.hasOwnProperty.call(message, "entitlementGranularity"))
+                                $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.encode(message.entitlementGranularity, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.channelPartnerGranularity != null && Object.hasOwnProperty.call(message, "channelPartnerGranularity"))
+                                $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.encode(message.channelPartnerGranularity, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RepricingConfig message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RepricingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingConfig} message RepricingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepricingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RepricingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.RepricingConfig} RepricingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepricingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RepricingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4:
+                                    message.entitlementGranularity = $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.channelPartnerGranularity = $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.decode(reader, reader.uint32());
+                                    break;
+                                case 1:
+                                    message.effectiveInvoiceMonth = $root.google.type.Date.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.adjustment = $root.google.cloud.channel.v1.RepricingAdjustment.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.rebillingBasis = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RepricingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.RepricingConfig} RepricingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepricingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RepricingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RepricingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.entitlementGranularity != null && message.hasOwnProperty("entitlementGranularity")) {
+                                properties.granularity = 1;
+                                {
+                                    var error = $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.verify(message.entitlementGranularity);
+                                    if (error)
+                                        return "entitlementGranularity." + error;
+                                }
+                            }
+                            if (message.channelPartnerGranularity != null && message.hasOwnProperty("channelPartnerGranularity")) {
+                                if (properties.granularity === 1)
+                                    return "granularity: multiple values";
+                                properties.granularity = 1;
+                                {
+                                    var error = $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.verify(message.channelPartnerGranularity);
+                                    if (error)
+                                        return "channelPartnerGranularity." + error;
+                                }
+                            }
+                            if (message.effectiveInvoiceMonth != null && message.hasOwnProperty("effectiveInvoiceMonth")) {
+                                var error = $root.google.type.Date.verify(message.effectiveInvoiceMonth);
+                                if (error)
+                                    return "effectiveInvoiceMonth." + error;
+                            }
+                            if (message.adjustment != null && message.hasOwnProperty("adjustment")) {
+                                var error = $root.google.cloud.channel.v1.RepricingAdjustment.verify(message.adjustment);
+                                if (error)
+                                    return "adjustment." + error;
+                            }
+                            if (message.rebillingBasis != null && message.hasOwnProperty("rebillingBasis"))
+                                switch (message.rebillingBasis) {
+                                default:
+                                    return "rebillingBasis: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RepricingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.RepricingConfig} RepricingConfig
+                         */
+                        RepricingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.RepricingConfig)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.RepricingConfig();
+                            if (object.entitlementGranularity != null) {
+                                if (typeof object.entitlementGranularity !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RepricingConfig.entitlementGranularity: object expected");
+                                message.entitlementGranularity = $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.fromObject(object.entitlementGranularity);
+                            }
+                            if (object.channelPartnerGranularity != null) {
+                                if (typeof object.channelPartnerGranularity !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RepricingConfig.channelPartnerGranularity: object expected");
+                                message.channelPartnerGranularity = $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.fromObject(object.channelPartnerGranularity);
+                            }
+                            if (object.effectiveInvoiceMonth != null) {
+                                if (typeof object.effectiveInvoiceMonth !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RepricingConfig.effectiveInvoiceMonth: object expected");
+                                message.effectiveInvoiceMonth = $root.google.type.Date.fromObject(object.effectiveInvoiceMonth);
+                            }
+                            if (object.adjustment != null) {
+                                if (typeof object.adjustment !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RepricingConfig.adjustment: object expected");
+                                message.adjustment = $root.google.cloud.channel.v1.RepricingAdjustment.fromObject(object.adjustment);
+                            }
+                            switch (object.rebillingBasis) {
+                            case "REBILLING_BASIS_UNSPECIFIED":
+                            case 0:
+                                message.rebillingBasis = 0;
+                                break;
+                            case "COST_AT_LIST":
+                            case 1:
+                                message.rebillingBasis = 1;
+                                break;
+                            case "DIRECT_CUSTOMER_COST":
+                            case 2:
+                                message.rebillingBasis = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RepricingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @static
+                         * @param {google.cloud.channel.v1.RepricingConfig} message RepricingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RepricingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.effectiveInvoiceMonth = null;
+                                object.adjustment = null;
+                                object.rebillingBasis = options.enums === String ? "REBILLING_BASIS_UNSPECIFIED" : 0;
+                            }
+                            if (message.effectiveInvoiceMonth != null && message.hasOwnProperty("effectiveInvoiceMonth"))
+                                object.effectiveInvoiceMonth = $root.google.type.Date.toObject(message.effectiveInvoiceMonth, options);
+                            if (message.adjustment != null && message.hasOwnProperty("adjustment"))
+                                object.adjustment = $root.google.cloud.channel.v1.RepricingAdjustment.toObject(message.adjustment, options);
+                            if (message.rebillingBasis != null && message.hasOwnProperty("rebillingBasis"))
+                                object.rebillingBasis = options.enums === String ? $root.google.cloud.channel.v1.RebillingBasis[message.rebillingBasis] : message.rebillingBasis;
+                            if (message.entitlementGranularity != null && message.hasOwnProperty("entitlementGranularity")) {
+                                object.entitlementGranularity = $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.toObject(message.entitlementGranularity, options);
+                                if (options.oneofs)
+                                    object.granularity = "entitlementGranularity";
+                            }
+                            if (message.channelPartnerGranularity != null && message.hasOwnProperty("channelPartnerGranularity")) {
+                                object.channelPartnerGranularity = $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.toObject(message.channelPartnerGranularity, options);
+                                if (options.oneofs)
+                                    object.granularity = "channelPartnerGranularity";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RepricingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RepricingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        RepricingConfig.EntitlementGranularity = (function() {
+    
+                            /**
+                             * Properties of an EntitlementGranularity.
+                             * @memberof google.cloud.channel.v1.RepricingConfig
+                             * @interface IEntitlementGranularity
+                             * @property {string|null} [entitlement] EntitlementGranularity entitlement
+                             */
+    
+                            /**
+                             * Constructs a new EntitlementGranularity.
+                             * @memberof google.cloud.channel.v1.RepricingConfig
+                             * @classdesc Represents an EntitlementGranularity.
+                             * @implements IEntitlementGranularity
+                             * @constructor
+                             * @param {google.cloud.channel.v1.RepricingConfig.IEntitlementGranularity=} [properties] Properties to set
+                             */
+                            function EntitlementGranularity(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EntitlementGranularity entitlement.
+                             * @member {string} entitlement
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @instance
+                             */
+                            EntitlementGranularity.prototype.entitlement = "";
+    
+                            /**
+                             * Creates a new EntitlementGranularity instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @static
+                             * @param {google.cloud.channel.v1.RepricingConfig.IEntitlementGranularity=} [properties] Properties to set
+                             * @returns {google.cloud.channel.v1.RepricingConfig.EntitlementGranularity} EntitlementGranularity instance
+                             */
+                            EntitlementGranularity.create = function create(properties) {
+                                return new EntitlementGranularity(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EntitlementGranularity message. Does not implicitly {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @static
+                             * @param {google.cloud.channel.v1.RepricingConfig.IEntitlementGranularity} message EntitlementGranularity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EntitlementGranularity.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.entitlement != null && Object.hasOwnProperty.call(message, "entitlement"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.entitlement);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EntitlementGranularity message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @static
+                             * @param {google.cloud.channel.v1.RepricingConfig.IEntitlementGranularity} message EntitlementGranularity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EntitlementGranularity.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EntitlementGranularity message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.channel.v1.RepricingConfig.EntitlementGranularity} EntitlementGranularity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EntitlementGranularity.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.entitlement = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EntitlementGranularity message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.channel.v1.RepricingConfig.EntitlementGranularity} EntitlementGranularity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EntitlementGranularity.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EntitlementGranularity message.
+                             * @function verify
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EntitlementGranularity.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.entitlement != null && message.hasOwnProperty("entitlement"))
+                                    if (!$util.isString(message.entitlement))
+                                        return "entitlement: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EntitlementGranularity message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.channel.v1.RepricingConfig.EntitlementGranularity} EntitlementGranularity
+                             */
+                            EntitlementGranularity.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity)
+                                    return object;
+                                var message = new $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity();
+                                if (object.entitlement != null)
+                                    message.entitlement = String(object.entitlement);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EntitlementGranularity message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @static
+                             * @param {google.cloud.channel.v1.RepricingConfig.EntitlementGranularity} message EntitlementGranularity
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EntitlementGranularity.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.entitlement = "";
+                                if (message.entitlement != null && message.hasOwnProperty("entitlement"))
+                                    object.entitlement = message.entitlement;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EntitlementGranularity to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.channel.v1.RepricingConfig.EntitlementGranularity
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EntitlementGranularity.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return EntitlementGranularity;
+                        })();
+    
+                        RepricingConfig.ChannelPartnerGranularity = (function() {
+    
+                            /**
+                             * Properties of a ChannelPartnerGranularity.
+                             * @memberof google.cloud.channel.v1.RepricingConfig
+                             * @interface IChannelPartnerGranularity
+                             */
+    
+                            /**
+                             * Constructs a new ChannelPartnerGranularity.
+                             * @memberof google.cloud.channel.v1.RepricingConfig
+                             * @classdesc Represents a ChannelPartnerGranularity.
+                             * @implements IChannelPartnerGranularity
+                             * @constructor
+                             * @param {google.cloud.channel.v1.RepricingConfig.IChannelPartnerGranularity=} [properties] Properties to set
+                             */
+                            function ChannelPartnerGranularity(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ChannelPartnerGranularity instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @static
+                             * @param {google.cloud.channel.v1.RepricingConfig.IChannelPartnerGranularity=} [properties] Properties to set
+                             * @returns {google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity} ChannelPartnerGranularity instance
+                             */
+                            ChannelPartnerGranularity.create = function create(properties) {
+                                return new ChannelPartnerGranularity(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ChannelPartnerGranularity message. Does not implicitly {@link google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @static
+                             * @param {google.cloud.channel.v1.RepricingConfig.IChannelPartnerGranularity} message ChannelPartnerGranularity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ChannelPartnerGranularity.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ChannelPartnerGranularity message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @static
+                             * @param {google.cloud.channel.v1.RepricingConfig.IChannelPartnerGranularity} message ChannelPartnerGranularity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ChannelPartnerGranularity.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ChannelPartnerGranularity message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity} ChannelPartnerGranularity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ChannelPartnerGranularity.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ChannelPartnerGranularity message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity} ChannelPartnerGranularity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ChannelPartnerGranularity.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ChannelPartnerGranularity message.
+                             * @function verify
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ChannelPartnerGranularity.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ChannelPartnerGranularity message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity} ChannelPartnerGranularity
+                             */
+                            ChannelPartnerGranularity.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity)
+                                    return object;
+                                return new $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ChannelPartnerGranularity message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @static
+                             * @param {google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity} message ChannelPartnerGranularity
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ChannelPartnerGranularity.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ChannelPartnerGranularity to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ChannelPartnerGranularity.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ChannelPartnerGranularity;
+                        })();
+    
+                        return RepricingConfig;
+                    })();
+    
+                    v1.RepricingAdjustment = (function() {
+    
+                        /**
+                         * Properties of a RepricingAdjustment.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IRepricingAdjustment
+                         * @property {google.cloud.channel.v1.IPercentageAdjustment|null} [percentageAdjustment] RepricingAdjustment percentageAdjustment
+                         */
+    
+                        /**
+                         * Constructs a new RepricingAdjustment.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a RepricingAdjustment.
+                         * @implements IRepricingAdjustment
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IRepricingAdjustment=} [properties] Properties to set
+                         */
+                        function RepricingAdjustment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RepricingAdjustment percentageAdjustment.
+                         * @member {google.cloud.channel.v1.IPercentageAdjustment|null|undefined} percentageAdjustment
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @instance
+                         */
+                        RepricingAdjustment.prototype.percentageAdjustment = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RepricingAdjustment adjustment.
+                         * @member {"percentageAdjustment"|undefined} adjustment
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @instance
+                         */
+                        Object.defineProperty(RepricingAdjustment.prototype, "adjustment", {
+                            get: $util.oneOfGetter($oneOfFields = ["percentageAdjustment"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RepricingAdjustment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingAdjustment=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.RepricingAdjustment} RepricingAdjustment instance
+                         */
+                        RepricingAdjustment.create = function create(properties) {
+                            return new RepricingAdjustment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RepricingAdjustment message. Does not implicitly {@link google.cloud.channel.v1.RepricingAdjustment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingAdjustment} message RepricingAdjustment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepricingAdjustment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.percentageAdjustment != null && Object.hasOwnProperty.call(message, "percentageAdjustment"))
+                                $root.google.cloud.channel.v1.PercentageAdjustment.encode(message.percentageAdjustment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RepricingAdjustment message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RepricingAdjustment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingAdjustment} message RepricingAdjustment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepricingAdjustment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RepricingAdjustment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.RepricingAdjustment} RepricingAdjustment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepricingAdjustment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RepricingAdjustment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.percentageAdjustment = $root.google.cloud.channel.v1.PercentageAdjustment.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RepricingAdjustment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.RepricingAdjustment} RepricingAdjustment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepricingAdjustment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RepricingAdjustment message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RepricingAdjustment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.percentageAdjustment != null && message.hasOwnProperty("percentageAdjustment")) {
+                                properties.adjustment = 1;
+                                {
+                                    var error = $root.google.cloud.channel.v1.PercentageAdjustment.verify(message.percentageAdjustment);
+                                    if (error)
+                                        return "percentageAdjustment." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RepricingAdjustment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.RepricingAdjustment} RepricingAdjustment
+                         */
+                        RepricingAdjustment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.RepricingAdjustment)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.RepricingAdjustment();
+                            if (object.percentageAdjustment != null) {
+                                if (typeof object.percentageAdjustment !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RepricingAdjustment.percentageAdjustment: object expected");
+                                message.percentageAdjustment = $root.google.cloud.channel.v1.PercentageAdjustment.fromObject(object.percentageAdjustment);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RepricingAdjustment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @static
+                         * @param {google.cloud.channel.v1.RepricingAdjustment} message RepricingAdjustment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RepricingAdjustment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.percentageAdjustment != null && message.hasOwnProperty("percentageAdjustment")) {
+                                object.percentageAdjustment = $root.google.cloud.channel.v1.PercentageAdjustment.toObject(message.percentageAdjustment, options);
+                                if (options.oneofs)
+                                    object.adjustment = "percentageAdjustment";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RepricingAdjustment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.RepricingAdjustment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RepricingAdjustment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RepricingAdjustment;
+                    })();
+    
+                    v1.PercentageAdjustment = (function() {
+    
+                        /**
+                         * Properties of a PercentageAdjustment.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IPercentageAdjustment
+                         * @property {google.type.IDecimal|null} [percentage] PercentageAdjustment percentage
+                         */
+    
+                        /**
+                         * Constructs a new PercentageAdjustment.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a PercentageAdjustment.
+                         * @implements IPercentageAdjustment
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IPercentageAdjustment=} [properties] Properties to set
+                         */
+                        function PercentageAdjustment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PercentageAdjustment percentage.
+                         * @member {google.type.IDecimal|null|undefined} percentage
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @instance
+                         */
+                        PercentageAdjustment.prototype.percentage = null;
+    
+                        /**
+                         * Creates a new PercentageAdjustment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @static
+                         * @param {google.cloud.channel.v1.IPercentageAdjustment=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.PercentageAdjustment} PercentageAdjustment instance
+                         */
+                        PercentageAdjustment.create = function create(properties) {
+                            return new PercentageAdjustment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PercentageAdjustment message. Does not implicitly {@link google.cloud.channel.v1.PercentageAdjustment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @static
+                         * @param {google.cloud.channel.v1.IPercentageAdjustment} message PercentageAdjustment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PercentageAdjustment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.percentage != null && Object.hasOwnProperty.call(message, "percentage"))
+                                $root.google.type.Decimal.encode(message.percentage, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PercentageAdjustment message, length delimited. Does not implicitly {@link google.cloud.channel.v1.PercentageAdjustment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @static
+                         * @param {google.cloud.channel.v1.IPercentageAdjustment} message PercentageAdjustment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PercentageAdjustment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PercentageAdjustment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.PercentageAdjustment} PercentageAdjustment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PercentageAdjustment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.PercentageAdjustment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.percentage = $root.google.type.Decimal.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PercentageAdjustment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.PercentageAdjustment} PercentageAdjustment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PercentageAdjustment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PercentageAdjustment message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PercentageAdjustment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                var error = $root.google.type.Decimal.verify(message.percentage);
+                                if (error)
+                                    return "percentage." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PercentageAdjustment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.PercentageAdjustment} PercentageAdjustment
+                         */
+                        PercentageAdjustment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.PercentageAdjustment)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.PercentageAdjustment();
+                            if (object.percentage != null) {
+                                if (typeof object.percentage !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.PercentageAdjustment.percentage: object expected");
+                                message.percentage = $root.google.type.Decimal.fromObject(object.percentage);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PercentageAdjustment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @static
+                         * @param {google.cloud.channel.v1.PercentageAdjustment} message PercentageAdjustment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PercentageAdjustment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.percentage = null;
+                            if (message.percentage != null && message.hasOwnProperty("percentage"))
+                                object.percentage = $root.google.type.Decimal.toObject(message.percentage, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PercentageAdjustment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.PercentageAdjustment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PercentageAdjustment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PercentageAdjustment;
+                    })();
+    
                     v1.CloudChannelService = (function() {
     
                         /**
@@ -10314,6 +11905,336 @@
                          * @instance
                          * @param {google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest} request UpdateChannelPartnerLinkRequest message or plain object
                          * @returns {Promise<google.cloud.channel.v1.ChannelPartnerLink>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#getCustomerRepricingConfig}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef GetCustomerRepricingConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.CustomerRepricingConfig} [response] CustomerRepricingConfig
+                         */
+    
+                        /**
+                         * Calls GetCustomerRepricingConfig.
+                         * @function getCustomerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IGetCustomerRepricingConfigRequest} request GetCustomerRepricingConfigRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.GetCustomerRepricingConfigCallback} callback Node-style callback called with the error, if any, and CustomerRepricingConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.getCustomerRepricingConfig = function getCustomerRepricingConfig(request, callback) {
+                            return this.rpcCall(getCustomerRepricingConfig, $root.google.cloud.channel.v1.GetCustomerRepricingConfigRequest, $root.google.cloud.channel.v1.CustomerRepricingConfig, request, callback);
+                        }, "name", { value: "GetCustomerRepricingConfig" });
+    
+                        /**
+                         * Calls GetCustomerRepricingConfig.
+                         * @function getCustomerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IGetCustomerRepricingConfigRequest} request GetCustomerRepricingConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.CustomerRepricingConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#listCustomerRepricingConfigs}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef ListCustomerRepricingConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ListCustomerRepricingConfigsResponse} [response] ListCustomerRepricingConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListCustomerRepricingConfigs.
+                         * @function listCustomerRepricingConfigs
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsRequest} request ListCustomerRepricingConfigsRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigsCallback} callback Node-style callback called with the error, if any, and ListCustomerRepricingConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.listCustomerRepricingConfigs = function listCustomerRepricingConfigs(request, callback) {
+                            return this.rpcCall(listCustomerRepricingConfigs, $root.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest, $root.google.cloud.channel.v1.ListCustomerRepricingConfigsResponse, request, callback);
+                        }, "name", { value: "ListCustomerRepricingConfigs" });
+    
+                        /**
+                         * Calls ListCustomerRepricingConfigs.
+                         * @function listCustomerRepricingConfigs
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsRequest} request ListCustomerRepricingConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ListCustomerRepricingConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#createCustomerRepricingConfig}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef CreateCustomerRepricingConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.CustomerRepricingConfig} [response] CustomerRepricingConfig
+                         */
+    
+                        /**
+                         * Calls CreateCustomerRepricingConfig.
+                         * @function createCustomerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest} request CreateCustomerRepricingConfigRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfigCallback} callback Node-style callback called with the error, if any, and CustomerRepricingConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.createCustomerRepricingConfig = function createCustomerRepricingConfig(request, callback) {
+                            return this.rpcCall(createCustomerRepricingConfig, $root.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest, $root.google.cloud.channel.v1.CustomerRepricingConfig, request, callback);
+                        }, "name", { value: "CreateCustomerRepricingConfig" });
+    
+                        /**
+                         * Calls CreateCustomerRepricingConfig.
+                         * @function createCustomerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest} request CreateCustomerRepricingConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.CustomerRepricingConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#updateCustomerRepricingConfig}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef UpdateCustomerRepricingConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.CustomerRepricingConfig} [response] CustomerRepricingConfig
+                         */
+    
+                        /**
+                         * Calls UpdateCustomerRepricingConfig.
+                         * @function updateCustomerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest} request UpdateCustomerRepricingConfigRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.UpdateCustomerRepricingConfigCallback} callback Node-style callback called with the error, if any, and CustomerRepricingConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.updateCustomerRepricingConfig = function updateCustomerRepricingConfig(request, callback) {
+                            return this.rpcCall(updateCustomerRepricingConfig, $root.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest, $root.google.cloud.channel.v1.CustomerRepricingConfig, request, callback);
+                        }, "name", { value: "UpdateCustomerRepricingConfig" });
+    
+                        /**
+                         * Calls UpdateCustomerRepricingConfig.
+                         * @function updateCustomerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest} request UpdateCustomerRepricingConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.CustomerRepricingConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#deleteCustomerRepricingConfig}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef DeleteCustomerRepricingConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteCustomerRepricingConfig.
+                         * @function deleteCustomerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest} request DeleteCustomerRepricingConfigRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.DeleteCustomerRepricingConfigCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.deleteCustomerRepricingConfig = function deleteCustomerRepricingConfig(request, callback) {
+                            return this.rpcCall(deleteCustomerRepricingConfig, $root.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteCustomerRepricingConfig" });
+    
+                        /**
+                         * Calls DeleteCustomerRepricingConfig.
+                         * @function deleteCustomerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest} request DeleteCustomerRepricingConfigRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#getChannelPartnerRepricingConfig}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef GetChannelPartnerRepricingConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ChannelPartnerRepricingConfig} [response] ChannelPartnerRepricingConfig
+                         */
+    
+                        /**
+                         * Calls GetChannelPartnerRepricingConfig.
+                         * @function getChannelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest} request GetChannelPartnerRepricingConfigRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.GetChannelPartnerRepricingConfigCallback} callback Node-style callback called with the error, if any, and ChannelPartnerRepricingConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.getChannelPartnerRepricingConfig = function getChannelPartnerRepricingConfig(request, callback) {
+                            return this.rpcCall(getChannelPartnerRepricingConfig, $root.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest, $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig, request, callback);
+                        }, "name", { value: "GetChannelPartnerRepricingConfig" });
+    
+                        /**
+                         * Calls GetChannelPartnerRepricingConfig.
+                         * @function getChannelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest} request GetChannelPartnerRepricingConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ChannelPartnerRepricingConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#listChannelPartnerRepricingConfigs}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef ListChannelPartnerRepricingConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse} [response] ListChannelPartnerRepricingConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListChannelPartnerRepricingConfigs.
+                         * @function listChannelPartnerRepricingConfigs
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest} request ListChannelPartnerRepricingConfigsRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigsCallback} callback Node-style callback called with the error, if any, and ListChannelPartnerRepricingConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.listChannelPartnerRepricingConfigs = function listChannelPartnerRepricingConfigs(request, callback) {
+                            return this.rpcCall(listChannelPartnerRepricingConfigs, $root.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest, $root.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse, request, callback);
+                        }, "name", { value: "ListChannelPartnerRepricingConfigs" });
+    
+                        /**
+                         * Calls ListChannelPartnerRepricingConfigs.
+                         * @function listChannelPartnerRepricingConfigs
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest} request ListChannelPartnerRepricingConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#createChannelPartnerRepricingConfig}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef CreateChannelPartnerRepricingConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ChannelPartnerRepricingConfig} [response] ChannelPartnerRepricingConfig
+                         */
+    
+                        /**
+                         * Calls CreateChannelPartnerRepricingConfig.
+                         * @function createChannelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest} request CreateChannelPartnerRepricingConfigRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerRepricingConfigCallback} callback Node-style callback called with the error, if any, and ChannelPartnerRepricingConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.createChannelPartnerRepricingConfig = function createChannelPartnerRepricingConfig(request, callback) {
+                            return this.rpcCall(createChannelPartnerRepricingConfig, $root.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest, $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig, request, callback);
+                        }, "name", { value: "CreateChannelPartnerRepricingConfig" });
+    
+                        /**
+                         * Calls CreateChannelPartnerRepricingConfig.
+                         * @function createChannelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest} request CreateChannelPartnerRepricingConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ChannelPartnerRepricingConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#updateChannelPartnerRepricingConfig}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef UpdateChannelPartnerRepricingConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ChannelPartnerRepricingConfig} [response] ChannelPartnerRepricingConfig
+                         */
+    
+                        /**
+                         * Calls UpdateChannelPartnerRepricingConfig.
+                         * @function updateChannelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest} request UpdateChannelPartnerRepricingConfigRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.UpdateChannelPartnerRepricingConfigCallback} callback Node-style callback called with the error, if any, and ChannelPartnerRepricingConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.updateChannelPartnerRepricingConfig = function updateChannelPartnerRepricingConfig(request, callback) {
+                            return this.rpcCall(updateChannelPartnerRepricingConfig, $root.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest, $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig, request, callback);
+                        }, "name", { value: "UpdateChannelPartnerRepricingConfig" });
+    
+                        /**
+                         * Calls UpdateChannelPartnerRepricingConfig.
+                         * @function updateChannelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest} request UpdateChannelPartnerRepricingConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ChannelPartnerRepricingConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#deleteChannelPartnerRepricingConfig}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef DeleteChannelPartnerRepricingConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteChannelPartnerRepricingConfig.
+                         * @function deleteChannelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest} request DeleteChannelPartnerRepricingConfigRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.DeleteChannelPartnerRepricingConfigCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.deleteChannelPartnerRepricingConfig = function deleteChannelPartnerRepricingConfig(request, callback) {
+                            return this.rpcCall(deleteChannelPartnerRepricingConfig, $root.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteChannelPartnerRepricingConfig" });
+    
+                        /**
+                         * Calls DeleteChannelPartnerRepricingConfig.
+                         * @function deleteChannelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest} request DeleteChannelPartnerRepricingConfigRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
     
@@ -11298,6 +13219,7 @@
                          * @property {string|null} [parent] ListCustomersRequest parent
                          * @property {number|null} [pageSize] ListCustomersRequest pageSize
                          * @property {string|null} [pageToken] ListCustomersRequest pageToken
+                         * @property {string|null} [filter] ListCustomersRequest filter
                          */
     
                         /**
@@ -11340,6 +13262,14 @@
                         ListCustomersRequest.prototype.pageToken = "";
     
                         /**
+                         * ListCustomersRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.channel.v1.ListCustomersRequest
+                         * @instance
+                         */
+                        ListCustomersRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new ListCustomersRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.ListCustomersRequest
@@ -11369,6 +13299,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             return writer;
                         };
     
@@ -11411,6 +13343,9 @@
                                     break;
                                 case 3:
                                     message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -11456,6 +13391,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -11477,6 +13415,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -11497,6 +13437,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -11504,6 +13445,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -16350,6 +18293,2538 @@
                         };
     
                         return UpdateChannelPartnerLinkRequest;
+                    })();
+    
+                    v1.GetCustomerRepricingConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCustomerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IGetCustomerRepricingConfigRequest
+                         * @property {string|null} [name] GetCustomerRepricingConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCustomerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a GetCustomerRepricingConfigRequest.
+                         * @implements IGetCustomerRepricingConfigRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IGetCustomerRepricingConfigRequest=} [properties] Properties to set
+                         */
+                        function GetCustomerRepricingConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCustomerRepricingConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @instance
+                         */
+                        GetCustomerRepricingConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCustomerRepricingConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IGetCustomerRepricingConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.GetCustomerRepricingConfigRequest} GetCustomerRepricingConfigRequest instance
+                         */
+                        GetCustomerRepricingConfigRequest.create = function create(properties) {
+                            return new GetCustomerRepricingConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomerRepricingConfigRequest message. Does not implicitly {@link google.cloud.channel.v1.GetCustomerRepricingConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IGetCustomerRepricingConfigRequest} message GetCustomerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomerRepricingConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomerRepricingConfigRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.GetCustomerRepricingConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IGetCustomerRepricingConfigRequest} message GetCustomerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomerRepricingConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCustomerRepricingConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.GetCustomerRepricingConfigRequest} GetCustomerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomerRepricingConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.GetCustomerRepricingConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCustomerRepricingConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.GetCustomerRepricingConfigRequest} GetCustomerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomerRepricingConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCustomerRepricingConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCustomerRepricingConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCustomerRepricingConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.GetCustomerRepricingConfigRequest} GetCustomerRepricingConfigRequest
+                         */
+                        GetCustomerRepricingConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.GetCustomerRepricingConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.GetCustomerRepricingConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCustomerRepricingConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.GetCustomerRepricingConfigRequest} message GetCustomerRepricingConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCustomerRepricingConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCustomerRepricingConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.GetCustomerRepricingConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCustomerRepricingConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetCustomerRepricingConfigRequest;
+                    })();
+    
+                    v1.ListCustomerRepricingConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListCustomerRepricingConfigsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListCustomerRepricingConfigsRequest
+                         * @property {string|null} [parent] ListCustomerRepricingConfigsRequest parent
+                         * @property {number|null} [pageSize] ListCustomerRepricingConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListCustomerRepricingConfigsRequest pageToken
+                         * @property {string|null} [filter] ListCustomerRepricingConfigsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomerRepricingConfigsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListCustomerRepricingConfigsRequest.
+                         * @implements IListCustomerRepricingConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListCustomerRepricingConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomerRepricingConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @instance
+                         */
+                        ListCustomerRepricingConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListCustomerRepricingConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @instance
+                         */
+                        ListCustomerRepricingConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListCustomerRepricingConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @instance
+                         */
+                        ListCustomerRepricingConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListCustomerRepricingConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @instance
+                         */
+                        ListCustomerRepricingConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListCustomerRepricingConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListCustomerRepricingConfigsRequest} ListCustomerRepricingConfigsRequest instance
+                         */
+                        ListCustomerRepricingConfigsRequest.create = function create(properties) {
+                            return new ListCustomerRepricingConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomerRepricingConfigsRequest message. Does not implicitly {@link google.cloud.channel.v1.ListCustomerRepricingConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsRequest} message ListCustomerRepricingConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomerRepricingConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomerRepricingConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListCustomerRepricingConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsRequest} message ListCustomerRepricingConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomerRepricingConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomerRepricingConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListCustomerRepricingConfigsRequest} ListCustomerRepricingConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomerRepricingConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomerRepricingConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListCustomerRepricingConfigsRequest} ListCustomerRepricingConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomerRepricingConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomerRepricingConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomerRepricingConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomerRepricingConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListCustomerRepricingConfigsRequest} ListCustomerRepricingConfigsRequest
+                         */
+                        ListCustomerRepricingConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomerRepricingConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ListCustomerRepricingConfigsRequest} message ListCustomerRepricingConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomerRepricingConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomerRepricingConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomerRepricingConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListCustomerRepricingConfigsRequest;
+                    })();
+    
+                    v1.ListCustomerRepricingConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListCustomerRepricingConfigsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListCustomerRepricingConfigsResponse
+                         * @property {Array.<google.cloud.channel.v1.ICustomerRepricingConfig>|null} [customerRepricingConfigs] ListCustomerRepricingConfigsResponse customerRepricingConfigs
+                         * @property {string|null} [nextPageToken] ListCustomerRepricingConfigsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomerRepricingConfigsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListCustomerRepricingConfigsResponse.
+                         * @implements IListCustomerRepricingConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListCustomerRepricingConfigsResponse(properties) {
+                            this.customerRepricingConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomerRepricingConfigsResponse customerRepricingConfigs.
+                         * @member {Array.<google.cloud.channel.v1.ICustomerRepricingConfig>} customerRepricingConfigs
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @instance
+                         */
+                        ListCustomerRepricingConfigsResponse.prototype.customerRepricingConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListCustomerRepricingConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @instance
+                         */
+                        ListCustomerRepricingConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomerRepricingConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListCustomerRepricingConfigsResponse} ListCustomerRepricingConfigsResponse instance
+                         */
+                        ListCustomerRepricingConfigsResponse.create = function create(properties) {
+                            return new ListCustomerRepricingConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomerRepricingConfigsResponse message. Does not implicitly {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsResponse} message ListCustomerRepricingConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomerRepricingConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customerRepricingConfigs != null && message.customerRepricingConfigs.length)
+                                for (var i = 0; i < message.customerRepricingConfigs.length; ++i)
+                                    $root.google.cloud.channel.v1.CustomerRepricingConfig.encode(message.customerRepricingConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomerRepricingConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListCustomerRepricingConfigsResponse} message ListCustomerRepricingConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomerRepricingConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomerRepricingConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListCustomerRepricingConfigsResponse} ListCustomerRepricingConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomerRepricingConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListCustomerRepricingConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.customerRepricingConfigs && message.customerRepricingConfigs.length))
+                                        message.customerRepricingConfigs = [];
+                                    message.customerRepricingConfigs.push($root.google.cloud.channel.v1.CustomerRepricingConfig.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomerRepricingConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListCustomerRepricingConfigsResponse} ListCustomerRepricingConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomerRepricingConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomerRepricingConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomerRepricingConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customerRepricingConfigs != null && message.hasOwnProperty("customerRepricingConfigs")) {
+                                if (!Array.isArray(message.customerRepricingConfigs))
+                                    return "customerRepricingConfigs: array expected";
+                                for (var i = 0; i < message.customerRepricingConfigs.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.CustomerRepricingConfig.verify(message.customerRepricingConfigs[i]);
+                                    if (error)
+                                        return "customerRepricingConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomerRepricingConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListCustomerRepricingConfigsResponse} ListCustomerRepricingConfigsResponse
+                         */
+                        ListCustomerRepricingConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListCustomerRepricingConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListCustomerRepricingConfigsResponse();
+                            if (object.customerRepricingConfigs) {
+                                if (!Array.isArray(object.customerRepricingConfigs))
+                                    throw TypeError(".google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.customerRepricingConfigs: array expected");
+                                message.customerRepricingConfigs = [];
+                                for (var i = 0; i < object.customerRepricingConfigs.length; ++i) {
+                                    if (typeof object.customerRepricingConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.customerRepricingConfigs: object expected");
+                                    message.customerRepricingConfigs[i] = $root.google.cloud.channel.v1.CustomerRepricingConfig.fromObject(object.customerRepricingConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomerRepricingConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.ListCustomerRepricingConfigsResponse} message ListCustomerRepricingConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomerRepricingConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.customerRepricingConfigs = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.customerRepricingConfigs && message.customerRepricingConfigs.length) {
+                                object.customerRepricingConfigs = [];
+                                for (var j = 0; j < message.customerRepricingConfigs.length; ++j)
+                                    object.customerRepricingConfigs[j] = $root.google.cloud.channel.v1.CustomerRepricingConfig.toObject(message.customerRepricingConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomerRepricingConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListCustomerRepricingConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomerRepricingConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListCustomerRepricingConfigsResponse;
+                    })();
+    
+                    v1.CreateCustomerRepricingConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCustomerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ICreateCustomerRepricingConfigRequest
+                         * @property {string|null} [parent] CreateCustomerRepricingConfigRequest parent
+                         * @property {google.cloud.channel.v1.ICustomerRepricingConfig|null} [customerRepricingConfig] CreateCustomerRepricingConfigRequest customerRepricingConfig
+                         */
+    
+                        /**
+                         * Constructs a new CreateCustomerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a CreateCustomerRepricingConfigRequest.
+                         * @implements ICreateCustomerRepricingConfigRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateCustomerRepricingConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCustomerRepricingConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @instance
+                         */
+                        CreateCustomerRepricingConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCustomerRepricingConfigRequest customerRepricingConfig.
+                         * @member {google.cloud.channel.v1.ICustomerRepricingConfig|null|undefined} customerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @instance
+                         */
+                        CreateCustomerRepricingConfigRequest.prototype.customerRepricingConfig = null;
+    
+                        /**
+                         * Creates a new CreateCustomerRepricingConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.CreateCustomerRepricingConfigRequest} CreateCustomerRepricingConfigRequest instance
+                         */
+                        CreateCustomerRepricingConfigRequest.create = function create(properties) {
+                            return new CreateCustomerRepricingConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomerRepricingConfigRequest message. Does not implicitly {@link google.cloud.channel.v1.CreateCustomerRepricingConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest} message CreateCustomerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomerRepricingConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.customerRepricingConfig != null && Object.hasOwnProperty.call(message, "customerRepricingConfig"))
+                                $root.google.cloud.channel.v1.CustomerRepricingConfig.encode(message.customerRepricingConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomerRepricingConfigRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.CreateCustomerRepricingConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest} message CreateCustomerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomerRepricingConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomerRepricingConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.CreateCustomerRepricingConfigRequest} CreateCustomerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomerRepricingConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.customerRepricingConfig = $root.google.cloud.channel.v1.CustomerRepricingConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomerRepricingConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.CreateCustomerRepricingConfigRequest} CreateCustomerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomerRepricingConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCustomerRepricingConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCustomerRepricingConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.customerRepricingConfig != null && message.hasOwnProperty("customerRepricingConfig")) {
+                                var error = $root.google.cloud.channel.v1.CustomerRepricingConfig.verify(message.customerRepricingConfig);
+                                if (error)
+                                    return "customerRepricingConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCustomerRepricingConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.CreateCustomerRepricingConfigRequest} CreateCustomerRepricingConfigRequest
+                         */
+                        CreateCustomerRepricingConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.customerRepricingConfig != null) {
+                                if (typeof object.customerRepricingConfig !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.CreateCustomerRepricingConfigRequest.customerRepricingConfig: object expected");
+                                message.customerRepricingConfig = $root.google.cloud.channel.v1.CustomerRepricingConfig.fromObject(object.customerRepricingConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCustomerRepricingConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.CreateCustomerRepricingConfigRequest} message CreateCustomerRepricingConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCustomerRepricingConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.customerRepricingConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.customerRepricingConfig != null && message.hasOwnProperty("customerRepricingConfig"))
+                                object.customerRepricingConfig = $root.google.cloud.channel.v1.CustomerRepricingConfig.toObject(message.customerRepricingConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCustomerRepricingConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.CreateCustomerRepricingConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCustomerRepricingConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateCustomerRepricingConfigRequest;
+                    })();
+    
+                    v1.UpdateCustomerRepricingConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCustomerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IUpdateCustomerRepricingConfigRequest
+                         * @property {google.cloud.channel.v1.ICustomerRepricingConfig|null} [customerRepricingConfig] UpdateCustomerRepricingConfigRequest customerRepricingConfig
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCustomerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents an UpdateCustomerRepricingConfigRequest.
+                         * @implements IUpdateCustomerRepricingConfigRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateCustomerRepricingConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCustomerRepricingConfigRequest customerRepricingConfig.
+                         * @member {google.cloud.channel.v1.ICustomerRepricingConfig|null|undefined} customerRepricingConfig
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @instance
+                         */
+                        UpdateCustomerRepricingConfigRequest.prototype.customerRepricingConfig = null;
+    
+                        /**
+                         * Creates a new UpdateCustomerRepricingConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest} UpdateCustomerRepricingConfigRequest instance
+                         */
+                        UpdateCustomerRepricingConfigRequest.create = function create(properties) {
+                            return new UpdateCustomerRepricingConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomerRepricingConfigRequest message. Does not implicitly {@link google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest} message UpdateCustomerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomerRepricingConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customerRepricingConfig != null && Object.hasOwnProperty.call(message, "customerRepricingConfig"))
+                                $root.google.cloud.channel.v1.CustomerRepricingConfig.encode(message.customerRepricingConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomerRepricingConfigRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest} message UpdateCustomerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomerRepricingConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomerRepricingConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest} UpdateCustomerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomerRepricingConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.customerRepricingConfig = $root.google.cloud.channel.v1.CustomerRepricingConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomerRepricingConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest} UpdateCustomerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomerRepricingConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCustomerRepricingConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCustomerRepricingConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customerRepricingConfig != null && message.hasOwnProperty("customerRepricingConfig")) {
+                                var error = $root.google.cloud.channel.v1.CustomerRepricingConfig.verify(message.customerRepricingConfig);
+                                if (error)
+                                    return "customerRepricingConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCustomerRepricingConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest} UpdateCustomerRepricingConfigRequest
+                         */
+                        UpdateCustomerRepricingConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest();
+                            if (object.customerRepricingConfig != null) {
+                                if (typeof object.customerRepricingConfig !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest.customerRepricingConfig: object expected");
+                                message.customerRepricingConfig = $root.google.cloud.channel.v1.CustomerRepricingConfig.fromObject(object.customerRepricingConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCustomerRepricingConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest} message UpdateCustomerRepricingConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCustomerRepricingConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.customerRepricingConfig = null;
+                            if (message.customerRepricingConfig != null && message.hasOwnProperty("customerRepricingConfig"))
+                                object.customerRepricingConfig = $root.google.cloud.channel.v1.CustomerRepricingConfig.toObject(message.customerRepricingConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCustomerRepricingConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCustomerRepricingConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateCustomerRepricingConfigRequest;
+                    })();
+    
+                    v1.DeleteCustomerRepricingConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteCustomerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IDeleteCustomerRepricingConfigRequest
+                         * @property {string|null} [name] DeleteCustomerRepricingConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCustomerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a DeleteCustomerRepricingConfigRequest.
+                         * @implements IDeleteCustomerRepricingConfigRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteCustomerRepricingConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCustomerRepricingConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @instance
+                         */
+                        DeleteCustomerRepricingConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteCustomerRepricingConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest} DeleteCustomerRepricingConfigRequest instance
+                         */
+                        DeleteCustomerRepricingConfigRequest.create = function create(properties) {
+                            return new DeleteCustomerRepricingConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomerRepricingConfigRequest message. Does not implicitly {@link google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest} message DeleteCustomerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomerRepricingConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomerRepricingConfigRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest} message DeleteCustomerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomerRepricingConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomerRepricingConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest} DeleteCustomerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomerRepricingConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomerRepricingConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest} DeleteCustomerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomerRepricingConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCustomerRepricingConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCustomerRepricingConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCustomerRepricingConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest} DeleteCustomerRepricingConfigRequest
+                         */
+                        DeleteCustomerRepricingConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCustomerRepricingConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest} message DeleteCustomerRepricingConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCustomerRepricingConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCustomerRepricingConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCustomerRepricingConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteCustomerRepricingConfigRequest;
+                    })();
+    
+                    v1.GetChannelPartnerRepricingConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetChannelPartnerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IGetChannelPartnerRepricingConfigRequest
+                         * @property {string|null} [name] GetChannelPartnerRepricingConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetChannelPartnerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a GetChannelPartnerRepricingConfigRequest.
+                         * @implements IGetChannelPartnerRepricingConfigRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest=} [properties] Properties to set
+                         */
+                        function GetChannelPartnerRepricingConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetChannelPartnerRepricingConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @instance
+                         */
+                        GetChannelPartnerRepricingConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetChannelPartnerRepricingConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest} GetChannelPartnerRepricingConfigRequest instance
+                         */
+                        GetChannelPartnerRepricingConfigRequest.create = function create(properties) {
+                            return new GetChannelPartnerRepricingConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetChannelPartnerRepricingConfigRequest message. Does not implicitly {@link google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest} message GetChannelPartnerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetChannelPartnerRepricingConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetChannelPartnerRepricingConfigRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest} message GetChannelPartnerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetChannelPartnerRepricingConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetChannelPartnerRepricingConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest} GetChannelPartnerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetChannelPartnerRepricingConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetChannelPartnerRepricingConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest} GetChannelPartnerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetChannelPartnerRepricingConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetChannelPartnerRepricingConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetChannelPartnerRepricingConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetChannelPartnerRepricingConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest} GetChannelPartnerRepricingConfigRequest
+                         */
+                        GetChannelPartnerRepricingConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetChannelPartnerRepricingConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest} message GetChannelPartnerRepricingConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetChannelPartnerRepricingConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetChannelPartnerRepricingConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetChannelPartnerRepricingConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetChannelPartnerRepricingConfigRequest;
+                    })();
+    
+                    v1.ListChannelPartnerRepricingConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListChannelPartnerRepricingConfigsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListChannelPartnerRepricingConfigsRequest
+                         * @property {string|null} [parent] ListChannelPartnerRepricingConfigsRequest parent
+                         * @property {number|null} [pageSize] ListChannelPartnerRepricingConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListChannelPartnerRepricingConfigsRequest pageToken
+                         * @property {string|null} [filter] ListChannelPartnerRepricingConfigsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListChannelPartnerRepricingConfigsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListChannelPartnerRepricingConfigsRequest.
+                         * @implements IListChannelPartnerRepricingConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListChannelPartnerRepricingConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListChannelPartnerRepricingConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @instance
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListChannelPartnerRepricingConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @instance
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListChannelPartnerRepricingConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @instance
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListChannelPartnerRepricingConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @instance
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListChannelPartnerRepricingConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest} ListChannelPartnerRepricingConfigsRequest instance
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.create = function create(properties) {
+                            return new ListChannelPartnerRepricingConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelPartnerRepricingConfigsRequest message. Does not implicitly {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest} message ListChannelPartnerRepricingConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelPartnerRepricingConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest} message ListChannelPartnerRepricingConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListChannelPartnerRepricingConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest} ListChannelPartnerRepricingConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListChannelPartnerRepricingConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest} ListChannelPartnerRepricingConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListChannelPartnerRepricingConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListChannelPartnerRepricingConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest} ListChannelPartnerRepricingConfigsRequest
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListChannelPartnerRepricingConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest} message ListChannelPartnerRepricingConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListChannelPartnerRepricingConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListChannelPartnerRepricingConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListChannelPartnerRepricingConfigsRequest;
+                    })();
+    
+                    v1.ListChannelPartnerRepricingConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListChannelPartnerRepricingConfigsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListChannelPartnerRepricingConfigsResponse
+                         * @property {Array.<google.cloud.channel.v1.IChannelPartnerRepricingConfig>|null} [channelPartnerRepricingConfigs] ListChannelPartnerRepricingConfigsResponse channelPartnerRepricingConfigs
+                         * @property {string|null} [nextPageToken] ListChannelPartnerRepricingConfigsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListChannelPartnerRepricingConfigsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListChannelPartnerRepricingConfigsResponse.
+                         * @implements IListChannelPartnerRepricingConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListChannelPartnerRepricingConfigsResponse(properties) {
+                            this.channelPartnerRepricingConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListChannelPartnerRepricingConfigsResponse channelPartnerRepricingConfigs.
+                         * @member {Array.<google.cloud.channel.v1.IChannelPartnerRepricingConfig>} channelPartnerRepricingConfigs
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @instance
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.prototype.channelPartnerRepricingConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListChannelPartnerRepricingConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @instance
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListChannelPartnerRepricingConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse} ListChannelPartnerRepricingConfigsResponse instance
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.create = function create(properties) {
+                            return new ListChannelPartnerRepricingConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelPartnerRepricingConfigsResponse message. Does not implicitly {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse} message ListChannelPartnerRepricingConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.channelPartnerRepricingConfigs != null && message.channelPartnerRepricingConfigs.length)
+                                for (var i = 0; i < message.channelPartnerRepricingConfigs.length; ++i)
+                                    $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.encode(message.channelPartnerRepricingConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelPartnerRepricingConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse} message ListChannelPartnerRepricingConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListChannelPartnerRepricingConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse} ListChannelPartnerRepricingConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.channelPartnerRepricingConfigs && message.channelPartnerRepricingConfigs.length))
+                                        message.channelPartnerRepricingConfigs = [];
+                                    message.channelPartnerRepricingConfigs.push($root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListChannelPartnerRepricingConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse} ListChannelPartnerRepricingConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListChannelPartnerRepricingConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.channelPartnerRepricingConfigs != null && message.hasOwnProperty("channelPartnerRepricingConfigs")) {
+                                if (!Array.isArray(message.channelPartnerRepricingConfigs))
+                                    return "channelPartnerRepricingConfigs: array expected";
+                                for (var i = 0; i < message.channelPartnerRepricingConfigs.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.verify(message.channelPartnerRepricingConfigs[i]);
+                                    if (error)
+                                        return "channelPartnerRepricingConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListChannelPartnerRepricingConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse} ListChannelPartnerRepricingConfigsResponse
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse();
+                            if (object.channelPartnerRepricingConfigs) {
+                                if (!Array.isArray(object.channelPartnerRepricingConfigs))
+                                    throw TypeError(".google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.channelPartnerRepricingConfigs: array expected");
+                                message.channelPartnerRepricingConfigs = [];
+                                for (var i = 0; i < object.channelPartnerRepricingConfigs.length; ++i) {
+                                    if (typeof object.channelPartnerRepricingConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.channelPartnerRepricingConfigs: object expected");
+                                    message.channelPartnerRepricingConfigs[i] = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.fromObject(object.channelPartnerRepricingConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListChannelPartnerRepricingConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse} message ListChannelPartnerRepricingConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.channelPartnerRepricingConfigs = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.channelPartnerRepricingConfigs && message.channelPartnerRepricingConfigs.length) {
+                                object.channelPartnerRepricingConfigs = [];
+                                for (var j = 0; j < message.channelPartnerRepricingConfigs.length; ++j)
+                                    object.channelPartnerRepricingConfigs[j] = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.toObject(message.channelPartnerRepricingConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListChannelPartnerRepricingConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListChannelPartnerRepricingConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListChannelPartnerRepricingConfigsResponse;
+                    })();
+    
+                    v1.CreateChannelPartnerRepricingConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateChannelPartnerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ICreateChannelPartnerRepricingConfigRequest
+                         * @property {string|null} [parent] CreateChannelPartnerRepricingConfigRequest parent
+                         * @property {google.cloud.channel.v1.IChannelPartnerRepricingConfig|null} [channelPartnerRepricingConfig] CreateChannelPartnerRepricingConfigRequest channelPartnerRepricingConfig
+                         */
+    
+                        /**
+                         * Constructs a new CreateChannelPartnerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a CreateChannelPartnerRepricingConfigRequest.
+                         * @implements ICreateChannelPartnerRepricingConfigRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateChannelPartnerRepricingConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateChannelPartnerRepricingConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @instance
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateChannelPartnerRepricingConfigRequest channelPartnerRepricingConfig.
+                         * @member {google.cloud.channel.v1.IChannelPartnerRepricingConfig|null|undefined} channelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @instance
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.prototype.channelPartnerRepricingConfig = null;
+    
+                        /**
+                         * Creates a new CreateChannelPartnerRepricingConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest} CreateChannelPartnerRepricingConfigRequest instance
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.create = function create(properties) {
+                            return new CreateChannelPartnerRepricingConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateChannelPartnerRepricingConfigRequest message. Does not implicitly {@link google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest} message CreateChannelPartnerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.channelPartnerRepricingConfig != null && Object.hasOwnProperty.call(message, "channelPartnerRepricingConfig"))
+                                $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.encode(message.channelPartnerRepricingConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateChannelPartnerRepricingConfigRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest} message CreateChannelPartnerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateChannelPartnerRepricingConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest} CreateChannelPartnerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.channelPartnerRepricingConfig = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateChannelPartnerRepricingConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest} CreateChannelPartnerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateChannelPartnerRepricingConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.channelPartnerRepricingConfig != null && message.hasOwnProperty("channelPartnerRepricingConfig")) {
+                                var error = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.verify(message.channelPartnerRepricingConfig);
+                                if (error)
+                                    return "channelPartnerRepricingConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateChannelPartnerRepricingConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest} CreateChannelPartnerRepricingConfigRequest
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.channelPartnerRepricingConfig != null) {
+                                if (typeof object.channelPartnerRepricingConfig !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest.channelPartnerRepricingConfig: object expected");
+                                message.channelPartnerRepricingConfig = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.fromObject(object.channelPartnerRepricingConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateChannelPartnerRepricingConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest} message CreateChannelPartnerRepricingConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.channelPartnerRepricingConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.channelPartnerRepricingConfig != null && message.hasOwnProperty("channelPartnerRepricingConfig"))
+                                object.channelPartnerRepricingConfig = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.toObject(message.channelPartnerRepricingConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateChannelPartnerRepricingConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateChannelPartnerRepricingConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateChannelPartnerRepricingConfigRequest;
+                    })();
+    
+                    v1.UpdateChannelPartnerRepricingConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateChannelPartnerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IUpdateChannelPartnerRepricingConfigRequest
+                         * @property {google.cloud.channel.v1.IChannelPartnerRepricingConfig|null} [channelPartnerRepricingConfig] UpdateChannelPartnerRepricingConfigRequest channelPartnerRepricingConfig
+                         */
+    
+                        /**
+                         * Constructs a new UpdateChannelPartnerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents an UpdateChannelPartnerRepricingConfigRequest.
+                         * @implements IUpdateChannelPartnerRepricingConfigRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateChannelPartnerRepricingConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateChannelPartnerRepricingConfigRequest channelPartnerRepricingConfig.
+                         * @member {google.cloud.channel.v1.IChannelPartnerRepricingConfig|null|undefined} channelPartnerRepricingConfig
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @instance
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.prototype.channelPartnerRepricingConfig = null;
+    
+                        /**
+                         * Creates a new UpdateChannelPartnerRepricingConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest} UpdateChannelPartnerRepricingConfigRequest instance
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.create = function create(properties) {
+                            return new UpdateChannelPartnerRepricingConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateChannelPartnerRepricingConfigRequest message. Does not implicitly {@link google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest} message UpdateChannelPartnerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.channelPartnerRepricingConfig != null && Object.hasOwnProperty.call(message, "channelPartnerRepricingConfig"))
+                                $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.encode(message.channelPartnerRepricingConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateChannelPartnerRepricingConfigRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest} message UpdateChannelPartnerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateChannelPartnerRepricingConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest} UpdateChannelPartnerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.channelPartnerRepricingConfig = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateChannelPartnerRepricingConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest} UpdateChannelPartnerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateChannelPartnerRepricingConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.channelPartnerRepricingConfig != null && message.hasOwnProperty("channelPartnerRepricingConfig")) {
+                                var error = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.verify(message.channelPartnerRepricingConfig);
+                                if (error)
+                                    return "channelPartnerRepricingConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateChannelPartnerRepricingConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest} UpdateChannelPartnerRepricingConfigRequest
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest();
+                            if (object.channelPartnerRepricingConfig != null) {
+                                if (typeof object.channelPartnerRepricingConfig !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest.channelPartnerRepricingConfig: object expected");
+                                message.channelPartnerRepricingConfig = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.fromObject(object.channelPartnerRepricingConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateChannelPartnerRepricingConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest} message UpdateChannelPartnerRepricingConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.channelPartnerRepricingConfig = null;
+                            if (message.channelPartnerRepricingConfig != null && message.hasOwnProperty("channelPartnerRepricingConfig"))
+                                object.channelPartnerRepricingConfig = $root.google.cloud.channel.v1.ChannelPartnerRepricingConfig.toObject(message.channelPartnerRepricingConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateChannelPartnerRepricingConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateChannelPartnerRepricingConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateChannelPartnerRepricingConfigRequest;
+                    })();
+    
+                    v1.DeleteChannelPartnerRepricingConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteChannelPartnerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IDeleteChannelPartnerRepricingConfigRequest
+                         * @property {string|null} [name] DeleteChannelPartnerRepricingConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteChannelPartnerRepricingConfigRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a DeleteChannelPartnerRepricingConfigRequest.
+                         * @implements IDeleteChannelPartnerRepricingConfigRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteChannelPartnerRepricingConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteChannelPartnerRepricingConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @instance
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteChannelPartnerRepricingConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest} DeleteChannelPartnerRepricingConfigRequest instance
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.create = function create(properties) {
+                            return new DeleteChannelPartnerRepricingConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteChannelPartnerRepricingConfigRequest message. Does not implicitly {@link google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest} message DeleteChannelPartnerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteChannelPartnerRepricingConfigRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest} message DeleteChannelPartnerRepricingConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteChannelPartnerRepricingConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest} DeleteChannelPartnerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteChannelPartnerRepricingConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest} DeleteChannelPartnerRepricingConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteChannelPartnerRepricingConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteChannelPartnerRepricingConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest} DeleteChannelPartnerRepricingConfigRequest
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteChannelPartnerRepricingConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest} message DeleteChannelPartnerRepricingConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteChannelPartnerRepricingConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteChannelPartnerRepricingConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteChannelPartnerRepricingConfigRequest;
                     })();
     
                     v1.CreateEntitlementRequest = (function() {
@@ -37121,6 +41596,425 @@
                 };
     
                 return Money;
+            })();
+    
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.year = reader.int32();
+                            break;
+                        case 2:
+                            message.month = reader.int32();
+                            break;
+                        case 3:
+                            message.day = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Date;
+            })();
+    
+            type.Decimal = (function() {
+    
+                /**
+                 * Properties of a Decimal.
+                 * @memberof google.type
+                 * @interface IDecimal
+                 * @property {string|null} [value] Decimal value
+                 */
+    
+                /**
+                 * Constructs a new Decimal.
+                 * @memberof google.type
+                 * @classdesc Represents a Decimal.
+                 * @implements IDecimal
+                 * @constructor
+                 * @param {google.type.IDecimal=} [properties] Properties to set
+                 */
+                function Decimal(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Decimal value.
+                 * @member {string} value
+                 * @memberof google.type.Decimal
+                 * @instance
+                 */
+                Decimal.prototype.value = "";
+    
+                /**
+                 * Creates a new Decimal instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Decimal
+                 * @static
+                 * @param {google.type.IDecimal=} [properties] Properties to set
+                 * @returns {google.type.Decimal} Decimal instance
+                 */
+                Decimal.create = function create(properties) {
+                    return new Decimal(properties);
+                };
+    
+                /**
+                 * Encodes the specified Decimal message. Does not implicitly {@link google.type.Decimal.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Decimal
+                 * @static
+                 * @param {google.type.IDecimal} message Decimal message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Decimal.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Decimal message, length delimited. Does not implicitly {@link google.type.Decimal.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Decimal
+                 * @static
+                 * @param {google.type.IDecimal} message Decimal message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Decimal.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Decimal message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Decimal
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Decimal} Decimal
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Decimal.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Decimal();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Decimal message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Decimal
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Decimal} Decimal
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Decimal.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Decimal message.
+                 * @function verify
+                 * @memberof google.type.Decimal
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Decimal.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isString(message.value))
+                            return "value: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Decimal message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Decimal
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Decimal} Decimal
+                 */
+                Decimal.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Decimal)
+                        return object;
+                    var message = new $root.google.type.Decimal();
+                    if (object.value != null)
+                        message.value = String(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Decimal message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Decimal
+                 * @static
+                 * @param {google.type.Decimal} message Decimal
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Decimal.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = "";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Decimal to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Decimal
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Decimal.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Decimal;
             })();
     
             return type;

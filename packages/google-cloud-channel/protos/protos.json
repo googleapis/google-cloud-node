@@ -989,6 +989,151 @@
                         }
                       }
                     },
+                    "RebillingBasis": {
+                      "values": {
+                        "REBILLING_BASIS_UNSPECIFIED": 0,
+                        "COST_AT_LIST": 1,
+                        "DIRECT_CUSTOMER_COST": 2
+                      }
+                    },
+                    "CustomerRepricingConfig": {
+                      "options": {
+                        "(google.api.resource).type": "cloudchannel.googleapis.com/CustomerRepricingConfig",
+                        "(google.api.resource).pattern": "accounts/{account}/customers/{customer}/customerRepricingConfigs/{customer_repricing_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "repricingConfig": {
+                          "type": "RepricingConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ChannelPartnerRepricingConfig": {
+                      "options": {
+                        "(google.api.resource).type": "cloudchannel.googleapis.com/ChannelPartnerRepricingConfig",
+                        "(google.api.resource).pattern": "accounts/{account}/channelPartnerLinks/{channel_partner}/channelPartnerRepricingConfigs/{channel_partner_repricing_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "repricingConfig": {
+                          "type": "RepricingConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RepricingConfig": {
+                      "oneofs": {
+                        "granularity": {
+                          "oneof": [
+                            "entitlementGranularity",
+                            "channelPartnerGranularity"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "entitlementGranularity": {
+                          "type": "EntitlementGranularity",
+                          "id": 4
+                        },
+                        "channelPartnerGranularity": {
+                          "type": "ChannelPartnerGranularity",
+                          "id": 5
+                        },
+                        "effectiveInvoiceMonth": {
+                          "type": "google.type.Date",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "adjustment": {
+                          "type": "RepricingAdjustment",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rebillingBasis": {
+                          "type": "RebillingBasis",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EntitlementGranularity": {
+                          "fields": {
+                            "entitlement": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Entitlement"
+                              }
+                            }
+                          }
+                        },
+                        "ChannelPartnerGranularity": {
+                          "fields": {}
+                        }
+                      }
+                    },
+                    "RepricingAdjustment": {
+                      "oneofs": {
+                        "adjustment": {
+                          "oneof": [
+                            "percentageAdjustment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "percentageAdjustment": {
+                          "type": "PercentageAdjustment",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PercentageAdjustment": {
+                      "fields": {
+                        "percentage": {
+                          "type": "google.type.Decimal",
+                          "id": 2
+                        }
+                      }
+                    },
                     "CloudChannelService": {
                       "options": {
                         "(google.api.default_host)": "cloudchannel.googleapis.com",
@@ -1523,6 +1668,194 @@
                             }
                           ]
                         },
+                        "GetCustomerRepricingConfig": {
+                          "requestType": "GetCustomerRepricingConfigRequest",
+                          "responseType": "CustomerRepricingConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=accounts/*/customers/*/customerRepricingConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=accounts/*/customers/*/customerRepricingConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListCustomerRepricingConfigs": {
+                          "requestType": "ListCustomerRepricingConfigsRequest",
+                          "responseType": "ListCustomerRepricingConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accounts/*/customers/*}/customerRepricingConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accounts/*/customers/*}/customerRepricingConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateCustomerRepricingConfig": {
+                          "requestType": "CreateCustomerRepricingConfigRequest",
+                          "responseType": "CustomerRepricingConfig",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=accounts/*/customers/*}/customerRepricingConfigs",
+                            "(google.api.http).body": "customer_repricing_config",
+                            "(google.api.method_signature)": "parent,customer_repricing_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=accounts/*/customers/*}/customerRepricingConfigs",
+                                "body": "customer_repricing_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,customer_repricing_config"
+                            }
+                          ]
+                        },
+                        "UpdateCustomerRepricingConfig": {
+                          "requestType": "UpdateCustomerRepricingConfigRequest",
+                          "responseType": "CustomerRepricingConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{customer_repricing_config.name=accounts/*/customers/*/customerRepricingConfigs/*}",
+                            "(google.api.http).body": "customer_repricing_config",
+                            "(google.api.method_signature)": "customer_repricing_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{customer_repricing_config.name=accounts/*/customers/*/customerRepricingConfigs/*}",
+                                "body": "customer_repricing_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "customer_repricing_config"
+                            }
+                          ]
+                        },
+                        "DeleteCustomerRepricingConfig": {
+                          "requestType": "DeleteCustomerRepricingConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=accounts/*/customers/*/customerRepricingConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=accounts/*/customers/*/customerRepricingConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetChannelPartnerRepricingConfig": {
+                          "requestType": "GetChannelPartnerRepricingConfigRequest",
+                          "responseType": "ChannelPartnerRepricingConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=accounts/*/channelPartnerLinks/*/channelPartnerRepricingConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=accounts/*/channelPartnerLinks/*/channelPartnerRepricingConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListChannelPartnerRepricingConfigs": {
+                          "requestType": "ListChannelPartnerRepricingConfigsRequest",
+                          "responseType": "ListChannelPartnerRepricingConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accounts/*/channelPartnerLinks/*}/channelPartnerRepricingConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accounts/*/channelPartnerLinks/*}/channelPartnerRepricingConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateChannelPartnerRepricingConfig": {
+                          "requestType": "CreateChannelPartnerRepricingConfigRequest",
+                          "responseType": "ChannelPartnerRepricingConfig",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=accounts/*/channelPartnerLinks/*}/channelPartnerRepricingConfigs",
+                            "(google.api.http).body": "channel_partner_repricing_config",
+                            "(google.api.method_signature)": "parent,channel_partner_repricing_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=accounts/*/channelPartnerLinks/*}/channelPartnerRepricingConfigs",
+                                "body": "channel_partner_repricing_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,channel_partner_repricing_config"
+                            }
+                          ]
+                        },
+                        "UpdateChannelPartnerRepricingConfig": {
+                          "requestType": "UpdateChannelPartnerRepricingConfigRequest",
+                          "responseType": "ChannelPartnerRepricingConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{channel_partner_repricing_config.name=accounts/*/channelPartnerLinks/*/channelPartnerRepricingConfigs/*}",
+                            "(google.api.http).body": "channel_partner_repricing_config",
+                            "(google.api.method_signature)": "channel_partner_repricing_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{channel_partner_repricing_config.name=accounts/*/channelPartnerLinks/*/channelPartnerRepricingConfigs/*}",
+                                "body": "channel_partner_repricing_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "channel_partner_repricing_config"
+                            }
+                          ]
+                        },
+                        "DeleteChannelPartnerRepricingConfig": {
+                          "requestType": "DeleteChannelPartnerRepricingConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=accounts/*/channelPartnerLinks/*/channelPartnerRepricingConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=accounts/*/channelPartnerLinks/*/channelPartnerRepricingConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "LookupOffer": {
                           "requestType": "LookupOfferRequest",
                           "responseType": "Offer",
@@ -1721,6 +2054,13 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2159,6 +2499,206 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetCustomerRepricingConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/CustomerRepricingConfig"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomerRepricingConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Customer"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomerRepricingConfigsResponse": {
+                      "fields": {
+                        "customerRepricingConfigs": {
+                          "rule": "repeated",
+                          "type": "CustomerRepricingConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateCustomerRepricingConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Customer"
+                          }
+                        },
+                        "customerRepricingConfig": {
+                          "type": "CustomerRepricingConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCustomerRepricingConfigRequest": {
+                      "fields": {
+                        "customerRepricingConfig": {
+                          "type": "CustomerRepricingConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCustomerRepricingConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/CustomerRepricingConfig"
+                          }
+                        }
+                      }
+                    },
+                    "GetChannelPartnerRepricingConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/ChannelPartnerRepricingConfig"
+                          }
+                        }
+                      }
+                    },
+                    "ListChannelPartnerRepricingConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/ChannelPartnerLink"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListChannelPartnerRepricingConfigsResponse": {
+                      "fields": {
+                        "channelPartnerRepricingConfigs": {
+                          "rule": "repeated",
+                          "type": "ChannelPartnerRepricingConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateChannelPartnerRepricingConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/ChannelPartnerLink"
+                          }
+                        },
+                        "channelPartnerRepricingConfig": {
+                          "type": "ChannelPartnerRepricingConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateChannelPartnerRepricingConfigRequest": {
+                      "fields": {
+                        "channelPartnerRepricingConfig": {
+                          "type": "ChannelPartnerRepricingConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteChannelPartnerRepricingConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/ChannelPartnerRepricingConfig"
                           }
                         }
                       }
@@ -4146,9 +4686,9 @@
         "type": {
           "options": {
             "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/type/money;money",
+            "go_package": "google.golang.org/genproto/googleapis/type/decimal;decimal",
             "java_multiple_files": true,
-            "java_outer_classname": "MoneyProto",
+            "java_outer_classname": "DecimalProto",
             "java_package": "com.google.type",
             "objc_class_prefix": "GTP"
           },
@@ -4216,6 +4756,30 @@
                 "nanos": {
                   "type": "int32",
                   "id": 3
+                }
+              }
+            },
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "Decimal": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
                 }
               }
             }
