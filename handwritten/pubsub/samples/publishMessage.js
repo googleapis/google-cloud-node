@@ -52,7 +52,7 @@ function main(
     try {
       const messageId = await pubSubClient
         .topic(topicNameOrId)
-        .publish(dataBuffer);
+        .publishMessage({data: dataBuffer});
       console.log(`Message ${messageId} published.`);
     } catch (error) {
       console.error(`Received error while publishing: ${error.message}`);
