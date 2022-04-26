@@ -215,9 +215,9 @@ export class KnowledgeBasesClient {
       projectConversationModelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversationModels/{conversation_model}'
       ),
-      projectConversationModelEvaluationsEvaluationPathTemplate:
+      projectConversationModelEvaluationPathTemplate:
         new this._gaxModule.PathTemplate(
-          'projects/{project}/conversationModels/{conversation_model}/evaluations/evaluation'
+          'projects/{project}/conversationModels/{conversation_model}/evaluations/{evaluation}'
         ),
       projectConversationParticipantPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -284,9 +284,9 @@ export class KnowledgeBasesClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/conversationModels/{conversation_model}'
         ),
-      projectLocationConversationModelEvaluationsEvaluationPathTemplate:
+      projectLocationConversationModelEvaluationPathTemplate:
         new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/evaluation'
+          'projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/{evaluation}'
         ),
       projectLocationConversationParticipantPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -1949,52 +1949,70 @@ export class KnowledgeBasesClient {
   }
 
   /**
-   * Return a fully-qualified projectConversationModelEvaluationsEvaluation resource name string.
+   * Return a fully-qualified projectConversationModelEvaluation resource name string.
    *
    * @param {string} project
    * @param {string} conversation_model
+   * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  projectConversationModelEvaluationsEvaluationPath(
+  projectConversationModelEvaluationPath(
     project: string,
-    conversationModel: string
+    conversationModel: string,
+    evaluation: string
   ) {
-    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.render(
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.render(
       {
         project: project,
         conversation_model: conversationModel,
+        evaluation: evaluation,
       }
     );
   }
 
   /**
-   * Parse the project from ProjectConversationModelEvaluationsEvaluation resource.
+   * Parse the project from ProjectConversationModelEvaluation resource.
    *
-   * @param {string} projectConversationModelEvaluationsEvaluationName
-   *   A fully-qualified path representing project_conversation_model_evaluations_evaluation resource.
+   * @param {string} projectConversationModelEvaluationName
+   *   A fully-qualified path representing project_conversation_model_evaluation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationModelEvaluationsEvaluationName(
-    projectConversationModelEvaluationsEvaluationName: string
+  matchProjectFromProjectConversationModelEvaluationName(
+    projectConversationModelEvaluationName: string
   ) {
-    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match(
-      projectConversationModelEvaluationsEvaluationName
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
+      projectConversationModelEvaluationName
     ).project;
   }
 
   /**
-   * Parse the conversation_model from ProjectConversationModelEvaluationsEvaluation resource.
+   * Parse the conversation_model from ProjectConversationModelEvaluation resource.
    *
-   * @param {string} projectConversationModelEvaluationsEvaluationName
-   *   A fully-qualified path representing project_conversation_model_evaluations_evaluation resource.
+   * @param {string} projectConversationModelEvaluationName
+   *   A fully-qualified path representing project_conversation_model_evaluation resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectConversationModelEvaluationsEvaluationName(
-    projectConversationModelEvaluationsEvaluationName: string
+  matchConversationModelFromProjectConversationModelEvaluationName(
+    projectConversationModelEvaluationName: string
   ) {
-    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match(
-      projectConversationModelEvaluationsEvaluationName
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
+      projectConversationModelEvaluationName
     ).conversation_model;
+  }
+
+  /**
+   * Parse the evaluation from ProjectConversationModelEvaluation resource.
+   *
+   * @param {string} projectConversationModelEvaluationName
+   *   A fully-qualified path representing project_conversation_model_evaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromProjectConversationModelEvaluationName(
+    projectConversationModelEvaluationName: string
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
+      projectConversationModelEvaluationName
+    ).evaluation;
   }
 
   /**
@@ -3260,70 +3278,88 @@ export class KnowledgeBasesClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationConversationModelEvaluationsEvaluation resource name string.
+   * Return a fully-qualified projectLocationConversationModelEvaluation resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} conversation_model
+   * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  projectLocationConversationModelEvaluationsEvaluationPath(
+  projectLocationConversationModelEvaluationPath(
     project: string,
     location: string,
-    conversationModel: string
+    conversationModel: string,
+    evaluation: string
   ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.render(
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.render(
       {
         project: project,
         location: location,
         conversation_model: conversationModel,
+        evaluation: evaluation,
       }
     );
   }
 
   /**
-   * Parse the project from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   * Parse the project from ProjectLocationConversationModelEvaluation resource.
    *
-   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
-   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @param {string} projectLocationConversationModelEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName(
-    projectLocationConversationModelEvaluationsEvaluationName: string
+  matchProjectFromProjectLocationConversationModelEvaluationName(
+    projectLocationConversationModelEvaluationName: string
   ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
-      projectLocationConversationModelEvaluationsEvaluationName
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationName
     ).project;
   }
 
   /**
-   * Parse the location from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   * Parse the location from ProjectLocationConversationModelEvaluation resource.
    *
-   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
-   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @param {string} projectLocationConversationModelEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName(
-    projectLocationConversationModelEvaluationsEvaluationName: string
+  matchLocationFromProjectLocationConversationModelEvaluationName(
+    projectLocationConversationModelEvaluationName: string
   ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
-      projectLocationConversationModelEvaluationsEvaluationName
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationName
     ).location;
   }
 
   /**
-   * Parse the conversation_model from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   * Parse the conversation_model from ProjectLocationConversationModelEvaluation resource.
    *
-   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
-   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @param {string} projectLocationConversationModelEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName(
-    projectLocationConversationModelEvaluationsEvaluationName: string
+  matchConversationModelFromProjectLocationConversationModelEvaluationName(
+    projectLocationConversationModelEvaluationName: string
   ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
-      projectLocationConversationModelEvaluationsEvaluationName
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationName
     ).conversation_model;
+  }
+
+  /**
+   * Parse the evaluation from ProjectLocationConversationModelEvaluation resource.
+   *
+   * @param {string} projectLocationConversationModelEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromProjectLocationConversationModelEvaluationName(
+    projectLocationConversationModelEvaluationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationName
+    ).evaluation;
   }
 
   /**

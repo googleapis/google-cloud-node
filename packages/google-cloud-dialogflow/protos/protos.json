@@ -6260,7 +6260,7 @@
                     "ConversationModelEvaluation": {
                       "options": {
                         "(google.api.resource).type": "dialogflow.googleapis.com/ConversationModelEvaluation",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/evaluation"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/{evaluation}"
                       },
                       "oneofs": {
                         "metrics": {
@@ -6588,7 +6588,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationModel"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/ConversationModelEvaluation"
                           }
                         },
                         "conversationModelEvaluation": {

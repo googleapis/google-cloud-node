@@ -2527,12 +2527,12 @@ describe('v2.ConversationDatasetsClient', () => {
       });
     });
 
-    describe('projectConversationModelEvaluationsEvaluation', () => {
-      const fakePath =
-        '/rendered/path/projectConversationModelEvaluationsEvaluation';
+    describe('projectConversationModelEvaluation', () => {
+      const fakePath = '/rendered/path/projectConversationModelEvaluation';
       const expectedParameters = {
         project: 'projectValue',
         conversation_model: 'conversationModelValue',
+        evaluation: 'evaluationValue',
       };
       const client =
         new conversationdatasetsModule.v2.ConversationDatasetsClient({
@@ -2540,21 +2540,21 @@ describe('v2.ConversationDatasetsClient', () => {
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.render =
+      client.pathTemplates.projectConversationModelEvaluationPathTemplate.render =
         sinon.stub().returns(fakePath);
-      client.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match =
+      client.pathTemplates.projectConversationModelEvaluationPathTemplate.match =
         sinon.stub().returns(expectedParameters);
 
-      it('projectConversationModelEvaluationsEvaluationPath', () => {
-        const result = client.projectConversationModelEvaluationsEvaluationPath(
+      it('projectConversationModelEvaluationPath', () => {
+        const result = client.projectConversationModelEvaluationPath(
           'projectValue',
-          'conversationModelValue'
+          'conversationModelValue',
+          'evaluationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (
-            client.pathTemplates
-              .projectConversationModelEvaluationsEvaluationPathTemplate
+            client.pathTemplates.projectConversationModelEvaluationPathTemplate
               .render as SinonStub
           )
             .getCall(-1)
@@ -2562,16 +2562,15 @@ describe('v2.ConversationDatasetsClient', () => {
         );
       });
 
-      it('matchProjectFromProjectConversationModelEvaluationsEvaluationName', () => {
+      it('matchProjectFromProjectConversationModelEvaluationName', () => {
         const result =
-          client.matchProjectFromProjectConversationModelEvaluationsEvaluationName(
+          client.matchProjectFromProjectConversationModelEvaluationName(
             fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
           (
-            client.pathTemplates
-              .projectConversationModelEvaluationsEvaluationPathTemplate
+            client.pathTemplates.projectConversationModelEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2579,16 +2578,31 @@ describe('v2.ConversationDatasetsClient', () => {
         );
       });
 
-      it('matchConversationModelFromProjectConversationModelEvaluationsEvaluationName', () => {
+      it('matchConversationModelFromProjectConversationModelEvaluationName', () => {
         const result =
-          client.matchConversationModelFromProjectConversationModelEvaluationsEvaluationName(
+          client.matchConversationModelFromProjectConversationModelEvaluationName(
             fakePath
           );
         assert.strictEqual(result, 'conversationModelValue');
         assert(
           (
-            client.pathTemplates
-              .projectConversationModelEvaluationsEvaluationPathTemplate
+            client.pathTemplates.projectConversationModelEvaluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEvaluationFromProjectConversationModelEvaluationName', () => {
+        const result =
+          client.matchEvaluationFromProjectConversationModelEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'evaluationValue');
+        assert(
+          (
+            client.pathTemplates.projectConversationModelEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -4179,13 +4193,14 @@ describe('v2.ConversationDatasetsClient', () => {
       });
     });
 
-    describe('projectLocationConversationModelEvaluationsEvaluation', () => {
+    describe('projectLocationConversationModelEvaluation', () => {
       const fakePath =
-        '/rendered/path/projectLocationConversationModelEvaluationsEvaluation';
+        '/rendered/path/projectLocationConversationModelEvaluation';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
         conversation_model: 'conversationModelValue',
+        evaluation: 'evaluationValue',
       };
       const client =
         new conversationdatasetsModule.v2.ConversationDatasetsClient({
@@ -4193,23 +4208,23 @@ describe('v2.ConversationDatasetsClient', () => {
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.render =
+      client.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.render =
         sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match =
+      client.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match =
         sinon.stub().returns(expectedParameters);
 
-      it('projectLocationConversationModelEvaluationsEvaluationPath', () => {
-        const result =
-          client.projectLocationConversationModelEvaluationsEvaluationPath(
-            'projectValue',
-            'locationValue',
-            'conversationModelValue'
-          );
+      it('projectLocationConversationModelEvaluationPath', () => {
+        const result = client.projectLocationConversationModelEvaluationPath(
+          'projectValue',
+          'locationValue',
+          'conversationModelValue',
+          'evaluationValue'
+        );
         assert.strictEqual(result, fakePath);
         assert(
           (
             client.pathTemplates
-              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .projectLocationConversationModelEvaluationPathTemplate
               .render as SinonStub
           )
             .getCall(-1)
@@ -4217,16 +4232,16 @@ describe('v2.ConversationDatasetsClient', () => {
         );
       });
 
-      it('matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+      it('matchProjectFromProjectLocationConversationModelEvaluationName', () => {
         const result =
-          client.matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName(
+          client.matchProjectFromProjectLocationConversationModelEvaluationName(
             fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
           (
             client.pathTemplates
-              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .projectLocationConversationModelEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -4234,16 +4249,16 @@ describe('v2.ConversationDatasetsClient', () => {
         );
       });
 
-      it('matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+      it('matchLocationFromProjectLocationConversationModelEvaluationName', () => {
         const result =
-          client.matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName(
+          client.matchLocationFromProjectLocationConversationModelEvaluationName(
             fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
           (
             client.pathTemplates
-              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .projectLocationConversationModelEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -4251,16 +4266,33 @@ describe('v2.ConversationDatasetsClient', () => {
         );
       });
 
-      it('matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+      it('matchConversationModelFromProjectLocationConversationModelEvaluationName', () => {
         const result =
-          client.matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName(
+          client.matchConversationModelFromProjectLocationConversationModelEvaluationName(
             fakePath
           );
         assert.strictEqual(result, 'conversationModelValue');
         assert(
           (
             client.pathTemplates
-              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .projectLocationConversationModelEvaluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEvaluationFromProjectLocationConversationModelEvaluationName', () => {
+        const result =
+          client.matchEvaluationFromProjectLocationConversationModelEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'evaluationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
