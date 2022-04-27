@@ -12237,9 +12237,6 @@ export namespace google {
 
                         /** Entity id */
                         id?: (string|null);
-
-                        /** Entity boundingPolyForDemoFrontend */
-                        boundingPolyForDemoFrontend?: (google.cloud.documentai.v1beta2.IBoundingPoly|null);
                     }
 
                     /** Represents an Entity. */
@@ -12271,9 +12268,6 @@ export namespace google {
 
                         /** Entity id. */
                         public id: string;
-
-                        /** Entity boundingPolyForDemoFrontend. */
-                        public boundingPolyForDemoFrontend?: (google.cloud.documentai.v1beta2.IBoundingPoly|null);
 
                         /**
                          * Creates a new Entity instance using the specified properties.

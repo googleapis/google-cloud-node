@@ -549,7 +549,10 @@
                             },
                             "type": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "mentionText": {
                               "type": "string",
@@ -1782,7 +1785,10 @@
                             },
                             "type": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "mentionText": {
                               "type": "string",
@@ -2653,7 +2659,10 @@
                             },
                             "type": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "mentionText": {
                               "type": "string",
@@ -2680,13 +2689,6 @@
                             "id": {
                               "type": "string",
                               "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "boundingPolyForDemoFrontend": {
-                              "type": "BoundingPoly",
-                              "id": 8,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -3721,7 +3723,10 @@
                             },
                             "type": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "mentionText": {
                               "type": "string",
