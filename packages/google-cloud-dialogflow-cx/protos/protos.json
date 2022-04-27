@@ -6522,6 +6522,10 @@
                               "type": "PurgeDataType",
                               "id": 8
                             },
+                            "audioExportSettings": {
+                              "type": "AudioExportSettings",
+                              "id": 12
+                            },
                             "insightsExportSettings": {
                               "type": "InsightsExportSettings",
                               "id": 13
@@ -6544,6 +6548,36 @@
                               "values": {
                                 "PURGE_DATA_TYPE_UNSPECIFIED": 0,
                                 "DIALOGFLOW_HISTORY": 1
+                              }
+                            },
+                            "AudioExportSettings": {
+                              "fields": {
+                                "gcsBucket": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "audioExportPattern": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "enableAudioRedaction": {
+                                  "type": "bool",
+                                  "id": 3
+                                },
+                                "audioFormat": {
+                                  "type": "AudioFormat",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "AudioFormat": {
+                                  "values": {
+                                    "AUDIO_FORMAT_UNSPECIFIED": 0,
+                                    "MULAW": 1,
+                                    "MP3": 2,
+                                    "OGG": 3
+                                  }
+                                }
                               }
                             },
                             "InsightsExportSettings": {
@@ -15018,6 +15052,24 @@
             "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -15120,24 +15172,6 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
             },
             "resourceReference": {
               "type": "google.api.ResourceReference",
