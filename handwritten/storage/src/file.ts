@@ -1835,7 +1835,7 @@ class File extends ServiceObject<File> {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createWriteStream(options: CreateWriteStreamOptions = {}): Writable {
-    options = Object.assign({metadata: {}}, options);
+    options = extend(true, {metadata: {}}, options);
 
     if (options.contentType) {
       options.metadata.contentType = options.contentType;
@@ -3951,7 +3951,8 @@ class File extends ServiceObject<File> {
     dup: Duplexify,
     options: CreateResumableUploadOptions
   ): void {
-    options = Object.assign(
+    options = extend(
+      true,
       {
         metadata: {},
       },
@@ -4019,7 +4020,8 @@ class File extends ServiceObject<File> {
    * @private
    */
   startSimpleUpload_(dup: Duplexify, options?: CreateWriteStreamOptions): void {
-    options = Object.assign(
+    options = extend(
+      true,
       {
         metadata: {},
       },

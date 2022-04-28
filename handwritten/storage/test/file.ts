@@ -2019,7 +2019,6 @@ describe('File', () => {
       const writable = file.createWriteStream(options);
 
       file.startSimpleUpload_ = (stream: {}, options_: {}) => {
-        assert.deepStrictEqual(options_, options);
         done();
       };
 
@@ -2034,7 +2033,6 @@ describe('File', () => {
       const writable = file.createWriteStream(options);
 
       file.startResumableUpload_ = (stream: {}, options_: {}) => {
-        assert.deepStrictEqual(options_, options);
         done();
       };
 
@@ -2050,7 +2048,6 @@ describe('File', () => {
       const writable = file.createWriteStream(options);
 
       file.startResumableUpload_ = (stream: {}, options_: {}) => {
-        assert.deepStrictEqual(options_, options);
         done();
       };
 
@@ -2170,7 +2167,6 @@ describe('File', () => {
         });
 
         file.startSimpleUpload_ = (stream: Stream, _options: {}) => {
-          assert.deepStrictEqual(_options, options);
           done();
         };
 
@@ -2185,7 +2181,6 @@ describe('File', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.deepStrictEqual(options.metadata, METADATA);
         done();
       };
 
@@ -2220,6 +2215,19 @@ describe('File', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.startResumableUpload_ = (stream: {}, options: any) => {
         assert.strictEqual(options.metadata.contentType, 'image/png');
+        done();
+      };
+
+      writable.write('data');
+    });
+
+    it('should not overwrite passed in options', done => {
+      const emptyObject = {};
+      const writable = file.createWriteStream(emptyObject);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      file.startResumableUpload_ = (stream: {}, options: any) => {
+        assert.strictEqual(options.metadata.contentType, 'image/png');
+        assert.deepStrictEqual(emptyObject, {});
         done();
       };
 
@@ -4829,7 +4837,7 @@ describe('File', () => {
             assert.strictEqual(opts.file, file.name);
             assert.strictEqual(opts.generation, file.generation);
             assert.strictEqual(opts.key, file.encryptionKey);
-            assert.strictEqual(opts.metadata, options.metadata);
+            assert.deepStrictEqual(opts.metadata, options.metadata);
             assert.strictEqual(opts.offset, options.offset);
             assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
             assert.strictEqual(opts.private, options.private);
@@ -4992,7 +5000,7 @@ describe('File', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeWritableStreamOverride = (stream: {}, options_: any) => {
-        assert.strictEqual(options_.metadata, options.metadata);
+        assert.deepStrictEqual(options_.metadata, options.metadata);
         assert.deepStrictEqual(options_.request, {
           qs: {
             name: file.name,
