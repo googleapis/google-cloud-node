@@ -11428,6 +11428,12 @@ export namespace google {
                 /** Properties of an ObjectTrackingAnnotation. */
                 interface IObjectTrackingAnnotation {
 
+                    /** ObjectTrackingAnnotation segment */
+                    segment?: (google.cloud.videointelligence.v1p2beta1.IVideoSegment|null);
+
+                    /** ObjectTrackingAnnotation trackId */
+                    trackId?: (number|Long|string|null);
+
                     /** ObjectTrackingAnnotation entity */
                     entity?: (google.cloud.videointelligence.v1p2beta1.IEntity|null);
 
@@ -11436,9 +11442,6 @@ export namespace google {
 
                     /** ObjectTrackingAnnotation frames */
                     frames?: (google.cloud.videointelligence.v1p2beta1.IObjectTrackingFrame[]|null);
-
-                    /** ObjectTrackingAnnotation segment */
-                    segment?: (google.cloud.videointelligence.v1p2beta1.IVideoSegment|null);
                 }
 
                 /** Represents an ObjectTrackingAnnotation. */
@@ -11450,6 +11453,12 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.videointelligence.v1p2beta1.IObjectTrackingAnnotation);
 
+                    /** ObjectTrackingAnnotation segment. */
+                    public segment?: (google.cloud.videointelligence.v1p2beta1.IVideoSegment|null);
+
+                    /** ObjectTrackingAnnotation trackId. */
+                    public trackId?: (number|Long|string|null);
+
                     /** ObjectTrackingAnnotation entity. */
                     public entity?: (google.cloud.videointelligence.v1p2beta1.IEntity|null);
 
@@ -11459,8 +11468,8 @@ export namespace google {
                     /** ObjectTrackingAnnotation frames. */
                     public frames: google.cloud.videointelligence.v1p2beta1.IObjectTrackingFrame[];
 
-                    /** ObjectTrackingAnnotation segment. */
-                    public segment?: (google.cloud.videointelligence.v1p2beta1.IVideoSegment|null);
+                    /** ObjectTrackingAnnotation trackInfo. */
+                    public trackInfo?: ("segment"|"trackId");
 
                     /**
                      * Creates a new ObjectTrackingAnnotation instance using the specified properties.

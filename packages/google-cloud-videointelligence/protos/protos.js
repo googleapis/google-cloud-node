@@ -28822,10 +28822,11 @@
                          * Properties of an ObjectTrackingAnnotation.
                          * @memberof google.cloud.videointelligence.v1p2beta1
                          * @interface IObjectTrackingAnnotation
+                         * @property {google.cloud.videointelligence.v1p2beta1.IVideoSegment|null} [segment] ObjectTrackingAnnotation segment
+                         * @property {number|Long|null} [trackId] ObjectTrackingAnnotation trackId
                          * @property {google.cloud.videointelligence.v1p2beta1.IEntity|null} [entity] ObjectTrackingAnnotation entity
                          * @property {number|null} [confidence] ObjectTrackingAnnotation confidence
                          * @property {Array.<google.cloud.videointelligence.v1p2beta1.IObjectTrackingFrame>|null} [frames] ObjectTrackingAnnotation frames
-                         * @property {google.cloud.videointelligence.v1p2beta1.IVideoSegment|null} [segment] ObjectTrackingAnnotation segment
                          */
     
                         /**
@@ -28843,6 +28844,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ObjectTrackingAnnotation segment.
+                         * @member {google.cloud.videointelligence.v1p2beta1.IVideoSegment|null|undefined} segment
+                         * @memberof google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation
+                         * @instance
+                         */
+                        ObjectTrackingAnnotation.prototype.segment = null;
+    
+                        /**
+                         * ObjectTrackingAnnotation trackId.
+                         * @member {number|Long|null|undefined} trackId
+                         * @memberof google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation
+                         * @instance
+                         */
+                        ObjectTrackingAnnotation.prototype.trackId = null;
     
                         /**
                          * ObjectTrackingAnnotation entity.
@@ -28868,13 +28885,19 @@
                          */
                         ObjectTrackingAnnotation.prototype.frames = $util.emptyArray;
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
                         /**
-                         * ObjectTrackingAnnotation segment.
-                         * @member {google.cloud.videointelligence.v1p2beta1.IVideoSegment|null|undefined} segment
+                         * ObjectTrackingAnnotation trackInfo.
+                         * @member {"segment"|"trackId"|undefined} trackInfo
                          * @memberof google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation
                          * @instance
                          */
-                        ObjectTrackingAnnotation.prototype.segment = null;
+                        Object.defineProperty(ObjectTrackingAnnotation.prototype, "trackInfo", {
+                            get: $util.oneOfGetter($oneOfFields = ["segment", "trackId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new ObjectTrackingAnnotation instance using the specified properties.
@@ -28909,6 +28932,8 @@
                                 $root.google.cloud.videointelligence.v1p2beta1.VideoSegment.encode(message.segment, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.confidence != null && Object.hasOwnProperty.call(message, "confidence"))
                                 writer.uint32(/* id 4, wireType 5 =*/37).float(message.confidence);
+                            if (message.trackId != null && Object.hasOwnProperty.call(message, "trackId"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.trackId);
                             return writer;
                         };
     
@@ -28943,6 +28968,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 3:
+                                    message.segment = $root.google.cloud.videointelligence.v1p2beta1.VideoSegment.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.trackId = reader.int64();
+                                    break;
                                 case 1:
                                     message.entity = $root.google.cloud.videointelligence.v1p2beta1.Entity.decode(reader, reader.uint32());
                                     break;
@@ -28953,9 +28984,6 @@
                                     if (!(message.frames && message.frames.length))
                                         message.frames = [];
                                     message.frames.push($root.google.cloud.videointelligence.v1p2beta1.ObjectTrackingFrame.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    message.segment = $root.google.cloud.videointelligence.v1p2beta1.VideoSegment.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -28992,6 +29020,22 @@
                         ObjectTrackingAnnotation.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.segment != null && message.hasOwnProperty("segment")) {
+                                properties.trackInfo = 1;
+                                {
+                                    var error = $root.google.cloud.videointelligence.v1p2beta1.VideoSegment.verify(message.segment);
+                                    if (error)
+                                        return "segment." + error;
+                                }
+                            }
+                            if (message.trackId != null && message.hasOwnProperty("trackId")) {
+                                if (properties.trackInfo === 1)
+                                    return "trackInfo: multiple values";
+                                properties.trackInfo = 1;
+                                if (!$util.isInteger(message.trackId) && !(message.trackId && $util.isInteger(message.trackId.low) && $util.isInteger(message.trackId.high)))
+                                    return "trackId: integer|Long expected";
+                            }
                             if (message.entity != null && message.hasOwnProperty("entity")) {
                                 var error = $root.google.cloud.videointelligence.v1p2beta1.Entity.verify(message.entity);
                                 if (error)
@@ -29009,11 +29053,6 @@
                                         return "frames." + error;
                                 }
                             }
-                            if (message.segment != null && message.hasOwnProperty("segment")) {
-                                var error = $root.google.cloud.videointelligence.v1p2beta1.VideoSegment.verify(message.segment);
-                                if (error)
-                                    return "segment." + error;
-                            }
                             return null;
                         };
     
@@ -29029,6 +29068,20 @@
                             if (object instanceof $root.google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation)
                                 return object;
                             var message = new $root.google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation();
+                            if (object.segment != null) {
+                                if (typeof object.segment !== "object")
+                                    throw TypeError(".google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation.segment: object expected");
+                                message.segment = $root.google.cloud.videointelligence.v1p2beta1.VideoSegment.fromObject(object.segment);
+                            }
+                            if (object.trackId != null)
+                                if ($util.Long)
+                                    (message.trackId = $util.Long.fromValue(object.trackId)).unsigned = false;
+                                else if (typeof object.trackId === "string")
+                                    message.trackId = parseInt(object.trackId, 10);
+                                else if (typeof object.trackId === "number")
+                                    message.trackId = object.trackId;
+                                else if (typeof object.trackId === "object")
+                                    message.trackId = new $util.LongBits(object.trackId.low >>> 0, object.trackId.high >>> 0).toNumber();
                             if (object.entity != null) {
                                 if (typeof object.entity !== "object")
                                     throw TypeError(".google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation.entity: object expected");
@@ -29045,11 +29098,6 @@
                                         throw TypeError(".google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation.frames: object expected");
                                     message.frames[i] = $root.google.cloud.videointelligence.v1p2beta1.ObjectTrackingFrame.fromObject(object.frames[i]);
                                 }
-                            }
-                            if (object.segment != null) {
-                                if (typeof object.segment !== "object")
-                                    throw TypeError(".google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation.segment: object expected");
-                                message.segment = $root.google.cloud.videointelligence.v1p2beta1.VideoSegment.fromObject(object.segment);
                             }
                             return message;
                         };
@@ -29071,7 +29119,6 @@
                                 object.frames = [];
                             if (options.defaults) {
                                 object.entity = null;
-                                object.segment = null;
                                 object.confidence = 0;
                             }
                             if (message.entity != null && message.hasOwnProperty("entity"))
@@ -29081,10 +29128,21 @@
                                 for (var j = 0; j < message.frames.length; ++j)
                                     object.frames[j] = $root.google.cloud.videointelligence.v1p2beta1.ObjectTrackingFrame.toObject(message.frames[j], options);
                             }
-                            if (message.segment != null && message.hasOwnProperty("segment"))
+                            if (message.segment != null && message.hasOwnProperty("segment")) {
                                 object.segment = $root.google.cloud.videointelligence.v1p2beta1.VideoSegment.toObject(message.segment, options);
+                                if (options.oneofs)
+                                    object.trackInfo = "segment";
+                            }
                             if (message.confidence != null && message.hasOwnProperty("confidence"))
                                 object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
+                            if (message.trackId != null && message.hasOwnProperty("trackId")) {
+                                if (typeof message.trackId === "number")
+                                    object.trackId = options.longs === String ? String(message.trackId) : message.trackId;
+                                else
+                                    object.trackId = options.longs === String ? $util.Long.prototype.toString.call(message.trackId) : options.longs === Number ? new $util.LongBits(message.trackId.low >>> 0, message.trackId.high >>> 0).toNumber() : message.trackId;
+                                if (options.oneofs)
+                                    object.trackInfo = "trackId";
+                            }
                             return object;
                         };
     
