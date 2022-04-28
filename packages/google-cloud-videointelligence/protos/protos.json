@@ -2259,7 +2259,23 @@
                       }
                     },
                     "ObjectTrackingAnnotation": {
+                      "oneofs": {
+                        "trackInfo": {
+                          "oneof": [
+                            "segment",
+                            "trackId"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "segment": {
+                          "type": "VideoSegment",
+                          "id": 3
+                        },
+                        "trackId": {
+                          "type": "int64",
+                          "id": 5
+                        },
                         "entity": {
                           "type": "Entity",
                           "id": 1
@@ -2272,10 +2288,6 @@
                           "rule": "repeated",
                           "type": "ObjectTrackingFrame",
                           "id": 2
-                        },
-                        "segment": {
-                          "type": "VideoSegment",
-                          "id": 3
                         }
                       }
                     },
