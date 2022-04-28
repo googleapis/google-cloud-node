@@ -1032,7 +1032,7 @@ describe('storage', () => {
 
       it('should preserve file ACL', async () => {
         const file = bucket.file(`file-${uuid.v4()}`);
-        await file.save('data');
+        await file.save('data', {resumable: false});
 
         await file.acl.update(customAcl);
         const [aclBefore] = await file.acl.get();
