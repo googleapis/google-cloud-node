@@ -25,6 +25,11 @@
   * [Long-running-operation](#long-running-operation)
   * [Quickstart](#quickstart)
   * [Update-intent](#update-intent)
+  * [Webhook-configure-optional-or-required-form-parameters](#webhook-configure-optional-or-required-form-parameters)
+  * [Webhook-configure-session-parameters-enable-agent-response](#webhook-configure-session-parameters-enable-agent-response)
+  * [Webhook-configure-session-parameters-trigger-transition](#webhook-configure-session-parameters-trigger-transition)
+  * [Webhook-configure-session-parameters](#webhook-configure-session-parameters)
+  * [Webhook-validate-form-parameter](#webhook-validate-form-parameter)
   * [Webhooks](#webhooks)
 
 ## Before you begin
@@ -256,6 +261,91 @@ __Usage:__
 
 
 `node samples/update-intent.js`
+
+
+-----
+
+
+
+
+### Webhook-configure-optional-or-required-form-parameters
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/webhook-configure-optional-or-required-form-parameters.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/webhook-configure-optional-or-required-form-parameters.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/webhook-configure-optional-or-required-form-parameters.js`
+
+
+-----
+
+
+
+
+### Webhook-configure-session-parameters-enable-agent-response
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/webhook-configure-session-parameters-enable-agent-response.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/webhook-configure-session-parameters-enable-agent-response.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/webhook-configure-session-parameters-enable-agent-response.js`
+
+
+-----
+
+
+
+
+### Webhook-configure-session-parameters-trigger-transition
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/webhook-configure-session-parameters-trigger-transition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/webhook-configure-session-parameters-trigger-transition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/webhook-configure-session-parameters-trigger-transition.js`
+
+
+-----
+
+
+
+
+### Webhook-configure-session-parameters
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/webhook-configure-session-parameters.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/webhook-configure-session-parameters.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/webhook-configure-session-parameters.js`
+
+
+-----
+
+
+
+
+### Webhook-validate-form-parameter
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/webhook-validate-form-parameter.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/webhook-validate-form-parameter.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/webhook-validate-form-parameter.js`
 
 
 -----
