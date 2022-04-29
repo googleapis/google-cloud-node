@@ -19,33 +19,6 @@
               "methods": [
                 "annotateAssessment"
               ]
-            },
-            "CreateKey": {
-              "methods": [
-                "createKey"
-              ]
-            },
-            "GetKey": {
-              "methods": [
-                "getKey"
-              ]
-            },
-            "UpdateKey": {
-              "methods": [
-                "updateKey"
-              ]
-            },
-            "DeleteKey": {
-              "methods": [
-                "deleteKey"
-              ]
-            },
-            "ListKeys": {
-              "methods": [
-                "listKeys",
-                "listKeysStream",
-                "listKeysAsync"
-              ]
             }
           }
         },
@@ -60,33 +33,6 @@
             "AnnotateAssessment": {
               "methods": [
                 "annotateAssessment"
-              ]
-            },
-            "CreateKey": {
-              "methods": [
-                "createKey"
-              ]
-            },
-            "GetKey": {
-              "methods": [
-                "getKey"
-              ]
-            },
-            "UpdateKey": {
-              "methods": [
-                "updateKey"
-              ]
-            },
-            "DeleteKey": {
-              "methods": [
-                "deleteKey"
-              ]
-            },
-            "ListKeys": {
-              "methods": [
-                "listKeys",
-                "listKeysStream",
-                "listKeysAsync"
               ]
             }
           }

@@ -1033,80 +1033,6 @@
                               "(google.api.method_signature)": "name,annotation"
                             }
                           ]
-                        },
-                        "CreateKey": {
-                          "requestType": "CreateKeyRequest",
-                          "responseType": "Key",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*}/keys",
-                            "(google.api.http).body": "key"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=projects/*}/keys",
-                                "body": "key"
-                              }
-                            }
-                          ]
-                        },
-                        "ListKeys": {
-                          "requestType": "ListKeysRequest",
-                          "responseType": "ListKeysResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*}/keys"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=projects/*}/keys"
-                              }
-                            }
-                          ]
-                        },
-                        "GetKey": {
-                          "requestType": "GetKeyRequest",
-                          "responseType": "Key",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/keys/*}"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{name=projects/*/keys/*}"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateKey": {
-                          "requestType": "UpdateKeyRequest",
-                          "responseType": "Key",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{key.name=projects/*/keys/*}",
-                            "(google.api.http).body": "key"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta1/{key.name=projects/*/keys/*}",
-                                "body": "key"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteKey": {
-                          "requestType": "DeleteKeyRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/keys/*}"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta1/{name=projects/*/keys/*}"
-                              }
-                            }
-                          ]
                         }
                       }
                     },
@@ -1143,7 +1069,22 @@
                           "type": "Annotation",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "reasons": {
+                          "rule": "repeated",
+                          "type": "Reason",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hashedAccountId": {
+                          "type": "bytes",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -1152,13 +1093,54 @@
                           "values": {
                             "ANNOTATION_UNSPECIFIED": 0,
                             "LEGITIMATE": 1,
-                            "FRAUDULENT": 2
+                            "FRAUDULENT": 2,
+                            "PASSWORD_CORRECT": 3,
+                            "PASSWORD_INCORRECT": 4
+                          }
+                        },
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "CHARGEBACK": 1,
+                            "CHARGEBACK_FRAUD": 8,
+                            "CHARGEBACK_DISPUTE": 9,
+                            "PAYMENT_HEURISTICS": 2,
+                            "INITIATED_TWO_FACTOR": 7,
+                            "PASSED_TWO_FACTOR": 3,
+                            "FAILED_TWO_FACTOR": 4,
+                            "CORRECT_PASSWORD": 5,
+                            "INCORRECT_PASSWORD": 6
                           }
                         }
                       }
                     },
                     "AnnotateAssessmentResponse": {
                       "fields": {}
+                    },
+                    "PasswordLeakVerification": {
+                      "fields": {
+                        "hashedUserCredentials": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "credentialsLeaked": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "canonicalizedUsername": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
                     },
                     "Assessment": {
                       "options": {
@@ -1198,6 +1180,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "passwordLeakVerification": {
+                          "type": "PasswordLeakVerification",
+                          "id": 7
+                        },
+                        "accountDefenderAssessment": {
+                          "type": "AccountDefenderAssessment",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -1249,6 +1239,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "hashedAccountId": {
+                          "type": "bytes",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1284,209 +1281,29 @@
                             "EXPIRED": 3,
                             "DUPE": 4,
                             "SITE_MISMATCH": 5,
-                            "MISSING": 6
+                            "MISSING": 6,
+                            "BROWSER_ERROR": 7
                           }
                         }
                       }
                     },
-                    "CreateKeyRequest": {
+                    "AccountDefenderAssessment": {
                       "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
-                          }
-                        },
-                        "key": {
-                          "type": "Key",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ListKeysRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListKeysResponse": {
-                      "fields": {
-                        "keys": {
+                        "labels": {
                           "rule": "repeated",
-                          "type": "Key",
+                          "type": "AccountDefenderLabel",
                           "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetKeyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateKeyRequest": {
-                      "fields": {
-                        "key": {
-                          "type": "Key",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteKeyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
-                          }
-                        }
-                      }
-                    },
-                    "Key": {
-                      "options": {
-                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Key",
-                        "(google.api.resource).pattern": "projects/{project}/keys/{key}"
-                      },
-                      "oneofs": {
-                        "platformSettings": {
-                          "oneof": [
-                            "webSettings",
-                            "androidSettings",
-                            "iosSettings"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "webSettings": {
-                          "type": "WebKeySettings",
-                          "id": 3
-                        },
-                        "androidSettings": {
-                          "type": "AndroidKeySettings",
-                          "id": 4
-                        },
-                        "iosSettings": {
-                          "type": "IOSKeySettings",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "WebKeySettings": {
-                      "fields": {
-                        "enforceAllowedDomains": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "allowedDomains": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        },
-                        "allowAmpTraffic": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "integrationType": {
-                          "type": "IntegrationType",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "challengeSecurityPreference": {
-                          "type": "ChallengeSecurityPreference",
-                          "id": 5
                         }
                       },
                       "nested": {
-                        "IntegrationType": {
+                        "AccountDefenderLabel": {
                           "values": {
-                            "INTEGRATION_TYPE_UNSPECIFIED": 0,
-                            "SCORE_ONLY": 1,
-                            "CHECKBOX_CHALLENGE": 2,
-                            "INVISIBLE_CHALLENGE": 3
+                            "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED": 0,
+                            "PROFILE_MATCH": 1,
+                            "SUSPICIOUS_LOGIN_ACTIVITY": 2,
+                            "SUSPICIOUS_ACCOUNT_CREATION": 3,
+                            "RELATED_ACCOUNTS_NUMBER_HIGH": 4
                           }
-                        },
-                        "ChallengeSecurityPreference": {
-                          "values": {
-                            "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED": 0,
-                            "USABILITY": 1,
-                            "BALANCED": 2,
-                            "SECURITY": 3
-                          }
-                        }
-                      }
-                    },
-                    "AndroidKeySettings": {
-                      "fields": {
-                        "allowedPackageNames": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "IOSKeySettings": {
-                      "fields": {
-                        "allowedBundleIds": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
                         }
                       }
                     }

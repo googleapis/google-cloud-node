@@ -3744,76 +3744,6 @@ export namespace google {
                      * @returns Promise
                      */
                     public annotateAssessment(request: google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest): Promise<google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse>;
-
-                    /**
-                     * Calls CreateKey.
-                     * @param request CreateKeyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Key
-                     */
-                    public createKey(request: google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest, callback: google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.CreateKeyCallback): void;
-
-                    /**
-                     * Calls CreateKey.
-                     * @param request CreateKeyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createKey(request: google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest): Promise<google.cloud.recaptchaenterprise.v1beta1.Key>;
-
-                    /**
-                     * Calls ListKeys.
-                     * @param request ListKeysRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListKeysResponse
-                     */
-                    public listKeys(request: google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest, callback: google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.ListKeysCallback): void;
-
-                    /**
-                     * Calls ListKeys.
-                     * @param request ListKeysRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listKeys(request: google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest): Promise<google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse>;
-
-                    /**
-                     * Calls GetKey.
-                     * @param request GetKeyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Key
-                     */
-                    public getKey(request: google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest, callback: google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.GetKeyCallback): void;
-
-                    /**
-                     * Calls GetKey.
-                     * @param request GetKeyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getKey(request: google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest): Promise<google.cloud.recaptchaenterprise.v1beta1.Key>;
-
-                    /**
-                     * Calls UpdateKey.
-                     * @param request UpdateKeyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Key
-                     */
-                    public updateKey(request: google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest, callback: google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.UpdateKeyCallback): void;
-
-                    /**
-                     * Calls UpdateKey.
-                     * @param request UpdateKeyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateKey(request: google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest): Promise<google.cloud.recaptchaenterprise.v1beta1.Key>;
-
-                    /**
-                     * Calls DeleteKey.
-                     * @param request DeleteKeyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteKey(request: google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest, callback: google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.DeleteKeyCallback): void;
-
-                    /**
-                     * Calls DeleteKey.
-                     * @param request DeleteKeyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteKey(request: google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace RecaptchaEnterpriseServiceV1Beta1 {
@@ -3831,41 +3761,6 @@ export namespace google {
                      * @param [response] AnnotateAssessmentResponse
                      */
                     type AnnotateAssessmentCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1#createKey}.
-                     * @param error Error, if any
-                     * @param [response] Key
-                     */
-                    type CreateKeyCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1beta1.Key) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1#listKeys}.
-                     * @param error Error, if any
-                     * @param [response] ListKeysResponse
-                     */
-                    type ListKeysCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1#getKey}.
-                     * @param error Error, if any
-                     * @param [response] Key
-                     */
-                    type GetKeyCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1beta1.Key) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1#updateKey}.
-                     * @param error Error, if any
-                     * @param [response] Key
-                     */
-                    type UpdateKeyCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1beta1.Key) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1#deleteKey}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteKeyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a CreateAssessmentRequest. */
@@ -3972,6 +3867,12 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest annotation */
                     annotation?: (google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation|keyof typeof google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation|null);
+
+                    /** AnnotateAssessmentRequest reasons */
+                    reasons?: (google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Reason[]|null);
+
+                    /** AnnotateAssessmentRequest hashedAccountId */
+                    hashedAccountId?: (Uint8Array|string|null);
                 }
 
                 /** Represents an AnnotateAssessmentRequest. */
@@ -3988,6 +3889,12 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest annotation. */
                     public annotation: (google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation|keyof typeof google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation);
+
+                    /** AnnotateAssessmentRequest reasons. */
+                    public reasons: google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Reason[];
+
+                    /** AnnotateAssessmentRequest hashedAccountId. */
+                    public hashedAccountId: (Uint8Array|string);
 
                     /**
                      * Creates a new AnnotateAssessmentRequest instance using the specified properties.
@@ -4066,7 +3973,23 @@ export namespace google {
                     enum Annotation {
                         ANNOTATION_UNSPECIFIED = 0,
                         LEGITIMATE = 1,
-                        FRAUDULENT = 2
+                        FRAUDULENT = 2,
+                        PASSWORD_CORRECT = 3,
+                        PASSWORD_INCORRECT = 4
+                    }
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        CHARGEBACK = 1,
+                        CHARGEBACK_FRAUD = 8,
+                        CHARGEBACK_DISPUTE = 9,
+                        PAYMENT_HEURISTICS = 2,
+                        INITIATED_TWO_FACTOR = 7,
+                        PASSED_TWO_FACTOR = 3,
+                        FAILED_TWO_FACTOR = 4,
+                        CORRECT_PASSWORD = 5,
+                        INCORRECT_PASSWORD = 6
                     }
                 }
 
@@ -4154,6 +4077,108 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a PasswordLeakVerification. */
+                interface IPasswordLeakVerification {
+
+                    /** PasswordLeakVerification hashedUserCredentials */
+                    hashedUserCredentials?: (Uint8Array|string|null);
+
+                    /** PasswordLeakVerification credentialsLeaked */
+                    credentialsLeaked?: (boolean|null);
+
+                    /** PasswordLeakVerification canonicalizedUsername */
+                    canonicalizedUsername?: (string|null);
+                }
+
+                /** Represents a PasswordLeakVerification. */
+                class PasswordLeakVerification implements IPasswordLeakVerification {
+
+                    /**
+                     * Constructs a new PasswordLeakVerification.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IPasswordLeakVerification);
+
+                    /** PasswordLeakVerification hashedUserCredentials. */
+                    public hashedUserCredentials: (Uint8Array|string);
+
+                    /** PasswordLeakVerification credentialsLeaked. */
+                    public credentialsLeaked: boolean;
+
+                    /** PasswordLeakVerification canonicalizedUsername. */
+                    public canonicalizedUsername: string;
+
+                    /**
+                     * Creates a new PasswordLeakVerification instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PasswordLeakVerification instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IPasswordLeakVerification): google.cloud.recaptchaenterprise.v1beta1.PasswordLeakVerification;
+
+                    /**
+                     * Encodes the specified PasswordLeakVerification message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.PasswordLeakVerification.verify|verify} messages.
+                     * @param message PasswordLeakVerification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IPasswordLeakVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PasswordLeakVerification message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.PasswordLeakVerification.verify|verify} messages.
+                     * @param message PasswordLeakVerification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IPasswordLeakVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PasswordLeakVerification message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PasswordLeakVerification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.PasswordLeakVerification;
+
+                    /**
+                     * Decodes a PasswordLeakVerification message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PasswordLeakVerification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.PasswordLeakVerification;
+
+                    /**
+                     * Verifies a PasswordLeakVerification message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PasswordLeakVerification message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PasswordLeakVerification
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.PasswordLeakVerification;
+
+                    /**
+                     * Creates a plain object from a PasswordLeakVerification message. Also converts values to other types if specified.
+                     * @param message PasswordLeakVerification
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.PasswordLeakVerification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PasswordLeakVerification to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an Assessment. */
                 interface IAssessment {
 
@@ -4171,6 +4196,12 @@ export namespace google {
 
                     /** Assessment reasons */
                     reasons?: (google.cloud.recaptchaenterprise.v1beta1.Assessment.ClassificationReason[]|null);
+
+                    /** Assessment passwordLeakVerification */
+                    passwordLeakVerification?: (google.cloud.recaptchaenterprise.v1beta1.IPasswordLeakVerification|null);
+
+                    /** Assessment accountDefenderAssessment */
+                    accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1beta1.IAccountDefenderAssessment|null);
                 }
 
                 /** Represents an Assessment. */
@@ -4196,6 +4227,12 @@ export namespace google {
 
                     /** Assessment reasons. */
                     public reasons: google.cloud.recaptchaenterprise.v1beta1.Assessment.ClassificationReason[];
+
+                    /** Assessment passwordLeakVerification. */
+                    public passwordLeakVerification?: (google.cloud.recaptchaenterprise.v1beta1.IPasswordLeakVerification|null);
+
+                    /** Assessment accountDefenderAssessment. */
+                    public accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1beta1.IAccountDefenderAssessment|null);
 
                     /**
                      * Creates a new Assessment instance using the specified properties.
@@ -4298,6 +4335,9 @@ export namespace google {
 
                     /** Event expectedAction */
                     expectedAction?: (string|null);
+
+                    /** Event hashedAccountId */
+                    hashedAccountId?: (Uint8Array|string|null);
                 }
 
                 /** Represents an Event. */
@@ -4323,6 +4363,9 @@ export namespace google {
 
                     /** Event expectedAction. */
                     public expectedAction: string;
+
+                    /** Event hashedAccountId. */
+                    public hashedAccountId: (Uint8Array|string);
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -4519,1008 +4562,111 @@ export namespace google {
                         EXPIRED = 3,
                         DUPE = 4,
                         SITE_MISMATCH = 5,
-                        MISSING = 6
+                        MISSING = 6,
+                        BROWSER_ERROR = 7
                     }
                 }
 
-                /** Properties of a CreateKeyRequest. */
-                interface ICreateKeyRequest {
+                /** Properties of an AccountDefenderAssessment. */
+                interface IAccountDefenderAssessment {
 
-                    /** CreateKeyRequest parent */
-                    parent?: (string|null);
-
-                    /** CreateKeyRequest key */
-                    key?: (google.cloud.recaptchaenterprise.v1beta1.IKey|null);
+                    /** AccountDefenderAssessment labels */
+                    labels?: (google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment.AccountDefenderLabel[]|null);
                 }
 
-                /** Represents a CreateKeyRequest. */
-                class CreateKeyRequest implements ICreateKeyRequest {
+                /** Represents an AccountDefenderAssessment. */
+                class AccountDefenderAssessment implements IAccountDefenderAssessment {
 
                     /**
-                     * Constructs a new CreateKeyRequest.
+                     * Constructs a new AccountDefenderAssessment.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest);
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IAccountDefenderAssessment);
 
-                    /** CreateKeyRequest parent. */
-                    public parent: string;
-
-                    /** CreateKeyRequest key. */
-                    public key?: (google.cloud.recaptchaenterprise.v1beta1.IKey|null);
+                    /** AccountDefenderAssessment labels. */
+                    public labels: google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment.AccountDefenderLabel[];
 
                     /**
-                     * Creates a new CreateKeyRequest instance using the specified properties.
+                     * Creates a new AccountDefenderAssessment instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns CreateKeyRequest instance
+                     * @returns AccountDefenderAssessment instance
                      */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest): google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest;
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IAccountDefenderAssessment): google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment;
 
                     /**
-                     * Encodes the specified CreateKeyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest.verify|verify} messages.
-                     * @param message CreateKeyRequest message or plain object to encode
+                     * Encodes the specified AccountDefenderAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment.verify|verify} messages.
+                     * @param message AccountDefenderAssessment message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IAccountDefenderAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified CreateKeyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest.verify|verify} messages.
-                     * @param message CreateKeyRequest message or plain object to encode
+                     * Encodes the specified AccountDefenderAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment.verify|verify} messages.
+                     * @param message AccountDefenderAssessment message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IAccountDefenderAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a CreateKeyRequest message from the specified reader or buffer.
+                     * Decodes an AccountDefenderAssessment message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns CreateKeyRequest
+                     * @returns AccountDefenderAssessment
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment;
 
                     /**
-                     * Decodes a CreateKeyRequest message from the specified reader or buffer, length delimited.
+                     * Decodes an AccountDefenderAssessment message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns CreateKeyRequest
+                     * @returns AccountDefenderAssessment
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment;
 
                     /**
-                     * Verifies a CreateKeyRequest message.
+                     * Verifies an AccountDefenderAssessment message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a CreateKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates an AccountDefenderAssessment message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns CreateKeyRequest
+                     * @returns AccountDefenderAssessment
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment;
 
                     /**
-                     * Creates a plain object from a CreateKeyRequest message. Also converts values to other types if specified.
-                     * @param message CreateKeyRequest
+                     * Creates a plain object from an AccountDefenderAssessment message. Also converts values to other types if specified.
+                     * @param message AccountDefenderAssessment
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this CreateKeyRequest to JSON.
+                     * Converts this AccountDefenderAssessment to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a ListKeysRequest. */
-                interface IListKeysRequest {
-
-                    /** ListKeysRequest parent */
-                    parent?: (string|null);
-
-                    /** ListKeysRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListKeysRequest pageToken */
-                    pageToken?: (string|null);
-                }
-
-                /** Represents a ListKeysRequest. */
-                class ListKeysRequest implements IListKeysRequest {
-
-                    /**
-                     * Constructs a new ListKeysRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest);
-
-                    /** ListKeysRequest parent. */
-                    public parent: string;
-
-                    /** ListKeysRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListKeysRequest pageToken. */
-                    public pageToken: string;
-
-                    /**
-                     * Creates a new ListKeysRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListKeysRequest instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest): google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest;
-
-                    /**
-                     * Encodes the specified ListKeysRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest.verify|verify} messages.
-                     * @param message ListKeysRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListKeysRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest.verify|verify} messages.
-                     * @param message ListKeysRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListKeysRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListKeysRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest;
-
-                    /**
-                     * Decodes a ListKeysRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListKeysRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest;
-
-                    /**
-                     * Verifies a ListKeysRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListKeysRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListKeysRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest;
-
-                    /**
-                     * Creates a plain object from a ListKeysRequest message. Also converts values to other types if specified.
-                     * @param message ListKeysRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListKeysRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListKeysResponse. */
-                interface IListKeysResponse {
-
-                    /** ListKeysResponse keys */
-                    keys?: (google.cloud.recaptchaenterprise.v1beta1.IKey[]|null);
-
-                    /** ListKeysResponse nextPageToken */
-                    nextPageToken?: (string|null);
-                }
-
-                /** Represents a ListKeysResponse. */
-                class ListKeysResponse implements IListKeysResponse {
-
-                    /**
-                     * Constructs a new ListKeysResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IListKeysResponse);
-
-                    /** ListKeysResponse keys. */
-                    public keys: google.cloud.recaptchaenterprise.v1beta1.IKey[];
-
-                    /** ListKeysResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /**
-                     * Creates a new ListKeysResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListKeysResponse instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IListKeysResponse): google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse;
-
-                    /**
-                     * Encodes the specified ListKeysResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse.verify|verify} messages.
-                     * @param message ListKeysResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IListKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListKeysResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse.verify|verify} messages.
-                     * @param message ListKeysResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IListKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListKeysResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListKeysResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse;
-
-                    /**
-                     * Decodes a ListKeysResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListKeysResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse;
-
-                    /**
-                     * Verifies a ListKeysResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListKeysResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListKeysResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse;
-
-                    /**
-                     * Creates a plain object from a ListKeysResponse message. Also converts values to other types if specified.
-                     * @param message ListKeysResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListKeysResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetKeyRequest. */
-                interface IGetKeyRequest {
-
-                    /** GetKeyRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetKeyRequest. */
-                class GetKeyRequest implements IGetKeyRequest {
-
-                    /**
-                     * Constructs a new GetKeyRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest);
-
-                    /** GetKeyRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetKeyRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetKeyRequest instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest): google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest;
-
-                    /**
-                     * Encodes the specified GetKeyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest.verify|verify} messages.
-                     * @param message GetKeyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetKeyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest.verify|verify} messages.
-                     * @param message GetKeyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetKeyRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetKeyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest;
-
-                    /**
-                     * Decodes a GetKeyRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetKeyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest;
-
-                    /**
-                     * Verifies a GetKeyRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetKeyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetKeyRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest;
-
-                    /**
-                     * Creates a plain object from a GetKeyRequest message. Also converts values to other types if specified.
-                     * @param message GetKeyRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetKeyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an UpdateKeyRequest. */
-                interface IUpdateKeyRequest {
-
-                    /** UpdateKeyRequest key */
-                    key?: (google.cloud.recaptchaenterprise.v1beta1.IKey|null);
-
-                    /** UpdateKeyRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdateKeyRequest. */
-                class UpdateKeyRequest implements IUpdateKeyRequest {
-
-                    /**
-                     * Constructs a new UpdateKeyRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest);
-
-                    /** UpdateKeyRequest key. */
-                    public key?: (google.cloud.recaptchaenterprise.v1beta1.IKey|null);
-
-                    /** UpdateKeyRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdateKeyRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateKeyRequest instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest): google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest;
-
-                    /**
-                     * Encodes the specified UpdateKeyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest.verify|verify} messages.
-                     * @param message UpdateKeyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateKeyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest.verify|verify} messages.
-                     * @param message UpdateKeyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateKeyRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateKeyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest;
-
-                    /**
-                     * Decodes an UpdateKeyRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateKeyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest;
-
-                    /**
-                     * Verifies an UpdateKeyRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateKeyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateKeyRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateKeyRequest message. Also converts values to other types if specified.
-                     * @param message UpdateKeyRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateKeyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeleteKeyRequest. */
-                interface IDeleteKeyRequest {
-
-                    /** DeleteKeyRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a DeleteKeyRequest. */
-                class DeleteKeyRequest implements IDeleteKeyRequest {
-
-                    /**
-                     * Constructs a new DeleteKeyRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest);
-
-                    /** DeleteKeyRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new DeleteKeyRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeleteKeyRequest instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest): google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest;
-
-                    /**
-                     * Encodes the specified DeleteKeyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest.verify|verify} messages.
-                     * @param message DeleteKeyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeleteKeyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest.verify|verify} messages.
-                     * @param message DeleteKeyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeleteKeyRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeleteKeyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest;
-
-                    /**
-                     * Decodes a DeleteKeyRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeleteKeyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest;
-
-                    /**
-                     * Verifies a DeleteKeyRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeleteKeyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeleteKeyRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest;
-
-                    /**
-                     * Creates a plain object from a DeleteKeyRequest message. Also converts values to other types if specified.
-                     * @param message DeleteKeyRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeleteKeyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Key. */
-                interface IKey {
-
-                    /** Key name */
-                    name?: (string|null);
-
-                    /** Key displayName */
-                    displayName?: (string|null);
-
-                    /** Key webSettings */
-                    webSettings?: (google.cloud.recaptchaenterprise.v1beta1.IWebKeySettings|null);
-
-                    /** Key androidSettings */
-                    androidSettings?: (google.cloud.recaptchaenterprise.v1beta1.IAndroidKeySettings|null);
-
-                    /** Key iosSettings */
-                    iosSettings?: (google.cloud.recaptchaenterprise.v1beta1.IIOSKeySettings|null);
-                }
-
-                /** Represents a Key. */
-                class Key implements IKey {
-
-                    /**
-                     * Constructs a new Key.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IKey);
-
-                    /** Key name. */
-                    public name: string;
-
-                    /** Key displayName. */
-                    public displayName: string;
-
-                    /** Key webSettings. */
-                    public webSettings?: (google.cloud.recaptchaenterprise.v1beta1.IWebKeySettings|null);
-
-                    /** Key androidSettings. */
-                    public androidSettings?: (google.cloud.recaptchaenterprise.v1beta1.IAndroidKeySettings|null);
-
-                    /** Key iosSettings. */
-                    public iosSettings?: (google.cloud.recaptchaenterprise.v1beta1.IIOSKeySettings|null);
-
-                    /** Key platformSettings. */
-                    public platformSettings?: ("webSettings"|"androidSettings"|"iosSettings");
-
-                    /**
-                     * Creates a new Key instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Key instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IKey): google.cloud.recaptchaenterprise.v1beta1.Key;
-
-                    /**
-                     * Encodes the specified Key message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.Key.verify|verify} messages.
-                     * @param message Key message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Key message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.Key.verify|verify} messages.
-                     * @param message Key message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Key message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Key
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.Key;
-
-                    /**
-                     * Decodes a Key message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Key
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.Key;
-
-                    /**
-                     * Verifies a Key message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Key message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Key
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.Key;
-
-                    /**
-                     * Creates a plain object from a Key message. Also converts values to other types if specified.
-                     * @param message Key
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.Key, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Key to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a WebKeySettings. */
-                interface IWebKeySettings {
-
-                    /** WebKeySettings enforceAllowedDomains */
-                    enforceAllowedDomains?: (boolean|null);
-
-                    /** WebKeySettings allowedDomains */
-                    allowedDomains?: (string[]|null);
-
-                    /** WebKeySettings allowAmpTraffic */
-                    allowAmpTraffic?: (boolean|null);
-
-                    /** WebKeySettings integrationType */
-                    integrationType?: (google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.IntegrationType|keyof typeof google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.IntegrationType|null);
-
-                    /** WebKeySettings challengeSecurityPreference */
-                    challengeSecurityPreference?: (google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.ChallengeSecurityPreference|keyof typeof google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.ChallengeSecurityPreference|null);
-                }
-
-                /** Represents a WebKeySettings. */
-                class WebKeySettings implements IWebKeySettings {
-
-                    /**
-                     * Constructs a new WebKeySettings.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IWebKeySettings);
-
-                    /** WebKeySettings enforceAllowedDomains. */
-                    public enforceAllowedDomains: boolean;
-
-                    /** WebKeySettings allowedDomains. */
-                    public allowedDomains: string[];
-
-                    /** WebKeySettings allowAmpTraffic. */
-                    public allowAmpTraffic: boolean;
-
-                    /** WebKeySettings integrationType. */
-                    public integrationType: (google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.IntegrationType|keyof typeof google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.IntegrationType);
-
-                    /** WebKeySettings challengeSecurityPreference. */
-                    public challengeSecurityPreference: (google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.ChallengeSecurityPreference|keyof typeof google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.ChallengeSecurityPreference);
-
-                    /**
-                     * Creates a new WebKeySettings instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns WebKeySettings instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IWebKeySettings): google.cloud.recaptchaenterprise.v1beta1.WebKeySettings;
-
-                    /**
-                     * Encodes the specified WebKeySettings message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.verify|verify} messages.
-                     * @param message WebKeySettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IWebKeySettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified WebKeySettings message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.verify|verify} messages.
-                     * @param message WebKeySettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IWebKeySettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a WebKeySettings message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns WebKeySettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.WebKeySettings;
-
-                    /**
-                     * Decodes a WebKeySettings message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns WebKeySettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.WebKeySettings;
-
-                    /**
-                     * Verifies a WebKeySettings message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a WebKeySettings message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns WebKeySettings
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.WebKeySettings;
-
-                    /**
-                     * Creates a plain object from a WebKeySettings message. Also converts values to other types if specified.
-                     * @param message WebKeySettings
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.WebKeySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this WebKeySettings to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace WebKeySettings {
-
-                    /** IntegrationType enum. */
-                    enum IntegrationType {
-                        INTEGRATION_TYPE_UNSPECIFIED = 0,
-                        SCORE_ONLY = 1,
-                        CHECKBOX_CHALLENGE = 2,
-                        INVISIBLE_CHALLENGE = 3
+                namespace AccountDefenderAssessment {
+
+                    /** AccountDefenderLabel enum. */
+                    enum AccountDefenderLabel {
+                        ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0,
+                        PROFILE_MATCH = 1,
+                        SUSPICIOUS_LOGIN_ACTIVITY = 2,
+                        SUSPICIOUS_ACCOUNT_CREATION = 3,
+                        RELATED_ACCOUNTS_NUMBER_HIGH = 4
                     }
-
-                    /** ChallengeSecurityPreference enum. */
-                    enum ChallengeSecurityPreference {
-                        CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED = 0,
-                        USABILITY = 1,
-                        BALANCED = 2,
-                        SECURITY = 3
-                    }
-                }
-
-                /** Properties of an AndroidKeySettings. */
-                interface IAndroidKeySettings {
-
-                    /** AndroidKeySettings allowedPackageNames */
-                    allowedPackageNames?: (string[]|null);
-                }
-
-                /** Represents an AndroidKeySettings. */
-                class AndroidKeySettings implements IAndroidKeySettings {
-
-                    /**
-                     * Constructs a new AndroidKeySettings.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IAndroidKeySettings);
-
-                    /** AndroidKeySettings allowedPackageNames. */
-                    public allowedPackageNames: string[];
-
-                    /**
-                     * Creates a new AndroidKeySettings instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AndroidKeySettings instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IAndroidKeySettings): google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings;
-
-                    /**
-                     * Encodes the specified AndroidKeySettings message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings.verify|verify} messages.
-                     * @param message AndroidKeySettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IAndroidKeySettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AndroidKeySettings message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings.verify|verify} messages.
-                     * @param message AndroidKeySettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IAndroidKeySettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AndroidKeySettings message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AndroidKeySettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings;
-
-                    /**
-                     * Decodes an AndroidKeySettings message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AndroidKeySettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings;
-
-                    /**
-                     * Verifies an AndroidKeySettings message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AndroidKeySettings message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AndroidKeySettings
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings;
-
-                    /**
-                     * Creates a plain object from an AndroidKeySettings message. Also converts values to other types if specified.
-                     * @param message AndroidKeySettings
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AndroidKeySettings to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a IOSKeySettings. */
-                interface IIOSKeySettings {
-
-                    /** IOSKeySettings allowedBundleIds */
-                    allowedBundleIds?: (string[]|null);
-                }
-
-                /** Represents a IOSKeySettings. */
-                class IOSKeySettings implements IIOSKeySettings {
-
-                    /**
-                     * Constructs a new IOSKeySettings.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IIOSKeySettings);
-
-                    /** IOSKeySettings allowedBundleIds. */
-                    public allowedBundleIds: string[];
-
-                    /**
-                     * Creates a new IOSKeySettings instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns IOSKeySettings instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IIOSKeySettings): google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings;
-
-                    /**
-                     * Encodes the specified IOSKeySettings message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings.verify|verify} messages.
-                     * @param message IOSKeySettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IIOSKeySettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified IOSKeySettings message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings.verify|verify} messages.
-                     * @param message IOSKeySettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IIOSKeySettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a IOSKeySettings message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns IOSKeySettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings;
-
-                    /**
-                     * Decodes a IOSKeySettings message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns IOSKeySettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings;
-
-                    /**
-                     * Verifies a IOSKeySettings message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a IOSKeySettings message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns IOSKeySettings
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings;
-
-                    /**
-                     * Creates a plain object from a IOSKeySettings message. Also converts values to other types if specified.
-                     * @param message IOSKeySettings
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this IOSKeySettings to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
                 }
             }
         }
