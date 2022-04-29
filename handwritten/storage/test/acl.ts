@@ -43,7 +43,7 @@ describe('storage/acl', () => {
   const ENTITY = 'user-user@example.com';
 
   before(() => {
-    const aclModule = proxyquire('../src/acl.js', {
+    const aclModule = proxyquire('../src/acl.ts', {
       '@google-cloud/promisify': fakePromisify,
     });
     Acl = aclModule.Acl;

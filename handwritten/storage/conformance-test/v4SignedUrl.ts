@@ -88,7 +88,7 @@ interface BucketAction {
 }
 
 const testFile = fs.readFileSync(
-  path.join(__dirname, '../../conformance-test/test-data/v4SignedUrl.json'),
+  path.join(__dirname, 'test-data', 'v4SignedUrl.json'),
   'utf-8'
 );
 
@@ -100,7 +100,8 @@ const v4SignedPolicyCases: V4SignedPolicyTestCase[] =
 
 const SERVICE_ACCOUNT = path.join(
   __dirname,
-  '../../conformance-test/fixtures/signing-service-account.json'
+  'fixtures',
+  'signing-service-account.json'
 );
 
 const storage = new Storage({keyFilename: SERVICE_ACCOUNT});

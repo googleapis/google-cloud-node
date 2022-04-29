@@ -614,6 +614,16 @@ export class Storage extends Service {
       maxRetryValue = options.retryOptions.maxRetries;
     }
 
+    let packageJson: ReturnType<JSON['parse']> = {};
+
+    try {
+      // if requiring from 'build' (default)
+      packageJson = require('../../package.json');
+    } catch (e) {
+      // if requiring directly from TypeScript context
+      packageJson = require('../package.json');
+    }
+
     const config = {
       apiEndpoint: options.apiEndpoint!,
       retryOptions: {
@@ -645,7 +655,7 @@ export class Storage extends Service {
         'https://www.googleapis.com/auth/cloud-platform',
         'https://www.googleapis.com/auth/devstorage.full_control',
       ],
-      packageJson: require('../../package.json'),
+      packageJson,
     };
 
     super(config, options);

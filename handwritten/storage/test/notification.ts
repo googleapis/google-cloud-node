@@ -56,7 +56,7 @@ describe('Notification', () => {
   const ID = '123';
 
   before(() => {
-    Notification = proxyquire('../src/notification.js', {
+    Notification = proxyquire('../src/notification.ts', {
       '@google-cloud/promisify': fakePromisify,
       './nodejs-common': {
         ServiceObject: FakeServiceObject,

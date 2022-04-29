@@ -37,7 +37,7 @@ describe('storage/iam', () => {
   };
 
   before(() => {
-    Iam = proxyquire('../src/iam.js', {
+    Iam = proxyquire('../src/iam.ts', {
       '@google-cloud/promisify': fakePromisify,
     }).Iam;
   });

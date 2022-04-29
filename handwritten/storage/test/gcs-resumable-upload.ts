@@ -105,7 +105,7 @@ describe('gcs-resumable-upload', () => {
     retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
   };
   let REQ_OPTS: GaxiosOptions;
-  const keyFile = path.join(__dirname, '../../test/fixtures/keys.json');
+  const keyFile = path.join(__dirname, 'fixtures', 'keys.json');
 
   before(() => {
     mockery.registerMock('abort-controller', {default: AbortController});
