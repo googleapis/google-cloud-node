@@ -95,9 +95,9 @@ describe('SpeechClient system test default', () => {
     const stream = client.streamingRecognize(request);
     let gotResponse = false;
     stream.on('data', response => {
-      assert.strictEqual(
+      assert.match(
         response.results[0].alternatives[0].transcript,
-        'test of streaming recognized call'
+        /test of streaming.*call/
       );
       gotResponse = true;
     });
