@@ -26,13 +26,16 @@
     "google storage",
     "storage"
   ],
+  "mocha": {
+    "require": "ts-node/register",
+    "extension": "ts"
+  },
   "scripts": {
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "mocha": "mocha --require ts-node/register --extension ts",
-    "system-test": "npm run mocha -- system-test --timeout 600000 --exit",
-    "conformance-test": "npm run mocha -- --parallel --require conformance-test/globalHooks.ts conformance-test/",
-    "test": "c8 npm run mocha -- test",
+    "system-test": "mocha system-test --timeout 600000 --exit",
+    "conformance-test": "mocha --parallel --require ts-node/register --require conformance-test/globalHooks.ts conformance-test/",
+    "test": "c8 mocha test",
     "lint": "gts check",
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "all-test": "npm test && npm run system-test && npm run samples-test",
