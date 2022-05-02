@@ -996,7 +996,7 @@ describe('storage', () => {
         await setUniformBucketLevelAccess(bucket, true);
 
         file = bucket.file(`file-${uuid.v4()}`);
-        await file.save('data');
+        await file.save('data', {resumable: false});
       });
 
       it('should fail to get file ACL', () => {
