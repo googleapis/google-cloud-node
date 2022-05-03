@@ -16,7 +16,7 @@ import {Message, PubSub, Topic, Subscription} from '@google-cloud/pubsub';
 import {assert} from 'chai';
 import {describe, it, after} from 'mocha';
 import {execSync, commandFor} from './common';
-import * as uuid from 'uuid';
+import {TestResources} from './testResources';
 
 interface TSPair {
   tname: string;
@@ -27,27 +27,25 @@ interface TSPair {
 describe('topics', () => {
   const projectId = process.env.GCLOUD_PROJECT;
   const pubsub = new PubSub({projectId});
-  const runId = uuid.v4();
-  console.log(`Topics runId: ${runId}`);
   const expectedMessage = {data: 'Hello, world!'};
 
-  let topicCounter = 0;
-  function topicName(): string {
-    return `topic-test-${runId}-topic-${++topicCounter}`;
+  const resources = new TestResources('pubsub-topics');
+
+  function topicName(testId: string): string {
+    return resources.generateName(testId);
   }
 
-  let subCounter = 0;
-  function subName(): string {
-    return `topic-test-${runId}-sub-${++subCounter}`;
+  function subName(testId: string): string {
+    return resources.generateName(testId);
   }
 
   function fullTopicName(name: string): string {
     return `projects/${projectId}/topics/${name}`;
   }
 
-  async function createPair(): Promise<TSPair> {
-    const tname = topicName(),
-      sname = subName();
+  async function createPair(testId: string): Promise<TSPair> {
+    const tname = topicName(testId),
+      sname = subName(testId);
     const [topic] = await pubsub.topic(tname).get({autoCreate: true});
     const [sub] = await topic.subscription(sname).get({autoCreate: true});
 
@@ -57,14 +55,14 @@ describe('topics', () => {
   async function cleanSubs() {
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
-      subscriptions.filter(x => x.name.indexOf(runId) >= 0).map(x => x.delete())
+      resources.filterForCleanup(subscriptions).map(x => x.delete?.())
     );
   }
 
   async function cleanTopics() {
     const [topics] = await pubsub.getTopics();
     await Promise.all(
-      topics.filter(x => x.name.indexOf(runId) >= 0).map(x => x.delete())
+      resources.filterForCleanup(topics).map(x => x.delete?.())
     );
   }
 
@@ -90,7 +88,7 @@ describe('topics', () => {
   };
 
   it('should create a topic', async () => {
-    const name = topicName();
+    const name = topicName('create');
     const output = execSync(`${commandFor('createTopic')} ${name}`);
     assert.include(output, `Topic ${name} created.`);
     const [topics] = await pubsub.getTopics();
@@ -99,14 +97,14 @@ describe('topics', () => {
   });
 
   it('should list topics', async () => {
-    const pair = await createPair();
+    const pair = await createPair('list');
     const output = execSync(`${commandFor('listAllTopics')}`);
     assert.include(output, 'Topics:');
     assert.include(output, pair.t.name);
   });
 
   it('should publish a simple message', async () => {
-    const pair = await createPair();
+    const pair = await createPair('publish');
     execSync(
       `${commandFor('publishMessage')} ${pair.tname} "${expectedMessage.data}"`
     );
@@ -115,7 +113,7 @@ describe('topics', () => {
   });
 
   it('should publish with flow control', async () => {
-    const pair = await createPair();
+    const pair = await createPair('pub_flow');
     const output = execSync(
       `${commandFor('publishWithFlowControl')} ${pair.tname}`
     );
@@ -125,7 +123,7 @@ describe('topics', () => {
   });
 
   it('should publish a JSON message', async () => {
-    const pair = await createPair();
+    const pair = await createPair('pub_json');
     execSync(
       `${commandFor('publishMessage')} ${pair.tname} "${expectedMessage.data}"`
     );
@@ -137,7 +135,7 @@ describe('topics', () => {
   });
 
   it('should publish a message with custom attributes', async () => {
-    const pair = await createPair();
+    const pair = await createPair('pub_attrs');
     execSync(
       `${commandFor('publishMessageWithCustomAttributes')} ${pair.tname} "${
         expectedMessage.data
@@ -152,7 +150,7 @@ describe('topics', () => {
   });
 
   it('should publish ordered messages', async () => {
-    const pair = await createPair();
+    const pair = await createPair('pub_ordered');
     execSync(
       `${commandFor('publishOrderedMessage')} ${pair.tname} "${
         expectedMessage.data
@@ -166,7 +164,7 @@ describe('topics', () => {
   it('should publish with specific batch settings', async () => {
     const maxMessages = 10;
     const waitTime = 1000;
-    const pair = await createPair();
+    const pair = await createPair('pub_batch');
     const startTime = Date.now();
     execSync(
       `${commandFor('publishBatchedMessages')} ${pair.tname} "${
@@ -187,7 +185,7 @@ describe('topics', () => {
   });
 
   it('should resume publish', async () => {
-    const pair = await createPair();
+    const pair = await createPair('pub_resume');
     execSync(
       `${commandFor('resumePublish')} ${pair.tname} "${
         expectedMessage.data
@@ -199,7 +197,7 @@ describe('topics', () => {
   });
 
   it('should publish with retry settings', async () => {
-    const pair = await createPair();
+    const pair = await createPair('pub_retry');
     execSync(
       `${commandFor('publishWithRetrySettings')} ${projectId} ${pair.tname} "${
         expectedMessage.data
@@ -210,7 +208,7 @@ describe('topics', () => {
   });
 
   it('should set the IAM policy for a topic', async () => {
-    const pair = await createPair();
+    const pair = await createPair('set_iam');
 
     execSync(`${commandFor('setTopicPolicy')} ${pair.tname}`);
     const results = await pair.t.iam.getPolicy();
@@ -230,7 +228,7 @@ describe('topics', () => {
   });
 
   it('should get the IAM policy for a topic', async () => {
-    const pair = await createPair();
+    const pair = await createPair('get_iam');
     const [policy] = await pair.t.iam.getPolicy();
     const output = execSync(`${commandFor('getTopicPolicy')} ${pair.tname}`);
     assert.include(
@@ -240,7 +238,7 @@ describe('topics', () => {
   });
 
   it('should test permissions for a topic', async () => {
-    const pair = await createPair();
+    const pair = await createPair('test_perms');
     const output = execSync(
       `${commandFor('testTopicPermissions')} ${pair.tname}`
     );
@@ -248,7 +246,7 @@ describe('topics', () => {
   });
 
   it('should delete a topic', async () => {
-    const name = topicName();
+    const name = topicName('delete');
     await pubsub.topic(name).get({autoCreate: true});
     const output = execSync(`${commandFor('deleteTopic')} ${name}`);
     assert.include(output, `Topic ${name} deleted.`);

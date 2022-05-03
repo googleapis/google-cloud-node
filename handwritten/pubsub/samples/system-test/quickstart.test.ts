@@ -16,17 +16,26 @@ import {PubSub} from '@google-cloud/pubsub';
 import {assert} from 'chai';
 import {describe, it, after} from 'mocha';
 import {execSync} from './common';
-import * as uuid from 'uuid';
+import {TestResources} from './testResources';
 
 describe('quickstart', () => {
   const projectId = process.env.GCLOUD_PROJECT;
   const pubsub = new PubSub({projectId});
-  const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
-  const subName = `nodejs-docs-samples-test-${uuid.v4()}`;
+
+  const resources = new TestResources('quickstart');
+  const topicName = resources.generateName('qs');
+  const subName = resources.generateName('qs');
 
   after(async () => {
-    await pubsub.subscription(subName).delete();
-    await pubsub.topic(topicName).delete();
+    const [subscriptions] = await pubsub.getSubscriptions();
+    await Promise.all(
+      resources.filterForCleanup(subscriptions).map(x => x.delete?.())
+    );
+
+    const [topics] = await pubsub.getTopics();
+    await Promise.all(
+      resources.filterForCleanup(topics).map(x => x.delete?.())
+    );
   });
 
   it('should run the quickstart', async () => {

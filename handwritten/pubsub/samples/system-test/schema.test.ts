@@ -25,9 +25,9 @@ import {
 import {assert} from 'chai';
 import {describe, it, after} from 'mocha';
 import * as cp from 'child_process';
-import * as uuid from 'uuid';
 import * as path from 'path';
 import * as defer from 'p-defer';
+import {TestResources} from './testResources';
 
 // Tests run as Node 12.
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
@@ -38,26 +38,19 @@ const execSync = (cmd: string) => cp.execSync(cmd, {encoding: 'utf-8'});
 describe('schema', () => {
   const projectId = process.env.GCLOUD_PROJECT;
   const pubsub = new PubSub({projectId});
-  const runId = uuid.v4();
-  console.log(`Schema runId: ${runId}`);
-  const topicIdStem = `schema-top-${runId}-`;
-  const subscriptionIdStem = `schema-sub-${runId}-`;
-  const schemaIdStem = `schema-${runId}-`;
 
-  // Schemas have a delay between deletion and actual deletion, so
-  // we have to make unique schema names. It's simplest to do it for topics
-  // and subscriptions too.
-  let curId = 1;
+  const resources = new TestResources('schema');
+
   function getTopicId(testName: string): string {
-    return `${topicIdStem}${testName}${curId++}`;
+    return resources.generateName(testName);
   }
 
   function getSubId(testName: string): string {
-    return `${subscriptionIdStem}${testName}${curId++}`;
+    return resources.generateName(testName);
   }
 
   function getSchemaId(testName: string): string {
-    return `${schemaIdStem}${testName}${curId++}`;
+    return resources.generateName(testName);
   }
 
   function fullSchemaName(base: string) {
@@ -66,43 +59,35 @@ describe('schema', () => {
 
   const commandFor = (action: string) => `node ${action}.js`;
 
-  async function cleanAllSchemas(prefix: string) {
+  async function cleanAllSchemas() {
     const schemas = [];
     for await (const s of pubsub.listSchemas()) {
-      if (s.name?.startsWith(prefix)) {
-        schemas.push(pubsub.schema(s.name!).delete());
-      }
+      schemas.push(s);
     }
-    await Promise.all(schemas);
+    await Promise.all(
+      resources.filterForCleanup(schemas).map(s => s.delete?.())
+    );
   }
 
-  async function cleanAllTopics(prefix: string) {
+  async function cleanAllTopics() {
     const [topics] = await pubsub.getTopics();
     await Promise.all(
-      topics.filter(x => x.name.startsWith(prefix)).map(x => x.delete())
+      resources.filterForCleanup(topics).map(t => t.delete?.())
     );
   }
 
-  async function cleanAllSubs(prefix: string) {
+  async function cleanAllSubs() {
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
-      subscriptions.filter(x => x.name.startsWith(prefix)).map(x => x.delete())
+      resources.filterForCleanup(subscriptions).map(s => s.delete?.())
     );
   }
 
-  // This is to make sure we didn't miss something from per-test cleanup.
   after(async () => {
-    await cleanAllSubs(subscriptionIdStem);
-    await cleanAllTopics(topicIdStem);
-    await cleanAllSchemas(schemaIdStem);
+    await cleanAllSubs();
+    await cleanAllTopics();
+    await cleanAllSchemas();
   });
-
-  // Each test should call this to clean its own resources.
-  async function cleanMine(testName: string) {
-    await cleanAllSubs(`${subscriptionIdStem}${testName}`);
-    await cleanAllTopics(`${topicIdStem}${testName}`);
-    await cleanAllSchemas(`${schemaIdStem}${testName}`);
-  }
 
   function fixturePath(fixture: string): string {
     return path.join(__dirname, '..', '..', 'system-test', 'fixtures', fixture);
@@ -155,231 +140,178 @@ describe('schema', () => {
   }
 
   it('should create an avro schema', async () => {
-    const id = 'create-avro';
-    try {
-      const schemaId = getSchemaId(id);
-      const output = execSync(
-        `${commandFor('createAvroSchema')} ${schemaId} ${fixturePath(
-          'provinces.avsc'
-        )}`
-      );
-      assert.include(output, schemaId);
-      assert.include(output, 'created.');
+    const schemaId = getSchemaId('create_avro');
+    const output = execSync(
+      `${commandFor('createAvroSchema')} ${schemaId} ${fixturePath(
+        'provinces.avsc'
+      )}`
+    );
+    assert.include(output, schemaId);
+    assert.include(output, 'created.');
 
-      let found = false;
-      for await (const s of pubsub.listSchemas()) {
-        if (s.name && s.name.indexOf(schemaId) >= 0) {
-          found = true;
-          break;
-        }
+    let found = false;
+    for await (const s of pubsub.listSchemas()) {
+      if (s.name && s.name.indexOf(schemaId) >= 0) {
+        found = true;
+        break;
       }
-
-      assert.ok(found, 'created schema was not found');
-    } finally {
-      await cleanMine(id);
     }
+
+    assert.ok(found, 'created schema was not found');
   });
 
   it('should create a proto schema', async () => {
-    const id = 'create-proto';
-    try {
-      const schemaId = getSchemaId(id);
-      const output = execSync(
-        `${commandFor('createProtoSchema')} ${schemaId} ${fixturePath(
-          'provinces.proto'
-        )}`
-      );
-      assert.include(output, schemaId);
-      assert.include(output, 'created.');
+    const schemaId = getSchemaId('create_proto');
+    const output = execSync(
+      `${commandFor('createProtoSchema')} ${schemaId} ${fixturePath(
+        'provinces.proto'
+      )}`
+    );
+    assert.include(output, schemaId);
+    assert.include(output, 'created.');
 
-      let found = false;
-      for await (const s of pubsub.listSchemas()) {
-        if (s.name && s.name.indexOf(schemaId) >= 0) {
-          found = true;
-          break;
-        }
+    let found = false;
+    for await (const s of pubsub.listSchemas()) {
+      if (s.name && s.name.indexOf(schemaId) >= 0) {
+        found = true;
+        break;
       }
-
-      assert.ok(found, 'created schema was not found');
-    } finally {
-      await cleanMine(id);
     }
+
+    assert.ok(found, 'created schema was not found');
   });
 
   it('should create a topic with a schema', async () => {
-    const id = 'create-topic';
-    try {
-      const schema = await createSchema('topic-schema', 'proto');
-      const topicId = getTopicId(id);
-      const output = execSync(
-        `${commandFor('createTopicWithSchema')} ${topicId} ${schema.id} BINARY`
-      );
-      assert.include(output, topicId);
-      assert.include(output, schema.id);
-      assert.include(output, 'created with');
+    const id = 'create_topic';
+    const schema = await createSchema(id, 'proto');
+    const topicId = getTopicId(id);
+    const output = execSync(
+      `${commandFor('createTopicWithSchema')} ${topicId} ${schema.id} BINARY`
+    );
+    assert.include(output, topicId);
+    assert.include(output, schema.id);
+    assert.include(output, 'created with');
 
-      const [topic] = await pubsub.topic(topicId).get();
-      assert.include(topic.metadata?.schemaSettings?.schema, schema.id);
-    } finally {
-      await cleanMine(id);
-    }
+    const [topic] = await pubsub.topic(topicId).get();
+    assert.include(topic.metadata?.schemaSettings?.schema, schema.id);
   });
 
   it('should delete a schema', async () => {
-    const id = 'delete-schema';
-    try {
-      const schema = await createSchema(id, 'proto');
+    const schema = await createSchema('delete', 'proto');
 
-      const output = execSync(`${commandFor('deleteSchema')} ${schema.id}`);
-      assert.include(output, schema.id);
-      assert.include(output, 'deleted.');
+    const output = execSync(`${commandFor('deleteSchema')} ${schema.id}`);
+    assert.include(output, schema.id);
+    assert.include(output, 'deleted.');
 
-      // Because of caching delays, this can't be deterministic without a big wait.
-      /*try {
-        const got = await pubsub.schema(schema.id).get();
-        assert.isNotOk(got, "schema hadn't been deleted");
-      } catch (e) {
-        // This is expected.
-      }*/
-    } finally {
-      await cleanMine(id);
-    }
+    // Because of caching delays, this can't be deterministic without a big wait.
+    /*try {
+      const got = await pubsub.schema(schema.id).get();
+      assert.isNotOk(got, "schema hadn't been deleted");
+    } catch (e) {
+      // This is expected.
+    }*/
   });
 
   it('should get a schema', async () => {
-    const id = 'get-schema';
-    try {
-      const schema = await createSchema(id, 'proto');
+    const schema = await createSchema('get', 'proto');
 
-      const output = execSync(`${commandFor('getSchema')} ${schema.id}`);
-      assert.include(output, schema.id);
-      assert.include(output, 'info:');
-      assert.include(output, 'PROTO');
-    } finally {
-      await cleanMine(id);
-    }
+    const output = execSync(`${commandFor('getSchema')} ${schema.id}`);
+    assert.include(output, schema.id);
+    assert.include(output, 'info:');
+    assert.include(output, 'PROTO');
   });
 
   it('should listen for avro records', async () => {
-    const id = 'listen-avro';
-    try {
-      const schema = await createSchema(id, 'avro');
-      const topic = await createTopicWithSchema(id, schema.id, Encodings.Json);
-      const sub = await createSub(id, topic.name);
+    const id = 'listen_avro';
+    const schema = await createSchema(id, 'avro');
+    const topic = await createTopicWithSchema(id, schema.id, Encodings.Json);
+    const sub = await createSub(id, topic.name);
 
-      topic.publish(
-        Buffer.from(
-          JSON.stringify({
-            name: 'Alberta',
-            post_abbr: 'AB',
-          })
-        )
-      );
-      await topic.flush();
+    topic.publishMessage({
+      data: Buffer.from(
+        JSON.stringify({
+          name: 'Alberta',
+          post_abbr: 'AB',
+        })
+      ),
+    });
+    await topic.flush();
 
-      const output = execSync(
-        `${commandFor('listenForAvroRecords')} ${sub.name} 3`
-      );
-      assert.include(output, 'Received message');
-      assert.include(output, 'Alberta');
-      assert.include(output, 'AB');
-    } finally {
-      await cleanMine(id);
-    }
+    const output = execSync(
+      `${commandFor('listenForAvroRecords')} ${sub.name} 3`
+    );
+    assert.include(output, 'Received message');
+    assert.include(output, 'Alberta');
+    assert.include(output, 'AB');
   });
 
   it('should listen for protobuf messages', async () => {
-    const id = 'listen-proto';
-    try {
-      const schema = await createSchema(id, 'proto');
-      const topic = await createTopicWithSchema(id, schema.id, Encodings.Json);
-      const sub = await createSub(id, topic.name);
+    const id = 'listen_proto';
+    const schema = await createSchema(id, 'proto');
+    const topic = await createTopicWithSchema(id, schema.id, Encodings.Json);
+    const sub = await createSub(id, topic.name);
 
-      topic.publish(
-        Buffer.from(
-          JSON.stringify({
-            name: 'Quebec',
-            post_abbr: 'QC',
-          })
-        )
-      );
-      await topic.flush();
+    topic.publishMessage({
+      data: Buffer.from(
+        JSON.stringify({
+          name: 'Quebec',
+          post_abbr: 'QC',
+        })
+      ),
+    });
+    await topic.flush();
 
-      const output = execSync(
-        `${commandFor('listenForProtobufMessages')} ${sub.name} 3`
-      );
-      assert.include(output, 'Received message');
-      assert.include(output, 'Quebec');
-      assert.include(output, 'QC');
-    } finally {
-      await cleanMine(id);
-    }
+    const output = execSync(
+      `${commandFor('listenForProtobufMessages')} ${sub.name} 3`
+    );
+    assert.include(output, 'Received message');
+    assert.include(output, 'Quebec');
+    assert.include(output, 'QC');
   });
 
   it('should list schemas', async () => {
-    const id = 'list';
-    try {
-      const schema = await createSchema(id, 'avro');
-      const output = execSync(`${commandFor('listSchemas')}`);
-      assert.include(output, schema.id);
-    } finally {
-      await cleanMine(id);
-    }
+    const schema = await createSchema('list', 'avro');
+    const output = execSync(`${commandFor('listSchemas')}`);
+    assert.include(output, schema.id);
   });
 
   it('should publish avro records', async () => {
-    const id = 'pub-avro';
-    try {
-      const schema = await createSchema(id, 'avro');
-      const topic = await createTopicWithSchema(
-        id,
-        schema.id,
-        Encodings.Binary
-      );
-      const sub = await createSub(id, topic.name);
-      const deferred = defer();
-      sub.on('message', deferred.resolve);
-      sub.on('error', deferred.reject);
+    const id = 'pub_avro';
+    const schema = await createSchema(id, 'avro');
+    const topic = await createTopicWithSchema(id, schema.id, Encodings.Binary);
+    const sub = await createSub(id, topic.name);
+    const deferred = defer();
+    sub.on('message', deferred.resolve);
+    sub.on('error', deferred.reject);
 
-      const output = execSync(
-        `${commandFor('publishAvroRecords')} ${topic.name}`
-      );
-      assert.include(output, 'published.');
+    const output = execSync(
+      `${commandFor('publishAvroRecords')} ${topic.name}`
+    );
+    assert.include(output, 'published.');
 
-      const result = (await deferred.promise) as Message;
-      assert.include(result.data.toString(), 'Ontario');
+    const result = (await deferred.promise) as Message;
+    assert.include(result.data.toString(), 'Ontario');
 
-      sub.close();
-    } finally {
-      await cleanMine(id);
-    }
+    sub.close();
   });
 
   it('should publish protobuf messages', async () => {
-    const id = 'pub-proto';
-    try {
-      const schema = await createSchema(id, 'proto');
-      const topic = await createTopicWithSchema(
-        id,
-        schema.id,
-        Encodings.Binary
-      );
-      const sub = await createSub(id, topic.name);
-      const deferred = defer();
-      sub.on('message', deferred.resolve);
-      sub.on('error', deferred.reject);
+    const id = 'pub_proto';
+    const schema = await createSchema(id, 'proto');
+    const topic = await createTopicWithSchema(id, schema.id, Encodings.Binary);
+    const sub = await createSub(id, topic.name);
+    const deferred = defer();
+    sub.on('message', deferred.resolve);
+    sub.on('error', deferred.reject);
 
-      const output = execSync(
-        `${commandFor('publishProtobufMessages')} ${topic.name}`
-      );
-      assert.include(output, 'published.');
+    const output = execSync(
+      `${commandFor('publishProtobufMessages')} ${topic.name}`
+    );
+    assert.include(output, 'published.');
 
-      const result = (await deferred.promise) as Message;
-      assert.include(result.data.toString(), 'Ontario');
+    const result = (await deferred.promise) as Message;
+    assert.include(result.data.toString(), 'Ontario');
 
-      sub.close();
-    } finally {
-      await cleanMine(id);
-    }
+    sub.close();
   });
 });
