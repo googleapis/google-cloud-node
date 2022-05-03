@@ -22,7 +22,7 @@
     "yargs": "^16.0.3"
   },
   "devDependencies": {
-    "@types/mocha": "^8.0.0",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.1.3"
