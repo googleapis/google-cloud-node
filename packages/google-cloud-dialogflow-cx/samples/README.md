@@ -16,8 +16,12 @@
   * [Create-page](#create-page)
   * [Delete-page](#delete-page)
   * [Detect-intent-audio](#detect-intent-audio)
+  * [Detect-intent-event](#detect-intent-event)
   * [Detect-intent-streaming](#detect-intent-streaming)
+  * [Detect-intent-synthesize-tts-response](#detect-intent-synthesize-tts-response)
   * [Detect-intent-text](#detect-intent-text)
+  * [Detect-intent-with-intent-input](#detect-intent-with-intent-input)
+  * [Detect-intent-with-sentiment-analysis](#detect-intent-with-sentiment-analysis)
   * [List-intents](#list-intents)
   * [List-page](#list-page)
   * [List-testcase-results](#list-testcase-results)
@@ -115,6 +119,23 @@ __Usage:__
 
 
 
+### Detect-intent-event
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-event.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/detect-intent-event.js`
+
+
+-----
+
+
+
+
 ### Detect-intent-streaming
 
 View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-streaming.js).
@@ -132,6 +153,23 @@ __Usage:__
 
 
 
+### Detect-intent-synthesize-tts-response
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-synthesize-tts-response.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-synthesize-tts-response.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/detect-intent-synthesize-tts-response.js`
+
+
+-----
+
+
+
+
 ### Detect-intent-text
 
 View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-text.js).
@@ -142,6 +180,40 @@ __Usage:__
 
 
 `node samples/detect-intent-text.js`
+
+
+-----
+
+
+
+
+### Detect-intent-with-intent-input
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-with-intent-input.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-with-intent-input.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/detect-intent-with-intent-input.js`
+
+
+-----
+
+
+
+
+### Detect-intent-with-sentiment-analysis
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-with-sentiment-analysis.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-with-sentiment-analysis.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/detect-intent-with-sentiment-analysis.js`
 
 
 -----
