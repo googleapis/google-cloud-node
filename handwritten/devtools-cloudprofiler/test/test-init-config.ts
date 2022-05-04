@@ -257,7 +257,7 @@ describe('createProfiler', () => {
     } catch (e) {
       assert.strictEqual(
         e.message,
-        'Service serviceName does not match regular expression "/^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$/"'
+        'Service serviceName does not match regular expression "/^[a-z0-9]([-a-z0-9_.]{0,253}[a-z0-9])?$/"'
       );
     }
   });
