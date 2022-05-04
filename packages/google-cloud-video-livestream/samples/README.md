@@ -14,6 +14,7 @@
 * [Samples](#samples)
   * [Create Channel](#create-channel)
   * [Create Channel Event](#create-channel-event)
+  * [Create Channel With Backup Input](#create-channel-with-backup-input)
   * [Create Input](#create-input)
   * [Delete Channel](#delete-channel)
   * [Delete Channel Event](#delete-channel-event)
@@ -72,6 +73,23 @@ __Usage:__
 
 
 `node samples/createChannelEvent.js`
+
+
+-----
+
+
+
+
+### Create Channel With Backup Input
+
+View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/createChannelWithBackupInput.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/createChannelWithBackupInput.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createChannelWithBackupInput.js`
 
 
 -----
