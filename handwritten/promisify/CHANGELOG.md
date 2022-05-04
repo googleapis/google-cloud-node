@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-promisify/compare/v2.0.4...v3.0.0) (2022-05-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop node 10 from engines list, update typescript to 4.6.3 (#300)
+
+### Build System
+
+* drop node 10 from engines list, update typescript to 4.6.3 ([#300](https://github.com/googleapis/nodejs-promisify/issues/300)) ([fed2f14](https://github.com/googleapis/nodejs-promisify/commit/fed2f145a5256c939eb66b85a5c7c48332b8841d))
+
 ### [2.0.4](https://www.github.com/googleapis/nodejs-promisify/compare/v2.0.3...v2.0.4) (2021-09-09)
 
 
