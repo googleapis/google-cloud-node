@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/nodejs-cloud-shell/compare/v1.0.5...v1.1.0) (2022-04-21)
+
+
+### Features
+
+* upgrade library to ga ([#69](https://github.com/googleapis/nodejs-cloud-shell/issues/69)) ([e878a84](https://github.com/googleapis/nodejs-cloud-shell/commit/e878a84014054ecfc2cd2d090c6762eaeca20fca))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-cloud-shell/compare/v1.0.4...v1.0.5) (2021-08-30)
 
 
