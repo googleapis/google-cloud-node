@@ -1,3 +1,10 @@
+# This file is manually updated due to specific needs of the cloud
+# profiler agent, e.g., not supporting Windows.
+#
+# It should be in sync with Google's template
+# https://github.com/googleapis/synthtool/blob/master/synthtool/gcp/templates/node_library/.github/workflows/ci.yaml
+# for Node.js GCP libraries as much as possible.
+
 on:
   push:
     branches:
@@ -9,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [10, 12, 14]
+        node: [10, 12, 14, 16]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -22,17 +29,6 @@ jobs:
       - run: npm install --production --engine-strict --ignore-scripts --no-package-lock
       # Clean up the production install, before installing dev/production:
       - run: rm -rf node_modules
-      - run: npm install
-      - run: npm test
-        env:
-          MOCHA_THROW_DEPRECATION: false
-  windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14
       - run: npm install
       - run: npm test
         env:
