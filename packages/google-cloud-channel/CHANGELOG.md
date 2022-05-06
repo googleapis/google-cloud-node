@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/googleapis/nodejs-channel/compare/v1.6.0...v1.7.0) (2022-05-06)
+
+
+### Features
+
+* Add API definitions for Cloud Channel Repricing APIs ([#142](https://github.com/googleapis/nodejs-channel/issues/142)) ([682993d](https://github.com/googleapis/nodejs-channel/commit/682993da96720de44fb2c705d9636234a75cbeba))
+
 ## [1.6.0](https://github.com/googleapis/nodejs-channel/compare/v1.5.0...v1.6.0) (2022-02-05)
 
 
