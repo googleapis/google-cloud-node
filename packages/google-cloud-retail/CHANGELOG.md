@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.8.1](https://github.com/googleapis/nodejs-retail/compare/v1.8.0...v1.8.1) (2022-05-06)
+
+
+### Bug Fixes
+
+* read projectId from retailClient.getProjectId ([#159](https://github.com/googleapis/nodejs-retail/issues/159)) ([f4fa61c](https://github.com/googleapis/nodejs-retail/commit/f4fa61c2a385b197dd0cfd923b1ac1d07d6539de))
+
 ## [1.8.0](https://github.com/googleapis/nodejs-retail/compare/v1.7.0...v1.8.0) (2022-04-08)
 
 
