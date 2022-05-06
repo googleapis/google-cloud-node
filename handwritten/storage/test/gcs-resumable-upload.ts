@@ -19,7 +19,7 @@ import * as mockery from 'mockery';
 import * as nock from 'nock';
 import * as path from 'path';
 import * as sinon from 'sinon';
-import {Readable} from 'stream';
+import {Readable, Writable} from 'stream';
 import {
   RETRY_DELAY_MULTIPLIER_DEFAULT,
   TOTAL_TIMEOUT_DEFAULT,
@@ -143,6 +143,10 @@ describe('gcs-resumable-upload', () => {
   });
 
   describe('ctor', () => {
+    it('should be a Writable', () => {
+      assert(up instanceof Writable);
+    });
+
     it('should throw if a bucket or file is not given', () => {
       assert.throws(() => {
         upload();
@@ -395,21 +399,6 @@ describe('gcs-resumable-upload', () => {
       assert.strictEqual(up.chunkSize, 123);
     });
 
-    it('should set `upstreamEnded` to `true` on `prefinish`', () => {
-      const up = upload({
-        bucket: BUCKET,
-        file: FILE,
-        chunkSize: 123,
-        retryOptions: RETRY_OPTIONS,
-      });
-
-      assert.strictEqual(up.upstreamEnded, false);
-
-      up.emit('prefinish');
-
-      assert.strictEqual(up.upstreamEnded, true);
-    });
-
     describe('on write', () => {
       let uri = '';
 
@@ -436,25 +425,26 @@ describe('gcs-resumable-upload', () => {
         upstreamBuffer.pipe(up);
       });
 
-      it("should emit 'finished' after 'prepareFinish'", async () => {
+      it("should set `upstreamEnded` to `true` and emit 'upstreamFinished' on `#end()`", done => {
         const upstreamBuffer = new Readable({
           read() {
+            this.push(Buffer.alloc(1));
             this.push(null);
           },
         });
 
         up.createURI = () => {};
-        await new Promise(resolve => {
-          up.once('writing', resolve);
-          upstreamBuffer.pipe(up);
-        });
+        up.once('writing', () => {
+          up.on('upstreamFinished', () => {
+            assert.equal(up.upstreamEnded, true);
+            done();
+          });
 
-        assert(up.upstream.readable);
+          assert.equal(up.upstreamEnded, false);
 
-        await new Promise(resolve => {
-          up.once('finish', resolve);
-          up.emit('prepareFinish');
+          up.once('wroteToChunkBuffer', () => up.emit('readFromChunkBuffer'));
         });
+        upstreamBuffer.pipe(up);
       });
 
       it('should continue uploading', done => {
@@ -503,12 +493,12 @@ describe('gcs-resumable-upload', () => {
     });
   });
 
-  describe('#upstream', () => {
+  describe('upstream', () => {
     beforeEach(() => {
       up.createURI = () => {};
     });
 
-    it('should write to `writeToChunkBuffer`', done => {
+    it('should handle writes to class', done => {
       up.on('wroteToChunkBuffer', () => {
         assert.equal(up.upstreamChunkBuffer.byteLength, 16);
         assert.equal(up.chunkBufferEncoding, 'buffer');
@@ -518,18 +508,18 @@ describe('gcs-resumable-upload', () => {
       up.write(Buffer.alloc(16));
     });
 
-    it("should setup a 'prepareFinish' handler", done => {
-      assert.equal(up.eventNames().includes('prepareFinish'), false);
+    it("should setup a 'uploadFinished' handler on 'upstreamFinished'", done => {
+      assert.equal(up.eventNames().includes('uploadFinished'), false);
 
-      up.on('wroteToChunkBuffer', () => {
-        assert.equal(up.eventNames().includes('prepareFinish'), true);
+      up.on('upstreamFinished', () => {
+        assert.equal(up.eventNames().includes('uploadFinished'), true);
         done();
       });
 
-      up.write(Buffer.alloc(16));
+      up.end();
     });
 
-    it("should finish only after 'prepareFinish' is emitted", done => {
+    it("should finish only after 'uploadFinished' is emitted", done => {
       const upstreamBuffer = new Readable({
         read() {
           this.push(Buffer.alloc(1));
@@ -546,7 +536,7 @@ describe('gcs-resumable-upload', () => {
 
           // setting up the listener now to prove it hasn't been fired before
           up.on('finish', done);
-          up.emit('prepareFinish');
+          process.nextTick(() => up.emit('uploadFinished'));
         });
       });
 
@@ -554,10 +544,14 @@ describe('gcs-resumable-upload', () => {
     });
   });
 
-  describe('#writeToChunkBuffer', () => {
+  describe('#_write', () => {
+    beforeEach(() => {
+      up.createURI = () => {};
+    });
+
     it('should append buffer to existing `upstreamChunkBuffer`', () => {
       up.upstreamChunkBuffer = Buffer.from('abc');
-      up.writeToChunkBuffer(Buffer.from('def'), 'buffer', () => {});
+      up.write(Buffer.from('def'));
 
       assert.equal(
         Buffer.compare(up.upstreamChunkBuffer, Buffer.from('abcdef')),
@@ -566,23 +560,28 @@ describe('gcs-resumable-upload', () => {
     });
 
     it('should convert string with encoding to Buffer and append to existing `upstreamChunkBuffer`', () => {
+      const existing = 'a ';
       const sample = '🦃';
+      const concat = existing + sample;
 
+      up.upstreamChunkBuffer = Buffer.from(existing);
       assert.equal(up.chunkBufferEncoding, undefined);
-      up.writeToChunkBuffer(sample, 'utf-8', () => {});
+
+      up.write(sample, 'utf-8', () => {});
 
       assert(Buffer.isBuffer(up.upstreamChunkBuffer));
-      assert.equal(up.upstreamChunkBuffer.toString(), sample);
-      assert.equal(up.chunkBufferEncoding, 'utf-8');
+      assert.equal(up.upstreamChunkBuffer.toString(), concat);
+      assert.equal(up.chunkBufferEncoding, 'buffer');
     });
 
     it("should callback on 'readFromChunkBuffer'", done => {
-      up.writeToChunkBuffer('sample', 'utf-8', done);
+      // The 'done' here is a callback from 'readFromChunkBuffer'
+      up.write('sample', 'utf-8', done);
       up.emit('readFromChunkBuffer');
     });
 
     it("should emit 'wroteToChunkBuffer' asynchronously", done => {
-      up.writeToChunkBuffer('sample', 'utf-8', () => {});
+      up.write('sample', 'utf-8', () => {});
 
       // setting this here proves it's async
       up.on('wroteToChunkBuffer', done);
@@ -670,30 +669,30 @@ describe('gcs-resumable-upload', () => {
       assert(result);
     });
 
-    it("should wait for upstream to 'finish' if !`upstreamChunkBuffer.byteLength` && !`upstreamEnded`", async () => {
+    it("should wait for 'upstreamFinished' if !`upstreamChunkBuffer.byteLength` && !`upstreamEnded`", async () => {
       await new Promise(resolve => {
         up.waitForNextChunk().then(resolve);
-        up.upstream.emit('finish');
+        up.emit('upstreamFinished');
       });
     });
 
-    it("should wait for upstream to 'finish' and resolve `false` if data is not available", async () => {
+    it("should wait for 'upstreamFinished' and resolve `false` if data is not available", async () => {
       const result = await new Promise(resolve => {
         up.waitForNextChunk().then(resolve);
-        up.upstream.emit('finish');
+        up.emit('upstreamFinished');
       });
 
       assert.equal(result, false);
     });
 
-    it("should wait for upstream to 'finish' and resolve `true` if data is available", async () => {
+    it("should wait for 'upstreamFinished' and resolve `true` if data is available", async () => {
       const result = await new Promise(resolve => {
-        up.upstream.on('newListener', (event: string) => {
-          if (event === 'finish') {
-            // Update the `upstreamChunkBuffer` before emitting 'finish'
+        up.on('newListener', (event: string) => {
+          if (event === 'upstreamFinished') {
+            // Update the `upstreamChunkBuffer` before emitting 'upstreamFinished'
             up.upstreamChunkBuffer = Buffer.from('abc');
 
-            process.nextTick(() => up.upstream.emit('finish'));
+            process.nextTick(() => up.emit('upstreamFinished'));
           }
         });
 
@@ -703,30 +702,30 @@ describe('gcs-resumable-upload', () => {
       assert.equal(result, true);
     });
 
-    it("should wait for 'prefinish' if !`upstreamChunkBuffer.byteLength` && !`upstreamEnded`", async () => {
+    it("should wait for 'upstreamFinished' if !`upstreamChunkBuffer.byteLength` && !`upstreamEnded`", async () => {
       await new Promise(resolve => {
         up.waitForNextChunk().then(resolve);
-        up.emit('prefinish');
+        up.emit('upstreamFinished');
       });
     });
 
-    it("should wait for 'prefinish' and resolve `false` if data is not available", async () => {
+    it("should wait for 'upstreamFinished' and resolve `false` if data is not available", async () => {
       const result = await new Promise(resolve => {
         up.waitForNextChunk().then(resolve);
-        up.emit('prefinish');
+        up.emit('upstreamFinished');
       });
 
       assert.equal(result, false);
     });
 
-    it("should wait for 'prefinish' and resolve `true` if data is available", async () => {
+    it("should wait for 'upstreamFinished' and resolve `true` if data is available", async () => {
       const result = await new Promise(resolve => {
         up.on('newListener', (event: string) => {
-          if (event === 'prefinish') {
-            // Update the `upstreamChunkBuffer` before emitting 'prefinish'
+          if (event === 'upstreamFinished') {
+            // Update the `upstreamChunkBuffer` before emitting 'upstreamFinished'
             up.upstreamChunkBuffer = Buffer.from('abc');
 
-            process.nextTick(() => up.emit('prefinish'));
+            process.nextTick(() => up.emit('upstreamFinished'));
           }
         });
 
@@ -737,9 +736,8 @@ describe('gcs-resumable-upload', () => {
     });
 
     it('should remove listeners after calling back from `wroteToChunkBuffer`', async () => {
-      assert.equal(up.listenerCount('finish'), 0);
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
-      assert.equal(up.listenerCount('prefinish'), 1);
+      assert.equal(up.listenerCount('upstreamFinished'), 0);
 
       await new Promise(resolve => {
         up.on('newListener', (event: string) => {
@@ -751,49 +749,26 @@ describe('gcs-resumable-upload', () => {
         up.waitForNextChunk().then(resolve);
       });
 
-      assert.equal(up.listenerCount('finish'), 0);
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
-      assert.equal(up.listenerCount('prefinish'), 1);
+      assert.equal(up.listenerCount('upstreamFinished'), 0);
     });
 
-    it("should remove listeners after calling back from upstream to 'finish'", async () => {
-      assert.equal(up.listenerCount('finish'), 0);
+    it("should remove listeners after calling back from 'upstreamFinished'", async () => {
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
-      assert.equal(up.listenerCount('prefinish'), 1);
-
-      await new Promise(resolve => {
-        up.upstream.on('newListener', (event: string) => {
-          if (event === 'finish') {
-            process.nextTick(() => up.upstream.emit('finish'));
-          }
-        });
-
-        up.waitForNextChunk().then(resolve);
-      });
-
-      assert.equal(up.listenerCount('finish'), 0);
-      assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
-      assert.equal(up.listenerCount('prefinish'), 1);
-    });
-
-    it("should remove listeners after calling back from 'prefinish'", async () => {
-      assert.equal(up.listenerCount('finish'), 0);
-      assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
-      assert.equal(up.listenerCount('prefinish'), 1);
+      assert.equal(up.listenerCount('upstreamFinished'), 0);
 
       await new Promise(resolve => {
         up.on('newListener', (event: string) => {
-          if (event === 'prefinish') {
-            process.nextTick(() => up.emit('prefinish'));
+          if (event === 'upstreamFinished') {
+            process.nextTick(() => up.emit('upstreamFinished'));
           }
         });
 
         up.waitForNextChunk().then(resolve);
       });
 
-      assert.equal(up.listenerCount('finish'), 0);
       assert.equal(up.listenerCount('wroteToChunkBuffer'), 0);
-      assert.equal(up.listenerCount('prefinish'), 1);
+      assert.equal(up.listenerCount('upstreamFinished'), 0);
     });
   });
 
@@ -1046,7 +1021,7 @@ describe('gcs-resumable-upload', () => {
 
       await up.startUploading();
 
-      // Should fast-forward (9-1) bytes
+      // Should fast-forward (up.offset - up.numBytesWritten) bytes
       assert.equal(up.offset, 9);
       assert.equal(up.numBytesWritten, 9);
       assert.equal(up.upstreamChunkBuffer.byteLength, 16);
@@ -1276,13 +1251,6 @@ describe('gcs-resumable-upload', () => {
     it('should delete the config', done => {
       const RESP = {data: '', status: 200};
       up.deleteConfig = done;
-      up.responseHandler(RESP);
-    });
-
-    it('should emit `prepareFinish` when request succeeds', done => {
-      const RESP = {data: '', status: 200};
-      up.once('prepareFinish', done);
-
       up.responseHandler(RESP);
     });
 
