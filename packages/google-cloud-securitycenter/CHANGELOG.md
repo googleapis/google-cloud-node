@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.11.0](https://github.com/googleapis/nodejs-security-center/compare/v5.10.0...v5.11.0) (2022-05-06)
+
+
+### Features
+
+* Add connection and description field to finding's list of attributes ([#479](https://github.com/googleapis/nodejs-security-center/issues/479)) ([fa705d9](https://github.com/googleapis/nodejs-security-center/commit/fa705d9e4fe41c64870480670b536a6640d5aa46))
+
 ## [5.10.0](https://github.com/googleapis/nodejs-security-center/compare/v5.9.0...v5.10.0) (2022-04-11)
 
 
