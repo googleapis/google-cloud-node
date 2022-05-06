@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [2.6.0](https://github.com/googleapis/nodejs-tasks/compare/v2.5.0...v2.6.0) (2022-05-06)
+
+
+### Features
+
+* AuditConfig for IAM v1 ([#611](https://github.com/googleapis/nodejs-tasks/issues/611)) ([176dcee](https://github.com/googleapis/nodejs-tasks/commit/176dcee213353a0a76b26a657172bea7a15f2ce5))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.4.2...v2.5.0) (2021-12-09)
 
 
