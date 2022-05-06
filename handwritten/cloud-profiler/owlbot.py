@@ -14,4 +14,5 @@
 
 import synthtool.languages.node as node
 
-node.owlbot_main(templates_excludes=[".github/sync-repo-settings.yaml"])
+node.owlbot_main(templates_excludes=[".github/sync-repo-settings.yaml",
+                                     ".github/workflows/ci.yaml"])
