@@ -25,18 +25,6 @@
                 }
               }
             },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "FileDescriptorSet": {
               "fields": {
                 "file": {
@@ -933,6 +921,18 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -1276,13 +1276,17 @@
                       "requestType": "GetApplicationRequest",
                       "responseType": "Application",
                       "options": {
-                        "(google.api.http).get": "/v1/{name=apps/*}"
+                        "(google.api.http).get": "/v1/{name=apps/*}",
+                        "(google.api.method_signature)": "name"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
                             "get": "/v1/{name=apps/*}"
                           }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
                         }
                       ]
                     },
@@ -1686,6 +1690,12 @@
                     }
                   }
                 },
+                "VersionView": {
+                  "values": {
+                    "BASIC": 0,
+                    "FULL": 1
+                  }
+                },
                 "GetVersionRequest": {
                   "fields": {
                     "name": {
@@ -1726,94 +1736,11 @@
                     }
                   }
                 },
-                "VersionView": {
-                  "values": {
-                    "BASIC": 0,
-                    "FULL": 1
-                  }
-                },
                 "DeleteVersionRequest": {
                   "fields": {
                     "name": {
                       "type": "string",
                       "id": 1
-                    }
-                  }
-                },
-                "ListInstancesRequest": {
-                  "fields": {
-                    "parent": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "pageSize": {
-                      "type": "int32",
-                      "id": 2
-                    },
-                    "pageToken": {
-                      "type": "string",
-                      "id": 3
-                    }
-                  }
-                },
-                "ListInstancesResponse": {
-                  "fields": {
-                    "instances": {
-                      "rule": "repeated",
-                      "type": "Instance",
-                      "id": 1
-                    },
-                    "nextPageToken": {
-                      "type": "string",
-                      "id": 2
-                    }
-                  }
-                },
-                "GetInstanceRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "DeleteInstanceRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "DebugInstanceRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "sshKey": {
-                      "type": "string",
-                      "id": 2
-                    }
-                  }
-                },
-                "ListIngressRulesRequest": {
-                  "fields": {
-                    "parent": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "pageSize": {
-                      "type": "int32",
-                      "id": 2
-                    },
-                    "pageToken": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "matchingAddress": {
-                      "type": "string",
-                      "id": 4
                     }
                   }
                 },
@@ -1899,86 +1826,7 @@
                     }
                   }
                 },
-                "ListIngressRulesResponse": {
-                  "fields": {
-                    "ingressRules": {
-                      "rule": "repeated",
-                      "type": "google.appengine.v1.FirewallRule",
-                      "id": 1
-                    },
-                    "nextPageToken": {
-                      "type": "string",
-                      "id": 2
-                    }
-                  }
-                },
-                "BatchUpdateIngressRulesRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "ingressRules": {
-                      "rule": "repeated",
-                      "type": "google.appengine.v1.FirewallRule",
-                      "id": 2
-                    }
-                  }
-                },
-                "BatchUpdateIngressRulesResponse": {
-                  "fields": {
-                    "ingressRules": {
-                      "rule": "repeated",
-                      "type": "google.appengine.v1.FirewallRule",
-                      "id": 1
-                    }
-                  }
-                },
-                "CreateIngressRuleRequest": {
-                  "fields": {
-                    "parent": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "rule": {
-                      "type": "google.appengine.v1.FirewallRule",
-                      "id": 2
-                    }
-                  }
-                },
-                "GetIngressRuleRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "UpdateIngressRuleRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "rule": {
-                      "type": "google.appengine.v1.FirewallRule",
-                      "id": 2
-                    },
-                    "updateMask": {
-                      "type": "google.protobuf.FieldMask",
-                      "id": 3
-                    }
-                  }
-                },
-                "DeleteIngressRuleRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "ListAuthorizedDomainsRequest": {
+                "ListInstancesRequest": {
                   "fields": {
                     "parent": {
                       "type": "string",
@@ -1994,11 +1842,11 @@
                     }
                   }
                 },
-                "ListAuthorizedDomainsResponse": {
+                "ListInstancesResponse": {
                   "fields": {
-                    "domains": {
+                    "instances": {
                       "rule": "repeated",
-                      "type": "google.appengine.v1.AuthorizedDomain",
+                      "type": "Instance",
                       "id": 1
                     },
                     "nextPageToken": {
@@ -2007,34 +1855,29 @@
                     }
                   }
                 },
-                "ListAuthorizedCertificatesRequest": {
+                "GetInstanceRequest": {
                   "fields": {
-                    "parent": {
+                    "name": {
                       "type": "string",
                       "id": 1
-                    },
-                    "view": {
-                      "type": "AuthorizedCertificateView",
-                      "id": 4
-                    },
-                    "pageSize": {
-                      "type": "int32",
-                      "id": 2
-                    },
-                    "pageToken": {
-                      "type": "string",
-                      "id": 3
                     }
                   }
                 },
-                "ListAuthorizedCertificatesResponse": {
+                "DeleteInstanceRequest": {
                   "fields": {
-                    "certificates": {
-                      "rule": "repeated",
-                      "type": "google.appengine.v1.AuthorizedCertificate",
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "DebugInstanceRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
                       "id": 1
                     },
-                    "nextPageToken": {
+                    "sshKey": {
                       "type": "string",
                       "id": 2
                     }
@@ -2138,55 +1981,7 @@
                     }
                   }
                 },
-                "GetAuthorizedCertificateRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "view": {
-                      "type": "AuthorizedCertificateView",
-                      "id": 2
-                    }
-                  }
-                },
-                "CreateAuthorizedCertificateRequest": {
-                  "fields": {
-                    "parent": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "certificate": {
-                      "type": "google.appengine.v1.AuthorizedCertificate",
-                      "id": 2
-                    }
-                  }
-                },
-                "UpdateAuthorizedCertificateRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "certificate": {
-                      "type": "google.appengine.v1.AuthorizedCertificate",
-                      "id": 2
-                    },
-                    "updateMask": {
-                      "type": "google.protobuf.FieldMask",
-                      "id": 3
-                    }
-                  }
-                },
-                "DeleteAuthorizedCertificateRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "ListDomainMappingsRequest": {
+                "ListIngressRulesRequest": {
                   "fields": {
                     "parent": {
                       "type": "string",
@@ -2199,14 +1994,18 @@
                     "pageToken": {
                       "type": "string",
                       "id": 3
+                    },
+                    "matchingAddress": {
+                      "type": "string",
+                      "id": 4
                     }
                   }
                 },
-                "ListDomainMappingsResponse": {
+                "ListIngressRulesResponse": {
                   "fields": {
-                    "domainMappings": {
+                    "ingressRules": {
                       "rule": "repeated",
-                      "type": "google.appengine.v1.DomainMapping",
+                      "type": "google.appengine.v1.FirewallRule",
                       "id": 1
                     },
                     "nextPageToken": {
@@ -2215,7 +2014,41 @@
                     }
                   }
                 },
-                "GetDomainMappingRequest": {
+                "BatchUpdateIngressRulesRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "ingressRules": {
+                      "rule": "repeated",
+                      "type": "google.appengine.v1.FirewallRule",
+                      "id": 2
+                    }
+                  }
+                },
+                "BatchUpdateIngressRulesResponse": {
+                  "fields": {
+                    "ingressRules": {
+                      "rule": "repeated",
+                      "type": "google.appengine.v1.FirewallRule",
+                      "id": 1
+                    }
+                  }
+                },
+                "CreateIngressRuleRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "rule": {
+                      "type": "google.appengine.v1.FirewallRule",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetIngressRuleRequest": {
                   "fields": {
                     "name": {
                       "type": "string",
@@ -2223,19 +2056,27 @@
                     }
                   }
                 },
-                "CreateDomainMappingRequest": {
+                "UpdateIngressRuleRequest": {
                   "fields": {
-                    "parent": {
+                    "name": {
                       "type": "string",
                       "id": 1
                     },
-                    "domainMapping": {
-                      "type": "google.appengine.v1.DomainMapping",
+                    "rule": {
+                      "type": "google.appengine.v1.FirewallRule",
                       "id": 2
                     },
-                    "overrideStrategy": {
-                      "type": "DomainOverrideStrategy",
-                      "id": 4
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 3
+                    }
+                  }
+                },
+                "DeleteIngressRuleRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
                     }
                   }
                 },
@@ -2261,27 +2102,32 @@
                     }
                   }
                 },
-                "UpdateDomainMappingRequest": {
+                "ListAuthorizedDomainsRequest": {
                   "fields": {
-                    "name": {
+                    "parent": {
                       "type": "string",
                       "id": 1
                     },
-                    "domainMapping": {
-                      "type": "google.appengine.v1.DomainMapping",
+                    "pageSize": {
+                      "type": "int32",
                       "id": 2
                     },
-                    "updateMask": {
-                      "type": "google.protobuf.FieldMask",
+                    "pageToken": {
+                      "type": "string",
                       "id": 3
                     }
                   }
                 },
-                "DeleteDomainMappingRequest": {
+                "ListAuthorizedDomainsResponse": {
                   "fields": {
-                    "name": {
-                      "type": "string",
+                    "domains": {
+                      "rule": "repeated",
+                      "type": "google.appengine.v1.AuthorizedDomain",
                       "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
                     }
                   }
                 },
@@ -2367,17 +2213,91 @@
                     }
                   }
                 },
+                "ListAuthorizedCertificatesRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "view": {
+                      "type": "AuthorizedCertificateView",
+                      "id": 4
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "ListAuthorizedCertificatesResponse": {
+                  "fields": {
+                    "certificates": {
+                      "rule": "repeated",
+                      "type": "google.appengine.v1.AuthorizedCertificate",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetAuthorizedCertificateRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "view": {
+                      "type": "AuthorizedCertificateView",
+                      "id": 2
+                    }
+                  }
+                },
                 "AuthorizedCertificateView": {
                   "values": {
                     "BASIC_CERTIFICATE": 0,
                     "FULL_CERTIFICATE": 1
                   }
                 },
-                "DomainOverrideStrategy": {
-                  "values": {
-                    "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY": 0,
-                    "STRICT": 1,
-                    "OVERRIDE": 2
+                "CreateAuthorizedCertificateRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "certificate": {
+                      "type": "google.appengine.v1.AuthorizedCertificate",
+                      "id": 2
+                    }
+                  }
+                },
+                "UpdateAuthorizedCertificateRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "certificate": {
+                      "type": "google.appengine.v1.AuthorizedCertificate",
+                      "id": 2
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 3
+                    }
+                  }
+                },
+                "DeleteAuthorizedCertificateRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
                   }
                 },
                 "DomainMappings": {
@@ -2486,6 +2406,90 @@
                     }
                   }
                 },
+                "ListDomainMappingsRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "ListDomainMappingsResponse": {
+                  "fields": {
+                    "domainMappings": {
+                      "rule": "repeated",
+                      "type": "google.appengine.v1.DomainMapping",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetDomainMappingRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "DomainOverrideStrategy": {
+                  "values": {
+                    "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY": 0,
+                    "STRICT": 1,
+                    "OVERRIDE": 2
+                  }
+                },
+                "CreateDomainMappingRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "domainMapping": {
+                      "type": "google.appengine.v1.DomainMapping",
+                      "id": 2
+                    },
+                    "overrideStrategy": {
+                      "type": "DomainOverrideStrategy",
+                      "id": 4
+                    }
+                  }
+                },
+                "UpdateDomainMappingRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "domainMapping": {
+                      "type": "google.appengine.v1.DomainMapping",
+                      "id": 2
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 3
+                    }
+                  }
+                },
+                "DeleteDomainMappingRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
                 "Application": {
                   "fields": {
                     "name": {
@@ -2529,6 +2533,10 @@
                       "type": "string",
                       "id": 12
                     },
+                    "serviceAccount": {
+                      "type": "string",
+                      "id": 13
+                    },
                     "iap": {
                       "type": "IdentityAwareProxy",
                       "id": 14
@@ -2547,6 +2555,14 @@
                     }
                   },
                   "nested": {
+                    "ServingStatus": {
+                      "values": {
+                        "UNSPECIFIED": 0,
+                        "SERVING": 1,
+                        "USER_DISABLED": 2,
+                        "SYSTEM_DISABLED": 3
+                      }
+                    },
                     "IdentityAwareProxy": {
                       "fields": {
                         "enabled": {
@@ -2567,6 +2583,14 @@
                         }
                       }
                     },
+                    "DatabaseType": {
+                      "values": {
+                        "DATABASE_TYPE_UNSPECIFIED": 0,
+                        "CLOUD_DATASTORE": 1,
+                        "CLOUD_FIRESTORE": 2,
+                        "CLOUD_DATASTORE_COMPATIBILITY": 3
+                      }
+                    },
                     "FeatureSettings": {
                       "fields": {
                         "splitHealthChecks": {
@@ -2577,22 +2601,6 @@
                           "type": "bool",
                           "id": 2
                         }
-                      }
-                    },
-                    "ServingStatus": {
-                      "values": {
-                        "UNSPECIFIED": 0,
-                        "SERVING": 1,
-                        "USER_DISABLED": 2,
-                        "SYSTEM_DISABLED": 3
-                      }
-                    },
-                    "DatabaseType": {
-                      "values": {
-                        "DATABASE_TYPE_UNSPECIFIED": 0,
-                        "CLOUD_DATASTORE": 1,
-                        "CLOUD_FIRESTORE": 2,
-                        "CLOUD_DATASTORE_COMPATIBILITY": 3
                       }
                     }
                   }
@@ -2930,6 +2938,13 @@
                     }
                   },
                   "nested": {
+                    "Availability": {
+                      "values": {
+                        "UNSPECIFIED": 0,
+                        "RESIDENT": 1,
+                        "DYNAMIC": 2
+                      }
+                    },
                     "Liveness": {
                       "fields": {},
                       "nested": {
@@ -2944,12 +2959,71 @@
                           }
                         }
                       }
+                    }
+                  }
+                },
+                "Service": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
                     },
-                    "Availability": {
+                    "id": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "split": {
+                      "type": "TrafficSplit",
+                      "id": 3
+                    },
+                    "labels": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 4
+                    },
+                    "networkSettings": {
+                      "type": "NetworkSettings",
+                      "id": 6
+                    }
+                  }
+                },
+                "TrafficSplit": {
+                  "fields": {
+                    "shardBy": {
+                      "type": "ShardBy",
+                      "id": 1
+                    },
+                    "allocations": {
+                      "keyType": "string",
+                      "type": "double",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "ShardBy": {
                       "values": {
                         "UNSPECIFIED": 0,
-                        "RESIDENT": 1,
-                        "DYNAMIC": 2
+                        "COOKIE": 1,
+                        "IP": 2,
+                        "RANDOM": 3
+                      }
+                    }
+                  }
+                },
+                "NetworkSettings": {
+                  "fields": {
+                    "ingressTrafficAllowed": {
+                      "type": "IngressTrafficAllowed",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "IngressTrafficAllowed": {
+                      "values": {
+                        "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED": 0,
+                        "INGRESS_TRAFFIC_ALLOWED_ALL": 1,
+                        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY": 2,
+                        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB": 3
                       }
                     }
                   }
@@ -3022,6 +3096,10 @@
                     "vm": {
                       "type": "bool",
                       "id": 12
+                    },
+                    "appEngineApis": {
+                      "type": "bool",
+                      "id": 128
                     },
                     "betaSettings": {
                       "keyType": "string",
@@ -3386,29 +3464,6 @@
                     }
                   }
                 },
-                "VpcAccessConnector": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "Entrypoint": {
-                  "oneofs": {
-                    "command": {
-                      "oneof": [
-                        "shell"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "shell": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
                 "InboundServiceType": {
                   "values": {
                     "INBOUND_SERVICE_UNSPECIFIED": 0,
@@ -3427,6 +3482,42 @@
                     "SERVING_STATUS_UNSPECIFIED": 0,
                     "SERVING": 1,
                     "STOPPED": 2
+                  }
+                },
+                "VpcAccessConnector": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "egressSetting": {
+                      "type": "EgressSetting",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "EgressSetting": {
+                      "values": {
+                        "EGRESS_SETTING_UNSPECIFIED": 0,
+                        "ALL_TRAFFIC": 1,
+                        "PRIVATE_IP_RANGES": 2
+                      }
+                    }
+                  }
+                },
+                "Entrypoint": {
+                  "oneofs": {
+                    "command": {
+                      "oneof": [
+                        "shell"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "shell": {
+                      "type": "string",
+                      "id": 1
+                    }
                   }
                 },
                 "Deployment": {
@@ -3495,67 +3586,6 @@
                     "filesCount": {
                       "type": "int32",
                       "id": 4
-                    }
-                  }
-                },
-                "Service": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "id": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "split": {
-                      "type": "TrafficSplit",
-                      "id": 3
-                    },
-                    "networkSettings": {
-                      "type": "NetworkSettings",
-                      "id": 6
-                    }
-                  }
-                },
-                "TrafficSplit": {
-                  "fields": {
-                    "shardBy": {
-                      "type": "ShardBy",
-                      "id": 1
-                    },
-                    "allocations": {
-                      "keyType": "string",
-                      "type": "double",
-                      "id": 2
-                    }
-                  },
-                  "nested": {
-                    "ShardBy": {
-                      "values": {
-                        "UNSPECIFIED": 0,
-                        "COOKIE": 1,
-                        "IP": 2,
-                        "RANDOM": 3
-                      }
-                    }
-                  }
-                },
-                "NetworkSettings": {
-                  "fields": {
-                    "ingressTrafficAllowed": {
-                      "type": "IngressTrafficAllowed",
-                      "id": 1
-                    }
-                  },
-                  "nested": {
-                    "IngressTrafficAllowed": {
-                      "values": {
-                        "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED": 0,
-                        "INGRESS_TRAFFIC_ALLOWED_ALL": 1,
-                        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY": 2,
-                        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB": 3
-                      }
                     }
                   }
                 },
@@ -3674,107 +3704,12 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -3877,6 +3812,101 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
             }
           }
         },

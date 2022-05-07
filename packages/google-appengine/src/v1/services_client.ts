@@ -458,7 +458,7 @@ export class ServicesClient {
    *   A Service resource containing the updated service. Only fields set in the
    *   field mask will be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
+   *   Required. Standard field mask for the set of fields to be updated.
    * @param {boolean} request.migrateTraffic
    *   Set to `true` to gradually shift traffic to one or more versions that you
    *   specify. By default, traffic is shifted immediately.

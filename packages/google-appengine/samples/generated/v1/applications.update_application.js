@@ -34,7 +34,7 @@ function main() {
    */
   // const application = {}
   /**
-   *  Standard field mask for the set of fields to be updated.
+   *  Required. Standard field mask for the set of fields to be updated.
    */
   // const updateMask = {}
 

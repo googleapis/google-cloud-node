@@ -621,7 +621,7 @@ export class DomainMappingsClient {
    *   A domain mapping containing the updated resource. Only fields set
    *   in the field mask will be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
+   *   Required. Standard field mask for the set of fields to be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

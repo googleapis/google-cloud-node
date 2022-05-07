@@ -272,230 +272,6 @@
                 return Duration;
             })();
     
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Timestamp;
-            })();
-    
             protobuf.FileDescriptorSet = (function() {
     
                 /**
@@ -5716,8 +5492,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
+                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  */
     
                 /**
@@ -5794,20 +5570,20 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.fieldBehavior.
-                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
-    
-                /**
                  * FieldOptions .google.api.resourceReference.
                  * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
+                 * FieldOptions .google.api.fieldBehavior.
+                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -5913,6 +5689,9 @@
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                             break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                            break;
                         case 1052:
                             if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
                                 message[".google.api.fieldBehavior"] = [];
@@ -5922,9 +5701,6 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
-                            break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -6000,6 +5776,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
+                    }
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -6017,11 +5798,6 @@
                             case 7:
                                 break;
                             }
-                    }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -6084,6 +5860,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -6124,11 +5905,6 @@
                                 message[".google.api.fieldBehavior"][i] = 7;
                                 break;
                             }
-                    }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     return message;
                 };
@@ -9206,6 +8982,230 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.seconds = reader.int64();
+                            break;
+                        case 2:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Timestamp;
             })();
     
             protobuf.Any = (function() {
@@ -15884,6 +15884,20 @@
                     return ListVersionsResponse;
                 })();
     
+                /**
+                 * VersionView enum.
+                 * @name google.appengine.v1.VersionView
+                 * @enum {number}
+                 * @property {number} BASIC=0 BASIC value
+                 * @property {number} FULL=1 FULL value
+                 */
+                v1.VersionView = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "BASIC"] = 0;
+                    values[valuesById[1] = "FULL"] = 1;
+                    return values;
+                })();
+    
                 v1.GetVersionRequest = (function() {
     
                     /**
@@ -16564,20 +16578,6 @@
                     return UpdateVersionRequest;
                 })();
     
-                /**
-                 * VersionView enum.
-                 * @name google.appengine.v1.VersionView
-                 * @enum {number}
-                 * @property {number} BASIC=0 BASIC value
-                 * @property {number} FULL=1 FULL value
-                 */
-                v1.VersionView = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "BASIC"] = 0;
-                    values[valuesById[1] = "FULL"] = 1;
-                    return values;
-                })();
-    
                 v1.DeleteVersionRequest = (function() {
     
                     /**
@@ -16763,6 +16763,173 @@
                     };
     
                     return DeleteVersionRequest;
+                })();
+    
+                v1.Instances = (function() {
+    
+                    /**
+                     * Constructs a new Instances service.
+                     * @memberof google.appengine.v1
+                     * @classdesc Represents an Instances
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function Instances(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (Instances.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Instances;
+    
+                    /**
+                     * Creates new Instances service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.appengine.v1.Instances
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {Instances} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    Instances.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Instances#listInstances}.
+                     * @memberof google.appengine.v1.Instances
+                     * @typedef ListInstancesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.ListInstancesResponse} [response] ListInstancesResponse
+                     */
+    
+                    /**
+                     * Calls ListInstances.
+                     * @function listInstances
+                     * @memberof google.appengine.v1.Instances
+                     * @instance
+                     * @param {google.appengine.v1.IListInstancesRequest} request ListInstancesRequest message or plain object
+                     * @param {google.appengine.v1.Instances.ListInstancesCallback} callback Node-style callback called with the error, if any, and ListInstancesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Instances.prototype.listInstances = function listInstances(request, callback) {
+                        return this.rpcCall(listInstances, $root.google.appengine.v1.ListInstancesRequest, $root.google.appengine.v1.ListInstancesResponse, request, callback);
+                    }, "name", { value: "ListInstances" });
+    
+                    /**
+                     * Calls ListInstances.
+                     * @function listInstances
+                     * @memberof google.appengine.v1.Instances
+                     * @instance
+                     * @param {google.appengine.v1.IListInstancesRequest} request ListInstancesRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.ListInstancesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Instances#getInstance}.
+                     * @memberof google.appengine.v1.Instances
+                     * @typedef GetInstanceCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.Instance} [response] Instance
+                     */
+    
+                    /**
+                     * Calls GetInstance.
+                     * @function getInstance
+                     * @memberof google.appengine.v1.Instances
+                     * @instance
+                     * @param {google.appengine.v1.IGetInstanceRequest} request GetInstanceRequest message or plain object
+                     * @param {google.appengine.v1.Instances.GetInstanceCallback} callback Node-style callback called with the error, if any, and Instance
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Instances.prototype.getInstance = function getInstance(request, callback) {
+                        return this.rpcCall(getInstance, $root.google.appengine.v1.GetInstanceRequest, $root.google.appengine.v1.Instance, request, callback);
+                    }, "name", { value: "GetInstance" });
+    
+                    /**
+                     * Calls GetInstance.
+                     * @function getInstance
+                     * @memberof google.appengine.v1.Instances
+                     * @instance
+                     * @param {google.appengine.v1.IGetInstanceRequest} request GetInstanceRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.Instance>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Instances#deleteInstance}.
+                     * @memberof google.appengine.v1.Instances
+                     * @typedef DeleteInstanceCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls DeleteInstance.
+                     * @function deleteInstance
+                     * @memberof google.appengine.v1.Instances
+                     * @instance
+                     * @param {google.appengine.v1.IDeleteInstanceRequest} request DeleteInstanceRequest message or plain object
+                     * @param {google.appengine.v1.Instances.DeleteInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Instances.prototype.deleteInstance = function deleteInstance(request, callback) {
+                        return this.rpcCall(deleteInstance, $root.google.appengine.v1.DeleteInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "DeleteInstance" });
+    
+                    /**
+                     * Calls DeleteInstance.
+                     * @function deleteInstance
+                     * @memberof google.appengine.v1.Instances
+                     * @instance
+                     * @param {google.appengine.v1.IDeleteInstanceRequest} request DeleteInstanceRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Instances#debugInstance}.
+                     * @memberof google.appengine.v1.Instances
+                     * @typedef DebugInstanceCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls DebugInstance.
+                     * @function debugInstance
+                     * @memberof google.appengine.v1.Instances
+                     * @instance
+                     * @param {google.appengine.v1.IDebugInstanceRequest} request DebugInstanceRequest message or plain object
+                     * @param {google.appengine.v1.Instances.DebugInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Instances.prototype.debugInstance = function debugInstance(request, callback) {
+                        return this.rpcCall(debugInstance, $root.google.appengine.v1.DebugInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "DebugInstance" });
+    
+                    /**
+                     * Calls DebugInstance.
+                     * @function debugInstance
+                     * @memberof google.appengine.v1.Instances
+                     * @instance
+                     * @param {google.appengine.v1.IDebugInstanceRequest} request DebugInstanceRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    return Instances;
                 })();
     
                 v1.ListInstancesRequest = (function() {
@@ -17812,6 +17979,239 @@
                     return DebugInstanceRequest;
                 })();
     
+                v1.Firewall = (function() {
+    
+                    /**
+                     * Constructs a new Firewall service.
+                     * @memberof google.appengine.v1
+                     * @classdesc Represents a Firewall
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function Firewall(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (Firewall.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Firewall;
+    
+                    /**
+                     * Creates new Firewall service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.appengine.v1.Firewall
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {Firewall} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    Firewall.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Firewall#listIngressRules}.
+                     * @memberof google.appengine.v1.Firewall
+                     * @typedef ListIngressRulesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.ListIngressRulesResponse} [response] ListIngressRulesResponse
+                     */
+    
+                    /**
+                     * Calls ListIngressRules.
+                     * @function listIngressRules
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IListIngressRulesRequest} request ListIngressRulesRequest message or plain object
+                     * @param {google.appengine.v1.Firewall.ListIngressRulesCallback} callback Node-style callback called with the error, if any, and ListIngressRulesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Firewall.prototype.listIngressRules = function listIngressRules(request, callback) {
+                        return this.rpcCall(listIngressRules, $root.google.appengine.v1.ListIngressRulesRequest, $root.google.appengine.v1.ListIngressRulesResponse, request, callback);
+                    }, "name", { value: "ListIngressRules" });
+    
+                    /**
+                     * Calls ListIngressRules.
+                     * @function listIngressRules
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IListIngressRulesRequest} request ListIngressRulesRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.ListIngressRulesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Firewall#batchUpdateIngressRules}.
+                     * @memberof google.appengine.v1.Firewall
+                     * @typedef BatchUpdateIngressRulesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.BatchUpdateIngressRulesResponse} [response] BatchUpdateIngressRulesResponse
+                     */
+    
+                    /**
+                     * Calls BatchUpdateIngressRules.
+                     * @function batchUpdateIngressRules
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IBatchUpdateIngressRulesRequest} request BatchUpdateIngressRulesRequest message or plain object
+                     * @param {google.appengine.v1.Firewall.BatchUpdateIngressRulesCallback} callback Node-style callback called with the error, if any, and BatchUpdateIngressRulesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Firewall.prototype.batchUpdateIngressRules = function batchUpdateIngressRules(request, callback) {
+                        return this.rpcCall(batchUpdateIngressRules, $root.google.appengine.v1.BatchUpdateIngressRulesRequest, $root.google.appengine.v1.BatchUpdateIngressRulesResponse, request, callback);
+                    }, "name", { value: "BatchUpdateIngressRules" });
+    
+                    /**
+                     * Calls BatchUpdateIngressRules.
+                     * @function batchUpdateIngressRules
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IBatchUpdateIngressRulesRequest} request BatchUpdateIngressRulesRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.BatchUpdateIngressRulesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Firewall#createIngressRule}.
+                     * @memberof google.appengine.v1.Firewall
+                     * @typedef CreateIngressRuleCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.FirewallRule} [response] FirewallRule
+                     */
+    
+                    /**
+                     * Calls CreateIngressRule.
+                     * @function createIngressRule
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.ICreateIngressRuleRequest} request CreateIngressRuleRequest message or plain object
+                     * @param {google.appengine.v1.Firewall.CreateIngressRuleCallback} callback Node-style callback called with the error, if any, and FirewallRule
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Firewall.prototype.createIngressRule = function createIngressRule(request, callback) {
+                        return this.rpcCall(createIngressRule, $root.google.appengine.v1.CreateIngressRuleRequest, $root.google.appengine.v1.FirewallRule, request, callback);
+                    }, "name", { value: "CreateIngressRule" });
+    
+                    /**
+                     * Calls CreateIngressRule.
+                     * @function createIngressRule
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.ICreateIngressRuleRequest} request CreateIngressRuleRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.FirewallRule>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Firewall#getIngressRule}.
+                     * @memberof google.appengine.v1.Firewall
+                     * @typedef GetIngressRuleCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.FirewallRule} [response] FirewallRule
+                     */
+    
+                    /**
+                     * Calls GetIngressRule.
+                     * @function getIngressRule
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IGetIngressRuleRequest} request GetIngressRuleRequest message or plain object
+                     * @param {google.appengine.v1.Firewall.GetIngressRuleCallback} callback Node-style callback called with the error, if any, and FirewallRule
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Firewall.prototype.getIngressRule = function getIngressRule(request, callback) {
+                        return this.rpcCall(getIngressRule, $root.google.appengine.v1.GetIngressRuleRequest, $root.google.appengine.v1.FirewallRule, request, callback);
+                    }, "name", { value: "GetIngressRule" });
+    
+                    /**
+                     * Calls GetIngressRule.
+                     * @function getIngressRule
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IGetIngressRuleRequest} request GetIngressRuleRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.FirewallRule>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Firewall#updateIngressRule}.
+                     * @memberof google.appengine.v1.Firewall
+                     * @typedef UpdateIngressRuleCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.FirewallRule} [response] FirewallRule
+                     */
+    
+                    /**
+                     * Calls UpdateIngressRule.
+                     * @function updateIngressRule
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IUpdateIngressRuleRequest} request UpdateIngressRuleRequest message or plain object
+                     * @param {google.appengine.v1.Firewall.UpdateIngressRuleCallback} callback Node-style callback called with the error, if any, and FirewallRule
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Firewall.prototype.updateIngressRule = function updateIngressRule(request, callback) {
+                        return this.rpcCall(updateIngressRule, $root.google.appengine.v1.UpdateIngressRuleRequest, $root.google.appengine.v1.FirewallRule, request, callback);
+                    }, "name", { value: "UpdateIngressRule" });
+    
+                    /**
+                     * Calls UpdateIngressRule.
+                     * @function updateIngressRule
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IUpdateIngressRuleRequest} request UpdateIngressRuleRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.FirewallRule>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.Firewall#deleteIngressRule}.
+                     * @memberof google.appengine.v1.Firewall
+                     * @typedef DeleteIngressRuleCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteIngressRule.
+                     * @function deleteIngressRule
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IDeleteIngressRuleRequest} request DeleteIngressRuleRequest message or plain object
+                     * @param {google.appengine.v1.Firewall.DeleteIngressRuleCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Firewall.prototype.deleteIngressRule = function deleteIngressRule(request, callback) {
+                        return this.rpcCall(deleteIngressRule, $root.google.appengine.v1.DeleteIngressRuleRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteIngressRule" });
+    
+                    /**
+                     * Calls DeleteIngressRule.
+                     * @function deleteIngressRule
+                     * @memberof google.appengine.v1.Firewall
+                     * @instance
+                     * @param {google.appengine.v1.IDeleteIngressRuleRequest} request DeleteIngressRuleRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    return Firewall;
+                })();
+    
                 v1.ListIngressRulesRequest = (function() {
     
                     /**
@@ -18064,173 +18464,6 @@
                     };
     
                     return ListIngressRulesRequest;
-                })();
-    
-                v1.Instances = (function() {
-    
-                    /**
-                     * Constructs a new Instances service.
-                     * @memberof google.appengine.v1
-                     * @classdesc Represents an Instances
-                     * @extends $protobuf.rpc.Service
-                     * @constructor
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    function Instances(rpcImpl, requestDelimited, responseDelimited) {
-                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                    }
-    
-                    (Instances.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Instances;
-    
-                    /**
-                     * Creates new Instances service using the specified rpc implementation.
-                     * @function create
-                     * @memberof google.appengine.v1.Instances
-                     * @static
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     * @returns {Instances} RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    Instances.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                        return new this(rpcImpl, requestDelimited, responseDelimited);
-                    };
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Instances#listInstances}.
-                     * @memberof google.appengine.v1.Instances
-                     * @typedef ListInstancesCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.ListInstancesResponse} [response] ListInstancesResponse
-                     */
-    
-                    /**
-                     * Calls ListInstances.
-                     * @function listInstances
-                     * @memberof google.appengine.v1.Instances
-                     * @instance
-                     * @param {google.appengine.v1.IListInstancesRequest} request ListInstancesRequest message or plain object
-                     * @param {google.appengine.v1.Instances.ListInstancesCallback} callback Node-style callback called with the error, if any, and ListInstancesResponse
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Instances.prototype.listInstances = function listInstances(request, callback) {
-                        return this.rpcCall(listInstances, $root.google.appengine.v1.ListInstancesRequest, $root.google.appengine.v1.ListInstancesResponse, request, callback);
-                    }, "name", { value: "ListInstances" });
-    
-                    /**
-                     * Calls ListInstances.
-                     * @function listInstances
-                     * @memberof google.appengine.v1.Instances
-                     * @instance
-                     * @param {google.appengine.v1.IListInstancesRequest} request ListInstancesRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.ListInstancesResponse>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Instances#getInstance}.
-                     * @memberof google.appengine.v1.Instances
-                     * @typedef GetInstanceCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.Instance} [response] Instance
-                     */
-    
-                    /**
-                     * Calls GetInstance.
-                     * @function getInstance
-                     * @memberof google.appengine.v1.Instances
-                     * @instance
-                     * @param {google.appengine.v1.IGetInstanceRequest} request GetInstanceRequest message or plain object
-                     * @param {google.appengine.v1.Instances.GetInstanceCallback} callback Node-style callback called with the error, if any, and Instance
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Instances.prototype.getInstance = function getInstance(request, callback) {
-                        return this.rpcCall(getInstance, $root.google.appengine.v1.GetInstanceRequest, $root.google.appengine.v1.Instance, request, callback);
-                    }, "name", { value: "GetInstance" });
-    
-                    /**
-                     * Calls GetInstance.
-                     * @function getInstance
-                     * @memberof google.appengine.v1.Instances
-                     * @instance
-                     * @param {google.appengine.v1.IGetInstanceRequest} request GetInstanceRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.Instance>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Instances#deleteInstance}.
-                     * @memberof google.appengine.v1.Instances
-                     * @typedef DeleteInstanceCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.longrunning.Operation} [response] Operation
-                     */
-    
-                    /**
-                     * Calls DeleteInstance.
-                     * @function deleteInstance
-                     * @memberof google.appengine.v1.Instances
-                     * @instance
-                     * @param {google.appengine.v1.IDeleteInstanceRequest} request DeleteInstanceRequest message or plain object
-                     * @param {google.appengine.v1.Instances.DeleteInstanceCallback} callback Node-style callback called with the error, if any, and Operation
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Instances.prototype.deleteInstance = function deleteInstance(request, callback) {
-                        return this.rpcCall(deleteInstance, $root.google.appengine.v1.DeleteInstanceRequest, $root.google.longrunning.Operation, request, callback);
-                    }, "name", { value: "DeleteInstance" });
-    
-                    /**
-                     * Calls DeleteInstance.
-                     * @function deleteInstance
-                     * @memberof google.appengine.v1.Instances
-                     * @instance
-                     * @param {google.appengine.v1.IDeleteInstanceRequest} request DeleteInstanceRequest message or plain object
-                     * @returns {Promise<google.longrunning.Operation>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Instances#debugInstance}.
-                     * @memberof google.appengine.v1.Instances
-                     * @typedef DebugInstanceCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.longrunning.Operation} [response] Operation
-                     */
-    
-                    /**
-                     * Calls DebugInstance.
-                     * @function debugInstance
-                     * @memberof google.appengine.v1.Instances
-                     * @instance
-                     * @param {google.appengine.v1.IDebugInstanceRequest} request DebugInstanceRequest message or plain object
-                     * @param {google.appengine.v1.Instances.DebugInstanceCallback} callback Node-style callback called with the error, if any, and Operation
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Instances.prototype.debugInstance = function debugInstance(request, callback) {
-                        return this.rpcCall(debugInstance, $root.google.appengine.v1.DebugInstanceRequest, $root.google.longrunning.Operation, request, callback);
-                    }, "name", { value: "DebugInstance" });
-    
-                    /**
-                     * Calls DebugInstance.
-                     * @function debugInstance
-                     * @memberof google.appengine.v1.Instances
-                     * @instance
-                     * @param {google.appengine.v1.IDebugInstanceRequest} request DebugInstanceRequest message or plain object
-                     * @returns {Promise<google.longrunning.Operation>} Promise
-                     * @variation 2
-                     */
-    
-                    return Instances;
                 })();
     
                 v1.ListIngressRulesResponse = (function() {
@@ -19734,6 +19967,74 @@
                     return DeleteIngressRuleRequest;
                 })();
     
+                v1.AuthorizedDomains = (function() {
+    
+                    /**
+                     * Constructs a new AuthorizedDomains service.
+                     * @memberof google.appengine.v1
+                     * @classdesc Represents an AuthorizedDomains
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function AuthorizedDomains(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (AuthorizedDomains.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AuthorizedDomains;
+    
+                    /**
+                     * Creates new AuthorizedDomains service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.appengine.v1.AuthorizedDomains
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {AuthorizedDomains} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    AuthorizedDomains.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.AuthorizedDomains#listAuthorizedDomains}.
+                     * @memberof google.appengine.v1.AuthorizedDomains
+                     * @typedef ListAuthorizedDomainsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.ListAuthorizedDomainsResponse} [response] ListAuthorizedDomainsResponse
+                     */
+    
+                    /**
+                     * Calls ListAuthorizedDomains.
+                     * @function listAuthorizedDomains
+                     * @memberof google.appengine.v1.AuthorizedDomains
+                     * @instance
+                     * @param {google.appengine.v1.IListAuthorizedDomainsRequest} request ListAuthorizedDomainsRequest message or plain object
+                     * @param {google.appengine.v1.AuthorizedDomains.ListAuthorizedDomainsCallback} callback Node-style callback called with the error, if any, and ListAuthorizedDomainsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AuthorizedDomains.prototype.listAuthorizedDomains = function listAuthorizedDomains(request, callback) {
+                        return this.rpcCall(listAuthorizedDomains, $root.google.appengine.v1.ListAuthorizedDomainsRequest, $root.google.appengine.v1.ListAuthorizedDomainsResponse, request, callback);
+                    }, "name", { value: "ListAuthorizedDomains" });
+    
+                    /**
+                     * Calls ListAuthorizedDomains.
+                     * @function listAuthorizedDomains
+                     * @memberof google.appengine.v1.AuthorizedDomains
+                     * @instance
+                     * @param {google.appengine.v1.IListAuthorizedDomainsRequest} request ListAuthorizedDomainsRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.ListAuthorizedDomainsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return AuthorizedDomains;
+                })();
+    
                 v1.ListAuthorizedDomainsRequest = (function() {
     
                     /**
@@ -20195,6 +20496,206 @@
                     };
     
                     return ListAuthorizedDomainsResponse;
+                })();
+    
+                v1.AuthorizedCertificates = (function() {
+    
+                    /**
+                     * Constructs a new AuthorizedCertificates service.
+                     * @memberof google.appengine.v1
+                     * @classdesc Represents an AuthorizedCertificates
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function AuthorizedCertificates(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (AuthorizedCertificates.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AuthorizedCertificates;
+    
+                    /**
+                     * Creates new AuthorizedCertificates service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {AuthorizedCertificates} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    AuthorizedCertificates.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#listAuthorizedCertificates}.
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @typedef ListAuthorizedCertificatesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.ListAuthorizedCertificatesResponse} [response] ListAuthorizedCertificatesResponse
+                     */
+    
+                    /**
+                     * Calls ListAuthorizedCertificates.
+                     * @function listAuthorizedCertificates
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.IListAuthorizedCertificatesRequest} request ListAuthorizedCertificatesRequest message or plain object
+                     * @param {google.appengine.v1.AuthorizedCertificates.ListAuthorizedCertificatesCallback} callback Node-style callback called with the error, if any, and ListAuthorizedCertificatesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AuthorizedCertificates.prototype.listAuthorizedCertificates = function listAuthorizedCertificates(request, callback) {
+                        return this.rpcCall(listAuthorizedCertificates, $root.google.appengine.v1.ListAuthorizedCertificatesRequest, $root.google.appengine.v1.ListAuthorizedCertificatesResponse, request, callback);
+                    }, "name", { value: "ListAuthorizedCertificates" });
+    
+                    /**
+                     * Calls ListAuthorizedCertificates.
+                     * @function listAuthorizedCertificates
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.IListAuthorizedCertificatesRequest} request ListAuthorizedCertificatesRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.ListAuthorizedCertificatesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#getAuthorizedCertificate}.
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @typedef GetAuthorizedCertificateCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.AuthorizedCertificate} [response] AuthorizedCertificate
+                     */
+    
+                    /**
+                     * Calls GetAuthorizedCertificate.
+                     * @function getAuthorizedCertificate
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.IGetAuthorizedCertificateRequest} request GetAuthorizedCertificateRequest message or plain object
+                     * @param {google.appengine.v1.AuthorizedCertificates.GetAuthorizedCertificateCallback} callback Node-style callback called with the error, if any, and AuthorizedCertificate
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AuthorizedCertificates.prototype.getAuthorizedCertificate = function getAuthorizedCertificate(request, callback) {
+                        return this.rpcCall(getAuthorizedCertificate, $root.google.appengine.v1.GetAuthorizedCertificateRequest, $root.google.appengine.v1.AuthorizedCertificate, request, callback);
+                    }, "name", { value: "GetAuthorizedCertificate" });
+    
+                    /**
+                     * Calls GetAuthorizedCertificate.
+                     * @function getAuthorizedCertificate
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.IGetAuthorizedCertificateRequest} request GetAuthorizedCertificateRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.AuthorizedCertificate>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#createAuthorizedCertificate}.
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @typedef CreateAuthorizedCertificateCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.AuthorizedCertificate} [response] AuthorizedCertificate
+                     */
+    
+                    /**
+                     * Calls CreateAuthorizedCertificate.
+                     * @function createAuthorizedCertificate
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.ICreateAuthorizedCertificateRequest} request CreateAuthorizedCertificateRequest message or plain object
+                     * @param {google.appengine.v1.AuthorizedCertificates.CreateAuthorizedCertificateCallback} callback Node-style callback called with the error, if any, and AuthorizedCertificate
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AuthorizedCertificates.prototype.createAuthorizedCertificate = function createAuthorizedCertificate(request, callback) {
+                        return this.rpcCall(createAuthorizedCertificate, $root.google.appengine.v1.CreateAuthorizedCertificateRequest, $root.google.appengine.v1.AuthorizedCertificate, request, callback);
+                    }, "name", { value: "CreateAuthorizedCertificate" });
+    
+                    /**
+                     * Calls CreateAuthorizedCertificate.
+                     * @function createAuthorizedCertificate
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.ICreateAuthorizedCertificateRequest} request CreateAuthorizedCertificateRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.AuthorizedCertificate>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#updateAuthorizedCertificate}.
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @typedef UpdateAuthorizedCertificateCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.AuthorizedCertificate} [response] AuthorizedCertificate
+                     */
+    
+                    /**
+                     * Calls UpdateAuthorizedCertificate.
+                     * @function updateAuthorizedCertificate
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.IUpdateAuthorizedCertificateRequest} request UpdateAuthorizedCertificateRequest message or plain object
+                     * @param {google.appengine.v1.AuthorizedCertificates.UpdateAuthorizedCertificateCallback} callback Node-style callback called with the error, if any, and AuthorizedCertificate
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AuthorizedCertificates.prototype.updateAuthorizedCertificate = function updateAuthorizedCertificate(request, callback) {
+                        return this.rpcCall(updateAuthorizedCertificate, $root.google.appengine.v1.UpdateAuthorizedCertificateRequest, $root.google.appengine.v1.AuthorizedCertificate, request, callback);
+                    }, "name", { value: "UpdateAuthorizedCertificate" });
+    
+                    /**
+                     * Calls UpdateAuthorizedCertificate.
+                     * @function updateAuthorizedCertificate
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.IUpdateAuthorizedCertificateRequest} request UpdateAuthorizedCertificateRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.AuthorizedCertificate>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#deleteAuthorizedCertificate}.
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @typedef DeleteAuthorizedCertificateCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteAuthorizedCertificate.
+                     * @function deleteAuthorizedCertificate
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.IDeleteAuthorizedCertificateRequest} request DeleteAuthorizedCertificateRequest message or plain object
+                     * @param {google.appengine.v1.AuthorizedCertificates.DeleteAuthorizedCertificateCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AuthorizedCertificates.prototype.deleteAuthorizedCertificate = function deleteAuthorizedCertificate(request, callback) {
+                        return this.rpcCall(deleteAuthorizedCertificate, $root.google.appengine.v1.DeleteAuthorizedCertificateRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteAuthorizedCertificate" });
+    
+                    /**
+                     * Calls DeleteAuthorizedCertificate.
+                     * @function deleteAuthorizedCertificate
+                     * @memberof google.appengine.v1.AuthorizedCertificates
+                     * @instance
+                     * @param {google.appengine.v1.IDeleteAuthorizedCertificateRequest} request DeleteAuthorizedCertificateRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    return AuthorizedCertificates;
                 })();
     
                 v1.ListAuthorizedCertificatesRequest = (function() {
@@ -20695,239 +21196,6 @@
                     return ListAuthorizedCertificatesResponse;
                 })();
     
-                v1.Firewall = (function() {
-    
-                    /**
-                     * Constructs a new Firewall service.
-                     * @memberof google.appengine.v1
-                     * @classdesc Represents a Firewall
-                     * @extends $protobuf.rpc.Service
-                     * @constructor
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    function Firewall(rpcImpl, requestDelimited, responseDelimited) {
-                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                    }
-    
-                    (Firewall.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Firewall;
-    
-                    /**
-                     * Creates new Firewall service using the specified rpc implementation.
-                     * @function create
-                     * @memberof google.appengine.v1.Firewall
-                     * @static
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     * @returns {Firewall} RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    Firewall.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                        return new this(rpcImpl, requestDelimited, responseDelimited);
-                    };
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Firewall#listIngressRules}.
-                     * @memberof google.appengine.v1.Firewall
-                     * @typedef ListIngressRulesCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.ListIngressRulesResponse} [response] ListIngressRulesResponse
-                     */
-    
-                    /**
-                     * Calls ListIngressRules.
-                     * @function listIngressRules
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IListIngressRulesRequest} request ListIngressRulesRequest message or plain object
-                     * @param {google.appengine.v1.Firewall.ListIngressRulesCallback} callback Node-style callback called with the error, if any, and ListIngressRulesResponse
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Firewall.prototype.listIngressRules = function listIngressRules(request, callback) {
-                        return this.rpcCall(listIngressRules, $root.google.appengine.v1.ListIngressRulesRequest, $root.google.appengine.v1.ListIngressRulesResponse, request, callback);
-                    }, "name", { value: "ListIngressRules" });
-    
-                    /**
-                     * Calls ListIngressRules.
-                     * @function listIngressRules
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IListIngressRulesRequest} request ListIngressRulesRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.ListIngressRulesResponse>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Firewall#batchUpdateIngressRules}.
-                     * @memberof google.appengine.v1.Firewall
-                     * @typedef BatchUpdateIngressRulesCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.BatchUpdateIngressRulesResponse} [response] BatchUpdateIngressRulesResponse
-                     */
-    
-                    /**
-                     * Calls BatchUpdateIngressRules.
-                     * @function batchUpdateIngressRules
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IBatchUpdateIngressRulesRequest} request BatchUpdateIngressRulesRequest message or plain object
-                     * @param {google.appengine.v1.Firewall.BatchUpdateIngressRulesCallback} callback Node-style callback called with the error, if any, and BatchUpdateIngressRulesResponse
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Firewall.prototype.batchUpdateIngressRules = function batchUpdateIngressRules(request, callback) {
-                        return this.rpcCall(batchUpdateIngressRules, $root.google.appengine.v1.BatchUpdateIngressRulesRequest, $root.google.appengine.v1.BatchUpdateIngressRulesResponse, request, callback);
-                    }, "name", { value: "BatchUpdateIngressRules" });
-    
-                    /**
-                     * Calls BatchUpdateIngressRules.
-                     * @function batchUpdateIngressRules
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IBatchUpdateIngressRulesRequest} request BatchUpdateIngressRulesRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.BatchUpdateIngressRulesResponse>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Firewall#createIngressRule}.
-                     * @memberof google.appengine.v1.Firewall
-                     * @typedef CreateIngressRuleCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.FirewallRule} [response] FirewallRule
-                     */
-    
-                    /**
-                     * Calls CreateIngressRule.
-                     * @function createIngressRule
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.ICreateIngressRuleRequest} request CreateIngressRuleRequest message or plain object
-                     * @param {google.appengine.v1.Firewall.CreateIngressRuleCallback} callback Node-style callback called with the error, if any, and FirewallRule
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Firewall.prototype.createIngressRule = function createIngressRule(request, callback) {
-                        return this.rpcCall(createIngressRule, $root.google.appengine.v1.CreateIngressRuleRequest, $root.google.appengine.v1.FirewallRule, request, callback);
-                    }, "name", { value: "CreateIngressRule" });
-    
-                    /**
-                     * Calls CreateIngressRule.
-                     * @function createIngressRule
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.ICreateIngressRuleRequest} request CreateIngressRuleRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.FirewallRule>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Firewall#getIngressRule}.
-                     * @memberof google.appengine.v1.Firewall
-                     * @typedef GetIngressRuleCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.FirewallRule} [response] FirewallRule
-                     */
-    
-                    /**
-                     * Calls GetIngressRule.
-                     * @function getIngressRule
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IGetIngressRuleRequest} request GetIngressRuleRequest message or plain object
-                     * @param {google.appengine.v1.Firewall.GetIngressRuleCallback} callback Node-style callback called with the error, if any, and FirewallRule
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Firewall.prototype.getIngressRule = function getIngressRule(request, callback) {
-                        return this.rpcCall(getIngressRule, $root.google.appengine.v1.GetIngressRuleRequest, $root.google.appengine.v1.FirewallRule, request, callback);
-                    }, "name", { value: "GetIngressRule" });
-    
-                    /**
-                     * Calls GetIngressRule.
-                     * @function getIngressRule
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IGetIngressRuleRequest} request GetIngressRuleRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.FirewallRule>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Firewall#updateIngressRule}.
-                     * @memberof google.appengine.v1.Firewall
-                     * @typedef UpdateIngressRuleCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.FirewallRule} [response] FirewallRule
-                     */
-    
-                    /**
-                     * Calls UpdateIngressRule.
-                     * @function updateIngressRule
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IUpdateIngressRuleRequest} request UpdateIngressRuleRequest message or plain object
-                     * @param {google.appengine.v1.Firewall.UpdateIngressRuleCallback} callback Node-style callback called with the error, if any, and FirewallRule
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Firewall.prototype.updateIngressRule = function updateIngressRule(request, callback) {
-                        return this.rpcCall(updateIngressRule, $root.google.appengine.v1.UpdateIngressRuleRequest, $root.google.appengine.v1.FirewallRule, request, callback);
-                    }, "name", { value: "UpdateIngressRule" });
-    
-                    /**
-                     * Calls UpdateIngressRule.
-                     * @function updateIngressRule
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IUpdateIngressRuleRequest} request UpdateIngressRuleRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.FirewallRule>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.Firewall#deleteIngressRule}.
-                     * @memberof google.appengine.v1.Firewall
-                     * @typedef DeleteIngressRuleCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.protobuf.Empty} [response] Empty
-                     */
-    
-                    /**
-                     * Calls DeleteIngressRule.
-                     * @function deleteIngressRule
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IDeleteIngressRuleRequest} request DeleteIngressRuleRequest message or plain object
-                     * @param {google.appengine.v1.Firewall.DeleteIngressRuleCallback} callback Node-style callback called with the error, if any, and Empty
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(Firewall.prototype.deleteIngressRule = function deleteIngressRule(request, callback) {
-                        return this.rpcCall(deleteIngressRule, $root.google.appengine.v1.DeleteIngressRuleRequest, $root.google.protobuf.Empty, request, callback);
-                    }, "name", { value: "DeleteIngressRule" });
-    
-                    /**
-                     * Calls DeleteIngressRule.
-                     * @function deleteIngressRule
-                     * @memberof google.appengine.v1.Firewall
-                     * @instance
-                     * @param {google.appengine.v1.IDeleteIngressRuleRequest} request DeleteIngressRuleRequest message or plain object
-                     * @returns {Promise<google.protobuf.Empty>} Promise
-                     * @variation 2
-                     */
-    
-                    return Firewall;
-                })();
-    
                 v1.GetAuthorizedCertificateRequest = (function() {
     
                     /**
@@ -21149,6 +21417,20 @@
                     };
     
                     return GetAuthorizedCertificateRequest;
+                })();
+    
+                /**
+                 * AuthorizedCertificateView enum.
+                 * @name google.appengine.v1.AuthorizedCertificateView
+                 * @enum {number}
+                 * @property {number} BASIC_CERTIFICATE=0 BASIC_CERTIFICATE value
+                 * @property {number} FULL_CERTIFICATE=1 FULL_CERTIFICATE value
+                 */
+                v1.AuthorizedCertificateView = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "BASIC_CERTIFICATE"] = 0;
+                    values[valuesById[1] = "FULL_CERTIFICATE"] = 1;
+                    return values;
                 })();
     
                 v1.CreateAuthorizedCertificateRequest = (function() {
@@ -21793,6 +22075,206 @@
                     };
     
                     return DeleteAuthorizedCertificateRequest;
+                })();
+    
+                v1.DomainMappings = (function() {
+    
+                    /**
+                     * Constructs a new DomainMappings service.
+                     * @memberof google.appengine.v1
+                     * @classdesc Represents a DomainMappings
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function DomainMappings(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (DomainMappings.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DomainMappings;
+    
+                    /**
+                     * Creates new DomainMappings service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {DomainMappings} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    DomainMappings.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.DomainMappings#listDomainMappings}.
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @typedef ListDomainMappingsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.ListDomainMappingsResponse} [response] ListDomainMappingsResponse
+                     */
+    
+                    /**
+                     * Calls ListDomainMappings.
+                     * @function listDomainMappings
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.IListDomainMappingsRequest} request ListDomainMappingsRequest message or plain object
+                     * @param {google.appengine.v1.DomainMappings.ListDomainMappingsCallback} callback Node-style callback called with the error, if any, and ListDomainMappingsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(DomainMappings.prototype.listDomainMappings = function listDomainMappings(request, callback) {
+                        return this.rpcCall(listDomainMappings, $root.google.appengine.v1.ListDomainMappingsRequest, $root.google.appengine.v1.ListDomainMappingsResponse, request, callback);
+                    }, "name", { value: "ListDomainMappings" });
+    
+                    /**
+                     * Calls ListDomainMappings.
+                     * @function listDomainMappings
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.IListDomainMappingsRequest} request ListDomainMappingsRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.ListDomainMappingsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.DomainMappings#getDomainMapping}.
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @typedef GetDomainMappingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.appengine.v1.DomainMapping} [response] DomainMapping
+                     */
+    
+                    /**
+                     * Calls GetDomainMapping.
+                     * @function getDomainMapping
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.IGetDomainMappingRequest} request GetDomainMappingRequest message or plain object
+                     * @param {google.appengine.v1.DomainMappings.GetDomainMappingCallback} callback Node-style callback called with the error, if any, and DomainMapping
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(DomainMappings.prototype.getDomainMapping = function getDomainMapping(request, callback) {
+                        return this.rpcCall(getDomainMapping, $root.google.appengine.v1.GetDomainMappingRequest, $root.google.appengine.v1.DomainMapping, request, callback);
+                    }, "name", { value: "GetDomainMapping" });
+    
+                    /**
+                     * Calls GetDomainMapping.
+                     * @function getDomainMapping
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.IGetDomainMappingRequest} request GetDomainMappingRequest message or plain object
+                     * @returns {Promise<google.appengine.v1.DomainMapping>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.DomainMappings#createDomainMapping}.
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @typedef CreateDomainMappingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls CreateDomainMapping.
+                     * @function createDomainMapping
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.ICreateDomainMappingRequest} request CreateDomainMappingRequest message or plain object
+                     * @param {google.appengine.v1.DomainMappings.CreateDomainMappingCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(DomainMappings.prototype.createDomainMapping = function createDomainMapping(request, callback) {
+                        return this.rpcCall(createDomainMapping, $root.google.appengine.v1.CreateDomainMappingRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "CreateDomainMapping" });
+    
+                    /**
+                     * Calls CreateDomainMapping.
+                     * @function createDomainMapping
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.ICreateDomainMappingRequest} request CreateDomainMappingRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.DomainMappings#updateDomainMapping}.
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @typedef UpdateDomainMappingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls UpdateDomainMapping.
+                     * @function updateDomainMapping
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.IUpdateDomainMappingRequest} request UpdateDomainMappingRequest message or plain object
+                     * @param {google.appengine.v1.DomainMappings.UpdateDomainMappingCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(DomainMappings.prototype.updateDomainMapping = function updateDomainMapping(request, callback) {
+                        return this.rpcCall(updateDomainMapping, $root.google.appengine.v1.UpdateDomainMappingRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "UpdateDomainMapping" });
+    
+                    /**
+                     * Calls UpdateDomainMapping.
+                     * @function updateDomainMapping
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.IUpdateDomainMappingRequest} request UpdateDomainMappingRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.appengine.v1.DomainMappings#deleteDomainMapping}.
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @typedef DeleteDomainMappingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls DeleteDomainMapping.
+                     * @function deleteDomainMapping
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.IDeleteDomainMappingRequest} request DeleteDomainMappingRequest message or plain object
+                     * @param {google.appengine.v1.DomainMappings.DeleteDomainMappingCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(DomainMappings.prototype.deleteDomainMapping = function deleteDomainMapping(request, callback) {
+                        return this.rpcCall(deleteDomainMapping, $root.google.appengine.v1.DeleteDomainMappingRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "DeleteDomainMapping" });
+    
+                    /**
+                     * Calls DeleteDomainMapping.
+                     * @function deleteDomainMapping
+                     * @memberof google.appengine.v1.DomainMappings
+                     * @instance
+                     * @param {google.appengine.v1.IDeleteDomainMappingRequest} request DeleteDomainMappingRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    return DomainMappings;
                 })();
     
                 v1.ListDomainMappingsRequest = (function() {
@@ -22445,6 +22927,22 @@
                     return GetDomainMappingRequest;
                 })();
     
+                /**
+                 * DomainOverrideStrategy enum.
+                 * @name google.appengine.v1.DomainOverrideStrategy
+                 * @enum {number}
+                 * @property {number} UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY=0 UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY value
+                 * @property {number} STRICT=1 STRICT value
+                 * @property {number} OVERRIDE=2 OVERRIDE value
+                 */
+                v1.DomainOverrideStrategy = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY"] = 0;
+                    values[valuesById[1] = "STRICT"] = 1;
+                    values[valuesById[2] = "OVERRIDE"] = 2;
+                    return values;
+                })();
+    
                 v1.CreateDomainMappingRequest = (function() {
     
                     /**
@@ -22698,74 +23196,6 @@
                     };
     
                     return CreateDomainMappingRequest;
-                })();
-    
-                v1.AuthorizedDomains = (function() {
-    
-                    /**
-                     * Constructs a new AuthorizedDomains service.
-                     * @memberof google.appengine.v1
-                     * @classdesc Represents an AuthorizedDomains
-                     * @extends $protobuf.rpc.Service
-                     * @constructor
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    function AuthorizedDomains(rpcImpl, requestDelimited, responseDelimited) {
-                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                    }
-    
-                    (AuthorizedDomains.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AuthorizedDomains;
-    
-                    /**
-                     * Creates new AuthorizedDomains service using the specified rpc implementation.
-                     * @function create
-                     * @memberof google.appengine.v1.AuthorizedDomains
-                     * @static
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     * @returns {AuthorizedDomains} RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    AuthorizedDomains.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                        return new this(rpcImpl, requestDelimited, responseDelimited);
-                    };
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.AuthorizedDomains#listAuthorizedDomains}.
-                     * @memberof google.appengine.v1.AuthorizedDomains
-                     * @typedef ListAuthorizedDomainsCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.ListAuthorizedDomainsResponse} [response] ListAuthorizedDomainsResponse
-                     */
-    
-                    /**
-                     * Calls ListAuthorizedDomains.
-                     * @function listAuthorizedDomains
-                     * @memberof google.appengine.v1.AuthorizedDomains
-                     * @instance
-                     * @param {google.appengine.v1.IListAuthorizedDomainsRequest} request ListAuthorizedDomainsRequest message or plain object
-                     * @param {google.appengine.v1.AuthorizedDomains.ListAuthorizedDomainsCallback} callback Node-style callback called with the error, if any, and ListAuthorizedDomainsResponse
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(AuthorizedDomains.prototype.listAuthorizedDomains = function listAuthorizedDomains(request, callback) {
-                        return this.rpcCall(listAuthorizedDomains, $root.google.appengine.v1.ListAuthorizedDomainsRequest, $root.google.appengine.v1.ListAuthorizedDomainsResponse, request, callback);
-                    }, "name", { value: "ListAuthorizedDomains" });
-    
-                    /**
-                     * Calls ListAuthorizedDomains.
-                     * @function listAuthorizedDomains
-                     * @memberof google.appengine.v1.AuthorizedDomains
-                     * @instance
-                     * @param {google.appengine.v1.IListAuthorizedDomainsRequest} request ListAuthorizedDomainsRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.ListAuthorizedDomainsResponse>} Promise
-                     * @variation 2
-                     */
-    
-                    return AuthorizedDomains;
                 })();
     
                 v1.UpdateDomainMappingRequest = (function() {
@@ -23197,436 +23627,6 @@
                     return DeleteDomainMappingRequest;
                 })();
     
-                v1.AuthorizedCertificates = (function() {
-    
-                    /**
-                     * Constructs a new AuthorizedCertificates service.
-                     * @memberof google.appengine.v1
-                     * @classdesc Represents an AuthorizedCertificates
-                     * @extends $protobuf.rpc.Service
-                     * @constructor
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    function AuthorizedCertificates(rpcImpl, requestDelimited, responseDelimited) {
-                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                    }
-    
-                    (AuthorizedCertificates.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AuthorizedCertificates;
-    
-                    /**
-                     * Creates new AuthorizedCertificates service using the specified rpc implementation.
-                     * @function create
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @static
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     * @returns {AuthorizedCertificates} RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    AuthorizedCertificates.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                        return new this(rpcImpl, requestDelimited, responseDelimited);
-                    };
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#listAuthorizedCertificates}.
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @typedef ListAuthorizedCertificatesCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.ListAuthorizedCertificatesResponse} [response] ListAuthorizedCertificatesResponse
-                     */
-    
-                    /**
-                     * Calls ListAuthorizedCertificates.
-                     * @function listAuthorizedCertificates
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.IListAuthorizedCertificatesRequest} request ListAuthorizedCertificatesRequest message or plain object
-                     * @param {google.appengine.v1.AuthorizedCertificates.ListAuthorizedCertificatesCallback} callback Node-style callback called with the error, if any, and ListAuthorizedCertificatesResponse
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(AuthorizedCertificates.prototype.listAuthorizedCertificates = function listAuthorizedCertificates(request, callback) {
-                        return this.rpcCall(listAuthorizedCertificates, $root.google.appengine.v1.ListAuthorizedCertificatesRequest, $root.google.appengine.v1.ListAuthorizedCertificatesResponse, request, callback);
-                    }, "name", { value: "ListAuthorizedCertificates" });
-    
-                    /**
-                     * Calls ListAuthorizedCertificates.
-                     * @function listAuthorizedCertificates
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.IListAuthorizedCertificatesRequest} request ListAuthorizedCertificatesRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.ListAuthorizedCertificatesResponse>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#getAuthorizedCertificate}.
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @typedef GetAuthorizedCertificateCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.AuthorizedCertificate} [response] AuthorizedCertificate
-                     */
-    
-                    /**
-                     * Calls GetAuthorizedCertificate.
-                     * @function getAuthorizedCertificate
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.IGetAuthorizedCertificateRequest} request GetAuthorizedCertificateRequest message or plain object
-                     * @param {google.appengine.v1.AuthorizedCertificates.GetAuthorizedCertificateCallback} callback Node-style callback called with the error, if any, and AuthorizedCertificate
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(AuthorizedCertificates.prototype.getAuthorizedCertificate = function getAuthorizedCertificate(request, callback) {
-                        return this.rpcCall(getAuthorizedCertificate, $root.google.appengine.v1.GetAuthorizedCertificateRequest, $root.google.appengine.v1.AuthorizedCertificate, request, callback);
-                    }, "name", { value: "GetAuthorizedCertificate" });
-    
-                    /**
-                     * Calls GetAuthorizedCertificate.
-                     * @function getAuthorizedCertificate
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.IGetAuthorizedCertificateRequest} request GetAuthorizedCertificateRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.AuthorizedCertificate>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#createAuthorizedCertificate}.
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @typedef CreateAuthorizedCertificateCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.AuthorizedCertificate} [response] AuthorizedCertificate
-                     */
-    
-                    /**
-                     * Calls CreateAuthorizedCertificate.
-                     * @function createAuthorizedCertificate
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.ICreateAuthorizedCertificateRequest} request CreateAuthorizedCertificateRequest message or plain object
-                     * @param {google.appengine.v1.AuthorizedCertificates.CreateAuthorizedCertificateCallback} callback Node-style callback called with the error, if any, and AuthorizedCertificate
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(AuthorizedCertificates.prototype.createAuthorizedCertificate = function createAuthorizedCertificate(request, callback) {
-                        return this.rpcCall(createAuthorizedCertificate, $root.google.appengine.v1.CreateAuthorizedCertificateRequest, $root.google.appengine.v1.AuthorizedCertificate, request, callback);
-                    }, "name", { value: "CreateAuthorizedCertificate" });
-    
-                    /**
-                     * Calls CreateAuthorizedCertificate.
-                     * @function createAuthorizedCertificate
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.ICreateAuthorizedCertificateRequest} request CreateAuthorizedCertificateRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.AuthorizedCertificate>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#updateAuthorizedCertificate}.
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @typedef UpdateAuthorizedCertificateCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.AuthorizedCertificate} [response] AuthorizedCertificate
-                     */
-    
-                    /**
-                     * Calls UpdateAuthorizedCertificate.
-                     * @function updateAuthorizedCertificate
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.IUpdateAuthorizedCertificateRequest} request UpdateAuthorizedCertificateRequest message or plain object
-                     * @param {google.appengine.v1.AuthorizedCertificates.UpdateAuthorizedCertificateCallback} callback Node-style callback called with the error, if any, and AuthorizedCertificate
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(AuthorizedCertificates.prototype.updateAuthorizedCertificate = function updateAuthorizedCertificate(request, callback) {
-                        return this.rpcCall(updateAuthorizedCertificate, $root.google.appengine.v1.UpdateAuthorizedCertificateRequest, $root.google.appengine.v1.AuthorizedCertificate, request, callback);
-                    }, "name", { value: "UpdateAuthorizedCertificate" });
-    
-                    /**
-                     * Calls UpdateAuthorizedCertificate.
-                     * @function updateAuthorizedCertificate
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.IUpdateAuthorizedCertificateRequest} request UpdateAuthorizedCertificateRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.AuthorizedCertificate>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.AuthorizedCertificates#deleteAuthorizedCertificate}.
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @typedef DeleteAuthorizedCertificateCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.protobuf.Empty} [response] Empty
-                     */
-    
-                    /**
-                     * Calls DeleteAuthorizedCertificate.
-                     * @function deleteAuthorizedCertificate
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.IDeleteAuthorizedCertificateRequest} request DeleteAuthorizedCertificateRequest message or plain object
-                     * @param {google.appengine.v1.AuthorizedCertificates.DeleteAuthorizedCertificateCallback} callback Node-style callback called with the error, if any, and Empty
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(AuthorizedCertificates.prototype.deleteAuthorizedCertificate = function deleteAuthorizedCertificate(request, callback) {
-                        return this.rpcCall(deleteAuthorizedCertificate, $root.google.appengine.v1.DeleteAuthorizedCertificateRequest, $root.google.protobuf.Empty, request, callback);
-                    }, "name", { value: "DeleteAuthorizedCertificate" });
-    
-                    /**
-                     * Calls DeleteAuthorizedCertificate.
-                     * @function deleteAuthorizedCertificate
-                     * @memberof google.appengine.v1.AuthorizedCertificates
-                     * @instance
-                     * @param {google.appengine.v1.IDeleteAuthorizedCertificateRequest} request DeleteAuthorizedCertificateRequest message or plain object
-                     * @returns {Promise<google.protobuf.Empty>} Promise
-                     * @variation 2
-                     */
-    
-                    return AuthorizedCertificates;
-                })();
-    
-                /**
-                 * AuthorizedCertificateView enum.
-                 * @name google.appengine.v1.AuthorizedCertificateView
-                 * @enum {number}
-                 * @property {number} BASIC_CERTIFICATE=0 BASIC_CERTIFICATE value
-                 * @property {number} FULL_CERTIFICATE=1 FULL_CERTIFICATE value
-                 */
-                v1.AuthorizedCertificateView = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "BASIC_CERTIFICATE"] = 0;
-                    values[valuesById[1] = "FULL_CERTIFICATE"] = 1;
-                    return values;
-                })();
-    
-                /**
-                 * DomainOverrideStrategy enum.
-                 * @name google.appengine.v1.DomainOverrideStrategy
-                 * @enum {number}
-                 * @property {number} UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY=0 UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY value
-                 * @property {number} STRICT=1 STRICT value
-                 * @property {number} OVERRIDE=2 OVERRIDE value
-                 */
-                v1.DomainOverrideStrategy = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY"] = 0;
-                    values[valuesById[1] = "STRICT"] = 1;
-                    values[valuesById[2] = "OVERRIDE"] = 2;
-                    return values;
-                })();
-    
-                v1.DomainMappings = (function() {
-    
-                    /**
-                     * Constructs a new DomainMappings service.
-                     * @memberof google.appengine.v1
-                     * @classdesc Represents a DomainMappings
-                     * @extends $protobuf.rpc.Service
-                     * @constructor
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    function DomainMappings(rpcImpl, requestDelimited, responseDelimited) {
-                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                    }
-    
-                    (DomainMappings.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DomainMappings;
-    
-                    /**
-                     * Creates new DomainMappings service using the specified rpc implementation.
-                     * @function create
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @static
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     * @returns {DomainMappings} RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    DomainMappings.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                        return new this(rpcImpl, requestDelimited, responseDelimited);
-                    };
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.DomainMappings#listDomainMappings}.
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @typedef ListDomainMappingsCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.ListDomainMappingsResponse} [response] ListDomainMappingsResponse
-                     */
-    
-                    /**
-                     * Calls ListDomainMappings.
-                     * @function listDomainMappings
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.IListDomainMappingsRequest} request ListDomainMappingsRequest message or plain object
-                     * @param {google.appengine.v1.DomainMappings.ListDomainMappingsCallback} callback Node-style callback called with the error, if any, and ListDomainMappingsResponse
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(DomainMappings.prototype.listDomainMappings = function listDomainMappings(request, callback) {
-                        return this.rpcCall(listDomainMappings, $root.google.appengine.v1.ListDomainMappingsRequest, $root.google.appengine.v1.ListDomainMappingsResponse, request, callback);
-                    }, "name", { value: "ListDomainMappings" });
-    
-                    /**
-                     * Calls ListDomainMappings.
-                     * @function listDomainMappings
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.IListDomainMappingsRequest} request ListDomainMappingsRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.ListDomainMappingsResponse>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.DomainMappings#getDomainMapping}.
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @typedef GetDomainMappingCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.appengine.v1.DomainMapping} [response] DomainMapping
-                     */
-    
-                    /**
-                     * Calls GetDomainMapping.
-                     * @function getDomainMapping
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.IGetDomainMappingRequest} request GetDomainMappingRequest message or plain object
-                     * @param {google.appengine.v1.DomainMappings.GetDomainMappingCallback} callback Node-style callback called with the error, if any, and DomainMapping
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(DomainMappings.prototype.getDomainMapping = function getDomainMapping(request, callback) {
-                        return this.rpcCall(getDomainMapping, $root.google.appengine.v1.GetDomainMappingRequest, $root.google.appengine.v1.DomainMapping, request, callback);
-                    }, "name", { value: "GetDomainMapping" });
-    
-                    /**
-                     * Calls GetDomainMapping.
-                     * @function getDomainMapping
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.IGetDomainMappingRequest} request GetDomainMappingRequest message or plain object
-                     * @returns {Promise<google.appengine.v1.DomainMapping>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.DomainMappings#createDomainMapping}.
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @typedef CreateDomainMappingCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.longrunning.Operation} [response] Operation
-                     */
-    
-                    /**
-                     * Calls CreateDomainMapping.
-                     * @function createDomainMapping
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.ICreateDomainMappingRequest} request CreateDomainMappingRequest message or plain object
-                     * @param {google.appengine.v1.DomainMappings.CreateDomainMappingCallback} callback Node-style callback called with the error, if any, and Operation
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(DomainMappings.prototype.createDomainMapping = function createDomainMapping(request, callback) {
-                        return this.rpcCall(createDomainMapping, $root.google.appengine.v1.CreateDomainMappingRequest, $root.google.longrunning.Operation, request, callback);
-                    }, "name", { value: "CreateDomainMapping" });
-    
-                    /**
-                     * Calls CreateDomainMapping.
-                     * @function createDomainMapping
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.ICreateDomainMappingRequest} request CreateDomainMappingRequest message or plain object
-                     * @returns {Promise<google.longrunning.Operation>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.DomainMappings#updateDomainMapping}.
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @typedef UpdateDomainMappingCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.longrunning.Operation} [response] Operation
-                     */
-    
-                    /**
-                     * Calls UpdateDomainMapping.
-                     * @function updateDomainMapping
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.IUpdateDomainMappingRequest} request UpdateDomainMappingRequest message or plain object
-                     * @param {google.appengine.v1.DomainMappings.UpdateDomainMappingCallback} callback Node-style callback called with the error, if any, and Operation
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(DomainMappings.prototype.updateDomainMapping = function updateDomainMapping(request, callback) {
-                        return this.rpcCall(updateDomainMapping, $root.google.appengine.v1.UpdateDomainMappingRequest, $root.google.longrunning.Operation, request, callback);
-                    }, "name", { value: "UpdateDomainMapping" });
-    
-                    /**
-                     * Calls UpdateDomainMapping.
-                     * @function updateDomainMapping
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.IUpdateDomainMappingRequest} request UpdateDomainMappingRequest message or plain object
-                     * @returns {Promise<google.longrunning.Operation>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.appengine.v1.DomainMappings#deleteDomainMapping}.
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @typedef DeleteDomainMappingCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.longrunning.Operation} [response] Operation
-                     */
-    
-                    /**
-                     * Calls DeleteDomainMapping.
-                     * @function deleteDomainMapping
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.IDeleteDomainMappingRequest} request DeleteDomainMappingRequest message or plain object
-                     * @param {google.appengine.v1.DomainMappings.DeleteDomainMappingCallback} callback Node-style callback called with the error, if any, and Operation
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(DomainMappings.prototype.deleteDomainMapping = function deleteDomainMapping(request, callback) {
-                        return this.rpcCall(deleteDomainMapping, $root.google.appengine.v1.DeleteDomainMappingRequest, $root.google.longrunning.Operation, request, callback);
-                    }, "name", { value: "DeleteDomainMapping" });
-    
-                    /**
-                     * Calls DeleteDomainMapping.
-                     * @function deleteDomainMapping
-                     * @memberof google.appengine.v1.DomainMappings
-                     * @instance
-                     * @param {google.appengine.v1.IDeleteDomainMappingRequest} request DeleteDomainMappingRequest message or plain object
-                     * @returns {Promise<google.longrunning.Operation>} Promise
-                     * @variation 2
-                     */
-    
-                    return DomainMappings;
-                })();
-    
                 v1.Application = (function() {
     
                     /**
@@ -23643,6 +23643,7 @@
                      * @property {google.appengine.v1.Application.ServingStatus|null} [servingStatus] Application servingStatus
                      * @property {string|null} [defaultHostname] Application defaultHostname
                      * @property {string|null} [defaultBucket] Application defaultBucket
+                     * @property {string|null} [serviceAccount] Application serviceAccount
                      * @property {google.appengine.v1.Application.IIdentityAwareProxy|null} [iap] Application iap
                      * @property {string|null} [gcrDomain] Application gcrDomain
                      * @property {google.appengine.v1.Application.DatabaseType|null} [databaseType] Application databaseType
@@ -23746,6 +23747,14 @@
                     Application.prototype.defaultBucket = "";
     
                     /**
+                     * Application serviceAccount.
+                     * @member {string} serviceAccount
+                     * @memberof google.appengine.v1.Application
+                     * @instance
+                     */
+                    Application.prototype.serviceAccount = "";
+    
+                    /**
                      * Application iap.
                      * @member {google.appengine.v1.Application.IIdentityAwareProxy|null|undefined} iap
                      * @memberof google.appengine.v1.Application
@@ -23822,6 +23831,8 @@
                             writer.uint32(/* id 11, wireType 2 =*/90).string(message.defaultHostname);
                         if (message.defaultBucket != null && Object.hasOwnProperty.call(message, "defaultBucket"))
                             writer.uint32(/* id 12, wireType 2 =*/98).string(message.defaultBucket);
+                        if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                            writer.uint32(/* id 13, wireType 2 =*/106).string(message.serviceAccount);
                         if (message.iap != null && Object.hasOwnProperty.call(message, "iap"))
                             $root.google.appengine.v1.Application.IdentityAwareProxy.encode(message.iap, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         if (message.gcrDomain != null && Object.hasOwnProperty.call(message, "gcrDomain"))
@@ -23895,6 +23906,9 @@
                                 break;
                             case 12:
                                 message.defaultBucket = reader.string();
+                                break;
+                            case 13:
+                                message.serviceAccount = reader.string();
                                 break;
                             case 14:
                                 message.iap = $root.google.appengine.v1.Application.IdentityAwareProxy.decode(reader, reader.uint32());
@@ -23988,6 +24002,9 @@
                         if (message.defaultBucket != null && message.hasOwnProperty("defaultBucket"))
                             if (!$util.isString(message.defaultBucket))
                                 return "defaultBucket: string expected";
+                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                            if (!$util.isString(message.serviceAccount))
+                                return "serviceAccount: string expected";
                         if (message.iap != null && message.hasOwnProperty("iap")) {
                             var error = $root.google.appengine.v1.Application.IdentityAwareProxy.verify(message.iap);
                             if (error)
@@ -24073,6 +24090,8 @@
                             message.defaultHostname = String(object.defaultHostname);
                         if (object.defaultBucket != null)
                             message.defaultBucket = String(object.defaultBucket);
+                        if (object.serviceAccount != null)
+                            message.serviceAccount = String(object.serviceAccount);
                         if (object.iap != null) {
                             if (typeof object.iap !== "object")
                                 throw TypeError(".google.appengine.v1.Application.iap: object expected");
@@ -24131,6 +24150,7 @@
                             object.servingStatus = options.enums === String ? "UNSPECIFIED" : 0;
                             object.defaultHostname = "";
                             object.defaultBucket = "";
+                            object.serviceAccount = "";
                             object.iap = null;
                             object.gcrDomain = "";
                             object.databaseType = options.enums === String ? "DATABASE_TYPE_UNSPECIFIED" : 0;
@@ -24159,6 +24179,8 @@
                             object.defaultHostname = message.defaultHostname;
                         if (message.defaultBucket != null && message.hasOwnProperty("defaultBucket"))
                             object.defaultBucket = message.defaultBucket;
+                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                            object.serviceAccount = message.serviceAccount;
                         if (message.iap != null && message.hasOwnProperty("iap"))
                             object.iap = $root.google.appengine.v1.Application.IdentityAwareProxy.toObject(message.iap, options);
                         if (message.gcrDomain != null && message.hasOwnProperty("gcrDomain"))
@@ -24180,6 +24202,24 @@
                     Application.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * ServingStatus enum.
+                     * @name google.appengine.v1.Application.ServingStatus
+                     * @enum {number}
+                     * @property {number} UNSPECIFIED=0 UNSPECIFIED value
+                     * @property {number} SERVING=1 SERVING value
+                     * @property {number} USER_DISABLED=2 USER_DISABLED value
+                     * @property {number} SYSTEM_DISABLED=3 SYSTEM_DISABLED value
+                     */
+                    Application.ServingStatus = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SERVING"] = 1;
+                        values[valuesById[2] = "USER_DISABLED"] = 2;
+                        values[valuesById[3] = "SYSTEM_DISABLED"] = 3;
+                        return values;
+                    })();
     
                     Application.IdentityAwareProxy = (function() {
     
@@ -24435,6 +24475,24 @@
                         return IdentityAwareProxy;
                     })();
     
+                    /**
+                     * DatabaseType enum.
+                     * @name google.appengine.v1.Application.DatabaseType
+                     * @enum {number}
+                     * @property {number} DATABASE_TYPE_UNSPECIFIED=0 DATABASE_TYPE_UNSPECIFIED value
+                     * @property {number} CLOUD_DATASTORE=1 CLOUD_DATASTORE value
+                     * @property {number} CLOUD_FIRESTORE=2 CLOUD_FIRESTORE value
+                     * @property {number} CLOUD_DATASTORE_COMPATIBILITY=3 CLOUD_DATASTORE_COMPATIBILITY value
+                     */
+                    Application.DatabaseType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DATABASE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CLOUD_DATASTORE"] = 1;
+                        values[valuesById[2] = "CLOUD_FIRESTORE"] = 2;
+                        values[valuesById[3] = "CLOUD_DATASTORE_COMPATIBILITY"] = 3;
+                        return values;
+                    })();
+    
                     Application.FeatureSettings = (function() {
     
                         /**
@@ -24643,42 +24701,6 @@
                         };
     
                         return FeatureSettings;
-                    })();
-    
-                    /**
-                     * ServingStatus enum.
-                     * @name google.appengine.v1.Application.ServingStatus
-                     * @enum {number}
-                     * @property {number} UNSPECIFIED=0 UNSPECIFIED value
-                     * @property {number} SERVING=1 SERVING value
-                     * @property {number} USER_DISABLED=2 USER_DISABLED value
-                     * @property {number} SYSTEM_DISABLED=3 SYSTEM_DISABLED value
-                     */
-                    Application.ServingStatus = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "SERVING"] = 1;
-                        values[valuesById[2] = "USER_DISABLED"] = 2;
-                        values[valuesById[3] = "SYSTEM_DISABLED"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * DatabaseType enum.
-                     * @name google.appengine.v1.Application.DatabaseType
-                     * @enum {number}
-                     * @property {number} DATABASE_TYPE_UNSPECIFIED=0 DATABASE_TYPE_UNSPECIFIED value
-                     * @property {number} CLOUD_DATASTORE=1 CLOUD_DATASTORE value
-                     * @property {number} CLOUD_FIRESTORE=2 CLOUD_FIRESTORE value
-                     * @property {number} CLOUD_DATASTORE_COMPATIBILITY=3 CLOUD_DATASTORE_COMPATIBILITY value
-                     */
-                    Application.DatabaseType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DATABASE_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "CLOUD_DATASTORE"] = 1;
-                        values[valuesById[2] = "CLOUD_FIRESTORE"] = 2;
-                        values[valuesById[3] = "CLOUD_DATASTORE_COMPATIBILITY"] = 3;
-                        return values;
                     })();
     
                     return Application;
@@ -27741,6 +27763,22 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Availability enum.
+                     * @name google.appengine.v1.Instance.Availability
+                     * @enum {number}
+                     * @property {number} UNSPECIFIED=0 UNSPECIFIED value
+                     * @property {number} RESIDENT=1 RESIDENT value
+                     * @property {number} DYNAMIC=2 DYNAMIC value
+                     */
+                    Instance.Availability = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RESIDENT"] = 1;
+                        values[valuesById[2] = "DYNAMIC"] = 2;
+                        return values;
+                    })();
+    
                     Instance.Liveness = (function() {
     
                         /**
@@ -27923,23 +27961,843 @@
                         return Liveness;
                     })();
     
+                    return Instance;
+                })();
+    
+                v1.Service = (function() {
+    
                     /**
-                     * Availability enum.
-                     * @name google.appengine.v1.Instance.Availability
+                     * Properties of a Service.
+                     * @memberof google.appengine.v1
+                     * @interface IService
+                     * @property {string|null} [name] Service name
+                     * @property {string|null} [id] Service id
+                     * @property {google.appengine.v1.ITrafficSplit|null} [split] Service split
+                     * @property {Object.<string,string>|null} [labels] Service labels
+                     * @property {google.appengine.v1.INetworkSettings|null} [networkSettings] Service networkSettings
+                     */
+    
+                    /**
+                     * Constructs a new Service.
+                     * @memberof google.appengine.v1
+                     * @classdesc Represents a Service.
+                     * @implements IService
+                     * @constructor
+                     * @param {google.appengine.v1.IService=} [properties] Properties to set
+                     */
+                    function Service(properties) {
+                        this.labels = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Service name.
+                     * @member {string} name
+                     * @memberof google.appengine.v1.Service
+                     * @instance
+                     */
+                    Service.prototype.name = "";
+    
+                    /**
+                     * Service id.
+                     * @member {string} id
+                     * @memberof google.appengine.v1.Service
+                     * @instance
+                     */
+                    Service.prototype.id = "";
+    
+                    /**
+                     * Service split.
+                     * @member {google.appengine.v1.ITrafficSplit|null|undefined} split
+                     * @memberof google.appengine.v1.Service
+                     * @instance
+                     */
+                    Service.prototype.split = null;
+    
+                    /**
+                     * Service labels.
+                     * @member {Object.<string,string>} labels
+                     * @memberof google.appengine.v1.Service
+                     * @instance
+                     */
+                    Service.prototype.labels = $util.emptyObject;
+    
+                    /**
+                     * Service networkSettings.
+                     * @member {google.appengine.v1.INetworkSettings|null|undefined} networkSettings
+                     * @memberof google.appengine.v1.Service
+                     * @instance
+                     */
+                    Service.prototype.networkSettings = null;
+    
+                    /**
+                     * Creates a new Service instance using the specified properties.
+                     * @function create
+                     * @memberof google.appengine.v1.Service
+                     * @static
+                     * @param {google.appengine.v1.IService=} [properties] Properties to set
+                     * @returns {google.appengine.v1.Service} Service instance
+                     */
+                    Service.create = function create(properties) {
+                        return new Service(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Service message. Does not implicitly {@link google.appengine.v1.Service.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.appengine.v1.Service
+                     * @static
+                     * @param {google.appengine.v1.IService} message Service message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Service.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                        if (message.split != null && Object.hasOwnProperty.call(message, "split"))
+                            $root.google.appengine.v1.TrafficSplit.encode(message.split, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                            for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                        if (message.networkSettings != null && Object.hasOwnProperty.call(message, "networkSettings"))
+                            $root.google.appengine.v1.NetworkSettings.encode(message.networkSettings, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Service message, length delimited. Does not implicitly {@link google.appengine.v1.Service.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.appengine.v1.Service
+                     * @static
+                     * @param {google.appengine.v1.IService} message Service message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Service.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Service message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.appengine.v1.Service
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.appengine.v1.Service} Service
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Service.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Service(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            case 2:
+                                message.id = reader.string();
+                                break;
+                            case 3:
+                                message.split = $root.google.appengine.v1.TrafficSplit.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                if (message.labels === $util.emptyObject)
+                                    message.labels = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.labels[key] = value;
+                                break;
+                            case 6:
+                                message.networkSettings = $root.google.appengine.v1.NetworkSettings.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Service message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.appengine.v1.Service
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.appengine.v1.Service} Service
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Service.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Service message.
+                     * @function verify
+                     * @memberof google.appengine.v1.Service
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Service.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            if (!$util.isString(message.id))
+                                return "id: string expected";
+                        if (message.split != null && message.hasOwnProperty("split")) {
+                            var error = $root.google.appengine.v1.TrafficSplit.verify(message.split);
+                            if (error)
+                                return "split." + error;
+                        }
+                        if (message.labels != null && message.hasOwnProperty("labels")) {
+                            if (!$util.isObject(message.labels))
+                                return "labels: object expected";
+                            var key = Object.keys(message.labels);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.labels[key[i]]))
+                                    return "labels: string{k:string} expected";
+                        }
+                        if (message.networkSettings != null && message.hasOwnProperty("networkSettings")) {
+                            var error = $root.google.appengine.v1.NetworkSettings.verify(message.networkSettings);
+                            if (error)
+                                return "networkSettings." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Service message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.appengine.v1.Service
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.appengine.v1.Service} Service
+                     */
+                    Service.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.appengine.v1.Service)
+                            return object;
+                        var message = new $root.google.appengine.v1.Service();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.id != null)
+                            message.id = String(object.id);
+                        if (object.split != null) {
+                            if (typeof object.split !== "object")
+                                throw TypeError(".google.appengine.v1.Service.split: object expected");
+                            message.split = $root.google.appengine.v1.TrafficSplit.fromObject(object.split);
+                        }
+                        if (object.labels) {
+                            if (typeof object.labels !== "object")
+                                throw TypeError(".google.appengine.v1.Service.labels: object expected");
+                            message.labels = {};
+                            for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                message.labels[keys[i]] = String(object.labels[keys[i]]);
+                        }
+                        if (object.networkSettings != null) {
+                            if (typeof object.networkSettings !== "object")
+                                throw TypeError(".google.appengine.v1.Service.networkSettings: object expected");
+                            message.networkSettings = $root.google.appengine.v1.NetworkSettings.fromObject(object.networkSettings);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Service message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.appengine.v1.Service
+                     * @static
+                     * @param {google.appengine.v1.Service} message Service
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Service.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.labels = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.id = "";
+                            object.split = null;
+                            object.networkSettings = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            object.id = message.id;
+                        if (message.split != null && message.hasOwnProperty("split"))
+                            object.split = $root.google.appengine.v1.TrafficSplit.toObject(message.split, options);
+                        var keys2;
+                        if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                            object.labels = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.labels[keys2[j]] = message.labels[keys2[j]];
+                        }
+                        if (message.networkSettings != null && message.hasOwnProperty("networkSettings"))
+                            object.networkSettings = $root.google.appengine.v1.NetworkSettings.toObject(message.networkSettings, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Service to JSON.
+                     * @function toJSON
+                     * @memberof google.appengine.v1.Service
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Service.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Service;
+                })();
+    
+                v1.TrafficSplit = (function() {
+    
+                    /**
+                     * Properties of a TrafficSplit.
+                     * @memberof google.appengine.v1
+                     * @interface ITrafficSplit
+                     * @property {google.appengine.v1.TrafficSplit.ShardBy|null} [shardBy] TrafficSplit shardBy
+                     * @property {Object.<string,number>|null} [allocations] TrafficSplit allocations
+                     */
+    
+                    /**
+                     * Constructs a new TrafficSplit.
+                     * @memberof google.appengine.v1
+                     * @classdesc Represents a TrafficSplit.
+                     * @implements ITrafficSplit
+                     * @constructor
+                     * @param {google.appengine.v1.ITrafficSplit=} [properties] Properties to set
+                     */
+                    function TrafficSplit(properties) {
+                        this.allocations = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TrafficSplit shardBy.
+                     * @member {google.appengine.v1.TrafficSplit.ShardBy} shardBy
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @instance
+                     */
+                    TrafficSplit.prototype.shardBy = 0;
+    
+                    /**
+                     * TrafficSplit allocations.
+                     * @member {Object.<string,number>} allocations
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @instance
+                     */
+                    TrafficSplit.prototype.allocations = $util.emptyObject;
+    
+                    /**
+                     * Creates a new TrafficSplit instance using the specified properties.
+                     * @function create
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @static
+                     * @param {google.appengine.v1.ITrafficSplit=} [properties] Properties to set
+                     * @returns {google.appengine.v1.TrafficSplit} TrafficSplit instance
+                     */
+                    TrafficSplit.create = function create(properties) {
+                        return new TrafficSplit(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TrafficSplit message. Does not implicitly {@link google.appengine.v1.TrafficSplit.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @static
+                     * @param {google.appengine.v1.ITrafficSplit} message TrafficSplit message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TrafficSplit.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.shardBy != null && Object.hasOwnProperty.call(message, "shardBy"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.shardBy);
+                        if (message.allocations != null && Object.hasOwnProperty.call(message, "allocations"))
+                            for (var keys = Object.keys(message.allocations), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 1 =*/17).double(message.allocations[keys[i]]).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TrafficSplit message, length delimited. Does not implicitly {@link google.appengine.v1.TrafficSplit.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @static
+                     * @param {google.appengine.v1.ITrafficSplit} message TrafficSplit message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TrafficSplit.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TrafficSplit message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.appengine.v1.TrafficSplit} TrafficSplit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TrafficSplit.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.TrafficSplit(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.shardBy = reader.int32();
+                                break;
+                            case 2:
+                                if (message.allocations === $util.emptyObject)
+                                    message.allocations = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = 0;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.double();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.allocations[key] = value;
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TrafficSplit message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.appengine.v1.TrafficSplit} TrafficSplit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TrafficSplit.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TrafficSplit message.
+                     * @function verify
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TrafficSplit.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.shardBy != null && message.hasOwnProperty("shardBy"))
+                            switch (message.shardBy) {
+                            default:
+                                return "shardBy: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.allocations != null && message.hasOwnProperty("allocations")) {
+                            if (!$util.isObject(message.allocations))
+                                return "allocations: object expected";
+                            var key = Object.keys(message.allocations);
+                            for (var i = 0; i < key.length; ++i)
+                                if (typeof message.allocations[key[i]] !== "number")
+                                    return "allocations: number{k:string} expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TrafficSplit message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.appengine.v1.TrafficSplit} TrafficSplit
+                     */
+                    TrafficSplit.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.appengine.v1.TrafficSplit)
+                            return object;
+                        var message = new $root.google.appengine.v1.TrafficSplit();
+                        switch (object.shardBy) {
+                        case "UNSPECIFIED":
+                        case 0:
+                            message.shardBy = 0;
+                            break;
+                        case "COOKIE":
+                        case 1:
+                            message.shardBy = 1;
+                            break;
+                        case "IP":
+                        case 2:
+                            message.shardBy = 2;
+                            break;
+                        case "RANDOM":
+                        case 3:
+                            message.shardBy = 3;
+                            break;
+                        }
+                        if (object.allocations) {
+                            if (typeof object.allocations !== "object")
+                                throw TypeError(".google.appengine.v1.TrafficSplit.allocations: object expected");
+                            message.allocations = {};
+                            for (var keys = Object.keys(object.allocations), i = 0; i < keys.length; ++i)
+                                message.allocations[keys[i]] = Number(object.allocations[keys[i]]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TrafficSplit message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @static
+                     * @param {google.appengine.v1.TrafficSplit} message TrafficSplit
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TrafficSplit.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.allocations = {};
+                        if (options.defaults)
+                            object.shardBy = options.enums === String ? "UNSPECIFIED" : 0;
+                        if (message.shardBy != null && message.hasOwnProperty("shardBy"))
+                            object.shardBy = options.enums === String ? $root.google.appengine.v1.TrafficSplit.ShardBy[message.shardBy] : message.shardBy;
+                        var keys2;
+                        if (message.allocations && (keys2 = Object.keys(message.allocations)).length) {
+                            object.allocations = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.allocations[keys2[j]] = options.json && !isFinite(message.allocations[keys2[j]]) ? String(message.allocations[keys2[j]]) : message.allocations[keys2[j]];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TrafficSplit to JSON.
+                     * @function toJSON
+                     * @memberof google.appengine.v1.TrafficSplit
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TrafficSplit.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * ShardBy enum.
+                     * @name google.appengine.v1.TrafficSplit.ShardBy
                      * @enum {number}
                      * @property {number} UNSPECIFIED=0 UNSPECIFIED value
-                     * @property {number} RESIDENT=1 RESIDENT value
-                     * @property {number} DYNAMIC=2 DYNAMIC value
+                     * @property {number} COOKIE=1 COOKIE value
+                     * @property {number} IP=2 IP value
+                     * @property {number} RANDOM=3 RANDOM value
                      */
-                    Instance.Availability = (function() {
+                    TrafficSplit.ShardBy = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "RESIDENT"] = 1;
-                        values[valuesById[2] = "DYNAMIC"] = 2;
+                        values[valuesById[1] = "COOKIE"] = 1;
+                        values[valuesById[2] = "IP"] = 2;
+                        values[valuesById[3] = "RANDOM"] = 3;
                         return values;
                     })();
     
-                    return Instance;
+                    return TrafficSplit;
+                })();
+    
+                v1.NetworkSettings = (function() {
+    
+                    /**
+                     * Properties of a NetworkSettings.
+                     * @memberof google.appengine.v1
+                     * @interface INetworkSettings
+                     * @property {google.appengine.v1.NetworkSettings.IngressTrafficAllowed|null} [ingressTrafficAllowed] NetworkSettings ingressTrafficAllowed
+                     */
+    
+                    /**
+                     * Constructs a new NetworkSettings.
+                     * @memberof google.appengine.v1
+                     * @classdesc Represents a NetworkSettings.
+                     * @implements INetworkSettings
+                     * @constructor
+                     * @param {google.appengine.v1.INetworkSettings=} [properties] Properties to set
+                     */
+                    function NetworkSettings(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NetworkSettings ingressTrafficAllowed.
+                     * @member {google.appengine.v1.NetworkSettings.IngressTrafficAllowed} ingressTrafficAllowed
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @instance
+                     */
+                    NetworkSettings.prototype.ingressTrafficAllowed = 0;
+    
+                    /**
+                     * Creates a new NetworkSettings instance using the specified properties.
+                     * @function create
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @static
+                     * @param {google.appengine.v1.INetworkSettings=} [properties] Properties to set
+                     * @returns {google.appengine.v1.NetworkSettings} NetworkSettings instance
+                     */
+                    NetworkSettings.create = function create(properties) {
+                        return new NetworkSettings(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NetworkSettings message. Does not implicitly {@link google.appengine.v1.NetworkSettings.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @static
+                     * @param {google.appengine.v1.INetworkSettings} message NetworkSettings message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NetworkSettings.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.ingressTrafficAllowed != null && Object.hasOwnProperty.call(message, "ingressTrafficAllowed"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ingressTrafficAllowed);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NetworkSettings message, length delimited. Does not implicitly {@link google.appengine.v1.NetworkSettings.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @static
+                     * @param {google.appengine.v1.INetworkSettings} message NetworkSettings message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NetworkSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NetworkSettings message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.appengine.v1.NetworkSettings} NetworkSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NetworkSettings.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.NetworkSettings();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.ingressTrafficAllowed = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NetworkSettings message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.appengine.v1.NetworkSettings} NetworkSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NetworkSettings.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NetworkSettings message.
+                     * @function verify
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NetworkSettings.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.ingressTrafficAllowed != null && message.hasOwnProperty("ingressTrafficAllowed"))
+                            switch (message.ingressTrafficAllowed) {
+                            default:
+                                return "ingressTrafficAllowed: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NetworkSettings message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.appengine.v1.NetworkSettings} NetworkSettings
+                     */
+                    NetworkSettings.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.appengine.v1.NetworkSettings)
+                            return object;
+                        var message = new $root.google.appengine.v1.NetworkSettings();
+                        switch (object.ingressTrafficAllowed) {
+                        case "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED":
+                        case 0:
+                            message.ingressTrafficAllowed = 0;
+                            break;
+                        case "INGRESS_TRAFFIC_ALLOWED_ALL":
+                        case 1:
+                            message.ingressTrafficAllowed = 1;
+                            break;
+                        case "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY":
+                        case 2:
+                            message.ingressTrafficAllowed = 2;
+                            break;
+                        case "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB":
+                        case 3:
+                            message.ingressTrafficAllowed = 3;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NetworkSettings message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @static
+                     * @param {google.appengine.v1.NetworkSettings} message NetworkSettings
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NetworkSettings.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.ingressTrafficAllowed = options.enums === String ? "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED" : 0;
+                        if (message.ingressTrafficAllowed != null && message.hasOwnProperty("ingressTrafficAllowed"))
+                            object.ingressTrafficAllowed = options.enums === String ? $root.google.appengine.v1.NetworkSettings.IngressTrafficAllowed[message.ingressTrafficAllowed] : message.ingressTrafficAllowed;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NetworkSettings to JSON.
+                     * @function toJSON
+                     * @memberof google.appengine.v1.NetworkSettings
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NetworkSettings.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * IngressTrafficAllowed enum.
+                     * @name google.appengine.v1.NetworkSettings.IngressTrafficAllowed
+                     * @enum {number}
+                     * @property {number} INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED=0 INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED value
+                     * @property {number} INGRESS_TRAFFIC_ALLOWED_ALL=1 INGRESS_TRAFFIC_ALLOWED_ALL value
+                     * @property {number} INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY=2 INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY value
+                     * @property {number} INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB=3 INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB value
+                     */
+                    NetworkSettings.IngressTrafficAllowed = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "INGRESS_TRAFFIC_ALLOWED_ALL"] = 1;
+                        values[valuesById[2] = "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY"] = 2;
+                        values[valuesById[3] = "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB"] = 3;
+                        return values;
+                    })();
+    
+                    return NetworkSettings;
                 })();
     
                 v1.Version = (function() {
@@ -27962,6 +28820,7 @@
                      * @property {string|null} [runtimeChannel] Version runtimeChannel
                      * @property {boolean|null} [threadsafe] Version threadsafe
                      * @property {boolean|null} [vm] Version vm
+                     * @property {boolean|null} [appEngineApis] Version appEngineApis
                      * @property {Object.<string,string>|null} [betaSettings] Version betaSettings
                      * @property {string|null} [env] Version env
                      * @property {google.appengine.v1.ServingStatus|null} [servingStatus] Version servingStatus
@@ -28123,6 +28982,14 @@
                      * @instance
                      */
                     Version.prototype.vm = false;
+    
+                    /**
+                     * Version appEngineApis.
+                     * @member {boolean} appEngineApis
+                     * @memberof google.appengine.v1.Version
+                     * @instance
+                     */
+                    Version.prototype.appEngineApis = false;
     
                     /**
                      * Version betaSettings.
@@ -28451,6 +29318,8 @@
                                 writer.uint32(/* id 125, wireType 2 =*/1002).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.buildEnvVariables[keys[i]]).ldelim();
                         if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                             writer.uint32(/* id 127, wireType 2 =*/1018).string(message.serviceAccount);
+                        if (message.appEngineApis != null && Object.hasOwnProperty.call(message, "appEngineApis"))
+                            writer.uint32(/* id 128, wireType 0 =*/1024).bool(message.appEngineApis);
                         return writer;
                     };
     
@@ -28535,6 +29404,9 @@
                                 break;
                             case 12:
                                 message.vm = reader.bool();
+                                break;
+                            case 128:
+                                message.appEngineApis = reader.bool();
                                 break;
                             case 13:
                                 if (message.betaSettings === $util.emptyObject)
@@ -28795,6 +29667,9 @@
                         if (message.vm != null && message.hasOwnProperty("vm"))
                             if (typeof message.vm !== "boolean")
                                 return "vm: boolean expected";
+                        if (message.appEngineApis != null && message.hasOwnProperty("appEngineApis"))
+                            if (typeof message.appEngineApis !== "boolean")
+                                return "appEngineApis: boolean expected";
                         if (message.betaSettings != null && message.hasOwnProperty("betaSettings")) {
                             if (!$util.isObject(message.betaSettings))
                                 return "betaSettings: object expected";
@@ -29035,6 +29910,8 @@
                             message.threadsafe = Boolean(object.threadsafe);
                         if (object.vm != null)
                             message.vm = Boolean(object.vm);
+                        if (object.appEngineApis != null)
+                            message.appEngineApis = Boolean(object.appEngineApis);
                         if (object.betaSettings) {
                             if (typeof object.betaSettings !== "object")
                                 throw TypeError(".google.appengine.v1.Version.betaSettings: object expected");
@@ -29234,6 +30111,7 @@
                             object.vpcAccessConnector = null;
                             object.entrypoint = null;
                             object.serviceAccount = "";
+                            object.appEngineApis = false;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -29350,6 +30228,8 @@
                         }
                         if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                             object.serviceAccount = message.serviceAccount;
+                        if (message.appEngineApis != null && message.hasOwnProperty("appEngineApis"))
+                            object.appEngineApis = message.appEngineApis;
                         return object;
                     };
     
@@ -32559,6 +33439,50 @@
                     return Resources;
                 })();
     
+                /**
+                 * InboundServiceType enum.
+                 * @name google.appengine.v1.InboundServiceType
+                 * @enum {number}
+                 * @property {number} INBOUND_SERVICE_UNSPECIFIED=0 INBOUND_SERVICE_UNSPECIFIED value
+                 * @property {number} INBOUND_SERVICE_MAIL=1 INBOUND_SERVICE_MAIL value
+                 * @property {number} INBOUND_SERVICE_MAIL_BOUNCE=2 INBOUND_SERVICE_MAIL_BOUNCE value
+                 * @property {number} INBOUND_SERVICE_XMPP_ERROR=3 INBOUND_SERVICE_XMPP_ERROR value
+                 * @property {number} INBOUND_SERVICE_XMPP_MESSAGE=4 INBOUND_SERVICE_XMPP_MESSAGE value
+                 * @property {number} INBOUND_SERVICE_XMPP_SUBSCRIBE=5 INBOUND_SERVICE_XMPP_SUBSCRIBE value
+                 * @property {number} INBOUND_SERVICE_XMPP_PRESENCE=6 INBOUND_SERVICE_XMPP_PRESENCE value
+                 * @property {number} INBOUND_SERVICE_CHANNEL_PRESENCE=7 INBOUND_SERVICE_CHANNEL_PRESENCE value
+                 * @property {number} INBOUND_SERVICE_WARMUP=9 INBOUND_SERVICE_WARMUP value
+                 */
+                v1.InboundServiceType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "INBOUND_SERVICE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "INBOUND_SERVICE_MAIL"] = 1;
+                    values[valuesById[2] = "INBOUND_SERVICE_MAIL_BOUNCE"] = 2;
+                    values[valuesById[3] = "INBOUND_SERVICE_XMPP_ERROR"] = 3;
+                    values[valuesById[4] = "INBOUND_SERVICE_XMPP_MESSAGE"] = 4;
+                    values[valuesById[5] = "INBOUND_SERVICE_XMPP_SUBSCRIBE"] = 5;
+                    values[valuesById[6] = "INBOUND_SERVICE_XMPP_PRESENCE"] = 6;
+                    values[valuesById[7] = "INBOUND_SERVICE_CHANNEL_PRESENCE"] = 7;
+                    values[valuesById[9] = "INBOUND_SERVICE_WARMUP"] = 9;
+                    return values;
+                })();
+    
+                /**
+                 * ServingStatus enum.
+                 * @name google.appengine.v1.ServingStatus
+                 * @enum {number}
+                 * @property {number} SERVING_STATUS_UNSPECIFIED=0 SERVING_STATUS_UNSPECIFIED value
+                 * @property {number} SERVING=1 SERVING value
+                 * @property {number} STOPPED=2 STOPPED value
+                 */
+                v1.ServingStatus = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "SERVING_STATUS_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "SERVING"] = 1;
+                    values[valuesById[2] = "STOPPED"] = 2;
+                    return values;
+                })();
+    
                 v1.VpcAccessConnector = (function() {
     
                     /**
@@ -32566,6 +33490,7 @@
                      * @memberof google.appengine.v1
                      * @interface IVpcAccessConnector
                      * @property {string|null} [name] VpcAccessConnector name
+                     * @property {google.appengine.v1.VpcAccessConnector.EgressSetting|null} [egressSetting] VpcAccessConnector egressSetting
                      */
     
                     /**
@@ -32590,6 +33515,14 @@
                      * @instance
                      */
                     VpcAccessConnector.prototype.name = "";
+    
+                    /**
+                     * VpcAccessConnector egressSetting.
+                     * @member {google.appengine.v1.VpcAccessConnector.EgressSetting} egressSetting
+                     * @memberof google.appengine.v1.VpcAccessConnector
+                     * @instance
+                     */
+                    VpcAccessConnector.prototype.egressSetting = 0;
     
                     /**
                      * Creates a new VpcAccessConnector instance using the specified properties.
@@ -32617,6 +33550,8 @@
                             writer = $Writer.create();
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.egressSetting != null && Object.hasOwnProperty.call(message, "egressSetting"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.egressSetting);
                         return writer;
                     };
     
@@ -32653,6 +33588,9 @@
                             switch (tag >>> 3) {
                             case 1:
                                 message.name = reader.string();
+                                break;
+                            case 2:
+                                message.egressSetting = reader.int32();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -32692,6 +33630,15 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
+                        if (message.egressSetting != null && message.hasOwnProperty("egressSetting"))
+                            switch (message.egressSetting) {
+                            default:
+                                return "egressSetting: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -32709,6 +33656,20 @@
                         var message = new $root.google.appengine.v1.VpcAccessConnector();
                         if (object.name != null)
                             message.name = String(object.name);
+                        switch (object.egressSetting) {
+                        case "EGRESS_SETTING_UNSPECIFIED":
+                        case 0:
+                            message.egressSetting = 0;
+                            break;
+                        case "ALL_TRAFFIC":
+                        case 1:
+                            message.egressSetting = 1;
+                            break;
+                        case "PRIVATE_IP_RANGES":
+                        case 2:
+                            message.egressSetting = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -32725,10 +33686,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.name = "";
+                            object.egressSetting = options.enums === String ? "EGRESS_SETTING_UNSPECIFIED" : 0;
+                        }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.egressSetting != null && message.hasOwnProperty("egressSetting"))
+                            object.egressSetting = options.enums === String ? $root.google.appengine.v1.VpcAccessConnector.EgressSetting[message.egressSetting] : message.egressSetting;
                         return object;
                     };
     
@@ -32742,6 +33707,22 @@
                     VpcAccessConnector.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * EgressSetting enum.
+                     * @name google.appengine.v1.VpcAccessConnector.EgressSetting
+                     * @enum {number}
+                     * @property {number} EGRESS_SETTING_UNSPECIFIED=0 EGRESS_SETTING_UNSPECIFIED value
+                     * @property {number} ALL_TRAFFIC=1 ALL_TRAFFIC value
+                     * @property {number} PRIVATE_IP_RANGES=2 PRIVATE_IP_RANGES value
+                     */
+                    VpcAccessConnector.EgressSetting = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EGRESS_SETTING_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ALL_TRAFFIC"] = 1;
+                        values[valuesById[2] = "PRIVATE_IP_RANGES"] = 2;
+                        return values;
+                    })();
     
                     return VpcAccessConnector;
                 })();
@@ -32949,50 +33930,6 @@
                     };
     
                     return Entrypoint;
-                })();
-    
-                /**
-                 * InboundServiceType enum.
-                 * @name google.appengine.v1.InboundServiceType
-                 * @enum {number}
-                 * @property {number} INBOUND_SERVICE_UNSPECIFIED=0 INBOUND_SERVICE_UNSPECIFIED value
-                 * @property {number} INBOUND_SERVICE_MAIL=1 INBOUND_SERVICE_MAIL value
-                 * @property {number} INBOUND_SERVICE_MAIL_BOUNCE=2 INBOUND_SERVICE_MAIL_BOUNCE value
-                 * @property {number} INBOUND_SERVICE_XMPP_ERROR=3 INBOUND_SERVICE_XMPP_ERROR value
-                 * @property {number} INBOUND_SERVICE_XMPP_MESSAGE=4 INBOUND_SERVICE_XMPP_MESSAGE value
-                 * @property {number} INBOUND_SERVICE_XMPP_SUBSCRIBE=5 INBOUND_SERVICE_XMPP_SUBSCRIBE value
-                 * @property {number} INBOUND_SERVICE_XMPP_PRESENCE=6 INBOUND_SERVICE_XMPP_PRESENCE value
-                 * @property {number} INBOUND_SERVICE_CHANNEL_PRESENCE=7 INBOUND_SERVICE_CHANNEL_PRESENCE value
-                 * @property {number} INBOUND_SERVICE_WARMUP=9 INBOUND_SERVICE_WARMUP value
-                 */
-                v1.InboundServiceType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "INBOUND_SERVICE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "INBOUND_SERVICE_MAIL"] = 1;
-                    values[valuesById[2] = "INBOUND_SERVICE_MAIL_BOUNCE"] = 2;
-                    values[valuesById[3] = "INBOUND_SERVICE_XMPP_ERROR"] = 3;
-                    values[valuesById[4] = "INBOUND_SERVICE_XMPP_MESSAGE"] = 4;
-                    values[valuesById[5] = "INBOUND_SERVICE_XMPP_SUBSCRIBE"] = 5;
-                    values[valuesById[6] = "INBOUND_SERVICE_XMPP_PRESENCE"] = 6;
-                    values[valuesById[7] = "INBOUND_SERVICE_CHANNEL_PRESENCE"] = 7;
-                    values[valuesById[9] = "INBOUND_SERVICE_WARMUP"] = 9;
-                    return values;
-                })();
-    
-                /**
-                 * ServingStatus enum.
-                 * @name google.appengine.v1.ServingStatus
-                 * @enum {number}
-                 * @property {number} SERVING_STATUS_UNSPECIFIED=0 SERVING_STATUS_UNSPECIFIED value
-                 * @property {number} SERVING=1 SERVING value
-                 * @property {number} STOPPED=2 STOPPED value
-                 */
-                v1.ServingStatus = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SERVING_STATUS_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "SERVING"] = 1;
-                    values[valuesById[2] = "STOPPED"] = 2;
-                    return values;
                 })();
     
                 v1.Deployment = (function() {
@@ -34149,784 +35086,6 @@
                     };
     
                     return ZipInfo;
-                })();
-    
-                v1.Service = (function() {
-    
-                    /**
-                     * Properties of a Service.
-                     * @memberof google.appengine.v1
-                     * @interface IService
-                     * @property {string|null} [name] Service name
-                     * @property {string|null} [id] Service id
-                     * @property {google.appengine.v1.ITrafficSplit|null} [split] Service split
-                     * @property {google.appengine.v1.INetworkSettings|null} [networkSettings] Service networkSettings
-                     */
-    
-                    /**
-                     * Constructs a new Service.
-                     * @memberof google.appengine.v1
-                     * @classdesc Represents a Service.
-                     * @implements IService
-                     * @constructor
-                     * @param {google.appengine.v1.IService=} [properties] Properties to set
-                     */
-                    function Service(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Service name.
-                     * @member {string} name
-                     * @memberof google.appengine.v1.Service
-                     * @instance
-                     */
-                    Service.prototype.name = "";
-    
-                    /**
-                     * Service id.
-                     * @member {string} id
-                     * @memberof google.appengine.v1.Service
-                     * @instance
-                     */
-                    Service.prototype.id = "";
-    
-                    /**
-                     * Service split.
-                     * @member {google.appengine.v1.ITrafficSplit|null|undefined} split
-                     * @memberof google.appengine.v1.Service
-                     * @instance
-                     */
-                    Service.prototype.split = null;
-    
-                    /**
-                     * Service networkSettings.
-                     * @member {google.appengine.v1.INetworkSettings|null|undefined} networkSettings
-                     * @memberof google.appengine.v1.Service
-                     * @instance
-                     */
-                    Service.prototype.networkSettings = null;
-    
-                    /**
-                     * Creates a new Service instance using the specified properties.
-                     * @function create
-                     * @memberof google.appengine.v1.Service
-                     * @static
-                     * @param {google.appengine.v1.IService=} [properties] Properties to set
-                     * @returns {google.appengine.v1.Service} Service instance
-                     */
-                    Service.create = function create(properties) {
-                        return new Service(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Service message. Does not implicitly {@link google.appengine.v1.Service.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.appengine.v1.Service
-                     * @static
-                     * @param {google.appengine.v1.IService} message Service message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Service.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
-                        if (message.split != null && Object.hasOwnProperty.call(message, "split"))
-                            $root.google.appengine.v1.TrafficSplit.encode(message.split, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        if (message.networkSettings != null && Object.hasOwnProperty.call(message, "networkSettings"))
-                            $root.google.appengine.v1.NetworkSettings.encode(message.networkSettings, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Service message, length delimited. Does not implicitly {@link google.appengine.v1.Service.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.appengine.v1.Service
-                     * @static
-                     * @param {google.appengine.v1.IService} message Service message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Service.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Service message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.appengine.v1.Service
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.appengine.v1.Service} Service
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Service.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Service();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.name = reader.string();
-                                break;
-                            case 2:
-                                message.id = reader.string();
-                                break;
-                            case 3:
-                                message.split = $root.google.appengine.v1.TrafficSplit.decode(reader, reader.uint32());
-                                break;
-                            case 6:
-                                message.networkSettings = $root.google.appengine.v1.NetworkSettings.decode(reader, reader.uint32());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Service message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.appengine.v1.Service
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.appengine.v1.Service} Service
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Service.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Service message.
-                     * @function verify
-                     * @memberof google.appengine.v1.Service
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Service.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            if (!$util.isString(message.name))
-                                return "name: string expected";
-                        if (message.id != null && message.hasOwnProperty("id"))
-                            if (!$util.isString(message.id))
-                                return "id: string expected";
-                        if (message.split != null && message.hasOwnProperty("split")) {
-                            var error = $root.google.appengine.v1.TrafficSplit.verify(message.split);
-                            if (error)
-                                return "split." + error;
-                        }
-                        if (message.networkSettings != null && message.hasOwnProperty("networkSettings")) {
-                            var error = $root.google.appengine.v1.NetworkSettings.verify(message.networkSettings);
-                            if (error)
-                                return "networkSettings." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Service message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.appengine.v1.Service
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.appengine.v1.Service} Service
-                     */
-                    Service.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.appengine.v1.Service)
-                            return object;
-                        var message = new $root.google.appengine.v1.Service();
-                        if (object.name != null)
-                            message.name = String(object.name);
-                        if (object.id != null)
-                            message.id = String(object.id);
-                        if (object.split != null) {
-                            if (typeof object.split !== "object")
-                                throw TypeError(".google.appengine.v1.Service.split: object expected");
-                            message.split = $root.google.appengine.v1.TrafficSplit.fromObject(object.split);
-                        }
-                        if (object.networkSettings != null) {
-                            if (typeof object.networkSettings !== "object")
-                                throw TypeError(".google.appengine.v1.Service.networkSettings: object expected");
-                            message.networkSettings = $root.google.appengine.v1.NetworkSettings.fromObject(object.networkSettings);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Service message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.appengine.v1.Service
-                     * @static
-                     * @param {google.appengine.v1.Service} message Service
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Service.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.name = "";
-                            object.id = "";
-                            object.split = null;
-                            object.networkSettings = null;
-                        }
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            object.name = message.name;
-                        if (message.id != null && message.hasOwnProperty("id"))
-                            object.id = message.id;
-                        if (message.split != null && message.hasOwnProperty("split"))
-                            object.split = $root.google.appengine.v1.TrafficSplit.toObject(message.split, options);
-                        if (message.networkSettings != null && message.hasOwnProperty("networkSettings"))
-                            object.networkSettings = $root.google.appengine.v1.NetworkSettings.toObject(message.networkSettings, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Service to JSON.
-                     * @function toJSON
-                     * @memberof google.appengine.v1.Service
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Service.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return Service;
-                })();
-    
-                v1.TrafficSplit = (function() {
-    
-                    /**
-                     * Properties of a TrafficSplit.
-                     * @memberof google.appengine.v1
-                     * @interface ITrafficSplit
-                     * @property {google.appengine.v1.TrafficSplit.ShardBy|null} [shardBy] TrafficSplit shardBy
-                     * @property {Object.<string,number>|null} [allocations] TrafficSplit allocations
-                     */
-    
-                    /**
-                     * Constructs a new TrafficSplit.
-                     * @memberof google.appengine.v1
-                     * @classdesc Represents a TrafficSplit.
-                     * @implements ITrafficSplit
-                     * @constructor
-                     * @param {google.appengine.v1.ITrafficSplit=} [properties] Properties to set
-                     */
-                    function TrafficSplit(properties) {
-                        this.allocations = {};
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * TrafficSplit shardBy.
-                     * @member {google.appengine.v1.TrafficSplit.ShardBy} shardBy
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @instance
-                     */
-                    TrafficSplit.prototype.shardBy = 0;
-    
-                    /**
-                     * TrafficSplit allocations.
-                     * @member {Object.<string,number>} allocations
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @instance
-                     */
-                    TrafficSplit.prototype.allocations = $util.emptyObject;
-    
-                    /**
-                     * Creates a new TrafficSplit instance using the specified properties.
-                     * @function create
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @static
-                     * @param {google.appengine.v1.ITrafficSplit=} [properties] Properties to set
-                     * @returns {google.appengine.v1.TrafficSplit} TrafficSplit instance
-                     */
-                    TrafficSplit.create = function create(properties) {
-                        return new TrafficSplit(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified TrafficSplit message. Does not implicitly {@link google.appengine.v1.TrafficSplit.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @static
-                     * @param {google.appengine.v1.ITrafficSplit} message TrafficSplit message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TrafficSplit.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.shardBy != null && Object.hasOwnProperty.call(message, "shardBy"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.shardBy);
-                        if (message.allocations != null && Object.hasOwnProperty.call(message, "allocations"))
-                            for (var keys = Object.keys(message.allocations), i = 0; i < keys.length; ++i)
-                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 1 =*/17).double(message.allocations[keys[i]]).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified TrafficSplit message, length delimited. Does not implicitly {@link google.appengine.v1.TrafficSplit.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @static
-                     * @param {google.appengine.v1.ITrafficSplit} message TrafficSplit message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TrafficSplit.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a TrafficSplit message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.appengine.v1.TrafficSplit} TrafficSplit
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TrafficSplit.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.TrafficSplit(), key, value;
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.shardBy = reader.int32();
-                                break;
-                            case 2:
-                                if (message.allocations === $util.emptyObject)
-                                    message.allocations = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = 0;
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.double();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.allocations[key] = value;
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a TrafficSplit message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.appengine.v1.TrafficSplit} TrafficSplit
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TrafficSplit.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a TrafficSplit message.
-                     * @function verify
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    TrafficSplit.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.shardBy != null && message.hasOwnProperty("shardBy"))
-                            switch (message.shardBy) {
-                            default:
-                                return "shardBy: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                                break;
-                            }
-                        if (message.allocations != null && message.hasOwnProperty("allocations")) {
-                            if (!$util.isObject(message.allocations))
-                                return "allocations: object expected";
-                            var key = Object.keys(message.allocations);
-                            for (var i = 0; i < key.length; ++i)
-                                if (typeof message.allocations[key[i]] !== "number")
-                                    return "allocations: number{k:string} expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a TrafficSplit message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.appengine.v1.TrafficSplit} TrafficSplit
-                     */
-                    TrafficSplit.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.appengine.v1.TrafficSplit)
-                            return object;
-                        var message = new $root.google.appengine.v1.TrafficSplit();
-                        switch (object.shardBy) {
-                        case "UNSPECIFIED":
-                        case 0:
-                            message.shardBy = 0;
-                            break;
-                        case "COOKIE":
-                        case 1:
-                            message.shardBy = 1;
-                            break;
-                        case "IP":
-                        case 2:
-                            message.shardBy = 2;
-                            break;
-                        case "RANDOM":
-                        case 3:
-                            message.shardBy = 3;
-                            break;
-                        }
-                        if (object.allocations) {
-                            if (typeof object.allocations !== "object")
-                                throw TypeError(".google.appengine.v1.TrafficSplit.allocations: object expected");
-                            message.allocations = {};
-                            for (var keys = Object.keys(object.allocations), i = 0; i < keys.length; ++i)
-                                message.allocations[keys[i]] = Number(object.allocations[keys[i]]);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a TrafficSplit message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @static
-                     * @param {google.appengine.v1.TrafficSplit} message TrafficSplit
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    TrafficSplit.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.objects || options.defaults)
-                            object.allocations = {};
-                        if (options.defaults)
-                            object.shardBy = options.enums === String ? "UNSPECIFIED" : 0;
-                        if (message.shardBy != null && message.hasOwnProperty("shardBy"))
-                            object.shardBy = options.enums === String ? $root.google.appengine.v1.TrafficSplit.ShardBy[message.shardBy] : message.shardBy;
-                        var keys2;
-                        if (message.allocations && (keys2 = Object.keys(message.allocations)).length) {
-                            object.allocations = {};
-                            for (var j = 0; j < keys2.length; ++j)
-                                object.allocations[keys2[j]] = options.json && !isFinite(message.allocations[keys2[j]]) ? String(message.allocations[keys2[j]]) : message.allocations[keys2[j]];
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this TrafficSplit to JSON.
-                     * @function toJSON
-                     * @memberof google.appengine.v1.TrafficSplit
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    TrafficSplit.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * ShardBy enum.
-                     * @name google.appengine.v1.TrafficSplit.ShardBy
-                     * @enum {number}
-                     * @property {number} UNSPECIFIED=0 UNSPECIFIED value
-                     * @property {number} COOKIE=1 COOKIE value
-                     * @property {number} IP=2 IP value
-                     * @property {number} RANDOM=3 RANDOM value
-                     */
-                    TrafficSplit.ShardBy = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "COOKIE"] = 1;
-                        values[valuesById[2] = "IP"] = 2;
-                        values[valuesById[3] = "RANDOM"] = 3;
-                        return values;
-                    })();
-    
-                    return TrafficSplit;
-                })();
-    
-                v1.NetworkSettings = (function() {
-    
-                    /**
-                     * Properties of a NetworkSettings.
-                     * @memberof google.appengine.v1
-                     * @interface INetworkSettings
-                     * @property {google.appengine.v1.NetworkSettings.IngressTrafficAllowed|null} [ingressTrafficAllowed] NetworkSettings ingressTrafficAllowed
-                     */
-    
-                    /**
-                     * Constructs a new NetworkSettings.
-                     * @memberof google.appengine.v1
-                     * @classdesc Represents a NetworkSettings.
-                     * @implements INetworkSettings
-                     * @constructor
-                     * @param {google.appengine.v1.INetworkSettings=} [properties] Properties to set
-                     */
-                    function NetworkSettings(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * NetworkSettings ingressTrafficAllowed.
-                     * @member {google.appengine.v1.NetworkSettings.IngressTrafficAllowed} ingressTrafficAllowed
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @instance
-                     */
-                    NetworkSettings.prototype.ingressTrafficAllowed = 0;
-    
-                    /**
-                     * Creates a new NetworkSettings instance using the specified properties.
-                     * @function create
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @static
-                     * @param {google.appengine.v1.INetworkSettings=} [properties] Properties to set
-                     * @returns {google.appengine.v1.NetworkSettings} NetworkSettings instance
-                     */
-                    NetworkSettings.create = function create(properties) {
-                        return new NetworkSettings(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified NetworkSettings message. Does not implicitly {@link google.appengine.v1.NetworkSettings.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @static
-                     * @param {google.appengine.v1.INetworkSettings} message NetworkSettings message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    NetworkSettings.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.ingressTrafficAllowed != null && Object.hasOwnProperty.call(message, "ingressTrafficAllowed"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ingressTrafficAllowed);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified NetworkSettings message, length delimited. Does not implicitly {@link google.appengine.v1.NetworkSettings.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @static
-                     * @param {google.appengine.v1.INetworkSettings} message NetworkSettings message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    NetworkSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a NetworkSettings message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.appengine.v1.NetworkSettings} NetworkSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    NetworkSettings.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.NetworkSettings();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.ingressTrafficAllowed = reader.int32();
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a NetworkSettings message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.appengine.v1.NetworkSettings} NetworkSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    NetworkSettings.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a NetworkSettings message.
-                     * @function verify
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    NetworkSettings.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.ingressTrafficAllowed != null && message.hasOwnProperty("ingressTrafficAllowed"))
-                            switch (message.ingressTrafficAllowed) {
-                            default:
-                                return "ingressTrafficAllowed: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a NetworkSettings message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.appengine.v1.NetworkSettings} NetworkSettings
-                     */
-                    NetworkSettings.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.appengine.v1.NetworkSettings)
-                            return object;
-                        var message = new $root.google.appengine.v1.NetworkSettings();
-                        switch (object.ingressTrafficAllowed) {
-                        case "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED":
-                        case 0:
-                            message.ingressTrafficAllowed = 0;
-                            break;
-                        case "INGRESS_TRAFFIC_ALLOWED_ALL":
-                        case 1:
-                            message.ingressTrafficAllowed = 1;
-                            break;
-                        case "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY":
-                        case 2:
-                            message.ingressTrafficAllowed = 2;
-                            break;
-                        case "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB":
-                        case 3:
-                            message.ingressTrafficAllowed = 3;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a NetworkSettings message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @static
-                     * @param {google.appengine.v1.NetworkSettings} message NetworkSettings
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    NetworkSettings.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.ingressTrafficAllowed = options.enums === String ? "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED" : 0;
-                        if (message.ingressTrafficAllowed != null && message.hasOwnProperty("ingressTrafficAllowed"))
-                            object.ingressTrafficAllowed = options.enums === String ? $root.google.appengine.v1.NetworkSettings.IngressTrafficAllowed[message.ingressTrafficAllowed] : message.ingressTrafficAllowed;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this NetworkSettings to JSON.
-                     * @function toJSON
-                     * @memberof google.appengine.v1.NetworkSettings
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    NetworkSettings.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * IngressTrafficAllowed enum.
-                     * @name google.appengine.v1.NetworkSettings.IngressTrafficAllowed
-                     * @enum {number}
-                     * @property {number} INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED=0 INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED value
-                     * @property {number} INGRESS_TRAFFIC_ALLOWED_ALL=1 INGRESS_TRAFFIC_ALLOWED_ALL value
-                     * @property {number} INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY=2 INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY value
-                     * @property {number} INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB=3 INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB value
-                     */
-                    NetworkSettings.IngressTrafficAllowed = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "INGRESS_TRAFFIC_ALLOWED_ALL"] = 1;
-                        values[valuesById[2] = "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY"] = 2;
-                        values[valuesById[3] = "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB"] = 3;
-                        return values;
-                    })();
-    
-                    return NetworkSettings;
                 })();
     
                 v1.AuditData = (function() {
@@ -36386,667 +36545,6 @@
              */
             var api = {};
     
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
-                                    message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
-            })();
-    
             api.Http = (function() {
     
                 /**
@@ -37949,6 +37447,667 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        case 10:
+                            if (!(message.style && message.style.length))
+                                message.style = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.style.push(reader.int32());
+                            } else
+                                message.style.push(reader.int32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
             })();
     
             return api;

@@ -585,6 +585,7 @@ export class ApplicationsClient {
    *
    * * `auth_domain` - Google authentication domain for controlling user access to the application.
    * * `default_cookie_expiration` - Cookie expiration policy for the application.
+   * * `iap` - Identity-Aware Proxy properties for the application.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -593,7 +594,7 @@ export class ApplicationsClient {
    * @param {google.appengine.v1.Application} request.application
    *   An Application containing the updated resource.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
+   *   Required. Standard field mask for the set of fields to be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
