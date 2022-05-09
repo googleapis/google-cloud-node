@@ -26,8 +26,8 @@ function main(requests) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The list of file annotation requests. Right now we support only
-   *  one AnnotateFileRequest in BatchAnnotateFilesRequest.
+   *  Required. The list of file annotation requests. Right now we support only one
+   *  AnnotateFileRequest in BatchAnnotateFilesRequest.
    */
   // const requests = 1234
   /**

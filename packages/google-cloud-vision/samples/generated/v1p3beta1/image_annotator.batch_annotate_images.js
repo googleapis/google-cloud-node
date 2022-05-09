@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(requests) {
   // [START vision_v1p3beta1_generated_ImageAnnotator_BatchAnnotateImages_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -39,6 +39,7 @@ function main() {
   async function callBatchAnnotateImages() {
     // Construct request
     const request = {
+      requests,
     };
 
     // Run request

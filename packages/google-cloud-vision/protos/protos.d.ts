@@ -524,6 +524,16 @@ export namespace google {
                     type AsyncBatchAnnotateFilesCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
+                /** Likelihood enum. */
+                enum Likelihood {
+                    UNKNOWN = 0,
+                    VERY_UNLIKELY = 1,
+                    UNLIKELY = 2,
+                    POSSIBLE = 3,
+                    LIKELY = 4,
+                    VERY_LIKELY = 5
+                }
+
                 /** Properties of a Feature. */
                 interface IFeature {
 
@@ -836,16 +846,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** Likelihood enum. */
-                enum Likelihood {
-                    UNKNOWN = 0,
-                    VERY_UNLIKELY = 1,
-                    UNLIKELY = 2,
-                    POSSIBLE = 3,
-                    LIKELY = 4,
-                    VERY_LIKELY = 5
                 }
 
                 /** Properties of a FaceAnnotation. */
@@ -1626,24 +1626,6 @@ export namespace google {
 
                     /** SafeSearchAnnotation racy */
                     racy?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
-
-                    /** SafeSearchAnnotation adultConfidence */
-                    adultConfidence?: (number|null);
-
-                    /** SafeSearchAnnotation spoofConfidence */
-                    spoofConfidence?: (number|null);
-
-                    /** SafeSearchAnnotation medicalConfidence */
-                    medicalConfidence?: (number|null);
-
-                    /** SafeSearchAnnotation violenceConfidence */
-                    violenceConfidence?: (number|null);
-
-                    /** SafeSearchAnnotation racyConfidence */
-                    racyConfidence?: (number|null);
-
-                    /** SafeSearchAnnotation nsfwConfidence */
-                    nsfwConfidence?: (number|null);
                 }
 
                 /** Represents a SafeSearchAnnotation. */
@@ -1669,24 +1651,6 @@ export namespace google {
 
                     /** SafeSearchAnnotation racy. */
                     public racy: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
-
-                    /** SafeSearchAnnotation adultConfidence. */
-                    public adultConfidence: number;
-
-                    /** SafeSearchAnnotation spoofConfidence. */
-                    public spoofConfidence: number;
-
-                    /** SafeSearchAnnotation medicalConfidence. */
-                    public medicalConfidence: number;
-
-                    /** SafeSearchAnnotation violenceConfidence. */
-                    public violenceConfidence: number;
-
-                    /** SafeSearchAnnotation racyConfidence. */
-                    public racyConfidence: number;
-
-                    /** SafeSearchAnnotation nsfwConfidence. */
-                    public nsfwConfidence: number;
 
                     /**
                      * Creates a new SafeSearchAnnotation instance using the specified properties.
@@ -20403,96 +20367,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a NormalizedBoundingPoly. */
-                interface INormalizedBoundingPoly {
-
-                    /** NormalizedBoundingPoly vertices */
-                    vertices?: (google.cloud.vision.v1p3beta1.INormalizedVertex[]|null);
-                }
-
-                /** Represents a NormalizedBoundingPoly. */
-                class NormalizedBoundingPoly implements INormalizedBoundingPoly {
-
-                    /**
-                     * Constructs a new NormalizedBoundingPoly.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly);
-
-                    /** NormalizedBoundingPoly vertices. */
-                    public vertices: google.cloud.vision.v1p3beta1.INormalizedVertex[];
-
-                    /**
-                     * Creates a new NormalizedBoundingPoly instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NormalizedBoundingPoly instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
-
-                    /**
-                     * Encodes the specified NormalizedBoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedBoundingPoly.verify|verify} messages.
-                     * @param message NormalizedBoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NormalizedBoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedBoundingPoly.verify|verify} messages.
-                     * @param message NormalizedBoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NormalizedBoundingPoly message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NormalizedBoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
-
-                    /**
-                     * Decodes a NormalizedBoundingPoly message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NormalizedBoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
-
-                    /**
-                     * Verifies a NormalizedBoundingPoly message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NormalizedBoundingPoly message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NormalizedBoundingPoly
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
-
-                    /**
-                     * Creates a plain object from a NormalizedBoundingPoly message. Also converts values to other types if specified.
-                     * @param message NormalizedBoundingPoly
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p3beta1.NormalizedBoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NormalizedBoundingPoly to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a Position. */
                 interface IPosition {
 
@@ -24327,23 +24201,8 @@ export namespace google {
                 /** Properties of a ProductSearchParams. */
                 interface IProductSearchParams {
 
-                    /** ProductSearchParams catalogName */
-                    catalogName?: (string|null);
-
-                    /** ProductSearchParams category */
-                    category?: (google.cloud.vision.v1p3beta1.ProductSearchCategory|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchCategory|null);
-
-                    /** ProductSearchParams productCategory */
-                    productCategory?: (string|null);
-
-                    /** ProductSearchParams normalizedBoundingPoly */
-                    normalizedBoundingPoly?: (google.cloud.vision.v1p3beta1.INormalizedBoundingPoly|null);
-
                     /** ProductSearchParams boundingPoly */
                     boundingPoly?: (google.cloud.vision.v1p3beta1.IBoundingPoly|null);
-
-                    /** ProductSearchParams view */
-                    view?: (google.cloud.vision.v1p3beta1.ProductSearchResultsView|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchResultsView|null);
 
                     /** ProductSearchParams productSet */
                     productSet?: (string|null);
@@ -24364,23 +24223,8 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.vision.v1p3beta1.IProductSearchParams);
 
-                    /** ProductSearchParams catalogName. */
-                    public catalogName: string;
-
-                    /** ProductSearchParams category. */
-                    public category: (google.cloud.vision.v1p3beta1.ProductSearchCategory|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchCategory);
-
-                    /** ProductSearchParams productCategory. */
-                    public productCategory: string;
-
-                    /** ProductSearchParams normalizedBoundingPoly. */
-                    public normalizedBoundingPoly?: (google.cloud.vision.v1p3beta1.INormalizedBoundingPoly|null);
-
                     /** ProductSearchParams boundingPoly. */
                     public boundingPoly?: (google.cloud.vision.v1p3beta1.IBoundingPoly|null);
-
-                    /** ProductSearchParams view. */
-                    public view: (google.cloud.vision.v1p3beta1.ProductSearchResultsView|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchResultsView);
 
                     /** ProductSearchParams productSet. */
                     public productSet: string;
@@ -24465,20 +24309,14 @@ export namespace google {
                 /** Properties of a ProductSearchResults. */
                 interface IProductSearchResults {
 
-                    /** ProductSearchResults category */
-                    category?: (google.cloud.vision.v1p3beta1.ProductSearchCategory|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchCategory|null);
-
-                    /** ProductSearchResults productCategory */
-                    productCategory?: (string|null);
-
                     /** ProductSearchResults indexTime */
                     indexTime?: (google.protobuf.ITimestamp|null);
 
-                    /** ProductSearchResults products */
-                    products?: (google.cloud.vision.v1p3beta1.ProductSearchResults.IProductInfo[]|null);
-
                     /** ProductSearchResults results */
                     results?: (google.cloud.vision.v1p3beta1.ProductSearchResults.IResult[]|null);
+
+                    /** ProductSearchResults productGroupedResults */
+                    productGroupedResults?: (google.cloud.vision.v1p3beta1.ProductSearchResults.IGroupedResult[]|null);
                 }
 
                 /** Represents a ProductSearchResults. */
@@ -24490,20 +24328,14 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.vision.v1p3beta1.IProductSearchResults);
 
-                    /** ProductSearchResults category. */
-                    public category: (google.cloud.vision.v1p3beta1.ProductSearchCategory|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchCategory);
-
-                    /** ProductSearchResults productCategory. */
-                    public productCategory: string;
-
                     /** ProductSearchResults indexTime. */
                     public indexTime?: (google.protobuf.ITimestamp|null);
 
-                    /** ProductSearchResults products. */
-                    public products: google.cloud.vision.v1p3beta1.ProductSearchResults.IProductInfo[];
-
                     /** ProductSearchResults results. */
                     public results: google.cloud.vision.v1p3beta1.ProductSearchResults.IResult[];
+
+                    /** ProductSearchResults productGroupedResults. */
+                    public productGroupedResults: google.cloud.vision.v1p3beta1.ProductSearchResults.IGroupedResult[];
 
                     /**
                      * Creates a new ProductSearchResults instance using the specified properties.
@@ -24577,108 +24409,6 @@ export namespace google {
                 }
 
                 namespace ProductSearchResults {
-
-                    /** Properties of a ProductInfo. */
-                    interface IProductInfo {
-
-                        /** ProductInfo productId */
-                        productId?: (string|null);
-
-                        /** ProductInfo imageUri */
-                        imageUri?: (string|null);
-
-                        /** ProductInfo score */
-                        score?: (number|null);
-                    }
-
-                    /** Represents a ProductInfo. */
-                    class ProductInfo implements IProductInfo {
-
-                        /**
-                         * Constructs a new ProductInfo.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.vision.v1p3beta1.ProductSearchResults.IProductInfo);
-
-                        /** ProductInfo productId. */
-                        public productId: string;
-
-                        /** ProductInfo imageUri. */
-                        public imageUri: string;
-
-                        /** ProductInfo score. */
-                        public score: number;
-
-                        /**
-                         * Creates a new ProductInfo instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ProductInfo instance
-                         */
-                        public static create(properties?: google.cloud.vision.v1p3beta1.ProductSearchResults.IProductInfo): google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo;
-
-                        /**
-                         * Encodes the specified ProductInfo message. Does not implicitly {@link google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo.verify|verify} messages.
-                         * @param message ProductInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.vision.v1p3beta1.ProductSearchResults.IProductInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ProductInfo message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo.verify|verify} messages.
-                         * @param message ProductInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.vision.v1p3beta1.ProductSearchResults.IProductInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ProductInfo message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ProductInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo;
-
-                        /**
-                         * Decodes a ProductInfo message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ProductInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo;
-
-                        /**
-                         * Verifies a ProductInfo message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ProductInfo message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ProductInfo
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo;
-
-                        /**
-                         * Creates a plain object from a ProductInfo message. Also converts values to other types if specified.
-                         * @param message ProductInfo
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ProductInfo to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
 
                     /** Properties of a Result. */
                     interface IResult {
@@ -24781,19 +24511,216 @@ export namespace google {
                          */
                         public toJSON(): { [k: string]: any };
                     }
-                }
 
-                /** ProductSearchCategory enum. */
-                enum ProductSearchCategory {
-                    PRODUCT_SEARCH_CATEGORY_UNSPECIFIED = 0,
-                    SHOES = 1,
-                    BAGS = 2
-                }
+                    /** Properties of an ObjectAnnotation. */
+                    interface IObjectAnnotation {
 
-                /** ProductSearchResultsView enum. */
-                enum ProductSearchResultsView {
-                    BASIC = 0,
-                    FULL = 1
+                        /** ObjectAnnotation mid */
+                        mid?: (string|null);
+
+                        /** ObjectAnnotation languageCode */
+                        languageCode?: (string|null);
+
+                        /** ObjectAnnotation name */
+                        name?: (string|null);
+
+                        /** ObjectAnnotation score */
+                        score?: (number|null);
+                    }
+
+                    /** Represents an ObjectAnnotation. */
+                    class ObjectAnnotation implements IObjectAnnotation {
+
+                        /**
+                         * Constructs a new ObjectAnnotation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vision.v1p3beta1.ProductSearchResults.IObjectAnnotation);
+
+                        /** ObjectAnnotation mid. */
+                        public mid: string;
+
+                        /** ObjectAnnotation languageCode. */
+                        public languageCode: string;
+
+                        /** ObjectAnnotation name. */
+                        public name: string;
+
+                        /** ObjectAnnotation score. */
+                        public score: number;
+
+                        /**
+                         * Creates a new ObjectAnnotation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ObjectAnnotation instance
+                         */
+                        public static create(properties?: google.cloud.vision.v1p3beta1.ProductSearchResults.IObjectAnnotation): google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation;
+
+                        /**
+                         * Encodes the specified ObjectAnnotation message. Does not implicitly {@link google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation.verify|verify} messages.
+                         * @param message ObjectAnnotation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vision.v1p3beta1.ProductSearchResults.IObjectAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ObjectAnnotation message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation.verify|verify} messages.
+                         * @param message ObjectAnnotation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vision.v1p3beta1.ProductSearchResults.IObjectAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ObjectAnnotation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ObjectAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation;
+
+                        /**
+                         * Decodes an ObjectAnnotation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ObjectAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation;
+
+                        /**
+                         * Verifies an ObjectAnnotation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ObjectAnnotation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ObjectAnnotation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation;
+
+                        /**
+                         * Creates a plain object from an ObjectAnnotation message. Also converts values to other types if specified.
+                         * @param message ObjectAnnotation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ObjectAnnotation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GroupedResult. */
+                    interface IGroupedResult {
+
+                        /** GroupedResult boundingPoly */
+                        boundingPoly?: (google.cloud.vision.v1p3beta1.IBoundingPoly|null);
+
+                        /** GroupedResult results */
+                        results?: (google.cloud.vision.v1p3beta1.ProductSearchResults.IResult[]|null);
+
+                        /** GroupedResult objectAnnotations */
+                        objectAnnotations?: (google.cloud.vision.v1p3beta1.ProductSearchResults.IObjectAnnotation[]|null);
+                    }
+
+                    /** Represents a GroupedResult. */
+                    class GroupedResult implements IGroupedResult {
+
+                        /**
+                         * Constructs a new GroupedResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vision.v1p3beta1.ProductSearchResults.IGroupedResult);
+
+                        /** GroupedResult boundingPoly. */
+                        public boundingPoly?: (google.cloud.vision.v1p3beta1.IBoundingPoly|null);
+
+                        /** GroupedResult results. */
+                        public results: google.cloud.vision.v1p3beta1.ProductSearchResults.IResult[];
+
+                        /** GroupedResult objectAnnotations. */
+                        public objectAnnotations: google.cloud.vision.v1p3beta1.ProductSearchResults.IObjectAnnotation[];
+
+                        /**
+                         * Creates a new GroupedResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GroupedResult instance
+                         */
+                        public static create(properties?: google.cloud.vision.v1p3beta1.ProductSearchResults.IGroupedResult): google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult;
+
+                        /**
+                         * Encodes the specified GroupedResult message. Does not implicitly {@link google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult.verify|verify} messages.
+                         * @param message GroupedResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vision.v1p3beta1.ProductSearchResults.IGroupedResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GroupedResult message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult.verify|verify} messages.
+                         * @param message GroupedResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vision.v1p3beta1.ProductSearchResults.IGroupedResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GroupedResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GroupedResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult;
+
+                        /**
+                         * Decodes a GroupedResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GroupedResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult;
+
+                        /**
+                         * Verifies a GroupedResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GroupedResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GroupedResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult;
+
+                        /**
+                         * Creates a plain object from a GroupedResult message. Also converts values to other types if specified.
+                         * @param message GroupedResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GroupedResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Represents a ProductSearch */

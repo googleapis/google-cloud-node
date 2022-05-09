@@ -476,8 +476,8 @@ export class ImageAnnotatorClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number[]} request.requests
-   *   Required. The list of file annotation requests. Right now we support only
-   *   one AnnotateFileRequest in BatchAnnotateFilesRequest.
+   *   Required. The list of file annotation requests. Right now we support only one
+   *   AnnotateFileRequest in BatchAnnotateFilesRequest.
    * @param {string} request.parent
    *   Optional. Target project and location to make a call.
    *

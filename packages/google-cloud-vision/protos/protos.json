@@ -222,6 +222,16 @@
                         }
                       }
                     },
+                    "Likelihood": {
+                      "values": {
+                        "UNKNOWN": 0,
+                        "VERY_UNLIKELY": 1,
+                        "UNLIKELY": 2,
+                        "POSSIBLE": 3,
+                        "LIKELY": 4,
+                        "VERY_LIKELY": 5
+                      }
+                    },
                     "Feature": {
                       "fields": {
                         "type": {
@@ -279,16 +289,6 @@
                           "type": "ImageSource",
                           "id": 2
                         }
-                      }
-                    },
-                    "Likelihood": {
-                      "values": {
-                        "UNKNOWN": 0,
-                        "VERY_UNLIKELY": 1,
-                        "UNLIKELY": 2,
-                        "POSSIBLE": 3,
-                        "LIKELY": 4,
-                        "VERY_LIKELY": 5
                       }
                     },
                     "FaceAnnotation": {
@@ -527,48 +527,6 @@
                         "racy": {
                           "type": "Likelihood",
                           "id": 9
-                        },
-                        "adultConfidence": {
-                          "type": "float",
-                          "id": 16,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "spoofConfidence": {
-                          "type": "float",
-                          "id": 18,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "medicalConfidence": {
-                          "type": "float",
-                          "id": 20,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "violenceConfidence": {
-                          "type": "float",
-                          "id": 22,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "racyConfidence": {
-                          "type": "float",
-                          "id": 24,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "nsfwConfidence": {
-                          "type": "float",
-                          "id": 26,
-                          "options": {
-                            "deprecated": true
-                          }
                         }
                       }
                     },
@@ -4292,7 +4250,8 @@
                     "go_package": "google.golang.org/genproto/googleapis/cloud/vision/v1p3beta1;vision",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebDetectionProto",
-                    "java_package": "com.google.cloud.vision.v1p3beta1"
+                    "java_package": "com.google.cloud.vision.v1p3beta1",
+                    "objc_class_prefix": "GCVN"
                   },
                   "nested": {
                     "Vertex": {
@@ -4330,15 +4289,6 @@
                           "rule": "repeated",
                           "type": "NormalizedVertex",
                           "id": 2
-                        }
-                      }
-                    },
-                    "NormalizedBoundingPoly": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 1
                         }
                       }
                     },
@@ -4944,7 +4894,10 @@
                         "requests": {
                           "rule": "repeated",
                           "type": "AnnotateImageRequest",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -5086,29 +5039,9 @@
                     },
                     "ProductSearchParams": {
                       "fields": {
-                        "catalogName": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "category": {
-                          "type": "ProductSearchCategory",
-                          "id": 2
-                        },
-                        "productCategory": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "normalizedBoundingPoly": {
-                          "type": "NormalizedBoundingPoly",
-                          "id": 3
-                        },
                         "boundingPoly": {
                           "type": "BoundingPoly",
                           "id": 9
-                        },
-                        "view": {
-                          "type": "ProductSearchResultsView",
-                          "id": 4
                         },
                         "productSet": {
                           "type": "string",
@@ -5130,46 +5063,22 @@
                     },
                     "ProductSearchResults": {
                       "fields": {
-                        "category": {
-                          "type": "ProductSearchCategory",
-                          "id": 1
-                        },
-                        "productCategory": {
-                          "type": "string",
-                          "id": 4
-                        },
                         "indexTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 2
-                        },
-                        "products": {
-                          "rule": "repeated",
-                          "type": "ProductInfo",
-                          "id": 3
                         },
                         "results": {
                           "rule": "repeated",
                           "type": "Result",
                           "id": 5
+                        },
+                        "productGroupedResults": {
+                          "rule": "repeated",
+                          "type": "GroupedResult",
+                          "id": 6
                         }
                       },
                       "nested": {
-                        "ProductInfo": {
-                          "fields": {
-                            "productId": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "imageUri": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "score": {
-                              "type": "float",
-                              "id": 3
-                            }
-                          }
-                        },
                         "Result": {
                           "fields": {
                             "product": {
@@ -5185,20 +5094,45 @@
                               "id": 3
                             }
                           }
+                        },
+                        "ObjectAnnotation": {
+                          "fields": {
+                            "mid": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "score": {
+                              "type": "float",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "GroupedResult": {
+                          "fields": {
+                            "boundingPoly": {
+                              "type": "BoundingPoly",
+                              "id": 1
+                            },
+                            "results": {
+                              "rule": "repeated",
+                              "type": "Result",
+                              "id": 2
+                            },
+                            "objectAnnotations": {
+                              "rule": "repeated",
+                              "type": "ObjectAnnotation",
+                              "id": 3
+                            }
+                          }
                         }
-                      }
-                    },
-                    "ProductSearchCategory": {
-                      "values": {
-                        "PRODUCT_SEARCH_CATEGORY_UNSPECIFIED": 0,
-                        "SHOES": 1,
-                        "BAGS": 2
-                      }
-                    },
-                    "ProductSearchResultsView": {
-                      "values": {
-                        "BASIC": 0,
-                        "FULL": 1
                       }
                     },
                     "ProductSearch": {
