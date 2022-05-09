@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [3.2.1](https://github.com/googleapis/nodejs-compute/compare/v3.2.0...v3.2.1) (2022-05-09)
+
+
+### Bug Fixes
+
+* **compute:** remove proto3_optional from parent_id ([#712](https://github.com/googleapis/nodejs-compute/issues/712)) ([#712](https://github.com/googleapis/nodejs-compute/issues/712)) ([f233960](https://github.com/googleapis/nodejs-compute/commit/f2339608ffc7805aef06737c2fccf5f3ab1f2591))
+* **compute:** replace missing REQUIRED for parent_id ([#711](https://github.com/googleapis/nodejs-compute/issues/711)) ([f233960](https://github.com/googleapis/nodejs-compute/commit/f2339608ffc7805aef06737c2fccf5f3ab1f2591))
+* **compute:** revert proto3_optional, required removal on parent_id ([#714](https://github.com/googleapis/nodejs-compute/issues/714)) ([#717](https://github.com/googleapis/nodejs-compute/issues/717)) ([072a9bd](https://github.com/googleapis/nodejs-compute/commit/072a9bda71af2a08d4d6177d4e01a906812c834a))
+
 ## [3.2.0](https://github.com/googleapis/nodejs-compute/compare/v3.1.2...v3.2.0) (2022-04-12)
 
 
