@@ -19,8 +19,8 @@
 import * as v1 from './v1';
 import * as v1alpha1 from './v1alpha1';
 
-const HubServiceClient = v1alpha1.HubServiceClient;
-type HubServiceClient = v1alpha1.HubServiceClient;
+const HubServiceClient = v1.HubServiceClient;
+type HubServiceClient = v1.HubServiceClient;
 
 export {v1, v1alpha1, HubServiceClient};
 export default {v1, v1alpha1, HubServiceClient};
