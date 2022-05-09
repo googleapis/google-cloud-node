@@ -41,7 +41,7 @@
     "hard-rejection": "^2.1.0",
     "linkinator": "^2.0.0",
     "mocha": "^8.0.0",
-    "sinon": "^13.0.0",
+    "sinon": "^14.0.0",
     "typescript": "^4.6.3"
   },
   "engines": {
