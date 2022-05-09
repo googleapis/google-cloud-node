@@ -14053,6 +14053,10 @@
                               "type": "PurgeDataType",
                               "id": 8
                             },
+                            "audioExportSettings": {
+                              "type": "AudioExportSettings",
+                              "id": 12
+                            },
                             "insightsExportSettings": {
                               "type": "InsightsExportSettings",
                               "id": 13
@@ -14075,6 +14079,36 @@
                               "values": {
                                 "PURGE_DATA_TYPE_UNSPECIFIED": 0,
                                 "DIALOGFLOW_HISTORY": 1
+                              }
+                            },
+                            "AudioExportSettings": {
+                              "fields": {
+                                "gcsBucket": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "audioExportPattern": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "enableAudioRedaction": {
+                                  "type": "bool",
+                                  "id": 3
+                                },
+                                "audioFormat": {
+                                  "type": "AudioFormat",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "AudioFormat": {
+                                  "values": {
+                                    "AUDIO_FORMAT_UNSPECIFIED": 0,
+                                    "MULAW": 1,
+                                    "MP3": 2,
+                                    "OGG": 3
+                                  }
+                                }
                               }
                             },
                             "InsightsExportSettings": {

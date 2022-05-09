@@ -52252,6 +52252,9 @@ export namespace google {
                         /** SecuritySettings purgeDataTypes */
                         purgeDataTypes?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.PurgeDataType[]|null);
 
+                        /** SecuritySettings audioExportSettings */
+                        audioExportSettings?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IAudioExportSettings|null);
+
                         /** SecuritySettings insightsExportSettings */
                         insightsExportSettings?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IInsightsExportSettings|null);
                     }
@@ -52288,6 +52291,9 @@ export namespace google {
 
                         /** SecuritySettings purgeDataTypes. */
                         public purgeDataTypes: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.PurgeDataType[];
+
+                        /** SecuritySettings audioExportSettings. */
+                        public audioExportSettings?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IAudioExportSettings|null);
 
                         /** SecuritySettings insightsExportSettings. */
                         public insightsExportSettings?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IInsightsExportSettings|null);
@@ -52384,6 +52390,125 @@ export namespace google {
                         enum PurgeDataType {
                             PURGE_DATA_TYPE_UNSPECIFIED = 0,
                             DIALOGFLOW_HISTORY = 1
+                        }
+
+                        /** Properties of an AudioExportSettings. */
+                        interface IAudioExportSettings {
+
+                            /** AudioExportSettings gcsBucket */
+                            gcsBucket?: (string|null);
+
+                            /** AudioExportSettings audioExportPattern */
+                            audioExportPattern?: (string|null);
+
+                            /** AudioExportSettings enableAudioRedaction */
+                            enableAudioRedaction?: (boolean|null);
+
+                            /** AudioExportSettings audioFormat */
+                            audioFormat?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings.AudioFormat|keyof typeof google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings.AudioFormat|null);
+                        }
+
+                        /** Represents an AudioExportSettings. */
+                        class AudioExportSettings implements IAudioExportSettings {
+
+                            /**
+                             * Constructs a new AudioExportSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IAudioExportSettings);
+
+                            /** AudioExportSettings gcsBucket. */
+                            public gcsBucket: string;
+
+                            /** AudioExportSettings audioExportPattern. */
+                            public audioExportPattern: string;
+
+                            /** AudioExportSettings enableAudioRedaction. */
+                            public enableAudioRedaction: boolean;
+
+                            /** AudioExportSettings audioFormat. */
+                            public audioFormat: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings.AudioFormat|keyof typeof google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings.AudioFormat);
+
+                            /**
+                             * Creates a new AudioExportSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AudioExportSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IAudioExportSettings): google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings;
+
+                            /**
+                             * Encodes the specified AudioExportSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings.verify|verify} messages.
+                             * @param message AudioExportSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IAudioExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AudioExportSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings.verify|verify} messages.
+                             * @param message AudioExportSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IAudioExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AudioExportSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AudioExportSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings;
+
+                            /**
+                             * Decodes an AudioExportSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AudioExportSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings;
+
+                            /**
+                             * Verifies an AudioExportSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AudioExportSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AudioExportSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings;
+
+                            /**
+                             * Creates a plain object from an AudioExportSettings message. Also converts values to other types if specified.
+                             * @param message AudioExportSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.AudioExportSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AudioExportSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace AudioExportSettings {
+
+                            /** AudioFormat enum. */
+                            enum AudioFormat {
+                                AUDIO_FORMAT_UNSPECIFIED = 0,
+                                MULAW = 1,
+                                MP3 = 2,
+                                OGG = 3
+                            }
                         }
 
                         /** Properties of an InsightsExportSettings. */
