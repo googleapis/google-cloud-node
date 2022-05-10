@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -93,13 +93,29 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     assert(client.alphaAnalyticsDataStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.alphaAnalyticsDataStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.alphaAnalyticsDataStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -138,8 +154,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
-  describe('runReport', () => {
-    it('invokes runReport without error', async () => {
+  describe('runFunnelReport', () => {
+    it('invokes runFunnelReport without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -147,479 +163,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunReportRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunReportResponse()
-      );
-      client.innerApiCalls.runReport = stubSimpleCall(expectedResponse);
-      const [response] = await client.runReport(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes runReport without error using callback', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunReportRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunReportResponse()
-      );
-      client.innerApiCalls.runReport =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.runReport(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.data.v1alpha.IRunReportResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes runReport with error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunReportRequest()
-      );
-      const expectedOptions = {};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.runReport = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.runReport(request), expectedError);
-      assert(
-        (client.innerApiCalls.runReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('runPivotReport', () => {
-    it('invokes runPivotReport without error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunPivotReportRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunPivotReportResponse()
-      );
-      client.innerApiCalls.runPivotReport = stubSimpleCall(expectedResponse);
-      const [response] = await client.runPivotReport(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runPivotReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes runPivotReport without error using callback', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunPivotReportRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunPivotReportResponse()
-      );
-      client.innerApiCalls.runPivotReport =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.runPivotReport(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.data.v1alpha.IRunPivotReportResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runPivotReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes runPivotReport with error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunPivotReportRequest()
-      );
-      const expectedOptions = {};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.runPivotReport = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.runPivotReport(request), expectedError);
-      assert(
-        (client.innerApiCalls.runPivotReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('batchRunReports', () => {
-    it('invokes batchRunReports without error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunReportsRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunReportsResponse()
-      );
-      client.innerApiCalls.batchRunReports = stubSimpleCall(expectedResponse);
-      const [response] = await client.batchRunReports(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchRunReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes batchRunReports without error using callback', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunReportsRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunReportsResponse()
-      );
-      client.innerApiCalls.batchRunReports =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchRunReports(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.data.v1alpha.IBatchRunReportsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchRunReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes batchRunReports with error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunReportsRequest()
-      );
-      const expectedOptions = {};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchRunReports = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.batchRunReports(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchRunReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('batchRunPivotReports', () => {
-    it('invokes batchRunPivotReports without error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunPivotReportsRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunPivotReportsResponse()
-      );
-      client.innerApiCalls.batchRunPivotReports =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.batchRunPivotReports(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchRunPivotReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes batchRunPivotReports without error using callback', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunPivotReportsRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunPivotReportsResponse()
-      );
-      client.innerApiCalls.batchRunPivotReports =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchRunPivotReports(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.data.v1alpha.IBatchRunPivotReportsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchRunPivotReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes batchRunPivotReports with error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.BatchRunPivotReportsRequest()
-      );
-      const expectedOptions = {};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchRunPivotReports = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.batchRunPivotReports(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchRunPivotReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('getMetadata', () => {
-    it('invokes getMetadata without error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.GetMetadataRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.Metadata()
-      );
-      client.innerApiCalls.getMetadata = stubSimpleCall(expectedResponse);
-      const [response] = await client.getMetadata(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMetadata as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes getMetadata without error using callback', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.GetMetadataRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.Metadata()
-      );
-      client.innerApiCalls.getMetadata =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.data.v1alpha.IMetadata | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMetadata as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes getMetadata with error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.GetMetadataRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getMetadata = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getMetadata(request), expectedError);
-      assert(
-        (client.innerApiCalls.getMetadata as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('runRealtimeReport', () => {
-    it('invokes runRealtimeReport without error', async () => {
-      const client =
-        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
+        new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
       request.property = '';
       const expectedHeaderRequestParams = 'property=';
@@ -631,19 +175,19 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunRealtimeReportResponse()
+        new protos.google.analytics.data.v1alpha.RunFunnelReportResponse()
       );
-      client.innerApiCalls.runRealtimeReport = stubSimpleCall(expectedResponse);
-      const [response] = await client.runRealtimeReport(request);
+      client.innerApiCalls.runFunnelReport = stubSimpleCall(expectedResponse);
+      const [response] = await client.runFunnelReport(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.runRealtimeReport as SinonStub)
+        (client.innerApiCalls.runFunnelReport as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes runRealtimeReport without error using callback', async () => {
+    it('invokes runFunnelReport without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -651,7 +195,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
+        new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
       request.property = '';
       const expectedHeaderRequestParams = 'property=';
@@ -663,16 +207,16 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunRealtimeReportResponse()
+        new protos.google.analytics.data.v1alpha.RunFunnelReportResponse()
       );
-      client.innerApiCalls.runRealtimeReport =
+      client.innerApiCalls.runFunnelReport =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.runRealtimeReport(
+        client.runFunnelReport(
           request,
           (
             err?: Error | null,
-            result?: protos.google.analytics.data.v1alpha.IRunRealtimeReportResponse | null
+            result?: protos.google.analytics.data.v1alpha.IRunFunnelReportResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -685,13 +229,13 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.runRealtimeReport as SinonStub)
+        (client.innerApiCalls.runFunnelReport as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes runRealtimeReport with error', async () => {
+    it('invokes runFunnelReport with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -699,7 +243,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
+        new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
       request.property = '';
       const expectedHeaderRequestParams = 'property=';
@@ -711,57 +255,32 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.runRealtimeReport = stubSimpleCall(
+      client.innerApiCalls.runFunnelReport = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.runRealtimeReport(request), expectedError);
+      await assert.rejects(client.runFunnelReport(request), expectedError);
       assert(
-        (client.innerApiCalls.runRealtimeReport as SinonStub)
+        (client.innerApiCalls.runFunnelReport as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
-  });
 
-  describe('Path templates', () => {
-    describe('metadata', () => {
-      const fakePath = '/rendered/path/metadata';
-      const expectedParameters = {
-        property: 'propertyValue',
-      };
+    it('invokes runFunnelReport with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.metadataPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.metadataPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('metadataPath', () => {
-        const result = client.metadataPath('propertyValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.metadataPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchPropertyFromMetadataName', () => {
-        const result = client.matchPropertyFromMetadataName(fakePath);
-        assert.strictEqual(result, 'propertyValue');
-        assert(
-          (client.pathTemplates.metadataPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
+      );
+      request.property = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.runFunnelReport(request), expectedError);
     });
   });
 });

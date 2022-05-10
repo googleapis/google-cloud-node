@@ -1,0 +1,91 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-data",
+        "version": "2.8.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.analytics.data.v1alpha",
+                "version": "v1alpha"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_RunFunnelReport_async",
+            "title": "AlphaAnalyticsData runFunnelReport Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a customized funnel report of your Google Analytics event data. The data returned from the API is as a table with columns for the requested dimensions and metrics. Funnel exploration lets you visualize the steps your users take to complete a task and quickly see how well they are succeeding or failing at each step. For example, how do prospects become shoppers and then become buyers? How do one time buyers become repeat buyers? With this information, you can improve inefficient or abandoned customer journeys. To learn more, see [GA4 Funnel Explorations](https://support.google.com/analytics/answer/9327974).",
+            "canonical": true,
+            "file": "alpha_analytics_data.run_funnel_report.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 118,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RunFunnelReport",
+                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.RunFunnelReport",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "property",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "date_ranges",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "funnel",
+                        "type": ".google.analytics.data.v1alpha.Funnel"
+                    },
+                    {
+                        "name": "funnel_breakdown",
+                        "type": ".google.analytics.data.v1alpha.FunnelBreakdown"
+                    },
+                    {
+                        "name": "funnel_next_action",
+                        "type": ".google.analytics.data.v1alpha.FunnelNextAction"
+                    },
+                    {
+                        "name": "funnel_visualization_type",
+                        "type": ".google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType"
+                    },
+                    {
+                        "name": "segments",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "limit",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "dimension_filter",
+                        "type": ".google.analytics.data.v1alpha.FilterExpression"
+                    },
+                    {
+                        "name": "return_property_quota",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.analytics.data.v1alpha.RunFunnelReportResponse",
+                "client": {
+                    "shortName": "AlphaAnalyticsDataClient",
+                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+                },
+                "method": {
+                    "shortName": "RunFunnelReport",
+                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.RunFunnelReport",
+                    "service": {
+                        "shortName": "AlphaAnalyticsData",
+                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+                    }
+                }
+            }
+        }
+    ]
+}

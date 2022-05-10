@@ -2,6 +2,927 @@
   "nested": {
     "google": {
       "nested": {
+        "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
+          "nested": {
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                },
+                "proto3Optional": {
+                  "type": "bool",
+                  "id": 17
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "phpGenericServices": {
+                  "type": "bool",
+                  "id": 42,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "analytics": {
           "nested": {
             "data": {
@@ -20,99 +941,17 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.readonly"
                       },
                       "methods": {
-                        "RunReport": {
-                          "requestType": "RunReportRequest",
-                          "responseType": "RunReportResponse",
+                        "RunFunnelReport": {
+                          "requestType": "RunFunnelReportRequest",
+                          "responseType": "RunFunnelReportResponse",
                           "options": {
-                            "(google.api.http).post": "/v1alpha:runReport",
+                            "(google.api.http).post": "/v1alpha/{property=properties/*}:runFunnelReport",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1alpha:runReport",
-                                "body": "*"
-                              }
-                            }
-                          ]
-                        },
-                        "RunPivotReport": {
-                          "requestType": "RunPivotReportRequest",
-                          "responseType": "RunPivotReportResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha:runPivotReport",
-                            "(google.api.http).body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha:runPivotReport",
-                                "body": "*"
-                              }
-                            }
-                          ]
-                        },
-                        "BatchRunReports": {
-                          "requestType": "BatchRunReportsRequest",
-                          "responseType": "BatchRunReportsResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha:batchRunReports",
-                            "(google.api.http).body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha:batchRunReports",
-                                "body": "*"
-                              }
-                            }
-                          ]
-                        },
-                        "BatchRunPivotReports": {
-                          "requestType": "BatchRunPivotReportsRequest",
-                          "responseType": "BatchRunPivotReportsResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha:batchRunPivotReports",
-                            "(google.api.http).body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha:batchRunPivotReports",
-                                "body": "*"
-                              }
-                            }
-                          ]
-                        },
-                        "GetMetadata": {
-                          "requestType": "GetMetadataRequest",
-                          "responseType": "Metadata",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{name=properties/*/metadata}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{name=properties/*/metadata}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "RunRealtimeReport": {
-                          "requestType": "RunRealtimeReportRequest",
-                          "responseType": "RunRealtimeReportResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{property=properties/*}:runRealtimeReport",
-                            "(google.api.http).body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{property=properties/*}:runRealtimeReport",
+                                "post": "/v1alpha/{property=properties/*}:runFunnelReport",
                                 "body": "*"
                               }
                             }
@@ -120,367 +959,78 @@
                         }
                       }
                     },
-                    "Metadata": {
-                      "options": {
-                        "(google.api.resource).type": "analyticsdata.googleapis.com/Metadata",
-                        "(google.api.resource).pattern": "properties/{property}/metadata"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "dimensions": {
-                          "rule": "repeated",
-                          "type": "DimensionMetadata",
-                          "id": 1
-                        },
-                        "metrics": {
-                          "rule": "repeated",
-                          "type": "MetricMetadata",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "RunReportRequest": {
-                      "fields": {
-                        "entity": {
-                          "type": "Entity",
-                          "id": 1
-                        },
-                        "dimensions": {
-                          "rule": "repeated",
-                          "type": "Dimension",
-                          "id": 2
-                        },
-                        "metrics": {
-                          "rule": "repeated",
-                          "type": "Metric",
-                          "id": 3
-                        },
-                        "dateRanges": {
-                          "rule": "repeated",
-                          "type": "DateRange",
-                          "id": 4
-                        },
-                        "offset": {
-                          "type": "int64",
-                          "id": 5
-                        },
-                        "limit": {
-                          "type": "int64",
-                          "id": 6
-                        },
-                        "metricAggregations": {
-                          "rule": "repeated",
-                          "type": "MetricAggregation",
-                          "id": 7
-                        },
-                        "dimensionFilter": {
-                          "type": "FilterExpression",
-                          "id": 8
-                        },
-                        "metricFilter": {
-                          "type": "FilterExpression",
-                          "id": 9
-                        },
-                        "orderBys": {
-                          "rule": "repeated",
-                          "type": "OrderBy",
-                          "id": 10
-                        },
-                        "currencyCode": {
-                          "type": "string",
-                          "id": 11
-                        },
-                        "cohortSpec": {
-                          "type": "CohortSpec",
-                          "id": 12
-                        },
-                        "keepEmptyRows": {
-                          "type": "bool",
-                          "id": 13
-                        },
-                        "returnPropertyQuota": {
-                          "type": "bool",
-                          "id": 14
-                        }
-                      }
-                    },
-                    "RunReportResponse": {
-                      "fields": {
-                        "dimensionHeaders": {
-                          "rule": "repeated",
-                          "type": "DimensionHeader",
-                          "id": 11
-                        },
-                        "metricHeaders": {
-                          "rule": "repeated",
-                          "type": "MetricHeader",
-                          "id": 1
-                        },
-                        "rows": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 2
-                        },
-                        "totals": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 8
-                        },
-                        "maximums": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 9
-                        },
-                        "minimums": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 10
-                        },
-                        "rowCount": {
-                          "type": "int32",
-                          "id": 12
-                        },
-                        "metadata": {
-                          "type": "ResponseMetaData",
-                          "id": 6
-                        },
-                        "propertyQuota": {
-                          "type": "PropertyQuota",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "RunPivotReportRequest": {
-                      "fields": {
-                        "entity": {
-                          "type": "Entity",
-                          "id": 1
-                        },
-                        "dimensions": {
-                          "rule": "repeated",
-                          "type": "Dimension",
-                          "id": 2
-                        },
-                        "metrics": {
-                          "rule": "repeated",
-                          "type": "Metric",
-                          "id": 3
-                        },
-                        "dimensionFilter": {
-                          "type": "FilterExpression",
-                          "id": 4
-                        },
-                        "metricFilter": {
-                          "type": "FilterExpression",
-                          "id": 5
-                        },
-                        "pivots": {
-                          "rule": "repeated",
-                          "type": "Pivot",
-                          "id": 6
-                        },
-                        "dateRanges": {
-                          "rule": "repeated",
-                          "type": "DateRange",
-                          "id": 7
-                        },
-                        "currencyCode": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "cohortSpec": {
-                          "type": "CohortSpec",
-                          "id": 9
-                        },
-                        "keepEmptyRows": {
-                          "type": "bool",
-                          "id": 10
-                        },
-                        "returnPropertyQuota": {
-                          "type": "bool",
-                          "id": 11
-                        }
-                      }
-                    },
-                    "RunPivotReportResponse": {
-                      "fields": {
-                        "pivotHeaders": {
-                          "rule": "repeated",
-                          "type": "PivotHeader",
-                          "id": 1
-                        },
-                        "dimensionHeaders": {
-                          "rule": "repeated",
-                          "type": "DimensionHeader",
-                          "id": 7
-                        },
-                        "metricHeaders": {
-                          "rule": "repeated",
-                          "type": "MetricHeader",
-                          "id": 2
-                        },
-                        "rows": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 3
-                        },
-                        "aggregates": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 4
-                        },
-                        "metadata": {
-                          "type": "ResponseMetaData",
-                          "id": 5
-                        },
-                        "propertyQuota": {
-                          "type": "PropertyQuota",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "BatchRunReportsRequest": {
-                      "fields": {
-                        "entity": {
-                          "type": "Entity",
-                          "id": 1
-                        },
-                        "requests": {
-                          "rule": "repeated",
-                          "type": "RunReportRequest",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchRunReportsResponse": {
-                      "fields": {
-                        "reports": {
-                          "rule": "repeated",
-                          "type": "RunReportResponse",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "BatchRunPivotReportsRequest": {
-                      "fields": {
-                        "entity": {
-                          "type": "Entity",
-                          "id": 1
-                        },
-                        "requests": {
-                          "rule": "repeated",
-                          "type": "RunPivotReportRequest",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchRunPivotReportsResponse": {
-                      "fields": {
-                        "pivotReports": {
-                          "rule": "repeated",
-                          "type": "RunPivotReportResponse",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "GetMetadataRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/Metadata"
-                          }
-                        }
-                      }
-                    },
-                    "RunRealtimeReportRequest": {
+                    "RunFunnelReportRequest": {
                       "fields": {
                         "property": {
                           "type": "string",
                           "id": 1
                         },
-                        "dimensions": {
+                        "dateRanges": {
                           "rule": "repeated",
-                          "type": "Dimension",
+                          "type": "DateRange",
                           "id": 2
                         },
-                        "metrics": {
-                          "rule": "repeated",
-                          "type": "Metric",
+                        "funnel": {
+                          "type": "Funnel",
                           "id": 3
+                        },
+                        "funnelBreakdown": {
+                          "type": "FunnelBreakdown",
+                          "id": 4
+                        },
+                        "funnelNextAction": {
+                          "type": "FunnelNextAction",
+                          "id": 5
+                        },
+                        "funnelVisualizationType": {
+                          "type": "FunnelVisualizationType",
+                          "id": 6
+                        },
+                        "segments": {
+                          "rule": "repeated",
+                          "type": "Segment",
+                          "id": 7
                         },
                         "limit": {
                           "type": "int64",
-                          "id": 4
+                          "id": 9
                         },
                         "dimensionFilter": {
                           "type": "FilterExpression",
-                          "id": 5
-                        },
-                        "metricFilter": {
-                          "type": "FilterExpression",
-                          "id": 6
-                        },
-                        "metricAggregations": {
-                          "rule": "repeated",
-                          "type": "MetricAggregation",
-                          "id": 7
-                        },
-                        "orderBys": {
-                          "rule": "repeated",
-                          "type": "OrderBy",
-                          "id": 8
+                          "id": 10
                         },
                         "returnPropertyQuota": {
                           "type": "bool",
-                          "id": 9
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "FunnelVisualizationType": {
+                          "values": {
+                            "FUNNEL_VISUALIZATION_TYPE_UNSPECIFIED": 0,
+                            "STANDARD_FUNNEL": 1,
+                            "TRENDED_FUNNEL": 2
+                          }
                         }
                       }
                     },
-                    "RunRealtimeReportResponse": {
+                    "RunFunnelReportResponse": {
                       "fields": {
-                        "dimensionHeaders": {
-                          "rule": "repeated",
-                          "type": "DimensionHeader",
+                        "funnelTable": {
+                          "type": "FunnelSubReport",
                           "id": 1
                         },
-                        "metricHeaders": {
-                          "rule": "repeated",
-                          "type": "MetricHeader",
+                        "funnelVisualization": {
+                          "type": "FunnelSubReport",
                           "id": 2
-                        },
-                        "rows": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 3
-                        },
-                        "totals": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 4
-                        },
-                        "maximums": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 5
-                        },
-                        "minimums": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 6
-                        },
-                        "rowCount": {
-                          "type": "int32",
-                          "id": 7
                         },
                         "propertyQuota": {
                           "type": "PropertyQuota",
-                          "id": 8
+                          "id": 3
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -497,14 +1047,6 @@
                         "name": {
                           "type": "string",
                           "id": 3
-                        }
-                      }
-                    },
-                    "Entity": {
-                      "fields": {
-                        "propertyId": {
-                          "type": "string",
-                          "id": 1
                         }
                       }
                     },
@@ -568,22 +1110,6 @@
                         }
                       }
                     },
-                    "Metric": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "expression": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "invisible": {
-                          "type": "bool",
-                          "id": 3
-                        }
-                      }
-                    },
                     "FilterExpression": {
                       "oneofs": {
                         "expr": {
@@ -627,7 +1153,6 @@
                       "oneofs": {
                         "oneFilter": {
                           "oneof": [
-                            "nullFilter",
                             "stringFilter",
                             "inListFilter",
                             "numericFilter",
@@ -640,295 +1165,119 @@
                           "type": "string",
                           "id": 1
                         },
-                        "nullFilter": {
-                          "type": "bool",
-                          "id": 2
-                        },
                         "stringFilter": {
                           "type": "StringFilter",
-                          "id": 3
+                          "id": 2
                         },
                         "inListFilter": {
                           "type": "InListFilter",
-                          "id": 4
+                          "id": 3
                         },
                         "numericFilter": {
                           "type": "NumericFilter",
-                          "id": 5
+                          "id": 4
                         },
                         "betweenFilter": {
                           "type": "BetweenFilter",
-                          "id": 6
+                          "id": 5
+                        }
+                      }
+                    },
+                    "StringFilter": {
+                      "fields": {
+                        "matchType": {
+                          "type": "MatchType",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "caseSensitive": {
+                          "type": "bool",
+                          "id": 3
                         }
                       },
                       "nested": {
-                        "StringFilter": {
-                          "fields": {
-                            "matchType": {
-                              "type": "MatchType",
-                              "id": 1
-                            },
-                            "value": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "caseSensitive": {
-                              "type": "bool",
-                              "id": 3
-                            }
-                          },
-                          "nested": {
-                            "MatchType": {
-                              "values": {
-                                "MATCH_TYPE_UNSPECIFIED": 0,
-                                "EXACT": 1,
-                                "BEGINS_WITH": 2,
-                                "ENDS_WITH": 3,
-                                "CONTAINS": 4,
-                                "FULL_REGEXP": 5,
-                                "PARTIAL_REGEXP": 6
-                              }
-                            }
-                          }
-                        },
-                        "InListFilter": {
-                          "fields": {
-                            "values": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1
-                            },
-                            "caseSensitive": {
-                              "type": "bool",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "NumericFilter": {
-                          "fields": {
-                            "operation": {
-                              "type": "Operation",
-                              "id": 1
-                            },
-                            "value": {
-                              "type": "NumericValue",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "Operation": {
-                              "values": {
-                                "OPERATION_UNSPECIFIED": 0,
-                                "EQUAL": 1,
-                                "LESS_THAN": 2,
-                                "LESS_THAN_OR_EQUAL": 3,
-                                "GREATER_THAN": 4,
-                                "GREATER_THAN_OR_EQUAL": 5
-                              }
-                            }
-                          }
-                        },
-                        "BetweenFilter": {
-                          "fields": {
-                            "fromValue": {
-                              "type": "NumericValue",
-                              "id": 1
-                            },
-                            "toValue": {
-                              "type": "NumericValue",
-                              "id": 2
-                            }
+                        "MatchType": {
+                          "values": {
+                            "MATCH_TYPE_UNSPECIFIED": 0,
+                            "EXACT": 1,
+                            "BEGINS_WITH": 2,
+                            "ENDS_WITH": 3,
+                            "CONTAINS": 4,
+                            "FULL_REGEXP": 5,
+                            "PARTIAL_REGEXP": 6
                           }
                         }
                       }
                     },
-                    "OrderBy": {
+                    "InListFilter": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "caseSensitive": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NumericFilter": {
+                      "fields": {
+                        "operation": {
+                          "type": "Operation",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "NumericValue",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Operation": {
+                          "values": {
+                            "OPERATION_UNSPECIFIED": 0,
+                            "EQUAL": 1,
+                            "LESS_THAN": 2,
+                            "LESS_THAN_OR_EQUAL": 3,
+                            "GREATER_THAN": 4,
+                            "GREATER_THAN_OR_EQUAL": 5
+                          }
+                        }
+                      }
+                    },
+                    "BetweenFilter": {
+                      "fields": {
+                        "fromValue": {
+                          "type": "NumericValue",
+                          "id": 1
+                        },
+                        "toValue": {
+                          "type": "NumericValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NumericValue": {
                       "oneofs": {
-                        "oneOrderBy": {
+                        "oneValue": {
                           "oneof": [
-                            "metric",
-                            "dimension",
-                            "pivot"
+                            "int64Value",
+                            "doubleValue"
                           ]
                         }
                       },
                       "fields": {
-                        "metric": {
-                          "type": "MetricOrderBy",
-                          "id": 1
-                        },
-                        "dimension": {
-                          "type": "DimensionOrderBy",
-                          "id": 2
-                        },
-                        "pivot": {
-                          "type": "PivotOrderBy",
-                          "id": 3
-                        },
-                        "desc": {
-                          "type": "bool",
-                          "id": 4
-                        }
-                      },
-                      "nested": {
-                        "MetricOrderBy": {
-                          "fields": {
-                            "metricName": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "DimensionOrderBy": {
-                          "fields": {
-                            "dimensionName": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "orderType": {
-                              "type": "OrderType",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "OrderType": {
-                              "values": {
-                                "ORDER_TYPE_UNSPECIFIED": 0,
-                                "ALPHANUMERIC": 1,
-                                "CASE_INSENSITIVE_ALPHANUMERIC": 2,
-                                "NUMERIC": 3
-                              }
-                            }
-                          }
-                        },
-                        "PivotOrderBy": {
-                          "fields": {
-                            "metricName": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "pivotSelections": {
-                              "rule": "repeated",
-                              "type": "PivotSelection",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "PivotSelection": {
-                              "fields": {
-                                "dimensionName": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "dimensionValue": {
-                                  "type": "string",
-                                  "id": 2
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Pivot": {
-                      "fields": {
-                        "fieldNames": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        },
-                        "orderBys": {
-                          "rule": "repeated",
-                          "type": "OrderBy",
-                          "id": 2
-                        },
-                        "offset": {
+                        "int64Value": {
                           "type": "int64",
-                          "id": 3
-                        },
-                        "limit": {
-                          "type": "int64",
-                          "id": 4
-                        },
-                        "metricAggregations": {
-                          "rule": "repeated",
-                          "type": "MetricAggregation",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "CohortSpec": {
-                      "fields": {
-                        "cohorts": {
-                          "rule": "repeated",
-                          "type": "Cohort",
                           "id": 1
                         },
-                        "cohortsRange": {
-                          "type": "CohortsRange",
+                        "doubleValue": {
+                          "type": "double",
                           "id": 2
-                        },
-                        "cohortReportSettings": {
-                          "type": "CohortReportSettings",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "Cohort": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "dimension": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "dateRange": {
-                          "type": "DateRange",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "CohortsRange": {
-                      "fields": {
-                        "granularity": {
-                          "type": "Granularity",
-                          "id": 1
-                        },
-                        "startOffset": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "endOffset": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "Granularity": {
-                          "values": {
-                            "GRANULARITY_UNSPECIFIED": 0,
-                            "DAILY": 1,
-                            "WEEKLY": 2,
-                            "MONTHLY": 3
-                          }
-                        }
-                      }
-                    },
-                    "CohortReportSettings": {
-                      "fields": {
-                        "accumulate": {
-                          "type": "bool",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ResponseMetaData": {
-                      "fields": {
-                        "dataLossFromOtherRow": {
-                          "type": "bool",
-                          "id": 3
                         }
                       }
                     },
@@ -949,28 +1298,6 @@
                         "type": {
                           "type": "MetricType",
                           "id": 2
-                        }
-                      }
-                    },
-                    "PivotHeader": {
-                      "fields": {
-                        "pivotDimensionHeaders": {
-                          "rule": "repeated",
-                          "type": "PivotDimensionHeader",
-                          "id": 1
-                        },
-                        "rowCount": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "PivotDimensionHeader": {
-                      "fields": {
-                        "dimensionValues": {
-                          "rule": "repeated",
-                          "type": "DimensionValue",
-                          "id": 1
                         }
                       }
                     },
@@ -1018,26 +1345,6 @@
                         }
                       }
                     },
-                    "NumericValue": {
-                      "oneofs": {
-                        "oneValue": {
-                          "oneof": [
-                            "int64Value",
-                            "doubleValue"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "int64Value": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "doubleValue": {
-                          "type": "double",
-                          "id": 2
-                        }
-                      }
-                    },
                     "PropertyQuota": {
                       "fields": {
                         "tokensPerDay": {
@@ -1055,6 +1362,10 @@
                         "serverErrorsPerProjectPerHour": {
                           "type": "QuotaStatus",
                           "id": 4
+                        },
+                        "potentiallyThresholdedRequestsPerHour": {
+                          "type": "QuotaStatus",
+                          "id": 5
                         }
                       }
                     },
@@ -1070,71 +1381,804 @@
                         }
                       }
                     },
-                    "DimensionMetadata": {
+                    "FunnelBreakdown": {
+                      "oneofs": {
+                        "_limit": {
+                          "oneof": [
+                            "limit"
+                          ]
+                        }
+                      },
                       "fields": {
-                        "apiName": {
+                        "breakdownDimension": {
+                          "type": "Dimension",
+                          "id": 1
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FunnelNextAction": {
+                      "oneofs": {
+                        "_limit": {
+                          "oneof": [
+                            "limit"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "nextActionDimension": {
+                          "type": "Dimension",
+                          "id": 1
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "Funnel": {
+                      "fields": {
+                        "isOpenFunnel": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "FunnelStep",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FunnelStep": {
+                      "oneofs": {
+                        "_withinDurationFromPriorStep": {
+                          "oneof": [
+                            "withinDurationFromPriorStep"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
                           "type": "string",
                           "id": 1
                         },
-                        "uiName": {
-                          "type": "string",
+                        "isDirectlyFollowedBy": {
+                          "type": "bool",
                           "id": 2
                         },
-                        "description": {
-                          "type": "string",
+                        "withinDurationFromPriorStep": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "filterExpression": {
+                          "type": "FunnelFilterExpression",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "FunnelSubReport": {
+                      "fields": {
+                        "dimensionHeaders": {
+                          "rule": "repeated",
+                          "type": "DimensionHeader",
+                          "id": 1
+                        },
+                        "metricHeaders": {
+                          "rule": "repeated",
+                          "type": "MetricHeader",
+                          "id": 2
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "Row",
                           "id": 3
                         },
-                        "deprecatedApiNames": {
+                        "metadata": {
+                          "type": "FunnelResponseMetadata",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UserSegment": {
+                      "fields": {
+                        "userInclusionCriteria": {
+                          "type": "UserSegmentCriteria",
+                          "id": 1
+                        },
+                        "exclusion": {
+                          "type": "UserSegmentExclusion",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UserSegmentCriteria": {
+                      "fields": {
+                        "andConditionGroups": {
                           "rule": "repeated",
+                          "type": "UserSegmentConditionGroup",
+                          "id": 1
+                        },
+                        "andSequenceGroups": {
+                          "rule": "repeated",
+                          "type": "UserSegmentSequenceGroup",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UserCriteriaScoping": {
+                      "values": {
+                        "USER_CRITERIA_SCOPING_UNSPECIFIED": 0,
+                        "USER_CRITERIA_WITHIN_SAME_EVENT": 1,
+                        "USER_CRITERIA_WITHIN_SAME_SESSION": 2,
+                        "USER_CRITERIA_ACROSS_ALL_SESSIONS": 3
+                      }
+                    },
+                    "UserSegmentConditionGroup": {
+                      "fields": {
+                        "conditionScoping": {
+                          "type": "UserCriteriaScoping",
+                          "id": 1
+                        },
+                        "segmentFilterExpression": {
+                          "type": "SegmentFilterExpression",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UserSegmentSequenceGroup": {
+                      "fields": {
+                        "sequenceScoping": {
+                          "type": "UserCriteriaScoping",
+                          "id": 1
+                        },
+                        "sequenceMaximumDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "userSequenceSteps": {
+                          "rule": "repeated",
+                          "type": "UserSequenceStep",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UserSequenceStep": {
+                      "fields": {
+                        "isDirectlyFollowedBy": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "stepScoping": {
+                          "type": "UserCriteriaScoping",
+                          "id": 2
+                        },
+                        "segmentFilterExpression": {
+                          "type": "SegmentFilterExpression",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UserSegmentExclusion": {
+                      "fields": {
+                        "userExclusionDuration": {
+                          "type": "UserExclusionDuration",
+                          "id": 1
+                        },
+                        "userExclusionCriteria": {
+                          "type": "UserSegmentCriteria",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UserExclusionDuration": {
+                      "values": {
+                        "USER_EXCLUSION_DURATION_UNSPECIFIED": 0,
+                        "USER_EXCLUSION_TEMPORARY": 1,
+                        "USER_EXCLUSION_PERMANENT": 2
+                      }
+                    },
+                    "SessionSegment": {
+                      "fields": {
+                        "sessionInclusionCriteria": {
+                          "type": "SessionSegmentCriteria",
+                          "id": 1
+                        },
+                        "exclusion": {
+                          "type": "SessionSegmentExclusion",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SessionSegmentCriteria": {
+                      "fields": {
+                        "andConditionGroups": {
+                          "rule": "repeated",
+                          "type": "SessionSegmentConditionGroup",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SessionCriteriaScoping": {
+                      "values": {
+                        "SESSION_CRITERIA_SCOPING_UNSPECIFIED": 0,
+                        "SESSION_CRITERIA_WITHIN_SAME_EVENT": 1,
+                        "SESSION_CRITERIA_WITHIN_SAME_SESSION": 2
+                      }
+                    },
+                    "SessionSegmentConditionGroup": {
+                      "fields": {
+                        "conditionScoping": {
+                          "type": "SessionCriteriaScoping",
+                          "id": 1
+                        },
+                        "segmentFilterExpression": {
+                          "type": "SegmentFilterExpression",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SessionSegmentExclusion": {
+                      "fields": {
+                        "sessionExclusionDuration": {
+                          "type": "SessionExclusionDuration",
+                          "id": 1
+                        },
+                        "sessionExclusionCriteria": {
+                          "type": "SessionSegmentCriteria",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SessionExclusionDuration": {
+                      "values": {
+                        "SESSION_EXCLUSION_DURATION_UNSPECIFIED": 0,
+                        "SESSION_EXCLUSION_TEMPORARY": 1,
+                        "SESSION_EXCLUSION_PERMANENT": 2
+                      }
+                    },
+                    "EventSegment": {
+                      "fields": {
+                        "eventInclusionCriteria": {
+                          "type": "EventSegmentCriteria",
+                          "id": 1
+                        },
+                        "exclusion": {
+                          "type": "EventSegmentExclusion",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EventSegmentCriteria": {
+                      "fields": {
+                        "andConditionGroups": {
+                          "rule": "repeated",
+                          "type": "EventSegmentConditionGroup",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "EventCriteriaScoping": {
+                      "values": {
+                        "EVENT_CRITERIA_SCOPING_UNSPECIFIED": 0,
+                        "EVENT_CRITERIA_WITHIN_SAME_EVENT": 1
+                      }
+                    },
+                    "EventSegmentConditionGroup": {
+                      "fields": {
+                        "conditionScoping": {
+                          "type": "EventCriteriaScoping",
+                          "id": 1
+                        },
+                        "segmentFilterExpression": {
+                          "type": "SegmentFilterExpression",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EventSegmentExclusion": {
+                      "fields": {
+                        "eventExclusionDuration": {
+                          "type": "EventExclusionDuration",
+                          "id": 1
+                        },
+                        "eventExclusionCriteria": {
+                          "type": "EventSegmentCriteria",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EventExclusionDuration": {
+                      "values": {
+                        "EVENT_EXCLUSION_DURATION_UNSPECIFIED": 0,
+                        "EVENT_EXCLUSION_PERMANENT": 1
+                      }
+                    },
+                    "Segment": {
+                      "oneofs": {
+                        "oneSegmentScope": {
+                          "oneof": [
+                            "userSegment",
+                            "sessionSegment",
+                            "eventSegment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
                           "type": "string",
+                          "id": 1
+                        },
+                        "userSegment": {
+                          "type": "UserSegment",
+                          "id": 2
+                        },
+                        "sessionSegment": {
+                          "type": "SessionSegment",
+                          "id": 3
+                        },
+                        "eventSegment": {
+                          "type": "EventSegment",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SegmentFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "andGroup",
+                            "orGroup",
+                            "notExpression",
+                            "segmentFilter",
+                            "segmentEventFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "SegmentFilterExpressionList",
+                          "id": 1
+                        },
+                        "orGroup": {
+                          "type": "SegmentFilterExpressionList",
+                          "id": 2
+                        },
+                        "notExpression": {
+                          "type": "SegmentFilterExpression",
+                          "id": 3
+                        },
+                        "segmentFilter": {
+                          "type": "SegmentFilter",
                           "id": 4
                         },
-                        "customDefinition": {
-                          "type": "bool",
+                        "segmentEventFilter": {
+                          "type": "SegmentEventFilter",
                           "id": 5
                         }
                       }
                     },
-                    "MetricMetadata": {
+                    "SegmentFilterExpressionList": {
                       "fields": {
-                        "apiName": {
+                        "expressions": {
+                          "rule": "repeated",
+                          "type": "SegmentFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SegmentFilter": {
+                      "oneofs": {
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter",
+                            "numericFilter",
+                            "betweenFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "fieldName": {
                           "type": "string",
                           "id": 1
                         },
-                        "uiName": {
+                        "stringFilter": {
+                          "type": "StringFilter",
+                          "id": 4
+                        },
+                        "inListFilter": {
+                          "type": "InListFilter",
+                          "id": 5
+                        },
+                        "numericFilter": {
+                          "type": "NumericFilter",
+                          "id": 6
+                        },
+                        "betweenFilter": {
+                          "type": "BetweenFilter",
+                          "id": 7
+                        },
+                        "filterScoping": {
+                          "type": "SegmentFilterScoping",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "SegmentFilterScoping": {
+                      "oneofs": {
+                        "_atAnyPointInTime": {
+                          "oneof": [
+                            "atAnyPointInTime"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "atAnyPointInTime": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SegmentEventFilter": {
+                      "oneofs": {
+                        "_eventName": {
+                          "oneof": [
+                            "eventName"
+                          ]
+                        },
+                        "_segmentParameterFilterExpression": {
+                          "oneof": [
+                            "segmentParameterFilterExpression"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "eventName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "segmentParameterFilterExpression": {
+                          "type": "SegmentParameterFilterExpression",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SegmentParameterFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "andGroup",
+                            "orGroup",
+                            "notExpression",
+                            "segmentParameterFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "SegmentParameterFilterExpressionList",
+                          "id": 1
+                        },
+                        "orGroup": {
+                          "type": "SegmentParameterFilterExpressionList",
+                          "id": 2
+                        },
+                        "notExpression": {
+                          "type": "SegmentParameterFilterExpression",
+                          "id": 3
+                        },
+                        "segmentParameterFilter": {
+                          "type": "SegmentParameterFilter",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SegmentParameterFilterExpressionList": {
+                      "fields": {
+                        "expressions": {
+                          "rule": "repeated",
+                          "type": "SegmentParameterFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SegmentParameterFilter": {
+                      "oneofs": {
+                        "oneParameter": {
+                          "oneof": [
+                            "eventParameterName",
+                            "itemParameterName"
+                          ]
+                        },
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter",
+                            "numericFilter",
+                            "betweenFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "eventParameterName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "itemParameterName": {
                           "type": "string",
                           "id": 2
                         },
-                        "description": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "deprecatedApiNames": {
-                          "rule": "repeated",
-                          "type": "string",
+                        "stringFilter": {
+                          "type": "StringFilter",
                           "id": 4
                         },
-                        "type": {
-                          "type": "MetricType",
+                        "inListFilter": {
+                          "type": "InListFilter",
                           "id": 5
                         },
-                        "expression": {
-                          "type": "string",
+                        "numericFilter": {
+                          "type": "NumericFilter",
                           "id": 6
                         },
-                        "customDefinition": {
-                          "type": "bool",
+                        "betweenFilter": {
+                          "type": "BetweenFilter",
+                          "id": 7
+                        },
+                        "filterScoping": {
+                          "type": "SegmentParameterFilterScoping",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "SegmentParameterFilterScoping": {
+                      "oneofs": {
+                        "_inAnyNDayPeriod": {
+                          "oneof": [
+                            "inAnyNDayPeriod"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inAnyNDayPeriod": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FunnelFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "andGroup",
+                            "orGroup",
+                            "notExpression",
+                            "funnelFilter",
+                            "funnelEventFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "FunnelFilterExpressionList",
+                          "id": 1
+                        },
+                        "orGroup": {
+                          "type": "FunnelFilterExpressionList",
+                          "id": 2
+                        },
+                        "notExpression": {
+                          "type": "FunnelFilterExpression",
+                          "id": 3
+                        },
+                        "funnelFilter": {
+                          "type": "FunnelFilter",
+                          "id": 4
+                        },
+                        "funnelEventFilter": {
+                          "type": "FunnelEventFilter",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "FunnelFilterExpressionList": {
+                      "fields": {
+                        "expressions": {
+                          "rule": "repeated",
+                          "type": "FunnelFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FunnelFilter": {
+                      "oneofs": {
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter",
+                            "numericFilter",
+                            "betweenFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "stringFilter": {
+                          "type": "StringFilter",
+                          "id": 4
+                        },
+                        "inListFilter": {
+                          "type": "InListFilter",
+                          "id": 5
+                        },
+                        "numericFilter": {
+                          "type": "NumericFilter",
+                          "id": 6
+                        },
+                        "betweenFilter": {
+                          "type": "BetweenFilter",
                           "id": 7
                         }
                       }
                     },
-                    "MetricAggregation": {
-                      "values": {
-                        "METRIC_AGGREGATION_UNSPECIFIED": 0,
-                        "TOTAL": 1,
-                        "MINIMUM": 5,
-                        "MAXIMUM": 6,
-                        "COUNT": 4
+                    "FunnelEventFilter": {
+                      "oneofs": {
+                        "_eventName": {
+                          "oneof": [
+                            "eventName"
+                          ]
+                        },
+                        "_funnelParameterFilterExpression": {
+                          "oneof": [
+                            "funnelParameterFilterExpression"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "eventName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "funnelParameterFilterExpression": {
+                          "type": "FunnelParameterFilterExpression",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FunnelParameterFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "andGroup",
+                            "orGroup",
+                            "notExpression",
+                            "funnelParameterFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "FunnelParameterFilterExpressionList",
+                          "id": 1
+                        },
+                        "orGroup": {
+                          "type": "FunnelParameterFilterExpressionList",
+                          "id": 2
+                        },
+                        "notExpression": {
+                          "type": "FunnelParameterFilterExpression",
+                          "id": 3
+                        },
+                        "funnelParameterFilter": {
+                          "type": "FunnelParameterFilter",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "FunnelParameterFilterExpressionList": {
+                      "fields": {
+                        "expressions": {
+                          "rule": "repeated",
+                          "type": "FunnelParameterFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FunnelParameterFilter": {
+                      "oneofs": {
+                        "oneParameter": {
+                          "oneof": [
+                            "eventParameterName",
+                            "itemParameterName"
+                          ]
+                        },
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter",
+                            "numericFilter",
+                            "betweenFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "eventParameterName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "itemParameterName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "stringFilter": {
+                          "type": "StringFilter",
+                          "id": 4
+                        },
+                        "inListFilter": {
+                          "type": "InListFilter",
+                          "id": 5
+                        },
+                        "numericFilter": {
+                          "type": "NumericFilter",
+                          "id": 6
+                        },
+                        "betweenFilter": {
+                          "type": "BetweenFilter",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "FunnelResponseMetadata": {
+                      "fields": {
+                        "samplingMetadatas": {
+                          "rule": "repeated",
+                          "type": "SamplingMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SamplingMetadata": {
+                      "fields": {
+                        "samplesReadCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "samplingSpaceSize": {
+                          "type": "int64",
+                          "id": 2
+                        }
                       }
                     },
                     "MetricType": {
@@ -2807,915 +3851,6 @@
                 "childType": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            }
-          }
-        },
-        "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
-          "nested": {
-            "FileDescriptorSet": {
-              "fields": {
-                "file": {
-                  "rule": "repeated",
-                  "type": "FileDescriptorProto",
-                  "id": 1
-                }
-              }
-            },
-            "FileDescriptorProto": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "package": {
-                  "type": "string",
-                  "id": 2
-                },
-                "dependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 3
-                },
-                "publicDependency": {
-                  "rule": "repeated",
-                  "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
-                },
-                "weakDependency": {
-                  "rule": "repeated",
-                  "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
-                },
-                "messageType": {
-                  "rule": "repeated",
-                  "type": "DescriptorProto",
-                  "id": 4
-                },
-                "enumType": {
-                  "rule": "repeated",
-                  "type": "EnumDescriptorProto",
-                  "id": 5
-                },
-                "service": {
-                  "rule": "repeated",
-                  "type": "ServiceDescriptorProto",
-                  "id": 6
-                },
-                "extension": {
-                  "rule": "repeated",
-                  "type": "FieldDescriptorProto",
-                  "id": 7
-                },
-                "options": {
-                  "type": "FileOptions",
-                  "id": 8
-                },
-                "sourceCodeInfo": {
-                  "type": "SourceCodeInfo",
-                  "id": 9
-                },
-                "syntax": {
-                  "type": "string",
-                  "id": 12
-                }
-              }
-            },
-            "DescriptorProto": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "field": {
-                  "rule": "repeated",
-                  "type": "FieldDescriptorProto",
-                  "id": 2
-                },
-                "extension": {
-                  "rule": "repeated",
-                  "type": "FieldDescriptorProto",
-                  "id": 6
-                },
-                "nestedType": {
-                  "rule": "repeated",
-                  "type": "DescriptorProto",
-                  "id": 3
-                },
-                "enumType": {
-                  "rule": "repeated",
-                  "type": "EnumDescriptorProto",
-                  "id": 4
-                },
-                "extensionRange": {
-                  "rule": "repeated",
-                  "type": "ExtensionRange",
-                  "id": 5
-                },
-                "oneofDecl": {
-                  "rule": "repeated",
-                  "type": "OneofDescriptorProto",
-                  "id": 8
-                },
-                "options": {
-                  "type": "MessageOptions",
-                  "id": 7
-                },
-                "reservedRange": {
-                  "rule": "repeated",
-                  "type": "ReservedRange",
-                  "id": 9
-                },
-                "reservedName": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "ExtensionRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
-                    }
-                  }
-                },
-                "ReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
-                }
-              }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
-            },
-            "FieldDescriptorProto": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "number": {
-                  "type": "int32",
-                  "id": 3
-                },
-                "label": {
-                  "type": "Label",
-                  "id": 4
-                },
-                "type": {
-                  "type": "Type",
-                  "id": 5
-                },
-                "typeName": {
-                  "type": "string",
-                  "id": 6
-                },
-                "extendee": {
-                  "type": "string",
-                  "id": 2
-                },
-                "defaultValue": {
-                  "type": "string",
-                  "id": 7
-                },
-                "oneofIndex": {
-                  "type": "int32",
-                  "id": 9
-                },
-                "jsonName": {
-                  "type": "string",
-                  "id": 10
-                },
-                "options": {
-                  "type": "FieldOptions",
-                  "id": 8
-                },
-                "proto3Optional": {
-                  "type": "bool",
-                  "id": 17
-                }
-              },
-              "nested": {
-                "Type": {
-                  "values": {
-                    "TYPE_DOUBLE": 1,
-                    "TYPE_FLOAT": 2,
-                    "TYPE_INT64": 3,
-                    "TYPE_UINT64": 4,
-                    "TYPE_INT32": 5,
-                    "TYPE_FIXED64": 6,
-                    "TYPE_FIXED32": 7,
-                    "TYPE_BOOL": 8,
-                    "TYPE_STRING": 9,
-                    "TYPE_GROUP": 10,
-                    "TYPE_MESSAGE": 11,
-                    "TYPE_BYTES": 12,
-                    "TYPE_UINT32": 13,
-                    "TYPE_ENUM": 14,
-                    "TYPE_SFIXED32": 15,
-                    "TYPE_SFIXED64": 16,
-                    "TYPE_SINT32": 17,
-                    "TYPE_SINT64": 18
-                  }
-                },
-                "Label": {
-                  "values": {
-                    "LABEL_OPTIONAL": 1,
-                    "LABEL_REQUIRED": 2,
-                    "LABEL_REPEATED": 3
-                  }
-                }
-              }
-            },
-            "OneofDescriptorProto": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "options": {
-                  "type": "OneofOptions",
-                  "id": 2
-                }
-              }
-            },
-            "EnumDescriptorProto": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "rule": "repeated",
-                  "type": "EnumValueDescriptorProto",
-                  "id": 2
-                },
-                "options": {
-                  "type": "EnumOptions",
-                  "id": 3
-                },
-                "reservedRange": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reservedName": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
-                }
-              }
-            },
-            "EnumValueDescriptorProto": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "number": {
-                  "type": "int32",
-                  "id": 2
-                },
-                "options": {
-                  "type": "EnumValueOptions",
-                  "id": 3
-                }
-              }
-            },
-            "ServiceDescriptorProto": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "method": {
-                  "rule": "repeated",
-                  "type": "MethodDescriptorProto",
-                  "id": 2
-                },
-                "options": {
-                  "type": "ServiceOptions",
-                  "id": 3
-                }
-              }
-            },
-            "MethodDescriptorProto": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "inputType": {
-                  "type": "string",
-                  "id": 2
-                },
-                "outputType": {
-                  "type": "string",
-                  "id": 3
-                },
-                "options": {
-                  "type": "MethodOptions",
-                  "id": 4
-                },
-                "clientStreaming": {
-                  "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "serverStreaming": {
-                  "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
-                }
-              }
-            },
-            "FileOptions": {
-              "fields": {
-                "javaPackage": {
-                  "type": "string",
-                  "id": 1
-                },
-                "javaOuterClassname": {
-                  "type": "string",
-                  "id": 8
-                },
-                "javaMultipleFiles": {
-                  "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "javaGenerateEqualsAndHash": {
-                  "type": "bool",
-                  "id": 20,
-                  "options": {
-                    "deprecated": true
-                  }
-                },
-                "javaStringCheckUtf8": {
-                  "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "optimizeFor": {
-                  "type": "OptimizeMode",
-                  "id": 9,
-                  "options": {
-                    "default": "SPEED"
-                  }
-                },
-                "goPackage": {
-                  "type": "string",
-                  "id": 11
-                },
-                "ccGenericServices": {
-                  "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "javaGenericServices": {
-                  "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "pyGenericServices": {
-                  "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "phpGenericServices": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "deprecated": {
-                  "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "ccEnableArenas": {
-                  "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
-                },
-                "objcClassPrefix": {
-                  "type": "string",
-                  "id": 36
-                },
-                "csharpNamespace": {
-                  "type": "string",
-                  "id": 37
-                },
-                "swiftPrefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "phpClassPrefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "phpNamespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "phpMetadataNamespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "rubyPackage": {
-                  "type": "string",
-                  "id": 45
-                },
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
-              "reserved": [
-                [
-                  38,
-                  38
-                ]
-              ],
-              "nested": {
-                "OptimizeMode": {
-                  "values": {
-                    "SPEED": 1,
-                    "CODE_SIZE": 2,
-                    "LITE_RUNTIME": 3
-                  }
-                }
-              }
-            },
-            "MessageOptions": {
-              "fields": {
-                "messageSetWireFormat": {
-                  "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "noStandardDescriptorAccessor": {
-                  "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "deprecated": {
-                  "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "mapEntry": {
-                  "type": "bool",
-                  "id": 7
-                },
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
-              "reserved": [
-                [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
-                  8,
-                  8
-                ],
-                [
-                  9,
-                  9
-                ]
-              ]
-            },
-            "FieldOptions": {
-              "fields": {
-                "ctype": {
-                  "type": "CType",
-                  "id": 1,
-                  "options": {
-                    "default": "STRING"
-                  }
-                },
-                "packed": {
-                  "type": "bool",
-                  "id": 2
-                },
-                "jstype": {
-                  "type": "JSType",
-                  "id": 6,
-                  "options": {
-                    "default": "JS_NORMAL"
-                  }
-                },
-                "lazy": {
-                  "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "deprecated": {
-                  "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "weak": {
-                  "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
-              "reserved": [
-                [
-                  4,
-                  4
-                ]
-              ],
-              "nested": {
-                "CType": {
-                  "values": {
-                    "STRING": 0,
-                    "CORD": 1,
-                    "STRING_PIECE": 2
-                  }
-                },
-                "JSType": {
-                  "values": {
-                    "JS_NORMAL": 0,
-                    "JS_STRING": 1,
-                    "JS_NUMBER": 2
-                  }
-                }
-              }
-            },
-            "OneofOptions": {
-              "fields": {
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
-            },
-            "EnumOptions": {
-              "fields": {
-                "allowAlias": {
-                  "type": "bool",
-                  "id": 2
-                },
-                "deprecated": {
-                  "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
-              ]
-            },
-            "EnumValueOptions": {
-              "fields": {
-                "deprecated": {
-                  "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
-            },
-            "ServiceOptions": {
-              "fields": {
-                "deprecated": {
-                  "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
-            },
-            "MethodOptions": {
-              "fields": {
-                "deprecated": {
-                  "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotencyLevel": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
-                },
-                "uninterpretedOption": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
-            },
-            "UninterpretedOption": {
-              "fields": {
-                "name": {
-                  "rule": "repeated",
-                  "type": "NamePart",
-                  "id": 2
-                },
-                "identifierValue": {
-                  "type": "string",
-                  "id": 3
-                },
-                "positiveIntValue": {
-                  "type": "uint64",
-                  "id": 4
-                },
-                "negativeIntValue": {
-                  "type": "int64",
-                  "id": 5
-                },
-                "doubleValue": {
-                  "type": "double",
-                  "id": 6
-                },
-                "stringValue": {
-                  "type": "bytes",
-                  "id": 7
-                },
-                "aggregateValue": {
-                  "type": "string",
-                  "id": 8
-                }
-              },
-              "nested": {
-                "NamePart": {
-                  "fields": {
-                    "namePart": {
-                      "rule": "required",
-                      "type": "string",
-                      "id": 1
-                    },
-                    "isExtension": {
-                      "rule": "required",
-                      "type": "bool",
-                      "id": 2
-                    }
-                  }
-                }
-              }
-            },
-            "SourceCodeInfo": {
-              "fields": {
-                "location": {
-                  "rule": "repeated",
-                  "type": "Location",
-                  "id": 1
-                }
-              },
-              "nested": {
-                "Location": {
-                  "fields": {
-                    "path": {
-                      "rule": "repeated",
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "span": {
-                      "rule": "repeated",
-                      "type": "int32",
-                      "id": 2
-                    },
-                    "leadingComments": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "trailingComments": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "leadingDetachedComments": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 6
-                    }
-                  }
-                }
-              }
-            },
-            "GeneratedCodeInfo": {
-              "fields": {
-                "annotation": {
-                  "rule": "repeated",
-                  "type": "Annotation",
-                  "id": 1
-                }
-              },
-              "nested": {
-                "Annotation": {
-                  "fields": {
-                    "path": {
-                      "rule": "repeated",
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "sourceFile": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "begin": {
-                      "type": "int32",
-                      "id": 3
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 4
-                    }
-                  }
                 }
               }
             }

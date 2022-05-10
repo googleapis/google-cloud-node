@@ -3,41 +3,16 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.analytics.data.v1alpha",
-  "libraryPackage": "@google-analytics/data",
+  "libraryPackage": "@google-cloud/data",
   "services": {
     "AlphaAnalyticsData": {
       "clients": {
         "grpc": {
           "libraryClient": "AlphaAnalyticsDataClient",
           "rpcs": {
-            "RunReport": {
+            "RunFunnelReport": {
               "methods": [
-                "runReport"
-              ]
-            },
-            "RunPivotReport": {
-              "methods": [
-                "runPivotReport"
-              ]
-            },
-            "BatchRunReports": {
-              "methods": [
-                "batchRunReports"
-              ]
-            },
-            "BatchRunPivotReports": {
-              "methods": [
-                "batchRunPivotReports"
-              ]
-            },
-            "GetMetadata": {
-              "methods": [
-                "getMetadata"
-              ]
-            },
-            "RunRealtimeReport": {
-              "methods": [
-                "runRealtimeReport"
+                "runFunnelReport"
               ]
             }
           }
@@ -45,34 +20,9 @@
         "grpc-fallback": {
           "libraryClient": "AlphaAnalyticsDataClient",
           "rpcs": {
-            "RunReport": {
+            "RunFunnelReport": {
               "methods": [
-                "runReport"
-              ]
-            },
-            "RunPivotReport": {
-              "methods": [
-                "runPivotReport"
-              ]
-            },
-            "BatchRunReports": {
-              "methods": [
-                "batchRunReports"
-              ]
-            },
-            "BatchRunPivotReports": {
-              "methods": [
-                "batchRunPivotReports"
-              ]
-            },
-            "GetMetadata": {
-              "methods": [
-                "getMetadata"
-              ]
-            },
-            "RunRealtimeReport": {
-              "methods": [
-                "runRealtimeReport"
+                "runFunnelReport"
               ]
             }
           }
