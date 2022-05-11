@@ -35,9 +35,7 @@ import * as path from 'path';
 import pLimit = require('p-limit');
 import {promisify} from 'util';
 import retry = require('async-retry');
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const snakeize = require('snakeize');
+import {convertObjKeysToSnakeCase} from './util';
 
 import {Acl} from './acl';
 import {Channel} from './channel';
@@ -1819,7 +1817,7 @@ class Bucket extends ServiceObject {
       {
         method: 'POST',
         uri: '/notificationConfigs',
-        json: snakeize(body),
+        json: convertObjKeysToSnakeCase(body),
         qs: query,
         maxRetries: 0, //explicitly set this value since this is a non-idempotent function
       },

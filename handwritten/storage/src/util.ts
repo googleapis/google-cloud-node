@@ -103,3 +103,31 @@ export function unicodeJSONStringify(obj: object) {
       '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4)
   );
 }
+
+/**
+ * Converts the given objects keys to snake_case
+ * @param {object} obj object to convert keys to snake case.
+ * @returns {object} object with keys converted to snake case.
+ */
+export function convertObjKeysToSnakeCase(obj: object): object {
+  if (obj instanceof Date || obj instanceof RegExp) {
+    return obj;
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(convertObjKeysToSnakeCase);
+  }
+  if (obj instanceof Object) {
+    return Object.keys(obj).reduce((acc, cur) => {
+      const s =
+        cur[0].toLocaleLowerCase() +
+        cur.slice(1).replace(/([A-Z]+)/g, (match, p1) => {
+          return `_${p1.toLowerCase()}`;
+        });
+
+      acc[s] = convertObjKeysToSnakeCase(obj[cur as keyof Object]);
+      return acc;
+    }, Object());
+  }
+
+  return obj;
+}

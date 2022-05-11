@@ -29,8 +29,6 @@ import pLimit = require('p-limit');
 import * as path from 'path';
 import * as proxyquire from 'proxyquire';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const snakeize = require('snakeize');
 import * as stream from 'stream';
 import {Bucket, Channel, Notification} from '../src';
 import {
@@ -55,6 +53,7 @@ import {Policy} from '../src/iam';
 import sinon = require('sinon');
 import {Transform} from 'stream';
 import {ExceptionMessages, IdempotencyStrategy} from '../src/storage';
+import {convertObjKeysToSnakeCase} from '../src/util';
 
 class FakeFile {
   calledWith_: IArguments;
@@ -1109,7 +1108,7 @@ describe('Bucket', () => {
       const expectedTopic = PUBSUB_SERVICE_PATH + topic;
       const expectedJson = Object.assign(
         {topic: expectedTopic},
-        snakeize(options)
+        convertObjKeysToSnakeCase(options)
       );
 
       bucket.request = (reqOpts: DecorateRequestOptions) => {
