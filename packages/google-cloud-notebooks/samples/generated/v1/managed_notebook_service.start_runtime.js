@@ -30,6 +30,10 @@ function main(name) {
    *  `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
    */
   // const name = 'abc123'
+  /**
+   *  Idempotent request UUID.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Notebooks library
   const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;

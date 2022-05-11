@@ -354,6 +354,7 @@ export class ManagedNotebookServiceClient {
       'switchRuntime',
       'resetRuntime',
       'reportRuntimeEvent',
+      'refreshRuntimeTokenInternal',
     ];
     for (const methodName of managedNotebookServiceStubMethods) {
       const callPromise = this.managedNotebookServiceStub.then(
@@ -526,6 +527,112 @@ export class ManagedNotebookServiceClient {
     this.initialize();
     return this.innerApiCalls.getRuntime(request, options, callback);
   }
+  /**
+   * Gets an access token for the consumer service account that the customer
+   * attached to the runtime. Only accessible from the tenant instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Format:
+   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+   * @param {string} request.vmId
+   *   Required. The VM hardware token for authenticating the VM.
+   *   https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RefreshRuntimeTokenInternalResponse]{@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_notebook_service.refresh_runtime_token_internal.js</caption>
+   * region_tag:notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_async
+   */
+  refreshRuntimeTokenInternal(
+    request?: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+      (
+        | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  refreshRuntimeTokenInternal(
+    request: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+      | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  refreshRuntimeTokenInternal(
+    request: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
+    callback: Callback<
+      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+      | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  refreshRuntimeTokenInternal(
+    request?: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+          | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+      | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+      (
+        | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.refreshRuntimeTokenInternal(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Creates a new Runtime in a given project and location.
@@ -539,6 +646,8 @@ export class ManagedNotebookServiceClient {
    *   Required. User-defined unique ID of this Runtime.
    * @param {google.cloud.notebooks.v1.Runtime} request.runtime
    *   Required. The Runtime to be created.
+   * @param {string} request.requestId
+   *   Idempotent request UUID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -677,6 +786,8 @@ export class ManagedNotebookServiceClient {
    * @param {string} request.name
    *   Required. Format:
    *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+   * @param {string} request.requestId
+   *   Idempotent request UUID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -819,6 +930,8 @@ export class ManagedNotebookServiceClient {
    * @param {string} request.name
    *   Required. Format:
    *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+   * @param {string} request.requestId
+   *   Idempotent request UUID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -961,6 +1074,8 @@ export class ManagedNotebookServiceClient {
    * @param {string} request.name
    *   Required. Format:
    *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+   * @param {string} request.requestId
+   *   Idempotent request UUID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1103,6 +1218,8 @@ export class ManagedNotebookServiceClient {
    *   machine type.
    * @param {google.cloud.notebooks.v1.RuntimeAcceleratorConfig} request.acceleratorConfig
    *   accelerator config.
+   * @param {string} request.requestId
+   *   Idempotent request UUID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1241,6 +1358,8 @@ export class ManagedNotebookServiceClient {
    * @param {string} request.name
    *   Required. Format:
    *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+   * @param {string} request.requestId
+   *   Idempotent request UUID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

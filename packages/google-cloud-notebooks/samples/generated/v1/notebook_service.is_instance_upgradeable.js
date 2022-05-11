@@ -30,6 +30,11 @@ function main(notebookInstance) {
    *  `projects/{project_id}/locations/{location}/instances/{instance_id}`
    */
   // const notebookInstance = 'abc123'
+  /**
+   *  Optional. The optional UpgradeType. Setting this field will search for additional
+   *  compute images to upgrade this instance.
+   */
+  // const type = {}
 
   // Imports the Notebooks library
   const {NotebookServiceClient} = require('@google-cloud/notebooks').v1;

@@ -38,6 +38,10 @@ function main(parent, runtimeId, runtime) {
    *  Required. The Runtime to be created.
    */
   // const runtime = {}
+  /**
+   *  Idempotent request UUID.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Notebooks library
   const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;

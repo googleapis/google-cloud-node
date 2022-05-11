@@ -110,7 +110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -130,6 +130,10 @@
                     {
                         "name": "runtime",
                         "type": ".google.cloud.notebooks.v1.Runtime"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -158,7 +162,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 52,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -169,6 +173,10 @@
                 "parameters": [
                     {
                         "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -198,7 +206,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 52,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -209,6 +217,10 @@
                 "parameters": [
                     {
                         "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -238,7 +250,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 52,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -249,6 +261,10 @@
                 "parameters": [
                     {
                         "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -278,7 +294,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -298,6 +314,10 @@
                     {
                         "name": "accelerator_config",
                         "type": ".google.cloud.notebooks.v1.RuntimeAcceleratorConfig"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -326,7 +346,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 52,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -337,6 +357,10 @@
                 "parameters": [
                     {
                         "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -396,6 +420,50 @@
                 "method": {
                     "shortName": "ReportRuntimeEvent",
                     "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.ReportRuntimeEvent",
+                    "service": {
+                        "shortName": "ManagedNotebookService",
+                        "fullName": "google.cloud.notebooks.v1.ManagedNotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_async",
+            "title": "ManagedNotebookService refreshRuntimeTokenInternal Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets an access token for the consumer service account that the customer attached to the runtime. Only accessible from the tenant instance.",
+            "canonical": true,
+            "file": "managed_notebook_service.refresh_runtime_token_internal.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RefreshRuntimeTokenInternal",
+                "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.RefreshRuntimeTokenInternal",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "vm_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse",
+                "client": {
+                    "shortName": "ManagedNotebookServiceClient",
+                    "fullName": "google.cloud.notebooks.v1.ManagedNotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "RefreshRuntimeTokenInternal",
+                    "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.RefreshRuntimeTokenInternal",
                     "service": {
                         "shortName": "ManagedNotebookService",
                         "fullName": "google.cloud.notebooks.v1.ManagedNotebookService"
@@ -808,6 +876,50 @@
             }
         },
         {
+            "regionTag": "notebooks_v1_generated_NotebookService_UpdateInstanceMetadataItems_async",
+            "title": "ManagedNotebookService updateInstanceMetadataItems Sample",
+            "origin": "API_DEFINITION",
+            "description": " Add/update metadata items for an instance.",
+            "canonical": true,
+            "file": "notebook_service.update_instance_metadata_items.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateInstanceMetadataItems",
+                "fullName": "google.cloud.notebooks.v1.NotebookService.UpdateInstanceMetadataItems",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "items",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.notebooks.v1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateInstanceMetadataItems",
+                    "fullName": "google.cloud.notebooks.v1.NotebookService.UpdateInstanceMetadataItems",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.notebooks.v1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "notebooks_v1_generated_NotebookService_DeleteInstance_async",
             "title": "ManagedNotebookService deleteInstance Sample",
             "origin": "API_DEFINITION",
@@ -1026,7 +1138,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -1038,6 +1150,10 @@
                     {
                         "name": "notebook_instance",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "type",
+                        "type": ".google.cloud.notebooks.v1.UpgradeType"
                     }
                 ],
                 "resultType": ".google.cloud.notebooks.v1.IsInstanceUpgradeableResponse",
@@ -1106,7 +1222,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 52,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],
@@ -1118,6 +1234,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "type",
+                        "type": ".google.cloud.notebooks.v1.UpgradeType"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -1190,7 +1310,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -1206,6 +1326,10 @@
                     {
                         "name": "vm_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "type",
+                        "type": ".google.cloud.notebooks.v1.UpgradeType"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -1763,7 +1887,7 @@
             "regionTag": "notebooks_v1_generated_NotebookService_CreateExecution_async",
             "title": "ManagedNotebookService createExecution Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new Scheduled Notebook in a given project and location.",
+            "description": " Creates a new Execution in a given project and location.",
             "canonical": true,
             "file": "notebook_service.create_execution.js",
             "language": "JAVASCRIPT",

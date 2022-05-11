@@ -35,6 +35,11 @@ function main(name, vmId) {
    *  https://cloud.google.com/compute/docs/instances/verifying-instance-identity
    */
   // const vmId = 'abc123'
+  /**
+   *  Optional. The optional UpgradeType. Setting this field will search for additional
+   *  compute images to upgrade this instance.
+   */
+  // const type = {}
 
   // Imports the Notebooks library
   const {NotebookServiceClient} = require('@google-cloud/notebooks').v1;

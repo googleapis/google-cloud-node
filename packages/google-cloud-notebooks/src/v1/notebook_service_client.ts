@@ -542,6 +542,7 @@ export class NotebookServiceClient {
       'updateInstanceConfig',
       'updateShieldedInstanceConfig',
       'setInstanceLabels',
+      'updateInstanceMetadataItems',
       'deleteInstance',
       'startInstance',
       'stopInstance',
@@ -737,6 +738,110 @@ export class NotebookServiceClient {
     return this.innerApiCalls.getInstance(request, options, callback);
   }
   /**
+   * Add/update metadata items for an instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Format:
+   *   `projects/{project_id}/locations/{location}/instances/{instance_id}`
+   * @param {number[]} request.items
+   *   Metadata items to add/update for the instance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [UpdateInstanceMetadataItemsResponse]{@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.update_instance_metadata_items.js</caption>
+   * region_tag:notebooks_v1_generated_NotebookService_UpdateInstanceMetadataItems_async
+   */
+  updateInstanceMetadataItems(
+    request?: protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse,
+      (
+        | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateInstanceMetadataItems(
+    request: protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse,
+      | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateInstanceMetadataItems(
+    request: protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest,
+    callback: Callback<
+      protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse,
+      | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateInstanceMetadataItems(
+    request?: protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse,
+          | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse,
+      | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse,
+      (
+        | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateInstanceMetadataItems(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Check if a notebook instance is upgradable.
    *
    * @param {Object} request
@@ -744,6 +849,9 @@ export class NotebookServiceClient {
    * @param {string} request.notebookInstance
    *   Required. Format:
    *   `projects/{project_id}/locations/{location}/instances/{instance_id}`
+   * @param {google.cloud.notebooks.v1.UpgradeType} [request.type]
+   *   Optional. The optional UpgradeType. Setting this field will search for additional
+   *   compute images to upgrade this instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2905,6 +3013,9 @@ export class NotebookServiceClient {
    * @param {string} request.name
    *   Required. Format:
    *   `projects/{project_id}/locations/{location}/instances/{instance_id}`
+   * @param {google.cloud.notebooks.v1.UpgradeType} [request.type]
+   *   Optional. The optional UpgradeType. Setting this field will search for additional
+   *   compute images to upgrade this instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3188,6 +3299,9 @@ export class NotebookServiceClient {
    * @param {string} request.vmId
    *   Required. The VM hardware token for authenticating the VM.
    *   https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+   * @param {google.cloud.notebooks.v1.UpgradeType} [request.type]
+   *   Optional. The optional UpgradeType. Setting this field will search for additional
+   *   compute images to upgrade this instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4161,7 +4275,7 @@ export class NotebookServiceClient {
     >;
   }
   /**
-   * Creates a new Scheduled Notebook in a given project and location.
+   * Creates a new Execution in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.

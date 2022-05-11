@@ -902,6 +902,7 @@
                          * @interface IEvent
                          * @property {google.protobuf.ITimestamp|null} [reportTime] Event reportTime
                          * @property {google.cloud.notebooks.v1.Event.EventType|null} [type] Event type
+                         * @property {Object.<string,string>|null} [details] Event details
                          */
     
                         /**
@@ -913,6 +914,7 @@
                          * @param {google.cloud.notebooks.v1.IEvent=} [properties] Properties to set
                          */
                         function Event(properties) {
+                            this.details = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -934,6 +936,14 @@
                          * @instance
                          */
                         Event.prototype.type = 0;
+    
+                        /**
+                         * Event details.
+                         * @member {Object.<string,string>} details
+                         * @memberof google.cloud.notebooks.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.details = $util.emptyObject;
     
                         /**
                          * Creates a new Event instance using the specified properties.
@@ -963,6 +973,9 @@
                                 $root.google.protobuf.Timestamp.encode(message.reportTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                for (var keys = Object.keys(message.details), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.details[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -993,7 +1006,7 @@
                         Event.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.notebooks.v1.Event();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.notebooks.v1.Event(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1002,6 +1015,28 @@
                                     break;
                                 case 2:
                                     message.type = reader.int32();
+                                    break;
+                                case 3:
+                                    if (message.details === $util.emptyObject)
+                                        message.details = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.details[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1049,8 +1084,19 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
+                            if (message.details != null && message.hasOwnProperty("details")) {
+                                if (!$util.isObject(message.details))
+                                    return "details: object expected";
+                                var key = Object.keys(message.details);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.details[key[i]]))
+                                        return "details: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -1080,6 +1126,25 @@
                             case 1:
                                 message.type = 1;
                                 break;
+                            case "HEARTBEAT":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "HEALTH":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "MAINTENANCE":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            if (object.details) {
+                                if (typeof object.details !== "object")
+                                    throw TypeError(".google.cloud.notebooks.v1.Event.details: object expected");
+                                message.details = {};
+                                for (var keys = Object.keys(object.details), i = 0; i < keys.length; ++i)
+                                    message.details[keys[i]] = String(object.details[keys[i]]);
                             }
                             return message;
                         };
@@ -1097,6 +1162,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.details = {};
                             if (options.defaults) {
                                 object.reportTime = null;
                                 object.type = options.enums === String ? "EVENT_TYPE_UNSPECIFIED" : 0;
@@ -1105,6 +1172,12 @@
                                 object.reportTime = $root.google.protobuf.Timestamp.toObject(message.reportTime, options);
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.notebooks.v1.Event.EventType[message.type] : message.type;
+                            var keys2;
+                            if (message.details && (keys2 = Object.keys(message.details)).length) {
+                                object.details = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.details[keys2[j]] = message.details[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -1125,11 +1198,17 @@
                          * @enum {number}
                          * @property {number} EVENT_TYPE_UNSPECIFIED=0 EVENT_TYPE_UNSPECIFIED value
                          * @property {number} IDLE=1 IDLE value
+                         * @property {number} HEARTBEAT=2 HEARTBEAT value
+                         * @property {number} HEALTH=3 HEALTH value
+                         * @property {number} MAINTENANCE=4 MAINTENANCE value
                          */
                         Event.EventType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "EVENT_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "IDLE"] = 1;
+                            values[valuesById[2] = "HEARTBEAT"] = 2;
+                            values[valuesById[3] = "HEALTH"] = 3;
+                            values[valuesById[4] = "MAINTENANCE"] = 4;
                             return values;
                         })();
     
@@ -1154,6 +1233,9 @@
                          * @property {string|null} [serviceAccount] ExecutionTemplate serviceAccount
                          * @property {google.cloud.notebooks.v1.ExecutionTemplate.JobType|null} [jobType] ExecutionTemplate jobType
                          * @property {google.cloud.notebooks.v1.ExecutionTemplate.IDataprocParameters|null} [dataprocParameters] ExecutionTemplate dataprocParameters
+                         * @property {google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters|null} [vertexAiParameters] ExecutionTemplate vertexAiParameters
+                         * @property {string|null} [kernelSpec] ExecutionTemplate kernelSpec
+                         * @property {string|null} [tensorboard] ExecutionTemplate tensorboard
                          */
     
                         /**
@@ -1268,17 +1350,41 @@
                          */
                         ExecutionTemplate.prototype.dataprocParameters = null;
     
+                        /**
+                         * ExecutionTemplate vertexAiParameters.
+                         * @member {google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters|null|undefined} vertexAiParameters
+                         * @memberof google.cloud.notebooks.v1.ExecutionTemplate
+                         * @instance
+                         */
+                        ExecutionTemplate.prototype.vertexAiParameters = null;
+    
+                        /**
+                         * ExecutionTemplate kernelSpec.
+                         * @member {string} kernelSpec
+                         * @memberof google.cloud.notebooks.v1.ExecutionTemplate
+                         * @instance
+                         */
+                        ExecutionTemplate.prototype.kernelSpec = "";
+    
+                        /**
+                         * ExecutionTemplate tensorboard.
+                         * @member {string} tensorboard
+                         * @memberof google.cloud.notebooks.v1.ExecutionTemplate
+                         * @instance
+                         */
+                        ExecutionTemplate.prototype.tensorboard = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * ExecutionTemplate jobParameters.
-                         * @member {"dataprocParameters"|undefined} jobParameters
+                         * @member {"dataprocParameters"|"vertexAiParameters"|undefined} jobParameters
                          * @memberof google.cloud.notebooks.v1.ExecutionTemplate
                          * @instance
                          */
                         Object.defineProperty(ExecutionTemplate.prototype, "jobParameters", {
-                            get: $util.oneOfGetter($oneOfFields = ["dataprocParameters"]),
+                            get: $util.oneOfGetter($oneOfFields = ["dataprocParameters", "vertexAiParameters"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1331,6 +1437,12 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.jobType);
                             if (message.dataprocParameters != null && Object.hasOwnProperty.call(message, "dataprocParameters"))
                                 $root.google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters.encode(message.dataprocParameters, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.vertexAiParameters != null && Object.hasOwnProperty.call(message, "vertexAiParameters"))
+                                $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.encode(message.vertexAiParameters, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.kernelSpec != null && Object.hasOwnProperty.call(message, "kernelSpec"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.kernelSpec);
+                            if (message.tensorboard != null && Object.hasOwnProperty.call(message, "tensorboard"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.tensorboard);
                             return writer;
                         };
     
@@ -1419,6 +1531,15 @@
                                     break;
                                 case 12:
                                     message.dataprocParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.vertexAiParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.decode(reader, reader.uint32());
+                                    break;
+                                case 14:
+                                    message.kernelSpec = reader.string();
+                                    break;
+                                case 15:
+                                    message.tensorboard = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1520,6 +1641,22 @@
                                         return "dataprocParameters." + error;
                                 }
                             }
+                            if (message.vertexAiParameters != null && message.hasOwnProperty("vertexAiParameters")) {
+                                if (properties.jobParameters === 1)
+                                    return "jobParameters: multiple values";
+                                properties.jobParameters = 1;
+                                {
+                                    var error = $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.verify(message.vertexAiParameters);
+                                    if (error)
+                                        return "vertexAiParameters." + error;
+                                }
+                            }
+                            if (message.kernelSpec != null && message.hasOwnProperty("kernelSpec"))
+                                if (!$util.isString(message.kernelSpec))
+                                    return "kernelSpec: string expected";
+                            if (message.tensorboard != null && message.hasOwnProperty("tensorboard"))
+                                if (!$util.isString(message.tensorboard))
+                                    return "tensorboard: string expected";
                             return null;
                         };
     
@@ -1610,6 +1747,15 @@
                                     throw TypeError(".google.cloud.notebooks.v1.ExecutionTemplate.dataprocParameters: object expected");
                                 message.dataprocParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters.fromObject(object.dataprocParameters);
                             }
+                            if (object.vertexAiParameters != null) {
+                                if (typeof object.vertexAiParameters !== "object")
+                                    throw TypeError(".google.cloud.notebooks.v1.ExecutionTemplate.vertexAiParameters: object expected");
+                                message.vertexAiParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.fromObject(object.vertexAiParameters);
+                            }
+                            if (object.kernelSpec != null)
+                                message.kernelSpec = String(object.kernelSpec);
+                            if (object.tensorboard != null)
+                                message.tensorboard = String(object.tensorboard);
                             return message;
                         };
     
@@ -1639,6 +1785,8 @@
                                 object.parameters = "";
                                 object.serviceAccount = "";
                                 object.jobType = options.enums === String ? "JOB_TYPE_UNSPECIFIED" : 0;
+                                object.kernelSpec = "";
+                                object.tensorboard = "";
                             }
                             if (message.scaleTier != null && message.hasOwnProperty("scaleTier"))
                                 object.scaleTier = options.enums === String ? $root.google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier[message.scaleTier] : message.scaleTier;
@@ -1671,6 +1819,15 @@
                                 if (options.oneofs)
                                     object.jobParameters = "dataprocParameters";
                             }
+                            if (message.vertexAiParameters != null && message.hasOwnProperty("vertexAiParameters")) {
+                                object.vertexAiParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.toObject(message.vertexAiParameters, options);
+                                if (options.oneofs)
+                                    object.jobParameters = "vertexAiParameters";
+                            }
+                            if (message.kernelSpec != null && message.hasOwnProperty("kernelSpec"))
+                                object.kernelSpec = message.kernelSpec;
+                            if (message.tensorboard != null && message.hasOwnProperty("tensorboard"))
+                                object.tensorboard = message.tensorboard;
                             return object;
                         };
     
@@ -1684,6 +1841,58 @@
                         ExecutionTemplate.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * ScaleTier enum.
+                         * @name google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier
+                         * @enum {number}
+                         * @property {number} SCALE_TIER_UNSPECIFIED=0 SCALE_TIER_UNSPECIFIED value
+                         * @property {number} BASIC=1 BASIC value
+                         * @property {number} STANDARD_1=2 STANDARD_1 value
+                         * @property {number} PREMIUM_1=3 PREMIUM_1 value
+                         * @property {number} BASIC_GPU=4 BASIC_GPU value
+                         * @property {number} BASIC_TPU=5 BASIC_TPU value
+                         * @property {number} CUSTOM=6 CUSTOM value
+                         */
+                        ExecutionTemplate.ScaleTier = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCALE_TIER_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BASIC"] = 1;
+                            values[valuesById[2] = "STANDARD_1"] = 2;
+                            values[valuesById[3] = "PREMIUM_1"] = 3;
+                            values[valuesById[4] = "BASIC_GPU"] = 4;
+                            values[valuesById[5] = "BASIC_TPU"] = 5;
+                            values[valuesById[6] = "CUSTOM"] = 6;
+                            return values;
+                        })();
+    
+                        /**
+                         * SchedulerAcceleratorType enum.
+                         * @name google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorType
+                         * @enum {number}
+                         * @property {number} SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED=0 SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED value
+                         * @property {number} NVIDIA_TESLA_K80=1 NVIDIA_TESLA_K80 value
+                         * @property {number} NVIDIA_TESLA_P100=2 NVIDIA_TESLA_P100 value
+                         * @property {number} NVIDIA_TESLA_V100=3 NVIDIA_TESLA_V100 value
+                         * @property {number} NVIDIA_TESLA_P4=4 NVIDIA_TESLA_P4 value
+                         * @property {number} NVIDIA_TESLA_T4=5 NVIDIA_TESLA_T4 value
+                         * @property {number} NVIDIA_TESLA_A100=10 NVIDIA_TESLA_A100 value
+                         * @property {number} TPU_V2=6 TPU_V2 value
+                         * @property {number} TPU_V3=7 TPU_V3 value
+                         */
+                        ExecutionTemplate.SchedulerAcceleratorType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NVIDIA_TESLA_K80"] = 1;
+                            values[valuesById[2] = "NVIDIA_TESLA_P100"] = 2;
+                            values[valuesById[3] = "NVIDIA_TESLA_V100"] = 3;
+                            values[valuesById[4] = "NVIDIA_TESLA_P4"] = 4;
+                            values[valuesById[5] = "NVIDIA_TESLA_T4"] = 5;
+                            values[valuesById[10] = "NVIDIA_TESLA_A100"] = 10;
+                            values[valuesById[6] = "TPU_V2"] = 6;
+                            values[valuesById[7] = "TPU_V3"] = 7;
+                            return values;
+                        })();
     
                         ExecutionTemplate.SchedulerAcceleratorConfig = (function() {
     
@@ -1839,6 +2048,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 10:
                                     case 6:
                                     case 7:
                                         break;
@@ -1885,6 +2095,10 @@
                                 case "NVIDIA_TESLA_T4":
                                 case 5:
                                     message.type = 5;
+                                    break;
+                                case "NVIDIA_TESLA_A100":
+                                case 10:
+                                    message.type = 10;
                                     break;
                                 case "TPU_V2":
                                 case 6:
@@ -1950,6 +2164,22 @@
                             };
     
                             return SchedulerAcceleratorConfig;
+                        })();
+    
+                        /**
+                         * JobType enum.
+                         * @name google.cloud.notebooks.v1.ExecutionTemplate.JobType
+                         * @enum {number}
+                         * @property {number} JOB_TYPE_UNSPECIFIED=0 JOB_TYPE_UNSPECIFIED value
+                         * @property {number} VERTEX_AI=1 VERTEX_AI value
+                         * @property {number} DATAPROC=2 DATAPROC value
+                         */
+                        ExecutionTemplate.JobType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "JOB_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "VERTEX_AI"] = 1;
+                            values[valuesById[2] = "DATAPROC"] = 2;
+                            return values;
                         })();
     
                         ExecutionTemplate.DataprocParameters = (function() {
@@ -2139,70 +2369,249 @@
                             return DataprocParameters;
                         })();
     
-                        /**
-                         * ScaleTier enum.
-                         * @name google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier
-                         * @enum {number}
-                         * @property {number} SCALE_TIER_UNSPECIFIED=0 SCALE_TIER_UNSPECIFIED value
-                         * @property {number} BASIC=1 BASIC value
-                         * @property {number} STANDARD_1=2 STANDARD_1 value
-                         * @property {number} PREMIUM_1=3 PREMIUM_1 value
-                         * @property {number} BASIC_GPU=4 BASIC_GPU value
-                         * @property {number} BASIC_TPU=5 BASIC_TPU value
-                         * @property {number} CUSTOM=6 CUSTOM value
-                         */
-                        ExecutionTemplate.ScaleTier = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "SCALE_TIER_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "BASIC"] = 1;
-                            values[valuesById[2] = "STANDARD_1"] = 2;
-                            values[valuesById[3] = "PREMIUM_1"] = 3;
-                            values[valuesById[4] = "BASIC_GPU"] = 4;
-                            values[valuesById[5] = "BASIC_TPU"] = 5;
-                            values[valuesById[6] = "CUSTOM"] = 6;
-                            return values;
-                        })();
+                        ExecutionTemplate.VertexAIParameters = (function() {
     
-                        /**
-                         * SchedulerAcceleratorType enum.
-                         * @name google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorType
-                         * @enum {number}
-                         * @property {number} SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED=0 SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED value
-                         * @property {number} NVIDIA_TESLA_K80=1 NVIDIA_TESLA_K80 value
-                         * @property {number} NVIDIA_TESLA_P100=2 NVIDIA_TESLA_P100 value
-                         * @property {number} NVIDIA_TESLA_V100=3 NVIDIA_TESLA_V100 value
-                         * @property {number} NVIDIA_TESLA_P4=4 NVIDIA_TESLA_P4 value
-                         * @property {number} NVIDIA_TESLA_T4=5 NVIDIA_TESLA_T4 value
-                         * @property {number} TPU_V2=6 TPU_V2 value
-                         * @property {number} TPU_V3=7 TPU_V3 value
-                         */
-                        ExecutionTemplate.SchedulerAcceleratorType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "NVIDIA_TESLA_K80"] = 1;
-                            values[valuesById[2] = "NVIDIA_TESLA_P100"] = 2;
-                            values[valuesById[3] = "NVIDIA_TESLA_V100"] = 3;
-                            values[valuesById[4] = "NVIDIA_TESLA_P4"] = 4;
-                            values[valuesById[5] = "NVIDIA_TESLA_T4"] = 5;
-                            values[valuesById[6] = "TPU_V2"] = 6;
-                            values[valuesById[7] = "TPU_V3"] = 7;
-                            return values;
-                        })();
+                            /**
+                             * Properties of a VertexAIParameters.
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate
+                             * @interface IVertexAIParameters
+                             * @property {string|null} [network] VertexAIParameters network
+                             * @property {Object.<string,string>|null} [env] VertexAIParameters env
+                             */
     
-                        /**
-                         * JobType enum.
-                         * @name google.cloud.notebooks.v1.ExecutionTemplate.JobType
-                         * @enum {number}
-                         * @property {number} JOB_TYPE_UNSPECIFIED=0 JOB_TYPE_UNSPECIFIED value
-                         * @property {number} VERTEX_AI=1 VERTEX_AI value
-                         * @property {number} DATAPROC=2 DATAPROC value
-                         */
-                        ExecutionTemplate.JobType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "JOB_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "VERTEX_AI"] = 1;
-                            values[valuesById[2] = "DATAPROC"] = 2;
-                            return values;
+                            /**
+                             * Constructs a new VertexAIParameters.
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate
+                             * @classdesc Represents a VertexAIParameters.
+                             * @implements IVertexAIParameters
+                             * @constructor
+                             * @param {google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters=} [properties] Properties to set
+                             */
+                            function VertexAIParameters(properties) {
+                                this.env = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VertexAIParameters network.
+                             * @member {string} network
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @instance
+                             */
+                            VertexAIParameters.prototype.network = "";
+    
+                            /**
+                             * VertexAIParameters env.
+                             * @member {Object.<string,string>} env
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @instance
+                             */
+                            VertexAIParameters.prototype.env = $util.emptyObject;
+    
+                            /**
+                             * Creates a new VertexAIParameters instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters=} [properties] Properties to set
+                             * @returns {google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters} VertexAIParameters instance
+                             */
+                            VertexAIParameters.create = function create(properties) {
+                                return new VertexAIParameters(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VertexAIParameters message. Does not implicitly {@link google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters} message VertexAIParameters message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VertexAIParameters.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.network);
+                                if (message.env != null && Object.hasOwnProperty.call(message, "env"))
+                                    for (var keys = Object.keys(message.env), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.env[keys[i]]).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VertexAIParameters message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters} message VertexAIParameters message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VertexAIParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VertexAIParameters message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters} VertexAIParameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VertexAIParameters.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.network = reader.string();
+                                        break;
+                                    case 2:
+                                        if (message.env === $util.emptyObject)
+                                            message.env = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.env[key] = value;
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VertexAIParameters message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters} VertexAIParameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VertexAIParameters.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VertexAIParameters message.
+                             * @function verify
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VertexAIParameters.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.network != null && message.hasOwnProperty("network"))
+                                    if (!$util.isString(message.network))
+                                        return "network: string expected";
+                                if (message.env != null && message.hasOwnProperty("env")) {
+                                    if (!$util.isObject(message.env))
+                                        return "env: object expected";
+                                    var key = Object.keys(message.env);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.env[key[i]]))
+                                            return "env: string{k:string} expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VertexAIParameters message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters} VertexAIParameters
+                             */
+                            VertexAIParameters.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters)
+                                    return object;
+                                var message = new $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters();
+                                if (object.network != null)
+                                    message.network = String(object.network);
+                                if (object.env) {
+                                    if (typeof object.env !== "object")
+                                        throw TypeError(".google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.env: object expected");
+                                    message.env = {};
+                                    for (var keys = Object.keys(object.env), i = 0; i < keys.length; ++i)
+                                        message.env[keys[i]] = String(object.env[keys[i]]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VertexAIParameters message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters} message VertexAIParameters
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VertexAIParameters.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.env = {};
+                                if (options.defaults)
+                                    object.network = "";
+                                if (message.network != null && message.hasOwnProperty("network"))
+                                    object.network = message.network;
+                                var keys2;
+                                if (message.env && (keys2 = Object.keys(message.env)).length) {
+                                    object.env = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.env[keys2[j]] = message.env[keys2[j]];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VertexAIParameters to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VertexAIParameters.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return VertexAIParameters;
                         })();
     
                         return ExecutionTemplate;
@@ -2998,6 +3407,8 @@
                          * @property {Array.<google.cloud.notebooks.v1.Instance.IUpgradeHistoryEntry>|null} [upgradeHistory] Instance upgradeHistory
                          * @property {google.cloud.notebooks.v1.Instance.NicType|null} [nicType] Instance nicType
                          * @property {google.cloud.notebooks.v1.IReservationAffinity|null} [reservationAffinity] Instance reservationAffinity
+                         * @property {string|null} [creator] Instance creator
+                         * @property {boolean|null} [canIpForward] Instance canIpForward
                          * @property {google.protobuf.ITimestamp|null} [createTime] Instance createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Instance updateTime
                          */
@@ -3281,6 +3692,22 @@
                         Instance.prototype.reservationAffinity = null;
     
                         /**
+                         * Instance creator.
+                         * @member {string} creator
+                         * @memberof google.cloud.notebooks.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.creator = "";
+    
+                        /**
+                         * Instance canIpForward.
+                         * @member {boolean} canIpForward
+                         * @memberof google.cloud.notebooks.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.canIpForward = false;
+    
+                        /**
                          * Instance createTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} createTime
                          * @memberof google.cloud.notebooks.v1.Instance
@@ -3409,6 +3836,10 @@
                                 writer.uint32(/* id 33, wireType 0 =*/264).int32(message.nicType);
                             if (message.reservationAffinity != null && Object.hasOwnProperty.call(message, "reservationAffinity"))
                                 $root.google.cloud.notebooks.v1.ReservationAffinity.encode(message.reservationAffinity, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                            if (message.creator != null && Object.hasOwnProperty.call(message, "creator"))
+                                writer.uint32(/* id 36, wireType 2 =*/290).string(message.creator);
+                            if (message.canIpForward != null && Object.hasOwnProperty.call(message, "canIpForward"))
+                                writer.uint32(/* id 39, wireType 0 =*/312).bool(message.canIpForward);
                             return writer;
                         };
     
@@ -3587,6 +4018,12 @@
                                 case 34:
                                     message.reservationAffinity = $root.google.cloud.notebooks.v1.ReservationAffinity.decode(reader, reader.uint32());
                                     break;
+                                case 36:
+                                    message.creator = reader.string();
+                                    break;
+                                case 39:
+                                    message.canIpForward = reader.bool();
+                                    break;
                                 case 23:
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
@@ -3695,6 +4132,8 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
+                                case 11:
                                     break;
                                 }
                             if (message.installGpuDriver != null && message.hasOwnProperty("installGpuDriver"))
@@ -3711,6 +4150,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.bootDiskSizeGb != null && message.hasOwnProperty("bootDiskSizeGb"))
@@ -3724,6 +4164,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.dataDiskSizeGb != null && message.hasOwnProperty("dataDiskSizeGb"))
@@ -3816,6 +4257,12 @@
                                 if (error)
                                     return "reservationAffinity." + error;
                             }
+                            if (message.creator != null && message.hasOwnProperty("creator"))
+                                if (!$util.isString(message.creator))
+                                    return "creator: string expected";
+                            if (message.canIpForward != null && message.hasOwnProperty("canIpForward"))
+                                if (typeof message.canIpForward !== "boolean")
+                                    return "canIpForward: boolean expected";
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime);
                                 if (error)
@@ -3921,6 +4368,14 @@
                             case 9:
                                 message.state = 9;
                                 break;
+                            case "SUSPENDING":
+                            case 10:
+                                message.state = 10;
+                                break;
+                            case "SUSPENDED":
+                            case 11:
+                                message.state = 11;
+                                break;
                             }
                             if (object.installGpuDriver != null)
                                 message.installGpuDriver = Boolean(object.installGpuDriver);
@@ -3942,6 +4397,10 @@
                             case "PD_BALANCED":
                             case 3:
                                 message.bootDiskType = 3;
+                                break;
+                            case "PD_EXTREME":
+                            case 4:
+                                message.bootDiskType = 4;
                                 break;
                             }
                             if (object.bootDiskSizeGb != null)
@@ -3969,6 +4428,10 @@
                             case "PD_BALANCED":
                             case 3:
                                 message.dataDiskType = 3;
+                                break;
+                            case "PD_EXTREME":
+                            case 4:
+                                message.dataDiskType = 4;
                                 break;
                             }
                             if (object.dataDiskSizeGb != null)
@@ -4071,6 +4534,10 @@
                                     throw TypeError(".google.cloud.notebooks.v1.Instance.reservationAffinity: object expected");
                                 message.reservationAffinity = $root.google.cloud.notebooks.v1.ReservationAffinity.fromObject(object.reservationAffinity);
                             }
+                            if (object.creator != null)
+                                message.creator = String(object.creator);
+                            if (object.canIpForward != null)
+                                message.canIpForward = Boolean(object.canIpForward);
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
                                     throw TypeError(".google.cloud.notebooks.v1.Instance.createTime: object expected");
@@ -4142,6 +4609,8 @@
                                 object.shieldedInstanceConfig = null;
                                 object.nicType = options.enums === String ? "UNSPECIFIED_NIC_TYPE" : 0;
                                 object.reservationAffinity = null;
+                                object.creator = "";
+                                object.canIpForward = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4245,6 +4714,10 @@
                                 object.nicType = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.NicType[message.nicType] : message.nicType;
                             if (message.reservationAffinity != null && message.hasOwnProperty("reservationAffinity"))
                                 object.reservationAffinity = $root.google.cloud.notebooks.v1.ReservationAffinity.toObject(message.reservationAffinity, options);
+                            if (message.creator != null && message.hasOwnProperty("creator"))
+                                object.creator = message.creator;
+                            if (message.canIpForward != null && message.hasOwnProperty("canIpForward"))
+                                object.canIpForward = message.canIpForward;
                             return object;
                         };
     
@@ -4258,6 +4731,40 @@
                         Instance.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * AcceleratorType enum.
+                         * @name google.cloud.notebooks.v1.Instance.AcceleratorType
+                         * @enum {number}
+                         * @property {number} ACCELERATOR_TYPE_UNSPECIFIED=0 ACCELERATOR_TYPE_UNSPECIFIED value
+                         * @property {number} NVIDIA_TESLA_K80=1 NVIDIA_TESLA_K80 value
+                         * @property {number} NVIDIA_TESLA_P100=2 NVIDIA_TESLA_P100 value
+                         * @property {number} NVIDIA_TESLA_V100=3 NVIDIA_TESLA_V100 value
+                         * @property {number} NVIDIA_TESLA_P4=4 NVIDIA_TESLA_P4 value
+                         * @property {number} NVIDIA_TESLA_T4=5 NVIDIA_TESLA_T4 value
+                         * @property {number} NVIDIA_TESLA_A100=11 NVIDIA_TESLA_A100 value
+                         * @property {number} NVIDIA_TESLA_T4_VWS=8 NVIDIA_TESLA_T4_VWS value
+                         * @property {number} NVIDIA_TESLA_P100_VWS=9 NVIDIA_TESLA_P100_VWS value
+                         * @property {number} NVIDIA_TESLA_P4_VWS=10 NVIDIA_TESLA_P4_VWS value
+                         * @property {number} TPU_V2=6 TPU_V2 value
+                         * @property {number} TPU_V3=7 TPU_V3 value
+                         */
+                        Instance.AcceleratorType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACCELERATOR_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NVIDIA_TESLA_K80"] = 1;
+                            values[valuesById[2] = "NVIDIA_TESLA_P100"] = 2;
+                            values[valuesById[3] = "NVIDIA_TESLA_V100"] = 3;
+                            values[valuesById[4] = "NVIDIA_TESLA_P4"] = 4;
+                            values[valuesById[5] = "NVIDIA_TESLA_T4"] = 5;
+                            values[valuesById[11] = "NVIDIA_TESLA_A100"] = 11;
+                            values[valuesById[8] = "NVIDIA_TESLA_T4_VWS"] = 8;
+                            values[valuesById[9] = "NVIDIA_TESLA_P100_VWS"] = 9;
+                            values[valuesById[10] = "NVIDIA_TESLA_P4_VWS"] = 10;
+                            values[valuesById[6] = "TPU_V2"] = 6;
+                            values[valuesById[7] = "TPU_V3"] = 7;
+                            return values;
+                        })();
     
                         Instance.AcceleratorConfig = (function() {
     
@@ -4544,6 +5051,76 @@
                             };
     
                             return AcceleratorConfig;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.notebooks.v1.Instance.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} STARTING=1 STARTING value
+                         * @property {number} PROVISIONING=2 PROVISIONING value
+                         * @property {number} ACTIVE=3 ACTIVE value
+                         * @property {number} STOPPING=4 STOPPING value
+                         * @property {number} STOPPED=5 STOPPED value
+                         * @property {number} DELETED=6 DELETED value
+                         * @property {number} UPGRADING=7 UPGRADING value
+                         * @property {number} INITIALIZING=8 INITIALIZING value
+                         * @property {number} REGISTERING=9 REGISTERING value
+                         * @property {number} SUSPENDING=10 SUSPENDING value
+                         * @property {number} SUSPENDED=11 SUSPENDED value
+                         */
+                        Instance.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STARTING"] = 1;
+                            values[valuesById[2] = "PROVISIONING"] = 2;
+                            values[valuesById[3] = "ACTIVE"] = 3;
+                            values[valuesById[4] = "STOPPING"] = 4;
+                            values[valuesById[5] = "STOPPED"] = 5;
+                            values[valuesById[6] = "DELETED"] = 6;
+                            values[valuesById[7] = "UPGRADING"] = 7;
+                            values[valuesById[8] = "INITIALIZING"] = 8;
+                            values[valuesById[9] = "REGISTERING"] = 9;
+                            values[valuesById[10] = "SUSPENDING"] = 10;
+                            values[valuesById[11] = "SUSPENDED"] = 11;
+                            return values;
+                        })();
+    
+                        /**
+                         * DiskType enum.
+                         * @name google.cloud.notebooks.v1.Instance.DiskType
+                         * @enum {number}
+                         * @property {number} DISK_TYPE_UNSPECIFIED=0 DISK_TYPE_UNSPECIFIED value
+                         * @property {number} PD_STANDARD=1 PD_STANDARD value
+                         * @property {number} PD_SSD=2 PD_SSD value
+                         * @property {number} PD_BALANCED=3 PD_BALANCED value
+                         * @property {number} PD_EXTREME=4 PD_EXTREME value
+                         */
+                        Instance.DiskType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DISK_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PD_STANDARD"] = 1;
+                            values[valuesById[2] = "PD_SSD"] = 2;
+                            values[valuesById[3] = "PD_BALANCED"] = 3;
+                            values[valuesById[4] = "PD_EXTREME"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * DiskEncryption enum.
+                         * @name google.cloud.notebooks.v1.Instance.DiskEncryption
+                         * @enum {number}
+                         * @property {number} DISK_ENCRYPTION_UNSPECIFIED=0 DISK_ENCRYPTION_UNSPECIFIED value
+                         * @property {number} GMEK=1 GMEK value
+                         * @property {number} CMEK=2 CMEK value
+                         */
+                        Instance.DiskEncryption = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DISK_ENCRYPTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GMEK"] = 1;
+                            values[valuesById[2] = "CMEK"] = 2;
+                            return values;
                         })();
     
                         Instance.Disk = (function() {
@@ -5929,104 +6506,6 @@
                         })();
     
                         /**
-                         * AcceleratorType enum.
-                         * @name google.cloud.notebooks.v1.Instance.AcceleratorType
-                         * @enum {number}
-                         * @property {number} ACCELERATOR_TYPE_UNSPECIFIED=0 ACCELERATOR_TYPE_UNSPECIFIED value
-                         * @property {number} NVIDIA_TESLA_K80=1 NVIDIA_TESLA_K80 value
-                         * @property {number} NVIDIA_TESLA_P100=2 NVIDIA_TESLA_P100 value
-                         * @property {number} NVIDIA_TESLA_V100=3 NVIDIA_TESLA_V100 value
-                         * @property {number} NVIDIA_TESLA_P4=4 NVIDIA_TESLA_P4 value
-                         * @property {number} NVIDIA_TESLA_T4=5 NVIDIA_TESLA_T4 value
-                         * @property {number} NVIDIA_TESLA_A100=11 NVIDIA_TESLA_A100 value
-                         * @property {number} NVIDIA_TESLA_T4_VWS=8 NVIDIA_TESLA_T4_VWS value
-                         * @property {number} NVIDIA_TESLA_P100_VWS=9 NVIDIA_TESLA_P100_VWS value
-                         * @property {number} NVIDIA_TESLA_P4_VWS=10 NVIDIA_TESLA_P4_VWS value
-                         * @property {number} TPU_V2=6 TPU_V2 value
-                         * @property {number} TPU_V3=7 TPU_V3 value
-                         */
-                        Instance.AcceleratorType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "ACCELERATOR_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "NVIDIA_TESLA_K80"] = 1;
-                            values[valuesById[2] = "NVIDIA_TESLA_P100"] = 2;
-                            values[valuesById[3] = "NVIDIA_TESLA_V100"] = 3;
-                            values[valuesById[4] = "NVIDIA_TESLA_P4"] = 4;
-                            values[valuesById[5] = "NVIDIA_TESLA_T4"] = 5;
-                            values[valuesById[11] = "NVIDIA_TESLA_A100"] = 11;
-                            values[valuesById[8] = "NVIDIA_TESLA_T4_VWS"] = 8;
-                            values[valuesById[9] = "NVIDIA_TESLA_P100_VWS"] = 9;
-                            values[valuesById[10] = "NVIDIA_TESLA_P4_VWS"] = 10;
-                            values[valuesById[6] = "TPU_V2"] = 6;
-                            values[valuesById[7] = "TPU_V3"] = 7;
-                            return values;
-                        })();
-    
-                        /**
-                         * State enum.
-                         * @name google.cloud.notebooks.v1.Instance.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} STARTING=1 STARTING value
-                         * @property {number} PROVISIONING=2 PROVISIONING value
-                         * @property {number} ACTIVE=3 ACTIVE value
-                         * @property {number} STOPPING=4 STOPPING value
-                         * @property {number} STOPPED=5 STOPPED value
-                         * @property {number} DELETED=6 DELETED value
-                         * @property {number} UPGRADING=7 UPGRADING value
-                         * @property {number} INITIALIZING=8 INITIALIZING value
-                         * @property {number} REGISTERING=9 REGISTERING value
-                         */
-                        Instance.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "STARTING"] = 1;
-                            values[valuesById[2] = "PROVISIONING"] = 2;
-                            values[valuesById[3] = "ACTIVE"] = 3;
-                            values[valuesById[4] = "STOPPING"] = 4;
-                            values[valuesById[5] = "STOPPED"] = 5;
-                            values[valuesById[6] = "DELETED"] = 6;
-                            values[valuesById[7] = "UPGRADING"] = 7;
-                            values[valuesById[8] = "INITIALIZING"] = 8;
-                            values[valuesById[9] = "REGISTERING"] = 9;
-                            return values;
-                        })();
-    
-                        /**
-                         * DiskType enum.
-                         * @name google.cloud.notebooks.v1.Instance.DiskType
-                         * @enum {number}
-                         * @property {number} DISK_TYPE_UNSPECIFIED=0 DISK_TYPE_UNSPECIFIED value
-                         * @property {number} PD_STANDARD=1 PD_STANDARD value
-                         * @property {number} PD_SSD=2 PD_SSD value
-                         * @property {number} PD_BALANCED=3 PD_BALANCED value
-                         */
-                        Instance.DiskType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "DISK_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "PD_STANDARD"] = 1;
-                            values[valuesById[2] = "PD_SSD"] = 2;
-                            values[valuesById[3] = "PD_BALANCED"] = 3;
-                            return values;
-                        })();
-    
-                        /**
-                         * DiskEncryption enum.
-                         * @name google.cloud.notebooks.v1.Instance.DiskEncryption
-                         * @enum {number}
-                         * @property {number} DISK_ENCRYPTION_UNSPECIFIED=0 DISK_ENCRYPTION_UNSPECIFIED value
-                         * @property {number} GMEK=1 GMEK value
-                         * @property {number} CMEK=2 CMEK value
-                         */
-                        Instance.DiskEncryption = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "DISK_ENCRYPTION_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "GMEK"] = 1;
-                            values[valuesById[2] = "CMEK"] = 2;
-                            return values;
-                        })();
-    
-                        /**
                          * NicType enum.
                          * @name google.cloud.notebooks.v1.Instance.NicType
                          * @enum {number}
@@ -6581,6 +7060,39 @@
                          * @instance
                          * @param {google.cloud.notebooks.v1.IReportRuntimeEventRequest} request ReportRuntimeEventRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#refreshRuntimeTokenInternal}.
+                         * @memberof google.cloud.notebooks.v1.ManagedNotebookService
+                         * @typedef RefreshRuntimeTokenInternalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse} [response] RefreshRuntimeTokenInternalResponse
+                         */
+    
+                        /**
+                         * Calls RefreshRuntimeTokenInternal.
+                         * @function refreshRuntimeTokenInternal
+                         * @memberof google.cloud.notebooks.v1.ManagedNotebookService
+                         * @instance
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest} request RefreshRuntimeTokenInternalRequest message or plain object
+                         * @param {google.cloud.notebooks.v1.ManagedNotebookService.RefreshRuntimeTokenInternalCallback} callback Node-style callback called with the error, if any, and RefreshRuntimeTokenInternalResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ManagedNotebookService.prototype.refreshRuntimeTokenInternal = function refreshRuntimeTokenInternal(request, callback) {
+                            return this.rpcCall(refreshRuntimeTokenInternal, $root.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest, $root.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse, request, callback);
+                        }, "name", { value: "RefreshRuntimeTokenInternal" });
+    
+                        /**
+                         * Calls RefreshRuntimeTokenInternal.
+                         * @function refreshRuntimeTokenInternal
+                         * @memberof google.cloud.notebooks.v1.ManagedNotebookService
+                         * @instance
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest} request RefreshRuntimeTokenInternalRequest message or plain object
+                         * @returns {Promise<google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse>} Promise
                          * @variation 2
                          */
     
@@ -7285,6 +7797,7 @@
                          * @property {string|null} [parent] CreateRuntimeRequest parent
                          * @property {string|null} [runtimeId] CreateRuntimeRequest runtimeId
                          * @property {google.cloud.notebooks.v1.IRuntime|null} [runtime] CreateRuntimeRequest runtime
+                         * @property {string|null} [requestId] CreateRuntimeRequest requestId
                          */
     
                         /**
@@ -7327,6 +7840,14 @@
                         CreateRuntimeRequest.prototype.runtime = null;
     
                         /**
+                         * CreateRuntimeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.notebooks.v1.CreateRuntimeRequest
+                         * @instance
+                         */
+                        CreateRuntimeRequest.prototype.requestId = "";
+    
+                        /**
                          * Creates a new CreateRuntimeRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.notebooks.v1.CreateRuntimeRequest
@@ -7356,6 +7877,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.runtimeId);
                             if (message.runtime != null && Object.hasOwnProperty.call(message, "runtime"))
                                 $root.google.cloud.notebooks.v1.Runtime.encode(message.runtime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             return writer;
                         };
     
@@ -7398,6 +7921,9 @@
                                     break;
                                 case 3:
                                     message.runtime = $root.google.cloud.notebooks.v1.Runtime.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.requestId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7445,6 +7971,9 @@
                                 if (error)
                                     return "runtime." + error;
                             }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -7469,6 +7998,8 @@
                                     throw TypeError(".google.cloud.notebooks.v1.CreateRuntimeRequest.runtime: object expected");
                                 message.runtime = $root.google.cloud.notebooks.v1.Runtime.fromObject(object.runtime);
                             }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -7489,6 +8020,7 @@
                                 object.parent = "";
                                 object.runtimeId = "";
                                 object.runtime = null;
+                                object.requestId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -7496,6 +8028,8 @@
                                 object.runtimeId = message.runtimeId;
                             if (message.runtime != null && message.hasOwnProperty("runtime"))
                                 object.runtime = $root.google.cloud.notebooks.v1.Runtime.toObject(message.runtime, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -7520,6 +8054,7 @@
                          * @memberof google.cloud.notebooks.v1
                          * @interface IDeleteRuntimeRequest
                          * @property {string|null} [name] DeleteRuntimeRequest name
+                         * @property {string|null} [requestId] DeleteRuntimeRequest requestId
                          */
     
                         /**
@@ -7544,6 +8079,14 @@
                          * @instance
                          */
                         DeleteRuntimeRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteRuntimeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.notebooks.v1.DeleteRuntimeRequest
+                         * @instance
+                         */
+                        DeleteRuntimeRequest.prototype.requestId = "";
     
                         /**
                          * Creates a new DeleteRuntimeRequest instance using the specified properties.
@@ -7571,6 +8114,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
                             return writer;
                         };
     
@@ -7607,6 +8152,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.requestId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7646,6 +8194,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -7663,6 +8214,8 @@
                             var message = new $root.google.cloud.notebooks.v1.DeleteRuntimeRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -7679,10 +8232,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.requestId = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -7707,6 +8264,7 @@
                          * @memberof google.cloud.notebooks.v1
                          * @interface IStartRuntimeRequest
                          * @property {string|null} [name] StartRuntimeRequest name
+                         * @property {string|null} [requestId] StartRuntimeRequest requestId
                          */
     
                         /**
@@ -7731,6 +8289,14 @@
                          * @instance
                          */
                         StartRuntimeRequest.prototype.name = "";
+    
+                        /**
+                         * StartRuntimeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.notebooks.v1.StartRuntimeRequest
+                         * @instance
+                         */
+                        StartRuntimeRequest.prototype.requestId = "";
     
                         /**
                          * Creates a new StartRuntimeRequest instance using the specified properties.
@@ -7758,6 +8324,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
                             return writer;
                         };
     
@@ -7794,6 +8362,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.requestId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7833,6 +8404,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -7850,6 +8424,8 @@
                             var message = new $root.google.cloud.notebooks.v1.StartRuntimeRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -7866,10 +8442,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.requestId = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -7894,6 +8474,7 @@
                          * @memberof google.cloud.notebooks.v1
                          * @interface IStopRuntimeRequest
                          * @property {string|null} [name] StopRuntimeRequest name
+                         * @property {string|null} [requestId] StopRuntimeRequest requestId
                          */
     
                         /**
@@ -7918,6 +8499,14 @@
                          * @instance
                          */
                         StopRuntimeRequest.prototype.name = "";
+    
+                        /**
+                         * StopRuntimeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.notebooks.v1.StopRuntimeRequest
+                         * @instance
+                         */
+                        StopRuntimeRequest.prototype.requestId = "";
     
                         /**
                          * Creates a new StopRuntimeRequest instance using the specified properties.
@@ -7945,6 +8534,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
                             return writer;
                         };
     
@@ -7981,6 +8572,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.requestId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8020,6 +8614,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -8037,6 +8634,8 @@
                             var message = new $root.google.cloud.notebooks.v1.StopRuntimeRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -8053,10 +8652,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.requestId = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -8083,6 +8686,7 @@
                          * @property {string|null} [name] SwitchRuntimeRequest name
                          * @property {string|null} [machineType] SwitchRuntimeRequest machineType
                          * @property {google.cloud.notebooks.v1.IRuntimeAcceleratorConfig|null} [acceleratorConfig] SwitchRuntimeRequest acceleratorConfig
+                         * @property {string|null} [requestId] SwitchRuntimeRequest requestId
                          */
     
                         /**
@@ -8125,6 +8729,14 @@
                         SwitchRuntimeRequest.prototype.acceleratorConfig = null;
     
                         /**
+                         * SwitchRuntimeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.notebooks.v1.SwitchRuntimeRequest
+                         * @instance
+                         */
+                        SwitchRuntimeRequest.prototype.requestId = "";
+    
+                        /**
                          * Creates a new SwitchRuntimeRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.notebooks.v1.SwitchRuntimeRequest
@@ -8154,6 +8766,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.machineType);
                             if (message.acceleratorConfig != null && Object.hasOwnProperty.call(message, "acceleratorConfig"))
                                 $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.encode(message.acceleratorConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             return writer;
                         };
     
@@ -8196,6 +8810,9 @@
                                     break;
                                 case 3:
                                     message.acceleratorConfig = $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.requestId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8243,6 +8860,9 @@
                                 if (error)
                                     return "acceleratorConfig." + error;
                             }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -8267,6 +8887,8 @@
                                     throw TypeError(".google.cloud.notebooks.v1.SwitchRuntimeRequest.acceleratorConfig: object expected");
                                 message.acceleratorConfig = $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.fromObject(object.acceleratorConfig);
                             }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -8287,6 +8909,7 @@
                                 object.name = "";
                                 object.machineType = "";
                                 object.acceleratorConfig = null;
+                                object.requestId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8294,6 +8917,8 @@
                                 object.machineType = message.machineType;
                             if (message.acceleratorConfig != null && message.hasOwnProperty("acceleratorConfig"))
                                 object.acceleratorConfig = $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.toObject(message.acceleratorConfig, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -8318,6 +8943,7 @@
                          * @memberof google.cloud.notebooks.v1
                          * @interface IResetRuntimeRequest
                          * @property {string|null} [name] ResetRuntimeRequest name
+                         * @property {string|null} [requestId] ResetRuntimeRequest requestId
                          */
     
                         /**
@@ -8342,6 +8968,14 @@
                          * @instance
                          */
                         ResetRuntimeRequest.prototype.name = "";
+    
+                        /**
+                         * ResetRuntimeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.notebooks.v1.ResetRuntimeRequest
+                         * @instance
+                         */
+                        ResetRuntimeRequest.prototype.requestId = "";
     
                         /**
                          * Creates a new ResetRuntimeRequest instance using the specified properties.
@@ -8369,6 +9003,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
                             return writer;
                         };
     
@@ -8405,6 +9041,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.requestId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8444,6 +9083,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -8461,6 +9103,8 @@
                             var message = new $root.google.cloud.notebooks.v1.ResetRuntimeRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -8477,10 +9121,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.requestId = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -8733,6 +9381,431 @@
                         };
     
                         return ReportRuntimeEventRequest;
+                    })();
+    
+                    v1.RefreshRuntimeTokenInternalRequest = (function() {
+    
+                        /**
+                         * Properties of a RefreshRuntimeTokenInternalRequest.
+                         * @memberof google.cloud.notebooks.v1
+                         * @interface IRefreshRuntimeTokenInternalRequest
+                         * @property {string|null} [name] RefreshRuntimeTokenInternalRequest name
+                         * @property {string|null} [vmId] RefreshRuntimeTokenInternalRequest vmId
+                         */
+    
+                        /**
+                         * Constructs a new RefreshRuntimeTokenInternalRequest.
+                         * @memberof google.cloud.notebooks.v1
+                         * @classdesc Represents a RefreshRuntimeTokenInternalRequest.
+                         * @implements IRefreshRuntimeTokenInternalRequest
+                         * @constructor
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest=} [properties] Properties to set
+                         */
+                        function RefreshRuntimeTokenInternalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RefreshRuntimeTokenInternalRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @instance
+                         */
+                        RefreshRuntimeTokenInternalRequest.prototype.name = "";
+    
+                        /**
+                         * RefreshRuntimeTokenInternalRequest vmId.
+                         * @member {string} vmId
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @instance
+                         */
+                        RefreshRuntimeTokenInternalRequest.prototype.vmId = "";
+    
+                        /**
+                         * Creates a new RefreshRuntimeTokenInternalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest=} [properties] Properties to set
+                         * @returns {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest} RefreshRuntimeTokenInternalRequest instance
+                         */
+                        RefreshRuntimeTokenInternalRequest.create = function create(properties) {
+                            return new RefreshRuntimeTokenInternalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RefreshRuntimeTokenInternalRequest message. Does not implicitly {@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest} message RefreshRuntimeTokenInternalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefreshRuntimeTokenInternalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.vmId != null && Object.hasOwnProperty.call(message, "vmId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.vmId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RefreshRuntimeTokenInternalRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest} message RefreshRuntimeTokenInternalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefreshRuntimeTokenInternalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RefreshRuntimeTokenInternalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest} RefreshRuntimeTokenInternalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefreshRuntimeTokenInternalRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.vmId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RefreshRuntimeTokenInternalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest} RefreshRuntimeTokenInternalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefreshRuntimeTokenInternalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RefreshRuntimeTokenInternalRequest message.
+                         * @function verify
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RefreshRuntimeTokenInternalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.vmId != null && message.hasOwnProperty("vmId"))
+                                if (!$util.isString(message.vmId))
+                                    return "vmId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RefreshRuntimeTokenInternalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest} RefreshRuntimeTokenInternalRequest
+                         */
+                        RefreshRuntimeTokenInternalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest)
+                                return object;
+                            var message = new $root.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.vmId != null)
+                                message.vmId = String(object.vmId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RefreshRuntimeTokenInternalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest} message RefreshRuntimeTokenInternalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RefreshRuntimeTokenInternalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.vmId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.vmId != null && message.hasOwnProperty("vmId"))
+                                object.vmId = message.vmId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RefreshRuntimeTokenInternalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RefreshRuntimeTokenInternalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RefreshRuntimeTokenInternalRequest;
+                    })();
+    
+                    v1.RefreshRuntimeTokenInternalResponse = (function() {
+    
+                        /**
+                         * Properties of a RefreshRuntimeTokenInternalResponse.
+                         * @memberof google.cloud.notebooks.v1
+                         * @interface IRefreshRuntimeTokenInternalResponse
+                         * @property {string|null} [accessToken] RefreshRuntimeTokenInternalResponse accessToken
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] RefreshRuntimeTokenInternalResponse expireTime
+                         */
+    
+                        /**
+                         * Constructs a new RefreshRuntimeTokenInternalResponse.
+                         * @memberof google.cloud.notebooks.v1
+                         * @classdesc Represents a RefreshRuntimeTokenInternalResponse.
+                         * @implements IRefreshRuntimeTokenInternalResponse
+                         * @constructor
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse=} [properties] Properties to set
+                         */
+                        function RefreshRuntimeTokenInternalResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RefreshRuntimeTokenInternalResponse accessToken.
+                         * @member {string} accessToken
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @instance
+                         */
+                        RefreshRuntimeTokenInternalResponse.prototype.accessToken = "";
+    
+                        /**
+                         * RefreshRuntimeTokenInternalResponse expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @instance
+                         */
+                        RefreshRuntimeTokenInternalResponse.prototype.expireTime = null;
+    
+                        /**
+                         * Creates a new RefreshRuntimeTokenInternalResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse=} [properties] Properties to set
+                         * @returns {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse} RefreshRuntimeTokenInternalResponse instance
+                         */
+                        RefreshRuntimeTokenInternalResponse.create = function create(properties) {
+                            return new RefreshRuntimeTokenInternalResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RefreshRuntimeTokenInternalResponse message. Does not implicitly {@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse} message RefreshRuntimeTokenInternalResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefreshRuntimeTokenInternalResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accessToken != null && Object.hasOwnProperty.call(message, "accessToken"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.accessToken);
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RefreshRuntimeTokenInternalResponse message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse} message RefreshRuntimeTokenInternalResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefreshRuntimeTokenInternalResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RefreshRuntimeTokenInternalResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse} RefreshRuntimeTokenInternalResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefreshRuntimeTokenInternalResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.accessToken = reader.string();
+                                    break;
+                                case 2:
+                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RefreshRuntimeTokenInternalResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse} RefreshRuntimeTokenInternalResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefreshRuntimeTokenInternalResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RefreshRuntimeTokenInternalResponse message.
+                         * @function verify
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RefreshRuntimeTokenInternalResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accessToken != null && message.hasOwnProperty("accessToken"))
+                                if (!$util.isString(message.accessToken))
+                                    return "accessToken: string expected";
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RefreshRuntimeTokenInternalResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse} RefreshRuntimeTokenInternalResponse
+                         */
+                        RefreshRuntimeTokenInternalResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse)
+                                return object;
+                            var message = new $root.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse();
+                            if (object.accessToken != null)
+                                message.accessToken = String(object.accessToken);
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RefreshRuntimeTokenInternalResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse} message RefreshRuntimeTokenInternalResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RefreshRuntimeTokenInternalResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.accessToken = "";
+                                object.expireTime = null;
+                            }
+                            if (message.accessToken != null && message.hasOwnProperty("accessToken"))
+                                object.accessToken = message.accessToken;
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RefreshRuntimeTokenInternalResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RefreshRuntimeTokenInternalResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RefreshRuntimeTokenInternalResponse;
                     })();
     
                     v1.Runtime = (function() {
@@ -9025,6 +10098,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.accessConfig != null && message.hasOwnProperty("accessConfig")) {
@@ -9124,6 +10199,14 @@
                             case "UNHEALTHY":
                             case 2:
                                 message.healthState = 2;
+                                break;
+                            case "AGENT_NOT_INSTALLED":
+                            case 3:
+                                message.healthState = 3;
+                                break;
+                            case "AGENT_NOT_RUNNING":
+                            case 4:
+                                message.healthState = 4;
                                 break;
                             }
                             if (object.accessConfig != null) {
@@ -9247,12 +10330,16 @@
                          * @property {number} HEALTH_STATE_UNSPECIFIED=0 HEALTH_STATE_UNSPECIFIED value
                          * @property {number} HEALTHY=1 HEALTHY value
                          * @property {number} UNHEALTHY=2 UNHEALTHY value
+                         * @property {number} AGENT_NOT_INSTALLED=3 AGENT_NOT_INSTALLED value
+                         * @property {number} AGENT_NOT_RUNNING=4 AGENT_NOT_RUNNING value
                          */
                         Runtime.HealthState = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "HEALTH_STATE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "HEALTHY"] = 1;
                             values[valuesById[2] = "UNHEALTHY"] = 2;
+                            values[valuesById[3] = "AGENT_NOT_INSTALLED"] = 3;
+                            values[valuesById[4] = "AGENT_NOT_RUNNING"] = 4;
                             return values;
                         })();
     
@@ -10652,6 +11739,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
@@ -10706,6 +11794,10 @@
                             case "PD_BALANCED":
                             case 3:
                                 message.diskType = 3;
+                                break;
+                            case "PD_EXTREME":
+                            case 4:
+                                message.diskType = 4;
                                 break;
                             }
                             if (object.labels) {
@@ -10782,6 +11874,7 @@
                          * @property {number} PD_STANDARD=1 PD_STANDARD value
                          * @property {number} PD_SSD=2 PD_SSD value
                          * @property {number} PD_BALANCED=3 PD_BALANCED value
+                         * @property {number} PD_EXTREME=4 PD_EXTREME value
                          */
                         LocalDiskInitializeParams.DiskType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -10789,6 +11882,7 @@
                             values[valuesById[1] = "PD_STANDARD"] = 1;
                             values[valuesById[2] = "PD_SSD"] = 2;
                             values[valuesById[3] = "PD_BALANCED"] = 3;
+                            values[valuesById[4] = "PD_EXTREME"] = 4;
                             return values;
                         })();
     
@@ -10959,6 +12053,7 @@
                                     return "accessType: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.runtimeOwner != null && message.hasOwnProperty("runtimeOwner"))
@@ -10990,6 +12085,10 @@
                             case "SINGLE_USER":
                             case 1:
                                 message.accessType = 1;
+                                break;
+                            case "SERVICE_ACCOUNT":
+                            case 2:
+                                message.accessType = 2;
                                 break;
                             }
                             if (object.runtimeOwner != null)
@@ -11043,11 +12142,13 @@
                          * @enum {number}
                          * @property {number} RUNTIME_ACCESS_TYPE_UNSPECIFIED=0 RUNTIME_ACCESS_TYPE_UNSPECIFIED value
                          * @property {number} SINGLE_USER=1 SINGLE_USER value
+                         * @property {number} SERVICE_ACCOUNT=2 SERVICE_ACCOUNT value
                          */
                         RuntimeAccessConfig.RuntimeAccessType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "RUNTIME_ACCESS_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "SINGLE_USER"] = 1;
+                            values[valuesById[2] = "SERVICE_ACCOUNT"] = 2;
                             return values;
                         })();
     
@@ -11067,6 +12168,8 @@
                          * @property {boolean|null} [installGpuDriver] RuntimeSoftwareConfig installGpuDriver
                          * @property {string|null} [customGpuDriverPath] RuntimeSoftwareConfig customGpuDriverPath
                          * @property {string|null} [postStartupScript] RuntimeSoftwareConfig postStartupScript
+                         * @property {Array.<google.cloud.notebooks.v1.IContainerImage>|null} [kernels] RuntimeSoftwareConfig kernels
+                         * @property {boolean|null} [upgradeable] RuntimeSoftwareConfig upgradeable
                          */
     
                         /**
@@ -11078,6 +12181,7 @@
                          * @param {google.cloud.notebooks.v1.IRuntimeSoftwareConfig=} [properties] Properties to set
                          */
                         function RuntimeSoftwareConfig(properties) {
+                            this.kernels = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11140,6 +12244,22 @@
                          */
                         RuntimeSoftwareConfig.prototype.postStartupScript = "";
     
+                        /**
+                         * RuntimeSoftwareConfig kernels.
+                         * @member {Array.<google.cloud.notebooks.v1.IContainerImage>} kernels
+                         * @memberof google.cloud.notebooks.v1.RuntimeSoftwareConfig
+                         * @instance
+                         */
+                        RuntimeSoftwareConfig.prototype.kernels = $util.emptyArray;
+    
+                        /**
+                         * RuntimeSoftwareConfig upgradeable.
+                         * @member {boolean|null|undefined} upgradeable
+                         * @memberof google.cloud.notebooks.v1.RuntimeSoftwareConfig
+                         * @instance
+                         */
+                        RuntimeSoftwareConfig.prototype.upgradeable = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11162,6 +12282,17 @@
                          */
                         Object.defineProperty(RuntimeSoftwareConfig.prototype, "_idleShutdown", {
                             get: $util.oneOfGetter($oneOfFields = ["idleShutdown"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RuntimeSoftwareConfig _upgradeable.
+                         * @member {"upgradeable"|undefined} _upgradeable
+                         * @memberof google.cloud.notebooks.v1.RuntimeSoftwareConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RuntimeSoftwareConfig.prototype, "_upgradeable", {
+                            get: $util.oneOfGetter($oneOfFields = ["upgradeable"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -11203,6 +12334,11 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.customGpuDriverPath);
                             if (message.postStartupScript != null && Object.hasOwnProperty.call(message, "postStartupScript"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.postStartupScript);
+                            if (message.kernels != null && message.kernels.length)
+                                for (var i = 0; i < message.kernels.length; ++i)
+                                    $root.google.cloud.notebooks.v1.ContainerImage.encode(message.kernels[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.upgradeable != null && Object.hasOwnProperty.call(message, "upgradeable"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.upgradeable);
                             return writer;
                         };
     
@@ -11257,6 +12393,14 @@
                                     break;
                                 case 7:
                                     message.postStartupScript = reader.string();
+                                    break;
+                                case 8:
+                                    if (!(message.kernels && message.kernels.length))
+                                        message.kernels = [];
+                                    message.kernels.push($root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32()));
+                                    break;
+                                case 9:
+                                    message.upgradeable = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -11319,6 +12463,20 @@
                             if (message.postStartupScript != null && message.hasOwnProperty("postStartupScript"))
                                 if (!$util.isString(message.postStartupScript))
                                     return "postStartupScript: string expected";
+                            if (message.kernels != null && message.hasOwnProperty("kernels")) {
+                                if (!Array.isArray(message.kernels))
+                                    return "kernels: array expected";
+                                for (var i = 0; i < message.kernels.length; ++i) {
+                                    var error = $root.google.cloud.notebooks.v1.ContainerImage.verify(message.kernels[i]);
+                                    if (error)
+                                        return "kernels." + error;
+                                }
+                            }
+                            if (message.upgradeable != null && message.hasOwnProperty("upgradeable")) {
+                                properties._upgradeable = 1;
+                                if (typeof message.upgradeable !== "boolean")
+                                    return "upgradeable: boolean expected";
+                            }
                             return null;
                         };
     
@@ -11348,6 +12506,18 @@
                                 message.customGpuDriverPath = String(object.customGpuDriverPath);
                             if (object.postStartupScript != null)
                                 message.postStartupScript = String(object.postStartupScript);
+                            if (object.kernels) {
+                                if (!Array.isArray(object.kernels))
+                                    throw TypeError(".google.cloud.notebooks.v1.RuntimeSoftwareConfig.kernels: array expected");
+                                message.kernels = [];
+                                for (var i = 0; i < object.kernels.length; ++i) {
+                                    if (typeof object.kernels[i] !== "object")
+                                        throw TypeError(".google.cloud.notebooks.v1.RuntimeSoftwareConfig.kernels: object expected");
+                                    message.kernels[i] = $root.google.cloud.notebooks.v1.ContainerImage.fromObject(object.kernels[i]);
+                                }
+                            }
+                            if (object.upgradeable != null)
+                                message.upgradeable = Boolean(object.upgradeable);
                             return message;
                         };
     
@@ -11364,6 +12534,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.kernels = [];
                             if (options.defaults) {
                                 object.notebookUpgradeSchedule = "";
                                 object.idleShutdownTimeout = 0;
@@ -11391,6 +12563,16 @@
                                 object.customGpuDriverPath = message.customGpuDriverPath;
                             if (message.postStartupScript != null && message.hasOwnProperty("postStartupScript"))
                                 object.postStartupScript = message.postStartupScript;
+                            if (message.kernels && message.kernels.length) {
+                                object.kernels = [];
+                                for (var j = 0; j < message.kernels.length; ++j)
+                                    object.kernels[j] = $root.google.cloud.notebooks.v1.ContainerImage.toObject(message.kernels[j], options);
+                            }
+                            if (message.upgradeable != null && message.hasOwnProperty("upgradeable")) {
+                                object.upgradeable = message.upgradeable;
+                                if (options.oneofs)
+                                    object._upgradeable = "upgradeable";
+                            }
                             return object;
                         };
     
@@ -12120,6 +13302,8 @@
                          * @property {Object.<string,string>|null} [metadata] VirtualMachineConfig metadata
                          * @property {Object.<string,string>|null} [labels] VirtualMachineConfig labels
                          * @property {google.cloud.notebooks.v1.VirtualMachineConfig.NicType|null} [nicType] VirtualMachineConfig nicType
+                         * @property {string|null} [reservedIpRange] VirtualMachineConfig reservedIpRange
+                         * @property {google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage|null} [bootImage] VirtualMachineConfig bootImage
                          */
     
                         /**
@@ -12263,6 +13447,22 @@
                         VirtualMachineConfig.prototype.nicType = 0;
     
                         /**
+                         * VirtualMachineConfig reservedIpRange.
+                         * @member {string} reservedIpRange
+                         * @memberof google.cloud.notebooks.v1.VirtualMachineConfig
+                         * @instance
+                         */
+                        VirtualMachineConfig.prototype.reservedIpRange = "";
+    
+                        /**
+                         * VirtualMachineConfig bootImage.
+                         * @member {google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage|null|undefined} bootImage
+                         * @memberof google.cloud.notebooks.v1.VirtualMachineConfig
+                         * @instance
+                         */
+                        VirtualMachineConfig.prototype.bootImage = null;
+    
+                        /**
                          * Creates a new VirtualMachineConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.notebooks.v1.VirtualMachineConfig
@@ -12321,6 +13521,10 @@
                                     writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.nicType != null && Object.hasOwnProperty.call(message, "nicType"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).int32(message.nicType);
+                            if (message.reservedIpRange != null && Object.hasOwnProperty.call(message, "reservedIpRange"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.reservedIpRange);
+                            if (message.bootImage != null && Object.hasOwnProperty.call(message, "bootImage"))
+                                $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.encode(message.bootImage, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -12461,6 +13665,12 @@
                                 case 17:
                                     message.nicType = reader.int32();
                                     break;
+                                case 18:
+                                    message.reservedIpRange = reader.string();
+                                    break;
+                                case 19:
+                                    message.bootImage = $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.decode(reader, reader.uint32());
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12580,6 +13790,14 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.reservedIpRange != null && message.hasOwnProperty("reservedIpRange"))
+                                if (!$util.isString(message.reservedIpRange))
+                                    return "reservedIpRange: string expected";
+                            if (message.bootImage != null && message.hasOwnProperty("bootImage")) {
+                                var error = $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.verify(message.bootImage);
+                                if (error)
+                                    return "bootImage." + error;
+                            }
                             return null;
                         };
     
@@ -12677,6 +13895,13 @@
                                 message.nicType = 2;
                                 break;
                             }
+                            if (object.reservedIpRange != null)
+                                message.reservedIpRange = String(object.reservedIpRange);
+                            if (object.bootImage != null) {
+                                if (typeof object.bootImage !== "object")
+                                    throw TypeError(".google.cloud.notebooks.v1.VirtualMachineConfig.bootImage: object expected");
+                                message.bootImage = $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.fromObject(object.bootImage);
+                            }
                             return message;
                         };
     
@@ -12713,6 +13938,8 @@
                                 object.subnet = "";
                                 object.internalIpOnly = false;
                                 object.nicType = options.enums === String ? "UNSPECIFIED_NIC_TYPE" : 0;
+                                object.reservedIpRange = "";
+                                object.bootImage = null;
                             }
                             if (message.zone != null && message.hasOwnProperty("zone"))
                                 object.zone = message.zone;
@@ -12760,6 +13987,10 @@
                             }
                             if (message.nicType != null && message.hasOwnProperty("nicType"))
                                 object.nicType = options.enums === String ? $root.google.cloud.notebooks.v1.VirtualMachineConfig.NicType[message.nicType] : message.nicType;
+                            if (message.reservedIpRange != null && message.hasOwnProperty("reservedIpRange"))
+                                object.reservedIpRange = message.reservedIpRange;
+                            if (message.bootImage != null && message.hasOwnProperty("bootImage"))
+                                object.bootImage = $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.toObject(message.bootImage, options);
                             return object;
                         };
     
@@ -12788,6 +14019,166 @@
                             values[valuesById[1] = "VIRTIO_NET"] = 1;
                             values[valuesById[2] = "GVNIC"] = 2;
                             return values;
+                        })();
+    
+                        VirtualMachineConfig.BootImage = (function() {
+    
+                            /**
+                             * Properties of a BootImage.
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig
+                             * @interface IBootImage
+                             */
+    
+                            /**
+                             * Constructs a new BootImage.
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig
+                             * @classdesc Represents a BootImage.
+                             * @implements IBootImage
+                             * @constructor
+                             * @param {google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage=} [properties] Properties to set
+                             */
+                            function BootImage(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new BootImage instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage=} [properties] Properties to set
+                             * @returns {google.cloud.notebooks.v1.VirtualMachineConfig.BootImage} BootImage instance
+                             */
+                            BootImage.create = function create(properties) {
+                                return new BootImage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BootImage message. Does not implicitly {@link google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage} message BootImage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BootImage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BootImage message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage} message BootImage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BootImage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BootImage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.notebooks.v1.VirtualMachineConfig.BootImage} BootImage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BootImage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BootImage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.notebooks.v1.VirtualMachineConfig.BootImage} BootImage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BootImage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BootImage message.
+                             * @function verify
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BootImage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BootImage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.notebooks.v1.VirtualMachineConfig.BootImage} BootImage
+                             */
+                            BootImage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage)
+                                    return object;
+                                return new $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage();
+                            };
+    
+                            /**
+                             * Creates a plain object from a BootImage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {google.cloud.notebooks.v1.VirtualMachineConfig.BootImage} message BootImage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BootImage.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this BootImage to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BootImage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return BootImage;
                         })();
     
                         return VirtualMachineConfig;
@@ -13604,6 +14995,39 @@
                          * @instance
                          * @param {google.cloud.notebooks.v1.ISetInstanceLabelsRequest} request SetInstanceLabelsRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#updateInstanceMetadataItems}.
+                         * @memberof google.cloud.notebooks.v1.NotebookService
+                         * @typedef UpdateInstanceMetadataItemsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse} [response] UpdateInstanceMetadataItemsResponse
+                         */
+    
+                        /**
+                         * Calls UpdateInstanceMetadataItems.
+                         * @function updateInstanceMetadataItems
+                         * @memberof google.cloud.notebooks.v1.NotebookService
+                         * @instance
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest} request UpdateInstanceMetadataItemsRequest message or plain object
+                         * @param {google.cloud.notebooks.v1.NotebookService.UpdateInstanceMetadataItemsCallback} callback Node-style callback called with the error, if any, and UpdateInstanceMetadataItemsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NotebookService.prototype.updateInstanceMetadataItems = function updateInstanceMetadataItems(request, callback) {
+                            return this.rpcCall(updateInstanceMetadataItems, $root.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest, $root.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse, request, callback);
+                        }, "name", { value: "UpdateInstanceMetadataItems" });
+    
+                        /**
+                         * Calls UpdateInstanceMetadataItems.
+                         * @function updateInstanceMetadataItems
+                         * @memberof google.cloud.notebooks.v1.NotebookService
+                         * @instance
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest} request UpdateInstanceMetadataItemsRequest message or plain object
+                         * @returns {Promise<google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse>} Promise
                          * @variation 2
                          */
     
@@ -16836,6 +18260,473 @@
                         return SetInstanceLabelsRequest;
                     })();
     
+                    v1.UpdateInstanceMetadataItemsRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateInstanceMetadataItemsRequest.
+                         * @memberof google.cloud.notebooks.v1
+                         * @interface IUpdateInstanceMetadataItemsRequest
+                         * @property {string|null} [name] UpdateInstanceMetadataItemsRequest name
+                         * @property {Object.<string,string>|null} [items] UpdateInstanceMetadataItemsRequest items
+                         */
+    
+                        /**
+                         * Constructs a new UpdateInstanceMetadataItemsRequest.
+                         * @memberof google.cloud.notebooks.v1
+                         * @classdesc Represents an UpdateInstanceMetadataItemsRequest.
+                         * @implements IUpdateInstanceMetadataItemsRequest
+                         * @constructor
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest=} [properties] Properties to set
+                         */
+                        function UpdateInstanceMetadataItemsRequest(properties) {
+                            this.items = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateInstanceMetadataItemsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @instance
+                         */
+                        UpdateInstanceMetadataItemsRequest.prototype.name = "";
+    
+                        /**
+                         * UpdateInstanceMetadataItemsRequest items.
+                         * @member {Object.<string,string>} items
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @instance
+                         */
+                        UpdateInstanceMetadataItemsRequest.prototype.items = $util.emptyObject;
+    
+                        /**
+                         * Creates a new UpdateInstanceMetadataItemsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest} UpdateInstanceMetadataItemsRequest instance
+                         */
+                        UpdateInstanceMetadataItemsRequest.create = function create(properties) {
+                            return new UpdateInstanceMetadataItemsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInstanceMetadataItemsRequest message. Does not implicitly {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest} message UpdateInstanceMetadataItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInstanceMetadataItemsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.items != null && Object.hasOwnProperty.call(message, "items"))
+                                for (var keys = Object.keys(message.items), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.items[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInstanceMetadataItemsRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest} message UpdateInstanceMetadataItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInstanceMetadataItemsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateInstanceMetadataItemsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest} UpdateInstanceMetadataItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInstanceMetadataItemsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    if (message.items === $util.emptyObject)
+                                        message.items = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.items[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateInstanceMetadataItemsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest} UpdateInstanceMetadataItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInstanceMetadataItemsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateInstanceMetadataItemsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateInstanceMetadataItemsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.items != null && message.hasOwnProperty("items")) {
+                                if (!$util.isObject(message.items))
+                                    return "items: object expected";
+                                var key = Object.keys(message.items);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.items[key[i]]))
+                                        return "items: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateInstanceMetadataItemsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest} UpdateInstanceMetadataItemsRequest
+                         */
+                        UpdateInstanceMetadataItemsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest)
+                                return object;
+                            var message = new $root.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.items) {
+                                if (typeof object.items !== "object")
+                                    throw TypeError(".google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest.items: object expected");
+                                message.items = {};
+                                for (var keys = Object.keys(object.items), i = 0; i < keys.length; ++i)
+                                    message.items[keys[i]] = String(object.items[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateInstanceMetadataItemsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest} message UpdateInstanceMetadataItemsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateInstanceMetadataItemsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.items = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            var keys2;
+                            if (message.items && (keys2 = Object.keys(message.items)).length) {
+                                object.items = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.items[keys2[j]] = message.items[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateInstanceMetadataItemsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateInstanceMetadataItemsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateInstanceMetadataItemsRequest;
+                    })();
+    
+                    v1.UpdateInstanceMetadataItemsResponse = (function() {
+    
+                        /**
+                         * Properties of an UpdateInstanceMetadataItemsResponse.
+                         * @memberof google.cloud.notebooks.v1
+                         * @interface IUpdateInstanceMetadataItemsResponse
+                         * @property {Object.<string,string>|null} [items] UpdateInstanceMetadataItemsResponse items
+                         */
+    
+                        /**
+                         * Constructs a new UpdateInstanceMetadataItemsResponse.
+                         * @memberof google.cloud.notebooks.v1
+                         * @classdesc Represents an UpdateInstanceMetadataItemsResponse.
+                         * @implements IUpdateInstanceMetadataItemsResponse
+                         * @constructor
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse=} [properties] Properties to set
+                         */
+                        function UpdateInstanceMetadataItemsResponse(properties) {
+                            this.items = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateInstanceMetadataItemsResponse items.
+                         * @member {Object.<string,string>} items
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @instance
+                         */
+                        UpdateInstanceMetadataItemsResponse.prototype.items = $util.emptyObject;
+    
+                        /**
+                         * Creates a new UpdateInstanceMetadataItemsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse} UpdateInstanceMetadataItemsResponse instance
+                         */
+                        UpdateInstanceMetadataItemsResponse.create = function create(properties) {
+                            return new UpdateInstanceMetadataItemsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInstanceMetadataItemsResponse message. Does not implicitly {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse} message UpdateInstanceMetadataItemsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInstanceMetadataItemsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.items != null && Object.hasOwnProperty.call(message, "items"))
+                                for (var keys = Object.keys(message.items), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.items[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInstanceMetadataItemsResponse message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse} message UpdateInstanceMetadataItemsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInstanceMetadataItemsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateInstanceMetadataItemsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse} UpdateInstanceMetadataItemsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInstanceMetadataItemsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (message.items === $util.emptyObject)
+                                        message.items = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.items[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateInstanceMetadataItemsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse} UpdateInstanceMetadataItemsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInstanceMetadataItemsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateInstanceMetadataItemsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateInstanceMetadataItemsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.items != null && message.hasOwnProperty("items")) {
+                                if (!$util.isObject(message.items))
+                                    return "items: object expected";
+                                var key = Object.keys(message.items);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.items[key[i]]))
+                                        return "items: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateInstanceMetadataItemsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse} UpdateInstanceMetadataItemsResponse
+                         */
+                        UpdateInstanceMetadataItemsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse)
+                                return object;
+                            var message = new $root.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse();
+                            if (object.items) {
+                                if (typeof object.items !== "object")
+                                    throw TypeError(".google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse.items: object expected");
+                                message.items = {};
+                                for (var keys = Object.keys(object.items), i = 0; i < keys.length; ++i)
+                                    message.items[keys[i]] = String(object.items[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateInstanceMetadataItemsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse} message UpdateInstanceMetadataItemsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateInstanceMetadataItemsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.items = {};
+                            var keys2;
+                            if (message.items && (keys2 = Object.keys(message.items)).length) {
+                                object.items = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.items[keys2[j]] = message.items[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateInstanceMetadataItemsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateInstanceMetadataItemsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateInstanceMetadataItemsResponse;
+                    })();
+    
                     v1.UpdateShieldedInstanceConfigRequest = (function() {
     
                         /**
@@ -18074,6 +19965,7 @@
                          * @memberof google.cloud.notebooks.v1
                          * @interface IIsInstanceUpgradeableRequest
                          * @property {string|null} [notebookInstance] IsInstanceUpgradeableRequest notebookInstance
+                         * @property {google.cloud.notebooks.v1.UpgradeType|null} [type] IsInstanceUpgradeableRequest type
                          */
     
                         /**
@@ -18098,6 +19990,14 @@
                          * @instance
                          */
                         IsInstanceUpgradeableRequest.prototype.notebookInstance = "";
+    
+                        /**
+                         * IsInstanceUpgradeableRequest type.
+                         * @member {google.cloud.notebooks.v1.UpgradeType} type
+                         * @memberof google.cloud.notebooks.v1.IsInstanceUpgradeableRequest
+                         * @instance
+                         */
+                        IsInstanceUpgradeableRequest.prototype.type = 0;
     
                         /**
                          * Creates a new IsInstanceUpgradeableRequest instance using the specified properties.
@@ -18125,6 +20025,8 @@
                                 writer = $Writer.create();
                             if (message.notebookInstance != null && Object.hasOwnProperty.call(message, "notebookInstance"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.notebookInstance);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
                             return writer;
                         };
     
@@ -18161,6 +20063,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.notebookInstance = reader.string();
+                                    break;
+                                case 2:
+                                    message.type = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -18200,6 +20105,17 @@
                             if (message.notebookInstance != null && message.hasOwnProperty("notebookInstance"))
                                 if (!$util.isString(message.notebookInstance))
                                     return "notebookInstance: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -18217,6 +20133,28 @@
                             var message = new $root.google.cloud.notebooks.v1.IsInstanceUpgradeableRequest();
                             if (object.notebookInstance != null)
                                 message.notebookInstance = String(object.notebookInstance);
+                            switch (object.type) {
+                            case "UPGRADE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "UPGRADE_FRAMEWORK":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "UPGRADE_OS":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "UPGRADE_CUDA":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "UPGRADE_ALL":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -18233,10 +20171,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.notebookInstance = "";
+                                object.type = options.enums === String ? "UPGRADE_TYPE_UNSPECIFIED" : 0;
+                            }
                             if (message.notebookInstance != null && message.hasOwnProperty("notebookInstance"))
                                 object.notebookInstance = message.notebookInstance;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
                             return object;
                         };
     
@@ -18995,6 +20937,7 @@
                          * @memberof google.cloud.notebooks.v1
                          * @interface IUpgradeInstanceRequest
                          * @property {string|null} [name] UpgradeInstanceRequest name
+                         * @property {google.cloud.notebooks.v1.UpgradeType|null} [type] UpgradeInstanceRequest type
                          */
     
                         /**
@@ -19019,6 +20962,14 @@
                          * @instance
                          */
                         UpgradeInstanceRequest.prototype.name = "";
+    
+                        /**
+                         * UpgradeInstanceRequest type.
+                         * @member {google.cloud.notebooks.v1.UpgradeType} type
+                         * @memberof google.cloud.notebooks.v1.UpgradeInstanceRequest
+                         * @instance
+                         */
+                        UpgradeInstanceRequest.prototype.type = 0;
     
                         /**
                          * Creates a new UpgradeInstanceRequest instance using the specified properties.
@@ -19046,6 +20997,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
                             return writer;
                         };
     
@@ -19082,6 +21035,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.type = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -19121,6 +21077,17 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -19138,6 +21105,28 @@
                             var message = new $root.google.cloud.notebooks.v1.UpgradeInstanceRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            switch (object.type) {
+                            case "UPGRADE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "UPGRADE_FRAMEWORK":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "UPGRADE_OS":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "UPGRADE_CUDA":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "UPGRADE_ALL":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -19154,10 +21143,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.type = options.enums === String ? "UPGRADE_TYPE_UNSPECIFIED" : 0;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
                             return object;
                         };
     
@@ -19393,6 +21386,7 @@
                          * @interface IUpgradeInstanceInternalRequest
                          * @property {string|null} [name] UpgradeInstanceInternalRequest name
                          * @property {string|null} [vmId] UpgradeInstanceInternalRequest vmId
+                         * @property {google.cloud.notebooks.v1.UpgradeType|null} [type] UpgradeInstanceInternalRequest type
                          */
     
                         /**
@@ -19427,6 +21421,14 @@
                         UpgradeInstanceInternalRequest.prototype.vmId = "";
     
                         /**
+                         * UpgradeInstanceInternalRequest type.
+                         * @member {google.cloud.notebooks.v1.UpgradeType} type
+                         * @memberof google.cloud.notebooks.v1.UpgradeInstanceInternalRequest
+                         * @instance
+                         */
+                        UpgradeInstanceInternalRequest.prototype.type = 0;
+    
+                        /**
                          * Creates a new UpgradeInstanceInternalRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.notebooks.v1.UpgradeInstanceInternalRequest
@@ -19454,6 +21456,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.vmId != null && Object.hasOwnProperty.call(message, "vmId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.vmId);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
                             return writer;
                         };
     
@@ -19493,6 +21497,9 @@
                                     break;
                                 case 2:
                                     message.vmId = reader.string();
+                                    break;
+                                case 3:
+                                    message.type = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -19535,6 +21542,17 @@
                             if (message.vmId != null && message.hasOwnProperty("vmId"))
                                 if (!$util.isString(message.vmId))
                                     return "vmId: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -19554,6 +21572,28 @@
                                 message.name = String(object.name);
                             if (object.vmId != null)
                                 message.vmId = String(object.vmId);
+                            switch (object.type) {
+                            case "UPGRADE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "UPGRADE_FRAMEWORK":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "UPGRADE_OS":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "UPGRADE_CUDA":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "UPGRADE_ALL":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -19573,11 +21613,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.vmId = "";
+                                object.type = options.enums === String ? "UPGRADE_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.vmId != null && message.hasOwnProperty("vmId"))
                                 object.vmId = message.vmId;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
                             return object;
                         };
     
@@ -23207,6 +25250,26 @@
                         };
     
                         return CreateExecutionRequest;
+                    })();
+    
+                    /**
+                     * UpgradeType enum.
+                     * @name google.cloud.notebooks.v1.UpgradeType
+                     * @enum {number}
+                     * @property {number} UPGRADE_TYPE_UNSPECIFIED=0 UPGRADE_TYPE_UNSPECIFIED value
+                     * @property {number} UPGRADE_FRAMEWORK=1 UPGRADE_FRAMEWORK value
+                     * @property {number} UPGRADE_OS=2 UPGRADE_OS value
+                     * @property {number} UPGRADE_CUDA=3 UPGRADE_CUDA value
+                     * @property {number} UPGRADE_ALL=4 UPGRADE_ALL value
+                     */
+                    v1.UpgradeType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UPGRADE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "UPGRADE_FRAMEWORK"] = 1;
+                        values[valuesById[2] = "UPGRADE_OS"] = 2;
+                        values[valuesById[3] = "UPGRADE_CUDA"] = 3;
+                        values[valuesById[4] = "UPGRADE_ALL"] = 4;
+                        return values;
                     })();
     
                     return v1;

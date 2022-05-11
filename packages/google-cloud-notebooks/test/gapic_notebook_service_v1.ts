@@ -368,6 +368,139 @@ describe('v1.NotebookServiceClient', () => {
     });
   });
 
+  describe('updateInstanceMetadataItems', () => {
+    it('invokes updateInstanceMetadataItems without error', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse()
+      );
+      client.innerApiCalls.updateInstanceMetadataItems =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateInstanceMetadataItems(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateInstanceMetadataItems as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateInstanceMetadataItems without error using callback', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse()
+      );
+      client.innerApiCalls.updateInstanceMetadataItems =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateInstanceMetadataItems(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateInstanceMetadataItems as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateInstanceMetadataItems with error', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateInstanceMetadataItems = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateInstanceMetadataItems(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateInstanceMetadataItems as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateInstanceMetadataItems with closed client', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateInstanceMetadataItems(request),
+        expectedError
+      );
+    });
+  });
+
   describe('isInstanceUpgradeable', () => {
     it('invokes isInstanceUpgradeable without error', async () => {
       const client = new notebookserviceModule.v1.NotebookServiceClient({

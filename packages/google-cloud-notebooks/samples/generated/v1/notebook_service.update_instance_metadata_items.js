@@ -21,40 +21,39 @@
 'use strict';
 
 function main(name) {
-  // [START notebooks_v1_generated_ManagedNotebookService_StopRuntime_async]
+  // [START notebooks_v1_generated_NotebookService_UpdateInstanceMetadataItems_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
    *  Required. Format:
-   *  `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+   *  `projects/{project_id}/locations/{location}/instances/{instance_id}`
    */
   // const name = 'abc123'
   /**
-   *  Idempotent request UUID.
+   *  Metadata items to add/update for the instance.
    */
-  // const requestId = 'abc123'
+  // const items = 1234
 
   // Imports the Notebooks library
-  const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;
+  const {NotebookServiceClient} = require('@google-cloud/notebooks').v1;
 
   // Instantiates a client
-  const notebooksClient = new ManagedNotebookServiceClient();
+  const notebooksClient = new NotebookServiceClient();
 
-  async function callStopRuntime() {
+  async function callUpdateInstanceMetadataItems() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await notebooksClient.stopRuntime(request);
-    const [response] = await operation.promise();
+    const response = await notebooksClient.updateInstanceMetadataItems(request);
     console.log(response);
   }
 
-  callStopRuntime();
-  // [END notebooks_v1_generated_ManagedNotebookService_StopRuntime_async]
+  callUpdateInstanceMetadataItems();
+  // [END notebooks_v1_generated_NotebookService_UpdateInstanceMetadataItems_async]
 }
 
 process.on('unhandledRejection', err => {

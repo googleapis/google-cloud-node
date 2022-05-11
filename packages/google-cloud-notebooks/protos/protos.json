@@ -14,7 +14,9 @@
                     "java_outer_classname": "NotebooksProto",
                     "java_package": "com.google.cloud.notebooks.v1",
                     "php_namespace": "Google\\Cloud\\Notebooks\\V1",
-                    "ruby_package": "Google::Cloud::Notebooks::V1"
+                    "ruby_package": "Google::Cloud::Notebooks::V1",
+                    "(google.api.resource_definition).type": "aiplatform.googleapis.com/Tensorboard",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/tensorboards/{tensorboard}"
                   },
                   "nested": {
                     "Environment": {
@@ -118,13 +120,24 @@
                         "type": {
                           "type": "EventType",
                           "id": 2
+                        },
+                        "details": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
                         "EventType": {
                           "values": {
                             "EVENT_TYPE_UNSPECIFIED": 0,
-                            "IDLE": 1
+                            "IDLE": 1,
+                            "HEARTBEAT": 2,
+                            "HEALTH": 3,
+                            "MAINTENANCE": 4
                           }
                         }
                       }
@@ -133,7 +146,8 @@
                       "oneofs": {
                         "jobParameters": {
                           "oneof": [
-                            "dataprocParameters"
+                            "dataprocParameters",
+                            "vertexAiParameters"
                           ]
                         }
                       },
@@ -190,29 +204,24 @@
                         "dataprocParameters": {
                           "type": "DataprocParameters",
                           "id": 12
+                        },
+                        "vertexAiParameters": {
+                          "type": "VertexAIParameters",
+                          "id": 13
+                        },
+                        "kernelSpec": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "tensorboard": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
                         }
                       },
                       "nested": {
-                        "SchedulerAcceleratorConfig": {
-                          "fields": {
-                            "type": {
-                              "type": "SchedulerAcceleratorType",
-                              "id": 1
-                            },
-                            "coreCount": {
-                              "type": "int64",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "DataprocParameters": {
-                          "fields": {
-                            "cluster": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
                         "ScaleTier": {
                           "values": {
                             "SCALE_TIER_UNSPECIFIED": 0,
@@ -232,8 +241,21 @@
                             "NVIDIA_TESLA_V100": 3,
                             "NVIDIA_TESLA_P4": 4,
                             "NVIDIA_TESLA_T4": 5,
+                            "NVIDIA_TESLA_A100": 10,
                             "TPU_V2": 6,
                             "TPU_V3": 7
+                          }
+                        },
+                        "SchedulerAcceleratorConfig": {
+                          "fields": {
+                            "type": {
+                              "type": "SchedulerAcceleratorType",
+                              "id": 1
+                            },
+                            "coreCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
                           }
                         },
                         "JobType": {
@@ -241,6 +263,27 @@
                             "JOB_TYPE_UNSPECIFIED": 0,
                             "VERTEX_AI": 1,
                             "DATAPROC": 2
+                          }
+                        },
+                        "DataprocParameters": {
+                          "fields": {
+                            "cluster": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "VertexAIParameters": {
+                          "fields": {
+                            "network": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "env": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 2
+                            }
                           }
                         }
                       }
@@ -562,6 +605,20 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "creator": {
+                          "type": "string",
+                          "id": 36,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "canIpForward": {
+                          "type": "bool",
+                          "id": 39,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 23,
@@ -578,6 +635,22 @@
                         }
                       },
                       "nested": {
+                        "AcceleratorType": {
+                          "values": {
+                            "ACCELERATOR_TYPE_UNSPECIFIED": 0,
+                            "NVIDIA_TESLA_K80": 1,
+                            "NVIDIA_TESLA_P100": 2,
+                            "NVIDIA_TESLA_V100": 3,
+                            "NVIDIA_TESLA_P4": 4,
+                            "NVIDIA_TESLA_T4": 5,
+                            "NVIDIA_TESLA_A100": 11,
+                            "NVIDIA_TESLA_T4_VWS": 8,
+                            "NVIDIA_TESLA_P100_VWS": 9,
+                            "NVIDIA_TESLA_P4_VWS": 10,
+                            "TPU_V2": 6,
+                            "TPU_V3": 7
+                          }
+                        },
                         "AcceleratorConfig": {
                           "fields": {
                             "type": {
@@ -588,6 +661,38 @@
                               "type": "int64",
                               "id": 2
                             }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STARTING": 1,
+                            "PROVISIONING": 2,
+                            "ACTIVE": 3,
+                            "STOPPING": 4,
+                            "STOPPED": 5,
+                            "DELETED": 6,
+                            "UPGRADING": 7,
+                            "INITIALIZING": 8,
+                            "REGISTERING": 9,
+                            "SUSPENDING": 10,
+                            "SUSPENDED": 11
+                          }
+                        },
+                        "DiskType": {
+                          "values": {
+                            "DISK_TYPE_UNSPECIFIED": 0,
+                            "PD_STANDARD": 1,
+                            "PD_SSD": 2,
+                            "PD_BALANCED": 3,
+                            "PD_EXTREME": 4
+                          }
+                        },
+                        "DiskEncryption": {
+                          "values": {
+                            "DISK_ENCRYPTION_UNSPECIFIED": 0,
+                            "GMEK": 1,
+                            "CMEK": 2
                           }
                         },
                         "Disk": {
@@ -732,51 +837,6 @@
                                 "ROLLBACK": 2
                               }
                             }
-                          }
-                        },
-                        "AcceleratorType": {
-                          "values": {
-                            "ACCELERATOR_TYPE_UNSPECIFIED": 0,
-                            "NVIDIA_TESLA_K80": 1,
-                            "NVIDIA_TESLA_P100": 2,
-                            "NVIDIA_TESLA_V100": 3,
-                            "NVIDIA_TESLA_P4": 4,
-                            "NVIDIA_TESLA_T4": 5,
-                            "NVIDIA_TESLA_A100": 11,
-                            "NVIDIA_TESLA_T4_VWS": 8,
-                            "NVIDIA_TESLA_P100_VWS": 9,
-                            "NVIDIA_TESLA_P4_VWS": 10,
-                            "TPU_V2": 6,
-                            "TPU_V3": 7
-                          }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "STARTING": 1,
-                            "PROVISIONING": 2,
-                            "ACTIVE": 3,
-                            "STOPPING": 4,
-                            "STOPPED": 5,
-                            "DELETED": 6,
-                            "UPGRADING": 7,
-                            "INITIALIZING": 8,
-                            "REGISTERING": 9
-                          }
-                        },
-                        "DiskType": {
-                          "values": {
-                            "DISK_TYPE_UNSPECIFIED": 0,
-                            "PD_STANDARD": 1,
-                            "PD_SSD": 2,
-                            "PD_BALANCED": 3
-                          }
-                        },
-                        "DiskEncryption": {
-                          "values": {
-                            "DISK_ENCRYPTION_UNSPECIFIED": 0,
-                            "GMEK": 1,
-                            "CMEK": 2
                           }
                         },
                         "NicType": {
@@ -1035,6 +1095,26 @@
                               }
                             }
                           ]
+                        },
+                        "RefreshRuntimeTokenInternal": {
+                          "requestType": "RefreshRuntimeTokenInternalRequest",
+                          "responseType": "RefreshRuntimeTokenInternalResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/runtimes/*}:refreshRuntimeTokenInternal",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,vm_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/runtimes/*}:refreshRuntimeTokenInternal",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,vm_id"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1111,6 +1191,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -1123,6 +1207,10 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "notebooks.googleapis.com/Runtime"
                           }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1134,6 +1222,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1145,6 +1237,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1164,6 +1260,10 @@
                         "acceleratorConfig": {
                           "type": "RuntimeAcceleratorConfig",
                           "id": 3
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -1175,6 +1275,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1200,6 +1304,40 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RefreshRuntimeTokenInternalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Runtime"
+                          }
+                        },
+                        "vmId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RefreshRuntimeTokenInternalResponse": {
+                      "fields": {
+                        "accessToken": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -1290,7 +1428,9 @@
                           "values": {
                             "HEALTH_STATE_UNSPECIFIED": 0,
                             "HEALTHY": 1,
-                            "UNHEALTHY": 2
+                            "UNHEALTHY": 2,
+                            "AGENT_NOT_INSTALLED": 3,
+                            "AGENT_NOT_RUNNING": 4
                           }
                         }
                       }
@@ -1466,7 +1606,8 @@
                             "DISK_TYPE_UNSPECIFIED": 0,
                             "PD_STANDARD": 1,
                             "PD_SSD": 2,
-                            "PD_BALANCED": 3
+                            "PD_BALANCED": 3,
+                            "PD_EXTREME": 4
                           }
                         }
                       }
@@ -1493,7 +1634,8 @@
                         "RuntimeAccessType": {
                           "values": {
                             "RUNTIME_ACCESS_TYPE_UNSPECIFIED": 0,
-                            "SINGLE_USER": 1
+                            "SINGLE_USER": 1,
+                            "SERVICE_ACCOUNT": 2
                           }
                         }
                       }
@@ -1508,6 +1650,11 @@
                         "_idleShutdown": {
                           "oneof": [
                             "idleShutdown"
+                          ]
+                        },
+                        "_upgradeable": {
+                          "oneof": [
+                            "upgradeable"
                           ]
                         }
                       },
@@ -1545,6 +1692,22 @@
                         "postStartupScript": {
                           "type": "string",
                           "id": 7
+                        },
+                        "kernels": {
+                          "rule": "repeated",
+                          "type": "ContainerImage",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "upgradeable": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -1709,6 +1872,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "reservedIpRange": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bootImage": {
+                          "type": "BootImage",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1718,6 +1895,9 @@
                             "VIRTIO_NET": 1,
                             "GVNIC": 2
                           }
+                        },
+                        "BootImage": {
+                          "fields": {}
                         }
                       }
                     },
@@ -2008,6 +2188,22 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Instance",
                                 "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateInstanceMetadataItems": {
+                          "requestType": "UpdateInstanceMetadataItemsRequest",
+                          "responseType": "UpdateInstanceMetadataItemsResponse",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{name=projects/*/locations/*/instances/*}:updateMetadataItems",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=projects/*/locations/*/instances/*}:updateMetadataItems",
+                                "body": "*"
                               }
                             }
                           ]
@@ -2735,6 +2931,31 @@
                         }
                       }
                     },
+                    "UpdateInstanceMetadataItemsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateInstanceMetadataItemsResponse": {
+                      "fields": {
+                        "items": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "UpdateShieldedInstanceConfigRequest": {
                       "fields": {
                         "name": {
@@ -2825,6 +3046,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "type": {
+                          "type": "UpgradeType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2898,6 +3126,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "type": {
+                          "type": "UpgradeType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2933,6 +3168,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "type": {
+                          "type": "UpgradeType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3223,6 +3465,15 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
+                      }
+                    },
+                    "UpgradeType": {
+                      "values": {
+                        "UPGRADE_TYPE_UNSPECIFIED": 0,
+                        "UPGRADE_FRAMEWORK": 1,
+                        "UPGRADE_OS": 2,
+                        "UPGRADE_CUDA": 3,
+                        "UPGRADE_ALL": 4
                       }
                     }
                   }

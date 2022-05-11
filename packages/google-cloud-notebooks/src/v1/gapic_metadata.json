@@ -15,6 +15,11 @@
                 "getRuntime"
               ]
             },
+            "RefreshRuntimeTokenInternal": {
+              "methods": [
+                "refreshRuntimeTokenInternal"
+              ]
+            },
             "CreateRuntime": {
               "methods": [
                 "createRuntime"
@@ -65,6 +70,11 @@
             "GetRuntime": {
               "methods": [
                 "getRuntime"
+              ]
+            },
+            "RefreshRuntimeTokenInternal": {
+              "methods": [
+                "refreshRuntimeTokenInternal"
               ]
             },
             "CreateRuntime": {
@@ -121,6 +131,11 @@
             "GetInstance": {
               "methods": [
                 "getInstance"
+              ]
+            },
+            "UpdateInstanceMetadataItems": {
+              "methods": [
+                "updateInstanceMetadataItems"
               ]
             },
             "IsInstanceUpgradeable": {
@@ -294,6 +309,11 @@
             "GetInstance": {
               "methods": [
                 "getInstance"
+              ]
+            },
+            "UpdateInstanceMetadataItems": {
+              "methods": [
+                "updateInstanceMetadataItems"
               ]
             },
             "IsInstanceUpgradeable": {

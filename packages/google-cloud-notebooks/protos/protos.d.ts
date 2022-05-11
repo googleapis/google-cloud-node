@@ -364,6 +364,9 @@ export namespace google {
 
                     /** Event type */
                     type?: (google.cloud.notebooks.v1.Event.EventType|keyof typeof google.cloud.notebooks.v1.Event.EventType|null);
+
+                    /** Event details */
+                    details?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents an Event. */
@@ -380,6 +383,9 @@ export namespace google {
 
                     /** Event type. */
                     public type: (google.cloud.notebooks.v1.Event.EventType|keyof typeof google.cloud.notebooks.v1.Event.EventType);
+
+                    /** Event details. */
+                    public details: { [k: string]: string };
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -457,7 +463,10 @@ export namespace google {
                     /** EventType enum. */
                     enum EventType {
                         EVENT_TYPE_UNSPECIFIED = 0,
-                        IDLE = 1
+                        IDLE = 1,
+                        HEARTBEAT = 2,
+                        HEALTH = 3,
+                        MAINTENANCE = 4
                     }
                 }
 
@@ -499,6 +508,15 @@ export namespace google {
 
                     /** ExecutionTemplate dataprocParameters */
                     dataprocParameters?: (google.cloud.notebooks.v1.ExecutionTemplate.IDataprocParameters|null);
+
+                    /** ExecutionTemplate vertexAiParameters */
+                    vertexAiParameters?: (google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters|null);
+
+                    /** ExecutionTemplate kernelSpec */
+                    kernelSpec?: (string|null);
+
+                    /** ExecutionTemplate tensorboard */
+                    tensorboard?: (string|null);
                 }
 
                 /** Represents an ExecutionTemplate. */
@@ -546,8 +564,17 @@ export namespace google {
                     /** ExecutionTemplate dataprocParameters. */
                     public dataprocParameters?: (google.cloud.notebooks.v1.ExecutionTemplate.IDataprocParameters|null);
 
+                    /** ExecutionTemplate vertexAiParameters. */
+                    public vertexAiParameters?: (google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters|null);
+
+                    /** ExecutionTemplate kernelSpec. */
+                    public kernelSpec: string;
+
+                    /** ExecutionTemplate tensorboard. */
+                    public tensorboard: string;
+
                     /** ExecutionTemplate jobParameters. */
-                    public jobParameters?: "dataprocParameters";
+                    public jobParameters?: ("dataprocParameters"|"vertexAiParameters");
 
                     /**
                      * Creates a new ExecutionTemplate instance using the specified properties.
@@ -621,6 +648,30 @@ export namespace google {
                 }
 
                 namespace ExecutionTemplate {
+
+                    /** ScaleTier enum. */
+                    enum ScaleTier {
+                        SCALE_TIER_UNSPECIFIED = 0,
+                        BASIC = 1,
+                        STANDARD_1 = 2,
+                        PREMIUM_1 = 3,
+                        BASIC_GPU = 4,
+                        BASIC_TPU = 5,
+                        CUSTOM = 6
+                    }
+
+                    /** SchedulerAcceleratorType enum. */
+                    enum SchedulerAcceleratorType {
+                        SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED = 0,
+                        NVIDIA_TESLA_K80 = 1,
+                        NVIDIA_TESLA_P100 = 2,
+                        NVIDIA_TESLA_V100 = 3,
+                        NVIDIA_TESLA_P4 = 4,
+                        NVIDIA_TESLA_T4 = 5,
+                        NVIDIA_TESLA_A100 = 10,
+                        TPU_V2 = 6,
+                        TPU_V3 = 7
+                    }
 
                     /** Properties of a SchedulerAcceleratorConfig. */
                     interface ISchedulerAcceleratorConfig {
@@ -718,6 +769,13 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** JobType enum. */
+                    enum JobType {
+                        JOB_TYPE_UNSPECIFIED = 0,
+                        VERTEX_AI = 1,
+                        DATAPROC = 2
+                    }
+
                     /** Properties of a DataprocParameters. */
                     interface IDataprocParameters {
 
@@ -808,34 +866,100 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
-                    /** ScaleTier enum. */
-                    enum ScaleTier {
-                        SCALE_TIER_UNSPECIFIED = 0,
-                        BASIC = 1,
-                        STANDARD_1 = 2,
-                        PREMIUM_1 = 3,
-                        BASIC_GPU = 4,
-                        BASIC_TPU = 5,
-                        CUSTOM = 6
+                    /** Properties of a VertexAIParameters. */
+                    interface IVertexAIParameters {
+
+                        /** VertexAIParameters network */
+                        network?: (string|null);
+
+                        /** VertexAIParameters env */
+                        env?: ({ [k: string]: string }|null);
                     }
 
-                    /** SchedulerAcceleratorType enum. */
-                    enum SchedulerAcceleratorType {
-                        SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED = 0,
-                        NVIDIA_TESLA_K80 = 1,
-                        NVIDIA_TESLA_P100 = 2,
-                        NVIDIA_TESLA_V100 = 3,
-                        NVIDIA_TESLA_P4 = 4,
-                        NVIDIA_TESLA_T4 = 5,
-                        TPU_V2 = 6,
-                        TPU_V3 = 7
-                    }
+                    /** Represents a VertexAIParameters. */
+                    class VertexAIParameters implements IVertexAIParameters {
 
-                    /** JobType enum. */
-                    enum JobType {
-                        JOB_TYPE_UNSPECIFIED = 0,
-                        VERTEX_AI = 1,
-                        DATAPROC = 2
+                        /**
+                         * Constructs a new VertexAIParameters.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters);
+
+                        /** VertexAIParameters network. */
+                        public network: string;
+
+                        /** VertexAIParameters env. */
+                        public env: { [k: string]: string };
+
+                        /**
+                         * Creates a new VertexAIParameters instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VertexAIParameters instance
+                         */
+                        public static create(properties?: google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters): google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters;
+
+                        /**
+                         * Encodes the specified VertexAIParameters message. Does not implicitly {@link google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.verify|verify} messages.
+                         * @param message VertexAIParameters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VertexAIParameters message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.verify|verify} messages.
+                         * @param message VertexAIParameters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.notebooks.v1.ExecutionTemplate.IVertexAIParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VertexAIParameters message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VertexAIParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters;
+
+                        /**
+                         * Decodes a VertexAIParameters message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VertexAIParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters;
+
+                        /**
+                         * Verifies a VertexAIParameters message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VertexAIParameters message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VertexAIParameters
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters;
+
+                        /**
+                         * Creates a plain object from a VertexAIParameters message. Also converts values to other types if specified.
+                         * @param message VertexAIParameters
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VertexAIParameters to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
                 }
 
@@ -1206,6 +1330,12 @@ export namespace google {
                     /** Instance reservationAffinity */
                     reservationAffinity?: (google.cloud.notebooks.v1.IReservationAffinity|null);
 
+                    /** Instance creator */
+                    creator?: (string|null);
+
+                    /** Instance canIpForward */
+                    canIpForward?: (boolean|null);
+
                     /** Instance createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -1318,6 +1448,12 @@ export namespace google {
                     /** Instance reservationAffinity. */
                     public reservationAffinity?: (google.cloud.notebooks.v1.IReservationAffinity|null);
 
+                    /** Instance creator. */
+                    public creator: string;
+
+                    /** Instance canIpForward. */
+                    public canIpForward: boolean;
+
                     /** Instance createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
@@ -1399,6 +1535,22 @@ export namespace google {
                 }
 
                 namespace Instance {
+
+                    /** AcceleratorType enum. */
+                    enum AcceleratorType {
+                        ACCELERATOR_TYPE_UNSPECIFIED = 0,
+                        NVIDIA_TESLA_K80 = 1,
+                        NVIDIA_TESLA_P100 = 2,
+                        NVIDIA_TESLA_V100 = 3,
+                        NVIDIA_TESLA_P4 = 4,
+                        NVIDIA_TESLA_T4 = 5,
+                        NVIDIA_TESLA_A100 = 11,
+                        NVIDIA_TESLA_T4_VWS = 8,
+                        NVIDIA_TESLA_P100_VWS = 9,
+                        NVIDIA_TESLA_P4_VWS = 10,
+                        TPU_V2 = 6,
+                        TPU_V3 = 7
+                    }
 
                     /** Properties of an AcceleratorConfig. */
                     interface IAcceleratorConfig {
@@ -1494,6 +1646,38 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STARTING = 1,
+                        PROVISIONING = 2,
+                        ACTIVE = 3,
+                        STOPPING = 4,
+                        STOPPED = 5,
+                        DELETED = 6,
+                        UPGRADING = 7,
+                        INITIALIZING = 8,
+                        REGISTERING = 9,
+                        SUSPENDING = 10,
+                        SUSPENDED = 11
+                    }
+
+                    /** DiskType enum. */
+                    enum DiskType {
+                        DISK_TYPE_UNSPECIFIED = 0,
+                        PD_STANDARD = 1,
+                        PD_SSD = 2,
+                        PD_BALANCED = 3,
+                        PD_EXTREME = 4
+                    }
+
+                    /** DiskEncryption enum. */
+                    enum DiskEncryption {
+                        DISK_ENCRYPTION_UNSPECIFIED = 0,
+                        GMEK = 1,
+                        CMEK = 2
                     }
 
                     /** Properties of a Disk. */
@@ -2009,51 +2193,6 @@ export namespace google {
                         }
                     }
 
-                    /** AcceleratorType enum. */
-                    enum AcceleratorType {
-                        ACCELERATOR_TYPE_UNSPECIFIED = 0,
-                        NVIDIA_TESLA_K80 = 1,
-                        NVIDIA_TESLA_P100 = 2,
-                        NVIDIA_TESLA_V100 = 3,
-                        NVIDIA_TESLA_P4 = 4,
-                        NVIDIA_TESLA_T4 = 5,
-                        NVIDIA_TESLA_A100 = 11,
-                        NVIDIA_TESLA_T4_VWS = 8,
-                        NVIDIA_TESLA_P100_VWS = 9,
-                        NVIDIA_TESLA_P4_VWS = 10,
-                        TPU_V2 = 6,
-                        TPU_V3 = 7
-                    }
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        STARTING = 1,
-                        PROVISIONING = 2,
-                        ACTIVE = 3,
-                        STOPPING = 4,
-                        STOPPED = 5,
-                        DELETED = 6,
-                        UPGRADING = 7,
-                        INITIALIZING = 8,
-                        REGISTERING = 9
-                    }
-
-                    /** DiskType enum. */
-                    enum DiskType {
-                        DISK_TYPE_UNSPECIFIED = 0,
-                        PD_STANDARD = 1,
-                        PD_SSD = 2,
-                        PD_BALANCED = 3
-                    }
-
-                    /** DiskEncryption enum. */
-                    enum DiskEncryption {
-                        DISK_ENCRYPTION_UNSPECIFIED = 0,
-                        GMEK = 1,
-                        CMEK = 2
-                    }
-
                     /** NicType enum. */
                     enum NicType {
                         UNSPECIFIED_NIC_TYPE = 0,
@@ -2303,6 +2442,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public reportRuntimeEvent(request: google.cloud.notebooks.v1.IReportRuntimeEventRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RefreshRuntimeTokenInternal.
+                     * @param request RefreshRuntimeTokenInternalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RefreshRuntimeTokenInternalResponse
+                     */
+                    public refreshRuntimeTokenInternal(request: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest, callback: google.cloud.notebooks.v1.ManagedNotebookService.RefreshRuntimeTokenInternalCallback): void;
+
+                    /**
+                     * Calls RefreshRuntimeTokenInternal.
+                     * @param request RefreshRuntimeTokenInternalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public refreshRuntimeTokenInternal(request: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest): Promise<google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse>;
                 }
 
                 namespace ManagedNotebookService {
@@ -2369,6 +2522,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ReportRuntimeEventCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#refreshRuntimeTokenInternal}.
+                     * @param error Error, if any
+                     * @param [response] RefreshRuntimeTokenInternalResponse
+                     */
+                    type RefreshRuntimeTokenInternalCallback = (error: (Error|null), response?: google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse) => void;
                 }
 
                 /** Properties of a ListRuntimesRequest. */
@@ -2676,6 +2836,9 @@ export namespace google {
 
                     /** CreateRuntimeRequest runtime */
                     runtime?: (google.cloud.notebooks.v1.IRuntime|null);
+
+                    /** CreateRuntimeRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a CreateRuntimeRequest. */
@@ -2695,6 +2858,9 @@ export namespace google {
 
                     /** CreateRuntimeRequest runtime. */
                     public runtime?: (google.cloud.notebooks.v1.IRuntime|null);
+
+                    /** CreateRuntimeRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new CreateRuntimeRequest instance using the specified properties.
@@ -2772,6 +2938,9 @@ export namespace google {
 
                     /** DeleteRuntimeRequest name */
                     name?: (string|null);
+
+                    /** DeleteRuntimeRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a DeleteRuntimeRequest. */
@@ -2785,6 +2954,9 @@ export namespace google {
 
                     /** DeleteRuntimeRequest name. */
                     public name: string;
+
+                    /** DeleteRuntimeRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new DeleteRuntimeRequest instance using the specified properties.
@@ -2862,6 +3034,9 @@ export namespace google {
 
                     /** StartRuntimeRequest name */
                     name?: (string|null);
+
+                    /** StartRuntimeRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a StartRuntimeRequest. */
@@ -2875,6 +3050,9 @@ export namespace google {
 
                     /** StartRuntimeRequest name. */
                     public name: string;
+
+                    /** StartRuntimeRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new StartRuntimeRequest instance using the specified properties.
@@ -2952,6 +3130,9 @@ export namespace google {
 
                     /** StopRuntimeRequest name */
                     name?: (string|null);
+
+                    /** StopRuntimeRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a StopRuntimeRequest. */
@@ -2965,6 +3146,9 @@ export namespace google {
 
                     /** StopRuntimeRequest name. */
                     public name: string;
+
+                    /** StopRuntimeRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new StopRuntimeRequest instance using the specified properties.
@@ -3048,6 +3232,9 @@ export namespace google {
 
                     /** SwitchRuntimeRequest acceleratorConfig */
                     acceleratorConfig?: (google.cloud.notebooks.v1.IRuntimeAcceleratorConfig|null);
+
+                    /** SwitchRuntimeRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a SwitchRuntimeRequest. */
@@ -3067,6 +3254,9 @@ export namespace google {
 
                     /** SwitchRuntimeRequest acceleratorConfig. */
                     public acceleratorConfig?: (google.cloud.notebooks.v1.IRuntimeAcceleratorConfig|null);
+
+                    /** SwitchRuntimeRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new SwitchRuntimeRequest instance using the specified properties.
@@ -3144,6 +3334,9 @@ export namespace google {
 
                     /** ResetRuntimeRequest name */
                     name?: (string|null);
+
+                    /** ResetRuntimeRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a ResetRuntimeRequest. */
@@ -3157,6 +3350,9 @@ export namespace google {
 
                     /** ResetRuntimeRequest name. */
                     public name: string;
+
+                    /** ResetRuntimeRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new ResetRuntimeRequest instance using the specified properties.
@@ -3331,6 +3527,198 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a RefreshRuntimeTokenInternalRequest. */
+                interface IRefreshRuntimeTokenInternalRequest {
+
+                    /** RefreshRuntimeTokenInternalRequest name */
+                    name?: (string|null);
+
+                    /** RefreshRuntimeTokenInternalRequest vmId */
+                    vmId?: (string|null);
+                }
+
+                /** Represents a RefreshRuntimeTokenInternalRequest. */
+                class RefreshRuntimeTokenInternalRequest implements IRefreshRuntimeTokenInternalRequest {
+
+                    /**
+                     * Constructs a new RefreshRuntimeTokenInternalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest);
+
+                    /** RefreshRuntimeTokenInternalRequest name. */
+                    public name: string;
+
+                    /** RefreshRuntimeTokenInternalRequest vmId. */
+                    public vmId: string;
+
+                    /**
+                     * Creates a new RefreshRuntimeTokenInternalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RefreshRuntimeTokenInternalRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest): google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest;
+
+                    /**
+                     * Encodes the specified RefreshRuntimeTokenInternalRequest message. Does not implicitly {@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest.verify|verify} messages.
+                     * @param message RefreshRuntimeTokenInternalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RefreshRuntimeTokenInternalRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest.verify|verify} messages.
+                     * @param message RefreshRuntimeTokenInternalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RefreshRuntimeTokenInternalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RefreshRuntimeTokenInternalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest;
+
+                    /**
+                     * Decodes a RefreshRuntimeTokenInternalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RefreshRuntimeTokenInternalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest;
+
+                    /**
+                     * Verifies a RefreshRuntimeTokenInternalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RefreshRuntimeTokenInternalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RefreshRuntimeTokenInternalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest;
+
+                    /**
+                     * Creates a plain object from a RefreshRuntimeTokenInternalRequest message. Also converts values to other types if specified.
+                     * @param message RefreshRuntimeTokenInternalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RefreshRuntimeTokenInternalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RefreshRuntimeTokenInternalResponse. */
+                interface IRefreshRuntimeTokenInternalResponse {
+
+                    /** RefreshRuntimeTokenInternalResponse accessToken */
+                    accessToken?: (string|null);
+
+                    /** RefreshRuntimeTokenInternalResponse expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RefreshRuntimeTokenInternalResponse. */
+                class RefreshRuntimeTokenInternalResponse implements IRefreshRuntimeTokenInternalResponse {
+
+                    /**
+                     * Constructs a new RefreshRuntimeTokenInternalResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse);
+
+                    /** RefreshRuntimeTokenInternalResponse accessToken. */
+                    public accessToken: string;
+
+                    /** RefreshRuntimeTokenInternalResponse expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RefreshRuntimeTokenInternalResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RefreshRuntimeTokenInternalResponse instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse): google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse;
+
+                    /**
+                     * Encodes the specified RefreshRuntimeTokenInternalResponse message. Does not implicitly {@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse.verify|verify} messages.
+                     * @param message RefreshRuntimeTokenInternalResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RefreshRuntimeTokenInternalResponse message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse.verify|verify} messages.
+                     * @param message RefreshRuntimeTokenInternalResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RefreshRuntimeTokenInternalResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RefreshRuntimeTokenInternalResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse;
+
+                    /**
+                     * Decodes a RefreshRuntimeTokenInternalResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RefreshRuntimeTokenInternalResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse;
+
+                    /**
+                     * Verifies a RefreshRuntimeTokenInternalResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RefreshRuntimeTokenInternalResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RefreshRuntimeTokenInternalResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse;
+
+                    /**
+                     * Creates a plain object from a RefreshRuntimeTokenInternalResponse message. Also converts values to other types if specified.
+                     * @param message RefreshRuntimeTokenInternalResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RefreshRuntimeTokenInternalResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Runtime. */
                 interface IRuntime {
 
@@ -3491,7 +3879,9 @@ export namespace google {
                     enum HealthState {
                         HEALTH_STATE_UNSPECIFIED = 0,
                         HEALTHY = 1,
-                        UNHEALTHY = 2
+                        UNHEALTHY = 2,
+                        AGENT_NOT_INSTALLED = 3,
+                        AGENT_NOT_RUNNING = 4
                     }
                 }
 
@@ -4070,7 +4460,8 @@ export namespace google {
                         DISK_TYPE_UNSPECIFIED = 0,
                         PD_STANDARD = 1,
                         PD_SSD = 2,
-                        PD_BALANCED = 3
+                        PD_BALANCED = 3,
+                        PD_EXTREME = 4
                     }
                 }
 
@@ -4181,7 +4572,8 @@ export namespace google {
                     /** RuntimeAccessType enum. */
                     enum RuntimeAccessType {
                         RUNTIME_ACCESS_TYPE_UNSPECIFIED = 0,
-                        SINGLE_USER = 1
+                        SINGLE_USER = 1,
+                        SERVICE_ACCOUNT = 2
                     }
                 }
 
@@ -4208,6 +4600,12 @@ export namespace google {
 
                     /** RuntimeSoftwareConfig postStartupScript */
                     postStartupScript?: (string|null);
+
+                    /** RuntimeSoftwareConfig kernels */
+                    kernels?: (google.cloud.notebooks.v1.IContainerImage[]|null);
+
+                    /** RuntimeSoftwareConfig upgradeable */
+                    upgradeable?: (boolean|null);
                 }
 
                 /** Represents a RuntimeSoftwareConfig. */
@@ -4240,11 +4638,20 @@ export namespace google {
                     /** RuntimeSoftwareConfig postStartupScript. */
                     public postStartupScript: string;
 
+                    /** RuntimeSoftwareConfig kernels. */
+                    public kernels: google.cloud.notebooks.v1.IContainerImage[];
+
+                    /** RuntimeSoftwareConfig upgradeable. */
+                    public upgradeable?: (boolean|null);
+
                     /** RuntimeSoftwareConfig _enableHealthMonitoring. */
                     public _enableHealthMonitoring?: "enableHealthMonitoring";
 
                     /** RuntimeSoftwareConfig _idleShutdown. */
                     public _idleShutdown?: "idleShutdown";
+
+                    /** RuntimeSoftwareConfig _upgradeable. */
+                    public _upgradeable?: "upgradeable";
 
                     /**
                      * Creates a new RuntimeSoftwareConfig instance using the specified properties.
@@ -4658,6 +5065,12 @@ export namespace google {
 
                     /** VirtualMachineConfig nicType */
                     nicType?: (google.cloud.notebooks.v1.VirtualMachineConfig.NicType|keyof typeof google.cloud.notebooks.v1.VirtualMachineConfig.NicType|null);
+
+                    /** VirtualMachineConfig reservedIpRange */
+                    reservedIpRange?: (string|null);
+
+                    /** VirtualMachineConfig bootImage */
+                    bootImage?: (google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage|null);
                 }
 
                 /** Represents a VirtualMachineConfig. */
@@ -4713,6 +5126,12 @@ export namespace google {
 
                     /** VirtualMachineConfig nicType. */
                     public nicType: (google.cloud.notebooks.v1.VirtualMachineConfig.NicType|keyof typeof google.cloud.notebooks.v1.VirtualMachineConfig.NicType);
+
+                    /** VirtualMachineConfig reservedIpRange. */
+                    public reservedIpRange: string;
+
+                    /** VirtualMachineConfig bootImage. */
+                    public bootImage?: (google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage|null);
 
                     /**
                      * Creates a new VirtualMachineConfig instance using the specified properties.
@@ -4792,6 +5211,90 @@ export namespace google {
                         UNSPECIFIED_NIC_TYPE = 0,
                         VIRTIO_NET = 1,
                         GVNIC = 2
+                    }
+
+                    /** Properties of a BootImage. */
+                    interface IBootImage {
+                    }
+
+                    /** Represents a BootImage. */
+                    class BootImage implements IBootImage {
+
+                        /**
+                         * Constructs a new BootImage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage);
+
+                        /**
+                         * Creates a new BootImage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BootImage instance
+                         */
+                        public static create(properties?: google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage): google.cloud.notebooks.v1.VirtualMachineConfig.BootImage;
+
+                        /**
+                         * Encodes the specified BootImage message. Does not implicitly {@link google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.verify|verify} messages.
+                         * @param message BootImage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BootImage message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.verify|verify} messages.
+                         * @param message BootImage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.notebooks.v1.VirtualMachineConfig.IBootImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BootImage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BootImage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.VirtualMachineConfig.BootImage;
+
+                        /**
+                         * Decodes a BootImage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BootImage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.VirtualMachineConfig.BootImage;
+
+                        /**
+                         * Verifies a BootImage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BootImage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BootImage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.VirtualMachineConfig.BootImage;
+
+                        /**
+                         * Creates a plain object from a BootImage message. Also converts values to other types if specified.
+                         * @param message BootImage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.notebooks.v1.VirtualMachineConfig.BootImage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BootImage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
                 }
 
@@ -5098,6 +5601,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public setInstanceLabels(request: google.cloud.notebooks.v1.ISetInstanceLabelsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateInstanceMetadataItems.
+                     * @param request UpdateInstanceMetadataItemsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UpdateInstanceMetadataItemsResponse
+                     */
+                    public updateInstanceMetadataItems(request: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest, callback: google.cloud.notebooks.v1.NotebookService.UpdateInstanceMetadataItemsCallback): void;
+
+                    /**
+                     * Calls UpdateInstanceMetadataItems.
+                     * @param request UpdateInstanceMetadataItemsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateInstanceMetadataItems(request: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest): Promise<google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse>;
 
                     /**
                      * Calls DeleteInstance.
@@ -5486,6 +6003,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type SetInstanceLabelsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#updateInstanceMetadataItems}.
+                     * @param error Error, if any
+                     * @param [response] UpdateInstanceMetadataItemsResponse
+                     */
+                    type UpdateInstanceMetadataItemsCallback = (error: (Error|null), response?: google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#deleteInstance}.
@@ -6663,6 +7187,192 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an UpdateInstanceMetadataItemsRequest. */
+                interface IUpdateInstanceMetadataItemsRequest {
+
+                    /** UpdateInstanceMetadataItemsRequest name */
+                    name?: (string|null);
+
+                    /** UpdateInstanceMetadataItemsRequest items */
+                    items?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an UpdateInstanceMetadataItemsRequest. */
+                class UpdateInstanceMetadataItemsRequest implements IUpdateInstanceMetadataItemsRequest {
+
+                    /**
+                     * Constructs a new UpdateInstanceMetadataItemsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest);
+
+                    /** UpdateInstanceMetadataItemsRequest name. */
+                    public name: string;
+
+                    /** UpdateInstanceMetadataItemsRequest items. */
+                    public items: { [k: string]: string };
+
+                    /**
+                     * Creates a new UpdateInstanceMetadataItemsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateInstanceMetadataItemsRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest): google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest;
+
+                    /**
+                     * Encodes the specified UpdateInstanceMetadataItemsRequest message. Does not implicitly {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest.verify|verify} messages.
+                     * @param message UpdateInstanceMetadataItemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateInstanceMetadataItemsRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest.verify|verify} messages.
+                     * @param message UpdateInstanceMetadataItemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateInstanceMetadataItemsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateInstanceMetadataItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest;
+
+                    /**
+                     * Decodes an UpdateInstanceMetadataItemsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateInstanceMetadataItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest;
+
+                    /**
+                     * Verifies an UpdateInstanceMetadataItemsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateInstanceMetadataItemsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateInstanceMetadataItemsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateInstanceMetadataItemsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateInstanceMetadataItemsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateInstanceMetadataItemsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateInstanceMetadataItemsResponse. */
+                interface IUpdateInstanceMetadataItemsResponse {
+
+                    /** UpdateInstanceMetadataItemsResponse items */
+                    items?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an UpdateInstanceMetadataItemsResponse. */
+                class UpdateInstanceMetadataItemsResponse implements IUpdateInstanceMetadataItemsResponse {
+
+                    /**
+                     * Constructs a new UpdateInstanceMetadataItemsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse);
+
+                    /** UpdateInstanceMetadataItemsResponse items. */
+                    public items: { [k: string]: string };
+
+                    /**
+                     * Creates a new UpdateInstanceMetadataItemsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateInstanceMetadataItemsResponse instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse): google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse;
+
+                    /**
+                     * Encodes the specified UpdateInstanceMetadataItemsResponse message. Does not implicitly {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse.verify|verify} messages.
+                     * @param message UpdateInstanceMetadataItemsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateInstanceMetadataItemsResponse message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse.verify|verify} messages.
+                     * @param message UpdateInstanceMetadataItemsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateInstanceMetadataItemsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateInstanceMetadataItemsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse;
+
+                    /**
+                     * Decodes an UpdateInstanceMetadataItemsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateInstanceMetadataItemsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse;
+
+                    /**
+                     * Verifies an UpdateInstanceMetadataItemsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateInstanceMetadataItemsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateInstanceMetadataItemsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse;
+
+                    /**
+                     * Creates a plain object from an UpdateInstanceMetadataItemsResponse message. Also converts values to other types if specified.
+                     * @param message UpdateInstanceMetadataItemsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateInstanceMetadataItemsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an UpdateShieldedInstanceConfigRequest. */
                 interface IUpdateShieldedInstanceConfigRequest {
 
@@ -7226,6 +7936,9 @@ export namespace google {
 
                     /** IsInstanceUpgradeableRequest notebookInstance */
                     notebookInstance?: (string|null);
+
+                    /** IsInstanceUpgradeableRequest type */
+                    type?: (google.cloud.notebooks.v1.UpgradeType|keyof typeof google.cloud.notebooks.v1.UpgradeType|null);
                 }
 
                 /** Represents an IsInstanceUpgradeableRequest. */
@@ -7239,6 +7952,9 @@ export namespace google {
 
                     /** IsInstanceUpgradeableRequest notebookInstance. */
                     public notebookInstance: string;
+
+                    /** IsInstanceUpgradeableRequest type. */
+                    public type: (google.cloud.notebooks.v1.UpgradeType|keyof typeof google.cloud.notebooks.v1.UpgradeType);
 
                     /**
                      * Creates a new IsInstanceUpgradeableRequest instance using the specified properties.
@@ -7622,6 +8338,9 @@ export namespace google {
 
                     /** UpgradeInstanceRequest name */
                     name?: (string|null);
+
+                    /** UpgradeInstanceRequest type */
+                    type?: (google.cloud.notebooks.v1.UpgradeType|keyof typeof google.cloud.notebooks.v1.UpgradeType|null);
                 }
 
                 /** Represents an UpgradeInstanceRequest. */
@@ -7635,6 +8354,9 @@ export namespace google {
 
                     /** UpgradeInstanceRequest name. */
                     public name: string;
+
+                    /** UpgradeInstanceRequest type. */
+                    public type: (google.cloud.notebooks.v1.UpgradeType|keyof typeof google.cloud.notebooks.v1.UpgradeType);
 
                     /**
                      * Creates a new UpgradeInstanceRequest instance using the specified properties.
@@ -7811,6 +8533,9 @@ export namespace google {
 
                     /** UpgradeInstanceInternalRequest vmId */
                     vmId?: (string|null);
+
+                    /** UpgradeInstanceInternalRequest type */
+                    type?: (google.cloud.notebooks.v1.UpgradeType|keyof typeof google.cloud.notebooks.v1.UpgradeType|null);
                 }
 
                 /** Represents an UpgradeInstanceInternalRequest. */
@@ -7827,6 +8552,9 @@ export namespace google {
 
                     /** UpgradeInstanceInternalRequest vmId. */
                     public vmId: string;
+
+                    /** UpgradeInstanceInternalRequest type. */
+                    public type: (google.cloud.notebooks.v1.UpgradeType|keyof typeof google.cloud.notebooks.v1.UpgradeType);
 
                     /**
                      * Creates a new UpgradeInstanceInternalRequest instance using the specified properties.
@@ -9469,6 +10197,15 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** UpgradeType enum. */
+                enum UpgradeType {
+                    UPGRADE_TYPE_UNSPECIFIED = 0,
+                    UPGRADE_FRAMEWORK = 1,
+                    UPGRADE_OS = 2,
+                    UPGRADE_CUDA = 3,
+                    UPGRADE_ALL = 4
                 }
             }
 

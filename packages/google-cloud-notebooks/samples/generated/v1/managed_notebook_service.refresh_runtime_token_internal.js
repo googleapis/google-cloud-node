@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START notebooks_v1_generated_ManagedNotebookService_StopRuntime_async]
+function main(name, vmId) {
+  // [START notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -31,9 +31,10 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Idempotent request UUID.
+   *  Required. The VM hardware token for authenticating the VM.
+   *  https://cloud.google.com/compute/docs/instances/verifying-instance-identity
    */
-  // const requestId = 'abc123'
+  // const vmId = 'abc123'
 
   // Imports the Notebooks library
   const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;
@@ -41,20 +42,20 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new ManagedNotebookServiceClient();
 
-  async function callStopRuntime() {
+  async function callRefreshRuntimeTokenInternal() {
     // Construct request
     const request = {
       name,
+      vmId,
     };
 
     // Run request
-    const [operation] = await notebooksClient.stopRuntime(request);
-    const [response] = await operation.promise();
+    const response = await notebooksClient.refreshRuntimeTokenInternal(request);
     console.log(response);
   }
 
-  callStopRuntime();
-  // [END notebooks_v1_generated_ManagedNotebookService_StopRuntime_async]
+  callRefreshRuntimeTokenInternal();
+  // [END notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_async]
 }
 
 process.on('unhandledRejection', err => {

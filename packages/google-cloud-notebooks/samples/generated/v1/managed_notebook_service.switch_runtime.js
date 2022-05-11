@@ -38,6 +38,10 @@ function main(name) {
    *  accelerator config.
    */
   // const acceleratorConfig = {}
+  /**
+   *  Idempotent request UUID.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Notebooks library
   const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;

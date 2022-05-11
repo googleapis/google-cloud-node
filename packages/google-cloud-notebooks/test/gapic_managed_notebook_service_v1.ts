@@ -380,6 +380,143 @@ describe('v1.ManagedNotebookServiceClient', () => {
     });
   });
 
+  describe('refreshRuntimeTokenInternal', () => {
+    it('invokes refreshRuntimeTokenInternal without error', async () => {
+      const client =
+        new managednotebookserviceModule.v1.ManagedNotebookServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse()
+      );
+      client.innerApiCalls.refreshRuntimeTokenInternal =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.refreshRuntimeTokenInternal(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes refreshRuntimeTokenInternal without error using callback', async () => {
+      const client =
+        new managednotebookserviceModule.v1.ManagedNotebookServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse()
+      );
+      client.innerApiCalls.refreshRuntimeTokenInternal =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.refreshRuntimeTokenInternal(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes refreshRuntimeTokenInternal with error', async () => {
+      const client =
+        new managednotebookserviceModule.v1.ManagedNotebookServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.refreshRuntimeTokenInternal = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.refreshRuntimeTokenInternal(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes refreshRuntimeTokenInternal with closed client', async () => {
+      const client =
+        new managednotebookserviceModule.v1.ManagedNotebookServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.refreshRuntimeTokenInternal(request),
+        expectedError
+      );
+    });
+  });
+
   describe('createRuntime', () => {
     it('invokes createRuntime without error', async () => {
       const client =
