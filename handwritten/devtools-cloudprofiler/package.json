@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/extend": "^3.0.0",
     "@types/long": "^4.0.0",
-    "@types/mocha": "^8.0.0",
+    "@types/mocha": "^9.0.0",
     "@types/nock": "^10.0.0",
     "@types/node": "^16.0.0",
     "@types/pretty-ms": "^4.0.0",
