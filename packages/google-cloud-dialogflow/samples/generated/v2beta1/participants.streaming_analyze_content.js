@@ -21,7 +21,7 @@
 'use strict';
 
 function main(participant) {
-  // [START dialogflow_v2_generated_Participants_AnalyzeContent_async]
+  // [START dialogflow_v2beta1_generated_Participants_StreamingAnalyzeContent_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -32,21 +32,39 @@ function main(participant) {
    */
   // const participant = 'abc123'
   /**
+   *  Instructs the speech recognizer how to process the speech audio.
+   */
+  // const audioConfig = {}
+  /**
    *  The natural language text to be processed.
    */
-  // const textInput = {}
-  /**
-   *  An input event to send to Dialogflow.
-   */
-  // const eventInput = {}
+  // const textConfig = {}
   /**
    *  Speech synthesis configuration.
    *  The speech synthesis settings for a virtual agent that may be configured
    *  for the associated conversation profile are not used when calling
-   *  AnalyzeContent. If this configuration is not supplied, speech synthesis
-   *  is disabled.
+   *  StreamingAnalyzeContent. If this configuration is not supplied, speech
+   *  synthesis is disabled.
    */
   // const replyAudioConfig = {}
+  /**
+   *  The input audio content to be recognized. Must be sent if `audio_config`
+   *  is set in the first message. The complete audio over all streaming
+   *  messages must not exceed 1 minute.
+   */
+  // const inputAudio = 'Buffer.from('string')'
+  /**
+   *  The UTF-8 encoded natural language text to be processed. Must be sent if
+   *  `text_config` is set in the first message. Text length must not exceed
+   *  256 bytes. The `input_text` field can be only sent once.
+   */
+  // const inputText = 'abc123'
+  /**
+   *  The DTMF digits used to invoke intent and fill in parameter value.
+   *  This input is ignored if the previous response indicated that DTMF input
+   *  is not accepted.
+   */
+  // const inputDtmf = {}
   /**
    *  Parameters for a Dialogflow virtual-agent query.
    */
@@ -64,31 +82,36 @@ function main(participant) {
    */
   // const cxParameters = {}
   /**
-   *  A unique identifier for this request. Restricted to 36 ASCII characters.
-   *  A random UUID is recommended.
-   *  This request is only idempotent if a `request_id` is provided.
+   *  Enable partial virtual agent responses. If this flag is not enabled,
+   *  response stream still contains only one final response even if some
+   *  `Fulfillment`s in Dialogflow virtual agent have been configured to return
+   *  partial responses.
    */
-  // const requestId = 'abc123'
+  // const enablePartialAutomatedAgentReply = true
 
   // Imports the Dialogflow library
-  const {ParticipantsClient} = require('@google-cloud/dialogflow').v2;
+  const {ParticipantsClient} = require('@google-cloud/dialogflow').v2beta1;
 
   // Instantiates a client
   const dialogflowClient = new ParticipantsClient();
 
-  async function callAnalyzeContent() {
+  async function callStreamingAnalyzeContent() {
     // Construct request
     const request = {
       participant,
     };
 
     // Run request
-    const response = await dialogflowClient.analyzeContent(request);
-    console.log(response);
+    const stream = await dialogflowClient.streamingAnalyzeContent();
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
+    stream.write(request);
+    stream.end(); 
   }
 
-  callAnalyzeContent();
-  // [END dialogflow_v2_generated_Participants_AnalyzeContent_async]
+  callStreamingAnalyzeContent();
+  // [END dialogflow_v2beta1_generated_Participants_StreamingAnalyzeContent_async]
 }
 
 process.on('unhandledRejection', err => {

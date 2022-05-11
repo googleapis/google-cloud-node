@@ -3878,7 +3878,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -3910,6 +3910,10 @@
                     {
                         "name": "assist_query_params",
                         "type": ".google.cloud.dialogflow.v2.AssistQueryParameters"
+                    },
+                    {
+                        "name": "cx_parameters",
+                        "type": ".google.protobuf.Struct"
                     },
                     {
                         "name": "request_id",

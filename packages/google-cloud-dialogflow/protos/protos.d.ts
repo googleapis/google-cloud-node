@@ -3470,6 +3470,9 @@ export namespace google {
                     /** AnalyzeContentRequest assistQueryParams */
                     assistQueryParams?: (google.cloud.dialogflow.v2.IAssistQueryParameters|null);
 
+                    /** AnalyzeContentRequest cxParameters */
+                    cxParameters?: (google.protobuf.IStruct|null);
+
                     /** AnalyzeContentRequest requestId */
                     requestId?: (string|null);
                 }
@@ -3500,6 +3503,9 @@ export namespace google {
 
                     /** AnalyzeContentRequest assistQueryParams. */
                     public assistQueryParams?: (google.cloud.dialogflow.v2.IAssistQueryParameters|null);
+
+                    /** AnalyzeContentRequest cxParameters. */
+                    public cxParameters?: (google.protobuf.IStruct|null);
 
                     /** AnalyzeContentRequest requestId. */
                     public requestId: string;
@@ -33391,6 +33397,20 @@ export namespace google {
                     public analyzeContent(request: google.cloud.dialogflow.v2beta1.IAnalyzeContentRequest): Promise<google.cloud.dialogflow.v2beta1.AnalyzeContentResponse>;
 
                     /**
+                     * Calls StreamingAnalyzeContent.
+                     * @param request StreamingAnalyzeContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and StreamingAnalyzeContentResponse
+                     */
+                    public streamingAnalyzeContent(request: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentRequest, callback: google.cloud.dialogflow.v2beta1.Participants.StreamingAnalyzeContentCallback): void;
+
+                    /**
+                     * Calls StreamingAnalyzeContent.
+                     * @param request StreamingAnalyzeContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public streamingAnalyzeContent(request: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentRequest): Promise<google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse>;
+
+                    /**
                      * Calls SuggestArticles.
                      * @param request SuggestArticlesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and SuggestArticlesResponse
@@ -33497,6 +33517,13 @@ export namespace google {
                      * @param [response] AnalyzeContentResponse
                      */
                     type AnalyzeContentCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2beta1.AnalyzeContentResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2beta1.Participants#streamingAnalyzeContent}.
+                     * @param error Error, if any
+                     * @param [response] StreamingAnalyzeContentResponse
+                     */
+                    type StreamingAnalyzeContentCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dialogflow.v2beta1.Participants#suggestArticles}.
@@ -34733,6 +34760,9 @@ export namespace google {
                     /** AnalyzeContentRequest assistQueryParams */
                     assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
 
+                    /** AnalyzeContentRequest cxParameters */
+                    cxParameters?: (google.protobuf.IStruct|null);
+
                     /** AnalyzeContentRequest messageSendTime */
                     messageSendTime?: (google.protobuf.ITimestamp|null);
 
@@ -34766,6 +34796,9 @@ export namespace google {
 
                     /** AnalyzeContentRequest assistQueryParams. */
                     public assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
+
+                    /** AnalyzeContentRequest cxParameters. */
+                    public cxParameters?: (google.protobuf.IStruct|null);
 
                     /** AnalyzeContentRequest messageSendTime. */
                     public messageSendTime?: (google.protobuf.ITimestamp|null);
@@ -35058,6 +35091,384 @@ export namespace google {
 
                     /**
                      * Converts this AnalyzeContentResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an InputTextConfig. */
+                interface IInputTextConfig {
+
+                    /** InputTextConfig languageCode */
+                    languageCode?: (string|null);
+                }
+
+                /** Represents an InputTextConfig. */
+                class InputTextConfig implements IInputTextConfig {
+
+                    /**
+                     * Constructs a new InputTextConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IInputTextConfig);
+
+                    /** InputTextConfig languageCode. */
+                    public languageCode: string;
+
+                    /**
+                     * Creates a new InputTextConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InputTextConfig instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IInputTextConfig): google.cloud.dialogflow.v2beta1.InputTextConfig;
+
+                    /**
+                     * Encodes the specified InputTextConfig message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.InputTextConfig.verify|verify} messages.
+                     * @param message InputTextConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IInputTextConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InputTextConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.InputTextConfig.verify|verify} messages.
+                     * @param message InputTextConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IInputTextConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InputTextConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InputTextConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.InputTextConfig;
+
+                    /**
+                     * Decodes an InputTextConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InputTextConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.InputTextConfig;
+
+                    /**
+                     * Verifies an InputTextConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InputTextConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InputTextConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.InputTextConfig;
+
+                    /**
+                     * Creates a plain object from an InputTextConfig message. Also converts values to other types if specified.
+                     * @param message InputTextConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.InputTextConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InputTextConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StreamingAnalyzeContentRequest. */
+                interface IStreamingAnalyzeContentRequest {
+
+                    /** StreamingAnalyzeContentRequest participant */
+                    participant?: (string|null);
+
+                    /** StreamingAnalyzeContentRequest audioConfig */
+                    audioConfig?: (google.cloud.dialogflow.v2beta1.IInputAudioConfig|null);
+
+                    /** StreamingAnalyzeContentRequest textConfig */
+                    textConfig?: (google.cloud.dialogflow.v2beta1.IInputTextConfig|null);
+
+                    /** StreamingAnalyzeContentRequest replyAudioConfig */
+                    replyAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
+
+                    /** StreamingAnalyzeContentRequest inputAudio */
+                    inputAudio?: (Uint8Array|string|null);
+
+                    /** StreamingAnalyzeContentRequest inputText */
+                    inputText?: (string|null);
+
+                    /** StreamingAnalyzeContentRequest inputDtmf */
+                    inputDtmf?: (google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents|null);
+
+                    /** StreamingAnalyzeContentRequest queryParams */
+                    queryParams?: (google.cloud.dialogflow.v2beta1.IQueryParameters|null);
+
+                    /** StreamingAnalyzeContentRequest assistQueryParams */
+                    assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
+
+                    /** StreamingAnalyzeContentRequest cxParameters */
+                    cxParameters?: (google.protobuf.IStruct|null);
+
+                    /** StreamingAnalyzeContentRequest enablePartialAutomatedAgentReply */
+                    enablePartialAutomatedAgentReply?: (boolean|null);
+                }
+
+                /** Represents a StreamingAnalyzeContentRequest. */
+                class StreamingAnalyzeContentRequest implements IStreamingAnalyzeContentRequest {
+
+                    /**
+                     * Constructs a new StreamingAnalyzeContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentRequest);
+
+                    /** StreamingAnalyzeContentRequest participant. */
+                    public participant: string;
+
+                    /** StreamingAnalyzeContentRequest audioConfig. */
+                    public audioConfig?: (google.cloud.dialogflow.v2beta1.IInputAudioConfig|null);
+
+                    /** StreamingAnalyzeContentRequest textConfig. */
+                    public textConfig?: (google.cloud.dialogflow.v2beta1.IInputTextConfig|null);
+
+                    /** StreamingAnalyzeContentRequest replyAudioConfig. */
+                    public replyAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
+
+                    /** StreamingAnalyzeContentRequest inputAudio. */
+                    public inputAudio?: (Uint8Array|string|null);
+
+                    /** StreamingAnalyzeContentRequest inputText. */
+                    public inputText?: (string|null);
+
+                    /** StreamingAnalyzeContentRequest inputDtmf. */
+                    public inputDtmf?: (google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents|null);
+
+                    /** StreamingAnalyzeContentRequest queryParams. */
+                    public queryParams?: (google.cloud.dialogflow.v2beta1.IQueryParameters|null);
+
+                    /** StreamingAnalyzeContentRequest assistQueryParams. */
+                    public assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
+
+                    /** StreamingAnalyzeContentRequest cxParameters. */
+                    public cxParameters?: (google.protobuf.IStruct|null);
+
+                    /** StreamingAnalyzeContentRequest enablePartialAutomatedAgentReply. */
+                    public enablePartialAutomatedAgentReply: boolean;
+
+                    /** StreamingAnalyzeContentRequest config. */
+                    public config?: ("audioConfig"|"textConfig");
+
+                    /** StreamingAnalyzeContentRequest input. */
+                    public input?: ("inputAudio"|"inputText"|"inputDtmf");
+
+                    /**
+                     * Creates a new StreamingAnalyzeContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingAnalyzeContentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentRequest): google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest;
+
+                    /**
+                     * Encodes the specified StreamingAnalyzeContentRequest message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest.verify|verify} messages.
+                     * @param message StreamingAnalyzeContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingAnalyzeContentRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest.verify|verify} messages.
+                     * @param message StreamingAnalyzeContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingAnalyzeContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingAnalyzeContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest;
+
+                    /**
+                     * Decodes a StreamingAnalyzeContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingAnalyzeContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest;
+
+                    /**
+                     * Verifies a StreamingAnalyzeContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingAnalyzeContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingAnalyzeContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest;
+
+                    /**
+                     * Creates a plain object from a StreamingAnalyzeContentRequest message. Also converts values to other types if specified.
+                     * @param message StreamingAnalyzeContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingAnalyzeContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StreamingAnalyzeContentResponse. */
+                interface IStreamingAnalyzeContentResponse {
+
+                    /** StreamingAnalyzeContentResponse recognitionResult */
+                    recognitionResult?: (google.cloud.dialogflow.v2beta1.IStreamingRecognitionResult|null);
+
+                    /** StreamingAnalyzeContentResponse replyText */
+                    replyText?: (string|null);
+
+                    /** StreamingAnalyzeContentResponse replyAudio */
+                    replyAudio?: (google.cloud.dialogflow.v2beta1.IOutputAudio|null);
+
+                    /** StreamingAnalyzeContentResponse automatedAgentReply */
+                    automatedAgentReply?: (google.cloud.dialogflow.v2beta1.IAutomatedAgentReply|null);
+
+                    /** StreamingAnalyzeContentResponse message */
+                    message?: (google.cloud.dialogflow.v2beta1.IMessage|null);
+
+                    /** StreamingAnalyzeContentResponse humanAgentSuggestionResults */
+                    humanAgentSuggestionResults?: (google.cloud.dialogflow.v2beta1.ISuggestionResult[]|null);
+
+                    /** StreamingAnalyzeContentResponse endUserSuggestionResults */
+                    endUserSuggestionResults?: (google.cloud.dialogflow.v2beta1.ISuggestionResult[]|null);
+
+                    /** StreamingAnalyzeContentResponse dtmfParameters */
+                    dtmfParameters?: (google.cloud.dialogflow.v2beta1.IDtmfParameters|null);
+                }
+
+                /** Represents a StreamingAnalyzeContentResponse. */
+                class StreamingAnalyzeContentResponse implements IStreamingAnalyzeContentResponse {
+
+                    /**
+                     * Constructs a new StreamingAnalyzeContentResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentResponse);
+
+                    /** StreamingAnalyzeContentResponse recognitionResult. */
+                    public recognitionResult?: (google.cloud.dialogflow.v2beta1.IStreamingRecognitionResult|null);
+
+                    /** StreamingAnalyzeContentResponse replyText. */
+                    public replyText: string;
+
+                    /** StreamingAnalyzeContentResponse replyAudio. */
+                    public replyAudio?: (google.cloud.dialogflow.v2beta1.IOutputAudio|null);
+
+                    /** StreamingAnalyzeContentResponse automatedAgentReply. */
+                    public automatedAgentReply?: (google.cloud.dialogflow.v2beta1.IAutomatedAgentReply|null);
+
+                    /** StreamingAnalyzeContentResponse message. */
+                    public message?: (google.cloud.dialogflow.v2beta1.IMessage|null);
+
+                    /** StreamingAnalyzeContentResponse humanAgentSuggestionResults. */
+                    public humanAgentSuggestionResults: google.cloud.dialogflow.v2beta1.ISuggestionResult[];
+
+                    /** StreamingAnalyzeContentResponse endUserSuggestionResults. */
+                    public endUserSuggestionResults: google.cloud.dialogflow.v2beta1.ISuggestionResult[];
+
+                    /** StreamingAnalyzeContentResponse dtmfParameters. */
+                    public dtmfParameters?: (google.cloud.dialogflow.v2beta1.IDtmfParameters|null);
+
+                    /**
+                     * Creates a new StreamingAnalyzeContentResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingAnalyzeContentResponse instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentResponse): google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse;
+
+                    /**
+                     * Encodes the specified StreamingAnalyzeContentResponse message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse.verify|verify} messages.
+                     * @param message StreamingAnalyzeContentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingAnalyzeContentResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse.verify|verify} messages.
+                     * @param message StreamingAnalyzeContentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IStreamingAnalyzeContentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingAnalyzeContentResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingAnalyzeContentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse;
+
+                    /**
+                     * Decodes a StreamingAnalyzeContentResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingAnalyzeContentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse;
+
+                    /**
+                     * Verifies a StreamingAnalyzeContentResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingAnalyzeContentResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingAnalyzeContentResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse;
+
+                    /**
+                     * Creates a plain object from a StreamingAnalyzeContentResponse message. Also converts values to other types if specified.
+                     * @param message StreamingAnalyzeContentResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingAnalyzeContentResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -37112,6 +37523,9 @@ export namespace google {
                     /** ResponseMessage endInteraction */
                     endInteraction?: (google.cloud.dialogflow.v2beta1.ResponseMessage.IEndInteraction|null);
 
+                    /** ResponseMessage mixedAudio */
+                    mixedAudio?: (google.cloud.dialogflow.v2beta1.ResponseMessage.IMixedAudio|null);
+
                     /** ResponseMessage telephonyTransferCall */
                     telephonyTransferCall?: (google.cloud.dialogflow.v2beta1.ResponseMessage.ITelephonyTransferCall|null);
                 }
@@ -37137,11 +37551,14 @@ export namespace google {
                     /** ResponseMessage endInteraction. */
                     public endInteraction?: (google.cloud.dialogflow.v2beta1.ResponseMessage.IEndInteraction|null);
 
+                    /** ResponseMessage mixedAudio. */
+                    public mixedAudio?: (google.cloud.dialogflow.v2beta1.ResponseMessage.IMixedAudio|null);
+
                     /** ResponseMessage telephonyTransferCall. */
                     public telephonyTransferCall?: (google.cloud.dialogflow.v2beta1.ResponseMessage.ITelephonyTransferCall|null);
 
                     /** ResponseMessage message. */
-                    public message?: ("text"|"payload"|"liveAgentHandoff"|"endInteraction"|"telephonyTransferCall");
+                    public message?: ("text"|"payload"|"liveAgentHandoff"|"endInteraction"|"mixedAudio"|"telephonyTransferCall");
 
                     /**
                      * Creates a new ResponseMessage instance using the specified properties.
@@ -37478,6 +37895,204 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a MixedAudio. */
+                    interface IMixedAudio {
+
+                        /** MixedAudio segments */
+                        segments?: (google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.ISegment[]|null);
+                    }
+
+                    /** Represents a MixedAudio. */
+                    class MixedAudio implements IMixedAudio {
+
+                        /**
+                         * Constructs a new MixedAudio.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2beta1.ResponseMessage.IMixedAudio);
+
+                        /** MixedAudio segments. */
+                        public segments: google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.ISegment[];
+
+                        /**
+                         * Creates a new MixedAudio instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MixedAudio instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2beta1.ResponseMessage.IMixedAudio): google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio;
+
+                        /**
+                         * Encodes the specified MixedAudio message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.verify|verify} messages.
+                         * @param message MixedAudio message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2beta1.ResponseMessage.IMixedAudio, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MixedAudio message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.verify|verify} messages.
+                         * @param message MixedAudio message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.ResponseMessage.IMixedAudio, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MixedAudio message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MixedAudio
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio;
+
+                        /**
+                         * Decodes a MixedAudio message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MixedAudio
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio;
+
+                        /**
+                         * Verifies a MixedAudio message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MixedAudio message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MixedAudio
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio;
+
+                        /**
+                         * Creates a plain object from a MixedAudio message. Also converts values to other types if specified.
+                         * @param message MixedAudio
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MixedAudio to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace MixedAudio {
+
+                        /** Properties of a Segment. */
+                        interface ISegment {
+
+                            /** Segment audio */
+                            audio?: (Uint8Array|string|null);
+
+                            /** Segment uri */
+                            uri?: (string|null);
+
+                            /** Segment allowPlaybackInterruption */
+                            allowPlaybackInterruption?: (boolean|null);
+                        }
+
+                        /** Represents a Segment. */
+                        class Segment implements ISegment {
+
+                            /**
+                             * Constructs a new Segment.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.ISegment);
+
+                            /** Segment audio. */
+                            public audio?: (Uint8Array|string|null);
+
+                            /** Segment uri. */
+                            public uri?: (string|null);
+
+                            /** Segment allowPlaybackInterruption. */
+                            public allowPlaybackInterruption: boolean;
+
+                            /** Segment content. */
+                            public content?: ("audio"|"uri");
+
+                            /**
+                             * Creates a new Segment instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Segment instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.ISegment): google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.Segment;
+
+                            /**
+                             * Encodes the specified Segment message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.Segment.verify|verify} messages.
+                             * @param message Segment message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.ISegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Segment message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.Segment.verify|verify} messages.
+                             * @param message Segment message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.ISegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Segment message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Segment
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.Segment;
+
+                            /**
+                             * Decodes a Segment message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Segment
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.Segment;
+
+                            /**
+                             * Verifies a Segment message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Segment message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Segment
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.Segment;
+
+                            /**
+                             * Creates a plain object from a Segment message. Also converts values to other types if specified.
+                             * @param message Segment
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.Segment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Segment to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
                     }
 
                     /** Properties of a TelephonyTransferCall. */

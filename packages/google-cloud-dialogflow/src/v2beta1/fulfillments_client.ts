@@ -418,6 +418,7 @@ export class FulfillmentsClient {
    * @param {string} request.name
    *   Required. The name of the fulfillment.
    *   Supported formats:
+   *
    *   - `projects/<Project ID>/agent/fulfillment`
    *   - `projects/<Project ID>/locations/<Location ID>/agent/fulfillment`
    * @param {object} [options]

@@ -1353,6 +1353,10 @@
                           "type": "AssistQueryParameters",
                           "id": 14
                         },
+                        "cxParameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 18
+                        },
                         "requestId": {
                           "type": "string",
                           "id": 11
@@ -10427,6 +10431,12 @@
                             }
                           ]
                         },
+                        "StreamingAnalyzeContent": {
+                          "requestType": "StreamingAnalyzeContentRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingAnalyzeContentResponse",
+                          "responseStream": true
+                        },
                         "SuggestArticles": {
                           "requestType": "SuggestArticlesRequest",
                           "responseType": "SuggestArticlesResponse",
@@ -10897,6 +10907,10 @@
                           "type": "AssistQueryParameters",
                           "id": 14
                         },
+                        "cxParameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 18
+                        },
                         "messageSendTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 10
@@ -10946,6 +10960,119 @@
                         "dtmfParameters": {
                           "type": "DtmfParameters",
                           "id": 9
+                        }
+                      }
+                    },
+                    "InputTextConfig": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamingAnalyzeContentRequest": {
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "audioConfig",
+                            "textConfig"
+                          ]
+                        },
+                        "input": {
+                          "oneof": [
+                            "inputAudio",
+                            "inputText",
+                            "inputDtmf"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "participant": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Participant"
+                          }
+                        },
+                        "audioConfig": {
+                          "type": "InputAudioConfig",
+                          "id": 2
+                        },
+                        "textConfig": {
+                          "type": "InputTextConfig",
+                          "id": 3
+                        },
+                        "replyAudioConfig": {
+                          "type": "OutputAudioConfig",
+                          "id": 4
+                        },
+                        "inputAudio": {
+                          "type": "bytes",
+                          "id": 5
+                        },
+                        "inputText": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "inputDtmf": {
+                          "type": "TelephonyDtmfEvents",
+                          "id": 9
+                        },
+                        "queryParams": {
+                          "type": "QueryParameters",
+                          "id": 7
+                        },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 8
+                        },
+                        "cxParameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 13
+                        },
+                        "enablePartialAutomatedAgentReply": {
+                          "type": "bool",
+                          "id": 12
+                        }
+                      }
+                    },
+                    "StreamingAnalyzeContentResponse": {
+                      "fields": {
+                        "recognitionResult": {
+                          "type": "StreamingRecognitionResult",
+                          "id": 1
+                        },
+                        "replyText": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "replyAudio": {
+                          "type": "OutputAudio",
+                          "id": 3
+                        },
+                        "automatedAgentReply": {
+                          "type": "AutomatedAgentReply",
+                          "id": 4
+                        },
+                        "message": {
+                          "type": "Message",
+                          "id": 6
+                        },
+                        "humanAgentSuggestionResults": {
+                          "rule": "repeated",
+                          "type": "SuggestionResult",
+                          "id": 7
+                        },
+                        "endUserSuggestionResults": {
+                          "rule": "repeated",
+                          "type": "SuggestionResult",
+                          "id": 8
+                        },
+                        "dtmfParameters": {
+                          "type": "DtmfParameters",
+                          "id": 10
                         }
                       }
                     },
@@ -11402,6 +11529,7 @@
                             "payload",
                             "liveAgentHandoff",
                             "endInteraction",
+                            "mixedAudio",
                             "telephonyTransferCall"
                           ]
                         }
@@ -11422,6 +11550,10 @@
                         "endInteraction": {
                           "type": "EndInteraction",
                           "id": 4
+                        },
+                        "mixedAudio": {
+                          "type": "MixedAudio",
+                          "id": 5
                         },
                         "telephonyTransferCall": {
                           "type": "TelephonyTransferCall",
@@ -11448,6 +11580,41 @@
                         },
                         "EndInteraction": {
                           "fields": {}
+                        },
+                        "MixedAudio": {
+                          "fields": {
+                            "segments": {
+                              "rule": "repeated",
+                              "type": "Segment",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Segment": {
+                              "oneofs": {
+                                "content": {
+                                  "oneof": [
+                                    "audio",
+                                    "uri"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "audio": {
+                                  "type": "bytes",
+                                  "id": 1
+                                },
+                                "uri": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "allowPlaybackInterruption": {
+                                  "type": "bool",
+                                  "id": 3
+                                }
+                              }
+                            }
+                          }
                         },
                         "TelephonyTransferCall": {
                           "oneofs": {

@@ -56,6 +56,14 @@ function main(participant) {
    */
   // const assistQueryParams = {}
   /**
+   *  Additional parameters to be put into Dialogflow CX session parameters. To
+   *  remove a parameter from the session, clients should explicitly set the
+   *  parameter value to null.
+   *  Note: this field should only be used if you are connecting to a Dialogflow
+   *  CX agent.
+   */
+  // const cxParameters = {}
+  /**
    *  Optional. The send time of the message from end user or human agent's
    *  perspective. It is used for identifying the same message under one
    *  participant.

@@ -769,6 +769,13 @@ export class ParticipantsClient {
    *   Parameters for a Dialogflow virtual-agent query.
    * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
    *   Parameters for a human assist query.
+   * @param {google.protobuf.Struct} request.cxParameters
+   *   Additional parameters to be put into Dialogflow CX session parameters. To
+   *   remove a parameter from the session, clients should explicitly set the
+   *   parameter value to null.
+   *
+   *   Note: this field should only be used if you are connecting to a Dialogflow
+   *   CX agent.
    * @param {string} request.requestId
    *   A unique identifier for this request. Restricted to 36 ASCII characters.
    *   A random UUID is recommended.

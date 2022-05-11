@@ -932,6 +932,11 @@
                 "compileSuggestion"
               ]
             },
+            "StreamingAnalyzeContent": {
+              "methods": [
+                "streamingAnalyzeContent"
+              ]
+            },
             "ListParticipants": {
               "methods": [
                 "listParticipants",

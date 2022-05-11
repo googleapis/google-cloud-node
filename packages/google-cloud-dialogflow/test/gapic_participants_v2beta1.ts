@@ -51,6 +51,20 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubBidiStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  return sinon.stub().returns(mockStream);
+}
+
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -1228,6 +1242,95 @@ describe('v2beta1.ParticipantsClient', () => {
       client.close();
       await assert.rejects(client.compileSuggestion(request), expectedError);
       assert(stub.calledOnce);
+    });
+  });
+
+  describe('streamingAnalyzeContent', () => {
+    it('invokes streamingAnalyzeContent without error', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse()
+      );
+      client.innerApiCalls.streamingAnalyzeContent =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamingAnalyzeContent();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamingAnalyzeContent as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
+    });
+
+    it('invokes streamingAnalyzeContent with error', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamingAnalyzeContent = stubBidiStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.streamingAnalyzeContent();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.streamingAnalyzeContent as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
     });
   });
 

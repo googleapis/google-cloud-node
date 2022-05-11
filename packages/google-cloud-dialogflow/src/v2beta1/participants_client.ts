@@ -25,10 +25,12 @@ import {
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  GoogleError,
 } from 'google-gax';
 
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -304,6 +306,14 @@ export class ParticipantsClient {
       ),
     };
 
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      streamingAnalyzeContent: new this._gaxModule.StreamDescriptor(
+        gax.StreamType.BIDI_STREAMING
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.Participants',
@@ -359,6 +369,7 @@ export class ParticipantsClient {
       'listParticipants',
       'updateParticipant',
       'analyzeContent',
+      'streamingAnalyzeContent',
       'suggestArticles',
       'suggestFaqAnswers',
       'suggestSmartReplies',
@@ -370,6 +381,16 @@ export class ParticipantsClient {
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new GoogleError('The client has already been closed.')
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -380,7 +401,10 @@ export class ParticipantsClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.stream[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -770,6 +794,13 @@ export class ParticipantsClient {
    *   Parameters for a Dialogflow virtual-agent query.
    * @param {google.cloud.dialogflow.v2beta1.AssistQueryParameters} request.assistQueryParams
    *   Parameters for a human assist query.
+   * @param {google.protobuf.Struct} request.cxParameters
+   *   Additional parameters to be put into Dialogflow CX session parameters. To
+   *   remove a parameter from the session, clients should explicitly set the
+   *   parameter value to null.
+   *
+   *   Note: this field should only be used if you are connecting to a Dialogflow
+   *   CX agent.
    * @param {google.protobuf.Timestamp} request.messageSendTime
    *   Optional. The send time of the message from end user or human agent's
    *   perspective. It is used for identifying the same message under one
@@ -1336,6 +1367,40 @@ export class ParticipantsClient {
       'DeprecationWarning'
     );
     return this.innerApiCalls.compileSuggestion(request, options, callback);
+  }
+
+  /**
+   * Adds a text (e.g., chat) or audio (e.g., phone recording) message from a
+   * participant into the conversation.
+   * Note: This method is only available through the gRPC API (not REST).
+   *
+   * The top-level message sent to the client by the server is
+   * `StreamingAnalyzeContentResponse`. Multiple response messages can be
+   * returned in order. The first one or more messages contain the
+   * `recognition_result` field. Each result represents a more complete
+   * transcript of what the user said. The next message contains the
+   * `reply_text` field, and potentially the `reply_audio` and/or the
+   * `automated_agent_reply` fields.
+   *
+   * Note: Always use agent versions for production traffic
+   * sent to virtual agents. See [Versions and
+   * environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing [StreamingAnalyzeContentRequest]{@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest} for write() method, and
+   *   will emit objects representing [StreamingAnalyzeContentResponse]{@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse} on 'data' event asynchronously.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/participants.streaming_analyze_content.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_Participants_StreamingAnalyzeContent_async
+   */
+  streamingAnalyzeContent(options?: CallOptions): gax.CancellableStream {
+    this.initialize();
+    return this.innerApiCalls.streamingAnalyzeContent(null, options);
   }
 
   /**
