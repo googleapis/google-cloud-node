@@ -1776,7 +1776,7 @@ export class RecaptchaEnterpriseServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
+   * @param {string} request.project
    *   Required. The name of the project to search related account group memberships from,
    *   in the format "projects/{project}".
    * @param {Buffer} [request.hashedAccountId]
@@ -1878,7 +1878,7 @@ export class RecaptchaEnterpriseServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
-        parent: request.parent || '',
+        project: request.project || '',
       });
     this.initialize();
     return this.innerApiCalls.searchRelatedAccountGroupMemberships(
@@ -1892,7 +1892,7 @@ export class RecaptchaEnterpriseServiceClient {
    * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
+   * @param {string} request.project
    *   Required. The name of the project to search related account group memberships from,
    *   in the format "projects/{project}".
    * @param {Buffer} [request.hashedAccountId]
@@ -1934,7 +1934,7 @@ export class RecaptchaEnterpriseServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
-        parent: request.parent || '',
+        project: request.project || '',
       });
     const defaultCallSettings =
       this._defaults['searchRelatedAccountGroupMemberships'];
@@ -1953,7 +1953,7 @@ export class RecaptchaEnterpriseServiceClient {
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
+   * @param {string} request.project
    *   Required. The name of the project to search related account group memberships from,
    *   in the format "projects/{project}".
    * @param {Buffer} [request.hashedAccountId]
@@ -1996,7 +1996,7 @@ export class RecaptchaEnterpriseServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
-        parent: request.parent || '',
+        project: request.project || '',
       });
     const defaultCallSettings =
       this._defaults['searchRelatedAccountGroupMemberships'];

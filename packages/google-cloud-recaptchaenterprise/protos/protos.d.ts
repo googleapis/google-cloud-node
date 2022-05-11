@@ -2073,6 +2073,9 @@ export namespace google {
 
                     /** Key testingOptions */
                     testingOptions?: (google.cloud.recaptchaenterprise.v1.ITestingOptions|null);
+
+                    /** Key wafSettings */
+                    wafSettings?: (google.cloud.recaptchaenterprise.v1.IWafSettings|null);
                 }
 
                 /** Represents a Key. */
@@ -2107,6 +2110,9 @@ export namespace google {
 
                     /** Key testingOptions. */
                     public testingOptions?: (google.cloud.recaptchaenterprise.v1.ITestingOptions|null);
+
+                    /** Key wafSettings. */
+                    public wafSettings?: (google.cloud.recaptchaenterprise.v1.IWafSettings|null);
 
                     /** Key platformSettings. */
                     public platformSettings?: ("webSettings"|"androidSettings"|"iosSettings");
@@ -3306,8 +3312,8 @@ export namespace google {
                 /** Properties of a SearchRelatedAccountGroupMembershipsRequest. */
                 interface ISearchRelatedAccountGroupMembershipsRequest {
 
-                    /** SearchRelatedAccountGroupMembershipsRequest parent */
-                    parent?: (string|null);
+                    /** SearchRelatedAccountGroupMembershipsRequest project */
+                    project?: (string|null);
 
                     /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
@@ -3328,8 +3334,8 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest);
 
-                    /** SearchRelatedAccountGroupMembershipsRequest parent. */
-                    public parent: string;
+                    /** SearchRelatedAccountGroupMembershipsRequest project. */
+                    public project: string;
 
                     /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
@@ -3691,6 +3697,119 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a WafSettings. */
+                interface IWafSettings {
+
+                    /** WafSettings wafService */
+                    wafService?: (google.cloud.recaptchaenterprise.v1.WafSettings.WafService|keyof typeof google.cloud.recaptchaenterprise.v1.WafSettings.WafService|null);
+
+                    /** WafSettings wafFeature */
+                    wafFeature?: (google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature|keyof typeof google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature|null);
+                }
+
+                /** Represents a WafSettings. */
+                class WafSettings implements IWafSettings {
+
+                    /**
+                     * Constructs a new WafSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IWafSettings);
+
+                    /** WafSettings wafService. */
+                    public wafService: (google.cloud.recaptchaenterprise.v1.WafSettings.WafService|keyof typeof google.cloud.recaptchaenterprise.v1.WafSettings.WafService);
+
+                    /** WafSettings wafFeature. */
+                    public wafFeature: (google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature|keyof typeof google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature);
+
+                    /**
+                     * Creates a new WafSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WafSettings instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IWafSettings): google.cloud.recaptchaenterprise.v1.WafSettings;
+
+                    /**
+                     * Encodes the specified WafSettings message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.WafSettings.verify|verify} messages.
+                     * @param message WafSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IWafSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WafSettings message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.WafSettings.verify|verify} messages.
+                     * @param message WafSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IWafSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WafSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WafSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.WafSettings;
+
+                    /**
+                     * Decodes a WafSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WafSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.WafSettings;
+
+                    /**
+                     * Verifies a WafSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WafSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WafSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.WafSettings;
+
+                    /**
+                     * Creates a plain object from a WafSettings message. Also converts values to other types if specified.
+                     * @param message WafSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.WafSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WafSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace WafSettings {
+
+                    /** WafFeature enum. */
+                    enum WafFeature {
+                        WAF_FEATURE_UNSPECIFIED = 0,
+                        CHALLENGE_PAGE = 1,
+                        SESSION_TOKEN = 2,
+                        ACTION_TOKEN = 3
+                    }
+
+                    /** WafService enum. */
+                    enum WafService {
+                        WAF_SERVICE_UNSPECIFIED = 0,
+                        CA = 1
+                    }
                 }
             }
 

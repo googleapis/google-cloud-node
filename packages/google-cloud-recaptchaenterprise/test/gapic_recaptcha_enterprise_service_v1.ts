@@ -2363,8 +2363,8 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2408,8 +2408,8 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2468,8 +2468,8 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2503,8 +2503,8 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -2571,8 +2571,8 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('expected');
       client.descriptors.page.searchRelatedAccountGroupMemberships.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2628,8 +2628,8 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -2679,8 +2679,8 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
       const expectedError = new Error('expected');
       client.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

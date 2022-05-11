@@ -4754,6 +4754,7 @@
                          * @property {Object.<string,string>|null} [labels] Key labels
                          * @property {google.protobuf.ITimestamp|null} [createTime] Key createTime
                          * @property {google.cloud.recaptchaenterprise.v1.ITestingOptions|null} [testingOptions] Key testingOptions
+                         * @property {google.cloud.recaptchaenterprise.v1.IWafSettings|null} [wafSettings] Key wafSettings
                          */
     
                         /**
@@ -4836,6 +4837,14 @@
                          */
                         Key.prototype.testingOptions = null;
     
+                        /**
+                         * Key wafSettings.
+                         * @member {google.cloud.recaptchaenterprise.v1.IWafSettings|null|undefined} wafSettings
+                         * @memberof google.cloud.recaptchaenterprise.v1.Key
+                         * @instance
+                         */
+                        Key.prototype.wafSettings = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -4891,6 +4900,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.testingOptions != null && Object.hasOwnProperty.call(message, "testingOptions"))
                                 $root.google.cloud.recaptchaenterprise.v1.TestingOptions.encode(message.testingOptions, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.wafSettings != null && Object.hasOwnProperty.call(message, "wafSettings"))
+                                $root.google.cloud.recaptchaenterprise.v1.WafSettings.encode(message.wafSettings, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -4967,6 +4978,9 @@
                                     break;
                                 case 9:
                                     message.testingOptions = $root.google.cloud.recaptchaenterprise.v1.TestingOptions.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.wafSettings = $root.google.cloud.recaptchaenterprise.v1.WafSettings.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5056,6 +5070,11 @@
                                 if (error)
                                     return "testingOptions." + error;
                             }
+                            if (message.wafSettings != null && message.hasOwnProperty("wafSettings")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.WafSettings.verify(message.wafSettings);
+                                if (error)
+                                    return "wafSettings." + error;
+                            }
                             return null;
                         };
     
@@ -5107,6 +5126,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Key.testingOptions: object expected");
                                 message.testingOptions = $root.google.cloud.recaptchaenterprise.v1.TestingOptions.fromObject(object.testingOptions);
                             }
+                            if (object.wafSettings != null) {
+                                if (typeof object.wafSettings !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Key.wafSettings: object expected");
+                                message.wafSettings = $root.google.cloud.recaptchaenterprise.v1.WafSettings.fromObject(object.wafSettings);
+                            }
                             return message;
                         };
     
@@ -5130,6 +5154,7 @@
                                 object.displayName = "";
                                 object.createTime = null;
                                 object.testingOptions = null;
+                                object.wafSettings = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5160,6 +5185,8 @@
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.testingOptions != null && message.hasOwnProperty("testingOptions"))
                                 object.testingOptions = $root.google.cloud.recaptchaenterprise.v1.TestingOptions.toObject(message.testingOptions, options);
+                            if (message.wafSettings != null && message.hasOwnProperty("wafSettings"))
+                                object.wafSettings = $root.google.cloud.recaptchaenterprise.v1.WafSettings.toObject(message.wafSettings, options);
                             return object;
                         };
     
@@ -7982,7 +8009,7 @@
                          * Properties of a SearchRelatedAccountGroupMembershipsRequest.
                          * @memberof google.cloud.recaptchaenterprise.v1
                          * @interface ISearchRelatedAccountGroupMembershipsRequest
-                         * @property {string|null} [parent] SearchRelatedAccountGroupMembershipsRequest parent
+                         * @property {string|null} [project] SearchRelatedAccountGroupMembershipsRequest project
                          * @property {Uint8Array|null} [hashedAccountId] SearchRelatedAccountGroupMembershipsRequest hashedAccountId
                          * @property {number|null} [pageSize] SearchRelatedAccountGroupMembershipsRequest pageSize
                          * @property {string|null} [pageToken] SearchRelatedAccountGroupMembershipsRequest pageToken
@@ -8004,12 +8031,12 @@
                         }
     
                         /**
-                         * SearchRelatedAccountGroupMembershipsRequest parent.
-                         * @member {string} parent
+                         * SearchRelatedAccountGroupMembershipsRequest project.
+                         * @member {string} project
                          * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
                          * @instance
                          */
-                        SearchRelatedAccountGroupMembershipsRequest.prototype.parent = "";
+                        SearchRelatedAccountGroupMembershipsRequest.prototype.project = "";
     
                         /**
                          * SearchRelatedAccountGroupMembershipsRequest hashedAccountId.
@@ -8059,8 +8086,8 @@
                         SearchRelatedAccountGroupMembershipsRequest.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.project != null && Object.hasOwnProperty.call(message, "project"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.project);
                             if (message.hashedAccountId != null && Object.hasOwnProperty.call(message, "hashedAccountId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.hashedAccountId);
                             if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
@@ -8102,7 +8129,7 @@
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    message.parent = reader.string();
+                                    message.project = reader.string();
                                     break;
                                 case 2:
                                     message.hashedAccountId = reader.bytes();
@@ -8148,9 +8175,9 @@
                         SearchRelatedAccountGroupMembershipsRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                if (!$util.isString(message.project))
+                                    return "project: string expected";
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
                                     return "hashedAccountId: buffer expected";
@@ -8175,8 +8202,8 @@
                             if (object instanceof $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest)
                                 return object;
                             var message = new $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
+                            if (object.project != null)
+                                message.project = String(object.project);
                             if (object.hashedAccountId != null)
                                 if (typeof object.hashedAccountId === "string")
                                     $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
@@ -8203,7 +8230,7 @@
                                 options = {};
                             var object = {};
                             if (options.defaults) {
-                                object.parent = "";
+                                object.project = "";
                                 if (options.bytes === String)
                                     object.hashedAccountId = "";
                                 else {
@@ -8214,8 +8241,8 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                object.project = message.project;
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
@@ -8874,6 +8901,284 @@
                         };
     
                         return RelatedAccountGroup;
+                    })();
+    
+                    v1.WafSettings = (function() {
+    
+                        /**
+                         * Properties of a WafSettings.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IWafSettings
+                         * @property {google.cloud.recaptchaenterprise.v1.WafSettings.WafService|null} [wafService] WafSettings wafService
+                         * @property {google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature|null} [wafFeature] WafSettings wafFeature
+                         */
+    
+                        /**
+                         * Constructs a new WafSettings.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a WafSettings.
+                         * @implements IWafSettings
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IWafSettings=} [properties] Properties to set
+                         */
+                        function WafSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WafSettings wafService.
+                         * @member {google.cloud.recaptchaenterprise.v1.WafSettings.WafService} wafService
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @instance
+                         */
+                        WafSettings.prototype.wafService = 0;
+    
+                        /**
+                         * WafSettings wafFeature.
+                         * @member {google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature} wafFeature
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @instance
+                         */
+                        WafSettings.prototype.wafFeature = 0;
+    
+                        /**
+                         * Creates a new WafSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IWafSettings=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.WafSettings} WafSettings instance
+                         */
+                        WafSettings.create = function create(properties) {
+                            return new WafSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WafSettings message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.WafSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IWafSettings} message WafSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WafSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.wafService != null && Object.hasOwnProperty.call(message, "wafService"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.wafService);
+                            if (message.wafFeature != null && Object.hasOwnProperty.call(message, "wafFeature"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.wafFeature);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WafSettings message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.WafSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IWafSettings} message WafSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WafSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WafSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.WafSettings} WafSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WafSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.WafSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.wafService = reader.int32();
+                                    break;
+                                case 2:
+                                    message.wafFeature = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WafSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.WafSettings} WafSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WafSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WafSettings message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WafSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.wafService != null && message.hasOwnProperty("wafService"))
+                                switch (message.wafService) {
+                                default:
+                                    return "wafService: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.wafFeature != null && message.hasOwnProperty("wafFeature"))
+                                switch (message.wafFeature) {
+                                default:
+                                    return "wafFeature: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WafSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.WafSettings} WafSettings
+                         */
+                        WafSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.WafSettings)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.WafSettings();
+                            switch (object.wafService) {
+                            case "WAF_SERVICE_UNSPECIFIED":
+                            case 0:
+                                message.wafService = 0;
+                                break;
+                            case "CA":
+                            case 1:
+                                message.wafService = 1;
+                                break;
+                            }
+                            switch (object.wafFeature) {
+                            case "WAF_FEATURE_UNSPECIFIED":
+                            case 0:
+                                message.wafFeature = 0;
+                                break;
+                            case "CHALLENGE_PAGE":
+                            case 1:
+                                message.wafFeature = 1;
+                                break;
+                            case "SESSION_TOKEN":
+                            case 2:
+                                message.wafFeature = 2;
+                                break;
+                            case "ACTION_TOKEN":
+                            case 3:
+                                message.wafFeature = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WafSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.WafSettings} message WafSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WafSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.wafService = options.enums === String ? "WAF_SERVICE_UNSPECIFIED" : 0;
+                                object.wafFeature = options.enums === String ? "WAF_FEATURE_UNSPECIFIED" : 0;
+                            }
+                            if (message.wafService != null && message.hasOwnProperty("wafService"))
+                                object.wafService = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WafSettings.WafService[message.wafService] : message.wafService;
+                            if (message.wafFeature != null && message.hasOwnProperty("wafFeature"))
+                                object.wafFeature = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature[message.wafFeature] : message.wafFeature;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WafSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.WafSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WafSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * WafFeature enum.
+                         * @name google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature
+                         * @enum {number}
+                         * @property {number} WAF_FEATURE_UNSPECIFIED=0 WAF_FEATURE_UNSPECIFIED value
+                         * @property {number} CHALLENGE_PAGE=1 CHALLENGE_PAGE value
+                         * @property {number} SESSION_TOKEN=2 SESSION_TOKEN value
+                         * @property {number} ACTION_TOKEN=3 ACTION_TOKEN value
+                         */
+                        WafSettings.WafFeature = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "WAF_FEATURE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CHALLENGE_PAGE"] = 1;
+                            values[valuesById[2] = "SESSION_TOKEN"] = 2;
+                            values[valuesById[3] = "ACTION_TOKEN"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * WafService enum.
+                         * @name google.cloud.recaptchaenterprise.v1.WafSettings.WafService
+                         * @enum {number}
+                         * @property {number} WAF_SERVICE_UNSPECIFIED=0 WAF_SERVICE_UNSPECIFIED value
+                         * @property {number} CA=1 CA value
+                         */
+                        WafSettings.WafService = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "WAF_SERVICE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CA"] = 1;
+                            return values;
+                        })();
+    
+                        return WafSettings;
                     })();
     
                     return v1;

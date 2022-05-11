@@ -212,19 +212,19 @@
                           "requestType": "SearchRelatedAccountGroupMembershipsRequest",
                           "responseType": "SearchRelatedAccountGroupMembershipsResponse",
                           "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*}/relatedaccountgroupmemberships:search",
+                            "(google.api.http).post": "/v1/{project=projects/*}/relatedaccountgroupmemberships:search",
                             "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "parent,hashed_account_id"
+                            "(google.api.method_signature)": "project,hashed_account_id"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1/{parent=projects/*}/relatedaccountgroupmemberships:search",
+                                "post": "/v1/{project=projects/*}/relatedaccountgroupmemberships:search",
                                 "body": "*"
                               }
                             },
                             {
-                              "(google.api.method_signature)": "parent,hashed_account_id"
+                              "(google.api.method_signature)": "project,hashed_account_id"
                             }
                           ]
                         }
@@ -676,6 +676,10 @@
                         "testingOptions": {
                           "type": "TestingOptions",
                           "id": 9
+                        },
+                        "wafSettings": {
+                          "type": "WafSettings",
+                          "id": 10
                         }
                       }
                     },
@@ -894,7 +898,7 @@
                     },
                     "SearchRelatedAccountGroupMembershipsRequest": {
                       "fields": {
-                        "parent": {
+                        "project": {
                           "type": "string",
                           "id": 1,
                           "options": {
@@ -970,6 +974,40 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroup"
+                          }
+                        }
+                      }
+                    },
+                    "WafSettings": {
+                      "fields": {
+                        "wafService": {
+                          "type": "WafService",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "wafFeature": {
+                          "type": "WafFeature",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "WafFeature": {
+                          "values": {
+                            "WAF_FEATURE_UNSPECIFIED": 0,
+                            "CHALLENGE_PAGE": 1,
+                            "SESSION_TOKEN": 2,
+                            "ACTION_TOKEN": 3
+                          }
+                        },
+                        "WafService": {
+                          "values": {
+                            "WAF_SERVICE_UNSPECIFIED": 0,
+                            "CA": 1
                           }
                         }
                       }

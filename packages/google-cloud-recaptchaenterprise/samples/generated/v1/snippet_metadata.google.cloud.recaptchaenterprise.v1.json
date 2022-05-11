@@ -520,7 +520,7 @@
                 "async": true,
                 "parameters": [
                     {
-                        "name": "parent",
+                        "name": "project",
                         "type": "TYPE_STRING"
                     },
                     {

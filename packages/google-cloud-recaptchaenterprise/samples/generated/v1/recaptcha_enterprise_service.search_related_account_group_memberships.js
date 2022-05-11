@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent) {
+function main(project) {
   // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -29,7 +29,7 @@ function main(parent) {
    *  Required. The name of the project to search related account group memberships from,
    *  in the format "projects/{project}".
    */
-  // const parent = 'abc123'
+  // const project = 'my-project'
   /**
    *  Optional. The unique stable hashed user identifier we should search connections to.
    *  The identifier should correspond to a `hashed_account_id` provided in a
@@ -62,7 +62,7 @@ function main(parent) {
   async function callSearchRelatedAccountGroupMemberships() {
     // Construct request
     const request = {
-      parent,
+      project,
     };
 
     // Run request
