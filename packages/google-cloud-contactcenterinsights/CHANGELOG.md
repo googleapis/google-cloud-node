@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-contact-center-insights/compare/v1.11.0...v2.0.0) (2022-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#122)
+
+### Build System
+
+* update library to use Node 12 ([#122](https://github.com/googleapis/nodejs-contact-center-insights/issues/122)) ([e5e62df](https://github.com/googleapis/nodejs-contact-center-insights/commit/e5e62dfe5f3fe1cc7a5de02f8a997f84e496f4da))
+
 ## [1.11.0](https://github.com/googleapis/nodejs-contact-center-insights/compare/v1.10.0...v1.11.0) (2022-03-23)
 
 
