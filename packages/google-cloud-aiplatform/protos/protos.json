@@ -11005,6 +11005,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "displayName": {
+                          "type": "string",
+                          "id": 10
+                        },
                         "metricsSchemaUri": {
                           "type": "string",
                           "id": 2
@@ -11041,6 +11045,10 @@
                           "rule": "repeated",
                           "type": "ModelEvaluationExplanationSpec",
                           "id": 9
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -27741,6 +27749,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "displayName": {
+                          "type": "string",
+                          "id": 10
+                        },
                         "metricsSchemaUri": {
                           "type": "string",
                           "id": 2
@@ -27769,6 +27781,10 @@
                           "rule": "repeated",
                           "type": "ModelEvaluationExplanationSpec",
                           "id": 9
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -28659,6 +28675,17 @@
                           "options": {
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
+                        },
+                        "templateUri": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "templateMetadata": {
+                          "type": "PipelineTemplateMetadata",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -28685,6 +28712,14 @@
                               "id": 3
                             }
                           }
+                        }
+                      }
+                    },
+                    "PipelineTemplateMetadata": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -29848,10 +29883,13 @@
                     },
                     "schema": {
                       "options": {
+                        "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema",
                         "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema;schema",
                         "java_multiple_files": true,
                         "java_outer_classname": "DatasetMetadataProto",
-                        "java_package": "com.google.cloud.aiplatform.v1beta1.schema"
+                        "java_package": "com.google.cloud.aiplatform.v1beta1.schema",
+                        "php_namespace": "Google\\Cloud\\AIPlatform\\V1beta1\\Schema",
+                        "ruby_package": "Google::Cloud::AIPlatform::V1beta1::Schema"
                       },
                       "nested": {
                         "ImageClassificationAnnotation": {
@@ -30329,10 +30367,13 @@
                           "nested": {
                             "instance": {
                               "options": {
+                                "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Instance",
                                 "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/instance;instance",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionInstanceProto",
-                                "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.instance"
+                                "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.instance",
+                                "php_namespace": "Google\\Cloud\\AIPlatform\\V1beta1\\Schema\\Predict\\Instance",
+                                "ruby_package": "Google::Cloud::AIPlatform::V1beta1::Schema::Predict::Instance"
                               },
                               "nested": {
                                 "ImageClassificationPredictionInstance": {
@@ -30475,10 +30516,13 @@
                             },
                             "params": {
                               "options": {
+                                "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Params",
                                 "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/params;params",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionParamsProto",
-                                "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.params"
+                                "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.params",
+                                "php_namespace": "Google\\Cloud\\AIPlatform\\V1beta1\\Schema\\Predict\\Params",
+                                "ruby_package": "Google::Cloud::AIPlatform::V1beta1::Schema::Predict::Params"
                               },
                               "nested": {
                                 "ImageClassificationPredictionParams": {
@@ -30569,10 +30613,13 @@
                             },
                             "prediction": {
                               "options": {
+                                "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Prediction",
                                 "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/prediction;prediction",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionResultProto",
-                                "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.prediction"
+                                "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.prediction",
+                                "php_namespace": "Google\\Cloud\\AIPlatform\\V1beta1\\Schema\\Predict\\Prediction",
+                                "ruby_package": "Google::Cloud::AIPlatform::V1beta1::Schema::Predict::Prediction"
                               },
                               "nested": {
                                 "ClassificationPredictionResult": {
@@ -30820,10 +30867,13 @@
                           "nested": {
                             "definition": {
                               "options": {
+                                "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.TrainingJob.Definition",
                                 "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/trainingjob/definition;definition",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "AutoMLVideoObjectTrackingProto",
-                                "java_package": "com.google.cloud.aiplatform.v1beta1.schema.trainingjob.definition"
+                                "java_package": "com.google.cloud.aiplatform.v1beta1.schema.trainingjob.definition",
+                                "php_namespace": "Google\\Cloud\\AIPlatform\\V1beta1\\Schema\\TrainingJob\\Definition",
+                                "ruby_package": "Google::Cloud::AIPlatform::V1beta1::Schema::TrainingJob::Definition"
                               },
                               "nested": {
                                 "AutoMlImageClassification": {
