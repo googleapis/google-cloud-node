@@ -5,7 +5,7 @@
   "author": "Google LLC",
   "repository": "googleapis/nodejs-analytics-admin",
   "engines": {
-    "node": ">=12"
+    "node": ">=12.0.0"
   },
   "files": [
     "*.js"
