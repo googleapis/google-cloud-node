@@ -18,8 +18,17 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -53,6 +62,7 @@ export class IdentityAwareProxyAdminServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   identityAwareProxyAdminServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -151,6 +161,32 @@ export class IdentityAwareProxyAdminServiceClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      tunnelDestGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/iap_tunnel/locations/{location}/destGroups/{dest_group}'
+      ),
+      tunnelLocationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/iap_tunnel/locations/{location}'
+      ),
+    };
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listTunnelDestGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tunnelDestGroups'
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.iap.v1.IdentityAwareProxyAdminService',
@@ -207,6 +243,11 @@ export class IdentityAwareProxyAdminServiceClient {
       'testIamPermissions',
       'getIapSettings',
       'updateIapSettings',
+      'listTunnelDestGroups',
+      'createTunnelDestGroup',
+      'getTunnelDestGroup',
+      'deleteTunnelDestGroup',
+      'updateTunnelDestGroup',
     ];
     for (const methodName of identityAwareProxyAdminServiceStubMethods) {
       const callPromise = this.identityAwareProxyAdminServiceStub.then(
@@ -223,7 +264,7 @@ export class IdentityAwareProxyAdminServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -745,6 +786,728 @@ export class IdentityAwareProxyAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateIapSettings(request, options, callback);
+  }
+  /**
+   * Creates a new TunnelDestGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Google Cloud Project ID and location.
+   *   In the following format:
+   *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+   * @param {google.cloud.iap.v1.TunnelDestGroup} request.tunnelDestGroup
+   *   Required. The TunnelDestGroup to create.
+   * @param {string} request.tunnelDestGroupId
+   *   Required. The ID to use for the TunnelDestGroup, which becomes the final component of
+   *   the resource name.
+   *
+   *   This value must be 4-63 characters, and valid characters
+   *   are `{@link 0-9|a-z}-`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TunnelDestGroup]{@link google.cloud.iap.v1.TunnelDestGroup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.create_tunnel_dest_group.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_CreateTunnelDestGroup_async
+   */
+  createTunnelDestGroup(
+    request?: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createTunnelDestGroup(
+    request: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createTunnelDestGroup(
+    request: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
+    callback: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createTunnelDestGroup(
+    request?: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createTunnelDestGroup(request, options, callback);
+  }
+  /**
+   * Retrieves an existing TunnelDestGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the TunnelDestGroup to be fetched.
+   *   In the following format:
+   *   `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TunnelDestGroup]{@link google.cloud.iap.v1.TunnelDestGroup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_tunnel_dest_group.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_async
+   */
+  getTunnelDestGroup(
+    request?: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getTunnelDestGroup(
+    request: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTunnelDestGroup(
+    request: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
+    callback: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTunnelDestGroup(
+    request?: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          | protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getTunnelDestGroup(request, options, callback);
+  }
+  /**
+   * Deletes a TunnelDestGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the TunnelDestGroup to delete.
+   *   In the following format:
+   *   `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.delete_tunnel_dest_group.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_DeleteTunnelDestGroup_async
+   */
+  deleteTunnelDestGroup(
+    request?: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteTunnelDestGroup(
+    request: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteTunnelDestGroup(
+    request: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteTunnelDestGroup(
+    request?: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteTunnelDestGroup(request, options, callback);
+  }
+  /**
+   * Updates a TunnelDestGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.iap.v1.TunnelDestGroup} request.tunnelDestGroup
+   *   Required. The new values for the TunnelDestGroup.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   A field mask that specifies which IAP settings to update.
+   *   If omitted, then all of the settings are updated. See
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TunnelDestGroup]{@link google.cloud.iap.v1.TunnelDestGroup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.update_tunnel_dest_group.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_UpdateTunnelDestGroup_async
+   */
+  updateTunnelDestGroup(
+    request?: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateTunnelDestGroup(
+    request: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateTunnelDestGroup(
+    request: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
+    callback: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateTunnelDestGroup(
+    request?: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.ITunnelDestGroup,
+      protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'tunnel_dest_group.name': request.tunnelDestGroup!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateTunnelDestGroup(request, options, callback);
+  }
+
+  /**
+   * Lists the existing TunnelDestGroups. To group across all locations, use a
+   * `-` as the location ID. For example:
+   * `/v1/projects/123/iap_tunnel/locations/-/destGroups`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Google Cloud Project ID and location.
+   *   In the following format:
+   *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+   *   A `-` can be used for the location to group across all locations.
+   * @param {number} request.pageSize
+   *   The maximum number of groups to return. The service might return fewer than
+   *   this value.
+   *   If unspecified, at most 100 groups are returned.
+   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListTunnelDestGroups`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListTunnelDestGroups` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [TunnelDestGroup]{@link google.cloud.iap.v1.TunnelDestGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTunnelDestGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listTunnelDestGroups(
+    request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.ITunnelDestGroup[],
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest | null,
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+    ]
+  >;
+  listTunnelDestGroups(
+    request: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.iap.v1.ITunnelDestGroup
+    >
+  ): void;
+  listTunnelDestGroups(
+    request: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.iap.v1.ITunnelDestGroup
+    >
+  ): void;
+  listTunnelDestGroups(
+    request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+          | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.iap.v1.ITunnelDestGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.iap.v1.ITunnelDestGroup
+    >
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.ITunnelDestGroup[],
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest | null,
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listTunnelDestGroups(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Google Cloud Project ID and location.
+   *   In the following format:
+   *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+   *   A `-` can be used for the location to group across all locations.
+   * @param {number} request.pageSize
+   *   The maximum number of groups to return. The service might return fewer than
+   *   this value.
+   *   If unspecified, at most 100 groups are returned.
+   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListTunnelDestGroups`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListTunnelDestGroups` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [TunnelDestGroup]{@link google.cloud.iap.v1.TunnelDestGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTunnelDestGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listTunnelDestGroupsStream(
+    request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listTunnelDestGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listTunnelDestGroups.createStream(
+      this.innerApiCalls.listTunnelDestGroups as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listTunnelDestGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Google Cloud Project ID and location.
+   *   In the following format:
+   *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+   *   A `-` can be used for the location to group across all locations.
+   * @param {number} request.pageSize
+   *   The maximum number of groups to return. The service might return fewer than
+   *   this value.
+   *   If unspecified, at most 100 groups are returned.
+   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListTunnelDestGroups`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListTunnelDestGroups` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [TunnelDestGroup]{@link google.cloud.iap.v1.TunnelDestGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.list_tunnel_dest_groups.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_async
+   */
+  listTunnelDestGroupsAsync(
+    request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.iap.v1.ITunnelDestGroup> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listTunnelDestGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listTunnelDestGroups.asyncIterate(
+      this.innerApiCalls['listTunnelDestGroups'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.iap.v1.ITunnelDestGroup>;
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified tunnelDestGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dest_group
+   * @returns {string} Resource name string.
+   */
+  tunnelDestGroupPath(project: string, location: string, destGroup: string) {
+    return this.pathTemplates.tunnelDestGroupPathTemplate.render({
+      project: project,
+      location: location,
+      dest_group: destGroup,
+    });
+  }
+
+  /**
+   * Parse the project from TunnelDestGroup resource.
+   *
+   * @param {string} tunnelDestGroupName
+   *   A fully-qualified path representing TunnelDestGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTunnelDestGroupName(tunnelDestGroupName: string) {
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
+      tunnelDestGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TunnelDestGroup resource.
+   *
+   * @param {string} tunnelDestGroupName
+   *   A fully-qualified path representing TunnelDestGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTunnelDestGroupName(tunnelDestGroupName: string) {
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
+      tunnelDestGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the dest_group from TunnelDestGroup resource.
+   *
+   * @param {string} tunnelDestGroupName
+   *   A fully-qualified path representing TunnelDestGroup resource.
+   * @returns {string} A string representing the dest_group.
+   */
+  matchDestGroupFromTunnelDestGroupName(tunnelDestGroupName: string) {
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
+      tunnelDestGroupName
+    ).dest_group;
+  }
+
+  /**
+   * Return a fully-qualified tunnelLocation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  tunnelLocationPath(project: string, location: string) {
+    return this.pathTemplates.tunnelLocationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from TunnelLocation resource.
+   *
+   * @param {string} tunnelLocationName
+   *   A fully-qualified path representing TunnelLocation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTunnelLocationName(tunnelLocationName: string) {
+    return this.pathTemplates.tunnelLocationPathTemplate.match(
+      tunnelLocationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TunnelLocation resource.
+   *
+   * @param {string} tunnelLocationName
+   *   A fully-qualified path representing TunnelLocation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTunnelLocationName(tunnelLocationName: string) {
+    return this.pathTemplates.tunnelLocationPathTemplate.match(
+      tunnelLocationName
+    ).location;
   }
 
   /**

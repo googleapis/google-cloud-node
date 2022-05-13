@@ -23,6 +23,8 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as identityawareproxyadminserviceModule from '../src';
 
+import {PassThrough} from 'stream';
+
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
@@ -47,6 +49,67 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.IdentityAwareProxyAdminServiceClient', () => {
@@ -862,6 +925,1052 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIapSettings(request), expectedError);
+    });
+  });
+
+  describe('createTunnelDestGroup', () => {
+    it('invokes createTunnelDestGroup without error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.iap.v1.TunnelDestGroup()
+      );
+      client.innerApiCalls.createTunnelDestGroup =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createTunnelDestGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createTunnelDestGroup without error using callback', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.iap.v1.TunnelDestGroup()
+      );
+      client.innerApiCalls.createTunnelDestGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createTunnelDestGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.iap.v1.ITunnelDestGroup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createTunnelDestGroup with error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTunnelDestGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createTunnelDestGroup(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.createTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createTunnelDestGroup with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createTunnelDestGroup(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getTunnelDestGroup', () => {
+    it('invokes getTunnelDestGroup without error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.iap.v1.TunnelDestGroup()
+      );
+      client.innerApiCalls.getTunnelDestGroup =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getTunnelDestGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getTunnelDestGroup without error using callback', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.iap.v1.TunnelDestGroup()
+      );
+      client.innerApiCalls.getTunnelDestGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTunnelDestGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.iap.v1.ITunnelDestGroup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getTunnelDestGroup with error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTunnelDestGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getTunnelDestGroup(request), expectedError);
+      assert(
+        (client.innerApiCalls.getTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getTunnelDestGroup with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTunnelDestGroup(request), expectedError);
+    });
+  });
+
+  describe('deleteTunnelDestGroup', () => {
+    it('invokes deleteTunnelDestGroup without error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteTunnelDestGroup =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteTunnelDestGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteTunnelDestGroup without error using callback', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteTunnelDestGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTunnelDestGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteTunnelDestGroup with error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTunnelDestGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteTunnelDestGroup(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.deleteTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteTunnelDestGroup with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteTunnelDestGroup(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateTunnelDestGroup', () => {
+    it('invokes updateTunnelDestGroup without error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.UpdateTunnelDestGroupRequest()
+      );
+      request.tunnelDestGroup = {};
+      request.tunnelDestGroup.name = '';
+      const expectedHeaderRequestParams = 'tunnel_dest_group.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.iap.v1.TunnelDestGroup()
+      );
+      client.innerApiCalls.updateTunnelDestGroup =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateTunnelDestGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateTunnelDestGroup without error using callback', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.UpdateTunnelDestGroupRequest()
+      );
+      request.tunnelDestGroup = {};
+      request.tunnelDestGroup.name = '';
+      const expectedHeaderRequestParams = 'tunnel_dest_group.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.iap.v1.TunnelDestGroup()
+      );
+      client.innerApiCalls.updateTunnelDestGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateTunnelDestGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.iap.v1.ITunnelDestGroup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateTunnelDestGroup with error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.UpdateTunnelDestGroupRequest()
+      );
+      request.tunnelDestGroup = {};
+      request.tunnelDestGroup.name = '';
+      const expectedHeaderRequestParams = 'tunnel_dest_group.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTunnelDestGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateTunnelDestGroup(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateTunnelDestGroup as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateTunnelDestGroup with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.UpdateTunnelDestGroupRequest()
+      );
+      request.tunnelDestGroup = {};
+      request.tunnelDestGroup.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateTunnelDestGroup(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('listTunnelDestGroups', () => {
+    it('invokes listTunnelDestGroups without error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+      ];
+      client.innerApiCalls.listTunnelDestGroups =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listTunnelDestGroups(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listTunnelDestGroups as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listTunnelDestGroups without error using callback', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+      ];
+      client.innerApiCalls.listTunnelDestGroups =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTunnelDestGroups(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.iap.v1.ITunnelDestGroup[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listTunnelDestGroups as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listTunnelDestGroups with error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTunnelDestGroups = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listTunnelDestGroups(request), expectedError);
+      assert(
+        (client.innerApiCalls.listTunnelDestGroups as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listTunnelDestGroupsStream without error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+      ];
+      client.descriptors.page.listTunnelDestGroups.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listTunnelDestGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.iap.v1.TunnelDestGroup[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.iap.v1.TunnelDestGroup) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listTunnelDestGroups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTunnelDestGroups, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listTunnelDestGroups.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listTunnelDestGroupsStream with error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTunnelDestGroups.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listTunnelDestGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.iap.v1.TunnelDestGroup[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.iap.v1.TunnelDestGroup) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listTunnelDestGroups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTunnelDestGroups, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listTunnelDestGroups.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listTunnelDestGroups without error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+        generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
+      ];
+      client.descriptors.page.listTunnelDestGroups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.iap.v1.ITunnelDestGroup[] = [];
+      const iterable = client.listTunnelDestGroupsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTunnelDestGroups.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listTunnelDestGroups.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listTunnelDestGroups with error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTunnelDestGroups.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listTunnelDestGroupsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.iap.v1.ITunnelDestGroup[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTunnelDestGroups.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listTunnelDestGroups.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tunnelDestGroup', () => {
+      const fakePath = '/rendered/path/tunnelDestGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dest_group: 'destGroupValue',
+      };
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.tunnelDestGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tunnelDestGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tunnelDestGroupPath', () => {
+        const result = client.tunnelDestGroupPath(
+          'projectValue',
+          'locationValue',
+          'destGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tunnelDestGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTunnelDestGroupName', () => {
+        const result = client.matchProjectFromTunnelDestGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTunnelDestGroupName', () => {
+        const result = client.matchLocationFromTunnelDestGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDestGroupFromTunnelDestGroupName', () => {
+        const result = client.matchDestGroupFromTunnelDestGroupName(fakePath);
+        assert.strictEqual(result, 'destGroupValue');
+        assert(
+          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tunnelLocation', () => {
+      const fakePath = '/rendered/path/tunnelLocation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.tunnelLocationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tunnelLocationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tunnelLocationPath', () => {
+        const result = client.tunnelLocationPath(
+          'projectValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tunnelLocationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTunnelLocationName', () => {
+        const result = client.matchProjectFromTunnelLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tunnelLocationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTunnelLocationName', () => {
+        const result = client.matchLocationFromTunnelLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tunnelLocationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
   });
 });

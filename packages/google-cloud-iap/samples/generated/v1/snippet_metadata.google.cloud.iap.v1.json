@@ -232,6 +232,226 @@
             }
         },
         {
+            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_async",
+            "title": "IdentityAwareProxyAdminService listTunnelDestGroups Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists the existing TunnelDestGroups. To group across all locations, use a `-` as the location ID. For example: `/v1/projects/123/iap_tunnel/locations/-/destGroups`",
+            "canonical": true,
+            "file": "identity_aware_proxy_admin_service.list_tunnel_dest_groups.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListTunnelDestGroups",
+                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ListTunnelDestGroups",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.iap.v1.ListTunnelDestGroupsResponse",
+                "client": {
+                    "shortName": "IdentityAwareProxyAdminServiceClient",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ListTunnelDestGroups",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ListTunnelDestGroups",
+                    "service": {
+                        "shortName": "IdentityAwareProxyAdminService",
+                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_CreateTunnelDestGroup_async",
+            "title": "IdentityAwareProxyAdminService createTunnelDestGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new TunnelDestGroup.",
+            "canonical": true,
+            "file": "identity_aware_proxy_admin_service.create_tunnel_dest_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateTunnelDestGroup",
+                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.CreateTunnelDestGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tunnel_dest_group",
+                        "type": ".google.cloud.iap.v1.TunnelDestGroup"
+                    },
+                    {
+                        "name": "tunnel_dest_group_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
+                "client": {
+                    "shortName": "IdentityAwareProxyAdminServiceClient",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateTunnelDestGroup",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.CreateTunnelDestGroup",
+                    "service": {
+                        "shortName": "IdentityAwareProxyAdminService",
+                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_async",
+            "title": "IdentityAwareProxyAdminService getTunnelDestGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves an existing TunnelDestGroup.",
+            "canonical": true,
+            "file": "identity_aware_proxy_admin_service.get_tunnel_dest_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 52,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetTunnelDestGroup",
+                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetTunnelDestGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
+                "client": {
+                    "shortName": "IdentityAwareProxyAdminServiceClient",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetTunnelDestGroup",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetTunnelDestGroup",
+                    "service": {
+                        "shortName": "IdentityAwareProxyAdminService",
+                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_DeleteTunnelDestGroup_async",
+            "title": "IdentityAwareProxyAdminService deleteTunnelDestGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a TunnelDestGroup.",
+            "canonical": true,
+            "file": "identity_aware_proxy_admin_service.delete_tunnel_dest_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 52,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteTunnelDestGroup",
+                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.DeleteTunnelDestGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "IdentityAwareProxyAdminServiceClient",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteTunnelDestGroup",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.DeleteTunnelDestGroup",
+                    "service": {
+                        "shortName": "IdentityAwareProxyAdminService",
+                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_UpdateTunnelDestGroup_async",
+            "title": "IdentityAwareProxyAdminService updateTunnelDestGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a TunnelDestGroup.",
+            "canonical": true,
+            "file": "identity_aware_proxy_admin_service.update_tunnel_dest_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateTunnelDestGroup",
+                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateTunnelDestGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "tunnel_dest_group",
+                        "type": ".google.cloud.iap.v1.TunnelDestGroup"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
+                "client": {
+                    "shortName": "IdentityAwareProxyAdminServiceClient",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateTunnelDestGroup",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateTunnelDestGroup",
+                    "service": {
+                        "shortName": "IdentityAwareProxyAdminService",
+                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_ListBrands_async",
             "title": "IdentityAwareProxyAdminService listBrands Sample",
             "origin": "API_DEFINITION",
@@ -275,7 +495,7 @@
             "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_CreateBrand_async",
             "title": "IdentityAwareProxyAdminService createBrand Sample",
             "origin": "API_DEFINITION",
-            "description": " Constructs a new OAuth brand for the project if one does not exist. The created brand is \"internal only\", meaning that OAuth clients created under it only accept requests from users who belong to the same G Suite organization as the project. The brand is created in an un-reviewed status. NOTE: The \"internal only\" status can be manually changed in the Google Cloud console. Requires that a brand does not already exist for the project, and that the specified support email is owned by the caller.",
+            "description": " Constructs a new OAuth brand for the project if one does not exist. The created brand is \"internal only\", meaning that OAuth clients created under it only accept requests from users who belong to the same Google Workspace organization as the project. The brand is created in an un-reviewed status. NOTE: The \"internal only\" status can be manually changed in the Google Cloud Console. Requires that a brand does not already exist for the project, and that the specified support email is owned by the caller.",
             "canonical": true,
             "file": "identity_aware_proxy_o_auth_service.create_brand.js",
             "language": "JAVASCRIPT",

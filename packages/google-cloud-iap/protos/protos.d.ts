@@ -115,6 +115,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateIapSettings(request: google.cloud.iap.v1.IUpdateIapSettingsRequest): Promise<google.cloud.iap.v1.IapSettings>;
+
+                    /**
+                     * Calls ListTunnelDestGroups.
+                     * @param request ListTunnelDestGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTunnelDestGroupsResponse
+                     */
+                    public listTunnelDestGroups(request: google.cloud.iap.v1.IListTunnelDestGroupsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyAdminService.ListTunnelDestGroupsCallback): void;
+
+                    /**
+                     * Calls ListTunnelDestGroups.
+                     * @param request ListTunnelDestGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTunnelDestGroups(request: google.cloud.iap.v1.IListTunnelDestGroupsRequest): Promise<google.cloud.iap.v1.ListTunnelDestGroupsResponse>;
+
+                    /**
+                     * Calls CreateTunnelDestGroup.
+                     * @param request CreateTunnelDestGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TunnelDestGroup
+                     */
+                    public createTunnelDestGroup(request: google.cloud.iap.v1.ICreateTunnelDestGroupRequest, callback: google.cloud.iap.v1.IdentityAwareProxyAdminService.CreateTunnelDestGroupCallback): void;
+
+                    /**
+                     * Calls CreateTunnelDestGroup.
+                     * @param request CreateTunnelDestGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTunnelDestGroup(request: google.cloud.iap.v1.ICreateTunnelDestGroupRequest): Promise<google.cloud.iap.v1.TunnelDestGroup>;
+
+                    /**
+                     * Calls GetTunnelDestGroup.
+                     * @param request GetTunnelDestGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TunnelDestGroup
+                     */
+                    public getTunnelDestGroup(request: google.cloud.iap.v1.IGetTunnelDestGroupRequest, callback: google.cloud.iap.v1.IdentityAwareProxyAdminService.GetTunnelDestGroupCallback): void;
+
+                    /**
+                     * Calls GetTunnelDestGroup.
+                     * @param request GetTunnelDestGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTunnelDestGroup(request: google.cloud.iap.v1.IGetTunnelDestGroupRequest): Promise<google.cloud.iap.v1.TunnelDestGroup>;
+
+                    /**
+                     * Calls DeleteTunnelDestGroup.
+                     * @param request DeleteTunnelDestGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteTunnelDestGroup(request: google.cloud.iap.v1.IDeleteTunnelDestGroupRequest, callback: google.cloud.iap.v1.IdentityAwareProxyAdminService.DeleteTunnelDestGroupCallback): void;
+
+                    /**
+                     * Calls DeleteTunnelDestGroup.
+                     * @param request DeleteTunnelDestGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTunnelDestGroup(request: google.cloud.iap.v1.IDeleteTunnelDestGroupRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateTunnelDestGroup.
+                     * @param request UpdateTunnelDestGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TunnelDestGroup
+                     */
+                    public updateTunnelDestGroup(request: google.cloud.iap.v1.IUpdateTunnelDestGroupRequest, callback: google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateTunnelDestGroupCallback): void;
+
+                    /**
+                     * Calls UpdateTunnelDestGroup.
+                     * @param request UpdateTunnelDestGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateTunnelDestGroup(request: google.cloud.iap.v1.IUpdateTunnelDestGroupRequest): Promise<google.cloud.iap.v1.TunnelDestGroup>;
                 }
 
                 namespace IdentityAwareProxyAdminService {
@@ -153,6 +223,911 @@ export namespace google {
                      * @param [response] IapSettings
                      */
                     type UpdateIapSettingsCallback = (error: (Error|null), response?: google.cloud.iap.v1.IapSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService#listTunnelDestGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListTunnelDestGroupsResponse
+                     */
+                    type ListTunnelDestGroupsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListTunnelDestGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService#createTunnelDestGroup}.
+                     * @param error Error, if any
+                     * @param [response] TunnelDestGroup
+                     */
+                    type CreateTunnelDestGroupCallback = (error: (Error|null), response?: google.cloud.iap.v1.TunnelDestGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService#getTunnelDestGroup}.
+                     * @param error Error, if any
+                     * @param [response] TunnelDestGroup
+                     */
+                    type GetTunnelDestGroupCallback = (error: (Error|null), response?: google.cloud.iap.v1.TunnelDestGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService#deleteTunnelDestGroup}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteTunnelDestGroupCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService#updateTunnelDestGroup}.
+                     * @param error Error, if any
+                     * @param [response] TunnelDestGroup
+                     */
+                    type UpdateTunnelDestGroupCallback = (error: (Error|null), response?: google.cloud.iap.v1.TunnelDestGroup) => void;
+                }
+
+                /** Properties of a ListTunnelDestGroupsRequest. */
+                interface IListTunnelDestGroupsRequest {
+
+                    /** ListTunnelDestGroupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTunnelDestGroupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTunnelDestGroupsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListTunnelDestGroupsRequest. */
+                class ListTunnelDestGroupsRequest implements IListTunnelDestGroupsRequest {
+
+                    /**
+                     * Constructs a new ListTunnelDestGroupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IListTunnelDestGroupsRequest);
+
+                    /** ListTunnelDestGroupsRequest parent. */
+                    public parent: string;
+
+                    /** ListTunnelDestGroupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTunnelDestGroupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListTunnelDestGroupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTunnelDestGroupsRequest instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IListTunnelDestGroupsRequest): google.cloud.iap.v1.ListTunnelDestGroupsRequest;
+
+                    /**
+                     * Encodes the specified ListTunnelDestGroupsRequest message. Does not implicitly {@link google.cloud.iap.v1.ListTunnelDestGroupsRequest.verify|verify} messages.
+                     * @param message ListTunnelDestGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IListTunnelDestGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTunnelDestGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.iap.v1.ListTunnelDestGroupsRequest.verify|verify} messages.
+                     * @param message ListTunnelDestGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IListTunnelDestGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTunnelDestGroupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTunnelDestGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.ListTunnelDestGroupsRequest;
+
+                    /**
+                     * Decodes a ListTunnelDestGroupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTunnelDestGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.ListTunnelDestGroupsRequest;
+
+                    /**
+                     * Verifies a ListTunnelDestGroupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTunnelDestGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTunnelDestGroupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.ListTunnelDestGroupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListTunnelDestGroupsRequest message. Also converts values to other types if specified.
+                     * @param message ListTunnelDestGroupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.ListTunnelDestGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTunnelDestGroupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListTunnelDestGroupsResponse. */
+                interface IListTunnelDestGroupsResponse {
+
+                    /** ListTunnelDestGroupsResponse tunnelDestGroups */
+                    tunnelDestGroups?: (google.cloud.iap.v1.ITunnelDestGroup[]|null);
+
+                    /** ListTunnelDestGroupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListTunnelDestGroupsResponse. */
+                class ListTunnelDestGroupsResponse implements IListTunnelDestGroupsResponse {
+
+                    /**
+                     * Constructs a new ListTunnelDestGroupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IListTunnelDestGroupsResponse);
+
+                    /** ListTunnelDestGroupsResponse tunnelDestGroups. */
+                    public tunnelDestGroups: google.cloud.iap.v1.ITunnelDestGroup[];
+
+                    /** ListTunnelDestGroupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListTunnelDestGroupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTunnelDestGroupsResponse instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IListTunnelDestGroupsResponse): google.cloud.iap.v1.ListTunnelDestGroupsResponse;
+
+                    /**
+                     * Encodes the specified ListTunnelDestGroupsResponse message. Does not implicitly {@link google.cloud.iap.v1.ListTunnelDestGroupsResponse.verify|verify} messages.
+                     * @param message ListTunnelDestGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IListTunnelDestGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTunnelDestGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.iap.v1.ListTunnelDestGroupsResponse.verify|verify} messages.
+                     * @param message ListTunnelDestGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IListTunnelDestGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTunnelDestGroupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTunnelDestGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.ListTunnelDestGroupsResponse;
+
+                    /**
+                     * Decodes a ListTunnelDestGroupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTunnelDestGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.ListTunnelDestGroupsResponse;
+
+                    /**
+                     * Verifies a ListTunnelDestGroupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTunnelDestGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTunnelDestGroupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.ListTunnelDestGroupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListTunnelDestGroupsResponse message. Also converts values to other types if specified.
+                     * @param message ListTunnelDestGroupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.ListTunnelDestGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTunnelDestGroupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateTunnelDestGroupRequest. */
+                interface ICreateTunnelDestGroupRequest {
+
+                    /** CreateTunnelDestGroupRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTunnelDestGroupRequest tunnelDestGroup */
+                    tunnelDestGroup?: (google.cloud.iap.v1.ITunnelDestGroup|null);
+
+                    /** CreateTunnelDestGroupRequest tunnelDestGroupId */
+                    tunnelDestGroupId?: (string|null);
+                }
+
+                /** Represents a CreateTunnelDestGroupRequest. */
+                class CreateTunnelDestGroupRequest implements ICreateTunnelDestGroupRequest {
+
+                    /**
+                     * Constructs a new CreateTunnelDestGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.ICreateTunnelDestGroupRequest);
+
+                    /** CreateTunnelDestGroupRequest parent. */
+                    public parent: string;
+
+                    /** CreateTunnelDestGroupRequest tunnelDestGroup. */
+                    public tunnelDestGroup?: (google.cloud.iap.v1.ITunnelDestGroup|null);
+
+                    /** CreateTunnelDestGroupRequest tunnelDestGroupId. */
+                    public tunnelDestGroupId: string;
+
+                    /**
+                     * Creates a new CreateTunnelDestGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTunnelDestGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.ICreateTunnelDestGroupRequest): google.cloud.iap.v1.CreateTunnelDestGroupRequest;
+
+                    /**
+                     * Encodes the specified CreateTunnelDestGroupRequest message. Does not implicitly {@link google.cloud.iap.v1.CreateTunnelDestGroupRequest.verify|verify} messages.
+                     * @param message CreateTunnelDestGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.ICreateTunnelDestGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTunnelDestGroupRequest message, length delimited. Does not implicitly {@link google.cloud.iap.v1.CreateTunnelDestGroupRequest.verify|verify} messages.
+                     * @param message CreateTunnelDestGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.ICreateTunnelDestGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTunnelDestGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTunnelDestGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.CreateTunnelDestGroupRequest;
+
+                    /**
+                     * Decodes a CreateTunnelDestGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTunnelDestGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.CreateTunnelDestGroupRequest;
+
+                    /**
+                     * Verifies a CreateTunnelDestGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTunnelDestGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTunnelDestGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.CreateTunnelDestGroupRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTunnelDestGroupRequest message. Also converts values to other types if specified.
+                     * @param message CreateTunnelDestGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.CreateTunnelDestGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTunnelDestGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetTunnelDestGroupRequest. */
+                interface IGetTunnelDestGroupRequest {
+
+                    /** GetTunnelDestGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetTunnelDestGroupRequest. */
+                class GetTunnelDestGroupRequest implements IGetTunnelDestGroupRequest {
+
+                    /**
+                     * Constructs a new GetTunnelDestGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IGetTunnelDestGroupRequest);
+
+                    /** GetTunnelDestGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetTunnelDestGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTunnelDestGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IGetTunnelDestGroupRequest): google.cloud.iap.v1.GetTunnelDestGroupRequest;
+
+                    /**
+                     * Encodes the specified GetTunnelDestGroupRequest message. Does not implicitly {@link google.cloud.iap.v1.GetTunnelDestGroupRequest.verify|verify} messages.
+                     * @param message GetTunnelDestGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IGetTunnelDestGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTunnelDestGroupRequest message, length delimited. Does not implicitly {@link google.cloud.iap.v1.GetTunnelDestGroupRequest.verify|verify} messages.
+                     * @param message GetTunnelDestGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IGetTunnelDestGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTunnelDestGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTunnelDestGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.GetTunnelDestGroupRequest;
+
+                    /**
+                     * Decodes a GetTunnelDestGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTunnelDestGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.GetTunnelDestGroupRequest;
+
+                    /**
+                     * Verifies a GetTunnelDestGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTunnelDestGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTunnelDestGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.GetTunnelDestGroupRequest;
+
+                    /**
+                     * Creates a plain object from a GetTunnelDestGroupRequest message. Also converts values to other types if specified.
+                     * @param message GetTunnelDestGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.GetTunnelDestGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTunnelDestGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteTunnelDestGroupRequest. */
+                interface IDeleteTunnelDestGroupRequest {
+
+                    /** DeleteTunnelDestGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteTunnelDestGroupRequest. */
+                class DeleteTunnelDestGroupRequest implements IDeleteTunnelDestGroupRequest {
+
+                    /**
+                     * Constructs a new DeleteTunnelDestGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IDeleteTunnelDestGroupRequest);
+
+                    /** DeleteTunnelDestGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteTunnelDestGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTunnelDestGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IDeleteTunnelDestGroupRequest): google.cloud.iap.v1.DeleteTunnelDestGroupRequest;
+
+                    /**
+                     * Encodes the specified DeleteTunnelDestGroupRequest message. Does not implicitly {@link google.cloud.iap.v1.DeleteTunnelDestGroupRequest.verify|verify} messages.
+                     * @param message DeleteTunnelDestGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IDeleteTunnelDestGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTunnelDestGroupRequest message, length delimited. Does not implicitly {@link google.cloud.iap.v1.DeleteTunnelDestGroupRequest.verify|verify} messages.
+                     * @param message DeleteTunnelDestGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IDeleteTunnelDestGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTunnelDestGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTunnelDestGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.DeleteTunnelDestGroupRequest;
+
+                    /**
+                     * Decodes a DeleteTunnelDestGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTunnelDestGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.DeleteTunnelDestGroupRequest;
+
+                    /**
+                     * Verifies a DeleteTunnelDestGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTunnelDestGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTunnelDestGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.DeleteTunnelDestGroupRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTunnelDestGroupRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTunnelDestGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.DeleteTunnelDestGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTunnelDestGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateTunnelDestGroupRequest. */
+                interface IUpdateTunnelDestGroupRequest {
+
+                    /** UpdateTunnelDestGroupRequest tunnelDestGroup */
+                    tunnelDestGroup?: (google.cloud.iap.v1.ITunnelDestGroup|null);
+
+                    /** UpdateTunnelDestGroupRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateTunnelDestGroupRequest. */
+                class UpdateTunnelDestGroupRequest implements IUpdateTunnelDestGroupRequest {
+
+                    /**
+                     * Constructs a new UpdateTunnelDestGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IUpdateTunnelDestGroupRequest);
+
+                    /** UpdateTunnelDestGroupRequest tunnelDestGroup. */
+                    public tunnelDestGroup?: (google.cloud.iap.v1.ITunnelDestGroup|null);
+
+                    /** UpdateTunnelDestGroupRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateTunnelDestGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateTunnelDestGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IUpdateTunnelDestGroupRequest): google.cloud.iap.v1.UpdateTunnelDestGroupRequest;
+
+                    /**
+                     * Encodes the specified UpdateTunnelDestGroupRequest message. Does not implicitly {@link google.cloud.iap.v1.UpdateTunnelDestGroupRequest.verify|verify} messages.
+                     * @param message UpdateTunnelDestGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IUpdateTunnelDestGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateTunnelDestGroupRequest message, length delimited. Does not implicitly {@link google.cloud.iap.v1.UpdateTunnelDestGroupRequest.verify|verify} messages.
+                     * @param message UpdateTunnelDestGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IUpdateTunnelDestGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateTunnelDestGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateTunnelDestGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.UpdateTunnelDestGroupRequest;
+
+                    /**
+                     * Decodes an UpdateTunnelDestGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateTunnelDestGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.UpdateTunnelDestGroupRequest;
+
+                    /**
+                     * Verifies an UpdateTunnelDestGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateTunnelDestGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateTunnelDestGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.UpdateTunnelDestGroupRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateTunnelDestGroupRequest message. Also converts values to other types if specified.
+                     * @param message UpdateTunnelDestGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.UpdateTunnelDestGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateTunnelDestGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TunnelDestGroup. */
+                interface ITunnelDestGroup {
+
+                    /** TunnelDestGroup name */
+                    name?: (string|null);
+
+                    /** TunnelDestGroup cidrs */
+                    cidrs?: (string[]|null);
+
+                    /** TunnelDestGroup fqdns */
+                    fqdns?: (string[]|null);
+                }
+
+                /** Represents a TunnelDestGroup. */
+                class TunnelDestGroup implements ITunnelDestGroup {
+
+                    /**
+                     * Constructs a new TunnelDestGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.ITunnelDestGroup);
+
+                    /** TunnelDestGroup name. */
+                    public name: string;
+
+                    /** TunnelDestGroup cidrs. */
+                    public cidrs: string[];
+
+                    /** TunnelDestGroup fqdns. */
+                    public fqdns: string[];
+
+                    /**
+                     * Creates a new TunnelDestGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TunnelDestGroup instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.ITunnelDestGroup): google.cloud.iap.v1.TunnelDestGroup;
+
+                    /**
+                     * Encodes the specified TunnelDestGroup message. Does not implicitly {@link google.cloud.iap.v1.TunnelDestGroup.verify|verify} messages.
+                     * @param message TunnelDestGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.ITunnelDestGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TunnelDestGroup message, length delimited. Does not implicitly {@link google.cloud.iap.v1.TunnelDestGroup.verify|verify} messages.
+                     * @param message TunnelDestGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.ITunnelDestGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TunnelDestGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TunnelDestGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.TunnelDestGroup;
+
+                    /**
+                     * Decodes a TunnelDestGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TunnelDestGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.TunnelDestGroup;
+
+                    /**
+                     * Verifies a TunnelDestGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TunnelDestGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TunnelDestGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.TunnelDestGroup;
+
+                    /**
+                     * Creates a plain object from a TunnelDestGroup message. Also converts values to other types if specified.
+                     * @param message TunnelDestGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.TunnelDestGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TunnelDestGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents an IdentityAwareProxyOAuthService */
+                class IdentityAwareProxyOAuthService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new IdentityAwareProxyOAuthService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new IdentityAwareProxyOAuthService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): IdentityAwareProxyOAuthService;
+
+                    /**
+                     * Calls ListBrands.
+                     * @param request ListBrandsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBrandsResponse
+                     */
+                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrandsCallback): void;
+
+                    /**
+                     * Calls ListBrands.
+                     * @param request ListBrandsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest): Promise<google.cloud.iap.v1.ListBrandsResponse>;
+
+                    /**
+                     * Calls CreateBrand.
+                     * @param request CreateBrandRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Brand
+                     */
+                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrandCallback): void;
+
+                    /**
+                     * Calls CreateBrand.
+                     * @param request CreateBrandRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest): Promise<google.cloud.iap.v1.Brand>;
+
+                    /**
+                     * Calls GetBrand.
+                     * @param request GetBrandRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Brand
+                     */
+                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrandCallback): void;
+
+                    /**
+                     * Calls GetBrand.
+                     * @param request GetBrandRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest): Promise<google.cloud.iap.v1.Brand>;
+
+                    /**
+                     * Calls CreateIdentityAwareProxyClient.
+                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls CreateIdentityAwareProxyClient.
+                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls ListIdentityAwareProxyClients.
+                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIdentityAwareProxyClientsResponse
+                     */
+                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClientsCallback): void;
+
+                    /**
+                     * Calls ListIdentityAwareProxyClients.
+                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest): Promise<google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse>;
+
+                    /**
+                     * Calls GetIdentityAwareProxyClient.
+                     * @param request GetIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls GetIdentityAwareProxyClient.
+                     * @param request GetIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls ResetIdentityAwareProxyClientSecret.
+                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecretCallback): void;
+
+                    /**
+                     * Calls ResetIdentityAwareProxyClientSecret.
+                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls DeleteIdentityAwareProxyClient.
+                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls DeleteIdentityAwareProxyClient.
+                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace IdentityAwareProxyOAuthService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#listBrands}.
+                     * @param error Error, if any
+                     * @param [response] ListBrandsResponse
+                     */
+                    type ListBrandsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListBrandsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#createBrand}.
+                     * @param error Error, if any
+                     * @param [response] Brand
+                     */
+                    type CreateBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#getBrand}.
+                     * @param error Error, if any
+                     * @param [response] Brand
+                     */
+                    type GetBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#createIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type CreateIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#listIdentityAwareProxyClients}.
+                     * @param error Error, if any
+                     * @param [response] ListIdentityAwareProxyClientsResponse
+                     */
+                    type ListIdentityAwareProxyClientsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#getIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type GetIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#resetIdentityAwareProxyClientSecret}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type ResetIdentityAwareProxyClientSecretCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#deleteIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a GetIapSettingsRequest. */
@@ -454,6 +1429,9 @@ export namespace google {
 
                     /** AccessSettings oauthSettings */
                     oauthSettings?: (google.cloud.iap.v1.IOAuthSettings|null);
+
+                    /** AccessSettings reauthSettings */
+                    reauthSettings?: (google.cloud.iap.v1.IReauthSettings|null);
                 }
 
                 /** Represents an AccessSettings. */
@@ -473,6 +1451,9 @@ export namespace google {
 
                     /** AccessSettings oauthSettings. */
                     public oauthSettings?: (google.cloud.iap.v1.IOAuthSettings|null);
+
+                    /** AccessSettings reauthSettings. */
+                    public reauthSettings?: (google.cloud.iap.v1.IReauthSettings|null);
 
                     /**
                      * Creates a new AccessSettings instance using the specified properties.
@@ -543,198 +1524,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** Represents an IdentityAwareProxyOAuthService */
-                class IdentityAwareProxyOAuthService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new IdentityAwareProxyOAuthService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new IdentityAwareProxyOAuthService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): IdentityAwareProxyOAuthService;
-
-                    /**
-                     * Calls ListBrands.
-                     * @param request ListBrandsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListBrandsResponse
-                     */
-                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrandsCallback): void;
-
-                    /**
-                     * Calls ListBrands.
-                     * @param request ListBrandsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest): Promise<google.cloud.iap.v1.ListBrandsResponse>;
-
-                    /**
-                     * Calls CreateBrand.
-                     * @param request CreateBrandRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Brand
-                     */
-                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrandCallback): void;
-
-                    /**
-                     * Calls CreateBrand.
-                     * @param request CreateBrandRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest): Promise<google.cloud.iap.v1.Brand>;
-
-                    /**
-                     * Calls GetBrand.
-                     * @param request GetBrandRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Brand
-                     */
-                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrandCallback): void;
-
-                    /**
-                     * Calls GetBrand.
-                     * @param request GetBrandRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest): Promise<google.cloud.iap.v1.Brand>;
-
-                    /**
-                     * Calls CreateIdentityAwareProxyClient.
-                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls CreateIdentityAwareProxyClient.
-                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls ListIdentityAwareProxyClients.
-                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListIdentityAwareProxyClientsResponse
-                     */
-                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClientsCallback): void;
-
-                    /**
-                     * Calls ListIdentityAwareProxyClients.
-                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest): Promise<google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse>;
-
-                    /**
-                     * Calls GetIdentityAwareProxyClient.
-                     * @param request GetIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls GetIdentityAwareProxyClient.
-                     * @param request GetIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls ResetIdentityAwareProxyClientSecret.
-                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecretCallback): void;
-
-                    /**
-                     * Calls ResetIdentityAwareProxyClientSecret.
-                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
-                     * @returns Promise
-                     */
-                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls DeleteIdentityAwareProxyClient.
-                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls DeleteIdentityAwareProxyClient.
-                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest): Promise<google.protobuf.Empty>;
-                }
-
-                namespace IdentityAwareProxyOAuthService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#listBrands}.
-                     * @param error Error, if any
-                     * @param [response] ListBrandsResponse
-                     */
-                    type ListBrandsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListBrandsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#createBrand}.
-                     * @param error Error, if any
-                     * @param [response] Brand
-                     */
-                    type CreateBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#getBrand}.
-                     * @param error Error, if any
-                     * @param [response] Brand
-                     */
-                    type GetBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#createIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type CreateIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#listIdentityAwareProxyClients}.
-                     * @param error Error, if any
-                     * @param [response] ListIdentityAwareProxyClientsResponse
-                     */
-                    type ListIdentityAwareProxyClientsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#getIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type GetIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#resetIdentityAwareProxyClientSecret}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type ResetIdentityAwareProxyClientSecretCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService#deleteIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a GcipSettings. */
@@ -1011,6 +1800,126 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ReauthSettings. */
+                interface IReauthSettings {
+
+                    /** ReauthSettings method */
+                    method?: (google.cloud.iap.v1.ReauthSettings.Method|keyof typeof google.cloud.iap.v1.ReauthSettings.Method|null);
+
+                    /** ReauthSettings maxAge */
+                    maxAge?: (google.protobuf.IDuration|null);
+
+                    /** ReauthSettings policyType */
+                    policyType?: (google.cloud.iap.v1.ReauthSettings.PolicyType|keyof typeof google.cloud.iap.v1.ReauthSettings.PolicyType|null);
+                }
+
+                /** Represents a ReauthSettings. */
+                class ReauthSettings implements IReauthSettings {
+
+                    /**
+                     * Constructs a new ReauthSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IReauthSettings);
+
+                    /** ReauthSettings method. */
+                    public method: (google.cloud.iap.v1.ReauthSettings.Method|keyof typeof google.cloud.iap.v1.ReauthSettings.Method);
+
+                    /** ReauthSettings maxAge. */
+                    public maxAge?: (google.protobuf.IDuration|null);
+
+                    /** ReauthSettings policyType. */
+                    public policyType: (google.cloud.iap.v1.ReauthSettings.PolicyType|keyof typeof google.cloud.iap.v1.ReauthSettings.PolicyType);
+
+                    /**
+                     * Creates a new ReauthSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReauthSettings instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IReauthSettings): google.cloud.iap.v1.ReauthSettings;
+
+                    /**
+                     * Encodes the specified ReauthSettings message. Does not implicitly {@link google.cloud.iap.v1.ReauthSettings.verify|verify} messages.
+                     * @param message ReauthSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IReauthSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReauthSettings message, length delimited. Does not implicitly {@link google.cloud.iap.v1.ReauthSettings.verify|verify} messages.
+                     * @param message ReauthSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IReauthSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReauthSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReauthSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.ReauthSettings;
+
+                    /**
+                     * Decodes a ReauthSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReauthSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.ReauthSettings;
+
+                    /**
+                     * Verifies a ReauthSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReauthSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReauthSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.ReauthSettings;
+
+                    /**
+                     * Creates a plain object from a ReauthSettings message. Also converts values to other types if specified.
+                     * @param message ReauthSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.ReauthSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReauthSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ReauthSettings {
+
+                    /** Method enum. */
+                    enum Method {
+                        METHOD_UNSPECIFIED = 0,
+                        LOGIN = 1,
+                        PASSWORD = 2,
+                        SECURE_KEY = 3
+                    }
+
+                    /** PolicyType enum. */
+                    enum PolicyType {
+                        POLICY_TYPE_UNSPECIFIED = 0,
+                        MINIMUM = 1,
+                        DEFAULT = 2
+                    }
                 }
 
                 /** Properties of an ApplicationSettings. */
@@ -6255,6 +7164,102 @@ export namespace google {
                  */
                 public toJSON(): { [k: string]: any };
             }
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of an Empty. */

@@ -1579,4 +1579,169 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       );
     });
   });
+
+  describe('Path templates', () => {
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tunnelDestGroup', () => {
+      const fakePath = '/rendered/path/tunnelDestGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dest_group: 'destGroupValue',
+      };
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.tunnelDestGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tunnelDestGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tunnelDestGroupPath', () => {
+        const result = client.tunnelDestGroupPath(
+          'projectValue',
+          'locationValue',
+          'destGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tunnelDestGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTunnelDestGroupName', () => {
+        const result = client.matchProjectFromTunnelDestGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTunnelDestGroupName', () => {
+        const result = client.matchLocationFromTunnelDestGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDestGroupFromTunnelDestGroupName', () => {
+        const result = client.matchDestGroupFromTunnelDestGroupName(fakePath);
+        assert.strictEqual(result, 'destGroupValue');
+        assert(
+          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tunnelLocation', () => {
+      const fakePath = '/rendered/path/tunnelLocation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.tunnelLocationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tunnelLocationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tunnelLocationPath', () => {
+        const result = client.tunnelLocationPath(
+          'projectValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tunnelLocationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTunnelLocationName', () => {
+        const result = client.matchProjectFromTunnelLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tunnelLocationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTunnelLocationName', () => {
+        const result = client.matchLocationFromTunnelLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tunnelLocationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });

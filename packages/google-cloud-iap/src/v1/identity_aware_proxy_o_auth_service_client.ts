@@ -64,6 +64,7 @@ export class IdentityAwareProxyOAuthServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   identityAwareProxyOAuthServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -161,6 +162,21 @@ export class IdentityAwareProxyOAuthServiceClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      tunnelDestGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/iap_tunnel/locations/{location}/destGroups/{dest_group}'
+      ),
+      tunnelLocationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/iap_tunnel/locations/{location}'
+      ),
+    };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -401,11 +417,12 @@ export class IdentityAwareProxyOAuthServiceClient {
   /**
    * Constructs a new OAuth brand for the project if one does not exist.
    * The created brand is "internal only", meaning that OAuth clients created
-   * under it only accept requests from users who belong to the same G Suite
-   * organization as the project. The brand is created in an un-reviewed status.
-   * NOTE: The "internal only" status can be manually changed in the Google
-   * Cloud console. Requires that a brand does not already exist for the
-   * project, and that the specified support email is owned by the caller.
+   * under it only accept requests from users who belong to the same Google
+   * Workspace organization as the project. The brand is created in an
+   * un-reviewed status. NOTE: The "internal only" status can be manually
+   * changed in the Google Cloud Console. Requires that a brand does not already
+   * exist for the project, and that the specified support email is owned by the
+   * caller.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1215,6 +1232,127 @@ export class IdentityAwareProxyOAuthServiceClient {
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.iap.v1.IIdentityAwareProxyClient>;
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified tunnelDestGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dest_group
+   * @returns {string} Resource name string.
+   */
+  tunnelDestGroupPath(project: string, location: string, destGroup: string) {
+    return this.pathTemplates.tunnelDestGroupPathTemplate.render({
+      project: project,
+      location: location,
+      dest_group: destGroup,
+    });
+  }
+
+  /**
+   * Parse the project from TunnelDestGroup resource.
+   *
+   * @param {string} tunnelDestGroupName
+   *   A fully-qualified path representing TunnelDestGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTunnelDestGroupName(tunnelDestGroupName: string) {
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
+      tunnelDestGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TunnelDestGroup resource.
+   *
+   * @param {string} tunnelDestGroupName
+   *   A fully-qualified path representing TunnelDestGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTunnelDestGroupName(tunnelDestGroupName: string) {
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
+      tunnelDestGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the dest_group from TunnelDestGroup resource.
+   *
+   * @param {string} tunnelDestGroupName
+   *   A fully-qualified path representing TunnelDestGroup resource.
+   * @returns {string} A string representing the dest_group.
+   */
+  matchDestGroupFromTunnelDestGroupName(tunnelDestGroupName: string) {
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
+      tunnelDestGroupName
+    ).dest_group;
+  }
+
+  /**
+   * Return a fully-qualified tunnelLocation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  tunnelLocationPath(project: string, location: string) {
+    return this.pathTemplates.tunnelLocationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from TunnelLocation resource.
+   *
+   * @param {string} tunnelLocationName
+   *   A fully-qualified path representing TunnelLocation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTunnelLocationName(tunnelLocationName: string) {
+    return this.pathTemplates.tunnelLocationPathTemplate.match(
+      tunnelLocationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TunnelLocation resource.
+   *
+   * @param {string} tunnelLocationName
+   *   A fully-qualified path representing TunnelLocation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTunnelLocationName(tunnelLocationName: string) {
+    return this.pathTemplates.tunnelLocationPathTemplate.match(
+      tunnelLocationName
+    ).location;
   }
 
   /**

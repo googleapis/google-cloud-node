@@ -34,6 +34,33 @@
               "methods": [
                 "updateIapSettings"
               ]
+            },
+            "CreateTunnelDestGroup": {
+              "methods": [
+                "createTunnelDestGroup"
+              ]
+            },
+            "GetTunnelDestGroup": {
+              "methods": [
+                "getTunnelDestGroup"
+              ]
+            },
+            "DeleteTunnelDestGroup": {
+              "methods": [
+                "deleteTunnelDestGroup"
+              ]
+            },
+            "UpdateTunnelDestGroup": {
+              "methods": [
+                "updateTunnelDestGroup"
+              ]
+            },
+            "ListTunnelDestGroups": {
+              "methods": [
+                "listTunnelDestGroups",
+                "listTunnelDestGroupsStream",
+                "listTunnelDestGroupsAsync"
+              ]
             }
           }
         },
@@ -63,6 +90,33 @@
             "UpdateIapSettings": {
               "methods": [
                 "updateIapSettings"
+              ]
+            },
+            "CreateTunnelDestGroup": {
+              "methods": [
+                "createTunnelDestGroup"
+              ]
+            },
+            "GetTunnelDestGroup": {
+              "methods": [
+                "getTunnelDestGroup"
+              ]
+            },
+            "DeleteTunnelDestGroup": {
+              "methods": [
+                "deleteTunnelDestGroup"
+              ]
+            },
+            "UpdateTunnelDestGroup": {
+              "methods": [
+                "updateTunnelDestGroup"
+              ]
+            },
+            "ListTunnelDestGroups": {
+              "methods": [
+                "listTunnelDestGroups",
+                "listTunnelDestGroupsStream",
+                "listTunnelDestGroupsAsync"
               ]
             }
           }
