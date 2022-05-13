@@ -3751,7 +3751,7 @@
                     "CustomDimension": {
                       "options": {
                         "(google.api.resource).type": "analyticsadmin.googleapis.com/CustomDimension",
-                        "(google.api.resource).pattern": "properties/{property}/customDimensions"
+                        "(google.api.resource).pattern": "properties/{property}/customDimensions/{custom_dimension}"
                       },
                       "fields": {
                         "name": {
@@ -3810,7 +3810,7 @@
                     "CustomMetric": {
                       "options": {
                         "(google.api.resource).type": "analyticsadmin.googleapis.com/CustomMetric",
-                        "(google.api.resource).pattern": "properties/{property}/customMetrics"
+                        "(google.api.resource).pattern": "properties/{property}/customMetrics/{custom_metric}"
                       },
                       "fields": {
                         "name": {

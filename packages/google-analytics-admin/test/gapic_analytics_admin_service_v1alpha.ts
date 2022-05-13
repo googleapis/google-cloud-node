@@ -12622,6 +12622,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const fakePath = '/rendered/path/customDimension';
       const expectedParameters = {
         property: 'propertyValue',
+        custom_dimension: 'customDimensionValue',
       };
       const client =
         new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
@@ -12637,7 +12638,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         .returns(expectedParameters);
 
       it('customDimensionPath', () => {
-        const result = client.customDimensionPath('propertyValue');
+        const result = client.customDimensionPath(
+          'propertyValue',
+          'customDimensionValue'
+        );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.customDimensionPathTemplate.render as SinonStub)
@@ -12655,12 +12659,24 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             .calledWith(fakePath)
         );
       });
+
+      it('matchCustomDimensionFromCustomDimensionName', () => {
+        const result =
+          client.matchCustomDimensionFromCustomDimensionName(fakePath);
+        assert.strictEqual(result, 'customDimensionValue');
+        assert(
+          (client.pathTemplates.customDimensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
 
     describe('customMetric', () => {
       const fakePath = '/rendered/path/customMetric';
       const expectedParameters = {
         property: 'propertyValue',
+        custom_metric: 'customMetricValue',
       };
       const client =
         new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
@@ -12676,7 +12692,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         .returns(expectedParameters);
 
       it('customMetricPath', () => {
-        const result = client.customMetricPath('propertyValue');
+        const result = client.customMetricPath(
+          'propertyValue',
+          'customMetricValue'
+        );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.customMetricPathTemplate.render as SinonStub)
@@ -12688,6 +12707,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       it('matchPropertyFromCustomMetricName', () => {
         const result = client.matchPropertyFromCustomMetricName(fakePath);
         assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.customMetricPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomMetricFromCustomMetricName', () => {
+        const result = client.matchCustomMetricFromCustomMetricName(fakePath);
+        assert.strictEqual(result, 'customMetricValue');
         assert(
           (client.pathTemplates.customMetricPathTemplate.match as SinonStub)
             .getCall(-1)

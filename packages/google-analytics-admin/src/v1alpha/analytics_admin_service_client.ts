@@ -178,10 +178,10 @@ export class AnalyticsAdminServiceClient {
         'properties/{property}/conversionEvents/{conversion_event}'
       ),
       customDimensionPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}/customDimensions'
+        'properties/{property}/customDimensions/{custom_dimension}'
       ),
       customMetricPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}/customMetrics'
+        'properties/{property}/customMetrics/{custom_metric}'
       ),
       dataRetentionSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/dataRetentionSettings'
@@ -9512,11 +9512,13 @@ export class AnalyticsAdminServiceClient {
    * Return a fully-qualified customDimension resource name string.
    *
    * @param {string} property
+   * @param {string} custom_dimension
    * @returns {string} Resource name string.
    */
-  customDimensionPath(property: string) {
+  customDimensionPath(property: string, customDimension: string) {
     return this.pathTemplates.customDimensionPathTemplate.render({
       property: property,
+      custom_dimension: customDimension,
     });
   }
 
@@ -9534,14 +9536,29 @@ export class AnalyticsAdminServiceClient {
   }
 
   /**
+   * Parse the custom_dimension from CustomDimension resource.
+   *
+   * @param {string} customDimensionName
+   *   A fully-qualified path representing CustomDimension resource.
+   * @returns {string} A string representing the custom_dimension.
+   */
+  matchCustomDimensionFromCustomDimensionName(customDimensionName: string) {
+    return this.pathTemplates.customDimensionPathTemplate.match(
+      customDimensionName
+    ).custom_dimension;
+  }
+
+  /**
    * Return a fully-qualified customMetric resource name string.
    *
    * @param {string} property
+   * @param {string} custom_metric
    * @returns {string} Resource name string.
    */
-  customMetricPath(property: string) {
+  customMetricPath(property: string, customMetric: string) {
     return this.pathTemplates.customMetricPathTemplate.render({
       property: property,
+      custom_metric: customMetric,
     });
   }
 
@@ -9555,6 +9572,18 @@ export class AnalyticsAdminServiceClient {
   matchPropertyFromCustomMetricName(customMetricName: string) {
     return this.pathTemplates.customMetricPathTemplate.match(customMetricName)
       .property;
+  }
+
+  /**
+   * Parse the custom_metric from CustomMetric resource.
+   *
+   * @param {string} customMetricName
+   *   A fully-qualified path representing CustomMetric resource.
+   * @returns {string} A string representing the custom_metric.
+   */
+  matchCustomMetricFromCustomMetricName(customMetricName: string) {
+    return this.pathTemplates.customMetricPathTemplate.match(customMetricName)
+      .custom_metric;
   }
 
   /**
