@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.7...v4.2.0) (2022-05-13)
+
+
+### Bug Fixes
+
+* initial module in golint presubmit check ([#818](https://github.com/googleapis/cloud-profiler-nodejs/issues/818)) ([df1f28a](https://github.com/googleapis/cloud-profiler-nodejs/commit/df1f28a6e0e74f9d5ee6751a203fe5610866b584))
+* library should released as 4.2.0 ([#833](https://github.com/googleapis/cloud-profiler-nodejs/issues/833)) ([8d722aa](https://github.com/googleapis/cloud-profiler-nodejs/commit/8d722aa0e5a3f03ea729db0a4d98b2a8c7717bcf))
+* relax service name requirements to allow starting with numbers ([#828](https://github.com/googleapis/cloud-profiler-nodejs/issues/828)) ([fe0f1cc](https://github.com/googleapis/cloud-profiler-nodejs/commit/fe0f1ccd14c2a091f1778142083f49813d724dcf))
+
 ### [4.1.7](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.6...v4.1.7) (2021-12-20)
 
 
