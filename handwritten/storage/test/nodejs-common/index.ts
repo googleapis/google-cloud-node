@@ -15,11 +15,10 @@
  */
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {Operation, Service, ServiceObject, util} from '../../src/nodejs-common';
+import {Service, ServiceObject, util} from '../../src/nodejs-common';
 
 describe('common', () => {
   it('should correctly export the common modules', () => {
-    assert(Operation);
     assert(Service);
     assert(ServiceObject);
     assert(util);

@@ -15,8 +15,6 @@
  */
 export {GoogleAuthOptions} from 'google-auth-library';
 
-export {Operation} from './operation';
-
 export {
   Service,
   ServiceConfig,
