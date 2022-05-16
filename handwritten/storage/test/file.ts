@@ -25,7 +25,6 @@ import {PromisifyAllOptions} from '@google-cloud/promisify';
 import {Readable, PassThrough, Stream, Duplex, Transform} from 'stream';
 import * as assert from 'assert';
 import * as crypto from 'crypto';
-import * as dateFormat from 'date-and-time';
 import * as duplexify from 'duplexify';
 import * as extend from 'extend';
 import * as fs from 'fs';
@@ -57,6 +56,7 @@ import {
   FileExceptionMessages,
 } from '../src/file';
 import {ExceptionMessages, IdempotencyStrategy} from '../src/storage';
+import {formatAsUTCISO} from '../src/util';
 
 class HTTPError extends Error {
   code: number;
@@ -3324,11 +3324,7 @@ describe('File', () => {
           {bucket: BUCKET.name},
           ...fieldsToConditions(requiredFields),
         ],
-        expiration: dateFormat.format(
-          new Date(CONFIG.expires),
-          'YYYY-MM-DD[T]HH:mm:ss[Z]',
-          true
-        ),
+        expiration: formatAsUTCISO(new Date(CONFIG.expires), true, '-', ':'),
       };
 
       const policyString = JSON.stringify(policy);
@@ -3548,7 +3544,7 @@ describe('File', () => {
             );
             assert.strictEqual(
               policy.expiration,
-              dateFormat.format(expires, 'YYYY-MM-DD[T]HH:mm:ss[Z]', true)
+              formatAsUTCISO(expires, true, '-', ':')
             );
             done();
           }
@@ -3569,11 +3565,7 @@ describe('File', () => {
             );
             assert.strictEqual(
               policy.expiration,
-              dateFormat.format(
-                new Date(expires),
-                'YYYY-MM-DD[T]HH:mm:ss[Z]',
-                true
-              )
+              formatAsUTCISO(new Date(expires), true, '-', ':')
             );
             done();
           }
@@ -3581,10 +3573,10 @@ describe('File', () => {
       });
 
       it('should accept strings', done => {
-        const expires = dateFormat.format(
+        const expires = formatAsUTCISO(
           new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-          'YYYY-MM-DD',
-          true
+          false,
+          '-'
         );
 
         file.generateSignedPostPolicyV4(
@@ -3598,11 +3590,7 @@ describe('File', () => {
             );
             assert.strictEqual(
               policy.expiration,
-              dateFormat.format(
-                new Date(expires),
-                'YYYY-MM-DD[T]HH:mm:ss[Z]',
-                true
-              )
+              formatAsUTCISO(new Date(expires), true, '-', ':')
             );
             done();
           }

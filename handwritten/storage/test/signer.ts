@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 import * as assert from 'assert';
-import * as dateFormat from 'date-and-time';
 import * as crypto from 'crypto';
 import * as sinon from 'sinon';
 import {describe, it, beforeEach, afterEach} from 'mocha';
@@ -29,7 +28,7 @@ import {
   Query,
   SignerExceptionMessages,
 } from '../src/signer';
-import {encodeURI, qsStringify} from '../src/util';
+import {encodeURI, formatAsUTCISO, qsStringify} from '../src/util';
 import {ExceptionMessages} from '../src/storage';
 
 describe('signer', () => {
@@ -187,11 +186,7 @@ describe('signer', () => {
             expires: expiresNumber,
           });
           const blobToSign = authClientSign.getCall(0).args[0];
-          assert(
-            blobToSign.includes(
-              dateFormat.format(accessibleAt, 'YYYYMMDD[T]HHmmss[Z]', true)
-            )
-          );
+          assert(blobToSign.includes(formatAsUTCISO(accessibleAt, true)));
         });
 
         it('should throw if an expiration date from the before accessibleAt date is given', () => {
@@ -211,11 +206,7 @@ describe('signer', () => {
 
         describe('checkInputTypes', () => {
           const query = {
-            'X-Goog-Date': dateFormat.format(
-              new Date(accessibleAtNumber),
-              'YYYYMMDD[T]HHmmss[Z]',
-              true
-            ),
+            'X-Goog-Date': formatAsUTCISO(new Date(accessibleAtNumber), true),
           };
 
           it('should accept Date objects', async () => {
@@ -688,7 +679,7 @@ describe('signer', () => {
           const query = (await signer['getSignedUrlV4'](CONFIG)) as Query;
           const arg = getCanonicalQueryParams.getCall(0).args[0];
 
-          const datestamp = dateFormat.format(NOW, 'YYYYMMDD', true);
+          const datestamp = formatAsUTCISO(NOW);
           const credentialScope = `${datestamp}/auto/storage/goog4_request`;
           const EXPECTED_CREDENTIAL = `${CLIENT_EMAIL}/${credentialScope}`;
 
@@ -697,7 +688,7 @@ describe('signer', () => {
         });
 
         it('should populate X-Goog-Date', async () => {
-          const dateISO = dateFormat.format(NOW, 'YYYYMMDD[T]HHmmss[Z]', true);
+          const dateISO = formatAsUTCISO(NOW, true);
 
           const query = (await signer['getSignedUrlV4'](CONFIG)) as Query;
           const arg = getCanonicalQueryParams.getCall(0).args[0];
@@ -787,9 +778,9 @@ describe('signer', () => {
       });
 
       it('should compose blobToSign', async () => {
-        const datestamp = dateFormat.format(NOW, 'YYYYMMDD', true);
+        const datestamp = formatAsUTCISO(NOW);
         const credentialScope = `${datestamp}/auto/storage/goog4_request`;
-        const dateISO = dateFormat.format(NOW, 'YYYYMMDD[T]HHmmss[Z]', true);
+        const dateISO = formatAsUTCISO(NOW, true);
 
         const authClientSign = sinon
           .stub(authClient, 'sign')

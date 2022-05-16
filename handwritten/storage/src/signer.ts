@@ -13,11 +13,10 @@
 // limitations under the License.
 
 import * as crypto from 'crypto';
-import * as dateFormat from 'date-and-time';
 import * as http from 'http';
 import * as url from 'url';
 import {ExceptionMessages} from './storage';
-import {encodeURI, qsStringify, objectEntries} from './util';
+import {encodeURI, qsStringify, objectEntries, formatAsUTCISO} from './util';
 
 interface GetCredentialsResponse {
   client_email?: string;
@@ -268,15 +267,14 @@ export class URLSigner {
 
     const extensionHeadersString = this.getCanonicalHeaders(extensionHeaders);
 
-    const datestamp = dateFormat.format(config.accessibleAt, 'YYYYMMDD', true);
+    const datestamp = formatAsUTCISO(config.accessibleAt);
     const credentialScope = `${datestamp}/auto/storage/goog4_request`;
 
     const sign = async () => {
       const credentials = await this.authClient.getCredentials();
       const credential = `${credentials.client_email}/${credentialScope}`;
-      const dateISO = dateFormat.format(
+      const dateISO = formatAsUTCISO(
         config.accessibleAt ? config.accessibleAt : new Date(),
-        'YYYYMMDD[T]HHmmss[Z]',
         true
       );
       const queryParams: Query = {
