@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [5.20.0](https://github.com/googleapis/nodejs-storage/compare/v5.19.4...v5.20.0) (2022-05-16)
+
+
+### Features
+
+* add x-goog-api-client headers for retry metrics ([#1920](https://github.com/googleapis/nodejs-storage/issues/1920)) ([0c7e4f6](https://github.com/googleapis/nodejs-storage/commit/0c7e4f6ade4cee1715e14b3cd9abf2aa2a56c0b9))
+
 ### [5.19.4](https://github.com/googleapis/nodejs-storage/compare/v5.19.3...v5.19.4) (2022-04-28)
 
 
