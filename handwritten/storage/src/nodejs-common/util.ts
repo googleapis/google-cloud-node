@@ -29,7 +29,14 @@ import {Duplex, DuplexOptions, Readable, Transform, Writable} from 'stream';
 import {teenyRequest} from 'teeny-request';
 import {Interceptor} from './service-object';
 import * as uuid from 'uuid';
-import * as packageJson from '../../package.json';
+let packageJson: ReturnType<JSON['parse']> = {};
+try {
+  // if requiring from 'build' (default)
+  packageJson = require('../../../package.json');
+} catch (e) {
+  // if requiring directly from TypeScript context
+  packageJson = require('../../package.json');
+}
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const duplexify: DuplexifyConstructor = require('duplexify');
