@@ -512,10 +512,10 @@ describe('Service', () => {
     it('should add the api-client header', done => {
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         const pkg = service.packageJson;
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-api-client'],
-          `gl-node/${process.versions.node} gccl/${pkg.version}`
+        const r = new RegExp(
+          `^gl-node/${process.versions.node} gccl/${pkg.version} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
         );
+        assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
       };
 

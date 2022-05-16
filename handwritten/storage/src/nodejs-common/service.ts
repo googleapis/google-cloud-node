@@ -17,6 +17,7 @@ import arrify = require('arrify');
 import * as extend from 'extend';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as r from 'teeny-request';
+import * as uuid from 'uuid';
 
 import {Interceptor} from './service-object';
 import {
@@ -242,7 +243,9 @@ export class Service {
     }
     reqOpts.headers = extend({}, reqOpts.headers, {
       'User-Agent': userAgent,
-      'x-goog-api-client': `gl-node/${process.versions.node} gccl/${pkg.version}`,
+      'x-goog-api-client': `gl-node/${process.versions.node} gccl/${
+        pkg.version
+      } gccl-invocation-id/${uuid.v4()}`,
     });
 
     if (reqOpts.shouldReturnStream) {

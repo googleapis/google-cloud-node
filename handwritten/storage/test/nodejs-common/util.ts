@@ -75,9 +75,12 @@ function fakeRequest() {
   return (requestOverride || teenyRequest).apply(null, arguments);
 }
 
-fakeRequest.defaults = () => {
-  // Ignore the default values, so we don't have to test for them in every API
-  // call.
+fakeRequest.defaults = (defaults: r.CoreOptions) => {
+  assert.ok(
+    /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
+      defaults.headers!['x-goog-api-client']
+    )
+  );
   return fakeRequest;
 };
 
@@ -503,7 +506,6 @@ describe('common/util', () => {
           assert.strictEqual(request.qs.uploadType, 'multipart');
           assert.strictEqual(request.timeout, 0);
           assert.strictEqual(request.maxRetries, 0);
-
           assert.strictEqual(Array.isArray(request.multipart), true);
 
           const mp = request.multipart as r.RequestPart[];

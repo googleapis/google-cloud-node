@@ -27,11 +27,20 @@ import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {Readable, Writable} from 'stream';
 import retry = require('async-retry');
 import {RetryOptions, PreconditionOptions} from './storage';
+import * as uuid from 'uuid';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const TERMINATED_UPLOAD_STATUS_CODE = 410;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 const DEFAULT_API_ENDPOINT_REGEX = /.*\.googleapis\.com/;
+let packageJson: ReturnType<JSON['parse']> = {};
+try {
+  // if requiring from 'build' (default)
+  packageJson = require('../../package.json');
+} catch (e) {
+  // if requiring directly from TypeScript context
+  packageJson = require('../package.json');
+}
 
 export const PROTOCOL_REGEX = /^(\w*):\/\//;
 
@@ -262,6 +271,11 @@ export class Upload extends Writable {
   contentLength: number | '*';
   retryOptions: RetryOptions;
   timeOfFirstRequest: number;
+  private currentInvocationId = {
+    chunk: uuid.v4(),
+    uri: uuid.v4(),
+    offset: uuid.v4(),
+  };
   private upstreamChunkBuffer: Buffer = Buffer.alloc(0);
   private chunkBufferEncoding?: BufferEncoding = undefined;
   private numChunksReadInRequest = 0;
@@ -530,6 +544,7 @@ export class Upload extends Writable {
   protected async createURIAsync(): Promise<string> {
     const metadata = this.metadata;
 
+    // Check if headers already exist before creating new ones
     const reqOpts: GaxiosOptions = {
       method: 'POST',
       url: [this.baseURI, this.bucket, 'o'].join('/'),
@@ -541,7 +556,9 @@ export class Upload extends Writable {
         this.params
       ),
       data: metadata,
-      headers: {},
+      headers: {
+        'x-goog-api-client': `gl-node/${process.versions.node} gccl/${packageJson.version} gccl-invocation-id/${this.currentInvocationId.uri}`,
+      },
     };
 
     if (metadata.contentLength) {
@@ -572,6 +589,8 @@ export class Upload extends Writable {
       async (bail: (err: Error) => void) => {
         try {
           const res = await this.makeRequest(reqOpts);
+          // We have successfully got a URI we can now create a new invocation id
+          this.currentInvocationId.uri = uuid.v4();
           return res.headers.location;
         } catch (err) {
           const e = err as GaxiosError;
@@ -707,20 +726,20 @@ export class Upload extends Writable {
       },
     });
 
-    let headers: GaxiosOptions['headers'] = {};
+    const headers: GaxiosOptions['headers'] = {
+      'x-goog-api-client': `gl-node/${process.versions.node} gccl/${packageJson.version} gccl-invocation-id/${this.currentInvocationId.chunk}`,
+    };
 
     // If using multiple chunk upload, set appropriate header
     if (multiChunkMode && expectedUploadSize) {
       // The '-1' is because the ending byte is inclusive in the request.
       const endingByte = expectedUploadSize + this.numBytesWritten - 1;
-      headers = {
-        'Content-Length': expectedUploadSize,
-        'Content-Range': `bytes ${this.offset}-${endingByte}/${this.contentLength}`,
-      };
+      headers['Content-Length'] = expectedUploadSize;
+      headers[
+        'Content-Range'
+      ] = `bytes ${this.offset}-${endingByte}/${this.contentLength}`;
     } else {
-      headers = {
-        'Content-Range': `bytes ${this.offset}-*/${this.contentLength}`,
-      };
+      headers['Content-Range'] = `bytes ${this.offset}-*/${this.contentLength}`;
     }
 
     const reqOpts: GaxiosOptions = {
@@ -749,6 +768,9 @@ export class Upload extends Writable {
       this.destroy(resp.data.error);
       return;
     }
+
+    // At this point we can safely create a new id for the chunk
+    this.currentInvocationId.chunk = uuid.v4();
 
     const shouldContinueWithNextMultiChunkRequest =
       this.chunkSize &&
@@ -849,10 +871,16 @@ export class Upload extends Writable {
     const opts: GaxiosOptions = {
       method: 'PUT',
       url: this.uri!,
-      headers: {'Content-Length': 0, 'Content-Range': 'bytes */*'},
+      headers: {
+        'Content-Length': 0,
+        'Content-Range': 'bytes */*',
+        'x-goog-api-client': `gl-node/${process.versions.node} gccl/${packageJson.version} gccl-invocation-id/${this.currentInvocationId.offset}`,
+      },
     };
     try {
       const resp = await this.makeRequest(opts);
+      // Successfully got the offset we can now create a new offset invocation id
+      this.currentInvocationId.offset = uuid.v4();
       if (resp.status === RESUMABLE_INCOMPLETE_STATUS_CODE) {
         if (resp.headers.range) {
           const range = resp.headers.range as string;

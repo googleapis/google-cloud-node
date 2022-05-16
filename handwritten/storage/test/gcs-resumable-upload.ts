@@ -67,6 +67,8 @@ const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 /** 256 KiB */
 const CHUNK_SIZE_MULTIPLE = 2 ** 18;
 const queryPath = '/?userProject=user-project-id';
+const X_GOOG_API_HEADER_REGEX =
+  /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/;
 
 function mockAuthorizeRequest(
   code = 200,
@@ -904,6 +906,15 @@ describe('gcs-resumable-upload', () => {
           done();
         });
       });
+
+      it('currentInvocationId.uri should remain the same on error', done => {
+        const beforeCallInvocationId = up.currentInvocationId.uri;
+        up.createURI((err: Error) => {
+          assert(err);
+          assert.equal(beforeCallInvocationId, up.currentInvocationId.uri);
+          done();
+        });
+      });
     });
 
     describe('success', () => {
@@ -937,6 +948,14 @@ describe('gcs-resumable-upload', () => {
         up.createURI((err: Error, uri: string) => {
           assert.ifError(err);
           assert.strictEqual(uri, URI);
+          done();
+        });
+      });
+
+      it('currentInvocationId.uri should be different after success', done => {
+        const beforeCallInvocationId = up.currentInvocationId.uri;
+        up.createURI(() => {
+          assert.notEqual(beforeCallInvocationId, up.currentInvocationId.uri);
           done();
         });
       });
@@ -1106,9 +1125,14 @@ describe('gcs-resumable-upload', () => {
 
           await up.startUploading();
 
-          assert.deepEqual(reqOpts.headers, {
-            'Content-Range': `bytes ${OFFSET}-*/${CONTENT_LENGTH}`,
-          });
+          assert(reqOpts.headers);
+          assert.equal(
+            reqOpts.headers['Content-Range'],
+            `bytes ${OFFSET}-*/${CONTENT_LENGTH}`
+          );
+          assert.ok(
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+          );
 
           const data = await getAllDataFromRequest();
 
@@ -1120,9 +1144,11 @@ describe('gcs-resumable-upload', () => {
 
           await up.startUploading();
 
-          assert.deepEqual(reqOpts.headers, {
-            'Content-Range': 'bytes 0-*/*',
-          });
+          assert(reqOpts.headers);
+          assert.equal(reqOpts.headers['Content-Range'], 'bytes 0-*/*');
+          assert.ok(
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+          );
 
           const data = await getAllDataFromRequest();
 
@@ -1147,10 +1173,15 @@ describe('gcs-resumable-upload', () => {
           await up.startUploading();
 
           const endByte = OFFSET + CHUNK_SIZE - 1;
-          assert.deepEqual(reqOpts.headers, {
-            'Content-Length': CHUNK_SIZE,
-            'Content-Range': `bytes ${OFFSET}-${endByte}/${CONTENT_LENGTH}`,
-          });
+          assert(reqOpts.headers);
+          assert.equal(reqOpts.headers['Content-Length'], CHUNK_SIZE);
+          assert.equal(
+            reqOpts.headers['Content-Range'],
+            `bytes ${OFFSET}-${endByte}/${CONTENT_LENGTH}`
+          );
+          assert.ok(
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+          );
 
           const data = await getAllDataFromRequest();
 
@@ -1166,10 +1197,15 @@ describe('gcs-resumable-upload', () => {
           await up.startUploading();
 
           const endByte = OFFSET + CHUNK_SIZE - 1;
-          assert.deepEqual(reqOpts.headers, {
-            'Content-Length': CHUNK_SIZE,
-            'Content-Range': `bytes ${OFFSET}-${endByte}/*`,
-          });
+          assert(reqOpts.headers);
+          assert.equal(reqOpts.headers['Content-Length'], CHUNK_SIZE);
+          assert.equal(
+            reqOpts.headers['Content-Range'],
+            `bytes ${OFFSET}-${endByte}/*`
+          );
+          assert.ok(
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+          );
 
           const data = await getAllDataFromRequest();
 
@@ -1188,10 +1224,18 @@ describe('gcs-resumable-upload', () => {
           await up.startUploading();
 
           const endByte = CONTENT_LENGTH - NUM_BYTES_WRITTEN + OFFSET - 1;
-          assert.deepEqual(reqOpts.headers, {
-            'Content-Length': CONTENT_LENGTH - NUM_BYTES_WRITTEN,
-            'Content-Range': `bytes ${OFFSET}-${endByte}/${CONTENT_LENGTH}`,
-          });
+          assert(reqOpts.headers);
+          assert.equal(
+            reqOpts.headers['Content-Length'],
+            CONTENT_LENGTH - NUM_BYTES_WRITTEN
+          );
+          assert.equal(
+            reqOpts.headers['Content-Range'],
+            `bytes ${OFFSET}-${endByte}/${CONTENT_LENGTH}`
+          );
+          assert.ok(
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+          );
           const data = await getAllDataFromRequest();
 
           assert.equal(data.byteLength, CONTENT_LENGTH - NUM_BYTES_WRITTEN);
@@ -1321,6 +1365,26 @@ describe('gcs-resumable-upload', () => {
 
       up.responseHandler(RESP);
     });
+
+    it('currentInvocationId.chunk should be different after success', done => {
+      const beforeCallInvocationId = up.currentInvocationId.chunk;
+      const RESP = {data: '', status: 200};
+      up.on('uploadFinished', () => {
+        assert.notEqual(beforeCallInvocationId, up.currentInvocationId.chunk);
+        done();
+      });
+      up.responseHandler(RESP);
+    });
+
+    it('currentInvocationId.chunk should be the same after error', done => {
+      const beforeCallInvocationId = up.currentInvocationId.chunk;
+      const RESP = {data: {error: new Error('Error.')}};
+      up.destroy = () => {
+        assert.equal(beforeCallInvocationId, up.currentInvocationId.chunk);
+        done();
+      };
+      up.responseHandler(RESP);
+    });
   });
 
   describe('#ensureUploadingSameObject', () => {
@@ -1418,14 +1482,37 @@ describe('gcs-resumable-upload', () => {
       up.makeRequest = async (reqOpts: GaxiosOptions) => {
         assert.strictEqual(reqOpts.method, 'PUT');
         assert.strictEqual(reqOpts.url, URI);
-        assert.deepStrictEqual(reqOpts.headers, {
-          'Content-Length': 0,
-          'Content-Range': 'bytes */*',
-        });
+        assert(reqOpts.headers);
+        assert.equal(reqOpts.headers['Content-Length'], 0);
+        assert.equal(reqOpts.headers['Content-Range'], 'bytes */*');
+        assert.ok(
+          X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+        );
         done();
         return {};
       };
       up.getAndSetOffset();
+    });
+
+    it('currentInvocationId.offset should be different after success', async () => {
+      const beforeCallInvocationId = up.currentInvocationId.offset;
+      up.makeRequest = () => {
+        return {};
+      };
+      await up.getAndSetOffset();
+      assert.notEqual(beforeCallInvocationId, up.currentInvocationId.offset);
+    });
+
+    it('currentInvocationId.offset should be the same on error', async done => {
+      const beforeCallInvocationId = up.currentInvocationId.offset;
+      up.destroy = () => {
+        assert.equal(beforeCallInvocationId, up.currentInvocationId.offset);
+        done();
+      };
+      up.makeRequest = () => {
+        throw new Error() as GaxiosError;
+      };
+      await up.getAndSetOffset();
     });
 
     describe('restart on 404', () => {
@@ -2345,9 +2432,16 @@ describe('gcs-resumable-upload', () => {
           assert(request.chunkWritesInRequest > 1);
 
           assert.equal(request.dataReceived, CONTENT_LENGTH);
-          assert.deepStrictEqual(request.opts.headers, {
-            'Content-Range': `bytes 0-*/${CONTENT_LENGTH}`,
-          });
+          assert(request.opts.headers);
+          assert.equal(
+            request.opts.headers['Content-Range'],
+            `bytes 0-*/${CONTENT_LENGTH}`
+          );
+          assert.ok(
+            X_GOOG_API_HEADER_REGEX.test(
+              request.opts.headers['x-goog-api-client']
+            )
+          );
 
           done();
         });
@@ -2504,19 +2598,36 @@ describe('gcs-resumable-upload', () => {
               const endByte = offset + LAST_REQUEST_SIZE - 1;
 
               assert.equal(request.dataReceived, LAST_REQUEST_SIZE);
-              assert.deepStrictEqual(request.opts.headers, {
-                'Content-Length': LAST_REQUEST_SIZE,
-                'Content-Range': `bytes ${offset}-${endByte}/${CONTENT_LENGTH}`,
-              });
+              assert(request.opts.headers);
+              assert.equal(
+                request.opts.headers['Content-Length'],
+                LAST_REQUEST_SIZE
+              );
+              assert.equal(
+                request.opts.headers['Content-Range'],
+                `bytes ${offset}-${endByte}/${CONTENT_LENGTH}`
+              );
+              assert.ok(
+                X_GOOG_API_HEADER_REGEX.test(
+                  request.opts.headers['x-goog-api-client']
+                )
+              );
             } else {
               // The preceding chunks
               const endByte = offset + CHUNK_SIZE - 1;
 
               assert.equal(request.dataReceived, CHUNK_SIZE);
-              assert.deepStrictEqual(request.opts.headers, {
-                'Content-Length': CHUNK_SIZE,
-                'Content-Range': `bytes ${offset}-${endByte}/${CONTENT_LENGTH}`,
-              });
+              assert(request.opts.headers);
+              assert.equal(request.opts.headers['Content-Length'], CHUNK_SIZE);
+              assert.equal(
+                request.opts.headers['Content-Range'],
+                `bytes ${offset}-${endByte}/${CONTENT_LENGTH}`
+              );
+              assert.ok(
+                X_GOOG_API_HEADER_REGEX.test(
+                  request.opts.headers['x-goog-api-client']
+                )
+              );
             }
           }
 
