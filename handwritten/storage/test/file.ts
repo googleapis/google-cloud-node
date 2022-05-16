@@ -103,6 +103,7 @@ const fakePromisify = {
       'save',
       'setEncryptionKey',
       'shouldRetryBasedOnPreconditionAndIdempotencyStrat',
+      'getBufferFromReadable',
     ]);
   },
 };
@@ -2651,8 +2652,13 @@ describe('File', () => {
     it('should only execute callback once', done => {
       Object.assign(fileReadStream, {
         _read(this: Readable) {
-          this.emit('error', new Error('Error.'));
-          this.emit('error', new Error('Error.'));
+          // Do not fire the errors immediately as this is a synchronous operation here
+          // and the iterator getter is also synchronous in file.getBufferFromReadable.
+          // this is only an issue for <= node 12. This cannot happen in practice.
+          process.nextTick(() => {
+            this.emit('error', new Error('Error.'));
+            this.emit('error', new Error('Error.'));
+          });
         },
       });
 
@@ -2685,7 +2691,12 @@ describe('File', () => {
 
         Object.assign(fileReadStream, {
           _read(this: Readable) {
-            this.emit('error', error);
+            // Do not fire the errors immediately as this is a synchronous operation here
+            // and the iterator getter is also synchronous in file.getBufferFromReadable.
+            // this is only an issue for <= node 12. This cannot happen in practice.
+            process.nextTick(() => {
+              this.emit('error', error);
+            });
           },
         });
 

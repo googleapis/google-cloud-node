@@ -24,7 +24,6 @@ import {
 import {promisifyAll} from '@google-cloud/promisify';
 
 import compressible = require('compressible');
-import getStream = require('get-stream');
 import * as crypto from 'crypto';
 import * as dateFormat from 'date-and-time';
 import * as extend from 'extend';
@@ -1394,8 +1393,8 @@ class File extends ServiceObject<File> {
       ) => {
         if (err) {
           // Get error message from the body.
-          getStream(rawResponseStream).then(body => {
-            err.message = body;
+          this.getBufferFromReadable(rawResponseStream).then(body => {
+            err.message = body.toString('utf8');
             throughStream.destroy(err);
           });
 
@@ -2172,10 +2171,9 @@ class File extends ServiceObject<File> {
         fileStream.pipe(writable).on('error', callback).on('finish', callback);
       });
     } else {
-      getStream
-        .buffer(fileStream)
+      this.getBufferFromReadable(fileStream)
         .then(contents => callback?.(null, contents))
-        .catch(callback as (error: RequestError) => void);
+        .catch(callback as (err: RequestError) => void);
     }
   }
 
@@ -4104,6 +4102,15 @@ class File extends ServiceObject<File> {
       this.storage.retryOptions.autoRetry = false;
     }
   }
+
+  private async getBufferFromReadable(readable: Readable): Promise<Buffer> {
+    const buf = [];
+    for await (const chunk of readable) {
+      buf.push(chunk);
+    }
+
+    return Buffer.concat(buf);
+  }
 }
 
 /*! Developer Documentation
@@ -4118,6 +4125,7 @@ promisifyAll(File, {
     'save',
     'setEncryptionKey',
     'shouldRetryBasedOnPreconditionAndIdempotencyStrat',
+    'getBufferFromReadable',
   ],
 });
 
