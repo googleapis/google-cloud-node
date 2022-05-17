@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-redis/compare/v2.4.0...v3.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#567)
+
+### Features
+
+* [Cloud Memorystore for Redis] Support Maintenance Window ([13dc45b](https://github.com/googleapis/nodejs-redis/commit/13dc45b62d6a6a2934d8062619e135ab8b52d7ec))
+* Add automated RDB (AKA persistence) ([#544](https://github.com/googleapis/nodejs-redis/issues/544)) ([3fe6859](https://github.com/googleapis/nodejs-redis/commit/3fe68596d177436d56f626757536cc63dc045ea7))
+* add secondary_ip_range field ([13dc45b](https://github.com/googleapis/nodejs-redis/commit/13dc45b62d6a6a2934d8062619e135ab8b52d7ec))
+* add secondary_ip_range field ([#549](https://github.com/googleapis/nodejs-redis/issues/549)) ([c454a54](https://github.com/googleapis/nodejs-redis/commit/c454a542480628c655b1fcfcab52b8f9457cdcb4))
+* add support for AUTH functionality ([13dc45b](https://github.com/googleapis/nodejs-redis/commit/13dc45b62d6a6a2934d8062619e135ab8b52d7ec))
+* add support for TLS functionality ([13dc45b](https://github.com/googleapis/nodejs-redis/commit/13dc45b62d6a6a2934d8062619e135ab8b52d7ec))
+
+
+### Build System
+
+* update library to use Node 12 ([#567](https://github.com/googleapis/nodejs-redis/issues/567)) ([c75ad13](https://github.com/googleapis/nodejs-redis/commit/c75ad1301968cbe59fad267bebed6610ddf07657))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-redis/compare/v2.3.1...v2.4.0) (2021-11-10)
 
 
