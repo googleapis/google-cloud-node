@@ -23,6 +23,7 @@ import {Channel} from './channel';
 import {File} from './file';
 import {normalize} from './util';
 import {HmacKey, HmacKeyMetadata, HmacKeyOptions} from './hmacKey';
+import path = require('path');
 
 export interface GetServiceAccountOptions {
   userProject?: string;
@@ -618,10 +619,10 @@ export class Storage extends Service {
 
     try {
       // if requiring from 'build' (default)
-      packageJson = require('../../package.json');
+      packageJson = require(path.join(__dirname, '../../package.json'));
     } catch (e) {
       // if requiring directly from TypeScript context
-      packageJson = require('../package.json');
+      packageJson = require(path.join(__dirname, '../package.json'));
     }
 
     const config = {
