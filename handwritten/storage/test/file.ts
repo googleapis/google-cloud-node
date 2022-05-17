@@ -2019,7 +2019,7 @@ describe('File', () => {
       };
       const writable = file.createWriteStream(options);
 
-      file.startSimpleUpload_ = (stream: {}, options_: {}) => {
+      file.startSimpleUpload_ = () => {
         done();
       };
 
@@ -2033,7 +2033,7 @@ describe('File', () => {
       };
       const writable = file.createWriteStream(options);
 
-      file.startResumableUpload_ = (stream: {}, options_: {}) => {
+      file.startResumableUpload_ = () => {
         done();
       };
 
@@ -2048,7 +2048,7 @@ describe('File', () => {
       };
       const writable = file.createWriteStream(options);
 
-      file.startResumableUpload_ = (stream: {}, options_: {}) => {
+      file.startResumableUpload_ = () => {
         done();
       };
 
@@ -2167,7 +2167,7 @@ describe('File', () => {
           },
         });
 
-        file.startSimpleUpload_ = (stream: Stream, _options: {}) => {
+        file.startSimpleUpload_ = () => {
           done();
         };
 
@@ -2180,8 +2180,7 @@ describe('File', () => {
         metadata: METADATA,
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
+      file.startResumableUpload_ = () => {
         done();
       };
 
