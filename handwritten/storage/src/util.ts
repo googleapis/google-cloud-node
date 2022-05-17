@@ -166,3 +166,27 @@ export function formatAsUTCISO(
 
   return resultString;
 }
+
+/**
+ * Attempts to retrieve package.json from either the typescript or build context.
+ * @returns {object} object representation of package.json
+ */
+export function getPackageJSON(): ReturnType<JSON['parse']> {
+  let packageJson: ReturnType<JSON['parse']> = undefined;
+  const possiblePaths = ['../../package.json', '../package.json'];
+
+  for (const path of possiblePaths) {
+    try {
+      packageJson = require(path);
+      break;
+    } catch {
+      packageJson = undefined;
+    }
+  }
+
+  if (packageJson) {
+    return packageJson;
+  }
+
+  throw new Error('Unable to find package.json');
+}

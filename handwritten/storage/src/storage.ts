@@ -21,9 +21,8 @@ import {Readable} from 'stream';
 import {Bucket} from './bucket';
 import {Channel} from './channel';
 import {File} from './file';
-import {normalize} from './util';
+import {getPackageJSON, normalize} from './util';
 import {HmacKey, HmacKeyMetadata, HmacKeyOptions} from './hmacKey';
-import path = require('path');
 
 export interface GetServiceAccountOptions {
   userProject?: string;
@@ -615,15 +614,7 @@ export class Storage extends Service {
       maxRetryValue = options.retryOptions.maxRetries;
     }
 
-    let packageJson: ReturnType<JSON['parse']> = {};
-
-    try {
-      // if requiring from 'build' (default)
-      packageJson = require(path.join(__dirname, '../../package.json'));
-    } catch (e) {
-      // if requiring directly from TypeScript context
-      packageJson = require(path.join(__dirname, '../package.json'));
-    }
+    const packageJson = getPackageJSON();
 
     const config = {
       apiEndpoint: options.apiEndpoint!,
