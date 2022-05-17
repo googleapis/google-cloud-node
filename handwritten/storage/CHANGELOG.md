@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+### [5.20.2](https://github.com/googleapis/nodejs-storage/compare/v5.20.1...v5.20.2) (2022-05-17)
+
+
+### Bug Fixes
+
+* use path.join and __dirname for require package.json ([#1936](https://github.com/googleapis/nodejs-storage/issues/1936)) ([b868762](https://github.com/googleapis/nodejs-storage/commit/b86876201ec7d4ce58ae5c1d9635dad82a1fdc4b))
+
 ### [5.20.1](https://github.com/googleapis/nodejs-storage/compare/v5.20.0...v5.20.1) (2022-05-16)
 
 
