@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=8"
+    "node": ">=12.0.0"
   },
   "files": [
     "*.js"
@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@google-cloud/bigquery-storage": "^2.8.0",
-    "google-protobuf": "^3.19.1",
     "avsc": "^5.4.18",
+    "google-protobuf": "^3.19.1",
     "snappy": "^7.0.0"
   },
   "devDependencies": {
