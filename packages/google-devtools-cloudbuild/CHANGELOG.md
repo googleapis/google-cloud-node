@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-cloudbuild/compare/v2.6.0...v3.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#325)
+
+### Build System
+
+* update library to use Node 12 ([#325](https://github.com/googleapis/nodejs-cloudbuild/issues/325)) ([596e5c2](https://github.com/googleapis/nodejs-cloudbuild/commit/596e5c21bc21c1d74fecb4cb7eb887561e1598f8))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.5.0...v2.6.0) (2021-08-25)
 
 
