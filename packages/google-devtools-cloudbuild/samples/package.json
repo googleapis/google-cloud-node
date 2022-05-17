@@ -9,7 +9,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-cloudbuild",
   "engines": {
-    "node": ">=10"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "test": "c8 mocha system-test --timeout=800000"
