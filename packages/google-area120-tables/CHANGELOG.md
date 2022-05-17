@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-area120-tables/compare/v1.3.0...v2.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#142)
+
+### Build System
+
+* update library to use Node 12 ([#142](https://github.com/googleapis/nodejs-area120-tables/issues/142)) ([d21b849](https://github.com/googleapis/nodejs-area120-tables/commit/d21b8496ae140038f7e34e630a7978653ce9d92f))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.8...v1.3.0) (2021-08-23)
 
 
