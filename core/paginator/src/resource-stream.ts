@@ -104,7 +104,7 @@ export class ResourceStream<T> extends Transform implements ResourceEvents<T> {
         }
       );
     } catch (e) {
-      this.destroy(e);
+      this.destroy(e as Error);
     }
   }
 }
