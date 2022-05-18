@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-private-catalog/compare/v1.1.1...v2.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#85)
+
+### Build System
+
+* update library to use Node 12 ([#85](https://github.com/googleapis/nodejs-private-catalog/issues/85)) ([e696cd7](https://github.com/googleapis/nodejs-private-catalog/commit/e696cd7c16ce8a80822e1f85cd35c2b072ea8d80))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.1.0...v1.1.1) (2021-09-09)
 
 
