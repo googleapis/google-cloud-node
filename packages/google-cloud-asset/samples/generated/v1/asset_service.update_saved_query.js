@@ -20,23 +20,22 @@
 
 'use strict';
 
-function main(feed, updateMask) {
-  // [START cloudasset_v1_generated_AssetService_UpdateFeed_async]
+function main(savedQuery, updateMask) {
+  // [START cloudasset_v1_generated_AssetService_UpdateSavedQuery_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new values of feed details. It must match an existing feed
-   *  and the field `name` must be in the format of:
-   *  projects/project_number/feeds/feed_id or
-   *  folders/folder_number/feeds/feed_id or
-   *  organizations/organization_number/feeds/feed_id.
+   *  Required. The saved query to update.
+   *  The saved query's `name` field is used to identify the one to update,
+   *  which has format as below:
+   *  * projects/project_number/savedQueries/saved_query_id
+   *  * folders/folder_number/savedQueries/saved_query_id
+   *  * organizations/organization_number/savedQueries/saved_query_id
    */
-  // const feed = {}
+  // const savedQuery = {}
   /**
-   *  Required. Only updates the `feed` fields indicated by this mask.
-   *  The field mask must not be empty, and it must not contain fields that
-   *  are immutable or only set by the server.
+   *  Required. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -46,20 +45,20 @@ function main(feed, updateMask) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function callUpdateFeed() {
+  async function callUpdateSavedQuery() {
     // Construct request
     const request = {
-      feed,
+      savedQuery,
       updateMask,
     };
 
     // Run request
-    const response = await assetClient.updateFeed(request);
+    const response = await assetClient.updateSavedQuery(request);
     console.log(response);
   }
 
-  callUpdateFeed();
-  // [END cloudasset_v1_generated_AssetService_UpdateFeed_async]
+  callUpdateSavedQuery();
+  // [END cloudasset_v1_generated_AssetService_UpdateSavedQuery_async]
 }
 
 process.on('unhandledRejection', err => {
