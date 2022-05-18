@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v1.10.0...v2.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#175)
+
+### Build System
+
+* update library to use Node 12 ([#175](https://github.com/googleapis/nodejs-video-transcoder/issues/175)) ([555aad4](https://github.com/googleapis/nodejs-video-transcoder/commit/555aad476236704167b667adf79f597baec0b6a1))
+
 ## [1.10.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v1.9.0...v1.10.0) (2022-02-08)
 
 
