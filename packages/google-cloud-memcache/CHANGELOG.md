@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-memcache/compare/v1.5.1...v2.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#196)
+
+### Build System
+
+* update library to use Node 12 ([#196](https://github.com/googleapis/nodejs-memcache/issues/196)) ([776f934](https://github.com/googleapis/nodejs-memcache/commit/776f93402453fc1b33394d80e19f3478efca42b4))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-memcache/compare/v1.5.0...v1.5.1) (2021-09-08)
 
 
