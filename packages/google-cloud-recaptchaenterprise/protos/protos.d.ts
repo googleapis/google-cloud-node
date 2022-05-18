@@ -633,6 +633,9 @@ export namespace google {
 
                     /** Assessment accountDefenderAssessment */
                     accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null);
+
+                    /** Assessment privatePasswordLeakVerification */
+                    privatePasswordLeakVerification?: (google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification|null);
                 }
 
                 /** Represents an Assessment. */
@@ -658,6 +661,9 @@ export namespace google {
 
                     /** Assessment accountDefenderAssessment. */
                     public accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null);
+
+                    /** Assessment privatePasswordLeakVerification. */
+                    public privatePasswordLeakVerification?: (google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification|null);
 
                     /**
                      * Creates a new Assessment instance using the specified properties.
@@ -1187,6 +1193,114 @@ export namespace google {
                         SUSPICIOUS_ACCOUNT_CREATION = 3,
                         RELATED_ACCOUNTS_NUMBER_HIGH = 4
                     }
+                }
+
+                /** Properties of a PrivatePasswordLeakVerification. */
+                interface IPrivatePasswordLeakVerification {
+
+                    /** PrivatePasswordLeakVerification lookupHashPrefix */
+                    lookupHashPrefix?: (Uint8Array|string|null);
+
+                    /** PrivatePasswordLeakVerification encryptedUserCredentialsHash */
+                    encryptedUserCredentialsHash?: (Uint8Array|string|null);
+
+                    /** PrivatePasswordLeakVerification encryptedLeakMatchPrefixes */
+                    encryptedLeakMatchPrefixes?: (Uint8Array[]|null);
+
+                    /** PrivatePasswordLeakVerification reencryptedUserCredentialsHash */
+                    reencryptedUserCredentialsHash?: (Uint8Array|string|null);
+                }
+
+                /** Represents a PrivatePasswordLeakVerification. */
+                class PrivatePasswordLeakVerification implements IPrivatePasswordLeakVerification {
+
+                    /**
+                     * Constructs a new PrivatePasswordLeakVerification.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification);
+
+                    /** PrivatePasswordLeakVerification lookupHashPrefix. */
+                    public lookupHashPrefix: (Uint8Array|string);
+
+                    /** PrivatePasswordLeakVerification encryptedUserCredentialsHash. */
+                    public encryptedUserCredentialsHash: (Uint8Array|string);
+
+                    /** PrivatePasswordLeakVerification encryptedLeakMatchPrefixes. */
+                    public encryptedLeakMatchPrefixes: Uint8Array[];
+
+                    /** PrivatePasswordLeakVerification reencryptedUserCredentialsHash. */
+                    public reencryptedUserCredentialsHash: (Uint8Array|string);
+
+                    /**
+                     * Creates a new PrivatePasswordLeakVerification instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivatePasswordLeakVerification instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
+
+                    /**
+                     * Encodes the specified PrivatePasswordLeakVerification message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
+                     * @param message PrivatePasswordLeakVerification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivatePasswordLeakVerification message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
+                     * @param message PrivatePasswordLeakVerification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivatePasswordLeakVerification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
+
+                    /**
+                     * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivatePasswordLeakVerification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
+
+                    /**
+                     * Verifies a PrivatePasswordLeakVerification message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivatePasswordLeakVerification message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivatePasswordLeakVerification
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
+
+                    /**
+                     * Creates a plain object from a PrivatePasswordLeakVerification message. Also converts values to other types if specified.
+                     * @param message PrivatePasswordLeakVerification
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivatePasswordLeakVerification to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a CreateKeyRequest. */

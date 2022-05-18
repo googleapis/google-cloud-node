@@ -345,6 +345,10 @@
                         "accountDefenderAssessment": {
                           "type": "AccountDefenderAssessment",
                           "id": 6
+                        },
+                        "privatePasswordLeakVerification": {
+                          "type": "PrivatePasswordLeakVerification",
+                          "id": 7
                         }
                       }
                     },
@@ -472,6 +476,39 @@
                             "SUSPICIOUS_LOGIN_ACTIVITY": 2,
                             "SUSPICIOUS_ACCOUNT_CREATION": 3,
                             "RELATED_ACCOUNTS_NUMBER_HIGH": 4
+                          }
+                        }
+                      }
+                    },
+                    "PrivatePasswordLeakVerification": {
+                      "fields": {
+                        "lookupHashPrefix": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptedUserCredentialsHash": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptedLeakMatchPrefixes": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reencryptedUserCredentialsHash": {
+                          "type": "bytes",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
