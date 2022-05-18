@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/nodejs-recommender/compare/v4.2.5...v5.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#233)
+
+### Build System
+
+* update library to use Node 12 ([#233](https://github.com/googleapis/nodejs-recommender/issues/233)) ([d4aabcc](https://github.com/googleapis/nodejs-recommender/commit/d4aabccf3b372e58e6093da2b6d1a3597895dd8c))
+
 ### [4.2.5](https://www.github.com/googleapis/nodejs-recommender/compare/v4.2.4...v4.2.5) (2021-09-09)
 
 
