@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-game-servers/compare/v2.5.0...v3.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#266)
+
+### Build System
+
+* update library to use Node 12 ([#266](https://github.com/googleapis/nodejs-game-servers/issues/266)) ([0ad7047](https://github.com/googleapis/nodejs-game-servers/commit/0ad7047cf2f815ed6dc99fe9b15c8f14ecbfdb42))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.4.0...v2.5.0) (2021-08-28)
 
 
