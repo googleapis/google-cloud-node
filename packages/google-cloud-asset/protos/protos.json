@@ -260,6 +260,114 @@
                               }
                             }
                           ]
+                        },
+                        "CreateSavedQuery": {
+                          "requestType": "CreateSavedQueryRequest",
+                          "responseType": "SavedQuery",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=*/*}/savedQueries",
+                            "(google.api.http).body": "saved_query",
+                            "(google.api.method_signature)": "parent,saved_query,saved_query_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=*/*}/savedQueries",
+                                "body": "saved_query"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,saved_query,saved_query_id"
+                            }
+                          ]
+                        },
+                        "GetSavedQuery": {
+                          "requestType": "GetSavedQueryRequest",
+                          "responseType": "SavedQuery",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=*/*/savedQueries/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=*/*/savedQueries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSavedQueries": {
+                          "requestType": "ListSavedQueriesRequest",
+                          "responseType": "ListSavedQueriesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=*/*}/savedQueries",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=*/*}/savedQueries"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateSavedQuery": {
+                          "requestType": "UpdateSavedQueryRequest",
+                          "responseType": "SavedQuery",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{saved_query.name=*/*/savedQueries/*}",
+                            "(google.api.http).body": "saved_query",
+                            "(google.api.method_signature)": "saved_query,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{saved_query.name=*/*/savedQueries/*}",
+                                "body": "saved_query"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "saved_query,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteSavedQuery": {
+                          "requestType": "DeleteSavedQueryRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=*/*/savedQueries/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=*/*/savedQueries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "BatchGetEffectiveIamPolicies": {
+                          "requestType": "BatchGetEffectiveIamPoliciesRequest",
+                          "responseType": "BatchGetEffectiveIamPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{scope=*/*}/effectiveIamPolicies:batchGet"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{scope=*/*}/effectiveIamPolicies:batchGet"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -984,6 +1092,13 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "savedAnalysisQuery": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "executionTimeout": {
                           "type": "google.protobuf.Duration",
                           "id": 2,
@@ -1113,6 +1228,13 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "savedAnalysisQuery": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "outputConfig": {
                           "type": "IamPolicyAnalysisOutputConfig",
                           "id": 2,
@@ -1124,6 +1246,190 @@
                     },
                     "AnalyzeIamPolicyLongrunningResponse": {
                       "fields": {}
+                    },
+                    "SavedQuery": {
+                      "options": {
+                        "(google.api.resource).type": "cloudasset.googleapis.com/SavedQuery",
+                        "(google.api.resource).pattern": "organizations/{organization}/savedQueries/{saved_query}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "creator": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastUpdater": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "content": {
+                          "type": "QueryContent",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "QueryContent": {
+                          "oneofs": {
+                            "queryContent": {
+                              "oneof": [
+                                "iamPolicyAnalysisQuery"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "iamPolicyAnalysisQuery": {
+                              "type": "IamPolicyAnalysisQuery",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CreateSavedQueryRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudasset.googleapis.com/SavedQuery"
+                          }
+                        },
+                        "savedQuery": {
+                          "type": "SavedQuery",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "savedQueryId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetSavedQueryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudasset.googleapis.com/SavedQuery"
+                          }
+                        }
+                      }
+                    },
+                    "ListSavedQueriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudasset.googleapis.com/SavedQuery"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSavedQueriesResponse": {
+                      "fields": {
+                        "savedQueries": {
+                          "rule": "repeated",
+                          "type": "SavedQuery",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateSavedQueryRequest": {
+                      "fields": {
+                        "savedQuery": {
+                          "type": "SavedQuery",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSavedQueryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudasset.googleapis.com/SavedQuery"
+                          }
+                        }
+                      }
                     },
                     "AnalyzeMoveRequest": {
                       "fields": {
@@ -1220,6 +1526,65 @@
                         "ACCESS_POLICY": 5,
                         "OS_INVENTORY": 6,
                         "RELATIONSHIP": 7
+                      }
+                    },
+                    "BatchGetEffectiveIamPoliciesRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "*"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "*"
+                          }
+                        }
+                      }
+                    },
+                    "BatchGetEffectiveIamPoliciesResponse": {
+                      "fields": {
+                        "policyResults": {
+                          "rule": "repeated",
+                          "type": "EffectiveIamPolicy",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "EffectiveIamPolicy": {
+                          "fields": {
+                            "fullResourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "policies": {
+                              "rule": "repeated",
+                              "type": "PolicyInfo",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "PolicyInfo": {
+                              "fields": {
+                                "attachedResource": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "policy": {
+                                  "type": "google.iam.v1.Policy",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     },
                     "TemporalAsset": {
@@ -1327,7 +1692,14 @@
                         },
                         "relatedAssets": {
                           "type": "RelatedAssets",
-                          "id": 13
+                          "id": 13,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "relatedAsset": {
+                          "type": "RelatedAsset",
+                          "id": 15
                         },
                         "ancestors": {
                           "rule": "repeated",
@@ -1369,6 +1741,9 @@
                       }
                     },
                     "RelatedAssets": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "relationshipAttributes": {
                           "type": "RelationshipAttributes",
@@ -1382,6 +1757,9 @@
                       }
                     },
                     "RelationshipAttributes": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "type": {
                           "type": "string",
@@ -1418,6 +1796,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        },
+                        "relationshipType": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -1504,6 +1886,21 @@
                           "keyType": "string",
                           "type": "RelatedResources",
                           "id": 21
+                        },
+                        "tagKeys": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 23
+                        },
+                        "tagValues": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 25
+                        },
+                        "tagValueIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 26
                         },
                         "parentAssetType": {
                           "type": "string",
@@ -4698,18 +5095,6 @@
                 }
               }
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "Struct": {
               "fields": {
                 "fields": {
@@ -4773,6 +5158,18 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -4791,6 +5188,54 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/expr;expr",
+            "java_multiple_files": true,
+            "java_outer_classname": "ExprProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "Expr": {
+              "fields": {
+                "expression": {
+                  "type": "string",
+                  "id": 1
+                },
+                "title": {
+                  "type": "string",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                },
+                "location": {
+                  "type": "string",
+                  "id": 4
                 }
               }
             }
@@ -4914,54 +5359,6 @@
                       }
                     }
                   }
-                }
-              }
-            }
-          }
-        },
-        "type": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/type/date;date",
-            "java_multiple_files": true,
-            "java_outer_classname": "DateProto",
-            "java_package": "com.google.type",
-            "objc_class_prefix": "GTP",
-            "cc_enable_arenas": true
-          },
-          "nested": {
-            "Expr": {
-              "fields": {
-                "expression": {
-                  "type": "string",
-                  "id": 1
-                },
-                "title": {
-                  "type": "string",
-                  "id": 2
-                },
-                "description": {
-                  "type": "string",
-                  "id": 3
-                },
-                "location": {
-                  "type": "string",
-                  "id": 4
-                }
-              }
-            },
-            "Date": {
-              "fields": {
-                "year": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "month": {
-                  "type": "int32",
-                  "id": 2
-                },
-                "day": {
-                  "type": "int32",
-                  "id": 3
                 }
               }
             }

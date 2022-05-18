@@ -26,9 +26,9 @@ function main(scope) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A scope can be a project, a folder, or an organization. The search is
-   *  limited to the IAM policies within the `scope`. The caller must be granted
-   *  the
+   *  Required. A scope can be a project, a folder, or an organization. The
+   *  search is limited to the IAM policies within the `scope`. The caller must
+   *  be granted the
    *  `cloudasset.assets.searchAllIamPolicies` (https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *  permission on the desired scope.
    *  The allowed values are:
@@ -43,7 +43,7 @@ function main(scope) {
    *  query (https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
    *  for more information. If not specified or empty, it will search all the
    *  IAM policies within the specified `scope`. Note that the query string is
-   *  compared against each Cloud IAM policy binding, including its members,
+   *  compared against each Cloud IAM policy binding, including its principals,
    *  roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
    *  contain the bindings that match your query. To learn more about the IAM
    *  policy structure, see IAM policy
@@ -77,27 +77,29 @@ function main(scope) {
    *    "instance2" and also specify user "amy".
    *  * `roles:roles/compute.admin` to find IAM policy bindings that specify the
    *    Compute Admin role.
-   *  * `memberTypes:user` to find IAM policy bindings that contain the "user"
-   *    member type.
+   *  * `memberTypes:user` to find IAM policy bindings that contain the
+   *    principal type "user".
    */
   // const query = 'abc123'
   /**
-   *  Optional. The page size for search result pagination. Page size is capped at 500 even
-   *  if a larger value is given. If set to zero, server will pick an appropriate
-   *  default. Returned results may be fewer than requested. When this happens,
-   *  there could be more results as long as `next_page_token` is returned.
+   *  Optional. The page size for search result pagination. Page size is capped
+   *  at 500 even if a larger value is given. If set to zero, server will pick an
+   *  appropriate default. Returned results may be fewer than requested. When
+   *  this happens, there could be more results as long as `next_page_token` is
+   *  returned.
    */
   // const pageSize = 1234
   /**
-   *  Optional. If present, retrieve the next batch of results from the preceding call to
-   *  this method. `page_token` must be the value of `next_page_token` from the
-   *  previous response. The values of all other method parameters must be
-   *  identical to those in the previous call.
+   *  Optional. If present, retrieve the next batch of results from the preceding
+   *  call to this method. `page_token` must be the value of `next_page_token`
+   *  from the previous response. The values of all other method parameters must
+   *  be identical to those in the previous call.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. A list of asset types that the IAM policies are attached to. If empty, it
-   *  will search the IAM policies that are attached to all the searchable asset
+   *  Optional. A list of asset types that the IAM policies are attached to. If
+   *  empty, it will search the IAM policies that are attached to all the
+   *  searchable asset
    *  types (https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
    *  Regular expressions are also supported. For example:
    *  * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
@@ -112,9 +114,9 @@ function main(scope) {
    */
   // const assetTypes = 'abc123'
   /**
-   *  Optional. A comma-separated list of fields specifying the sorting order of the
-   *  results. The default order is ascending. Add " DESC" after the field name
-   *  to indicate descending order. Redundant space characters are ignored.
+   *  Optional. A comma-separated list of fields specifying the sorting order of
+   *  the results. The default order is ascending. Add " DESC" after the field
+   *  name to indicate descending order. Redundant space characters are ignored.
    *  Example: "assetType DESC, resource".
    *  Only singular primitive fields in the response are sortable:
    *    * resource

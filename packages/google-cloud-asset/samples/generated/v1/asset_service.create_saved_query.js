@@ -20,31 +20,34 @@
 
 'use strict';
 
-function main(parent, feedId, feed) {
-  // [START cloudasset_v1_generated_AssetService_CreateFeed_async]
+function main(parent, savedQuery, savedQueryId) {
+  // [START cloudasset_v1_generated_AssetService_CreateSavedQuery_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the project/folder/organization where this feed
-   *  should be created in. It can only be an organization number (such as
-   *  "organizations/123"), a folder number (such as "folders/123"), a project ID
-   *  (such as "projects/my-project-id")", or a project number (such as
-   *  "projects/12345").
+   *  Required. The name of the project/folder/organization where this
+   *  saved_query should be created in. It can only be an organization number
+   *  (such as "organizations/123"), a folder number (such as "folders/123"), a
+   *  project ID (such as "projects/my-project-id")", or a project number (such
+   *  as "projects/12345").
    */
   // const parent = 'abc123'
   /**
-   *  Required. This is the client-assigned asset feed identifier and it needs to
-   *  be unique under a specific parent project/folder/organization.
+   *  Required. The saved_query details. The `name` field must be empty as it
+   *  will be generated based on the parent and saved_query_id.
    */
-  // const feedId = 'abc123'
+  // const savedQuery = {}
   /**
-   *  Required. The feed details. The field `name` must be empty and it will be
-   *  generated in the format of: projects/project_number/feeds/feed_id
-   *  folders/folder_number/feeds/feed_id
-   *  organizations/organization_number/feeds/feed_id
+   *  Required. The ID to use for the saved query, which must be unique in the
+   *  specified parent. It will become the final component of the saved query's
+   *  resource name.
+   *  This value should be 4-63 characters, and valid characters
+   *  are /[a-z][0-9]-/.
+   *  Notice that this field is required in the saved query creation, and the
+   *  `name` field of the `saved_query` will be ignored.
    */
-  // const feed = {}
+  // const savedQueryId = 'abc123'
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1;
@@ -52,21 +55,21 @@ function main(parent, feedId, feed) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function callCreateFeed() {
+  async function callCreateSavedQuery() {
     // Construct request
     const request = {
       parent,
-      feedId,
-      feed,
+      savedQuery,
+      savedQueryId,
     };
 
     // Run request
-    const response = await assetClient.createFeed(request);
+    const response = await assetClient.createSavedQuery(request);
     console.log(response);
   }
 
-  callCreateFeed();
-  // [END cloudasset_v1_generated_AssetService_CreateFeed_async]
+  callCreateSavedQuery();
+  // [END cloudasset_v1_generated_AssetService_CreateSavedQuery_async]
 }
 
 process.on('unhandledRejection', err => {
