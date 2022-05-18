@@ -2638,5 +2638,101 @@ describe('gcs-resumable-upload', () => {
         upstreamBuffer.pipe(up);
       });
     });
+
+    describe('empty object', () => {
+      let uri = '';
+
+      beforeEach(() => {
+        uri = 'uri';
+
+        up.contentLength = 0;
+        up.createURI = (
+          callback: (error: Error | null, uri: string) => void
+        ) => {
+          up.uri = uri;
+          up.offset = 0;
+          callback(null, uri);
+        };
+      });
+
+      it('should support uploading empty objects', done => {
+        const CONTENT_LENGTH = 0;
+        const EXPECTED_NUM_REQUESTS = 1;
+
+        const upstreamBuffer = new Readable({
+          read() {
+            this.push(null);
+          },
+        });
+
+        const requests: {
+          dataReceived: number;
+          opts: GaxiosOptions;
+          chunkWritesInRequest: number;
+        }[] = [];
+        let overallDataReceived = 0;
+
+        up.makeRequestStream = async (opts: GaxiosOptions) => {
+          let dataReceived = 0;
+          let chunkWritesInRequest = 0;
+
+          const res = await new Promise(resolve => {
+            opts.body.on('data', (data: Buffer) => {
+              dataReceived += data.byteLength;
+              overallDataReceived += data.byteLength;
+              chunkWritesInRequest++;
+            });
+
+            opts.body.on('end', () => {
+              requests.push({dataReceived, opts, chunkWritesInRequest});
+
+              resolve({
+                status: 200,
+                data: {},
+              });
+
+              resolve(null);
+            });
+          });
+
+          return res;
+        };
+
+        up.on('error', done);
+
+        up.on('finish', () => {
+          // Ensure the correct number of requests and data look correct
+          assert.equal(requests.length, EXPECTED_NUM_REQUESTS);
+          assert.equal(overallDataReceived, CONTENT_LENGTH);
+
+          // Validate the single request
+          const request = requests[0];
+
+          assert.strictEqual(request.opts.method, 'PUT');
+          assert.strictEqual(request.opts.url, uri);
+
+          // We should be writing multiple chunks down the wire
+          assert(request.chunkWritesInRequest === 0);
+
+          assert.equal(request.dataReceived, CONTENT_LENGTH);
+          assert(request.opts.headers);
+
+          assert.equal(
+            request.opts.headers['Content-Range'],
+            `bytes 0-*/${CONTENT_LENGTH}`
+          );
+          assert.ok(
+            X_GOOG_API_HEADER_REGEX.test(
+              request.opts.headers['x-goog-api-client']
+            )
+          );
+
+          done();
+        });
+
+        // init the request
+        upstreamBuffer.pipe(up);
+      });
+    });
   });
 });

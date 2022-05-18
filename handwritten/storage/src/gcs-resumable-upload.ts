@@ -384,7 +384,11 @@ export class Upload extends Writable {
 
     this.once('uploadFinished', fireFinishEvent);
 
-    process.nextTick(() => this.emit('upstreamFinished'));
+    process.nextTick(() => {
+      this.emit('upstreamFinished');
+      // it's possible `_write` may not be called - namely for empty object uploads
+      this.emit('writing');
+    });
   }
 
   /**
