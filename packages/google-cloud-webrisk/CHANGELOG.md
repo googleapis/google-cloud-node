@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-web-risk/compare/v2.2.0...v3.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#326)
+
+### Build System
+
+* update library to use Node 12 ([#326](https://github.com/googleapis/nodejs-web-risk/issues/326)) ([c787161](https://github.com/googleapis/nodejs-web-risk/commit/c787161b830bcc482b05171dac38418203fcac87))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.8...v2.2.0) (2021-08-23)
 
 
