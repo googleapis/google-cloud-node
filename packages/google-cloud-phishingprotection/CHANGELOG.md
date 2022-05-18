@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-phishing-protection/compare/v2.5.0...v3.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#386)
+
+### Build System
+
+* update library to use Node 12 ([#386](https://github.com/googleapis/nodejs-phishing-protection/issues/386)) ([4c8fc7d](https://github.com/googleapis/nodejs-phishing-protection/commit/4c8fc7d1fbcb90d18c7c74b73c1cc42db139cc39))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.7...v2.5.0) (2021-08-23)
 
 
