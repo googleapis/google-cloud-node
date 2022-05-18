@@ -201,7 +201,7 @@ describe('Bucket', () => {
   const BUCKET_NAME = 'test-bucket';
 
   before(() => {
-    Bucket = proxyquire('../src/bucket.ts', {
+    Bucket = proxyquire('../src/bucket.js', {
       fs: fakeFs,
       'p-limit': fakePLimit,
       '@google-cloud/promisify': fakePromisify,
@@ -210,11 +210,11 @@ describe('Bucket', () => {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
       },
-      './acl.ts': {Acl: FakeAcl},
-      './file.ts': {File: FakeFile},
-      './iam.ts': {Iam: FakeIam},
-      './notification.ts': {Notification: FakeNotification},
-      './signer.ts': fakeSigner,
+      './acl.js': {Acl: FakeAcl},
+      './file.js': {File: FakeFile},
+      './iam.js': {Iam: FakeIam},
+      './notification.js': {Notification: FakeNotification},
+      './signer.js': fakeSigner,
     }).Bucket;
   });
 
@@ -2607,7 +2607,7 @@ describe('Bucket', () => {
 
   describe('upload', () => {
     const basename = 'testfile.json';
-    const filepath = path.join(__dirname, 'testdata', basename);
+    const filepath = path.join(__dirname, '../../test/testdata/' + basename);
     const metadata = {
       metadata: {
         a: 'b',

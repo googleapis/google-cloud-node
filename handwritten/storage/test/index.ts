@@ -103,7 +103,7 @@ describe('Storage', () => {
       './nodejs-common': {
         Service: FakeService,
       },
-      './channel.ts': {Channel: FakeChannel},
+      './channel.js': {Channel: FakeChannel},
       './hmacKey': hmacKeyModule,
     }).Storage;
     Bucket = Storage.Bucket;
@@ -145,7 +145,7 @@ describe('Storage', () => {
       assert.deepStrictEqual(
         calledWith.packageJson,
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require('../package.json')
+        require('../../package.json')
       );
     });
 

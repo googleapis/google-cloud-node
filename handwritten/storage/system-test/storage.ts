@@ -58,7 +58,6 @@ describe('storage', () => {
   const USER_ACCOUNT = 'user-spsawchuk@gmail.com';
   const TESTS_PREFIX = `storage-tests-${shortUUID()}-`;
   const RETENTION_DURATION_SECONDS = 10;
-  const DATA_ROOT = path.join(__dirname, 'data');
 
   const storage = new Storage({
     retryOptions: {idempotencyStrategy: IdempotencyStrategy.RetryAlways},
@@ -73,14 +72,17 @@ describe('storage', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const FILES: {[index: string]: any} = {
     logo: {
-      path: path.join(DATA_ROOT, 'CloudPlatform_128px_Retina.png'),
+      path: path.join(
+        __dirname,
+        '../../system-test/data/CloudPlatform_128px_Retina.png'
+      ),
     },
     big: {
-      path: path.join(DATA_ROOT, 'three-mb-file.tif'),
+      path: path.join(__dirname, '../../system-test/data/three-mb-file.tif'),
       hash: undefined,
     },
     html: {
-      path: path.join(DATA_ROOT, 'long-html-file.html'),
+      path: path.join(__dirname, '../../system-test/data/long-html-file.html'),
     },
   };
 

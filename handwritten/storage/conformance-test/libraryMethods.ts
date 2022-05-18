@@ -183,7 +183,10 @@ export async function bucketUploadResumable(bucket: Bucket) {
     bucket.instancePreconditionOpts.ifGenerationMatch = 0;
   }
   await bucket.upload(
-    path.join(__dirname, 'test-data', 'retryStrategyTestData.json'),
+    path.join(
+      __dirname,
+      '../../conformance-test/test-data/retryStrategyTestData.json'
+    ),
     {resumable: true}
   );
 }
@@ -194,7 +197,10 @@ export async function bucketUploadMultipart(bucket: Bucket) {
     bucket.instancePreconditionOpts.ifGenerationMatch = 0;
   }
   await bucket.upload(
-    path.join(__dirname, 'test-data', 'retryStrategyTestData.json'),
+    path.join(
+      __dirname,
+      '../../conformance-test/test-data/retryStrategyTestData.json'
+    ),
     {resumable: false}
   );
 }

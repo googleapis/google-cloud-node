@@ -21,7 +21,7 @@ import {Readable} from 'stream';
 import {Bucket} from './bucket';
 import {Channel} from './channel';
 import {File} from './file';
-import {getPackageJSON, normalize} from './util';
+import {normalize} from './util';
 import {HmacKey, HmacKeyMetadata, HmacKeyOptions} from './hmacKey';
 
 export interface GetServiceAccountOptions {
@@ -614,8 +614,6 @@ export class Storage extends Service {
       maxRetryValue = options.retryOptions.maxRetries;
     }
 
-    const packageJson = getPackageJSON();
-
     const config = {
       apiEndpoint: options.apiEndpoint!,
       retryOptions: {
@@ -647,7 +645,7 @@ export class Storage extends Service {
         'https://www.googleapis.com/auth/cloud-platform',
         'https://www.googleapis.com/auth/devstorage.full_control',
       ],
-      packageJson,
+      packageJson: require('../../package.json'),
     };
 
     super(config, options);

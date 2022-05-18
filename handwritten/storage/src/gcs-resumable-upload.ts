@@ -28,13 +28,12 @@ import {Readable, Writable} from 'stream';
 import retry = require('async-retry');
 import {RetryOptions, PreconditionOptions} from './storage';
 import * as uuid from 'uuid';
-import {getPackageJSON} from './util';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const TERMINATED_UPLOAD_STATUS_CODE = 410;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 const DEFAULT_API_ENDPOINT_REGEX = /.*\.googleapis\.com/;
-const packageJson = getPackageJSON();
+const packageJson = require('../../package.json');
 
 export const PROTOCOL_REGEX = /^(\w*):\/\//;
 

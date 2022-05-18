@@ -54,7 +54,7 @@ describe('Channel', () => {
   let channel: any;
 
   before(() => {
-    Channel = proxyquire('../src/channel.ts', {
+    Channel = proxyquire('../src/channel.js', {
       '@google-cloud/promisify': fakePromisify,
       './nodejs-common': {
         ServiceObject: FakeServiceObject,

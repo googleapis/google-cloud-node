@@ -205,7 +205,7 @@ describe('File', () => {
   let BUCKET: any;
 
   before(() => {
-    File = proxyquire('../src/file.ts', {
+    File = proxyquire('../src/file.js', {
       './nodejs-common': {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
