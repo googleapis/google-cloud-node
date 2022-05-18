@@ -527,6 +527,204 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#createSavedQuery}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef CreateSavedQueryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.SavedQuery} [response] SavedQuery
+                         */
+    
+                        /**
+                         * Calls CreateSavedQuery.
+                         * @function createSavedQuery
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.ICreateSavedQueryRequest} request CreateSavedQueryRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.CreateSavedQueryCallback} callback Node-style callback called with the error, if any, and SavedQuery
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.createSavedQuery = function createSavedQuery(request, callback) {
+                            return this.rpcCall(createSavedQuery, $root.google.cloud.asset.v1.CreateSavedQueryRequest, $root.google.cloud.asset.v1.SavedQuery, request, callback);
+                        }, "name", { value: "CreateSavedQuery" });
+    
+                        /**
+                         * Calls CreateSavedQuery.
+                         * @function createSavedQuery
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.ICreateSavedQueryRequest} request CreateSavedQueryRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.SavedQuery>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#getSavedQuery}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef GetSavedQueryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.SavedQuery} [response] SavedQuery
+                         */
+    
+                        /**
+                         * Calls GetSavedQuery.
+                         * @function getSavedQuery
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IGetSavedQueryRequest} request GetSavedQueryRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.GetSavedQueryCallback} callback Node-style callback called with the error, if any, and SavedQuery
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.getSavedQuery = function getSavedQuery(request, callback) {
+                            return this.rpcCall(getSavedQuery, $root.google.cloud.asset.v1.GetSavedQueryRequest, $root.google.cloud.asset.v1.SavedQuery, request, callback);
+                        }, "name", { value: "GetSavedQuery" });
+    
+                        /**
+                         * Calls GetSavedQuery.
+                         * @function getSavedQuery
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IGetSavedQueryRequest} request GetSavedQueryRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.SavedQuery>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#listSavedQueries}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef ListSavedQueriesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.ListSavedQueriesResponse} [response] ListSavedQueriesResponse
+                         */
+    
+                        /**
+                         * Calls ListSavedQueries.
+                         * @function listSavedQueries
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IListSavedQueriesRequest} request ListSavedQueriesRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.ListSavedQueriesCallback} callback Node-style callback called with the error, if any, and ListSavedQueriesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.listSavedQueries = function listSavedQueries(request, callback) {
+                            return this.rpcCall(listSavedQueries, $root.google.cloud.asset.v1.ListSavedQueriesRequest, $root.google.cloud.asset.v1.ListSavedQueriesResponse, request, callback);
+                        }, "name", { value: "ListSavedQueries" });
+    
+                        /**
+                         * Calls ListSavedQueries.
+                         * @function listSavedQueries
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IListSavedQueriesRequest} request ListSavedQueriesRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.ListSavedQueriesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#updateSavedQuery}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef UpdateSavedQueryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.SavedQuery} [response] SavedQuery
+                         */
+    
+                        /**
+                         * Calls UpdateSavedQuery.
+                         * @function updateSavedQuery
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IUpdateSavedQueryRequest} request UpdateSavedQueryRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.UpdateSavedQueryCallback} callback Node-style callback called with the error, if any, and SavedQuery
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.updateSavedQuery = function updateSavedQuery(request, callback) {
+                            return this.rpcCall(updateSavedQuery, $root.google.cloud.asset.v1.UpdateSavedQueryRequest, $root.google.cloud.asset.v1.SavedQuery, request, callback);
+                        }, "name", { value: "UpdateSavedQuery" });
+    
+                        /**
+                         * Calls UpdateSavedQuery.
+                         * @function updateSavedQuery
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IUpdateSavedQueryRequest} request UpdateSavedQueryRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.SavedQuery>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#deleteSavedQuery}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef DeleteSavedQueryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteSavedQuery.
+                         * @function deleteSavedQuery
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IDeleteSavedQueryRequest} request DeleteSavedQueryRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.DeleteSavedQueryCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.deleteSavedQuery = function deleteSavedQuery(request, callback) {
+                            return this.rpcCall(deleteSavedQuery, $root.google.cloud.asset.v1.DeleteSavedQueryRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteSavedQuery" });
+    
+                        /**
+                         * Calls DeleteSavedQuery.
+                         * @function deleteSavedQuery
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IDeleteSavedQueryRequest} request DeleteSavedQueryRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#batchGetEffectiveIamPolicies}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef BatchGetEffectiveIamPoliciesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse} [response] BatchGetEffectiveIamPoliciesResponse
+                         */
+    
+                        /**
+                         * Calls BatchGetEffectiveIamPolicies.
+                         * @function batchGetEffectiveIamPolicies
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest} request BatchGetEffectiveIamPoliciesRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.BatchGetEffectiveIamPoliciesCallback} callback Node-style callback called with the error, if any, and BatchGetEffectiveIamPoliciesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.batchGetEffectiveIamPolicies = function batchGetEffectiveIamPolicies(request, callback) {
+                            return this.rpcCall(batchGetEffectiveIamPolicies, $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest, $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse, request, callback);
+                        }, "name", { value: "BatchGetEffectiveIamPolicies" });
+    
+                        /**
+                         * Calls BatchGetEffectiveIamPolicies.
+                         * @function batchGetEffectiveIamPolicies
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest} request BatchGetEffectiveIamPoliciesRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return AssetService;
                     })();
     
@@ -8576,6 +8774,7 @@
                          * @memberof google.cloud.asset.v1
                          * @interface IAnalyzeIamPolicyRequest
                          * @property {google.cloud.asset.v1.IIamPolicyAnalysisQuery|null} [analysisQuery] AnalyzeIamPolicyRequest analysisQuery
+                         * @property {string|null} [savedAnalysisQuery] AnalyzeIamPolicyRequest savedAnalysisQuery
                          * @property {google.protobuf.IDuration|null} [executionTimeout] AnalyzeIamPolicyRequest executionTimeout
                          */
     
@@ -8601,6 +8800,14 @@
                          * @instance
                          */
                         AnalyzeIamPolicyRequest.prototype.analysisQuery = null;
+    
+                        /**
+                         * AnalyzeIamPolicyRequest savedAnalysisQuery.
+                         * @member {string} savedAnalysisQuery
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyRequest
+                         * @instance
+                         */
+                        AnalyzeIamPolicyRequest.prototype.savedAnalysisQuery = "";
     
                         /**
                          * AnalyzeIamPolicyRequest executionTimeout.
@@ -8638,6 +8845,8 @@
                                 $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.encode(message.analysisQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.executionTimeout != null && Object.hasOwnProperty.call(message, "executionTimeout"))
                                 $root.google.protobuf.Duration.encode(message.executionTimeout, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.savedAnalysisQuery != null && Object.hasOwnProperty.call(message, "savedAnalysisQuery"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.savedAnalysisQuery);
                             return writer;
                         };
     
@@ -8674,6 +8883,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.savedAnalysisQuery = reader.string();
                                     break;
                                 case 2:
                                     message.executionTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -8718,6 +8930,9 @@
                                 if (error)
                                     return "analysisQuery." + error;
                             }
+                            if (message.savedAnalysisQuery != null && message.hasOwnProperty("savedAnalysisQuery"))
+                                if (!$util.isString(message.savedAnalysisQuery))
+                                    return "savedAnalysisQuery: string expected";
                             if (message.executionTimeout != null && message.hasOwnProperty("executionTimeout")) {
                                 var error = $root.google.protobuf.Duration.verify(message.executionTimeout);
                                 if (error)
@@ -8743,6 +8958,8 @@
                                     throw TypeError(".google.cloud.asset.v1.AnalyzeIamPolicyRequest.analysisQuery: object expected");
                                 message.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.fromObject(object.analysisQuery);
                             }
+                            if (object.savedAnalysisQuery != null)
+                                message.savedAnalysisQuery = String(object.savedAnalysisQuery);
                             if (object.executionTimeout != null) {
                                 if (typeof object.executionTimeout !== "object")
                                     throw TypeError(".google.cloud.asset.v1.AnalyzeIamPolicyRequest.executionTimeout: object expected");
@@ -8767,11 +8984,14 @@
                             if (options.defaults) {
                                 object.analysisQuery = null;
                                 object.executionTimeout = null;
+                                object.savedAnalysisQuery = "";
                             }
                             if (message.analysisQuery != null && message.hasOwnProperty("analysisQuery"))
                                 object.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.toObject(message.analysisQuery, options);
                             if (message.executionTimeout != null && message.hasOwnProperty("executionTimeout"))
                                 object.executionTimeout = $root.google.protobuf.Duration.toObject(message.executionTimeout, options);
+                            if (message.savedAnalysisQuery != null && message.hasOwnProperty("savedAnalysisQuery"))
+                                object.savedAnalysisQuery = message.savedAnalysisQuery;
                             return object;
                         };
     
@@ -10071,6 +10291,7 @@
                          * @memberof google.cloud.asset.v1
                          * @interface IAnalyzeIamPolicyLongrunningRequest
                          * @property {google.cloud.asset.v1.IIamPolicyAnalysisQuery|null} [analysisQuery] AnalyzeIamPolicyLongrunningRequest analysisQuery
+                         * @property {string|null} [savedAnalysisQuery] AnalyzeIamPolicyLongrunningRequest savedAnalysisQuery
                          * @property {google.cloud.asset.v1.IIamPolicyAnalysisOutputConfig|null} [outputConfig] AnalyzeIamPolicyLongrunningRequest outputConfig
                          */
     
@@ -10096,6 +10317,14 @@
                          * @instance
                          */
                         AnalyzeIamPolicyLongrunningRequest.prototype.analysisQuery = null;
+    
+                        /**
+                         * AnalyzeIamPolicyLongrunningRequest savedAnalysisQuery.
+                         * @member {string} savedAnalysisQuery
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest
+                         * @instance
+                         */
+                        AnalyzeIamPolicyLongrunningRequest.prototype.savedAnalysisQuery = "";
     
                         /**
                          * AnalyzeIamPolicyLongrunningRequest outputConfig.
@@ -10133,6 +10362,8 @@
                                 $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.encode(message.analysisQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
                                 $root.google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.encode(message.outputConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.savedAnalysisQuery != null && Object.hasOwnProperty.call(message, "savedAnalysisQuery"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.savedAnalysisQuery);
                             return writer;
                         };
     
@@ -10169,6 +10400,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.savedAnalysisQuery = reader.string();
                                     break;
                                 case 2:
                                     message.outputConfig = $root.google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.decode(reader, reader.uint32());
@@ -10213,6 +10447,9 @@
                                 if (error)
                                     return "analysisQuery." + error;
                             }
+                            if (message.savedAnalysisQuery != null && message.hasOwnProperty("savedAnalysisQuery"))
+                                if (!$util.isString(message.savedAnalysisQuery))
+                                    return "savedAnalysisQuery: string expected";
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
                                 var error = $root.google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.verify(message.outputConfig);
                                 if (error)
@@ -10238,6 +10475,8 @@
                                     throw TypeError(".google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest.analysisQuery: object expected");
                                 message.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.fromObject(object.analysisQuery);
                             }
+                            if (object.savedAnalysisQuery != null)
+                                message.savedAnalysisQuery = String(object.savedAnalysisQuery);
                             if (object.outputConfig != null) {
                                 if (typeof object.outputConfig !== "object")
                                     throw TypeError(".google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest.outputConfig: object expected");
@@ -10262,11 +10501,14 @@
                             if (options.defaults) {
                                 object.analysisQuery = null;
                                 object.outputConfig = null;
+                                object.savedAnalysisQuery = "";
                             }
                             if (message.analysisQuery != null && message.hasOwnProperty("analysisQuery"))
                                 object.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.toObject(message.analysisQuery, options);
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
                                 object.outputConfig = $root.google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.toObject(message.outputConfig, options);
+                            if (message.savedAnalysisQuery != null && message.hasOwnProperty("savedAnalysisQuery"))
+                                object.savedAnalysisQuery = message.savedAnalysisQuery;
                             return object;
                         };
     
@@ -10442,6 +10684,1926 @@
                         };
     
                         return AnalyzeIamPolicyLongrunningResponse;
+                    })();
+    
+                    v1.SavedQuery = (function() {
+    
+                        /**
+                         * Properties of a SavedQuery.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ISavedQuery
+                         * @property {string|null} [name] SavedQuery name
+                         * @property {string|null} [description] SavedQuery description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SavedQuery createTime
+                         * @property {string|null} [creator] SavedQuery creator
+                         * @property {google.protobuf.ITimestamp|null} [lastUpdateTime] SavedQuery lastUpdateTime
+                         * @property {string|null} [lastUpdater] SavedQuery lastUpdater
+                         * @property {Object.<string,string>|null} [labels] SavedQuery labels
+                         * @property {google.cloud.asset.v1.SavedQuery.IQueryContent|null} [content] SavedQuery content
+                         */
+    
+                        /**
+                         * Constructs a new SavedQuery.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a SavedQuery.
+                         * @implements ISavedQuery
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ISavedQuery=} [properties] Properties to set
+                         */
+                        function SavedQuery(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SavedQuery name.
+                         * @member {string} name
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         */
+                        SavedQuery.prototype.name = "";
+    
+                        /**
+                         * SavedQuery description.
+                         * @member {string} description
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         */
+                        SavedQuery.prototype.description = "";
+    
+                        /**
+                         * SavedQuery createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         */
+                        SavedQuery.prototype.createTime = null;
+    
+                        /**
+                         * SavedQuery creator.
+                         * @member {string} creator
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         */
+                        SavedQuery.prototype.creator = "";
+    
+                        /**
+                         * SavedQuery lastUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastUpdateTime
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         */
+                        SavedQuery.prototype.lastUpdateTime = null;
+    
+                        /**
+                         * SavedQuery lastUpdater.
+                         * @member {string} lastUpdater
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         */
+                        SavedQuery.prototype.lastUpdater = "";
+    
+                        /**
+                         * SavedQuery labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         */
+                        SavedQuery.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * SavedQuery content.
+                         * @member {google.cloud.asset.v1.SavedQuery.IQueryContent|null|undefined} content
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         */
+                        SavedQuery.prototype.content = null;
+    
+                        /**
+                         * Creates a new SavedQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @static
+                         * @param {google.cloud.asset.v1.ISavedQuery=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.SavedQuery} SavedQuery instance
+                         */
+                        SavedQuery.create = function create(properties) {
+                            return new SavedQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SavedQuery message. Does not implicitly {@link google.cloud.asset.v1.SavedQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @static
+                         * @param {google.cloud.asset.v1.ISavedQuery} message SavedQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SavedQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.creator != null && Object.hasOwnProperty.call(message, "creator"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.creator);
+                            if (message.lastUpdateTime != null && Object.hasOwnProperty.call(message, "lastUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.lastUpdater != null && Object.hasOwnProperty.call(message, "lastUpdater"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.lastUpdater);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                $root.google.cloud.asset.v1.SavedQuery.QueryContent.encode(message.content, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SavedQuery message, length delimited. Does not implicitly {@link google.cloud.asset.v1.SavedQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @static
+                         * @param {google.cloud.asset.v1.ISavedQuery} message SavedQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SavedQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SavedQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.SavedQuery} SavedQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SavedQuery.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SavedQuery(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.creator = reader.string();
+                                    break;
+                                case 5:
+                                    message.lastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.lastUpdater = reader.string();
+                                    break;
+                                case 7:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 8:
+                                    message.content = $root.google.cloud.asset.v1.SavedQuery.QueryContent.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SavedQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.SavedQuery} SavedQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SavedQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SavedQuery message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SavedQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.creator != null && message.hasOwnProperty("creator"))
+                                if (!$util.isString(message.creator))
+                                    return "creator: string expected";
+                            if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastUpdateTime);
+                                if (error)
+                                    return "lastUpdateTime." + error;
+                            }
+                            if (message.lastUpdater != null && message.hasOwnProperty("lastUpdater"))
+                                if (!$util.isString(message.lastUpdater))
+                                    return "lastUpdater: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.content != null && message.hasOwnProperty("content")) {
+                                var error = $root.google.cloud.asset.v1.SavedQuery.QueryContent.verify(message.content);
+                                if (error)
+                                    return "content." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SavedQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.SavedQuery} SavedQuery
+                         */
+                        SavedQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.SavedQuery)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.SavedQuery();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.SavedQuery.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.creator != null)
+                                message.creator = String(object.creator);
+                            if (object.lastUpdateTime != null) {
+                                if (typeof object.lastUpdateTime !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.SavedQuery.lastUpdateTime: object expected");
+                                message.lastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.lastUpdateTime);
+                            }
+                            if (object.lastUpdater != null)
+                                message.lastUpdater = String(object.lastUpdater);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.SavedQuery.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.content != null) {
+                                if (typeof object.content !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.SavedQuery.content: object expected");
+                                message.content = $root.google.cloud.asset.v1.SavedQuery.QueryContent.fromObject(object.content);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SavedQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @static
+                         * @param {google.cloud.asset.v1.SavedQuery} message SavedQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SavedQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.creator = "";
+                                object.lastUpdateTime = null;
+                                object.lastUpdater = "";
+                                object.content = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.creator != null && message.hasOwnProperty("creator"))
+                                object.creator = message.creator;
+                            if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime"))
+                                object.lastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastUpdateTime, options);
+                            if (message.lastUpdater != null && message.hasOwnProperty("lastUpdater"))
+                                object.lastUpdater = message.lastUpdater;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                object.content = $root.google.cloud.asset.v1.SavedQuery.QueryContent.toObject(message.content, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SavedQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.SavedQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SavedQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        SavedQuery.QueryContent = (function() {
+    
+                            /**
+                             * Properties of a QueryContent.
+                             * @memberof google.cloud.asset.v1.SavedQuery
+                             * @interface IQueryContent
+                             * @property {google.cloud.asset.v1.IIamPolicyAnalysisQuery|null} [iamPolicyAnalysisQuery] QueryContent iamPolicyAnalysisQuery
+                             */
+    
+                            /**
+                             * Constructs a new QueryContent.
+                             * @memberof google.cloud.asset.v1.SavedQuery
+                             * @classdesc Represents a QueryContent.
+                             * @implements IQueryContent
+                             * @constructor
+                             * @param {google.cloud.asset.v1.SavedQuery.IQueryContent=} [properties] Properties to set
+                             */
+                            function QueryContent(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QueryContent iamPolicyAnalysisQuery.
+                             * @member {google.cloud.asset.v1.IIamPolicyAnalysisQuery|null|undefined} iamPolicyAnalysisQuery
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @instance
+                             */
+                            QueryContent.prototype.iamPolicyAnalysisQuery = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * QueryContent queryContent.
+                             * @member {"iamPolicyAnalysisQuery"|undefined} queryContent
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @instance
+                             */
+                            Object.defineProperty(QueryContent.prototype, "queryContent", {
+                                get: $util.oneOfGetter($oneOfFields = ["iamPolicyAnalysisQuery"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new QueryContent instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @static
+                             * @param {google.cloud.asset.v1.SavedQuery.IQueryContent=} [properties] Properties to set
+                             * @returns {google.cloud.asset.v1.SavedQuery.QueryContent} QueryContent instance
+                             */
+                            QueryContent.create = function create(properties) {
+                                return new QueryContent(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QueryContent message. Does not implicitly {@link google.cloud.asset.v1.SavedQuery.QueryContent.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @static
+                             * @param {google.cloud.asset.v1.SavedQuery.IQueryContent} message QueryContent message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryContent.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.iamPolicyAnalysisQuery != null && Object.hasOwnProperty.call(message, "iamPolicyAnalysisQuery"))
+                                    $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.encode(message.iamPolicyAnalysisQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QueryContent message, length delimited. Does not implicitly {@link google.cloud.asset.v1.SavedQuery.QueryContent.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @static
+                             * @param {google.cloud.asset.v1.SavedQuery.IQueryContent} message QueryContent message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryContent.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QueryContent message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.asset.v1.SavedQuery.QueryContent} QueryContent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryContent.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SavedQuery.QueryContent();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.iamPolicyAnalysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QueryContent message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.asset.v1.SavedQuery.QueryContent} QueryContent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryContent.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QueryContent message.
+                             * @function verify
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QueryContent.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.iamPolicyAnalysisQuery != null && message.hasOwnProperty("iamPolicyAnalysisQuery")) {
+                                    properties.queryContent = 1;
+                                    {
+                                        var error = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.verify(message.iamPolicyAnalysisQuery);
+                                        if (error)
+                                            return "iamPolicyAnalysisQuery." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QueryContent message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.asset.v1.SavedQuery.QueryContent} QueryContent
+                             */
+                            QueryContent.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.asset.v1.SavedQuery.QueryContent)
+                                    return object;
+                                var message = new $root.google.cloud.asset.v1.SavedQuery.QueryContent();
+                                if (object.iamPolicyAnalysisQuery != null) {
+                                    if (typeof object.iamPolicyAnalysisQuery !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.SavedQuery.QueryContent.iamPolicyAnalysisQuery: object expected");
+                                    message.iamPolicyAnalysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.fromObject(object.iamPolicyAnalysisQuery);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QueryContent message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @static
+                             * @param {google.cloud.asset.v1.SavedQuery.QueryContent} message QueryContent
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QueryContent.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.iamPolicyAnalysisQuery != null && message.hasOwnProperty("iamPolicyAnalysisQuery")) {
+                                    object.iamPolicyAnalysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.toObject(message.iamPolicyAnalysisQuery, options);
+                                    if (options.oneofs)
+                                        object.queryContent = "iamPolicyAnalysisQuery";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QueryContent to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.asset.v1.SavedQuery.QueryContent
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QueryContent.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return QueryContent;
+                        })();
+    
+                        return SavedQuery;
+                    })();
+    
+                    v1.CreateSavedQueryRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSavedQueryRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ICreateSavedQueryRequest
+                         * @property {string|null} [parent] CreateSavedQueryRequest parent
+                         * @property {google.cloud.asset.v1.ISavedQuery|null} [savedQuery] CreateSavedQueryRequest savedQuery
+                         * @property {string|null} [savedQueryId] CreateSavedQueryRequest savedQueryId
+                         */
+    
+                        /**
+                         * Constructs a new CreateSavedQueryRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a CreateSavedQueryRequest.
+                         * @implements ICreateSavedQueryRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ICreateSavedQueryRequest=} [properties] Properties to set
+                         */
+                        function CreateSavedQueryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSavedQueryRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @instance
+                         */
+                        CreateSavedQueryRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSavedQueryRequest savedQuery.
+                         * @member {google.cloud.asset.v1.ISavedQuery|null|undefined} savedQuery
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @instance
+                         */
+                        CreateSavedQueryRequest.prototype.savedQuery = null;
+    
+                        /**
+                         * CreateSavedQueryRequest savedQueryId.
+                         * @member {string} savedQueryId
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @instance
+                         */
+                        CreateSavedQueryRequest.prototype.savedQueryId = "";
+    
+                        /**
+                         * Creates a new CreateSavedQueryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ICreateSavedQueryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.CreateSavedQueryRequest} CreateSavedQueryRequest instance
+                         */
+                        CreateSavedQueryRequest.create = function create(properties) {
+                            return new CreateSavedQueryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSavedQueryRequest message. Does not implicitly {@link google.cloud.asset.v1.CreateSavedQueryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ICreateSavedQueryRequest} message CreateSavedQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSavedQueryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.savedQuery != null && Object.hasOwnProperty.call(message, "savedQuery"))
+                                $root.google.cloud.asset.v1.SavedQuery.encode(message.savedQuery, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.savedQueryId != null && Object.hasOwnProperty.call(message, "savedQueryId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.savedQueryId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSavedQueryRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.CreateSavedQueryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ICreateSavedQueryRequest} message CreateSavedQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSavedQueryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSavedQueryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.CreateSavedQueryRequest} CreateSavedQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSavedQueryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.CreateSavedQueryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.savedQuery = $root.google.cloud.asset.v1.SavedQuery.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.savedQueryId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSavedQueryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.CreateSavedQueryRequest} CreateSavedQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSavedQueryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSavedQueryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSavedQueryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.savedQuery != null && message.hasOwnProperty("savedQuery")) {
+                                var error = $root.google.cloud.asset.v1.SavedQuery.verify(message.savedQuery);
+                                if (error)
+                                    return "savedQuery." + error;
+                            }
+                            if (message.savedQueryId != null && message.hasOwnProperty("savedQueryId"))
+                                if (!$util.isString(message.savedQueryId))
+                                    return "savedQueryId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSavedQueryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.CreateSavedQueryRequest} CreateSavedQueryRequest
+                         */
+                        CreateSavedQueryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.CreateSavedQueryRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.CreateSavedQueryRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.savedQuery != null) {
+                                if (typeof object.savedQuery !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.CreateSavedQueryRequest.savedQuery: object expected");
+                                message.savedQuery = $root.google.cloud.asset.v1.SavedQuery.fromObject(object.savedQuery);
+                            }
+                            if (object.savedQueryId != null)
+                                message.savedQueryId = String(object.savedQueryId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSavedQueryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.CreateSavedQueryRequest} message CreateSavedQueryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSavedQueryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.savedQuery = null;
+                                object.savedQueryId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.savedQuery != null && message.hasOwnProperty("savedQuery"))
+                                object.savedQuery = $root.google.cloud.asset.v1.SavedQuery.toObject(message.savedQuery, options);
+                            if (message.savedQueryId != null && message.hasOwnProperty("savedQueryId"))
+                                object.savedQueryId = message.savedQueryId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSavedQueryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.CreateSavedQueryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSavedQueryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateSavedQueryRequest;
+                    })();
+    
+                    v1.GetSavedQueryRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSavedQueryRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IGetSavedQueryRequest
+                         * @property {string|null} [name] GetSavedQueryRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSavedQueryRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a GetSavedQueryRequest.
+                         * @implements IGetSavedQueryRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IGetSavedQueryRequest=} [properties] Properties to set
+                         */
+                        function GetSavedQueryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSavedQueryRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @instance
+                         */
+                        GetSavedQueryRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSavedQueryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IGetSavedQueryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.GetSavedQueryRequest} GetSavedQueryRequest instance
+                         */
+                        GetSavedQueryRequest.create = function create(properties) {
+                            return new GetSavedQueryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSavedQueryRequest message. Does not implicitly {@link google.cloud.asset.v1.GetSavedQueryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IGetSavedQueryRequest} message GetSavedQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSavedQueryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSavedQueryRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.GetSavedQueryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IGetSavedQueryRequest} message GetSavedQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSavedQueryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSavedQueryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.GetSavedQueryRequest} GetSavedQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSavedQueryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.GetSavedQueryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSavedQueryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.GetSavedQueryRequest} GetSavedQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSavedQueryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSavedQueryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSavedQueryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSavedQueryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.GetSavedQueryRequest} GetSavedQueryRequest
+                         */
+                        GetSavedQueryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.GetSavedQueryRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.GetSavedQueryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSavedQueryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.GetSavedQueryRequest} message GetSavedQueryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSavedQueryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSavedQueryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.GetSavedQueryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSavedQueryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetSavedQueryRequest;
+                    })();
+    
+                    v1.ListSavedQueriesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSavedQueriesRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IListSavedQueriesRequest
+                         * @property {string|null} [parent] ListSavedQueriesRequest parent
+                         * @property {string|null} [filter] ListSavedQueriesRequest filter
+                         * @property {number|null} [pageSize] ListSavedQueriesRequest pageSize
+                         * @property {string|null} [pageToken] ListSavedQueriesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSavedQueriesRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a ListSavedQueriesRequest.
+                         * @implements IListSavedQueriesRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IListSavedQueriesRequest=} [properties] Properties to set
+                         */
+                        function ListSavedQueriesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSavedQueriesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @instance
+                         */
+                        ListSavedQueriesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSavedQueriesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @instance
+                         */
+                        ListSavedQueriesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListSavedQueriesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @instance
+                         */
+                        ListSavedQueriesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSavedQueriesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @instance
+                         */
+                        ListSavedQueriesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSavedQueriesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IListSavedQueriesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.ListSavedQueriesRequest} ListSavedQueriesRequest instance
+                         */
+                        ListSavedQueriesRequest.create = function create(properties) {
+                            return new ListSavedQueriesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSavedQueriesRequest message. Does not implicitly {@link google.cloud.asset.v1.ListSavedQueriesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IListSavedQueriesRequest} message ListSavedQueriesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSavedQueriesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSavedQueriesRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ListSavedQueriesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IListSavedQueriesRequest} message ListSavedQueriesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSavedQueriesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSavedQueriesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.ListSavedQueriesRequest} ListSavedQueriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSavedQueriesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListSavedQueriesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSavedQueriesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.ListSavedQueriesRequest} ListSavedQueriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSavedQueriesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSavedQueriesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSavedQueriesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSavedQueriesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.ListSavedQueriesRequest} ListSavedQueriesRequest
+                         */
+                        ListSavedQueriesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.ListSavedQueriesRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.ListSavedQueriesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSavedQueriesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ListSavedQueriesRequest} message ListSavedQueriesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSavedQueriesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSavedQueriesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSavedQueriesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListSavedQueriesRequest;
+                    })();
+    
+                    v1.ListSavedQueriesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSavedQueriesResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IListSavedQueriesResponse
+                         * @property {Array.<google.cloud.asset.v1.ISavedQuery>|null} [savedQueries] ListSavedQueriesResponse savedQueries
+                         * @property {string|null} [nextPageToken] ListSavedQueriesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSavedQueriesResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a ListSavedQueriesResponse.
+                         * @implements IListSavedQueriesResponse
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IListSavedQueriesResponse=} [properties] Properties to set
+                         */
+                        function ListSavedQueriesResponse(properties) {
+                            this.savedQueries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSavedQueriesResponse savedQueries.
+                         * @member {Array.<google.cloud.asset.v1.ISavedQuery>} savedQueries
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @instance
+                         */
+                        ListSavedQueriesResponse.prototype.savedQueries = $util.emptyArray;
+    
+                        /**
+                         * ListSavedQueriesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @instance
+                         */
+                        ListSavedQueriesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSavedQueriesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IListSavedQueriesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.ListSavedQueriesResponse} ListSavedQueriesResponse instance
+                         */
+                        ListSavedQueriesResponse.create = function create(properties) {
+                            return new ListSavedQueriesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSavedQueriesResponse message. Does not implicitly {@link google.cloud.asset.v1.ListSavedQueriesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IListSavedQueriesResponse} message ListSavedQueriesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSavedQueriesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.savedQueries != null && message.savedQueries.length)
+                                for (var i = 0; i < message.savedQueries.length; ++i)
+                                    $root.google.cloud.asset.v1.SavedQuery.encode(message.savedQueries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSavedQueriesResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ListSavedQueriesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IListSavedQueriesResponse} message ListSavedQueriesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSavedQueriesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSavedQueriesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.ListSavedQueriesResponse} ListSavedQueriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSavedQueriesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListSavedQueriesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.savedQueries && message.savedQueries.length))
+                                        message.savedQueries = [];
+                                    message.savedQueries.push($root.google.cloud.asset.v1.SavedQuery.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSavedQueriesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.ListSavedQueriesResponse} ListSavedQueriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSavedQueriesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSavedQueriesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSavedQueriesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.savedQueries != null && message.hasOwnProperty("savedQueries")) {
+                                if (!Array.isArray(message.savedQueries))
+                                    return "savedQueries: array expected";
+                                for (var i = 0; i < message.savedQueries.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.SavedQuery.verify(message.savedQueries[i]);
+                                    if (error)
+                                        return "savedQueries." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSavedQueriesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.ListSavedQueriesResponse} ListSavedQueriesResponse
+                         */
+                        ListSavedQueriesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.ListSavedQueriesResponse)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.ListSavedQueriesResponse();
+                            if (object.savedQueries) {
+                                if (!Array.isArray(object.savedQueries))
+                                    throw TypeError(".google.cloud.asset.v1.ListSavedQueriesResponse.savedQueries: array expected");
+                                message.savedQueries = [];
+                                for (var i = 0; i < object.savedQueries.length; ++i) {
+                                    if (typeof object.savedQueries[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.ListSavedQueriesResponse.savedQueries: object expected");
+                                    message.savedQueries[i] = $root.google.cloud.asset.v1.SavedQuery.fromObject(object.savedQueries[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSavedQueriesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.ListSavedQueriesResponse} message ListSavedQueriesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSavedQueriesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.savedQueries = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.savedQueries && message.savedQueries.length) {
+                                object.savedQueries = [];
+                                for (var j = 0; j < message.savedQueries.length; ++j)
+                                    object.savedQueries[j] = $root.google.cloud.asset.v1.SavedQuery.toObject(message.savedQueries[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSavedQueriesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.ListSavedQueriesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSavedQueriesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListSavedQueriesResponse;
+                    })();
+    
+                    v1.UpdateSavedQueryRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSavedQueryRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IUpdateSavedQueryRequest
+                         * @property {google.cloud.asset.v1.ISavedQuery|null} [savedQuery] UpdateSavedQueryRequest savedQuery
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSavedQueryRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSavedQueryRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an UpdateSavedQueryRequest.
+                         * @implements IUpdateSavedQueryRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IUpdateSavedQueryRequest=} [properties] Properties to set
+                         */
+                        function UpdateSavedQueryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSavedQueryRequest savedQuery.
+                         * @member {google.cloud.asset.v1.ISavedQuery|null|undefined} savedQuery
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @instance
+                         */
+                        UpdateSavedQueryRequest.prototype.savedQuery = null;
+    
+                        /**
+                         * UpdateSavedQueryRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @instance
+                         */
+                        UpdateSavedQueryRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateSavedQueryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IUpdateSavedQueryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.UpdateSavedQueryRequest} UpdateSavedQueryRequest instance
+                         */
+                        UpdateSavedQueryRequest.create = function create(properties) {
+                            return new UpdateSavedQueryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSavedQueryRequest message. Does not implicitly {@link google.cloud.asset.v1.UpdateSavedQueryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IUpdateSavedQueryRequest} message UpdateSavedQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSavedQueryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.savedQuery != null && Object.hasOwnProperty.call(message, "savedQuery"))
+                                $root.google.cloud.asset.v1.SavedQuery.encode(message.savedQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSavedQueryRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.UpdateSavedQueryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IUpdateSavedQueryRequest} message UpdateSavedQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSavedQueryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSavedQueryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.UpdateSavedQueryRequest} UpdateSavedQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSavedQueryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.UpdateSavedQueryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.savedQuery = $root.google.cloud.asset.v1.SavedQuery.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSavedQueryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.UpdateSavedQueryRequest} UpdateSavedQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSavedQueryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSavedQueryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSavedQueryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.savedQuery != null && message.hasOwnProperty("savedQuery")) {
+                                var error = $root.google.cloud.asset.v1.SavedQuery.verify(message.savedQuery);
+                                if (error)
+                                    return "savedQuery." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSavedQueryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.UpdateSavedQueryRequest} UpdateSavedQueryRequest
+                         */
+                        UpdateSavedQueryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.UpdateSavedQueryRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.UpdateSavedQueryRequest();
+                            if (object.savedQuery != null) {
+                                if (typeof object.savedQuery !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.UpdateSavedQueryRequest.savedQuery: object expected");
+                                message.savedQuery = $root.google.cloud.asset.v1.SavedQuery.fromObject(object.savedQuery);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.UpdateSavedQueryRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSavedQueryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.UpdateSavedQueryRequest} message UpdateSavedQueryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSavedQueryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.savedQuery = null;
+                                object.updateMask = null;
+                            }
+                            if (message.savedQuery != null && message.hasOwnProperty("savedQuery"))
+                                object.savedQuery = $root.google.cloud.asset.v1.SavedQuery.toObject(message.savedQuery, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSavedQueryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.UpdateSavedQueryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSavedQueryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateSavedQueryRequest;
+                    })();
+    
+                    v1.DeleteSavedQueryRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSavedQueryRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IDeleteSavedQueryRequest
+                         * @property {string|null} [name] DeleteSavedQueryRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSavedQueryRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a DeleteSavedQueryRequest.
+                         * @implements IDeleteSavedQueryRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IDeleteSavedQueryRequest=} [properties] Properties to set
+                         */
+                        function DeleteSavedQueryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSavedQueryRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @instance
+                         */
+                        DeleteSavedQueryRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSavedQueryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IDeleteSavedQueryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.DeleteSavedQueryRequest} DeleteSavedQueryRequest instance
+                         */
+                        DeleteSavedQueryRequest.create = function create(properties) {
+                            return new DeleteSavedQueryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSavedQueryRequest message. Does not implicitly {@link google.cloud.asset.v1.DeleteSavedQueryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IDeleteSavedQueryRequest} message DeleteSavedQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSavedQueryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSavedQueryRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.DeleteSavedQueryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IDeleteSavedQueryRequest} message DeleteSavedQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSavedQueryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSavedQueryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.DeleteSavedQueryRequest} DeleteSavedQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSavedQueryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.DeleteSavedQueryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSavedQueryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.DeleteSavedQueryRequest} DeleteSavedQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSavedQueryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSavedQueryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSavedQueryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSavedQueryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.DeleteSavedQueryRequest} DeleteSavedQueryRequest
+                         */
+                        DeleteSavedQueryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.DeleteSavedQueryRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.DeleteSavedQueryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSavedQueryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.DeleteSavedQueryRequest} message DeleteSavedQueryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSavedQueryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSavedQueryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.DeleteSavedQueryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSavedQueryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteSavedQueryRequest;
                     })();
     
                     v1.AnalyzeMoveRequest = (function() {
@@ -11649,6 +13811,886 @@
                         return values;
                     })();
     
+                    v1.BatchGetEffectiveIamPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchGetEffectiveIamPoliciesRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IBatchGetEffectiveIamPoliciesRequest
+                         * @property {string|null} [scope] BatchGetEffectiveIamPoliciesRequest scope
+                         * @property {Array.<string>|null} [names] BatchGetEffectiveIamPoliciesRequest names
+                         */
+    
+                        /**
+                         * Constructs a new BatchGetEffectiveIamPoliciesRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a BatchGetEffectiveIamPoliciesRequest.
+                         * @implements IBatchGetEffectiveIamPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest=} [properties] Properties to set
+                         */
+                        function BatchGetEffectiveIamPoliciesRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchGetEffectiveIamPoliciesRequest scope.
+                         * @member {string} scope
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @instance
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.prototype.scope = "";
+    
+                        /**
+                         * BatchGetEffectiveIamPoliciesRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @instance
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchGetEffectiveIamPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest} BatchGetEffectiveIamPoliciesRequest instance
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.create = function create(properties) {
+                            return new BatchGetEffectiveIamPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchGetEffectiveIamPoliciesRequest message. Does not implicitly {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest} message BatchGetEffectiveIamPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.scope);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.names[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchGetEffectiveIamPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest} message BatchGetEffectiveIamPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchGetEffectiveIamPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest} BatchGetEffectiveIamPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.scope = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.names && message.names.length))
+                                        message.names = [];
+                                    message.names.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchGetEffectiveIamPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest} BatchGetEffectiveIamPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchGetEffectiveIamPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                if (!$util.isString(message.scope))
+                                    return "scope: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchGetEffectiveIamPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest} BatchGetEffectiveIamPoliciesRequest
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest();
+                            if (object.scope != null)
+                                message.scope = String(object.scope);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchGetEffectiveIamPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest} message BatchGetEffectiveIamPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults)
+                                object.scope = "";
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                object.scope = message.scope;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchGetEffectiveIamPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchGetEffectiveIamPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchGetEffectiveIamPoliciesRequest;
+                    })();
+    
+                    v1.BatchGetEffectiveIamPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchGetEffectiveIamPoliciesResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IBatchGetEffectiveIamPoliciesResponse
+                         * @property {Array.<google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.IEffectiveIamPolicy>|null} [policyResults] BatchGetEffectiveIamPoliciesResponse policyResults
+                         */
+    
+                        /**
+                         * Constructs a new BatchGetEffectiveIamPoliciesResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a BatchGetEffectiveIamPoliciesResponse.
+                         * @implements IBatchGetEffectiveIamPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse=} [properties] Properties to set
+                         */
+                        function BatchGetEffectiveIamPoliciesResponse(properties) {
+                            this.policyResults = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchGetEffectiveIamPoliciesResponse policyResults.
+                         * @member {Array.<google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.IEffectiveIamPolicy>} policyResults
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @instance
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.prototype.policyResults = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchGetEffectiveIamPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse} BatchGetEffectiveIamPoliciesResponse instance
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.create = function create(properties) {
+                            return new BatchGetEffectiveIamPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchGetEffectiveIamPoliciesResponse message. Does not implicitly {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse} message BatchGetEffectiveIamPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.policyResults != null && message.policyResults.length)
+                                for (var i = 0; i < message.policyResults.length; ++i)
+                                    $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.encode(message.policyResults[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchGetEffectiveIamPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse} message BatchGetEffectiveIamPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchGetEffectiveIamPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse} BatchGetEffectiveIamPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    if (!(message.policyResults && message.policyResults.length))
+                                        message.policyResults = [];
+                                    message.policyResults.push($root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchGetEffectiveIamPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse} BatchGetEffectiveIamPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchGetEffectiveIamPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.policyResults != null && message.hasOwnProperty("policyResults")) {
+                                if (!Array.isArray(message.policyResults))
+                                    return "policyResults: array expected";
+                                for (var i = 0; i < message.policyResults.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.verify(message.policyResults[i]);
+                                    if (error)
+                                        return "policyResults." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchGetEffectiveIamPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse} BatchGetEffectiveIamPoliciesResponse
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse();
+                            if (object.policyResults) {
+                                if (!Array.isArray(object.policyResults))
+                                    throw TypeError(".google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.policyResults: array expected");
+                                message.policyResults = [];
+                                for (var i = 0; i < object.policyResults.length; ++i) {
+                                    if (typeof object.policyResults[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.policyResults: object expected");
+                                    message.policyResults[i] = $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.fromObject(object.policyResults[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchGetEffectiveIamPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse} message BatchGetEffectiveIamPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.policyResults = [];
+                            if (message.policyResults && message.policyResults.length) {
+                                object.policyResults = [];
+                                for (var j = 0; j < message.policyResults.length; ++j)
+                                    object.policyResults[j] = $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.toObject(message.policyResults[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchGetEffectiveIamPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchGetEffectiveIamPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy = (function() {
+    
+                            /**
+                             * Properties of an EffectiveIamPolicy.
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                             * @interface IEffectiveIamPolicy
+                             * @property {string|null} [fullResourceName] EffectiveIamPolicy fullResourceName
+                             * @property {Array.<google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.IPolicyInfo>|null} [policies] EffectiveIamPolicy policies
+                             */
+    
+                            /**
+                             * Constructs a new EffectiveIamPolicy.
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse
+                             * @classdesc Represents an EffectiveIamPolicy.
+                             * @implements IEffectiveIamPolicy
+                             * @constructor
+                             * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.IEffectiveIamPolicy=} [properties] Properties to set
+                             */
+                            function EffectiveIamPolicy(properties) {
+                                this.policies = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EffectiveIamPolicy fullResourceName.
+                             * @member {string} fullResourceName
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @instance
+                             */
+                            EffectiveIamPolicy.prototype.fullResourceName = "";
+    
+                            /**
+                             * EffectiveIamPolicy policies.
+                             * @member {Array.<google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.IPolicyInfo>} policies
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @instance
+                             */
+                            EffectiveIamPolicy.prototype.policies = $util.emptyArray;
+    
+                            /**
+                             * Creates a new EffectiveIamPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @static
+                             * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.IEffectiveIamPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy} EffectiveIamPolicy instance
+                             */
+                            EffectiveIamPolicy.create = function create(properties) {
+                                return new EffectiveIamPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EffectiveIamPolicy message. Does not implicitly {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @static
+                             * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.IEffectiveIamPolicy} message EffectiveIamPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EffectiveIamPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.fullResourceName);
+                                if (message.policies != null && message.policies.length)
+                                    for (var i = 0; i < message.policies.length; ++i)
+                                        $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.encode(message.policies[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EffectiveIamPolicy message, length delimited. Does not implicitly {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @static
+                             * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.IEffectiveIamPolicy} message EffectiveIamPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EffectiveIamPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EffectiveIamPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy} EffectiveIamPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EffectiveIamPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.fullResourceName = reader.string();
+                                        break;
+                                    case 2:
+                                        if (!(message.policies && message.policies.length))
+                                            message.policies = [];
+                                        message.policies.push($root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EffectiveIamPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy} EffectiveIamPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EffectiveIamPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EffectiveIamPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EffectiveIamPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                    if (!$util.isString(message.fullResourceName))
+                                        return "fullResourceName: string expected";
+                                if (message.policies != null && message.hasOwnProperty("policies")) {
+                                    if (!Array.isArray(message.policies))
+                                        return "policies: array expected";
+                                    for (var i = 0; i < message.policies.length; ++i) {
+                                        var error = $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.verify(message.policies[i]);
+                                        if (error)
+                                            return "policies." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EffectiveIamPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy} EffectiveIamPolicy
+                             */
+                            EffectiveIamPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy();
+                                if (object.fullResourceName != null)
+                                    message.fullResourceName = String(object.fullResourceName);
+                                if (object.policies) {
+                                    if (!Array.isArray(object.policies))
+                                        throw TypeError(".google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.policies: array expected");
+                                    message.policies = [];
+                                    for (var i = 0; i < object.policies.length; ++i) {
+                                        if (typeof object.policies[i] !== "object")
+                                            throw TypeError(".google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.policies: object expected");
+                                        message.policies[i] = $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.fromObject(object.policies[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EffectiveIamPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @static
+                             * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy} message EffectiveIamPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EffectiveIamPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.policies = [];
+                                if (options.defaults)
+                                    object.fullResourceName = "";
+                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                    object.fullResourceName = message.fullResourceName;
+                                if (message.policies && message.policies.length) {
+                                    object.policies = [];
+                                    for (var j = 0; j < message.policies.length; ++j)
+                                        object.policies[j] = $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.toObject(message.policies[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EffectiveIamPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EffectiveIamPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            EffectiveIamPolicy.PolicyInfo = (function() {
+    
+                                /**
+                                 * Properties of a PolicyInfo.
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                                 * @interface IPolicyInfo
+                                 * @property {string|null} [attachedResource] PolicyInfo attachedResource
+                                 * @property {google.iam.v1.IPolicy|null} [policy] PolicyInfo policy
+                                 */
+    
+                                /**
+                                 * Constructs a new PolicyInfo.
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy
+                                 * @classdesc Represents a PolicyInfo.
+                                 * @implements IPolicyInfo
+                                 * @constructor
+                                 * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.IPolicyInfo=} [properties] Properties to set
+                                 */
+                                function PolicyInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * PolicyInfo attachedResource.
+                                 * @member {string} attachedResource
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @instance
+                                 */
+                                PolicyInfo.prototype.attachedResource = "";
+    
+                                /**
+                                 * PolicyInfo policy.
+                                 * @member {google.iam.v1.IPolicy|null|undefined} policy
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @instance
+                                 */
+                                PolicyInfo.prototype.policy = null;
+    
+                                /**
+                                 * Creates a new PolicyInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @static
+                                 * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.IPolicyInfo=} [properties] Properties to set
+                                 * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo} PolicyInfo instance
+                                 */
+                                PolicyInfo.create = function create(properties) {
+                                    return new PolicyInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PolicyInfo message. Does not implicitly {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @static
+                                 * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.IPolicyInfo} message PolicyInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PolicyInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.attachedResource != null && Object.hasOwnProperty.call(message, "attachedResource"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.attachedResource);
+                                    if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                                        $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PolicyInfo message, length delimited. Does not implicitly {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @static
+                                 * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.IPolicyInfo} message PolicyInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PolicyInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PolicyInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo} PolicyInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PolicyInfo.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.attachedResource = reader.string();
+                                            break;
+                                        case 2:
+                                            message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PolicyInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo} PolicyInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PolicyInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PolicyInfo message.
+                                 * @function verify
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PolicyInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.attachedResource != null && message.hasOwnProperty("attachedResource"))
+                                        if (!$util.isString(message.attachedResource))
+                                            return "attachedResource: string expected";
+                                    if (message.policy != null && message.hasOwnProperty("policy")) {
+                                        var error = $root.google.iam.v1.Policy.verify(message.policy);
+                                        if (error)
+                                            return "policy." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PolicyInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo} PolicyInfo
+                                 */
+                                PolicyInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo)
+                                        return object;
+                                    var message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo();
+                                    if (object.attachedResource != null)
+                                        message.attachedResource = String(object.attachedResource);
+                                    if (object.policy != null) {
+                                        if (typeof object.policy !== "object")
+                                            throw TypeError(".google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.policy: object expected");
+                                        message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PolicyInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @static
+                                 * @param {google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo} message PolicyInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PolicyInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.attachedResource = "";
+                                        object.policy = null;
+                                    }
+                                    if (message.attachedResource != null && message.hasOwnProperty("attachedResource"))
+                                        object.attachedResource = message.attachedResource;
+                                    if (message.policy != null && message.hasOwnProperty("policy"))
+                                        object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this PolicyInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PolicyInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return PolicyInfo;
+                            })();
+    
+                            return EffectiveIamPolicy;
+                        })();
+    
+                        return BatchGetEffectiveIamPoliciesResponse;
+                    })();
+    
                     v1.TemporalAsset = (function() {
     
                         /**
@@ -12225,6 +15267,7 @@
                          * @property {google.identity.accesscontextmanager.v1.IServicePerimeter|null} [servicePerimeter] Asset servicePerimeter
                          * @property {google.cloud.osconfig.v1.IInventory|null} [osInventory] Asset osInventory
                          * @property {google.cloud.asset.v1.IRelatedAssets|null} [relatedAssets] Asset relatedAssets
+                         * @property {google.cloud.asset.v1.IRelatedAsset|null} [relatedAsset] Asset relatedAsset
                          * @property {Array.<string>|null} [ancestors] Asset ancestors
                          */
     
@@ -12334,6 +15377,14 @@
                         Asset.prototype.relatedAssets = null;
     
                         /**
+                         * Asset relatedAsset.
+                         * @member {google.cloud.asset.v1.IRelatedAsset|null|undefined} relatedAsset
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.relatedAsset = null;
+    
+                        /**
                          * Asset ancestors.
                          * @member {Array.<string>} ancestors
                          * @memberof google.cloud.asset.v1.Asset
@@ -12405,6 +15456,8 @@
                                 $root.google.cloud.osconfig.v1.Inventory.encode(message.osInventory, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.relatedAssets != null && Object.hasOwnProperty.call(message, "relatedAssets"))
                                 $root.google.cloud.asset.v1.RelatedAssets.encode(message.relatedAssets, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.relatedAsset != null && Object.hasOwnProperty.call(message, "relatedAsset"))
+                                $root.google.cloud.asset.v1.RelatedAsset.encode(message.relatedAsset, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -12473,6 +15526,9 @@
                                     break;
                                 case 13:
                                     message.relatedAssets = $root.google.cloud.asset.v1.RelatedAssets.decode(reader, reader.uint32());
+                                    break;
+                                case 15:
+                                    message.relatedAsset = $root.google.cloud.asset.v1.RelatedAsset.decode(reader, reader.uint32());
                                     break;
                                 case 10:
                                     if (!(message.ancestors && message.ancestors.length))
@@ -12583,6 +15639,11 @@
                                 if (error)
                                     return "relatedAssets." + error;
                             }
+                            if (message.relatedAsset != null && message.hasOwnProperty("relatedAsset")) {
+                                var error = $root.google.cloud.asset.v1.RelatedAsset.verify(message.relatedAsset);
+                                if (error)
+                                    return "relatedAsset." + error;
+                            }
                             if (message.ancestors != null && message.hasOwnProperty("ancestors")) {
                                 if (!Array.isArray(message.ancestors))
                                     return "ancestors: array expected";
@@ -12659,6 +15720,11 @@
                                     throw TypeError(".google.cloud.asset.v1.Asset.relatedAssets: object expected");
                                 message.relatedAssets = $root.google.cloud.asset.v1.RelatedAssets.fromObject(object.relatedAssets);
                             }
+                            if (object.relatedAsset != null) {
+                                if (typeof object.relatedAsset !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Asset.relatedAsset: object expected");
+                                message.relatedAsset = $root.google.cloud.asset.v1.RelatedAsset.fromObject(object.relatedAsset);
+                            }
                             if (object.ancestors) {
                                 if (!Array.isArray(object.ancestors))
                                     throw TypeError(".google.cloud.asset.v1.Asset.ancestors: array expected");
@@ -12694,6 +15760,7 @@
                                 object.updateTime = null;
                                 object.osInventory = null;
                                 object.relatedAssets = null;
+                                object.relatedAsset = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12734,6 +15801,8 @@
                                 object.osInventory = $root.google.cloud.osconfig.v1.Inventory.toObject(message.osInventory, options);
                             if (message.relatedAssets != null && message.hasOwnProperty("relatedAssets"))
                                 object.relatedAssets = $root.google.cloud.asset.v1.RelatedAssets.toObject(message.relatedAssets, options);
+                            if (message.relatedAsset != null && message.hasOwnProperty("relatedAsset"))
+                                object.relatedAsset = $root.google.cloud.asset.v1.RelatedAsset.toObject(message.relatedAsset, options);
                             return object;
                         };
     
@@ -13575,6 +16644,7 @@
                          * @property {string|null} [asset] RelatedAsset asset
                          * @property {string|null} [assetType] RelatedAsset assetType
                          * @property {Array.<string>|null} [ancestors] RelatedAsset ancestors
+                         * @property {string|null} [relationshipType] RelatedAsset relationshipType
                          */
     
                         /**
@@ -13618,6 +16688,14 @@
                         RelatedAsset.prototype.ancestors = $util.emptyArray;
     
                         /**
+                         * RelatedAsset relationshipType.
+                         * @member {string} relationshipType
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @instance
+                         */
+                        RelatedAsset.prototype.relationshipType = "";
+    
+                        /**
                          * Creates a new RelatedAsset instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.RelatedAsset
@@ -13648,6 +16726,8 @@
                             if (message.ancestors != null && message.ancestors.length)
                                 for (var i = 0; i < message.ancestors.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.ancestors[i]);
+                            if (message.relationshipType != null && Object.hasOwnProperty.call(message, "relationshipType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.relationshipType);
                             return writer;
                         };
     
@@ -13692,6 +16772,9 @@
                                     if (!(message.ancestors && message.ancestors.length))
                                         message.ancestors = [];
                                     message.ancestors.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.relationshipType = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -13741,6 +16824,9 @@
                                     if (!$util.isString(message.ancestors[i]))
                                         return "ancestors: string[] expected";
                             }
+                            if (message.relationshipType != null && message.hasOwnProperty("relationshipType"))
+                                if (!$util.isString(message.relationshipType))
+                                    return "relationshipType: string expected";
                             return null;
                         };
     
@@ -13767,6 +16853,8 @@
                                 for (var i = 0; i < object.ancestors.length; ++i)
                                     message.ancestors[i] = String(object.ancestors[i]);
                             }
+                            if (object.relationshipType != null)
+                                message.relationshipType = String(object.relationshipType);
                             return message;
                         };
     
@@ -13788,6 +16876,7 @@
                             if (options.defaults) {
                                 object.asset = "";
                                 object.assetType = "";
+                                object.relationshipType = "";
                             }
                             if (message.asset != null && message.hasOwnProperty("asset"))
                                 object.asset = message.asset;
@@ -13798,6 +16887,8 @@
                                 for (var j = 0; j < message.ancestors.length; ++j)
                                     object.ancestors[j] = message.ancestors[j];
                             }
+                            if (message.relationshipType != null && message.hasOwnProperty("relationshipType"))
+                                object.relationshipType = message.relationshipType;
                             return object;
                         };
     
@@ -13840,6 +16931,9 @@
                          * @property {Array.<google.cloud.asset.v1.IVersionedResource>|null} [versionedResources] ResourceSearchResult versionedResources
                          * @property {Array.<google.cloud.asset.v1.IAttachedResource>|null} [attachedResources] ResourceSearchResult attachedResources
                          * @property {Object.<string,google.cloud.asset.v1.IRelatedResources>|null} [relationships] ResourceSearchResult relationships
+                         * @property {Array.<string>|null} [tagKeys] ResourceSearchResult tagKeys
+                         * @property {Array.<string>|null} [tagValues] ResourceSearchResult tagValues
+                         * @property {Array.<string>|null} [tagValueIds] ResourceSearchResult tagValueIds
                          * @property {string|null} [parentAssetType] ResourceSearchResult parentAssetType
                          */
     
@@ -13858,6 +16952,9 @@
                             this.versionedResources = [];
                             this.attachedResources = [];
                             this.relationships = {};
+                            this.tagKeys = [];
+                            this.tagValues = [];
+                            this.tagValueIds = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -14017,6 +17114,30 @@
                         ResourceSearchResult.prototype.relationships = $util.emptyObject;
     
                         /**
+                         * ResourceSearchResult tagKeys.
+                         * @member {Array.<string>} tagKeys
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.tagKeys = $util.emptyArray;
+    
+                        /**
+                         * ResourceSearchResult tagValues.
+                         * @member {Array.<string>} tagValues
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.tagValues = $util.emptyArray;
+    
+                        /**
+                         * ResourceSearchResult tagValueIds.
+                         * @member {Array.<string>} tagValueIds
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.tagValueIds = $util.emptyArray;
+    
+                        /**
                          * ResourceSearchResult parentAssetType.
                          * @member {string} parentAssetType
                          * @memberof google.cloud.asset.v1.ResourceSearchResult
@@ -14094,6 +17215,15 @@
                                     writer.uint32(/* id 21, wireType 2 =*/170).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.asset.v1.RelatedResources.encode(message.relationships[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.tagKeys != null && message.tagKeys.length)
+                                for (var i = 0; i < message.tagKeys.length; ++i)
+                                    writer.uint32(/* id 23, wireType 2 =*/186).string(message.tagKeys[i]);
+                            if (message.tagValues != null && message.tagValues.length)
+                                for (var i = 0; i < message.tagValues.length; ++i)
+                                    writer.uint32(/* id 25, wireType 2 =*/202).string(message.tagValues[i]);
+                            if (message.tagValueIds != null && message.tagValueIds.length)
+                                for (var i = 0; i < message.tagValueIds.length; ++i)
+                                    writer.uint32(/* id 26, wireType 2 =*/210).string(message.tagValueIds[i]);
                             if (message.parentAssetType != null && Object.hasOwnProperty.call(message, "parentAssetType"))
                                 writer.uint32(/* id 103, wireType 2 =*/826).string(message.parentAssetType);
                             return writer;
@@ -14233,6 +17363,21 @@
                                     }
                                     message.relationships[key] = value;
                                     break;
+                                case 23:
+                                    if (!(message.tagKeys && message.tagKeys.length))
+                                        message.tagKeys = [];
+                                    message.tagKeys.push(reader.string());
+                                    break;
+                                case 25:
+                                    if (!(message.tagValues && message.tagValues.length))
+                                        message.tagValues = [];
+                                    message.tagValues.push(reader.string());
+                                    break;
+                                case 26:
+                                    if (!(message.tagValueIds && message.tagValueIds.length))
+                                        message.tagValueIds = [];
+                                    message.tagValueIds.push(reader.string());
+                                    break;
                                 case 103:
                                     message.parentAssetType = reader.string();
                                     break;
@@ -14366,6 +17511,27 @@
                                         return "relationships." + error;
                                 }
                             }
+                            if (message.tagKeys != null && message.hasOwnProperty("tagKeys")) {
+                                if (!Array.isArray(message.tagKeys))
+                                    return "tagKeys: array expected";
+                                for (var i = 0; i < message.tagKeys.length; ++i)
+                                    if (!$util.isString(message.tagKeys[i]))
+                                        return "tagKeys: string[] expected";
+                            }
+                            if (message.tagValues != null && message.hasOwnProperty("tagValues")) {
+                                if (!Array.isArray(message.tagValues))
+                                    return "tagValues: array expected";
+                                for (var i = 0; i < message.tagValues.length; ++i)
+                                    if (!$util.isString(message.tagValues[i]))
+                                        return "tagValues: string[] expected";
+                            }
+                            if (message.tagValueIds != null && message.hasOwnProperty("tagValueIds")) {
+                                if (!Array.isArray(message.tagValueIds))
+                                    return "tagValueIds: array expected";
+                                for (var i = 0; i < message.tagValueIds.length; ++i)
+                                    if (!$util.isString(message.tagValueIds[i]))
+                                        return "tagValueIds: string[] expected";
+                            }
                             if (message.parentAssetType != null && message.hasOwnProperty("parentAssetType"))
                                 if (!$util.isString(message.parentAssetType))
                                     return "parentAssetType: string expected";
@@ -14470,6 +17636,27 @@
                                     message.relationships[keys[i]] = $root.google.cloud.asset.v1.RelatedResources.fromObject(object.relationships[keys[i]]);
                                 }
                             }
+                            if (object.tagKeys) {
+                                if (!Array.isArray(object.tagKeys))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.tagKeys: array expected");
+                                message.tagKeys = [];
+                                for (var i = 0; i < object.tagKeys.length; ++i)
+                                    message.tagKeys[i] = String(object.tagKeys[i]);
+                            }
+                            if (object.tagValues) {
+                                if (!Array.isArray(object.tagValues))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.tagValues: array expected");
+                                message.tagValues = [];
+                                for (var i = 0; i < object.tagValues.length; ++i)
+                                    message.tagValues[i] = String(object.tagValues[i]);
+                            }
+                            if (object.tagValueIds) {
+                                if (!Array.isArray(object.tagValueIds))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.tagValueIds: array expected");
+                                message.tagValueIds = [];
+                                for (var i = 0; i < object.tagValueIds.length; ++i)
+                                    message.tagValueIds[i] = String(object.tagValueIds[i]);
+                            }
                             if (object.parentAssetType != null)
                                 message.parentAssetType = String(object.parentAssetType);
                             return message;
@@ -14493,6 +17680,9 @@
                                 object.versionedResources = [];
                                 object.folders = [];
                                 object.attachedResources = [];
+                                object.tagKeys = [];
+                                object.tagValues = [];
+                                object.tagValueIds = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -14570,6 +17760,21 @@
                                 object.relationships = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.relationships[keys2[j]] = $root.google.cloud.asset.v1.RelatedResources.toObject(message.relationships[keys2[j]], options);
+                            }
+                            if (message.tagKeys && message.tagKeys.length) {
+                                object.tagKeys = [];
+                                for (var j = 0; j < message.tagKeys.length; ++j)
+                                    object.tagKeys[j] = message.tagKeys[j];
+                            }
+                            if (message.tagValues && message.tagValues.length) {
+                                object.tagValues = [];
+                                for (var j = 0; j < message.tagValues.length; ++j)
+                                    object.tagValues[j] = message.tagValues[j];
+                            }
+                            if (message.tagValueIds && message.tagValueIds.length) {
+                                object.tagValueIds = [];
+                                for (var j = 0; j < message.tagValueIds.length; ++j)
+                                    object.tagValueIds[j] = message.tagValueIds[j];
                             }
                             if (message.parentAssetType != null && message.hasOwnProperty("parentAssetType"))
                                 object.parentAssetType = message.parentAssetType;
@@ -47054,225 +50259,6 @@
                 return Timestamp;
             })();
     
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Any;
-            })();
-    
             protobuf.Struct = (function() {
     
                 /**
@@ -48087,6 +51073,225 @@
                 return ListValue;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type_url = reader.string();
+                            break;
+                        case 2:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -48515,6 +51720,504 @@
             })();
     
             return protobuf;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.year = reader.int32();
+                            break;
+                        case 2:
+                            message.month = reader.int32();
+                            break;
+                        case 3:
+                            message.day = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Date;
+            })();
+    
+            type.Expr = (function() {
+    
+                /**
+                 * Properties of an Expr.
+                 * @memberof google.type
+                 * @interface IExpr
+                 * @property {string|null} [expression] Expr expression
+                 * @property {string|null} [title] Expr title
+                 * @property {string|null} [description] Expr description
+                 * @property {string|null} [location] Expr location
+                 */
+    
+                /**
+                 * Constructs a new Expr.
+                 * @memberof google.type
+                 * @classdesc Represents an Expr.
+                 * @implements IExpr
+                 * @constructor
+                 * @param {google.type.IExpr=} [properties] Properties to set
+                 */
+                function Expr(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Expr expression.
+                 * @member {string} expression
+                 * @memberof google.type.Expr
+                 * @instance
+                 */
+                Expr.prototype.expression = "";
+    
+                /**
+                 * Expr title.
+                 * @member {string} title
+                 * @memberof google.type.Expr
+                 * @instance
+                 */
+                Expr.prototype.title = "";
+    
+                /**
+                 * Expr description.
+                 * @member {string} description
+                 * @memberof google.type.Expr
+                 * @instance
+                 */
+                Expr.prototype.description = "";
+    
+                /**
+                 * Expr location.
+                 * @member {string} location
+                 * @memberof google.type.Expr
+                 * @instance
+                 */
+                Expr.prototype.location = "";
+    
+                /**
+                 * Creates a new Expr instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {google.type.IExpr=} [properties] Properties to set
+                 * @returns {google.type.Expr} Expr instance
+                 */
+                Expr.create = function create(properties) {
+                    return new Expr(properties);
+                };
+    
+                /**
+                 * Encodes the specified Expr message. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {google.type.IExpr} message Expr message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Expr.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.expression);
+                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.location);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Expr message, length delimited. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {google.type.IExpr} message Expr message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Expr.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Expr message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Expr} Expr
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Expr.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Expr();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.expression = reader.string();
+                            break;
+                        case 2:
+                            message.title = reader.string();
+                            break;
+                        case 3:
+                            message.description = reader.string();
+                            break;
+                        case 4:
+                            message.location = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Expr message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Expr} Expr
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Expr.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Expr message.
+                 * @function verify
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Expr.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.expression != null && message.hasOwnProperty("expression"))
+                        if (!$util.isString(message.expression))
+                            return "expression: string expected";
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        if (!$util.isString(message.title))
+                            return "title: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.location != null && message.hasOwnProperty("location"))
+                        if (!$util.isString(message.location))
+                            return "location: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Expr message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Expr} Expr
+                 */
+                Expr.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Expr)
+                        return object;
+                    var message = new $root.google.type.Expr();
+                    if (object.expression != null)
+                        message.expression = String(object.expression);
+                    if (object.title != null)
+                        message.title = String(object.title);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.location != null)
+                        message.location = String(object.location);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Expr message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {google.type.Expr} message Expr
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Expr.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.expression = "";
+                        object.title = "";
+                        object.description = "";
+                        object.location = "";
+                    }
+                    if (message.expression != null && message.hasOwnProperty("expression"))
+                        object.expression = message.expression;
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        object.title = message.title;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.location != null && message.hasOwnProperty("location"))
+                        object.location = message.location;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Expr to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Expr
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Expr.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Expr;
+            })();
+    
+            return type;
         })();
     
         google.iam = (function() {
@@ -49889,504 +53592,6 @@
             })();
     
             return iam;
-        })();
-    
-        google.type = (function() {
-    
-            /**
-             * Namespace type.
-             * @memberof google
-             * @namespace
-             */
-            var type = {};
-    
-            type.Expr = (function() {
-    
-                /**
-                 * Properties of an Expr.
-                 * @memberof google.type
-                 * @interface IExpr
-                 * @property {string|null} [expression] Expr expression
-                 * @property {string|null} [title] Expr title
-                 * @property {string|null} [description] Expr description
-                 * @property {string|null} [location] Expr location
-                 */
-    
-                /**
-                 * Constructs a new Expr.
-                 * @memberof google.type
-                 * @classdesc Represents an Expr.
-                 * @implements IExpr
-                 * @constructor
-                 * @param {google.type.IExpr=} [properties] Properties to set
-                 */
-                function Expr(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Expr expression.
-                 * @member {string} expression
-                 * @memberof google.type.Expr
-                 * @instance
-                 */
-                Expr.prototype.expression = "";
-    
-                /**
-                 * Expr title.
-                 * @member {string} title
-                 * @memberof google.type.Expr
-                 * @instance
-                 */
-                Expr.prototype.title = "";
-    
-                /**
-                 * Expr description.
-                 * @member {string} description
-                 * @memberof google.type.Expr
-                 * @instance
-                 */
-                Expr.prototype.description = "";
-    
-                /**
-                 * Expr location.
-                 * @member {string} location
-                 * @memberof google.type.Expr
-                 * @instance
-                 */
-                Expr.prototype.location = "";
-    
-                /**
-                 * Creates a new Expr instance using the specified properties.
-                 * @function create
-                 * @memberof google.type.Expr
-                 * @static
-                 * @param {google.type.IExpr=} [properties] Properties to set
-                 * @returns {google.type.Expr} Expr instance
-                 */
-                Expr.create = function create(properties) {
-                    return new Expr(properties);
-                };
-    
-                /**
-                 * Encodes the specified Expr message. Does not implicitly {@link google.type.Expr.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.type.Expr
-                 * @static
-                 * @param {google.type.IExpr} message Expr message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Expr.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.expression);
-                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
-                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
-                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.location);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Expr message, length delimited. Does not implicitly {@link google.type.Expr.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.type.Expr
-                 * @static
-                 * @param {google.type.IExpr} message Expr message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Expr.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Expr message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.type.Expr
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.type.Expr} Expr
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Expr.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Expr();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.expression = reader.string();
-                            break;
-                        case 2:
-                            message.title = reader.string();
-                            break;
-                        case 3:
-                            message.description = reader.string();
-                            break;
-                        case 4:
-                            message.location = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Expr message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.type.Expr
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.type.Expr} Expr
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Expr.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Expr message.
-                 * @function verify
-                 * @memberof google.type.Expr
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Expr.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.expression != null && message.hasOwnProperty("expression"))
-                        if (!$util.isString(message.expression))
-                            return "expression: string expected";
-                    if (message.title != null && message.hasOwnProperty("title"))
-                        if (!$util.isString(message.title))
-                            return "title: string expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    if (message.location != null && message.hasOwnProperty("location"))
-                        if (!$util.isString(message.location))
-                            return "location: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Expr message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.type.Expr
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.type.Expr} Expr
-                 */
-                Expr.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.type.Expr)
-                        return object;
-                    var message = new $root.google.type.Expr();
-                    if (object.expression != null)
-                        message.expression = String(object.expression);
-                    if (object.title != null)
-                        message.title = String(object.title);
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    if (object.location != null)
-                        message.location = String(object.location);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Expr message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.type.Expr
-                 * @static
-                 * @param {google.type.Expr} message Expr
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Expr.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.expression = "";
-                        object.title = "";
-                        object.description = "";
-                        object.location = "";
-                    }
-                    if (message.expression != null && message.hasOwnProperty("expression"))
-                        object.expression = message.expression;
-                    if (message.title != null && message.hasOwnProperty("title"))
-                        object.title = message.title;
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    if (message.location != null && message.hasOwnProperty("location"))
-                        object.location = message.location;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Expr to JSON.
-                 * @function toJSON
-                 * @memberof google.type.Expr
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Expr.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Expr;
-            })();
-    
-            type.Date = (function() {
-    
-                /**
-                 * Properties of a Date.
-                 * @memberof google.type
-                 * @interface IDate
-                 * @property {number|null} [year] Date year
-                 * @property {number|null} [month] Date month
-                 * @property {number|null} [day] Date day
-                 */
-    
-                /**
-                 * Constructs a new Date.
-                 * @memberof google.type
-                 * @classdesc Represents a Date.
-                 * @implements IDate
-                 * @constructor
-                 * @param {google.type.IDate=} [properties] Properties to set
-                 */
-                function Date(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Date year.
-                 * @member {number} year
-                 * @memberof google.type.Date
-                 * @instance
-                 */
-                Date.prototype.year = 0;
-    
-                /**
-                 * Date month.
-                 * @member {number} month
-                 * @memberof google.type.Date
-                 * @instance
-                 */
-                Date.prototype.month = 0;
-    
-                /**
-                 * Date day.
-                 * @member {number} day
-                 * @memberof google.type.Date
-                 * @instance
-                 */
-                Date.prototype.day = 0;
-    
-                /**
-                 * Creates a new Date instance using the specified properties.
-                 * @function create
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {google.type.IDate=} [properties] Properties to set
-                 * @returns {google.type.Date} Date instance
-                 */
-                Date.create = function create(properties) {
-                    return new Date(properties);
-                };
-    
-                /**
-                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {google.type.IDate} message Date message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Date.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
-                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
-                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {google.type.IDate} message Date message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Date.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Date message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.type.Date} Date
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Date.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.year = reader.int32();
-                            break;
-                        case 2:
-                            message.month = reader.int32();
-                            break;
-                        case 3:
-                            message.day = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Date message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.type.Date} Date
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Date.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Date message.
-                 * @function verify
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Date.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.year != null && message.hasOwnProperty("year"))
-                        if (!$util.isInteger(message.year))
-                            return "year: integer expected";
-                    if (message.month != null && message.hasOwnProperty("month"))
-                        if (!$util.isInteger(message.month))
-                            return "month: integer expected";
-                    if (message.day != null && message.hasOwnProperty("day"))
-                        if (!$util.isInteger(message.day))
-                            return "day: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.type.Date} Date
-                 */
-                Date.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.type.Date)
-                        return object;
-                    var message = new $root.google.type.Date();
-                    if (object.year != null)
-                        message.year = object.year | 0;
-                    if (object.month != null)
-                        message.month = object.month | 0;
-                    if (object.day != null)
-                        message.day = object.day | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Date message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {google.type.Date} message Date
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Date.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.year = 0;
-                        object.month = 0;
-                        object.day = 0;
-                    }
-                    if (message.year != null && message.hasOwnProperty("year"))
-                        object.year = message.year;
-                    if (message.month != null && message.hasOwnProperty("month"))
-                        object.month = message.month;
-                    if (message.day != null && message.hasOwnProperty("day"))
-                        object.day = message.day;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Date to JSON.
-                 * @function toJSON
-                 * @memberof google.type.Date
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Date.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Date;
-            })();
-    
-            return type;
         })();
     
         google.identity = (function() {

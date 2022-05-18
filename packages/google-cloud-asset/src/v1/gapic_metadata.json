@@ -50,6 +50,31 @@
                 "analyzeMove"
               ]
             },
+            "CreateSavedQuery": {
+              "methods": [
+                "createSavedQuery"
+              ]
+            },
+            "GetSavedQuery": {
+              "methods": [
+                "getSavedQuery"
+              ]
+            },
+            "UpdateSavedQuery": {
+              "methods": [
+                "updateSavedQuery"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
+              ]
+            },
+            "BatchGetEffectiveIamPolicies": {
+              "methods": [
+                "batchGetEffectiveIamPolicies"
+              ]
+            },
             "ExportAssets": {
               "methods": [
                 "exportAssets"
@@ -79,6 +104,13 @@
                 "searchAllIamPolicies",
                 "searchAllIamPoliciesStream",
                 "searchAllIamPoliciesAsync"
+              ]
+            },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
               ]
             }
           }
@@ -126,6 +158,31 @@
                 "analyzeMove"
               ]
             },
+            "CreateSavedQuery": {
+              "methods": [
+                "createSavedQuery"
+              ]
+            },
+            "GetSavedQuery": {
+              "methods": [
+                "getSavedQuery"
+              ]
+            },
+            "UpdateSavedQuery": {
+              "methods": [
+                "updateSavedQuery"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
+              ]
+            },
+            "BatchGetEffectiveIamPolicies": {
+              "methods": [
+                "batchGetEffectiveIamPolicies"
+              ]
+            },
             "ExportAssets": {
               "methods": [
                 "exportAssets"
@@ -155,6 +212,13 @@
                 "searchAllIamPolicies",
                 "searchAllIamPoliciesStream",
                 "searchAllIamPoliciesAsync"
+              ]
+            },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
               ]
             }
           }

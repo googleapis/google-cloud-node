@@ -20,25 +20,18 @@
 
 'use strict';
 
-function main(feed, updateMask) {
-  // [START cloudasset_v1_generated_AssetService_UpdateFeed_async]
+function main(name) {
+  // [START cloudasset_v1_generated_AssetService_GetSavedQuery_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new values of feed details. It must match an existing feed
-   *  and the field `name` must be in the format of:
-   *  projects/project_number/feeds/feed_id or
-   *  folders/folder_number/feeds/feed_id or
-   *  organizations/organization_number/feeds/feed_id.
+   *  Required. The name of the saved query and it must be in the format of:
+   *  * projects/project_number/savedQueries/saved_query_id
+   *  * folders/folder_number/savedQueries/saved_query_id
+   *  * organizations/organization_number/savedQueries/saved_query_id
    */
-  // const feed = {}
-  /**
-   *  Required. Only updates the `feed` fields indicated by this mask.
-   *  The field mask must not be empty, and it must not contain fields that
-   *  are immutable or only set by the server.
-   */
-  // const updateMask = {}
+  // const name = 'abc123'
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1;
@@ -46,20 +39,19 @@ function main(feed, updateMask) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function callUpdateFeed() {
+  async function callGetSavedQuery() {
     // Construct request
     const request = {
-      feed,
-      updateMask,
+      name,
     };
 
     // Run request
-    const response = await assetClient.updateFeed(request);
+    const response = await assetClient.getSavedQuery(request);
     console.log(response);
   }
 
-  callUpdateFeed();
-  // [END cloudasset_v1_generated_AssetService_UpdateFeed_async]
+  callGetSavedQuery();
+  // [END cloudasset_v1_generated_AssetService_GetSavedQuery_async]
 }
 
 process.on('unhandledRejection', err => {

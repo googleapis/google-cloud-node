@@ -63,7 +63,8 @@ function main(parent, outputConfig) {
    */
   // const contentType = {}
   /**
-   *  Required. Output configuration indicating where the results will be output to.
+   *  Required. Output configuration indicating where the results will be output
+   *  to.
    */
   // const outputConfig = {}
   /**
