@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-dataproc/compare/v3.2.0...v4.0.0) (2022-05-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#589)
+* add support for Virtual Dataproc cluster running on GKE cluster (#570)
+
+### Features
+
+* add new Dataproc features: - Spark runtime versioning for Spark batches - custom image containers for Spark batches - auto-diagnostic of failed Spark batches - Local SSD NVME interface support for GCE clusters ([c433b6b](https://github.com/googleapis/nodejs-dataproc/commit/c433b6ba90fc28f68677f0f7426ff2af8b43bd01))
+* add support for Virtual Dataproc cluster running on GKE cluster ([#570](https://github.com/googleapis/nodejs-dataproc/issues/570)) ([e9b061c](https://github.com/googleapis/nodejs-dataproc/commit/e9b061c68dc30db6f8613e7d3bafafb369243297))
+
+
+### Bug Fixes
+
+* Move yarn_config into a oneof ([c0f4df6](https://github.com/googleapis/nodejs-dataproc/commit/c0f4df6a5762c6918a6d6bf2bc9c14d8bf3bf7b2))
+
+
+### Build System
+
+* update library to use Node 12 ([#589](https://github.com/googleapis/nodejs-dataproc/issues/589)) ([3ef332c](https://github.com/googleapis/nodejs-dataproc/commit/3ef332c1c1713f6278b1190558a907a0ee55c737))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v3.1.0...v3.2.0) (2021-10-19)
 
 
