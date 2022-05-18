@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-talent/compare/v3.5.1...v4.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#420)
+
+### Build System
+
+* update library to use Node 12 ([#420](https://github.com/googleapis/nodejs-talent/issues/420)) ([1032175](https://github.com/googleapis/nodejs-talent/commit/103217596c4e423f2e8c6b1b1a559f66ee40e2b7))
+
 ### [3.5.1](https://www.github.com/googleapis/nodejs-talent/compare/v3.5.0...v3.5.1) (2021-10-20)
 
 
