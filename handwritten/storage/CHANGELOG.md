@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+### [5.20.4](https://github.com/googleapis/nodejs-storage/compare/v5.20.3...v5.20.4) (2022-05-18)
+
+
+### Bug Fixes
+
+* revert native typescript mocha tests ([#1947](https://github.com/googleapis/nodejs-storage/issues/1947)) ([1d0ea7d](https://github.com/googleapis/nodejs-storage/commit/1d0ea7d2281a049bc99c6bd810dd24ffc83c6a09))
+* support empty object uploads for resumable upload ([#1949](https://github.com/googleapis/nodejs-storage/issues/1949)) ([da6016e](https://github.com/googleapis/nodejs-storage/commit/da6016e20b681d6a75ed1a5459cfd333b58c70a9))
+
 ### [5.20.3](https://github.com/googleapis/nodejs-storage/compare/v5.20.2...v5.20.3) (2022-05-17)
 
 
