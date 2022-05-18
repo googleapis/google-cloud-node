@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v3.2.0...v4.0.0) (2022-05-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#205)
+
+### Bug Fixes
+
+* CustomDimension and CustomMetric resource configuration in Analytics Admin API ([#204](https://github.com/googleapis/nodejs-analytics-admin/issues/204)) ([ff521a5](https://github.com/googleapis/nodejs-analytics-admin/commit/ff521a5d7658e8b7a8c8995a8049a074d911a127))
+
+
+### Build System
+
+* update library to use Node 12 ([#205](https://github.com/googleapis/nodejs-analytics-admin/issues/205)) ([002c8b7](https://github.com/googleapis/nodejs-analytics-admin/commit/002c8b7ec24b3539378eeeff1ced553780c6aebe))
+
 ## [3.2.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v3.1.0...v3.2.0) (2022-04-11)
 
 
