@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-functions/compare/v1.3.0...v2.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#164)
+
+### Build System
+
+* update library to use Node 12 ([#164](https://github.com/googleapis/nodejs-functions/issues/164)) ([dd4d94a](https://github.com/googleapis/nodejs-functions/commit/dd4d94a43269225225aaf5da37fc1176eb6c6999))
+
 ## [1.3.0](https://github.com/googleapis/nodejs-functions/compare/v1.2.0...v1.3.0) (2022-04-21)
 
 
