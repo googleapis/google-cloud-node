@@ -19,6 +19,8 @@
   * [Run Report](#run-report)
   * [Run Report With Aggregations](#run-report-with-aggregations)
   * [Run Report With Cohorts](#run-report-with-cohorts)
+  * [Run Report With Date Ranges](#run-report-with-date-ranges)
+  * [Run Report With Named Date Ranges](#run-report-with-named-date-ranges)
 
 ## Before you begin
 
@@ -147,6 +149,40 @@ __Usage:__
 
 
 `node samples/runReportWithCohorts.js`
+
+
+-----
+
+
+
+
+### Run Report With Date Ranges
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDateRanges.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDateRanges.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithDateRanges.js`
+
+
+-----
+
+
+
+
+### Run Report With Named Date Ranges
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithNamedDateRanges.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithNamedDateRanges.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithNamedDateRanges.js`
 
 
 
