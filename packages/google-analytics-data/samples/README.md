@@ -20,6 +20,8 @@
   * [Run Report With Aggregations](#run-report-with-aggregations)
   * [Run Report With Cohorts](#run-report-with-cohorts)
   * [Run Report With Date Ranges](#run-report-with-date-ranges)
+  * [Run Report With Dimension Exclude Filter](#run-report-with-dimension-exclude-filter)
+  * [Run Report With Dimension In List Filter](#run-report-with-dimension-in-list-filter)
   * [Run Report With Named Date Ranges](#run-report-with-named-date-ranges)
 
 ## Before you begin
@@ -166,6 +168,40 @@ __Usage:__
 
 
 `node samples/runReportWithDateRanges.js`
+
+
+-----
+
+
+
+
+### Run Report With Dimension Exclude Filter
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionExcludeFilter.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDimensionExcludeFilter.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithDimensionExcludeFilter.js`
+
+
+-----
+
+
+
+
+### Run Report With Dimension In List Filter
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionInListFilter.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDimensionInListFilter.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithDimensionInListFilter.js`
 
 
 -----
