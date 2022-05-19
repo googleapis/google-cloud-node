@@ -11,8 +11,6 @@
 ## Table of Contents
 
 * [Before you begin](#before-you-begin)
-* [Samples](#samples)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -24,23 +22,6 @@ Before running the samples, make sure you've followed the steps outlined in
 `npm install`
 
 `cd ..`
-
-## Samples
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/nodejs-recaptcha-enterprise/blob/main/samples/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-recaptcha-enterprise&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/quickstart.js`
-
-
 
 
 
