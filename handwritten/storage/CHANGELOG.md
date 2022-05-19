@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+### [5.20.5](https://github.com/googleapis/nodejs-storage/compare/v5.20.4...v5.20.5) (2022-05-19)
+
+
+### Bug Fixes
+
+* **chore:** move uuid package to dependencies ([#1952](https://github.com/googleapis/nodejs-storage/issues/1952)) ([0ff5aa3](https://github.com/googleapis/nodejs-storage/commit/0ff5aa3e9ff8b4dcc536b9494e44b9a2fb217727))
+
 ### [5.20.4](https://github.com/googleapis/nodejs-storage/compare/v5.20.3...v5.20.4) (2022-05-18)
 
 
