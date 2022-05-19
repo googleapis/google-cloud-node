@@ -21,6 +21,17 @@ const compute = require('../');
 
 const DiskType = compute.protos.google.cloud.compute.v1.AttachedDisk.Type;
 
+const delay = async test => {
+  const retries = test.currentRetry();
+  if (retries === 0) return; // no retry on the first failure.
+  // see: https://github.com/grpc/proposal/blob/master/A6-client-retries.md#exponential-backoff
+  const ms = Math.pow(2, retries) * 500 + Math.random() * 1000;
+  return new Promise(done => {
+    console.info(`retrying "${test.title}" in ${ms}ms`);
+    setTimeout(done, ms);
+  });
+};
+
 describe('Compute', () => {
   const region = 'us-central1';
   const zone = 'us-central1-a';
@@ -28,6 +39,7 @@ describe('Compute', () => {
   let project = null;
   let dirty = false;
   let operationsClient = null;
+  let instancesClient = null;
 
   before(async () => {
     operationsClient = new compute.ZoneOperationsClient({fallback: 'rest'});
@@ -143,6 +155,27 @@ describe('Compute', () => {
 
     before(async () => {
       client = new compute.FirewallsClient({fallback: 'rest'});
+      instancesClient = new compute.InstancesClient({fallback: 'rest'});
+
+      const FOUR_HOURS = 1000 * 60 * 60 * 4;
+      const projectId = await instancesClient.getProjectId();
+      for await (const rule of client.listAsync({
+        project: projectId,
+      })) {
+        const created = new Date(rule.creationTimestamp).getTime();
+        // Delete firewalls that are older than 4 hours and match our
+        // test prefix.
+        if (
+          created < Date.now() - FOUR_HOURS &&
+          rule.name.startsWith('tsgapic-firewall')
+        ) {
+          console.info(`deleting stale firewall ${rule.name}`);
+          await client.delete({
+            project: projectId,
+            firewall: rule.name,
+          });
+        }
+      }
       NAME = generateName('firewall');
     });
 
@@ -155,6 +188,9 @@ describe('Compute', () => {
     });
 
     it('create and fetch firewall, test capital letter field like "IPProtocol"', async function () {
+      this.retries(3);
+      await delay(this.test);
+
       this.timeout(10 * 60 * 1000);
       const resource = {
         name: NAME,
