@@ -19,24 +19,26 @@
 import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
-const BinauthzManagementServiceV1Beta1Client =
-  v1beta1.BinauthzManagementServiceV1Beta1Client;
-type BinauthzManagementServiceV1Beta1Client =
-  v1beta1.BinauthzManagementServiceV1Beta1Client;
-const SystemPolicyV1Beta1Client = v1beta1.SystemPolicyV1Beta1Client;
-type SystemPolicyV1Beta1Client = v1beta1.SystemPolicyV1Beta1Client;
+const BinauthzManagementServiceV1Client = v1.BinauthzManagementServiceV1Client;
+type BinauthzManagementServiceV1Client = v1.BinauthzManagementServiceV1Client;
+const SystemPolicyV1Client = v1.SystemPolicyV1Client;
+type SystemPolicyV1Client = v1.SystemPolicyV1Client;
+const ValidationHelperV1Client = v1.ValidationHelperV1Client;
+type ValidationHelperV1Client = v1.ValidationHelperV1Client;
 
 export {
   v1,
   v1beta1,
-  BinauthzManagementServiceV1Beta1Client,
-  SystemPolicyV1Beta1Client,
+  BinauthzManagementServiceV1Client,
+  SystemPolicyV1Client,
+  ValidationHelperV1Client,
 };
 export default {
   v1,
   v1beta1,
-  BinauthzManagementServiceV1Beta1Client,
-  SystemPolicyV1Beta1Client,
+  BinauthzManagementServiceV1Client,
+  SystemPolicyV1Client,
+  ValidationHelperV1Client,
 };
 import * as protos from '../protos/protos';
 export {protos};

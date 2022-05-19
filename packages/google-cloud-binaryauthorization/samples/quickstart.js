@@ -19,14 +19,14 @@ async function main(parent) {
 
   // eslint-disable-next-line node/no-missing-require
   const {
-    BinauthzManagementServiceV1Beta1Client,
+    BinauthzManagementServiceV1Client,
   } = require('@google-cloud/binary-authorization');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'
 
   // Creates a client
-  const client = new BinauthzManagementServiceV1Beta1Client();
+  const client = new BinauthzManagementServiceV1Client();
 
   async function listAttestors() {
     const attestors = await client.listAttestors({parent});

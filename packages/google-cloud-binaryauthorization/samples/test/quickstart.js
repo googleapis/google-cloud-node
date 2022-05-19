@@ -20,7 +20,7 @@
 const cp = require('child_process');
 const {before, describe, it} = require('mocha');
 const {
-  BinauthzManagementServiceV1Beta1Client,
+  BinauthzManagementServiceV1Client,
 } = require('@google-cloud/binary-authorization');
 const {assert} = require('chai');
 
@@ -30,7 +30,7 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    const client = new BinauthzManagementServiceV1Beta1Client();
+    const client = new BinauthzManagementServiceV1Client();
     projectId = await client.getProjectId();
   });
 

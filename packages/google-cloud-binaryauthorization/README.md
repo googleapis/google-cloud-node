@@ -4,7 +4,7 @@
 
 # [Binary Authorization: Node.js Client](https://github.com/googleapis/nodejs-binary-authorization)
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/binary-authorization.svg)](https://www.npmjs.org/package/@google-cloud/binary-authorization)
 
 
@@ -61,14 +61,14 @@ npm install @google-cloud/binary-authorization
 
 // eslint-disable-next-line node/no-missing-require
 const {
-  BinauthzManagementServiceV1Beta1Client,
+  BinauthzManagementServiceV1Client,
 } = require('@google-cloud/binary-authorization');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
 
 // Creates a client
-const client = new BinauthzManagementServiceV1Beta1Client();
+const client = new BinauthzManagementServiceV1Client();
 
 async function listAttestors() {
   const attestors = await client.listAttestors({parent});
@@ -120,13 +120,14 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority.
 
 
 
 
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]

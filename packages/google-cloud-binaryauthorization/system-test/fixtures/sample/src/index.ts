@@ -17,32 +17,30 @@
 // ** All changes to this file may be overwritten. **
 
 import {
-  BinauthzManagementServiceV1Beta1Client,
-  SystemPolicyV1Beta1Client,
+  BinauthzManagementServiceV1Client,
+  SystemPolicyV1Client,
 } from '@google-cloud/binary-authorization';
 
 // check that the client class type name can be used
 function doStuffWithBinauthzManagementServiceV1Beta1Client(
-  client: BinauthzManagementServiceV1Beta1Client
+  client: BinauthzManagementServiceV1Client
 ) {
   client.close();
 }
-function doStuffWithSystemPolicyV1Beta1Client(
-  client: SystemPolicyV1Beta1Client
-) {
+function doStuffWithSystemPolicyV1Client(client: SystemPolicyV1Client) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const binauthzManagementServiceV1Beta1Client =
-    new BinauthzManagementServiceV1Beta1Client();
+  const binauthzManagementServiceV1Client =
+    new BinauthzManagementServiceV1Client();
   doStuffWithBinauthzManagementServiceV1Beta1Client(
-    binauthzManagementServiceV1Beta1Client
+    binauthzManagementServiceV1Client
   );
   // check that the client instance can be created
-  const systemPolicyV1Beta1Client = new SystemPolicyV1Beta1Client();
-  doStuffWithSystemPolicyV1Beta1Client(systemPolicyV1Beta1Client);
+  const systemPolicyV1Beta1Client = new SystemPolicyV1Client();
+  doStuffWithSystemPolicyV1Client(systemPolicyV1Beta1Client);
 }
 
 main();
