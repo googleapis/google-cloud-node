@@ -200,7 +200,7 @@ describe('translate', () => {
           parent: `projects/${projectId}`,
         });
       } catch (_err) {
-        err = _err;
+        err = _err as Error;
       }
       assert(err);
       assert(

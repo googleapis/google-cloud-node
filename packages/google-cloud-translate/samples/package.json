@@ -8,7 +8,7 @@
     "!test/"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "test": "mocha --recursive --timeout 240000"
