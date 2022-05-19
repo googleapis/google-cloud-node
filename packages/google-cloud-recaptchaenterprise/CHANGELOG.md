@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.5.0...v3.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#374)
+* rename parent to project in SearchRelatedAccountGroupMembershipsRequest (#370)
+* remove key management API (#366)
+
+### Features
+
+* Add support for Password Check through the private_password_leak_verification field in the reCAPTCHA Assessment ([#376](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/376)) ([7c1583c](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/7c1583c6854d9a567fd135f5ba1629250fe5f8ce))
+
+
+### Bug Fixes
+
+* remove key management API ([#366](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/366)) ([44a5a4b](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/44a5a4be5ee8fedd9258d28cd2151f15961dba5c))
+* rename parent to project in SearchRelatedAccountGroupMembershipsRequest ([#370](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/370)) ([aad0883](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/aad0883aa839e16ab76c3057678cf7583652466a))
+
+
+### Build System
+
+* update library to use Node 12 ([#374](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/374)) ([4042ae2](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/4042ae2304c92b7c74187c3874807be80ad72537))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.4.0...v2.5.0) (2021-12-10)
 
 
