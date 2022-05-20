@@ -19,6 +19,7 @@
 
 const path = require('path');
 const cp = require('child_process');
+// eslint-disable-next-line node/no-missing-require
 const {before, describe, it} = require('mocha');
 // eslint-disable-next-line node/no-missing-require
 const {PublisherClient} = require('@google-cloud/eventarc-publishing');
