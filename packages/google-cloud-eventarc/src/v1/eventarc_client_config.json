@@ -60,6 +60,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "GetProvider": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListProviders": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetChannelConnection": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

@@ -179,6 +179,9 @@ export class EventarcClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      providerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/providers/{provider}'
+      ),
       triggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/triggers/{trigger}'
       ),
@@ -197,6 +200,11 @@ export class EventarcClient {
         'pageToken',
         'nextPageToken',
         'channels'
+      ),
+      listProviders: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'providers'
       ),
       listChannelConnections: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -377,6 +385,8 @@ export class EventarcClient {
       'createChannel',
       'updateChannel',
       'deleteChannel',
+      'getProvider',
+      'listProviders',
       'getChannelConnection',
       'listChannelConnections',
       'createChannelConnection',
@@ -631,6 +641,91 @@ export class EventarcClient {
       });
     this.initialize();
     return this.innerApiCalls.getChannel(request, options, callback);
+  }
+  /**
+   * Get a single Provider.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the provider to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Provider]{@link google.cloud.eventarc.v1.Provider}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.get_provider.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_GetProvider_async
+   */
+  getProvider(
+    request?: protos.google.cloud.eventarc.v1.IGetProviderRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IProvider,
+      protos.google.cloud.eventarc.v1.IGetProviderRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getProvider(
+    request: protos.google.cloud.eventarc.v1.IGetProviderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IProvider,
+      protos.google.cloud.eventarc.v1.IGetProviderRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProvider(
+    request: protos.google.cloud.eventarc.v1.IGetProviderRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IProvider,
+      protos.google.cloud.eventarc.v1.IGetProviderRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProvider(
+    request?: protos.google.cloud.eventarc.v1.IGetProviderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.v1.IProvider,
+          | protos.google.cloud.eventarc.v1.IGetProviderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.v1.IProvider,
+      protos.google.cloud.eventarc.v1.IGetProviderRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IProvider,
+      protos.google.cloud.eventarc.v1.IGetProviderRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getProvider(request, options, callback);
   }
   /**
    * Get a single ChannelConnection.
@@ -2302,6 +2397,222 @@ export class EventarcClient {
     ) as AsyncIterable<protos.google.cloud.eventarc.v1.IChannel>;
   }
   /**
+   * List providers.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the provider to get.
+   * @param {number} request.pageSize
+   *   The maximum number of providers to return on each page.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListProviders` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListProviders` must
+   *   match the call that provided the page token.
+   * @param {string} request.orderBy
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting oder is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, _id`.
+   * @param {string} request.filter
+   *   The filter field that the list request will filter on.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Provider]{@link google.cloud.eventarc.v1.Provider}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProvidersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listProviders(
+    request?: protos.google.cloud.eventarc.v1.IListProvidersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IProvider[],
+      protos.google.cloud.eventarc.v1.IListProvidersRequest | null,
+      protos.google.cloud.eventarc.v1.IListProvidersResponse
+    ]
+  >;
+  listProviders(
+    request: protos.google.cloud.eventarc.v1.IListProvidersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListProvidersRequest,
+      protos.google.cloud.eventarc.v1.IListProvidersResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IProvider
+    >
+  ): void;
+  listProviders(
+    request: protos.google.cloud.eventarc.v1.IListProvidersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListProvidersRequest,
+      protos.google.cloud.eventarc.v1.IListProvidersResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IProvider
+    >
+  ): void;
+  listProviders(
+    request?: protos.google.cloud.eventarc.v1.IListProvidersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListProvidersRequest,
+          | protos.google.cloud.eventarc.v1.IListProvidersResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IProvider
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListProvidersRequest,
+      protos.google.cloud.eventarc.v1.IListProvidersResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IProvider
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IProvider[],
+      protos.google.cloud.eventarc.v1.IListProvidersRequest | null,
+      protos.google.cloud.eventarc.v1.IListProvidersResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listProviders(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the provider to get.
+   * @param {number} request.pageSize
+   *   The maximum number of providers to return on each page.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListProviders` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListProviders` must
+   *   match the call that provided the page token.
+   * @param {string} request.orderBy
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting oder is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, _id`.
+   * @param {string} request.filter
+   *   The filter field that the list request will filter on.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Provider]{@link google.cloud.eventarc.v1.Provider} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProvidersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listProvidersStream(
+    request?: protos.google.cloud.eventarc.v1.IListProvidersRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listProviders'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listProviders.createStream(
+      this.innerApiCalls.listProviders as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listProviders`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the provider to get.
+   * @param {number} request.pageSize
+   *   The maximum number of providers to return on each page.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListProviders` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListProviders` must
+   *   match the call that provided the page token.
+   * @param {string} request.orderBy
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting oder is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, _id`.
+   * @param {string} request.filter
+   *   The filter field that the list request will filter on.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Provider]{@link google.cloud.eventarc.v1.Provider}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.list_providers.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_ListProviders_async
+   */
+  listProvidersAsync(
+    request?: protos.google.cloud.eventarc.v1.IListProvidersRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.eventarc.v1.IProvider> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listProviders'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listProviders.asyncIterate(
+      this.innerApiCalls['listProviders'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.eventarc.v1.IProvider>;
+  }
+  /**
    * List channel connections.
    *
    * @param {Object} request
@@ -2680,6 +2991,55 @@ export class EventarcClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified provider resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} provider
+   * @returns {string} Resource name string.
+   */
+  providerPath(project: string, location: string, provider: string) {
+    return this.pathTemplates.providerPathTemplate.render({
+      project: project,
+      location: location,
+      provider: provider,
+    });
+  }
+
+  /**
+   * Parse the project from Provider resource.
+   *
+   * @param {string} providerName
+   *   A fully-qualified path representing Provider resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProviderName(providerName: string) {
+    return this.pathTemplates.providerPathTemplate.match(providerName).project;
+  }
+
+  /**
+   * Parse the location from Provider resource.
+   *
+   * @param {string} providerName
+   *   A fully-qualified path representing Provider resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProviderName(providerName: string) {
+    return this.pathTemplates.providerPathTemplate.match(providerName).location;
+  }
+
+  /**
+   * Parse the provider from Provider resource.
+   *
+   * @param {string} providerName
+   *   A fully-qualified path representing Provider resource.
+   * @returns {string} A string representing the provider.
+   */
+  matchProviderFromProviderName(providerName: string) {
+    return this.pathTemplates.providerPathTemplate.match(providerName).provider;
   }
 
   /**

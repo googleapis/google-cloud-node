@@ -20,6 +20,11 @@
                 "getChannel"
               ]
             },
+            "GetProvider": {
+              "methods": [
+                "getProvider"
+              ]
+            },
             "GetChannelConnection": {
               "methods": [
                 "getChannelConnection"
@@ -77,6 +82,13 @@
                 "listChannels",
                 "listChannelsStream",
                 "listChannelsAsync"
+              ]
+            },
+            "ListProviders": {
+              "methods": [
+                "listProviders",
+                "listProvidersStream",
+                "listProvidersAsync"
               ]
             },
             "ListChannelConnections": {
@@ -101,6 +113,11 @@
                 "getChannel"
               ]
             },
+            "GetProvider": {
+              "methods": [
+                "getProvider"
+              ]
+            },
             "GetChannelConnection": {
               "methods": [
                 "getChannelConnection"
@@ -158,6 +175,13 @@
                 "listChannels",
                 "listChannelsStream",
                 "listChannelsAsync"
+              ]
+            },
+            "ListProviders": {
+              "methods": [
+                "listProviders",
+                "listProvidersStream",
+                "listProvidersAsync"
               ]
             },
             "ListChannelConnections": {

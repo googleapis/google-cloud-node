@@ -492,6 +492,132 @@ describe('v1.EventarcClient', () => {
     });
   });
 
+  describe('getProvider', () => {
+    it('invokes getProvider without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetProviderRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.Provider()
+      );
+      client.innerApiCalls.getProvider = stubSimpleCall(expectedResponse);
+      const [response] = await client.getProvider(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getProvider as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getProvider without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetProviderRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.Provider()
+      );
+      client.innerApiCalls.getProvider =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getProvider(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IProvider | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getProvider as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getProvider with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetProviderRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getProvider = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getProvider(request), expectedError);
+      assert(
+        (client.innerApiCalls.getProvider as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getProvider with closed client', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetProviderRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getProvider(request), expectedError);
+    });
+  });
+
   describe('getChannelConnection', () => {
     it('invokes getChannelConnection without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
@@ -2753,6 +2879,287 @@ describe('v1.EventarcClient', () => {
     });
   });
 
+  describe('listProviders', () => {
+    it('invokes listProviders without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListProvidersRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+      ];
+      client.innerApiCalls.listProviders = stubSimpleCall(expectedResponse);
+      const [response] = await client.listProviders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listProviders as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listProviders without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListProvidersRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+      ];
+      client.innerApiCalls.listProviders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listProviders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IProvider[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listProviders as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listProviders with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListProvidersRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listProviders = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listProviders(request), expectedError);
+      assert(
+        (client.innerApiCalls.listProviders as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listProvidersStream without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListProvidersRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+      ];
+      client.descriptors.page.listProviders.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listProvidersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.Provider[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.Provider) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listProviders.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProviders, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listProviders.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listProvidersStream with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListProvidersRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProviders.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listProvidersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.Provider[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.Provider) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listProviders.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProviders, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listProviders.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listProviders without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListProvidersRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
+      ];
+      client.descriptors.page.listProviders.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.eventarc.v1.IProvider[] = [];
+      const iterable = client.listProvidersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProviders.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listProviders.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listProviders with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListProvidersRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProviders.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listProvidersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.eventarc.v1.IProvider[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProviders.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listProviders.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('listChannelConnections', () => {
     it('invokes listChannelConnections without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
@@ -3301,6 +3708,70 @@ describe('v1.EventarcClient', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('provider', () => {
+      const fakePath = '/rendered/path/provider';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        provider: 'providerValue',
+      };
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.providerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.providerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('providerPath', () => {
+        const result = client.providerPath(
+          'projectValue',
+          'locationValue',
+          'providerValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.providerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProviderName', () => {
+        const result = client.matchProjectFromProviderName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.providerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProviderName', () => {
+        const result = client.matchLocationFromProviderName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.providerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchProviderFromProviderName', () => {
+        const result = client.matchProviderFromProviderName(fakePath);
+        assert.strictEqual(result, 'providerValue');
+        assert(
+          (client.pathTemplates.providerPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
