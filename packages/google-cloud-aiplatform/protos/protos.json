@@ -17144,6 +17144,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "neighbors": {
+                          "rule": "repeated",
+                          "type": "Neighbor",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -17207,6 +17215,24 @@
                         "outputName": {
                           "type": "string",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Neighbor": {
+                      "fields": {
+                        "neighborId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "neighborDistance": {
+                          "type": "double",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -17374,18 +17400,68 @@
                       }
                     },
                     "Examples": {
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "nearestNeighborSearchConfig",
+                            "preset"
+                          ]
+                        }
+                      },
                       "fields": {
-                        "gcsSource": {
-                          "type": "GcsSource",
-                          "id": 1
-                        },
                         "nearestNeighborSearchConfig": {
                           "type": "google.protobuf.Value",
                           "id": 2
                         },
+                        "preset": {
+                          "type": "Preset",
+                          "id": 4
+                        },
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        },
                         "neighborCount": {
                           "type": "int32",
                           "id": 3
+                        }
+                      }
+                    },
+                    "Preset": {
+                      "oneofs": {
+                        "_query": {
+                          "oneof": [
+                            "query"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "query": {
+                          "type": "Query",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "modality": {
+                          "type": "Modality",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Query": {
+                          "values": {
+                            "PRECISE": 0,
+                            "FAST": 1
+                          }
+                        },
+                        "Modality": {
+                          "values": {
+                            "MODALITY_UNSPECIFIED": 0,
+                            "IMAGE": 1,
+                            "TEXT": 2,
+                            "TABULAR": 3
+                          }
                         }
                       }
                     },
@@ -17398,6 +17474,10 @@
                         "metadata": {
                           "type": "ExplanationMetadataOverride",
                           "id": 2
+                        },
+                        "examplesOverride": {
+                          "type": "ExamplesOverride",
+                          "id": 3
                         }
                       }
                     },
@@ -17424,6 +17504,58 @@
                         }
                       }
                     },
+                    "ExamplesOverride": {
+                      "fields": {
+                        "neighborCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "crowdingCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "restrictions": {
+                          "rule": "repeated",
+                          "type": "ExamplesRestrictionsNamespace",
+                          "id": 3
+                        },
+                        "returnEmbeddings": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "dataFormat": {
+                          "type": "DataFormat",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "DataFormat": {
+                          "values": {
+                            "DATA_FORMAT_UNSPECIFIED": 0,
+                            "INSTANCES": 1,
+                            "EMBEDDINGS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ExamplesRestrictionsNamespace": {
+                      "fields": {
+                        "namespaceName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "allow": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "deny": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ExplanationMetadata": {
                       "fields": {
                         "inputs": {
@@ -17445,6 +17577,10 @@
                         "featureAttributionsSchemaUri": {
                           "type": "string",
                           "id": 3
+                        },
+                        "latentSpaceSource": {
+                          "type": "string",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -27973,6 +28109,34 @@
                             }
                           ]
                         },
+                        "UpdateExplanationDataset": {
+                          "requestType": "UpdateExplanationDatasetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{model=projects/*/locations/*/models/*}:updateExplanationDataset",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "model",
+                            "(google.longrunning.operation_info).response_type": "UpdateExplanationDatasetResponse",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateExplanationDatasetOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{model=projects/*/locations/*/models/*}:updateExplanationDataset",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "UpdateExplanationDatasetResponse",
+                                "metadata_type": "UpdateExplanationDatasetOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteModel": {
                           "requestType": "DeleteModelRequest",
                           "responseType": "google.longrunning.Operation",
@@ -28338,6 +28502,30 @@
                         }
                       }
                     },
+                    "UpdateExplanationDatasetRequest": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "examples": {
+                          "type": "Examples",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateExplanationDatasetOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "DeleteModelRequest": {
                       "fields": {
                         "name": {
@@ -28453,6 +28641,9 @@
                           }
                         }
                       }
+                    },
+                    "UpdateExplanationDatasetResponse": {
+                      "fields": {}
                     },
                     "ExportModelResponse": {
                       "fields": {}

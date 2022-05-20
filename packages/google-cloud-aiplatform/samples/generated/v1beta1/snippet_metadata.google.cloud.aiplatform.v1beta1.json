@@ -5342,7 +5342,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -5528,6 +5528,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_ModelService_UpdateExplanationDataset_async",
+            "title": "DatasetService updateExplanationDataset Sample",
+            "origin": "API_DEFINITION",
+            "description": " Incremental update the dataset used for a examples model.",
+            "canonical": true,
+            "file": "model_service.update_explanation_dataset.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateExplanationDataset",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelService.UpdateExplanationDataset",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "examples",
+                        "type": ".google.cloud.aiplatform.v1beta1.Examples"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateExplanationDataset",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelService.UpdateExplanationDataset",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_ModelService_DeleteModel_async",
             "title": "DatasetService deleteModel Sample",
             "origin": "API_DEFINITION",
@@ -5662,7 +5706,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],

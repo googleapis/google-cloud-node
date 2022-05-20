@@ -20,21 +20,20 @@
 
 'use strict';
 
-function main(name, outputConfig) {
-  // [START aiplatform_v1beta1_generated_ModelService_ExportModel_async]
+function main(model) {
+  // [START aiplatform_v1beta1_generated_ModelService_UpdateExplanationDataset_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Model to export.
-   *  The resource name may contain version id or version alias to specify the
-   *  version, if no version is specified, the default version will be exported.
+   *  Required. The resource name of the Model to update.
+   *  Format: `projects/{project}/locations/{location}/models/{model}`
    */
-  // const name = 'abc123'
+  // const model = 'abc123'
   /**
-   *  Required. The desired output location and configuration.
+   *  The example config containing the location of the dataset.
    */
-  // const outputConfig = {}
+  // const examples = {}
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -42,21 +41,20 @@ function main(name, outputConfig) {
   // Instantiates a client
   const aiplatformClient = new ModelServiceClient();
 
-  async function callExportModel() {
+  async function callUpdateExplanationDataset() {
     // Construct request
     const request = {
-      name,
-      outputConfig,
+      model,
     };
 
     // Run request
-    const [operation] = await aiplatformClient.exportModel(request);
+    const [operation] = await aiplatformClient.updateExplanationDataset(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callExportModel();
-  // [END aiplatform_v1beta1_generated_ModelService_ExportModel_async]
+  callUpdateExplanationDataset();
+  // [END aiplatform_v1beta1_generated_ModelService_UpdateExplanationDataset_async]
 }
 
 process.on('unhandledRejection', err => {
