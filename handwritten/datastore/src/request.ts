@@ -727,7 +727,7 @@ class DatastoreRequest {
       } catch (e) {
         // using setImmediate here to make sure this doesn't throw a
         // synchronous error
-        setImmediate(onResultSet, e);
+        setImmediate(onResultSet, e as Error);
         return;
       }
 
@@ -880,7 +880,7 @@ class DatastoreRequest {
           // Even a failed rollback should be transparent.
           // RE: https://github.com/GoogleCloudPlatform/gcloud-node/pull/1369#discussion_r66833976
         }
-        callback!(err);
+        callback!(err as Error);
       }
     });
   }

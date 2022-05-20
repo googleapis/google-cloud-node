@@ -611,13 +611,13 @@ class Datastore extends DatastoreRequest {
     const gaxOpts = options.gaxOptions || {};
 
     const reqOpts = {
-      pageSize: gaxOpts.pageSize,
-      pageToken: gaxOpts.pageToken,
+      pageSize: (gaxOpts as GetIndexesOptions).pageSize,
+      pageToken: (gaxOpts as GetIndexesOptions).pageToken,
       ...options,
     };
 
-    delete gaxOpts.pageSize;
-    delete gaxOpts.pageToken;
+    delete (gaxOpts as GetIndexesOptions).pageSize;
+    delete (gaxOpts as GetIndexesOptions).pageToken;
     delete (reqOpts as CallOptions).autoPaginate;
     delete (reqOpts as GetIndexesOptions).gaxOptions;
 

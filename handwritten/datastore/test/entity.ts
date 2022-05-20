@@ -1675,8 +1675,11 @@ describe('entity', () => {
       try {
         entity.keyFromKeyProto(keyProtoInvalid);
       } catch (e) {
-        assert.strictEqual(e.name, 'InvalidKey');
-        assert.strictEqual(e.message, 'Ancestor keys require an id or name.');
+        assert.strictEqual((e as Error).name, 'InvalidKey');
+        assert.strictEqual(
+          (e as Error).message,
+          'Ancestor keys require an id or name.'
+        );
         done();
       }
     });
@@ -1756,8 +1759,11 @@ describe('entity', () => {
       try {
         entity.keyToKeyProto(key);
       } catch (e) {
-        assert.strictEqual(e.name, 'InvalidKey');
-        assert.strictEqual(e.message, 'A key should contain at least a kind.');
+        assert.strictEqual((e as Error).name, 'InvalidKey');
+        assert.strictEqual(
+          (e as Error).message,
+          'A key should contain at least a kind.'
+        );
         done();
       }
     });
@@ -1771,8 +1777,11 @@ describe('entity', () => {
       try {
         entity.keyToKeyProto(key);
       } catch (e) {
-        assert.strictEqual(e.name, 'InvalidKey');
-        assert.strictEqual(e.message, 'Ancestor keys require an id or name.');
+        assert.strictEqual((e as Error).name, 'InvalidKey');
+        assert.strictEqual(
+          (e as Error).message,
+          'Ancestor keys require an id or name.'
+        );
         done();
       }
     });

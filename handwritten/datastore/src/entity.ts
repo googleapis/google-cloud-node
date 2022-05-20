@@ -180,7 +180,11 @@ export namespace entity {
         try {
           return this.typeCastFunction!(this.value);
         } catch (error) {
-          error.message = `integerTypeCastFunction threw an error:\n\n  - ${error.message}`;
+          (
+            error as Error
+          ).message = `integerTypeCastFunction threw an error:\n\n  - ${
+            (error as Error).message
+          }`;
           throw error;
         }
       } else {
