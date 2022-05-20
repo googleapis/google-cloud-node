@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.1.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#70)
+
+### Build System
+
+* update library to use Node 12 ([#70](https://github.com/googleapis/nodejs-gke-connect-gateway/issues/70)) ([7417416](https://github.com/googleapis/nodejs-gke-connect-gateway/commit/741741665d6dbdfe70e51ed0f181e8791bac4716))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.0.3...v1.1.0) (2021-08-23)
 
 
