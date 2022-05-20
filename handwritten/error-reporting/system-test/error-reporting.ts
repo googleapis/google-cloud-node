@@ -604,7 +604,7 @@ describe('error-reporting', () => {
     timeout: number
   ) {
     function expectedTopOfStack() {
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         errors.report(
           errOb,
           undefined,
