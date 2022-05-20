@@ -1,0 +1,155 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.run.v2",
+  "libraryPackage": "@google-cloud/run",
+  "services": {
+    "Revisions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RevisionsClient",
+          "rpcs": {
+            "GetRevision": {
+              "methods": [
+                "getRevision"
+              ]
+            },
+            "DeleteRevision": {
+              "methods": [
+                "deleteRevision"
+              ]
+            },
+            "ListRevisions": {
+              "methods": [
+                "listRevisions",
+                "listRevisionsStream",
+                "listRevisionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RevisionsClient",
+          "rpcs": {
+            "GetRevision": {
+              "methods": [
+                "getRevision"
+              ]
+            },
+            "DeleteRevision": {
+              "methods": [
+                "deleteRevision"
+              ]
+            },
+            "ListRevisions": {
+              "methods": [
+                "listRevisions",
+                "listRevisionsStream",
+                "listRevisionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Services": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServicesClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServicesClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

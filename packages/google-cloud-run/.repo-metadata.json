@@ -1,0 +1,14 @@
+{
+  "name": "run",
+  "name_pretty": "Cloud Run",
+  "product_documentation": "https://cloud.google.com/run",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/run/latest",
+  "issue_tracker": "https://github.com/googleapis/nodejs-run/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-run",
+  "distribution_name": "@google-cloud/run",
+  "api_id": "run.googleapis.com",
+  "default_version": "v2",
+  "requires_billing": true
+}

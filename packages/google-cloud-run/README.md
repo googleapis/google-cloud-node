@@ -10,11 +10,11 @@
 
 
 
-run client for Node.js
+Cloud Run Admin API
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-run/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-run/blob/main/CHANGELOG.md).
 
 * [Cloud Run Node.js Client API Reference][client-docs]
 * [Cloud Run Documentation][product-docs]
@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,64 @@ npm install @google-cloud/run
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The location and project to list resources on.
+ *  Location must be a valid GCP region, and may not be the "-" wildcard.
+ *  Format: projects/{projectnumber}/locations/{location}
+ */
+// const parent = 'abc123'
+/**
+ *  Maximum number of Services to return in this call.
+ */
+// const pageSize = 1234
+/**
+ *  A page token received from a previous call to ListServices.
+ *  All other parameters must match.
+ */
+// const pageToken = 'abc123'
+
+/**
+ *  If true, returns deleted (but unexpired) resources along with active ones.
+ */
+// const showDeleted = true
+// Imports the Run library
+const {ServicesClient} = require('@google-cloud/run').v2;
+
+// Instantiates a client
+const runClient = new ServicesClient();
+
+async function callListServices() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await runClient.listServicesAsync(request);
+  for await (const response of iterable) {
+    console.log(response);
+  }
+}
+
+callListServices();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-run/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-run/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-run&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -103,7 +161,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-run/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-run/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,10 +173,10 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-run/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-run/blob/main/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/run/latest/
-[product-docs]: cloud.google.com/run/
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/run/latest
+[product-docs]: https://cloud.google.com/run
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

@@ -1,0 +1,9 @@
+[
+  "../../protos/google/cloud/run/v2/condition.proto",
+  "../../protos/google/cloud/run/v2/k8s.min.proto",
+  "../../protos/google/cloud/run/v2/revision.proto",
+  "../../protos/google/cloud/run/v2/revision_template.proto",
+  "../../protos/google/cloud/run/v2/service.proto",
+  "../../protos/google/cloud/run/v2/traffic_target.proto",
+  "../../protos/google/cloud/run/v2/vendor_settings.proto"
+]
