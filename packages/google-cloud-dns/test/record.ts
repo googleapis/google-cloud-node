@@ -20,6 +20,11 @@ import * as proxyquire from 'proxyquire';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {Record} from '../src';
 
+interface Metadata {
+  name: string;
+  data?: string[];
+  ttl: number;
+}
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
   promisifyAll(esClass: Function, options: promisify.PromisifyAllOptions) {
@@ -292,7 +297,7 @@ describe('Record', () => {
   });
 
   describe('delete', () => {
-    it('should call zone.deleteRecords', done => {
+    it('should call zone.deleteRecords', (done: any) => {
       record.zone_.deleteRecords = (records: Record[], callback: Function) => {
         assert.strictEqual(records, record);
         callback();
@@ -303,7 +308,7 @@ describe('Record', () => {
 
   describe('toJSON', () => {
     it('should format the data for the API', () => {
-      const expectedRecord = Object.assign({}, METADATA, {
+      const expectedRecord: Metadata = Object.assign({}, METADATA, {
         type: 'A',
         rrdatas: METADATA.data,
       });

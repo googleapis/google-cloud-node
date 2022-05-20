@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=10"
+    "node": ">=12.0.0"
   },
   "repository": "googleapis/nodejs-dns",
   "main": "./build/src/index.js",
@@ -67,10 +67,10 @@
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^2.0.0",
-    "mocha": "^8.0.0",
+    "mocha": "^9.2.2",
     "proxyquire": "^2.0.1",
     "tmp": "^0.2.0",
-    "typescript": "^3.8.3",
+    "typescript": "^4.6.4",
     "uuid": "^8.0.0"
   }
 }
