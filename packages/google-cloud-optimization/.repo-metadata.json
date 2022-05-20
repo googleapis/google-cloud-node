@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/optimization/",
   "client_documentation": "https://googleapis.dev/nodejs/cloudoptimization/latest/",
   "issue_tracker": "https://github.com/googleapis/nodejs-cloud-optimization/issues",
-  "release_level": "beta",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-cloud-optimization",
   "distribution_name": "@google-cloud/optimization",
