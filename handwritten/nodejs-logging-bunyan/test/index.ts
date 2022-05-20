@@ -19,6 +19,14 @@ import {inspect} from 'util';
 import {LoggingBunyan} from '../src';
 import * as types from '../src/types/core';
 
+interface Options {
+  logName?: string;
+  resource: {};
+  serviceContext: {
+    service: string;
+  };
+  apiEndpoint: string;
+}
 interface FakeLogType {
   entry?: () => void;
   write?: () => void;
@@ -142,7 +150,7 @@ describe('logging-bunyan', () => {
     });
 
     it('should localize Log instance using default name, options', () => {
-      const optionsWithoutLogName = Object.assign({}, OPTIONS);
+      const optionsWithoutLogName: Options = Object.assign({}, OPTIONS);
       delete optionsWithoutLogName.logName;
       new loggingBunyanLib.LoggingBunyan(optionsWithoutLogName);
       assert.strictEqual(fakeLoggingOptions_, optionsWithoutLogName);
@@ -164,7 +172,7 @@ describe('logging-bunyan', () => {
         new loggingBunyanLib.LoggingBunyan({serviceContext: {}});
       } catch (err) {
         assert.strictEqual(
-          err.message,
+          (err as Error).message,
           "If 'serviceContext' is specified then " +
             "'serviceContext.service' is required."
         );
