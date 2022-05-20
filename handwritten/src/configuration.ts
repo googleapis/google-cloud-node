@@ -412,7 +412,7 @@ export class Configuration {
       if (typeof this._givenConfiguration.projectId === 'string') {
         this._projectId = this._givenConfiguration.projectId!;
       } else if (typeof this._givenConfiguration.projectId === 'number') {
-        this._projectId = this._givenConfiguration.projectId!.toString();
+        this._projectId = String(this._givenConfiguration!.projectId);
       }
     }
     return this._projectId;
