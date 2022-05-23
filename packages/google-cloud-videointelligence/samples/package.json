@@ -9,7 +9,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-video-intelligence",
   "engines": {
-    "node": ">=8"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "test": "mocha system-test --timeout=800000"
