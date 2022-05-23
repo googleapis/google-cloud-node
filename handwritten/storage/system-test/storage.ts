@@ -48,6 +48,9 @@ import {IdempotencyStrategy} from '../src/storage';
 // running inside VPCSC.
 const RUNNING_IN_VPCSC = !!process.env['GOOGLE_CLOUD_TESTS_IN_VPCSC'];
 
+const UNIFORM_ACCESS_TIMEOUT = 60 * 1000; // 60s see: https://cloud.google.com/storage/docs/consistency#eventually_consistent_operations
+const UNIFORM_ACCESS_WAIT_TIME = 5 * 1000; // 5s
+
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
 nock('http://metadata.google.internal')
   .get(() => true)
@@ -1026,9 +1029,17 @@ describe('storage', () => {
         await setUniformBucketLevelAccess(bucket, true);
         await setUniformBucketLevelAccess(bucket, false);
 
-        const [aclAfter] = await bucket.acl.default.get();
-        assert.deepStrictEqual(aclAfter, aclBefore);
-      });
+        // Setting uniform bucket level access is eventually consistent and may take up to a minute to be reflected
+        for (;;) {
+          try {
+            const [aclAfter] = await bucket.acl.default.get();
+            assert.deepStrictEqual(aclAfter, aclBefore);
+            break;
+          } catch {
+            await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
+          }
+        }
+      }).timeout(UNIFORM_ACCESS_TIMEOUT);
 
       it('should preserve file ACL', async () => {
         const file = bucket.file(`file-${uuid.v4()}`);
@@ -1040,9 +1051,17 @@ describe('storage', () => {
         await setUniformBucketLevelAccess(bucket, true);
         await setUniformBucketLevelAccess(bucket, false);
 
-        const [aclAfter] = await file.acl.get();
-        assert.deepStrictEqual(aclAfter, aclBefore);
-      });
+        // Setting uniform bucket level access is eventually consistent and may take up to a minute to be reflected
+        for (;;) {
+          try {
+            const [aclAfter] = await file.acl.get();
+            assert.deepStrictEqual(aclAfter, aclBefore);
+            break;
+          } catch {
+            await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
+          }
+        }
+      }).timeout(UNIFORM_ACCESS_TIMEOUT);
     });
   });
 
