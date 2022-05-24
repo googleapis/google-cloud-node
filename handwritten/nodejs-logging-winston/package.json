@@ -50,7 +50,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/logging": "^9.6.9",
+    "@google-cloud/logging": "^10.0.0",
     "google-auth-library": "^8.0.2",
     "lodash.mapvalues": "^4.6.0",
     "winston-transport": "^4.3.0"
