@@ -58,7 +58,7 @@ describe(__filename, () => {
     it('should write request correlated log entries', function () {
       this.timeout(TEST_TIMEOUT);
       // eslint-disable-next-line no-async-promise-executor
-      return new Promise(async resolve => {
+      return new Promise<void>(async resolve => {
         const logger = winston.createLogger();
         const mw = await elb.makeMiddleware(logger, {
           logName: LOG_NAME,

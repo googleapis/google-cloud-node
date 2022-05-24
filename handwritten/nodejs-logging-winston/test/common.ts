@@ -22,6 +22,11 @@ import {LoggingCommon} from '../src/common';
 
 declare const global: {[index: string]: {} | null};
 
+interface Metadata {
+  value(): void;
+  labels?: {label2?: string};
+}
+
 describe('logging-common', () => {
   let fakeLogInstance: Logging;
   let fakeLoggingOptions_: Options | null;
@@ -508,7 +513,7 @@ describe('logging-common', () => {
     const MESSAGE = 'message';
     const PREFIX = 'prefix';
     const LABELS = {label1: 'value1'};
-    const METADATA = {value: () => {}, labels: {label2: 'value2'}};
+    const METADATA: Metadata = {value: () => {}, labels: {label2: 'value2'}};
 
     beforeEach(() => {
       const opts = Object.assign({}, OPTIONS, {

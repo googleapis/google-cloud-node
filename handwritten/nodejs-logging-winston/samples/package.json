@@ -8,7 +8,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-logging-winston",
   "engines": {
-    "node": ">=10"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "test": "mocha --timeout 600000"
