@@ -10,6 +10,7 @@
     "test/**/*.ts",
     "system-test/*.ts",
     "conformance-test/*.ts",
-    "conformance-test/scenarios/*.ts"
+    "conformance-test/scenarios/*.ts",
+    "internal-tooling/*.ts"
   ]
 }

@@ -1331,20 +1331,6 @@ describe('common/util', () => {
       };
     }
 
-    const retryOptionsTwoMaxRetries = {
-      retryOptions: {
-        maxRetries: 7,
-      },
-      maxRetries: 7,
-    };
-
-    const retryOptionsTwoAutoRetry = {
-      retryOptions: {
-        autoRetry: false,
-      },
-      autoRetry: false,
-    };
-
     const retryOptionsConfig = {
       retryOptions: {
         autoRetry: false,
@@ -1548,20 +1534,6 @@ describe('common/util', () => {
       it('should use retryOptions if provided', done => {
         retryRequestOverride = testRetryOptions(done);
         util.makeRequest(reqOpts, retryOptionsConfig, assert.ifError);
-      });
-
-      it('should throw if autoRetry is specified twice', done => {
-        assert.throws(() => {
-          util.makeRequest(reqOpts, retryOptionsTwoAutoRetry, util.noop);
-        }, /autoRetry is deprecated. Use retryOptions.autoRetry instead\./);
-        done();
-      });
-
-      it('should throw if maxRetries is specified twice', done => {
-        assert.throws(() => {
-          util.makeRequest(reqOpts, retryOptionsTwoMaxRetries, util.noop);
-        }, /maxRetries is deprecated. Use retryOptions.maxRetries instead\./);
-        done();
       });
 
       it('should allow request options to control retry setting', done => {

@@ -135,6 +135,7 @@ export {
   UploadOptions,
   UploadResponse,
 } from './bucket';
+export * from './crc32c';
 export {Channel, StopCallback} from './channel';
 export {
   CopyCallback,
@@ -165,9 +166,6 @@ export {
   GetFileMetadataResponse,
   GetFileOptions,
   GetFileResponse,
-  GetSignedPolicyCallback,
-  GetSignedPolicyOptions,
-  GetSignedPolicyResponse,
   GenerateSignedPostPolicyV2Callback,
   GenerateSignedPostPolicyV2Options,
   GenerateSignedPostPolicyV2Response,
@@ -199,6 +197,7 @@ export {
   SetStorageClassResponse,
   SignedPostPolicyV4Output,
 } from './file';
+export * from './hash-stream-validator';
 export {
   HmacKey,
   HmacKeyMetadata,

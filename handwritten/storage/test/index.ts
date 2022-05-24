@@ -26,7 +26,7 @@ import * as assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {Bucket} from '../src';
+import {Bucket, CRC32C_DEFAULT_VALIDATOR_GENERATOR} from '../src';
 import {GetFilesOptions} from '../src/bucket';
 import sinon = require('sinon');
 import {HmacKey} from '../src/hmacKey';
@@ -188,16 +188,6 @@ describe('Storage', () => {
       assert.strictEqual(calledWith.useAuthWithCustomEndpoint, true);
     });
 
-    it('should propagate autoRetry', () => {
-      const autoRetry = false;
-      const storage = new Storage({
-        projectId: PROJECT_ID,
-        autoRetry,
-      });
-      const calledWith = storage.calledWith_[0];
-      assert.strictEqual(calledWith.retryOptions.autoRetry, autoRetry);
-    });
-
     it('should propagate autoRetry in retryOptions', () => {
       const autoRetry = false;
       const storage = new Storage({
@@ -206,18 +196,6 @@ describe('Storage', () => {
       });
       const calledWith = storage.calledWith_[0];
       assert.strictEqual(calledWith.retryOptions.autoRetry, autoRetry);
-    });
-
-    it('should throw if autoRetry is defined twice', () => {
-      const autoRetry = 10;
-      assert.throws(() => {
-        new Storage({
-          projectId: PROJECT_ID,
-          retryOptions: {autoRetry},
-          autoRetry,
-        }),
-          StorageExceptionMessages.AUTO_RETRY_DEPRECATED;
-      });
     });
 
     it('should propagate retryDelayMultiplier', () => {
@@ -279,16 +257,6 @@ describe('Storage', () => {
       );
     });
 
-    it('should propagate maxRetries', () => {
-      const maxRetries = 10;
-      const storage = new Storage({
-        projectId: PROJECT_ID,
-        maxRetries,
-      });
-      const calledWith = storage.calledWith_[0];
-      assert.strictEqual(calledWith.retryOptions.maxRetries, maxRetries);
-    });
-
     it('should propagate maxRetries in retryOptions', () => {
       const maxRetries = 1;
       const storage = new Storage({
@@ -297,18 +265,6 @@ describe('Storage', () => {
       });
       const calledWith = storage.calledWith_[0];
       assert.strictEqual(calledWith.retryOptions.maxRetries, maxRetries);
-    });
-
-    it('should throw if maxRetries is defined twice', () => {
-      const maxRetries = 10;
-      assert.throws(() => {
-        new Storage({
-          projectId: PROJECT_ID,
-          retryOptions: {maxRetries},
-          maxRetries,
-        }),
-          StorageExceptionMessages.MAX_RETRIES_DEPRECATED;
-      });
     });
 
     it('should set retryFunction', () => {
@@ -440,6 +396,20 @@ describe('Storage', () => {
       const calledWith = storage.calledWith_[0];
       assert.strictEqual(calledWith.baseUrl, `${apiEndpoint}storage/v1`);
       assert.strictEqual(calledWith.apiEndpoint, 'https://some.fake.endpoint');
+    });
+
+    it('should accept a `crc32cGenerator`', () => {
+      const crc32cGenerator = () => {};
+
+      const storage = new Storage({crc32cGenerator});
+      assert.strictEqual(storage.crc32cGenerator, crc32cGenerator);
+    });
+
+    it('should use `CRC32C_DEFAULT_VALIDATOR_GENERATOR` by default', () => {
+      assert.strictEqual(
+        storage.crc32cGenerator,
+        CRC32C_DEFAULT_VALIDATOR_GENERATOR
+      );
     });
 
     describe('STORAGE_EMULATOR_HOST', () => {

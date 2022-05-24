@@ -63,6 +63,7 @@ import {
   Query,
 } from './signer';
 import {Readable} from 'stream';
+import {CRC32CValidatorGenerator} from './crc32c';
 
 interface SourceObject {
   name: string;
@@ -116,11 +117,6 @@ export interface EnableLoggingOptions {
 export interface GetFilesOptions {
   autoPaginate?: boolean;
   delimiter?: string;
-  /**
-   * @deprecated dirrectory is deprecated
-   * @internal
-   * */
-  directory?: string;
   endOffset?: string;
   includeTrailingDelimiter?: boolean;
   prefix?: string;
@@ -365,8 +361,6 @@ export interface UploadOptions
   destination?: string | File;
   encryptionKey?: string | Buffer;
   kmsKeyName?: string;
-  resumable?: boolean;
-  timeout?: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onUploadProgress?: (progressEvent: any) => void;
 }
@@ -395,15 +389,6 @@ export enum BucketExceptionMessages {
   METAGENERATION_NOT_PROVIDED = 'A metageneration must be provided.',
   SUPPLY_NOTIFICATION_ID = 'You must supply a notification ID.',
 }
-
-/**
- * The size of a file (in bytes) must be greater than this number to
- * automatically trigger a resumable upload.
- *
- * @const {number}
- * @private
- */
-const RESUMABLE_THRESHOLD = 5000000;
 
 /**
  * Get and set IAM policies for your bucket.
@@ -639,6 +624,7 @@ class Bucket extends ServiceObject {
 
   acl: Acl;
   iam: Iam;
+  crc32cGenerator: CRC32CValidatorGenerator;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getFilesStream(query?: GetFilesOptions): Readable {
@@ -1050,6 +1036,9 @@ class Bucket extends ServiceObject {
       request: this.request.bind(this),
       pathPrefix: '/defaultObjectAcl',
     });
+
+    this.crc32cGenerator =
+      options.crc32cGenerator || this.storage.crc32cGenerator;
 
     this.iam = new Iam(this);
 
@@ -2203,7 +2192,7 @@ class Bucket extends ServiceObject {
           },
         });
       } catch (e) {
-        callback!(e);
+        callback!(e as Error);
         return;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
@@ -2342,8 +2331,6 @@ class Bucket extends ServiceObject {
    *     names, aside from the prefix, contain delimiter will have their name
    *     truncated after the delimiter, returned in `apiResponse.prefixes`.
    *     Duplicate prefixes are omitted.
-   * @deprecated @property {string} [directory] Filter results based on a directory name, or
-   *     more technically, a "prefix". Assumes delimeter to be '/'. Deprecated. Use prefix instead.
    * @property {string} [endOffset] Filter results to objects whose names are
    * lexicographically before endOffset. If startOffset is also set, the objects
    * listed have names between startOffset (inclusive) and endOffset (exclusive).
@@ -2382,8 +2369,6 @@ class Bucket extends ServiceObject {
    *     names, aside from the prefix, contain delimiter will have their name
    *     truncated after the delimiter, returned in `apiResponse.prefixes`.
    *     Duplicate prefixes are omitted.
-   * @deprecated @param {string} [query.directory] Filter results based on a directory name, or
-   *     more technically, a "prefix". Assumes delimeter to be '/'. Deprecated. Use query.prefix instead.
    * @param {string} [query.endOffset] Filter results to objects whose names are
    * lexicographically before endOffset. If startOffset is also set, the objects
    * listed have names between startOffset (inclusive) and endOffset (exclusive).
@@ -2518,11 +2503,6 @@ class Bucket extends ServiceObject {
       callback = queryOrCallback as GetFilesCallback;
     }
     query = Object.assign({}, query);
-
-    if (query.directory) {
-      query.prefix = `${query.directory}/`.replace(/\/*$/, '/');
-      delete query.directory;
-    }
 
     this.request(
       {
@@ -3711,8 +3691,8 @@ class Bucket extends ServiceObject {
    *     `options.predefinedAcl = 'private'`)
    * @property {boolean} [public] Make the uploaded file public. (Alias for
    *     `options.predefinedAcl = 'publicRead'`)
-   * @property {boolean} [resumable] Force a resumable upload. (default:
-   *     true for files larger than 5 MB).
+   * @property {boolean} [resumable=true] Resumable uploads are automatically
+   *     enabled and must be shut off explicitly by setting to false.
    * @property {number} [timeout=60000] Set the HTTP request timeout in
    *     milliseconds. This option is not available for resumable uploads.
    *     Default: `60000`
@@ -3741,14 +3721,7 @@ class Bucket extends ServiceObject {
    * Upload a file to the bucket. This is a convenience method that wraps
    * {@link File#createWriteStream}.
    *
-   * You can specify whether or not an upload is resumable by setting
-   * `options.resumable`. *Resumable uploads are enabled by default if your
-   * input file is larger than 5 MB.*
-   *
-   * For faster crc32c computation, you must manually install
-   * {@link https://www.npmjs.com/package/fast-crc32c| `fast-crc32c`}:
-   *
-   *     $ npm install --save fast-crc32c
+   * Resumable uploads are enabled by default
    *
    * See {@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads| Upload Options (Simple or Resumable)}
    * See {@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert| Objects: insert API Documentation}
@@ -3796,8 +3769,8 @@ class Bucket extends ServiceObject {
    *     `options.predefinedAcl = 'private'`)
    * @param {boolean} [options.public] Make the uploaded file public. (Alias for
    *     `options.predefinedAcl = 'publicRead'`)
-   * @param {boolean} [options.resumable] Force a resumable upload. (default:
-   *     true for files larger than 5 MB).
+   * @param {boolean} [options.resumable=true] Resumable uploads are automatically
+   *     enabled and must be shut off explicitly by setting to false.
    * @param {number} [options.timeout=60000] Set the HTTP request timeout in
    *     milliseconds. This option is not available for resumable uploads.
    *     Default: `60000`
@@ -3838,7 +3811,6 @@ class Bucket extends ServiceObject {
    * //-
    * const options = {
    *   destination: 'new-image.png',
-   *   resumable: true,
    *   validation: 'crc32c',
    *   metadata: {
    *     metadata: {
@@ -4041,24 +4013,7 @@ class Bucket extends ServiceObject {
       });
     }
 
-    if (options.resumable !== null && typeof options.resumable === 'boolean') {
-      upload(maxRetries);
-    } else {
-      // Determine if the upload should be resumable if it's over the threshold.
-      fs.stat(pathString, (err, fd) => {
-        if (err) {
-          callback!(err);
-          return;
-        }
-
-        if (fd.size <= RESUMABLE_THRESHOLD) {
-          // Only disable resumable uploads so createWriteStream still attempts them and falls back to simple upload.
-          options.resumable = false;
-        }
-
-        upload(maxRetries);
-      });
-    }
+    upload(maxRetries);
   }
 
   makeAllFilesPublicPrivate_(
@@ -4136,7 +4091,7 @@ class Bucket extends ServiceObject {
         if (!options.force) {
           throw e;
         }
-        errors.push(e);
+        errors.push(e as Error);
       }
     };
 

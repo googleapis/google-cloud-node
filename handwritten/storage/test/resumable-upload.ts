@@ -33,7 +33,7 @@ import {
   ApiError,
   CreateUriCallback,
   PROTOCOL_REGEX,
-} from '../src/gcs-resumable-upload';
+} from '../src/resumable-upload';
 import {GaxiosOptions, GaxiosError, GaxiosResponse} from 'gaxios';
 
 nock.disableNetConnect();
@@ -43,23 +43,6 @@ class AbortController {
   signal = this;
   abort() {
     this.aborted = true;
-  }
-}
-
-let configData = {} as {[index: string]: {}};
-class ConfigStore {
-  constructor(packageName: string, defaults: object, config: object) {
-    this.set('packageName', packageName);
-    this.set('config', config);
-  }
-  delete(key: string) {
-    delete configData[key];
-  }
-  get(key: string) {
-    return configData[key];
-  }
-  set(key: string, value: {}) {
-    configData[key] = value;
   }
 }
 
@@ -81,7 +64,7 @@ function mockAuthorizeRequest(
     .reply(code, data);
 }
 
-describe('gcs-resumable-upload', () => {
+describe('resumable-upload', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let upload: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -111,13 +94,11 @@ describe('gcs-resumable-upload', () => {
 
   before(() => {
     mockery.registerMock('abort-controller', {default: AbortController});
-    mockery.registerMock('configstore', ConfigStore);
     mockery.enable({useCleanCache: true, warnOnUnregistered: false});
-    upload = require('../src/gcs-resumable-upload').upload;
+    upload = require('../src/resumable-upload').upload;
   });
 
   beforeEach(() => {
-    configData = {};
     REQ_OPTS = {url: 'http://fake.local'};
     up = upload({
       bucket: BUCKET,
@@ -318,22 +299,6 @@ describe('gcs-resumable-upload', () => {
       assert.strictEqual(up.predefinedAcl, 'private');
     });
 
-    it('should create a ConfigStore instance', () => {
-      assert.strictEqual(configData.packageName, 'gcs-resumable-upload');
-    });
-
-    it('should set the configPath', () => {
-      const configPath = '/custom/config/path';
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const up = upload({
-        bucket: BUCKET,
-        file: FILE,
-        configPath,
-        retryOptions: RETRY_OPTIONS,
-      });
-      assert.deepStrictEqual(configData.config, {configPath});
-    });
-
     it('should set numBytesWritten to 0', () => {
       assert.strictEqual(up.numBytesWritten, 0);
     });
@@ -361,7 +326,7 @@ describe('gcs-resumable-upload', () => {
       assert.strictEqual(up.contentLength, '*');
     });
 
-    it('should localize the uri or get one from config', () => {
+    it('should localize the uri', () => {
       const uri = 'http://www.blah.com/';
       const upWithUri = upload({
         bucket: BUCKET,
@@ -371,15 +336,6 @@ describe('gcs-resumable-upload', () => {
       });
       assert.strictEqual(upWithUri.uriProvidedManually, true);
       assert.strictEqual(upWithUri.uri, uri);
-
-      configData[`${BUCKET}/${FILE}`] = {uri: 'fake-uri'};
-      const up = upload({
-        bucket: BUCKET,
-        file: FILE,
-        retryOptions: RETRY_OPTIONS,
-      });
-      assert.strictEqual(up.uriProvidedManually, false);
-      assert.strictEqual(up.uri, 'fake-uri');
     });
 
     it('should not have `chunkSize` by default', () => {
@@ -477,18 +433,6 @@ describe('gcs-resumable-upload', () => {
         };
         up.createURI = (callback: CreateUriCallback) => {
           callback(error);
-        };
-        up.emit('writing');
-      });
-
-      it('should save the uri to config on first write event', done => {
-        const uri = 'http://newly-created-uri';
-        up.createURI = (callback: CreateUriCallback) => {
-          callback(null, uri);
-        };
-        up.set = (props: {}) => {
-          assert.deepStrictEqual(props, {uri});
-          done();
         };
         up.emit('writing');
       });
@@ -1292,12 +1236,6 @@ describe('gcs-resumable-upload', () => {
       up.responseHandler(RESP);
     });
 
-    it('should delete the config', done => {
-      const RESP = {data: '', status: 200};
-      up.deleteConfig = done;
-      up.responseHandler(RESP);
-    });
-
     it('should continue with multi-chunk upload when incomplete', done => {
       const lastByteReceived = 9;
 
@@ -1387,89 +1325,25 @@ describe('gcs-resumable-upload', () => {
     });
   });
 
-  describe('#ensureUploadingSameObject', () => {
-    let chunk = Buffer.alloc(0);
+  it('currentInvocationId.offset should be different after success', async () => {
+    const beforeCallInvocationId = up.currentInvocationId.offset;
+    up.makeRequest = () => {
+      return {};
+    };
+    await up.getAndSetOffset();
+    assert.notEqual(beforeCallInvocationId, up.currentInvocationId.offset);
+  });
 
-    beforeEach(() => {
-      chunk = crypto.randomBytes(512);
-      up.upstreamChunkBuffer = chunk;
-    });
-
-    it('should not alter the chunk buffer', async () => {
-      await up.ensureUploadingSameObject();
-
-      assert.equal(Buffer.compare(up.upstreamChunkBuffer, chunk), 0);
-    });
-
-    describe('first write', () => {
-      it('should get the first chunk', async () => {
-        let calledGet = false;
-        up.get = (prop: string) => {
-          assert.strictEqual(prop, 'firstChunk');
-          calledGet = true;
-        };
-
-        const result = await up.ensureUploadingSameObject();
-
-        assert(result);
-        assert(calledGet);
-      });
-
-      describe('new upload', () => {
-        it('should save the uri and first chunk (16 bytes) if its not cached', done => {
-          const URI = 'uri';
-          up.uri = URI;
-          up.get = () => {};
-          up.set = (props: {uri?: string; firstChunk: Buffer}) => {
-            const firstChunk = chunk.slice(0, 16);
-            assert.deepStrictEqual(props.uri, URI);
-            assert.strictEqual(Buffer.compare(props.firstChunk, firstChunk), 0);
-            done();
-          };
-          up.ensureUploadingSameObject();
-        });
-      });
-
-      describe('continued upload', () => {
-        beforeEach(() => {
-          up.restart = () => {};
-        });
-
-        it('should not `#restart` and return `true` if cache is the same', async () => {
-          up.upstreamChunkBuffer = Buffer.alloc(512, 'a');
-          up.get = (param: string) => {
-            return param === 'firstChunk' ? Buffer.alloc(16, 'a') : undefined;
-          };
-
-          let calledRestart = false;
-          up.restart = () => {
-            calledRestart = true;
-          };
-
-          const result = await up.ensureUploadingSameObject();
-
-          assert(result);
-          assert.equal(calledRestart, false);
-        });
-
-        it('should `#restart` and return `false` if different', async () => {
-          up.upstreamChunkBuffer = Buffer.alloc(512, 'a');
-          up.get = (param: string) => {
-            return param === 'firstChunk' ? Buffer.alloc(16, 'b') : undefined;
-          };
-
-          let calledRestart = false;
-          up.restart = () => {
-            calledRestart = true;
-          };
-
-          const result = await up.ensureUploadingSameObject();
-
-          assert(calledRestart);
-          assert.equal(result, false);
-        });
-      });
-    });
+  it('currentInvocationId.offset should be the same on error', async done => {
+    const beforeCallInvocationId = up.currentInvocationId.offset;
+    up.destroy = () => {
+      assert.equal(beforeCallInvocationId, up.currentInvocationId.offset);
+      done();
+    };
+    up.makeRequest = () => {
+      throw new Error() as GaxiosError;
+    };
+    await up.getAndSetOffset();
   });
 
   describe('#getAndSetOffset', () => {
@@ -1492,71 +1366,6 @@ describe('gcs-resumable-upload', () => {
         return {};
       };
       up.getAndSetOffset();
-    });
-
-    it('currentInvocationId.offset should be different after success', async () => {
-      const beforeCallInvocationId = up.currentInvocationId.offset;
-      up.makeRequest = () => {
-        return {};
-      };
-      await up.getAndSetOffset();
-      assert.notEqual(beforeCallInvocationId, up.currentInvocationId.offset);
-    });
-
-    it('currentInvocationId.offset should be the same on error', async done => {
-      const beforeCallInvocationId = up.currentInvocationId.offset;
-      up.destroy = () => {
-        assert.equal(beforeCallInvocationId, up.currentInvocationId.offset);
-        done();
-      };
-      up.makeRequest = () => {
-        throw new Error() as GaxiosError;
-      };
-      await up.getAndSetOffset();
-    });
-
-    describe('restart on 404', () => {
-      const RESP = {status: 404} as GaxiosResponse;
-      const ERROR = new Error(':(') as GaxiosError;
-      ERROR.response = RESP;
-
-      beforeEach(() => {
-        up.makeRequest = async () => {
-          throw ERROR;
-        };
-      });
-
-      it('should restart the upload', done => {
-        up.restart = done;
-        up.getAndSetOffset();
-      });
-
-      it('should not restart if URI provided manually', done => {
-        up.uriProvidedManually = true;
-        up.restart = done; // will cause test to fail
-        up.on('error', (err: Error) => {
-          assert.strictEqual(err, ERROR);
-          done();
-        });
-        up.getAndSetOffset();
-      });
-    });
-
-    describe('restart on 410', () => {
-      const ERROR = new Error(':(') as GaxiosError;
-      const RESP = {status: 410} as GaxiosResponse;
-      ERROR.response = RESP;
-
-      beforeEach(() => {
-        up.makeRequest = async () => {
-          throw ERROR;
-        };
-      });
-
-      it('should restart the upload', done => {
-        up.restart = done;
-        up.getAndSetOffset();
-      });
     });
 
     it('should set the offset from the range', async () => {
@@ -1888,11 +1697,6 @@ describe('gcs-resumable-upload', () => {
       up.restart();
     });
 
-    it('should delete the config', done => {
-      up.deleteConfig = done;
-      up.restart();
-    });
-
     describe('starting a new upload', () => {
       it('should create a new URI', done => {
         up.createURI = () => {
@@ -1917,21 +1721,6 @@ describe('gcs-resumable-upload', () => {
         up.restart();
       });
 
-      it('should save the uri to config when restarting', done => {
-        const uri = 'http://newly-created-uri';
-
-        up.createURI = (callback: Function) => {
-          callback(null, uri);
-        };
-
-        up.set = (props: {}) => {
-          assert.deepStrictEqual(props, {uri});
-          done();
-        };
-
-        up.restart();
-      });
-
       it('should start uploading', done => {
         up.createURI = (callback: Function) => {
           up.startUploading = done;
@@ -1939,51 +1728,6 @@ describe('gcs-resumable-upload', () => {
         };
         up.restart();
       });
-    });
-  });
-
-  describe('#get', () => {
-    it('should return the value from the config store', () => {
-      const prop = 'property';
-      const value = 'abc';
-      up.configStore = {
-        get(name: string) {
-          assert.strictEqual(name, up.cacheKey);
-          const obj: {[i: string]: string} = {};
-          obj[prop] = value;
-          return obj;
-        },
-      };
-      assert.strictEqual(up.get(prop), value);
-    });
-  });
-
-  describe('#set', () => {
-    it('should set the value to the config store', done => {
-      const props = {setting: true};
-      up.configStore = {
-        set(name: string, prps: {}) {
-          assert.strictEqual(name, up.cacheKey);
-          assert.strictEqual(prps, props);
-          done();
-        },
-      };
-      up.set(props);
-    });
-  });
-
-  describe('#deleteConfig', () => {
-    it('should delete the entry from the config store', done => {
-      const props = {setting: true};
-
-      up.configStore = {
-        delete(name: string) {
-          assert.strictEqual(name, up.cacheKey);
-          done();
-        },
-      };
-
-      up.deleteConfig(props);
     });
   });
 

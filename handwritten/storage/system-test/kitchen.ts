@@ -20,7 +20,7 @@ import * as tmp from 'tmp';
 import * as crypto from 'crypto';
 import * as os from 'os';
 import {Readable} from 'stream';
-import {createURI, ErrorWithCode, upload} from '../src/gcs-resumable-upload';
+import {createURI, ErrorWithCode, upload} from '../src/resumable-upload';
 import {
   RETRY_DELAY_MULTIPLIER_DEFAULT,
   TOTAL_TIMEOUT_DEFAULT,
@@ -54,13 +54,13 @@ async function delay(title: string, retries: number, done: Function) {
   setTimeout(done(), ms);
 }
 
-describe('gcs-resumable-upload', () => {
+describe('resumable-upload', () => {
   beforeEach(() => {
     upload({
       bucket: bucketName,
       file: filePath,
       retryOptions: retryOptions,
-    }).deleteConfig();
+    });
   });
 
   it('should work', done => {
@@ -175,41 +175,6 @@ describe('gcs-resumable-upload', () => {
       )
       .on('error', (err: ErrorWithCode) => {
         assert.strictEqual(err.code, '400');
-        done();
-      });
-  });
-
-  it('should set custom config file', done => {
-    const uploadOptions = {
-      bucket: bucketName,
-      file: filePath,
-      metadata: {contentType: 'image/jpg'},
-      retryOptions: retryOptions,
-      configPath: path.join(
-        os.tmpdir(),
-        `test-gcs-resumable-${Date.now()}.json`
-      ),
-    };
-    let uploadSucceeded = false;
-
-    fs.createReadStream(filePath)
-      .on('error', done)
-      .pipe(upload(uploadOptions))
-      .on('error', done)
-      .on('response', resp => {
-        uploadSucceeded = resp.status === 200;
-      })
-      .on('finish', () => {
-        assert.strictEqual(uploadSucceeded, true);
-
-        const configData = JSON.parse(
-          fs.readFileSync(uploadOptions.configPath, 'utf8')
-        );
-        const keyName = `${uploadOptions.bucket}/${uploadOptions.file}`.replace(
-          path.extname(filePath),
-          ''
-        );
-        assert.ok(Object.keys(configData).includes(keyName));
         done();
       });
   });

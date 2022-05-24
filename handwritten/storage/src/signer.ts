@@ -213,8 +213,9 @@ export class URLSigner {
           Signature: signature,
         } as V2SignedUrlQuery;
       } catch (err) {
-        const signingErr = new SigningError(err.message);
-        signingErr.stack = err.stack;
+        const error = err as Error;
+        const signingErr = new SigningError(error.message);
+        signingErr.stack = error.stack;
         throw signingErr;
       }
     };
@@ -318,8 +319,9 @@ export class URLSigner {
         });
         return signedQuery;
       } catch (err) {
-        const signingErr = new SigningError(err.message);
-        signingErr.stack = err.stack;
+        const error = err as Error;
+        const signingErr = new SigningError(error.message);
+        signingErr.stack = error.stack;
         throw signingErr;
       }
     };

@@ -775,25 +775,14 @@ export class Util {
     callback: BodyResponseCallback
   ): void | Abortable {
     let autoRetryValue = AUTO_RETRY_DEFAULT;
-    if (
-      config.autoRetry !== undefined &&
-      config.retryOptions?.autoRetry !== undefined
-    ) {
-      throw new ApiError(
-        'autoRetry is deprecated. Use retryOptions.autoRetry instead.'
-      );
-    } else if (config.autoRetry !== undefined) {
+    if (config.autoRetry !== undefined) {
       autoRetryValue = config.autoRetry;
     } else if (config.retryOptions?.autoRetry !== undefined) {
       autoRetryValue = config.retryOptions.autoRetry;
     }
 
     let maxRetryValue = MAX_RETRY_DEFAULT;
-    if (config.maxRetries && config.retryOptions?.maxRetries) {
-      throw new ApiError(
-        'maxRetries is deprecated. Use retryOptions.maxRetries instead.'
-      );
-    } else if (config.maxRetries) {
+    if (config.maxRetries) {
       maxRetryValue = config.maxRetries;
     } else if (config.retryOptions?.maxRetries) {
       maxRetryValue = config.retryOptions.maxRetries;
