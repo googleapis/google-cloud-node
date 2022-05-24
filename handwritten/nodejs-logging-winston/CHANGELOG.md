@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [4.2.4](https://github.com/googleapis/nodejs-logging-winston/compare/v4.2.3...v4.2.4) (2022-05-23)
+
+
+### Bug Fixes
+
+* LoggingWinston log test 'should work correctly with winston formats' failed ([#710](https://github.com/googleapis/nodejs-logging-winston/issues/710)) ([9549b41](https://github.com/googleapis/nodejs-logging-winston/commit/9549b41614f3a0795f623c03755213c90520fb0f))
+
 ### [4.2.3](https://github.com/googleapis/nodejs-logging-winston/compare/v4.2.2...v4.2.3) (2022-04-21)
 
 
