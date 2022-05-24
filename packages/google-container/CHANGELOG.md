@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-cloud-container/compare/v3.0.1...v4.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#539)
+
+### Build System
+
+* update library to use Node 12 ([#539](https://github.com/googleapis/nodejs-cloud-container/issues/539)) ([89ca157](https://github.com/googleapis/nodejs-cloud-container/commit/89ca157084eae2575cd2725149f6376fc810164e))
+
 ### [3.0.1](https://github.com/googleapis/nodejs-cloud-container/compare/v3.0.0...v3.0.1) (2022-05-06)
 
 
