@@ -4,6 +4,35 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/nodejs-storage/compare/v5.20.5...v6.0.0) (2022-05-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* update TypeScript
+* remove deprecated fields
+* remove configstore
+* align resumable upload behavior
+* utilize internalized CRC32C utilities
+* drop node 10 support
+
+### Build System
+
+* drop node 10 support ([77fa8d9](https://github.com/googleapis/nodejs-storage/commit/77fa8d9f95afbc830b57188ce0d2dfac46476d0b))
+
+
+### Code Refactoring
+
+* align resumable upload behavior ([77fa8d9](https://github.com/googleapis/nodejs-storage/commit/77fa8d9f95afbc830b57188ce0d2dfac46476d0b))
+* remove configstore ([77fa8d9](https://github.com/googleapis/nodejs-storage/commit/77fa8d9f95afbc830b57188ce0d2dfac46476d0b))
+* remove deprecated fields ([77fa8d9](https://github.com/googleapis/nodejs-storage/commit/77fa8d9f95afbc830b57188ce0d2dfac46476d0b))
+* utilize internalized CRC32C utilities ([77fa8d9](https://github.com/googleapis/nodejs-storage/commit/77fa8d9f95afbc830b57188ce0d2dfac46476d0b))
+
+
+### deps
+
+* update TypeScript ([77fa8d9](https://github.com/googleapis/nodejs-storage/commit/77fa8d9f95afbc830b57188ce0d2dfac46476d0b))
+
 ### [5.20.5](https://github.com/googleapis/nodejs-storage/compare/v5.20.4...v5.20.5) (2022-05-19)
 
 
