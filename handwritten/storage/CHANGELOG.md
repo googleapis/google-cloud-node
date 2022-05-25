@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+### [6.0.1](https://github.com/googleapis/nodejs-storage/compare/v6.0.0...v6.0.1) (2022-05-25)
+
+
+### Bug Fixes
+
+* capture and throw on non-existent files ([#1969](https://github.com/googleapis/nodejs-storage/issues/1969)) ([52d81c0](https://github.com/googleapis/nodejs-storage/commit/52d81c026f30aef0902ea7173dfa6da2e7f97d50))
+
 ## [6.0.0](https://github.com/googleapis/nodejs-storage/compare/v5.20.5...v6.0.0) (2022-05-24)
 
 
