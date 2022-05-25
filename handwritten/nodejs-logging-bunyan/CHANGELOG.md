@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v3.3.1...v4.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#627)
+
+### Build System
+
+* update library to use Node 12 ([#627](https://github.com/googleapis/nodejs-logging-bunyan/issues/627)) ([e9d1143](https://github.com/googleapis/nodejs-logging-bunyan/commit/e9d1143ee335b825a3817fc09573da7cac4584c2))
+
 ### [3.3.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v3.3.0...v3.3.1) (2022-04-15)
 
 
