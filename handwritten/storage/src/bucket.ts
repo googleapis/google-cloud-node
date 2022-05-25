@@ -3922,6 +3922,7 @@ class Bucket extends ServiceObject {
               writable.on('progress', options.onUploadProgress);
             }
             fs.createReadStream(pathString)
+              .on('error', bail)
               .pipe(writable)
               .on('error', err => {
                 if (

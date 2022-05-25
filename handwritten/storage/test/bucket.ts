@@ -2602,6 +2602,11 @@ describe('Bucket', () => {
   describe('upload', () => {
     const basename = 'testfile.json';
     const filepath = path.join(__dirname, '../../test/testdata/' + basename);
+    const nonExistentFilePath = path.join(
+      __dirname,
+      '../../test/testdata/',
+      'non-existent-file'
+    );
     const metadata = {
       metadata: {
         a: 'b',
@@ -3029,6 +3034,14 @@ describe('Bucket', () => {
           done();
         }
       );
+    });
+
+    it('should capture and throw on non-existent files', done => {
+      bucket.upload(nonExistentFilePath, (err: Error) => {
+        assert(err);
+        assert(err.message.includes('ENOENT'));
+        done();
+      });
     });
   });
 
