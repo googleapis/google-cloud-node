@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-scheduler/compare/v2.3.0...v3.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#452)
+
+### Build System
+
+* update library to use Node 12 ([#452](https://github.com/googleapis/nodejs-scheduler/issues/452)) ([195e7e1](https://github.com/googleapis/nodejs-scheduler/commit/195e7e15e1ce9e3b9dcf5a60aaa76ab3bcd2fc75))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.6...v2.3.0) (2021-09-10)
 
 
