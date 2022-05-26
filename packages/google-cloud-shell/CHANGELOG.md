@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-cloud-shell/compare/v1.1.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#89)
+
+### Build System
+
+* update library to use Node 12 ([#89](https://github.com/googleapis/nodejs-cloud-shell/issues/89)) ([314345e](https://github.com/googleapis/nodejs-cloud-shell/commit/314345e76607e76c4ee4e5866080e1eff599e261))
+
 ## [1.1.0](https://github.com/googleapis/nodejs-cloud-shell/compare/v1.0.5...v1.1.0) (2022-04-21)
 
 
