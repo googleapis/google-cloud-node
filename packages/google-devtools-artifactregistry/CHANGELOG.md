@@ -2,16 +2,15 @@
 
 ## [2.0.0](https://github.com/googleapis/nodejs-artifact-registry/compare/v1.3.0...v2.0.0) (2022-05-20)
 
-
 ### ⚠ BREAKING CHANGES
 
 * Update library to use Node 12
 * update library to use Node 12 (#147)
 
+
 ### Features
 
 * AuditConfig for IAM v1 ([#134](https://github.com/googleapis/nodejs-artifact-registry/issues/134)) ([5022f63](https://github.com/googleapis/nodejs-artifact-registry/commit/5022f6319c872cd90750c0d3d1e6b74c4a35df9e))
-
 
 ### Build System
 
