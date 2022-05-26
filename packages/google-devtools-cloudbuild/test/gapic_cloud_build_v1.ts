@@ -251,8 +251,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -283,8 +284,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -331,8 +333,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -360,6 +363,7 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -378,8 +382,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -410,8 +415,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -458,8 +464,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -490,6 +497,7 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -639,8 +647,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -671,8 +680,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -719,8 +729,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -751,6 +762,7 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -769,8 +781,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -802,8 +815,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -850,8 +864,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -882,6 +897,7 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -900,9 +916,11 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.trigger = {};
       request.trigger.resourceName = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger.resource_name=';
+      const expectedHeaderRequestParams =
+        'project_id=&trigger_id=&trigger.resource_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -934,9 +952,11 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.trigger = {};
       request.trigger.resourceName = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger.resource_name=';
+      const expectedHeaderRequestParams =
+        'project_id=&trigger_id=&trigger.resource_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -983,9 +1003,11 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.trigger = {};
       request.trigger.resourceName = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger.resource_name=';
+      const expectedHeaderRequestParams =
+        'project_id=&trigger_id=&trigger.resource_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1016,6 +1038,7 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.trigger = {};
       request.trigger.resourceName = '';
       const expectedError = new Error('The client has already been closed.');
@@ -1035,8 +1058,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
       request.projectId = '';
+      request.trigger = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1068,8 +1092,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
       request.projectId = '';
+      request.trigger = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1116,8 +1141,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
       request.projectId = '';
+      request.trigger = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1151,6 +1177,7 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
       request.projectId = '';
+      request.trigger = '';
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1492,8 +1519,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1525,8 +1553,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1580,8 +1609,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1612,8 +1642,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
       request.projectId = '';
+      request.id = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1876,8 +1907,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1910,8 +1942,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1965,8 +1998,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1997,8 +2031,9 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
       request.projectId = '';
+      request.triggerId = '';
       request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
       const expectedOptions = {
         otherArgs: {
           headers: {

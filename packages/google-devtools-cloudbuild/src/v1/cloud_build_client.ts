@@ -567,6 +567,7 @@ export class CloudBuildClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        id: request.id || '',
         name: request.name || '',
       });
     this.initialize();
@@ -664,6 +665,7 @@ export class CloudBuildClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        id: request.id || '',
         name: request.name || '',
       });
     this.initialize();
@@ -868,6 +870,7 @@ export class CloudBuildClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        trigger_id: request.triggerId || '',
         name: request.name || '',
       });
     this.initialize();
@@ -973,6 +976,7 @@ export class CloudBuildClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        trigger_id: request.triggerId || '',
         name: request.name || '',
       });
     this.initialize();
@@ -1077,6 +1081,7 @@ export class CloudBuildClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        trigger_id: request.triggerId || '',
         'trigger.resource_name': request.trigger!.resourceName || '',
       });
     this.initialize();
@@ -1185,6 +1190,7 @@ export class CloudBuildClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        trigger: request.trigger || '',
         name: request.name || '',
       });
     this.initialize();
@@ -1560,6 +1566,7 @@ export class CloudBuildClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        id: request.id || '',
         name: request.name || '',
       });
     this.initialize();
@@ -1850,6 +1857,7 @@ export class CloudBuildClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        trigger_id: request.triggerId || '',
         name: request.name || '',
       });
     this.initialize();
