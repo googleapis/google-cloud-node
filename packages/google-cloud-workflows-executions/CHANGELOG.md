@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-workflows/compare/v1.4.0...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#140)
+
+### Bug Fixes
+
+* **workflows:** add ancillary service bindings to service_yaml ([#116](https://github.com/googleapis/nodejs-workflows/issues/116)) ([e6b432f](https://github.com/googleapis/nodejs-workflows/commit/e6b432f51dfcff0249ac80f368705340218124f6))
+
+
+### Build System
+
+* update library to use Node 12 ([#140](https://github.com/googleapis/nodejs-workflows/issues/140)) ([e9f9ff9](https://github.com/googleapis/nodejs-workflows/commit/e9f9ff95d1c3374d98986cc3d13e011f760d406e))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-workflows/compare/v1.3.1...v1.4.0) (2021-11-08)
 
 
