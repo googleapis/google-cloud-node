@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-eventarc/compare/v1.2.0...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#73)
+
+### Features
+
+* Add Provider resources ([#75](https://github.com/googleapis/nodejs-eventarc/issues/75)) ([ccda3a7](https://github.com/googleapis/nodejs-eventarc/commit/ccda3a7d2981b79cc692f8103c4f096ecc9fcf08))
+
+
+### Build System
+
+* update library to use Node 12 ([#73](https://github.com/googleapis/nodejs-eventarc/issues/73)) ([bd5c2a1](https://github.com/googleapis/nodejs-eventarc/commit/bd5c2a15758e5b387df663fcfa7cb2df1c416ebc))
+
 ## [1.2.0](https://github.com/googleapis/nodejs-eventarc/compare/v1.1.2...v1.2.0) (2022-02-14)
 
 
