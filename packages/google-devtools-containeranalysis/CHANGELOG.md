@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v3.4.0...v4.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#408)
+
+### Bug Fixes
+
+* Flaky pubsub test ([#394](https://github.com/googleapis/nodejs-containeranalysis/issues/394)) ([eb74ba8](https://github.com/googleapis/nodejs-containeranalysis/commit/eb74ba886c2a3397d57b3f99fca0fe1df1216f2d))
+
+
+### Build System
+
+* update library to use Node 12 ([#408](https://github.com/googleapis/nodejs-containeranalysis/issues/408)) ([4aeecf8](https://github.com/googleapis/nodejs-containeranalysis/commit/4aeecf8ea7c476aa3dab167766121eeec7346a85))
+
 ## [3.4.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v3.3.0...v3.4.0) (2022-04-05)
 
 
