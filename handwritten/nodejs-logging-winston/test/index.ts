@@ -76,6 +76,7 @@ describe('logging-winston', () => {
 
   beforeEach(() => {
     fakeLoggingOptions_ = null;
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     loggingWinston = new loggingWinstonLib.LoggingWinston(OPTIONS);
   });
 

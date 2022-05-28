@@ -21,10 +21,15 @@ import {
   Log,
   LogSync,
 } from '@google-cloud/logging';
+import {
+  setInstrumentationStatus,
+  createDiagnosticEntry,
+} from '@google-cloud/logging/build/src/utils/instrumentation';
 import {LogSeverityFunctions} from '@google-cloud/logging/build/src/utils/log-common';
 import mapValues = require('lodash.mapvalues');
 import {Options} from '.';
 import {Entry, LogEntry} from '@google-cloud/logging/build/src/entry';
+import path = require('path');
 
 type Callback = (err: Error | null, apiResponse?: {}) => void;
 export type MonitoredResource = protos.google.api.MonitoredResource;
@@ -82,6 +87,9 @@ export const LOGGING_SPAN_KEY = 'logging.googleapis.com/spanId';
  * Log entry data key to allow users to indicate a traceSampled flag for the request.
  */
 export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
+
+// The variable to hold cached library version
+let libraryVersion: string;
 
 /*!
  * Gets the current fully qualified trace ID when available from the
@@ -164,6 +172,18 @@ export class LoggingCommon {
     callback: Callback
   ) {
     metadata = metadata || ({} as MetadataArg);
+    // First create instrumentation record if it is never written before
+    let instrumentationEntry: Entry | undefined;
+    if (!setInstrumentationStatus(true)) {
+      instrumentationEntry = createDiagnosticEntry(
+        'nodejs-winston',
+        getNodejsLibraryVersion()
+      );
+      // Update instrumentation record resource, logName and timestamp
+      instrumentationEntry.metadata.resource = this.resource;
+      instrumentationEntry.metadata.logName = metadata.logName;
+      instrumentationEntry.metadata.timestamp = metadata.timestamp;
+    }
     message = message || '';
     const hasMetadata = Object.keys(metadata).length;
 
@@ -265,7 +285,22 @@ export class LoggingCommon {
       delete data.metadata!.logName;
     }
 
-    const entry = this.entry(entryMetadata, data);
+    const entries: Entry[] = [];
+    entries.push(this.entry(entryMetadata, data));
+    // Check if instrumentation entry needs to be added as well
+    if (instrumentationEntry) {
+      // Make sure instrumentation entry is updated by underlying logger
+      instrumentationEntry = this.entry(
+        instrumentationEntry.metadata,
+        instrumentationEntry.data
+      );
+      if (levelCode !== NPM_LEVEL_NAME_TO_CODE.info) {
+        // We using info level for diagnostic records
+        this.cloudLog[
+          CLOUD_LOGGING_LEVEL_CODE_TO_NAME[NPM_LEVEL_NAME_TO_CODE.info]
+        ]([instrumentationEntry], this.defaultCallback);
+      } else entries.push(instrumentationEntry);
+    }
     // Make sure that both callbacks are called in case if provided
     const newCallback: Callback = (err: Error | null, apiResponse?: {}) => {
       if (callback) {
@@ -275,7 +310,7 @@ export class LoggingCommon {
         this.defaultCallback(err, apiResponse);
       }
     };
-    this.cloudLog[cloudLevel](entry, newCallback);
+    this.cloudLog[cloudLevel](entries, newCallback);
     // The LogSync class does not supports callback. However Writable class always
     // provides onwrite() callback which needs to be called after each log is written,
     // so the stream would remove writing state. Since this.defaultCallback can also be set, we
@@ -291,6 +326,18 @@ export class LoggingCommon {
     }
     return (this.cloudLog as Log).entry(metadata, data);
   }
+}
+
+export function getNodejsLibraryVersion() {
+  if (libraryVersion) {
+    return libraryVersion;
+  }
+  libraryVersion = require(path.resolve(
+    __dirname,
+    '../../',
+    'package.json'
+  )).version;
+  return libraryVersion;
 }
 
 type MetadataArg = {

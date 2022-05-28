@@ -98,8 +98,8 @@ describe('Stackdriver Trace Log Correlation', () => {
     logger.log({level: 'info', message: 'hello'});
     setCurrentContextId('3');
     setImmediate(() => {
-      assert.strictEqual(seenContextIds.length, 2);
-      assert.deepStrictEqual(seenContextIds, ['1', '2']);
+      assert.strictEqual(seenContextIds.length, 3);
+      assert.deepStrictEqual(seenContextIds, ['1', '', '2']);
       done();
     });
   });

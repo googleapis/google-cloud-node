@@ -21,6 +21,7 @@ import {ErrorsApiTransport} from './errors-transport';
 import * as proxyquire from 'proxyquire';
 import * as winston from 'winston';
 import {Logging, Entry} from '@google-cloud/logging';
+import * as instrumentation from '@google-cloud/logging/build/src/utils/instrumentation';
 
 const logging = new Logging();
 
@@ -166,15 +167,31 @@ describe('LoggingWinston', function () {
       // will not return additional diagnostic record which is always written with INFO severity
       logger.error(MESSAGE);
 
-      const [entry] = await pollLogs(
+      const entries = await pollLogs(
         LOG_NAME,
         start,
-        1,
-        WRITE_CONSISTENCY_DELAY_MS,
-        'severity:"ERROR"'
+        2,
+        WRITE_CONSISTENCY_DELAY_MS
       );
-      const data = entry.data as {message: string};
-      assert.strictEqual(data.message, `   ${MESSAGE}`);
+      entries.forEach(entry => {
+        assert.ok(entry.data);
+        if (
+          Object.prototype.hasOwnProperty.call(
+            entry.data,
+            instrumentation.DIAGNOSTIC_INFO_KEY
+          )
+        ) {
+          const info =
+            entry.data[instrumentation.DIAGNOSTIC_INFO_KEY][
+              instrumentation.INSTRUMENTATION_SOURCE_KEY
+            ];
+          assert.equal(info[0].name, 'nodejs');
+          assert.equal(info[1].name, 'nodejs-winston');
+        } else {
+          const data = entry.data as {message: string};
+          assert.strictEqual(data.message, `   ${MESSAGE}`);
+        }
+      });
     });
   });
 
@@ -224,8 +241,7 @@ function pollLogs(
   logName: string,
   logTime: number,
   size: number,
-  timeout: number,
-  filter?: string
+  timeout: number
 ) {
   const p = new Promise<Entry[]>((resolve, reject) => {
     const end = Date.now() + timeout;
@@ -236,7 +252,6 @@ function pollLogs(
         logging.log(logName).getEntries(
           {
             pageSize: size,
-            filter: filter,
           },
           (err, entries) => {
             if (!entries || entries.length < size) return loop();
