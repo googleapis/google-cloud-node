@@ -18,6 +18,7 @@ import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
 import {Options} from '../src';
 import {Entry, Logging, LogSync, Log} from '@google-cloud/logging';
+import * as instrumentation from '@google-cloud/logging/build/src/utils/instrumentation';
 import {LoggingCommon} from '../src/common';
 
 declare const global: {[index: string]: {} | null};
@@ -72,6 +73,7 @@ describe('logging-common', () => {
     logName: 'log-name',
     levels: {
       one: 1,
+      six: 6,
     },
     resource: {},
     serviceContext: {
@@ -191,6 +193,7 @@ describe('logging-common', () => {
 
   describe('log', () => {
     const LEVEL = Object.keys(OPTIONS.levels as {[name: string]: number})[0];
+    const INFO = Object.keys(OPTIONS.levels as {[name: string]: number})[1];
     const STACKDRIVER_LEVEL = 'alert'; // (code 1)
     const MESSAGE = 'message';
     const METADATA = {
@@ -497,14 +500,60 @@ describe('logging-common', () => {
       };
 
       loggingCommon.cloudLog[STACKDRIVER_LEVEL] = (
-        entry_: Entry,
+        entry_: Entry[],
         callback: () => void
       ) => {
-        assert.strictEqual(entry_, entry);
+        assert.deepEqual(entry_[0], entry);
         callback(); // done()
       };
 
       loggingCommon.log(LEVEL, MESSAGE, METADATA, done);
+    });
+
+    it('should add instrumentation log entry', done => {
+      loggingCommon.cloudLog.entry = (entryMetadata: {}, data: {}) => {
+        return new Entry(entryMetadata, data);
+      };
+      loggingCommon.cloudLog['info'] = (
+        entry_: Entry[],
+        callback: () => void
+      ) => {
+        assert.equal(entry_.length, 2);
+        assert.equal(
+          entry_[1].data[instrumentation.DIAGNOSTIC_INFO_KEY][
+            instrumentation.INSTRUMENTATION_SOURCE_KEY
+          ][0].name,
+          'nodejs-winston'
+        );
+        callback(); // done()
+      };
+      instrumentation.setInstrumentationStatus(false);
+      loggingCommon.log(INFO, MESSAGE, METADATA, done);
+    });
+
+    it('should add instrumentation log entry with info log level', done => {
+      loggingCommon.cloudLog.entry = (entryMetadata: {}, data: {}) => {
+        return new Entry(entryMetadata, data);
+      };
+      loggingCommon.cloudLog['info'] = (entry_: Entry[]) => {
+        assert.equal(entry_.length, 1);
+        assert.equal(
+          entry_[0].data[instrumentation.DIAGNOSTIC_INFO_KEY][
+            instrumentation.INSTRUMENTATION_SOURCE_KEY
+          ][0].name,
+          'nodejs-winston'
+        );
+      };
+      loggingCommon.cloudLog[STACKDRIVER_LEVEL] = (entry_: Entry[]) => {
+        assert.equal(entry_.length, 1);
+        assert.deepStrictEqual(entry_[0].data, {
+          message: MESSAGE,
+          metadata: METADATA,
+        });
+      };
+      instrumentation.setInstrumentationStatus(false);
+      loggingCommon.log(LEVEL, MESSAGE, METADATA);
+      done();
     });
   });
 
