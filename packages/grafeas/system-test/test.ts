@@ -14,19 +14,18 @@
 import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import {GrafeasClient} from '../src';
+import {CallOptions} from 'google-gax';
 
-describe('GrafeasSystemTest', () => {
+describe('GrafeasSystemTest', async () => {
   it('lists occurrences', async () => {
     const client = new GrafeasClient();
     const projectId = await client.getProjectId();
-    const [resp] = await client.listOccurrences(
+    const resp = await client.listOccurrences(
       {
         parent: client.projectPath(projectId),
       },
-      {
-        autoPaginate: false,
-        pageSize: 1,
-      }
+
+      {pageSize: 1, autoPaginate: false} as CallOptions
     );
     assert.ok(resp.length > 0);
   });
