@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/nodejs-logging-winston/compare/v5.0.0...v5.1.0) (2022-05-28)
+
+
+### Features
+
+* Add support for library instrumentation ([#713](https://github.com/googleapis/nodejs-logging-winston/issues/713)) ([04f99b7](https://github.com/googleapis/nodejs-logging-winston/commit/04f99b7dd24b63cb4859b5d2413788d12522e33b))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-logging-winston/compare/v4.2.4...v5.0.0) (2022-05-24)
 
 
