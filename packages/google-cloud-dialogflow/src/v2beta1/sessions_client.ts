@@ -304,7 +304,8 @@ export class SessionsClient {
     // Provide descriptors for these.
     this.descriptors.stream = {
       streamingDetectIntent: new this._gaxModule.StreamDescriptor(
-        gax.StreamType.BIDI_STREAMING
+        gax.StreamType.BIDI_STREAMING,
+        opts.fallback === 'rest'
       ),
     };
 
