@@ -603,6 +603,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         service_name: request.serviceName || '',
+        config_id: request.configId || '',
       });
     this.initialize();
     return this.innerApiCalls.getServiceConfig(request, options, callback);
@@ -813,6 +814,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         service_name: request.serviceName || '',
+        rollout_id: request.rolloutId || '',
       });
     this.initialize();
     return this.innerApiCalls.getServiceRollout(request, options, callback);
