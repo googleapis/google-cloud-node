@@ -253,7 +253,8 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.indexId = '';
+      const expectedHeaderRequestParams = 'project_id=&index_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -284,7 +285,8 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.indexId = '';
+      const expectedHeaderRequestParams = 'project_id=&index_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -331,7 +333,8 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.indexId = '';
+      const expectedHeaderRequestParams = 'project_id=&index_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -359,6 +362,7 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
       request.projectId = '';
+      request.indexId = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIndex(request), expectedError);
@@ -954,7 +958,8 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.DeleteIndexRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.indexId = '';
+      const expectedHeaderRequestParams = 'project_id=&index_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -986,7 +991,8 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.DeleteIndexRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.indexId = '';
+      const expectedHeaderRequestParams = 'project_id=&index_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1040,7 +1046,8 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.DeleteIndexRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.indexId = '';
+      const expectedHeaderRequestParams = 'project_id=&index_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1071,7 +1078,8 @@ describe('v1.DatastoreAdminClient', () => {
         new protos.google.datastore.admin.v1.DeleteIndexRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.indexId = '';
+      const expectedHeaderRequestParams = 'project_id=&index_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
