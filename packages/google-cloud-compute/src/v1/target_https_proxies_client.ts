@@ -420,6 +420,7 @@ export class TargetHttpsProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_https_proxy: request.targetHttpsProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -533,6 +534,7 @@ export class TargetHttpsProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_https_proxy: request.targetHttpsProxy || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -755,6 +757,7 @@ export class TargetHttpsProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_https_proxy: request.targetHttpsProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -877,6 +880,7 @@ export class TargetHttpsProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_https_proxy: request.targetHttpsProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -999,6 +1003,7 @@ export class TargetHttpsProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_https_proxy: request.targetHttpsProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1121,6 +1126,7 @@ export class TargetHttpsProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_https_proxy: request.targetHttpsProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1243,6 +1249,7 @@ export class TargetHttpsProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_https_proxy: request.targetHttpsProxy || '',
       });
     this.initialize();
     return this.innerApiCalls

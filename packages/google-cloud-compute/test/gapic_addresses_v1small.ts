@@ -232,7 +232,9 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&region=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&region=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +314,9 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&region=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +344,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
       request.project = '';
+      request.region = '';
+      request.address = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +363,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +395,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -433,7 +443,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -461,6 +472,7 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -572,7 +584,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -611,7 +624,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -665,7 +679,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -693,7 +708,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1small.Address()
@@ -747,7 +763,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -792,7 +809,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1small.Address()
@@ -834,7 +852,8 @@ describe('v1small.AddressesClient', () => {
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

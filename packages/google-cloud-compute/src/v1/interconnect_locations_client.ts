@@ -404,6 +404,7 @@ export class InterconnectLocationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        interconnect_location: request.interconnectLocation || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);

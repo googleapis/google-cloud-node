@@ -398,6 +398,8 @@ export class ZoneOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        operation: request.operation || '',
       });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
@@ -493,6 +495,8 @@ export class ZoneOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        operation: request.operation || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -588,6 +592,8 @@ export class ZoneOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        operation: request.operation || '',
       });
     this.initialize();
     return this.innerApiCalls.wait(request, options, callback);
@@ -687,6 +693,7 @@ export class ZoneOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -733,6 +740,7 @@ export class ZoneOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -788,6 +796,7 @@ export class ZoneOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

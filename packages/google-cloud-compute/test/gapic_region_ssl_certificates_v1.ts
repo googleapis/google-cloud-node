@@ -243,7 +243,9 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.sslCertificate = '';
+      const expectedHeaderRequestParams = 'project=&region=&ssl_certificate=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -275,7 +277,9 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.sslCertificate = '';
+      const expectedHeaderRequestParams = 'project=&region=&ssl_certificate=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -323,7 +327,9 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.sslCertificate = '';
+      const expectedHeaderRequestParams = 'project=&region=&ssl_certificate=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -352,6 +358,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
       );
       request.project = '';
+      request.region = '';
+      request.sslCertificate = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -370,7 +378,9 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.sslCertificate = '';
+      const expectedHeaderRequestParams = 'project=&region=&ssl_certificate=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -402,7 +412,9 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.sslCertificate = '';
+      const expectedHeaderRequestParams = 'project=&region=&ssl_certificate=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -449,7 +461,9 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.sslCertificate = '';
+      const expectedHeaderRequestParams = 'project=&region=&ssl_certificate=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -478,6 +492,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
       );
       request.project = '';
+      request.region = '';
+      request.sslCertificate = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -496,7 +512,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -528,7 +545,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -576,7 +594,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -605,6 +624,7 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -623,7 +643,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -663,7 +684,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -718,7 +740,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -747,7 +770,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SslCertificate()
@@ -802,7 +826,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -848,7 +873,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SslCertificate()
@@ -891,7 +917,8 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

@@ -232,7 +232,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +264,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +312,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +341,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
       request.project = '';
+      request.sslPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +359,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +391,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -432,7 +438,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,6 +467,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
       request.project = '';
+      request.sslPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -733,7 +741,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -764,7 +773,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -810,7 +820,8 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.sslPolicy = '';
+      const expectedHeaderRequestParams = 'project=&ssl_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -838,6 +849,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
       request.project = '';
+      request.sslPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);

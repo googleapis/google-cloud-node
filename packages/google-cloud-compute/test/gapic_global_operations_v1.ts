@@ -234,7 +234,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +266,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +314,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +343,7 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
       );
       request.project = '';
+      request.operation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +361,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +393,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +440,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +469,7 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
       );
       request.project = '';
+      request.operation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -479,7 +487,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +519,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -556,7 +566,8 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -584,6 +595,7 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
       );
       request.project = '';
+      request.operation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.wait(request), expectedError);

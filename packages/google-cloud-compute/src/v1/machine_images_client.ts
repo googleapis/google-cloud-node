@@ -412,6 +412,7 @@ export class MachineImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        machine_image: request.machineImage || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -519,6 +520,7 @@ export class MachineImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        machine_image: request.machineImage || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -620,6 +622,7 @@ export class MachineImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -843,6 +846,7 @@ export class MachineImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -944,6 +948,7 @@ export class MachineImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);

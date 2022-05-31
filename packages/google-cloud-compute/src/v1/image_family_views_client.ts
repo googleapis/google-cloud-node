@@ -379,6 +379,8 @@ export class ImageFamilyViewsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        family: request.family || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);

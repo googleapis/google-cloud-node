@@ -412,6 +412,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        public_delegated_prefix: request.publicDelegatedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -531,6 +532,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        public_delegated_prefix: request.publicDelegatedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -753,6 +755,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        public_delegated_prefix: request.publicDelegatedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls

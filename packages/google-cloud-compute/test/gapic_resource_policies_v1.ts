@@ -234,7 +234,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resourcePolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +267,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resourcePolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +316,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resourcePolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +346,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resourcePolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +365,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resourcePolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +398,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resourcePolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +446,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resourcePolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +476,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resourcePolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -479,7 +495,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +528,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +577,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -588,6 +610,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -605,7 +629,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -636,7 +661,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -683,7 +709,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -711,6 +738,7 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -728,7 +756,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -759,7 +789,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -806,7 +838,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -837,6 +871,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -854,7 +890,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -886,7 +924,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -933,7 +973,9 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -964,6 +1006,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1075,7 +1119,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1114,7 +1159,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1168,7 +1214,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1196,7 +1243,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ResourcePolicy()
@@ -1250,7 +1298,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1295,7 +1344,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ResourcePolicy()
@@ -1337,7 +1387,8 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

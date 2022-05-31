@@ -232,7 +232,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +314,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +344,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
       request.project = '';
+      request.region = '';
+      request.urlMap = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +363,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +396,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -432,7 +444,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,6 +474,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
       request.project = '';
+      request.region = '';
+      request.urlMap = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -477,7 +493,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -508,7 +525,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -555,7 +573,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -583,6 +602,7 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -600,7 +620,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -631,7 +653,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -677,7 +701,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -705,6 +731,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
       request.project = '';
+      request.region = '';
+      request.urlMap = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -722,7 +750,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -753,7 +783,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -800,7 +832,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -828,6 +862,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
       request.project = '';
+      request.region = '';
+      request.urlMap = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -845,7 +881,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -876,7 +914,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -923,7 +963,9 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.urlMap = '';
+      const expectedHeaderRequestParams = 'project=&region=&url_map=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -951,6 +993,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
       request.project = '';
+      request.region = '';
+      request.urlMap = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.validate(request), expectedError);
@@ -968,7 +1012,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1001,7 +1046,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1049,7 +1095,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1077,7 +1124,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
@@ -1122,7 +1170,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1164,7 +1213,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
@@ -1200,7 +1250,8 @@ describe('v1.RegionUrlMapsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

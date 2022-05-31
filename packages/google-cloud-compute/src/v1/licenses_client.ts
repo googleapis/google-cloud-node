@@ -406,6 +406,7 @@ export class LicensesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        license: request.license || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -511,6 +512,7 @@ export class LicensesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        license: request.license || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -606,6 +608,7 @@ export class LicensesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -815,6 +818,7 @@ export class LicensesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -916,6 +920,7 @@ export class LicensesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);

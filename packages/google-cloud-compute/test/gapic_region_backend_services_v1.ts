@@ -243,7 +243,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -275,7 +277,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -323,7 +327,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -352,6 +358,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.backendService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -370,7 +378,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -402,7 +412,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -449,7 +461,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -478,6 +492,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.backendService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -496,7 +512,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -528,7 +546,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -576,7 +596,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -605,6 +627,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.backendService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getHealth(request), expectedError);
@@ -623,7 +647,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -655,7 +680,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -703,7 +729,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -732,6 +759,7 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -750,7 +778,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -782,7 +812,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -829,7 +861,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -858,6 +892,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.backendService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -876,7 +912,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -908,7 +946,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -956,7 +996,9 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.backendService = '';
+      const expectedHeaderRequestParams = 'project=&region=&backend_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -985,6 +1027,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.backendService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -1003,7 +1047,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1043,7 +1088,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1098,7 +1144,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1127,7 +1174,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.BackendService()
@@ -1182,7 +1230,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1228,7 +1277,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.BackendService()
@@ -1271,7 +1321,8 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

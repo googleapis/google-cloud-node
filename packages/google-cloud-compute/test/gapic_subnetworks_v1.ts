@@ -232,7 +232,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +314,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +344,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
+      request.subnetwork = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +363,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +396,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -433,7 +445,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -464,6 +478,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
+      request.subnetwork = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.expandIpCidrRange(request), expectedError);
@@ -481,7 +497,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -512,7 +530,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -558,7 +578,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -586,6 +608,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
+      request.subnetwork = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -603,7 +627,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -634,7 +660,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -681,7 +709,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -712,6 +742,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -729,7 +761,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -760,7 +793,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -807,7 +841,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -835,6 +870,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -852,7 +888,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -883,7 +921,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -929,7 +969,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -957,6 +999,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
+      request.subnetwork = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -974,7 +1018,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1005,7 +1051,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1052,7 +1100,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1083,6 +1133,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1100,7 +1152,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1132,7 +1186,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1179,7 +1235,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.subnetwork = '';
+      const expectedHeaderRequestParams = 'project=&region=&subnetwork=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1213,6 +1271,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
+      request.subnetwork = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1233,7 +1293,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1265,7 +1327,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1312,7 +1376,9 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1343,6 +1409,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1454,7 +1522,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1487,7 +1556,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1535,7 +1605,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1563,7 +1634,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
@@ -1611,7 +1683,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1656,7 +1729,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
@@ -1692,7 +1766,8 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

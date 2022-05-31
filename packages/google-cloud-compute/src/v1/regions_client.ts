@@ -389,6 +389,7 @@ export class RegionsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);

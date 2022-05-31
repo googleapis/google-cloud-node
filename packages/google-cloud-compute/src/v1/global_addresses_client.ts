@@ -404,6 +404,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        address: request.address || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -517,6 +518,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        address: request.address || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);

@@ -234,7 +234,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +266,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +314,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +343,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
       request.project = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addRule(request), expectedError);
@@ -357,7 +361,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +393,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -435,7 +441,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -463,6 +470,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
       request.project = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -480,7 +488,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -511,7 +520,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +567,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -585,6 +596,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
       request.project = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -602,7 +614,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -633,7 +646,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -680,7 +694,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -708,6 +723,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
       request.project = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRule(request), expectedError);
@@ -981,7 +997,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1012,7 +1029,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1058,7 +1076,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1086,6 +1105,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
       request.project = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1103,7 +1123,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1134,7 +1155,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1181,7 +1203,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1209,6 +1232,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
       request.project = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patchRule(request), expectedError);
@@ -1226,7 +1250,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1257,7 +1282,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1304,7 +1330,8 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1335,6 +1362,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
       request.project = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeRule(request), expectedError);

@@ -427,6 +427,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        disk: request.disk || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -553,6 +555,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        disk: request.disk || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -667,6 +671,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        disk: request.disk || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -774,6 +780,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        disk: request.disk || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -871,6 +879,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -967,6 +977,7 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1091,6 +1102,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        disk: request.disk || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1207,6 +1220,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        disk: request.disk || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1324,6 +1339,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -1422,6 +1439,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1539,6 +1558,8 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
@@ -1694,6 +1715,7 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -1740,6 +1762,7 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1795,6 +1818,7 @@ export class DisksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

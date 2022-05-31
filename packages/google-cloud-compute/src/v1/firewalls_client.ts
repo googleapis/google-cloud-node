@@ -405,6 +405,7 @@ export class FirewallsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        firewall: request.firewall || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -510,6 +511,7 @@ export class FirewallsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        firewall: request.firewall || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -720,6 +722,7 @@ export class FirewallsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        firewall: request.firewall || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -836,6 +839,7 @@ export class FirewallsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        firewall: request.firewall || '',
       });
     this.initialize();
     return this.innerApiCalls

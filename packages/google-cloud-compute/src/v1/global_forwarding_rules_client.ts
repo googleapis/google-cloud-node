@@ -413,6 +413,7 @@ export class GlobalForwardingRulesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        forwarding_rule: request.forwardingRule || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -532,6 +533,7 @@ export class GlobalForwardingRulesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        forwarding_rule: request.forwardingRule || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -754,6 +756,7 @@ export class GlobalForwardingRulesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        forwarding_rule: request.forwardingRule || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -874,6 +877,7 @@ export class GlobalForwardingRulesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -996,6 +1000,7 @@ export class GlobalForwardingRulesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        forwarding_rule: request.forwardingRule || '',
       });
     this.initialize();
     return this.innerApiCalls

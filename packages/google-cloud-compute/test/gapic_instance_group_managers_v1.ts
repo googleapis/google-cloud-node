@@ -243,7 +243,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.AbandonInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -275,7 +278,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.AbandonInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -323,7 +329,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.AbandonInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -355,6 +364,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.AbandonInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.abandonInstances(request), expectedError);
@@ -373,7 +384,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -406,7 +420,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -454,7 +471,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -489,6 +509,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -510,7 +532,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.CreateInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -542,7 +567,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.CreateInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -590,7 +618,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.CreateInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -622,6 +653,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.CreateInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createInstances(request), expectedError);
@@ -640,7 +673,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -672,7 +708,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -720,7 +759,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -749,6 +791,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -767,7 +811,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -799,7 +846,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -847,7 +897,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -879,6 +932,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteInstances(request), expectedError);
@@ -897,7 +952,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -930,7 +988,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -978,7 +1039,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1013,6 +1077,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1034,7 +1100,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1066,7 +1135,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1113,7 +1185,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1142,6 +1217,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -1160,7 +1237,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1192,7 +1270,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1240,7 +1319,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1269,6 +1349,7 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1287,7 +1368,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1319,7 +1403,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1366,7 +1453,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1395,6 +1485,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1413,7 +1505,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1446,7 +1541,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1494,7 +1592,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1529,6 +1630,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1550,7 +1653,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.RecreateInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1582,7 +1688,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.RecreateInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1630,7 +1739,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.RecreateInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1662,6 +1774,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.RecreateInstancesInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.recreateInstances(request), expectedError);
@@ -1680,7 +1794,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ResizeInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1712,7 +1829,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ResizeInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1760,7 +1880,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ResizeInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1789,6 +1912,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ResizeInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resize(request), expectedError);
@@ -1807,7 +1932,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetInstanceTemplateInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1840,7 +1968,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetInstanceTemplateInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1888,7 +2019,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetInstanceTemplateInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1920,6 +2054,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetInstanceTemplateInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setInstanceTemplate(request), expectedError);
@@ -1938,7 +2074,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetTargetPoolsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1970,7 +2109,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetTargetPoolsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2018,7 +2160,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetTargetPoolsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2050,6 +2195,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.SetTargetPoolsInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setTargetPools(request), expectedError);
@@ -2068,7 +2215,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2101,7 +2251,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2149,7 +2302,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2184,6 +2340,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsInstanceGroupManagerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.instanceGroupManager = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2307,7 +2465,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2347,7 +2506,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2404,7 +2564,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2433,7 +2594,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceGroupManager()
@@ -2489,7 +2651,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -2536,7 +2699,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceGroupManager()
@@ -2580,7 +2744,8 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2619,7 +2784,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListErrorsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2659,7 +2827,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListErrorsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2717,7 +2888,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListErrorsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2749,7 +2923,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListErrorsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceManagedByIgmError()
@@ -2808,7 +2985,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListErrorsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedError = new Error('expected');
       client.descriptors.page.listErrors.createStream = stubPageStreamingCall(
         undefined,
@@ -2858,7 +3038,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListErrorsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceManagedByIgmError()
@@ -2904,7 +3087,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListErrorsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedError = new Error('expected');
       client.descriptors.page.listErrors.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2945,7 +3131,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListManagedInstancesInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2986,7 +3175,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListManagedInstancesInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3042,7 +3234,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListManagedInstancesInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3074,7 +3269,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListManagedInstancesInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ManagedInstance()
@@ -3130,7 +3328,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListManagedInstancesInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedError = new Error('expected');
       client.descriptors.page.listManagedInstances.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3175,7 +3376,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListManagedInstancesInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ManagedInstance()
@@ -3220,7 +3424,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListManagedInstancesInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedError = new Error('expected');
       client.descriptors.page.listManagedInstances.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3258,7 +3465,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3299,7 +3509,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3355,7 +3568,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3390,7 +3606,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.PerInstanceConfig()
@@ -3451,7 +3670,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedError = new Error('expected');
       client.descriptors.page.listPerInstanceConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3501,7 +3723,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.PerInstanceConfig()
@@ -3548,7 +3773,10 @@ describe('v1.InstanceGroupManagersClient', () => {
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsInstanceGroupManagersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.instanceGroupManager = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&instance_group_manager=';
       const expectedError = new Error('expected');
       client.descriptors.page.listPerInstanceConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

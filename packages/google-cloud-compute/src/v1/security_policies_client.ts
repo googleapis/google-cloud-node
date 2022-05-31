@@ -421,6 +421,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        security_policy: request.securityPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -541,6 +542,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        security_policy: request.securityPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -654,6 +656,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        security_policy: request.securityPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -749,6 +752,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        security_policy: request.securityPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls.getRule(request, options, callback);
@@ -1082,6 +1086,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        security_policy: request.securityPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1204,6 +1209,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        security_policy: request.securityPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1324,6 +1330,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        security_policy: request.securityPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls

@@ -234,7 +234,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +267,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +316,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +346,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       request.project = '';
+      request.region = '';
+      request.packetMirroring = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +365,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +398,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +446,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +476,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
       request.project = '';
+      request.region = '';
+      request.packetMirroring = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -479,7 +495,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +527,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +575,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -585,6 +604,7 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -602,7 +622,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -633,7 +655,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -679,7 +703,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.packetMirroring = '';
+      const expectedHeaderRequestParams = 'project=&region=&packet_mirroring=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -707,6 +733,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
       request.project = '';
+      request.region = '';
+      request.packetMirroring = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -724,7 +752,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -756,7 +786,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -803,7 +835,9 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -834,6 +868,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -945,7 +981,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -984,7 +1021,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1038,7 +1076,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1066,7 +1105,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.PacketMirroring()
@@ -1120,7 +1160,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1165,7 +1206,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.PacketMirroring()
@@ -1207,7 +1249,8 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

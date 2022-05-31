@@ -234,7 +234,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +267,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +316,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +346,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.operation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +365,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +398,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +446,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +476,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.operation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -479,7 +495,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +528,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -556,7 +576,9 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -584,6 +606,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.operation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.wait(request), expectedError);
@@ -601,7 +625,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -634,7 +659,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -682,7 +708,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -710,7 +737,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
@@ -758,7 +786,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -803,7 +832,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
@@ -839,7 +869,8 @@ describe('v1.ZoneOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

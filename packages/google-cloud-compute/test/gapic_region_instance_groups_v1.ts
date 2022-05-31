@@ -248,7 +248,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -280,7 +282,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -327,7 +331,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -356,6 +362,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       request.project = '';
+      request.region = '';
+      request.instanceGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -374,7 +382,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -406,7 +416,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -454,7 +466,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -486,6 +500,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       request.project = '';
+      request.region = '';
+      request.instanceGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setNamedPorts(request), expectedError);
@@ -504,7 +520,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -544,7 +561,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -599,7 +617,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -628,7 +647,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceGroup()
@@ -683,7 +703,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -729,7 +750,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceGroup()
@@ -772,7 +794,8 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -810,7 +833,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -850,7 +875,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -908,7 +935,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -940,7 +969,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceWithNamedPorts()
@@ -997,7 +1028,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1043,7 +1076,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceWithNamedPorts()
@@ -1089,7 +1124,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.instanceGroup = '';
+      const expectedHeaderRequestParams = 'project=&region=&instance_group=';
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

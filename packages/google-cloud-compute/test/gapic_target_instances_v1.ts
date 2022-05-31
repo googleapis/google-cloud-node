@@ -234,7 +234,9 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.targetInstance = '';
+      const expectedHeaderRequestParams = 'project=&zone=&target_instance=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +267,9 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.targetInstance = '';
+      const expectedHeaderRequestParams = 'project=&zone=&target_instance=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +316,9 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.targetInstance = '';
+      const expectedHeaderRequestParams = 'project=&zone=&target_instance=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +346,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetInstanceRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.targetInstance = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +365,9 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.targetInstance = '';
+      const expectedHeaderRequestParams = 'project=&zone=&target_instance=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +398,9 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.targetInstance = '';
+      const expectedHeaderRequestParams = 'project=&zone=&target_instance=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +446,9 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.targetInstance = '';
+      const expectedHeaderRequestParams = 'project=&zone=&target_instance=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +476,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetInstanceRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.targetInstance = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -479,7 +495,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +527,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +575,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -585,6 +604,7 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetInstanceRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -696,7 +716,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetInstancesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -735,7 +756,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetInstancesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -789,7 +811,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetInstancesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -817,7 +840,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetInstancesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.TargetInstance()
@@ -871,7 +895,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetInstancesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -916,7 +941,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetInstancesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.TargetInstance()
@@ -958,7 +984,8 @@ describe('v1.TargetInstancesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetInstancesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

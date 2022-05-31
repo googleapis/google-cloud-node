@@ -411,6 +411,7 @@ export class InterconnectsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        interconnect: request.interconnect || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -518,6 +519,7 @@ export class InterconnectsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        interconnect: request.interconnect || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -617,6 +619,7 @@ export class InterconnectsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        interconnect: request.interconnect || '',
       });
     this.initialize();
     return this.innerApiCalls.getDiagnostics(request, options, callback);
@@ -839,6 +842,7 @@ export class InterconnectsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        interconnect: request.interconnect || '',
       });
     this.initialize();
     return this.innerApiCalls

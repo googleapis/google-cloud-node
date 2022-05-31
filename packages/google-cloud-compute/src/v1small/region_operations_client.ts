@@ -385,6 +385,8 @@ export class RegionOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        operation: request.operation || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -490,6 +492,8 @@ export class RegionOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        operation: request.operation || '',
       });
     this.initialize();
     return this.innerApiCalls.wait(request, options, callback);

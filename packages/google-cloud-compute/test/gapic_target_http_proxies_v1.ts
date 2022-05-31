@@ -234,7 +234,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +266,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +314,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +343,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetHttpProxyRequest()
       );
       request.project = '';
+      request.targetHttpProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +361,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +393,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +440,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +469,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetHttpProxyRequest()
       );
       request.project = '';
+      request.targetHttpProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -602,7 +610,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -633,7 +642,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -679,7 +689,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -707,6 +718,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchTargetHttpProxyRequest()
       );
       request.project = '';
+      request.targetHttpProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -724,7 +736,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -755,7 +768,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -802,7 +816,8 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetHttpProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_http_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -830,6 +845,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest()
       );
       request.project = '';
+      request.targetHttpProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setUrlMap(request), expectedError);

@@ -234,7 +234,9 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.commitment = '';
+      const expectedHeaderRequestParams = 'project=&region=&commitment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +267,9 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.commitment = '';
+      const expectedHeaderRequestParams = 'project=&region=&commitment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -311,7 +315,9 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.commitment = '';
+      const expectedHeaderRequestParams = 'project=&region=&commitment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -339,6 +345,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
       );
       request.project = '';
+      request.region = '';
+      request.commitment = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -356,7 +364,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -387,7 +396,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +444,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +473,7 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -479,7 +491,9 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.commitment = '';
+      const expectedHeaderRequestParams = 'project=&region=&commitment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +524,9 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.commitment = '';
+      const expectedHeaderRequestParams = 'project=&region=&commitment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +573,9 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.commitment = '';
+      const expectedHeaderRequestParams = 'project=&region=&commitment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -585,6 +603,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
       );
       request.project = '';
+      request.region = '';
+      request.commitment = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -696,7 +716,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -729,7 +750,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -777,7 +799,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -805,7 +828,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Commitment()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Commitment()),
@@ -853,7 +877,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -898,7 +923,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Commitment()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Commitment()),
@@ -934,7 +960,8 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

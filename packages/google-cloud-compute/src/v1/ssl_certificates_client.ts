@@ -415,6 +415,7 @@ export class SslCertificatesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        ssl_certificate: request.sslCertificate || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -528,6 +529,7 @@ export class SslCertificatesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        ssl_certificate: request.sslCertificate || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);

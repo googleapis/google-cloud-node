@@ -419,6 +419,8 @@ export class PublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        public_delegated_prefix: request.publicDelegatedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -540,6 +542,8 @@ export class PublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        public_delegated_prefix: request.publicDelegatedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -642,6 +646,7 @@ export class PublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -766,6 +771,8 @@ export class PublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        public_delegated_prefix: request.publicDelegatedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -954,6 +961,7 @@ export class PublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -1000,6 +1008,7 @@ export class PublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1055,6 +1064,7 @@ export class PublicDelegatedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

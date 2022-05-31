@@ -236,7 +236,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.externalVpnGateway = '';
+      const expectedHeaderRequestParams = 'project=&external_vpn_gateway=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -269,7 +270,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.externalVpnGateway = '';
+      const expectedHeaderRequestParams = 'project=&external_vpn_gateway=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -318,7 +320,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.externalVpnGateway = '';
+      const expectedHeaderRequestParams = 'project=&external_vpn_gateway=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -348,6 +351,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       request.project = '';
+      request.externalVpnGateway = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -367,7 +371,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.externalVpnGateway = '';
+      const expectedHeaderRequestParams = 'project=&external_vpn_gateway=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -400,7 +405,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.externalVpnGateway = '';
+      const expectedHeaderRequestParams = 'project=&external_vpn_gateway=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -448,7 +454,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.externalVpnGateway = '';
+      const expectedHeaderRequestParams = 'project=&external_vpn_gateway=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -478,6 +485,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       request.project = '';
+      request.externalVpnGateway = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -628,7 +636,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -661,7 +670,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -710,7 +720,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -740,6 +751,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -759,7 +771,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -793,7 +806,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -842,7 +856,8 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -875,6 +890,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

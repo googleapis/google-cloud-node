@@ -416,6 +416,7 @@ export class BackendBucketsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_bucket: request.backendBucket || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -536,6 +537,7 @@ export class BackendBucketsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_bucket: request.backendBucket || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -658,6 +660,7 @@ export class BackendBucketsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_bucket: request.backendBucket || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -771,6 +774,7 @@ export class BackendBucketsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_bucket: request.backendBucket || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -993,6 +997,7 @@ export class BackendBucketsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_bucket: request.backendBucket || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1115,6 +1120,7 @@ export class BackendBucketsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_bucket: request.backendBucket || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1237,6 +1243,7 @@ export class BackendBucketsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_bucket: request.backendBucket || '',
       });
     this.initialize();
     return this.innerApiCalls

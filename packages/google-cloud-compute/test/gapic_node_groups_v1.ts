@@ -232,7 +232,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +314,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +344,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.nodeGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addNodes(request), expectedError);
@@ -355,7 +363,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +396,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -433,7 +445,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -461,6 +475,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.nodeGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -478,7 +494,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -509,7 +527,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -556,7 +576,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -587,6 +609,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.nodeGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteNodes(request), expectedError);
@@ -604,7 +628,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -635,7 +661,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -681,7 +709,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -709,6 +739,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.nodeGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -726,7 +758,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -757,7 +791,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -804,7 +840,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -835,6 +873,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -852,7 +892,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -883,7 +924,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -930,7 +972,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -958,6 +1001,7 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -975,7 +1019,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1006,7 +1052,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1052,7 +1100,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1080,6 +1130,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.nodeGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1097,7 +1149,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1128,7 +1182,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1175,7 +1231,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1206,6 +1264,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1223,7 +1283,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1254,7 +1316,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1301,7 +1365,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1332,6 +1398,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.nodeGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setNodeTemplate(request), expectedError);
@@ -1349,7 +1417,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1381,7 +1451,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1428,7 +1500,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1459,6 +1533,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1570,7 +1646,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1603,7 +1680,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1651,7 +1729,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1679,7 +1758,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.NodeGroup()),
         generateSampleMessage(new protos.google.cloud.compute.v1.NodeGroup()),
@@ -1727,7 +1807,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1772,7 +1853,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.NodeGroup()),
         generateSampleMessage(new protos.google.cloud.compute.v1.NodeGroup()),
@@ -1808,7 +1890,8 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1845,7 +1928,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1884,7 +1969,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1939,7 +2026,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1967,7 +2056,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NodeGroupNode()
@@ -2021,7 +2112,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedError = new Error('expected');
       client.descriptors.page.listNodes.createStream = stubPageStreamingCall(
         undefined,
@@ -2066,7 +2159,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NodeGroupNode()
@@ -2108,7 +2203,9 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.nodeGroup = '';
+      const expectedHeaderRequestParams = 'project=&zone=&node_group=';
       const expectedError = new Error('expected');
       client.descriptors.page.listNodes.asyncIterate = stubAsyncIterationCall(
         undefined,

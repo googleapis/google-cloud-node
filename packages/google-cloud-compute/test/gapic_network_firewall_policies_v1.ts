@@ -245,7 +245,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -277,7 +278,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -325,7 +327,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -357,6 +360,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addAssociation(request), expectedError);
@@ -375,7 +379,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -407,7 +412,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -455,7 +461,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -484,6 +491,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addRule(request), expectedError);
@@ -502,7 +510,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -534,7 +543,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -582,7 +592,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -614,6 +625,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cloneRules(request), expectedError);
@@ -632,7 +644,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -664,7 +677,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -712,7 +726,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -741,6 +756,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -759,7 +775,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -791,7 +808,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -838,7 +856,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -867,6 +886,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -885,7 +905,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -917,7 +938,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -965,7 +987,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -997,6 +1020,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAssociation(request), expectedError);
@@ -1015,7 +1039,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1047,7 +1072,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1095,7 +1121,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1127,6 +1154,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1145,7 +1173,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1177,7 +1206,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1225,7 +1255,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1254,6 +1285,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRule(request), expectedError);
@@ -1399,7 +1431,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1431,7 +1464,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1478,7 +1512,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1507,6 +1542,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1525,7 +1561,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1557,7 +1594,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1605,7 +1643,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1634,6 +1673,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patchRule(request), expectedError);
@@ -1652,7 +1692,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1684,7 +1725,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1732,7 +1774,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1764,6 +1807,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeAssociation(request), expectedError);
@@ -1782,7 +1826,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1814,7 +1859,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1862,7 +1908,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1894,6 +1941,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeRule(request), expectedError);
@@ -1912,7 +1960,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1944,7 +1993,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1992,7 +2042,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2024,6 +2075,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2042,7 +2094,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2075,7 +2128,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2123,7 +2177,8 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2155,6 +2210,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

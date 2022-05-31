@@ -405,6 +405,7 @@ export class SslPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        ssl_policy: request.sslPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -512,6 +513,7 @@ export class SslPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        ssl_policy: request.sslPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -829,6 +831,7 @@ export class SslPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        ssl_policy: request.sslPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls

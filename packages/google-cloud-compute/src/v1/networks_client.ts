@@ -423,6 +423,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -537,6 +538,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -642,6 +644,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -741,6 +744,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls.getEffectiveFirewalls(request, options, callback);
@@ -951,6 +955,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1073,6 +1078,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1193,6 +1199,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1315,6 +1322,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1648,6 +1656,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     this.initialize();
     return this.innerApiCalls.listPeeringRoutes(request, options, callback);
@@ -1701,6 +1710,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     const defaultCallSettings = this._defaults['listPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1763,6 +1773,7 @@ export class NetworksClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        network: request.network || '',
       });
     const defaultCallSettings = this._defaults['listPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);

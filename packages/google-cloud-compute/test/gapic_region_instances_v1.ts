@@ -171,7 +171,8 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -202,7 +203,8 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -249,7 +251,8 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -280,6 +283,7 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.bulkInsert(request), expectedError);

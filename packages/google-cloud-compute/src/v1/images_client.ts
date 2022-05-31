@@ -408,6 +408,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        image: request.image || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -524,6 +525,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        image: request.image || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -629,6 +631,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        image: request.image || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -722,6 +725,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        family: request.family || '',
       });
     this.initialize();
     return this.innerApiCalls.getFromFamily(request, options, callback);
@@ -817,6 +821,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -1025,6 +1030,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        image: request.image || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1140,6 +1146,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -1234,6 +1241,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1355,6 +1363,7 @@ export class ImagesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);

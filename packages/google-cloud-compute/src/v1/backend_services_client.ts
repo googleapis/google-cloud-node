@@ -424,6 +424,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -544,6 +545,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -666,6 +668,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -779,6 +782,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -879,6 +883,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls.getHealth(request, options, callback);
@@ -1101,6 +1106,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1223,6 +1229,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1345,6 +1352,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1467,6 +1475,7 @@ export class BackendServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        backend_service: request.backendService || '',
       });
     this.initialize();
     return this.innerApiCalls

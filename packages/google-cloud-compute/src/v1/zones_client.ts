@@ -389,6 +389,7 @@ export class ZonesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);

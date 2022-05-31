@@ -232,7 +232,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -264,7 +266,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -311,7 +315,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -342,6 +348,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.disk = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addResourcePolicies(request), expectedError);
@@ -359,7 +367,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -390,7 +400,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -437,7 +449,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -468,6 +482,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.disk = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSnapshot(request), expectedError);
@@ -485,7 +501,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -516,7 +534,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -563,7 +583,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -591,6 +613,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.disk = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -608,7 +632,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -639,7 +665,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -685,7 +713,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -713,6 +743,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.disk = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -730,7 +762,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -761,7 +795,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -808,7 +844,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -839,6 +877,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -856,7 +896,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -887,7 +928,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -934,7 +976,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -962,6 +1005,7 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -979,7 +1023,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1011,7 +1057,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1058,7 +1106,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1092,6 +1142,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.disk = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1112,7 +1164,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1143,7 +1197,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1190,7 +1246,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.disk = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1218,6 +1276,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.disk = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resize(request), expectedError);
@@ -1235,7 +1295,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1266,7 +1328,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1313,7 +1377,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1344,6 +1410,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1361,7 +1429,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1392,7 +1462,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1439,7 +1511,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1467,6 +1541,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -1484,7 +1560,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1516,7 +1594,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1563,7 +1643,9 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1594,6 +1676,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1705,7 +1789,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1738,7 +1823,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1786,7 +1872,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1814,7 +1901,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
@@ -1859,7 +1947,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1901,7 +1990,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
@@ -1937,7 +2027,8 @@ describe('v1.DisksClient', () => {
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

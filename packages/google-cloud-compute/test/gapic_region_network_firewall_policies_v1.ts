@@ -260,7 +260,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -294,7 +296,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -344,7 +348,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -378,6 +384,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addAssociation(request), expectedError);
@@ -398,7 +406,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -432,7 +442,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -482,7 +494,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -513,6 +527,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addRule(request), expectedError);
@@ -533,7 +549,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -567,7 +585,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -617,7 +637,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -651,6 +673,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cloneRules(request), expectedError);
@@ -671,7 +695,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -705,7 +731,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -755,7 +783,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -786,6 +816,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -806,7 +838,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -840,7 +874,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -889,7 +925,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -920,6 +958,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -940,7 +980,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -974,7 +1016,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1024,7 +1068,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1058,6 +1104,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAssociation(request), expectedError);
@@ -1078,7 +1126,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1113,7 +1162,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1163,7 +1213,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1200,6 +1251,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1223,7 +1275,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1257,7 +1311,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1307,7 +1363,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1341,6 +1399,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1361,7 +1421,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1395,7 +1457,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1445,7 +1509,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1476,6 +1542,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRule(request), expectedError);
@@ -1496,7 +1564,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1530,7 +1599,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1580,7 +1650,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1611,6 +1682,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1631,7 +1703,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1665,7 +1739,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1714,7 +1790,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1745,6 +1823,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1765,7 +1845,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1799,7 +1881,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1849,7 +1933,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1880,6 +1966,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patchRule(request), expectedError);
@@ -1900,7 +1988,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1934,7 +2024,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1984,7 +2076,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2018,6 +2112,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeAssociation(request), expectedError);
@@ -2038,7 +2134,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2072,7 +2170,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2122,7 +2222,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&firewall_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2156,6 +2258,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.firewallPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeRule(request), expectedError);
@@ -2176,7 +2280,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2210,7 +2316,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2260,7 +2368,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2294,6 +2404,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2314,7 +2426,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2349,7 +2463,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2399,7 +2515,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2433,6 +2551,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionNetworkFirewallPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2453,7 +2573,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2495,7 +2616,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2552,7 +2674,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2583,7 +2706,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -2640,7 +2764,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -2688,7 +2813,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -2733,7 +2859,8 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

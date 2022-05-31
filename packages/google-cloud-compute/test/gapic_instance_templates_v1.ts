@@ -234,7 +234,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.instanceTemplate = '';
+      const expectedHeaderRequestParams = 'project=&instance_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +266,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.instanceTemplate = '';
+      const expectedHeaderRequestParams = 'project=&instance_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +314,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.instanceTemplate = '';
+      const expectedHeaderRequestParams = 'project=&instance_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +343,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
       request.project = '';
+      request.instanceTemplate = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +361,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.instanceTemplate = '';
+      const expectedHeaderRequestParams = 'project=&instance_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +393,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.instanceTemplate = '';
+      const expectedHeaderRequestParams = 'project=&instance_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +440,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.instanceTemplate = '';
+      const expectedHeaderRequestParams = 'project=&instance_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +469,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
       request.project = '';
+      request.instanceTemplate = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -479,7 +487,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +519,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +567,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -588,6 +599,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -728,7 +740,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -759,7 +772,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -806,7 +820,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -837,6 +852,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -854,7 +870,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -886,7 +903,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -933,7 +951,8 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -964,6 +983,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

@@ -411,6 +411,7 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        external_vpn_gateway: request.externalVpnGateway || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -524,6 +525,7 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        external_vpn_gateway: request.externalVpnGateway || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -744,6 +746,7 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -865,6 +868,7 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        resource: request.resource || '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);

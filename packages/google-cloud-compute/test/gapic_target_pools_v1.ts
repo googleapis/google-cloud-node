@@ -232,7 +232,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +314,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -341,6 +347,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetPool = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addHealthCheck(request), expectedError);
@@ -358,7 +366,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -389,7 +399,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -436,7 +448,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -467,6 +481,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetPool = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addInstance(request), expectedError);
@@ -484,7 +500,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -515,7 +533,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -562,7 +582,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -590,6 +612,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetPool = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -607,7 +631,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -638,7 +664,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -684,7 +712,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -712,6 +742,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetPool = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -729,7 +761,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -760,7 +794,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -807,7 +843,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -835,6 +873,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetPool = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getHealth(request), expectedError);
@@ -852,7 +892,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -883,7 +924,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -930,7 +972,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -958,6 +1001,7 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -975,7 +1019,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1006,7 +1052,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1053,7 +1101,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1084,6 +1134,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetPool = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeHealthCheck(request), expectedError);
@@ -1101,7 +1153,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1132,7 +1186,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1179,7 +1235,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1210,6 +1268,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetPool = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeInstance(request), expectedError);
@@ -1227,7 +1287,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1258,7 +1320,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1305,7 +1369,9 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetPool = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_pool=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1333,6 +1399,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetPool = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setBackup(request), expectedError);
@@ -1444,7 +1512,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1477,7 +1546,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1525,7 +1595,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1553,7 +1624,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
@@ -1601,7 +1673,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1646,7 +1719,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
         generateSampleMessage(new protos.google.cloud.compute.v1.TargetPool()),
@@ -1682,7 +1756,8 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

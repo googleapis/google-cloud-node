@@ -411,6 +411,7 @@ export class TargetTcpProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_tcp_proxy: request.targetTcpProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -524,6 +525,7 @@ export class TargetTcpProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_tcp_proxy: request.targetTcpProxy || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -746,6 +748,7 @@ export class TargetTcpProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_tcp_proxy: request.targetTcpProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -868,6 +871,7 @@ export class TargetTcpProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_tcp_proxy: request.targetTcpProxy || '',
       });
     this.initialize();
     return this.innerApiCalls

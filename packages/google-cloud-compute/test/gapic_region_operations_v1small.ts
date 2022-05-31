@@ -171,7 +171,9 @@ describe('v1small.RegionOperationsClient', () => {
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&region=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -202,7 +204,9 @@ describe('v1small.RegionOperationsClient', () => {
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&region=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -248,7 +252,9 @@ describe('v1small.RegionOperationsClient', () => {
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&region=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -276,6 +282,8 @@ describe('v1small.RegionOperationsClient', () => {
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
       request.project = '';
+      request.region = '';
+      request.operation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -293,7 +301,9 @@ describe('v1small.RegionOperationsClient', () => {
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&region=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -324,7 +334,9 @@ describe('v1small.RegionOperationsClient', () => {
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&region=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -370,7 +382,9 @@ describe('v1small.RegionOperationsClient', () => {
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.operation = '';
+      const expectedHeaderRequestParams = 'project=&region=&operation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -398,6 +412,8 @@ describe('v1small.RegionOperationsClient', () => {
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
       request.project = '';
+      request.region = '';
+      request.operation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.wait(request), expectedError);

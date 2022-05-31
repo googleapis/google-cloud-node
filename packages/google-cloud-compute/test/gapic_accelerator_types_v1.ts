@@ -234,7 +234,9 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.acceleratorType = '';
+      const expectedHeaderRequestParams = 'project=&zone=&accelerator_type=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +267,9 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.acceleratorType = '';
+      const expectedHeaderRequestParams = 'project=&zone=&accelerator_type=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -311,7 +315,9 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.acceleratorType = '';
+      const expectedHeaderRequestParams = 'project=&zone=&accelerator_type=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -339,6 +345,8 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.acceleratorType = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -450,7 +458,8 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -489,7 +498,8 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -543,7 +553,8 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -571,7 +582,8 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.AcceleratorType()
@@ -625,7 +637,8 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -670,7 +683,8 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.AcceleratorType()
@@ -712,7 +726,8 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

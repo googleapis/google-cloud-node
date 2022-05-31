@@ -260,7 +260,10 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.notificationEndpoint = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&notification_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -294,7 +297,10 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.notificationEndpoint = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&notification_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -344,7 +350,10 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.notificationEndpoint = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&notification_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -375,6 +384,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
       request.project = '';
+      request.region = '';
+      request.notificationEndpoint = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -395,7 +406,10 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.notificationEndpoint = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&notification_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -429,7 +443,10 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.notificationEndpoint = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&notification_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -478,7 +495,10 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.notificationEndpoint = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&notification_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -509,6 +529,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
       request.project = '';
+      request.region = '';
+      request.notificationEndpoint = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -529,7 +551,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -563,7 +586,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -613,7 +637,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -644,6 +669,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -664,7 +690,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -706,7 +733,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -765,7 +793,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -796,7 +825,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NotificationEndpoint()
@@ -854,7 +884,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -903,7 +934,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NotificationEndpoint()
@@ -949,7 +981,8 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

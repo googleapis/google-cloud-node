@@ -234,7 +234,8 @@ describe('v1.GlobalAddressesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +266,8 @@ describe('v1.GlobalAddressesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +314,8 @@ describe('v1.GlobalAddressesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +343,7 @@ describe('v1.GlobalAddressesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalAddressRequest()
       );
       request.project = '';
+      request.address = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +361,8 @@ describe('v1.GlobalAddressesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +393,8 @@ describe('v1.GlobalAddressesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +440,8 @@ describe('v1.GlobalAddressesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalAddressRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.address = '';
+      const expectedHeaderRequestParams = 'project=&address=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +469,7 @@ describe('v1.GlobalAddressesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalAddressRequest()
       );
       request.project = '';
+      request.address = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);

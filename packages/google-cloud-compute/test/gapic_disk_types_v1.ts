@@ -232,7 +232,9 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.diskType = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk_type=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.diskType = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk_type=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -309,7 +313,9 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.diskType = '';
+      const expectedHeaderRequestParams = 'project=&zone=&disk_type=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -337,6 +343,8 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.diskType = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -448,7 +456,8 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -481,7 +490,8 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -529,7 +539,8 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +568,8 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.DiskType()),
         generateSampleMessage(new protos.google.cloud.compute.v1.DiskType()),
@@ -605,7 +617,8 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -650,7 +663,8 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.DiskType()),
         generateSampleMessage(new protos.google.cloud.compute.v1.DiskType()),
@@ -686,7 +700,8 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

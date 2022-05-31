@@ -232,7 +232,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.DeleteImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +264,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.DeleteImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +312,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.DeleteImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +341,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.DeleteImageRequest()
       );
       request.project = '';
+      request.image = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +359,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.DeprecateImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +391,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.DeprecateImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -433,7 +439,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.DeprecateImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -461,6 +468,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.DeprecateImageRequest()
       );
       request.project = '';
+      request.image = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deprecate(request), expectedError);
@@ -478,7 +486,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -509,7 +518,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -555,7 +565,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -583,6 +594,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetImageRequest()
       );
       request.project = '';
+      request.image = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -600,7 +612,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetFromFamilyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.family = '';
+      const expectedHeaderRequestParams = 'project=&family=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -631,7 +644,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetFromFamilyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.family = '';
+      const expectedHeaderRequestParams = 'project=&family=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -678,7 +692,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetFromFamilyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.family = '';
+      const expectedHeaderRequestParams = 'project=&family=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -709,6 +724,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetFromFamilyImageRequest()
       );
       request.project = '';
+      request.family = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getFromFamily(request), expectedError);
@@ -726,7 +742,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -757,7 +774,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -804,7 +822,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -835,6 +854,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyImageRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -975,7 +995,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.PatchImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1006,7 +1027,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.PatchImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1052,7 +1074,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.PatchImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.image = '';
+      const expectedHeaderRequestParams = 'project=&image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1080,6 +1103,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.PatchImageRequest()
       );
       request.project = '';
+      request.image = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1097,7 +1121,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1128,7 +1153,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1175,7 +1201,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1206,6 +1233,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyImageRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1223,7 +1251,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1254,7 +1283,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1301,7 +1331,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1329,6 +1360,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsImageRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -1346,7 +1378,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1378,7 +1411,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1425,7 +1459,8 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1456,6 +1491,7 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsImageRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

@@ -417,6 +417,8 @@ export class TargetVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        target_vpn_gateway: request.targetVpnGateway || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -532,6 +534,8 @@ export class TargetVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        target_vpn_gateway: request.targetVpnGateway || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -634,6 +638,7 @@ export class TargetVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -813,6 +818,7 @@ export class TargetVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -859,6 +865,7 @@ export class TargetVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -914,6 +921,7 @@ export class TargetVpnGatewaysClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

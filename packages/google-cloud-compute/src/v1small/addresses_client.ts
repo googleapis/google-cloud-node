@@ -418,6 +418,8 @@ export class AddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        address: request.address || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -544,6 +546,7 @@ export class AddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -737,6 +740,7 @@ export class AddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -791,6 +795,7 @@ export class AddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -854,6 +859,7 @@ export class AddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

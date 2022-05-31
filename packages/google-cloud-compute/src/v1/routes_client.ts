@@ -396,6 +396,7 @@ export class RoutesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        route: request.route || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -501,6 +502,7 @@ export class RoutesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        route: request.route || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);

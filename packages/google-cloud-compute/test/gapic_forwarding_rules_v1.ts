@@ -234,7 +234,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +267,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +316,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +346,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteForwardingRuleRequest()
       );
       request.project = '';
+      request.region = '';
+      request.forwardingRule = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +365,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +398,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +446,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +476,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetForwardingRuleRequest()
       );
       request.project = '';
+      request.region = '';
+      request.forwardingRule = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -479,7 +495,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +527,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +575,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -585,6 +604,7 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertForwardingRuleRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -602,7 +622,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -633,7 +655,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -679,7 +703,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -707,6 +733,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchForwardingRuleRequest()
       );
       request.project = '';
+      request.region = '';
+      request.forwardingRule = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -724,7 +752,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -755,7 +785,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -802,7 +834,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -830,6 +864,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsForwardingRuleRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -847,7 +883,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -878,7 +916,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -925,7 +965,9 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetForwardingRuleRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.forwardingRule = '';
+      const expectedHeaderRequestParams = 'project=&region=&forwarding_rule=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -953,6 +995,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetForwardingRuleRequest()
       );
       request.project = '';
+      request.region = '';
+      request.forwardingRule = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setTarget(request), expectedError);
@@ -1064,7 +1108,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1103,7 +1148,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1157,7 +1203,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1185,7 +1232,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ForwardingRule()
@@ -1239,7 +1287,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1284,7 +1333,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ForwardingRule()
@@ -1326,7 +1376,8 @@ describe('v1.ForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

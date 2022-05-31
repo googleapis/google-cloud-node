@@ -413,6 +413,7 @@ export class UrlMapsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        url_map: request.urlMap || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -518,6 +519,7 @@ export class UrlMapsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        url_map: request.urlMap || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -734,6 +736,7 @@ export class UrlMapsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        url_map: request.urlMap || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -848,6 +851,7 @@ export class UrlMapsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        url_map: request.urlMap || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -964,6 +968,7 @@ export class UrlMapsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        url_map: request.urlMap || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1073,6 +1078,7 @@ export class UrlMapsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        url_map: request.urlMap || '',
       });
     this.initialize();
     return this.innerApiCalls.validate(request, options, callback);

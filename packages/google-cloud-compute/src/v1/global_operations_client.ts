@@ -407,6 +407,7 @@ export class GlobalOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        operation: request.operation || '',
       });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
@@ -500,6 +501,7 @@ export class GlobalOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        operation: request.operation || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -593,6 +595,7 @@ export class GlobalOperationsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        operation: request.operation || '',
       });
     this.initialize();
     return this.innerApiCalls.wait(request, options, callback);

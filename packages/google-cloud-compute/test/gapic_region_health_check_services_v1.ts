@@ -245,7 +245,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -277,7 +280,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -325,7 +331,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -354,6 +363,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.healthCheckService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -372,7 +383,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -404,7 +418,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -451,7 +468,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -480,6 +500,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.healthCheckService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -498,7 +520,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -530,7 +553,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -578,7 +602,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -607,6 +632,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -625,7 +651,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -657,7 +686,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -704,7 +736,10 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.healthCheckService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&health_check_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -733,6 +768,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.healthCheckService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -751,7 +788,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -791,7 +829,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -846,7 +885,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -875,7 +915,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.HealthCheckService()
@@ -931,7 +972,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -978,7 +1020,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.HealthCheckService()
@@ -1022,7 +1065,8 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

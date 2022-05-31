@@ -169,7 +169,8 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.licenseCode = '';
+      const expectedHeaderRequestParams = 'project=&license_code=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -200,7 +201,8 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.licenseCode = '';
+      const expectedHeaderRequestParams = 'project=&license_code=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -246,7 +248,8 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.licenseCode = '';
+      const expectedHeaderRequestParams = 'project=&license_code=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -274,6 +277,7 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
       request.project = '';
+      request.licenseCode = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -291,7 +295,8 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -323,7 +328,8 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -370,7 +376,8 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -401,6 +408,7 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);

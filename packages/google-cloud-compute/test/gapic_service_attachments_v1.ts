@@ -234,7 +234,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.DeleteServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +268,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.DeleteServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +318,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.DeleteServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +349,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.DeleteServiceAttachmentRequest()
       );
       request.project = '';
+      request.region = '';
+      request.serviceAttachment = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +368,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +402,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +451,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +482,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetServiceAttachmentRequest()
       );
       request.project = '';
+      request.region = '';
+      request.serviceAttachment = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -479,7 +501,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -510,7 +534,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -557,7 +583,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -588,6 +616,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyServiceAttachmentRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -605,7 +635,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -636,7 +667,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -683,7 +715,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -711,6 +744,7 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertServiceAttachmentRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -728,7 +762,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.PatchServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -759,7 +796,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.PatchServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -805,7 +845,10 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.PatchServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.serviceAttachment = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&service_attachment=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -833,6 +876,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.PatchServiceAttachmentRequest()
       );
       request.project = '';
+      request.region = '';
+      request.serviceAttachment = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -850,7 +895,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -881,7 +928,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -928,7 +977,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -959,6 +1010,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyServiceAttachmentRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -976,7 +1029,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1008,7 +1063,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1055,7 +1112,9 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsServiceAttachmentRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1086,6 +1145,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsServiceAttachmentRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1197,7 +1258,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListServiceAttachmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1236,7 +1298,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListServiceAttachmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1290,7 +1353,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListServiceAttachmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1318,7 +1382,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListServiceAttachmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ServiceAttachment()
@@ -1373,7 +1438,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListServiceAttachmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1419,7 +1485,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListServiceAttachmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ServiceAttachment()
@@ -1461,7 +1528,8 @@ describe('v1.ServiceAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListServiceAttachmentsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

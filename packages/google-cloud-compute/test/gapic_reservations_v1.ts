@@ -232,7 +232,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +314,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +344,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.reservation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +363,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +396,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -432,7 +444,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,6 +474,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.reservation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -477,7 +493,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -508,7 +526,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -555,7 +575,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -586,6 +608,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -603,7 +627,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -634,7 +659,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -681,7 +707,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -709,6 +736,7 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -726,7 +754,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -757,7 +787,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -804,7 +836,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -832,6 +866,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.reservation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resize(request), expectedError);
@@ -849,7 +885,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -880,7 +918,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -927,7 +967,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -958,6 +1000,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -975,7 +1019,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1007,7 +1053,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1054,7 +1102,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1085,6 +1135,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1102,7 +1154,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1133,7 +1187,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1180,7 +1236,9 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.reservation = '';
+      const expectedHeaderRequestParams = 'project=&zone=&reservation=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1208,6 +1266,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.reservation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -1319,7 +1379,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1352,7 +1413,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1400,7 +1462,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1428,7 +1491,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reservation()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reservation()),
@@ -1476,7 +1540,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1521,7 +1586,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reservation()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reservation()),
@@ -1557,7 +1623,8 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

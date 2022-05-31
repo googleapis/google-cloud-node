@@ -260,7 +260,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -294,7 +297,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -344,7 +350,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -375,6 +384,8 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -395,7 +406,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -429,7 +443,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -478,7 +495,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -509,6 +529,8 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -529,7 +551,8 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -563,7 +586,8 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -613,7 +637,8 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -644,6 +669,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -664,7 +690,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -698,7 +727,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -747,7 +779,10 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&network_edge_security_service=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -778,6 +813,8 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
       request.project = '';
+      request.region = '';
+      request.networkEdgeSecurityService = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);

@@ -234,7 +234,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -265,7 +266,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -312,7 +314,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -340,6 +343,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest()
       );
       request.project = '';
+      request.targetGrpcProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -357,7 +361,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -388,7 +393,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -434,7 +440,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -462,6 +469,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetTargetGrpcProxyRequest()
       );
       request.project = '';
+      request.targetGrpcProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -602,7 +610,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -633,7 +642,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -679,7 +689,8 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchTargetGrpcProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.targetGrpcProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_grpc_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -707,6 +718,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchTargetGrpcProxyRequest()
       );
       request.project = '';
+      request.targetGrpcProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);

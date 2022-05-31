@@ -413,6 +413,7 @@ export class TargetSslProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_ssl_proxy: request.targetSslProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -526,6 +527,7 @@ export class TargetSslProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_ssl_proxy: request.targetSslProxy || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -748,6 +750,7 @@ export class TargetSslProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_ssl_proxy: request.targetSslProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -870,6 +873,7 @@ export class TargetSslProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_ssl_proxy: request.targetSslProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -992,6 +996,7 @@ export class TargetSslProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_ssl_proxy: request.targetSslProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1114,6 +1119,7 @@ export class TargetSslProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_ssl_proxy: request.targetSslProxy || '',
       });
     this.initialize();
     return this.innerApiCalls

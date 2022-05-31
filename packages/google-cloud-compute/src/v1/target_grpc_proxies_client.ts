@@ -410,6 +410,7 @@ export class TargetGrpcProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_grpc_proxy: request.targetGrpcProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -523,6 +524,7 @@ export class TargetGrpcProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_grpc_proxy: request.targetGrpcProxy || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -745,6 +747,7 @@ export class TargetGrpcProxiesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        target_grpc_proxy: request.targetGrpcProxy || '',
       });
     this.initialize();
     return this.innerApiCalls

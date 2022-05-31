@@ -412,6 +412,7 @@ export class PublicAdvertisedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        public_advertised_prefix: request.publicAdvertisedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -531,6 +532,7 @@ export class PublicAdvertisedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        public_advertised_prefix: request.publicAdvertisedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -753,6 +755,7 @@ export class PublicAdvertisedPrefixesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        public_advertised_prefix: request.publicAdvertisedPrefix || '',
       });
     this.initialize();
     return this.innerApiCalls

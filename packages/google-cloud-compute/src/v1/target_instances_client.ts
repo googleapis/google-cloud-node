@@ -417,6 +417,8 @@ export class TargetInstancesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        target_instance: request.targetInstance || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -532,6 +534,8 @@ export class TargetInstancesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
+        target_instance: request.targetInstance || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -634,6 +638,7 @@ export class TargetInstancesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -811,6 +816,7 @@ export class TargetInstancesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -857,6 +863,7 @@ export class TargetInstancesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -912,6 +919,7 @@ export class TargetInstancesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        zone: request.zone || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

@@ -232,7 +232,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.nodeTemplate = '';
+      const expectedHeaderRequestParams = 'project=&region=&node_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.nodeTemplate = '';
+      const expectedHeaderRequestParams = 'project=&region=&node_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +314,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.nodeTemplate = '';
+      const expectedHeaderRequestParams = 'project=&region=&node_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +344,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
       request.project = '';
+      request.region = '';
+      request.nodeTemplate = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +363,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.nodeTemplate = '';
+      const expectedHeaderRequestParams = 'project=&region=&node_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +396,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.nodeTemplate = '';
+      const expectedHeaderRequestParams = 'project=&region=&node_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -432,7 +444,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.nodeTemplate = '';
+      const expectedHeaderRequestParams = 'project=&region=&node_template=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,6 +474,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
       request.project = '';
+      request.region = '';
+      request.nodeTemplate = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -477,7 +493,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -508,7 +526,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -555,7 +575,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -586,6 +608,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -603,7 +627,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -634,7 +659,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -681,7 +707,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -709,6 +736,7 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -726,7 +754,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -757,7 +787,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -804,7 +836,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -835,6 +869,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -852,7 +888,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -884,7 +922,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -931,7 +971,9 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -962,6 +1004,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       request.project = '';
+      request.region = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1073,7 +1117,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1112,7 +1157,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1166,7 +1212,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1194,7 +1241,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NodeTemplate()
@@ -1248,7 +1296,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1293,7 +1342,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NodeTemplate()
@@ -1335,7 +1385,8 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

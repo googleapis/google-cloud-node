@@ -232,7 +232,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +264,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +312,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +341,7 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
       request.project = '';
+      request.healthCheck = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +359,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +391,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -432,7 +438,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,6 +467,7 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
       request.project = '';
+      request.healthCheck = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -600,7 +608,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -631,7 +640,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -677,7 +687,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -705,6 +716,7 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
       request.project = '';
+      request.healthCheck = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -722,7 +734,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -753,7 +766,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -800,7 +814,8 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.healthCheck = '';
+      const expectedHeaderRequestParams = 'project=&health_check=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -828,6 +843,7 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
       request.project = '';
+      request.healthCheck = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);

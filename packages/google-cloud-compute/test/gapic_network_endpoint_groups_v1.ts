@@ -243,7 +243,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -276,7 +279,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -324,7 +330,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -359,6 +368,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.networkEndpointGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -380,7 +391,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -412,7 +426,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,7 +477,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -489,6 +509,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEndpointGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.networkEndpointGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -507,7 +529,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -540,7 +565,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -588,7 +616,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -623,6 +654,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsNetworkEndpointGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.networkEndpointGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -644,7 +677,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -676,7 +712,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -723,7 +762,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -752,6 +794,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEndpointGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.networkEndpointGroup = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -770,7 +814,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -802,7 +847,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -850,7 +896,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -879,6 +926,7 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEndpointGroupRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -897,7 +945,9 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -930,7 +980,9 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -978,7 +1030,9 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkEndpointGroupRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&zone=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1010,6 +1064,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkEndpointGroupRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1130,7 +1186,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1170,7 +1227,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1227,7 +1285,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1256,7 +1315,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NetworkEndpointGroup()
@@ -1312,7 +1372,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1359,7 +1420,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NetworkEndpointGroup()
@@ -1403,7 +1465,8 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1442,7 +1505,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1483,7 +1549,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1541,7 +1610,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1573,7 +1645,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
@@ -1632,7 +1707,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworkEndpoints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1680,7 +1758,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
@@ -1726,7 +1807,10 @@ describe('v1.NetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsNetworkEndpointGroupsRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.networkEndpointGroup = '';
+      const expectedHeaderRequestParams =
+        'project=&zone=&network_endpoint_group=';
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworkEndpoints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

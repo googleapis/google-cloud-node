@@ -245,7 +245,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -277,7 +278,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -325,7 +327,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -354,6 +357,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest()
       );
       request.project = '';
+      request.publicAdvertisedPrefix = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -372,7 +376,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -404,7 +409,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -451,7 +457,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -480,6 +487,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest()
       );
       request.project = '';
+      request.publicAdvertisedPrefix = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -625,7 +633,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -657,7 +666,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -704,7 +714,8 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.publicAdvertisedPrefix = '';
+      const expectedHeaderRequestParams = 'project=&public_advertised_prefix=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -733,6 +744,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest()
       );
       request.project = '';
+      request.publicAdvertisedPrefix = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);

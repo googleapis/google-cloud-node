@@ -232,7 +232,9 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.DeleteAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.autoscaler = '';
+      const expectedHeaderRequestParams = 'project=&zone=&autoscaler=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +265,9 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.DeleteAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.autoscaler = '';
+      const expectedHeaderRequestParams = 'project=&zone=&autoscaler=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +314,9 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.DeleteAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.autoscaler = '';
+      const expectedHeaderRequestParams = 'project=&zone=&autoscaler=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +344,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.DeleteAutoscalerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.autoscaler = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +363,9 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.GetAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.autoscaler = '';
+      const expectedHeaderRequestParams = 'project=&zone=&autoscaler=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +396,9 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.GetAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.autoscaler = '';
+      const expectedHeaderRequestParams = 'project=&zone=&autoscaler=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -432,7 +444,9 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.GetAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      request.autoscaler = '';
+      const expectedHeaderRequestParams = 'project=&zone=&autoscaler=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,6 +474,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.GetAutoscalerRequest()
       );
       request.project = '';
+      request.zone = '';
+      request.autoscaler = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -477,7 +493,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.InsertAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -508,7 +525,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.InsertAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -555,7 +573,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.InsertAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -583,6 +602,7 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.InsertAutoscalerRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -600,7 +620,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.PatchAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -631,7 +652,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.PatchAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -677,7 +699,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.PatchAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -705,6 +728,7 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.PatchAutoscalerRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -722,7 +746,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.UpdateAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -753,7 +778,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.UpdateAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -800,7 +826,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.UpdateAutoscalerRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -828,6 +855,7 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.UpdateAutoscalerRequest()
       );
       request.project = '';
+      request.zone = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -939,7 +967,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -972,7 +1001,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1020,7 +1050,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1048,7 +1079,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Autoscaler()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Autoscaler()),
@@ -1096,7 +1128,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1141,7 +1174,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Autoscaler()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Autoscaler()),
@@ -1177,7 +1211,8 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.zone = '';
+      const expectedHeaderRequestParams = 'project=&zone=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

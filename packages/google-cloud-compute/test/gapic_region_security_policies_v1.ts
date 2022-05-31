@@ -243,7 +243,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -275,7 +277,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -323,7 +327,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -352,6 +358,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -370,7 +378,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -402,7 +412,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -449,7 +461,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -478,6 +492,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSecurityPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -496,7 +512,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -528,7 +545,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -576,7 +594,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -605,6 +624,7 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -623,7 +643,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -655,7 +677,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -702,7 +726,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.securityPolicy = '';
+      const expectedHeaderRequestParams = 'project=&region=&security_policy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -731,6 +757,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.securityPolicy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -749,7 +777,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -789,7 +818,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -844,7 +874,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -873,7 +904,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -928,7 +960,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -974,7 +1007,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -1017,7 +1051,8 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

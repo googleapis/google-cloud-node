@@ -245,7 +245,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -277,7 +280,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -325,7 +331,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -354,6 +363,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetHttpsProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -372,7 +383,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -404,7 +418,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -451,7 +468,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -480,6 +500,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetHttpsProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -498,7 +520,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -530,7 +553,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -578,7 +602,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -607,6 +632,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -625,7 +651,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -657,7 +686,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -704,7 +736,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -733,6 +768,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetHttpsProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -751,7 +788,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -784,7 +824,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -832,7 +875,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -864,6 +910,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetHttpsProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setSslCertificates(request), expectedError);
@@ -882,7 +930,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -914,7 +965,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -962,7 +1016,10 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams =
+        'project=&region=&target_https_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -991,6 +1048,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
       request.project = '';
+      request.region = '';
+      request.targetHttpsProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setUrlMap(request), expectedError);
@@ -1009,7 +1068,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1049,7 +1109,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1104,7 +1165,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1133,7 +1195,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.TargetHttpsProxy()
@@ -1188,7 +1251,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1234,7 +1298,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.TargetHttpsProxy()
@@ -1277,7 +1342,8 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,

@@ -414,6 +414,8 @@ export class NetworkEdgeSecurityServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        network_edge_security_service: request.networkEdgeSecurityService || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -535,6 +537,8 @@ export class NetworkEdgeSecurityServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        network_edge_security_service: request.networkEdgeSecurityService || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -639,6 +643,7 @@ export class NetworkEdgeSecurityServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -766,6 +771,8 @@ export class NetworkEdgeSecurityServicesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
+        network_edge_security_service: request.networkEdgeSecurityService || '',
       });
     this.initialize();
     return this.innerApiCalls

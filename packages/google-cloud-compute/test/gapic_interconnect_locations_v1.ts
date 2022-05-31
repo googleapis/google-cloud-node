@@ -243,7 +243,8 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.interconnectLocation = '';
+      const expectedHeaderRequestParams = 'project=&interconnect_location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -275,7 +276,8 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.interconnectLocation = '';
+      const expectedHeaderRequestParams = 'project=&interconnect_location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -322,7 +324,8 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.interconnectLocation = '';
+      const expectedHeaderRequestParams = 'project=&interconnect_location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -351,6 +354,7 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
       request.project = '';
+      request.interconnectLocation = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);

@@ -232,7 +232,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.machineImage = '';
+      const expectedHeaderRequestParams = 'project=&machine_image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -263,7 +264,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.machineImage = '';
+      const expectedHeaderRequestParams = 'project=&machine_image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -310,7 +312,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.machineImage = '';
+      const expectedHeaderRequestParams = 'project=&machine_image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -338,6 +341,7 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
       request.project = '';
+      request.machineImage = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -355,7 +359,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.machineImage = '';
+      const expectedHeaderRequestParams = 'project=&machine_image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -386,7 +391,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.machineImage = '';
+      const expectedHeaderRequestParams = 'project=&machine_image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -432,7 +438,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.machineImage = '';
+      const expectedHeaderRequestParams = 'project=&machine_image=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,6 +467,7 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
       request.project = '';
+      request.machineImage = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -477,7 +485,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -508,7 +517,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -555,7 +565,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -586,6 +597,7 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -726,7 +738,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -757,7 +770,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -804,7 +818,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -835,6 +850,7 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -852,7 +868,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -884,7 +901,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -931,7 +949,8 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&resource=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -962,6 +981,7 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       request.project = '';
+      request.resource = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
