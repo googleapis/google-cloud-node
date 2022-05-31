@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-storage-transfer/compare/v1.2.0...v2.0.0) (2022-05-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#64)
+
+### Build System
+
+* update library to use Node 12 ([#64](https://github.com/googleapis/nodejs-storage-transfer/issues/64)) ([908f83e](https://github.com/googleapis/nodejs-storage-transfer/commit/908f83e07c89cd14a434fe2a09f5ca22ef3956be))
+
 ## [1.2.0](https://github.com/googleapis/nodejs-storage-transfer/compare/v1.1.1...v1.2.0) (2022-04-06)
 
 
