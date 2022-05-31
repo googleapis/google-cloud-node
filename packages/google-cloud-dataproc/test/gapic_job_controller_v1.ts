@@ -251,7 +251,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -282,7 +283,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -329,7 +331,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -357,6 +360,7 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.submitJob(request), expectedError);
@@ -374,7 +378,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -405,7 +411,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -452,7 +460,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -480,6 +490,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
       request.projectId = '';
+      request.region = '';
+      request.jobId = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJob(request), expectedError);
@@ -497,7 +509,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -528,7 +542,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -575,7 +591,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -603,6 +621,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
       request.projectId = '';
+      request.region = '';
+      request.jobId = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateJob(request), expectedError);
@@ -620,7 +640,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -651,7 +673,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -698,7 +722,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -726,6 +752,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
       request.projectId = '';
+      request.region = '';
+      request.jobId = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelJob(request), expectedError);
@@ -743,7 +771,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -774,7 +804,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -821,7 +853,9 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -849,6 +883,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
       request.projectId = '';
+      request.region = '';
+      request.jobId = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -866,7 +902,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -899,7 +936,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -953,7 +991,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -984,7 +1023,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1060,7 +1100,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1093,7 +1134,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1142,7 +1184,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1170,7 +1213,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -1215,7 +1259,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -1257,7 +1302,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -1293,7 +1339,8 @@ describe('v1.JobControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,

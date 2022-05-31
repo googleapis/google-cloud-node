@@ -253,7 +253,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -284,7 +286,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -331,7 +335,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -362,6 +368,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
       request.projectId = '';
+      request.region = '';
+      request.clusterName = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCluster(request), expectedError);
@@ -379,7 +387,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -412,7 +421,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -466,7 +476,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -497,7 +508,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -573,7 +585,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -606,7 +620,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -660,7 +676,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -691,7 +709,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -767,7 +787,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -799,7 +821,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -853,7 +877,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -884,7 +910,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -957,7 +985,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -989,7 +1019,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1043,7 +1075,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1074,7 +1108,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1147,7 +1183,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1180,7 +1218,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1234,7 +1274,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1265,7 +1307,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1341,7 +1385,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1374,7 +1420,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1428,7 +1476,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1459,7 +1509,9 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      request.clusterName = '';
+      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1535,7 +1587,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1568,7 +1621,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1617,7 +1671,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1648,7 +1703,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -1697,7 +1753,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
         undefined,
@@ -1743,7 +1800,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -1781,7 +1839,8 @@ describe('v1.ClusterControllerClient', () => {
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project_id=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
