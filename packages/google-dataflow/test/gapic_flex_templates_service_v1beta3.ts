@@ -167,7 +167,8 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -200,7 +201,8 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -248,7 +250,8 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -280,6 +283,7 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
       request.projectId = '';
+      request.location = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.launchFlexTemplate(request), expectedError);

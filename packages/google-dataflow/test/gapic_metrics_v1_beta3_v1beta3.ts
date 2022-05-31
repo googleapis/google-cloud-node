@@ -221,7 +221,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -252,7 +254,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -299,7 +303,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -330,6 +336,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
       request.projectId = '';
+      request.location = '';
+      request.jobId = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJobMetrics(request), expectedError);
@@ -347,7 +355,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -387,7 +397,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -442,7 +454,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -476,7 +490,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -535,7 +551,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.getJobExecutionDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -583,7 +601,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -629,7 +649,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.getJobExecutionDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -668,7 +690,11 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      request.stageId = '';
+      const expectedHeaderRequestParams =
+        'project_id=&location=&job_id=&stage_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -708,7 +734,11 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      request.stageId = '';
+      const expectedHeaderRequestParams =
+        'project_id=&location=&job_id=&stage_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -763,7 +793,11 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      request.stageId = '';
+      const expectedHeaderRequestParams =
+        'project_id=&location=&job_id=&stage_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -797,7 +831,11 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      request.stageId = '';
+      const expectedHeaderRequestParams =
+        'project_id=&location=&job_id=&stage_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -856,7 +894,11 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      request.stageId = '';
+      const expectedHeaderRequestParams =
+        'project_id=&location=&job_id=&stage_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.getStageExecutionDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -904,7 +946,11 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      request.stageId = '';
+      const expectedHeaderRequestParams =
+        'project_id=&location=&job_id=&stage_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -950,7 +996,11 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      request.stageId = '';
+      const expectedHeaderRequestParams =
+        'project_id=&location=&job_id=&stage_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.getStageExecutionDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

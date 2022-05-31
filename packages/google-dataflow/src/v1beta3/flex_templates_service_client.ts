@@ -382,6 +382,7 @@ export class FlexTemplatesServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
       });
     this.initialize();
     return this.innerApiCalls.launchFlexTemplate(request, options, callback);

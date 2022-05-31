@@ -158,7 +158,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -190,7 +191,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -237,7 +239,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -271,6 +274,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
       request.projectId = '';
+      request.location = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -291,7 +295,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -322,7 +327,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -369,7 +375,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -400,6 +407,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
       request.projectId = '';
+      request.location = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.launchTemplate(request), expectedError);
@@ -417,7 +425,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -448,7 +457,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -495,7 +505,8 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'project_id=&location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -526,6 +537,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
       request.projectId = '';
+      request.location = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTemplate(request), expectedError);

@@ -373,6 +373,8 @@ export class SnapshotsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        snapshot_id: request.snapshotId || '',
       });
     this.initialize();
     return this.innerApiCalls.getSnapshot(request, options, callback);
@@ -462,6 +464,8 @@ export class SnapshotsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        snapshot_id: request.snapshotId || '',
       });
     this.initialize();
     return this.innerApiCalls.deleteSnapshot(request, options, callback);
@@ -551,6 +555,8 @@ export class SnapshotsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        job_id: request.jobId || '',
       });
     this.initialize();
     return this.innerApiCalls.listSnapshots(request, options, callback);

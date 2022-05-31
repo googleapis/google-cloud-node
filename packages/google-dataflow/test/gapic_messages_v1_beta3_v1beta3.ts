@@ -221,7 +221,9 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -254,7 +256,9 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -303,7 +307,9 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -334,7 +340,9 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
@@ -383,7 +391,9 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listJobMessages.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -427,7 +437,9 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
@@ -465,7 +477,9 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
       request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
+      request.location = '';
+      request.jobId = '';
+      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listJobMessages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

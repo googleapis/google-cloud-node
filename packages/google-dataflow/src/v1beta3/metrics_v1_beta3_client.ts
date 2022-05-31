@@ -412,6 +412,8 @@ export class MetricsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        job_id: request.jobId || '',
       });
     this.initialize();
     return this.innerApiCalls.getJobMetrics(request, options, callback);
@@ -517,6 +519,8 @@ export class MetricsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        job_id: request.jobId || '',
       });
     this.initialize();
     return this.innerApiCalls.getJobExecutionDetails(
@@ -569,6 +573,8 @@ export class MetricsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        job_id: request.jobId || '',
       });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
@@ -626,6 +632,8 @@ export class MetricsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        job_id: request.jobId || '',
       });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
@@ -743,6 +751,9 @@ export class MetricsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        job_id: request.jobId || '',
+        stage_id: request.stageId || '',
       });
     this.initialize();
     return this.innerApiCalls.getStageExecutionDetails(
@@ -801,6 +812,9 @@ export class MetricsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        job_id: request.jobId || '',
+        stage_id: request.stageId || '',
       });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
@@ -864,6 +878,9 @@ export class MetricsV1Beta3Client {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        location: request.location || '',
+        job_id: request.jobId || '',
+        stage_id: request.stageId || '',
       });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
