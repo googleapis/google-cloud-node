@@ -179,7 +179,8 @@ export class BigQueryStorageClient {
     // Provide descriptors for these.
     this.descriptors.stream = {
       readRows: new this._gaxModule.StreamDescriptor(
-        gax.StreamType.SERVER_STREAMING
+        gax.StreamType.SERVER_STREAMING,
+        opts.fallback === 'rest'
       ),
     };
 
