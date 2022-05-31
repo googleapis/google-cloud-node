@@ -162,7 +162,8 @@ export class StreamingVideoIntelligenceServiceClient {
     // Provide descriptors for these.
     this.descriptors.stream = {
       streamingAnnotateVideo: new this._gaxModule.StreamDescriptor(
-        gax.StreamType.BIDI_STREAMING
+        gax.StreamType.BIDI_STREAMING,
+        opts.fallback === 'rest'
       ),
     };
 
