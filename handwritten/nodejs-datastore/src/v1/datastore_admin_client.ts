@@ -517,6 +517,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        index_id: request.indexId || '',
       });
     this.initialize();
     return this.innerApiCalls.getIndex(request, options, callback);
@@ -1114,6 +1115,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
+        index_id: request.indexId || '',
       });
     this.initialize();
     return this.innerApiCalls.deleteIndex(request, options, callback);
