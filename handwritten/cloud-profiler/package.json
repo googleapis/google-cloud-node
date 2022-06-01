@@ -41,7 +41,7 @@
     "pretty-ms": "^7.0.0",
     "protobufjs": "~6.11.0",
     "semver": "^7.0.0",
-    "teeny-request": "^7.0.0"
+    "teeny-request": "^8.0.0"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
@@ -54,18 +54,18 @@
     "@types/tmp": "0.2.3",
     "c8": "^7.0.0",
     "codecov": "^3.0.0",
-    "gts": "^2.0.0",
+    "gts": "^3.1.0",
     "js-green-licenses": "^3.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^2.0.0",
-    "mocha": "^8.0.0",
+    "mocha": "^9.2.2",
     "nock": "^13.0.0",
     "sinon": "^14.0.0",
     "source-map": "^0.7.0",
     "tmp": "0.2.1",
-    "typescript": "^3.8.3"
+    "typescript": "^4.7.2"
   },
   "files": [
     "build/src",
@@ -81,6 +81,6 @@
     ]
   },
   "engines": {
-    "node": ">=10.4.1"
+    "node": ">=12.0.0"
   }
 }

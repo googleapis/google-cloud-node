@@ -20,25 +20,30 @@ import * as sinon from 'sinon';
 
 import {createProfiler, nodeVersionOkay} from '../src/index';
 import {Profiler} from '../src/profiler';
+import * as packageJson from '../package.json';
 
 describe('nodeVersionOkay', () => {
+  const version = parseInt(packageJson.engines.node.replace('>=', ''));
   it('should accept alpha versions', () => {
-    assert.strictEqual(true, nodeVersionOkay('v11.0.0-alpha.1'));
+    assert.strictEqual(true, nodeVersionOkay(`v${version}.0.0-alpha.1`));
   });
   it('should accept beta versions', () => {
-    assert.strictEqual(true, nodeVersionOkay('v12.9.10-beta.2'));
+    assert.strictEqual(true, nodeVersionOkay(`v${version}.9.10-beta.2`));
   });
   it('should accept nightly versions', () => {
-    assert.strictEqual(true, nodeVersionOkay('v11.0.0-nightly2018000000'));
+    assert.strictEqual(
+      true,
+      nodeVersionOkay(`v${version}.0.0-nightly2018000000`)
+    );
   });
   it('should accept pre-release versions', () => {
-    assert.strictEqual(true, nodeVersionOkay('v11.0.0-pre'));
+    assert.strictEqual(true, nodeVersionOkay(`v${version}.0.0-pre`));
   });
-  it('should accept v10.4.1', () => {
-    assert.strictEqual(true, nodeVersionOkay('v10.4.1'));
+  it('should accept v12.4.1', () => {
+    assert.strictEqual(true, nodeVersionOkay(`v${version}.4.1`));
   });
-  it('should not accept v10.4.0', () => {
-    assert.strictEqual(false, nodeVersionOkay('v10.4.0'));
+  it('should not accept v11.4.0', () => {
+    assert.strictEqual(false, nodeVersionOkay(`v${version - 1}.4.0`));
   });
 });
 
@@ -256,7 +261,7 @@ describe('createProfiler', () => {
       assert.fail('expected an error because invalid service was specified');
     } catch (e) {
       assert.strictEqual(
-        e.message,
+        (e as Error).message,
         'Service serviceName does not match regular expression "/^[a-z0-9]([-a-z0-9_.]{0,253}[a-z0-9])?$/"'
       );
     }
@@ -283,7 +288,7 @@ describe('createProfiler', () => {
       assert.fail('expected an error because invalid service was specified');
     } catch (e) {
       assert.strictEqual(
-        e.message,
+        (e as Error).message,
         'Project ID must be specified in the configuration'
       );
     }
@@ -335,7 +340,7 @@ describe('createProfiler', () => {
       assert.fail('expected an error because invalid service was specified');
     } catch (e) {
       assert.strictEqual(
-        e.message,
+        (e as Error).message,
         'serviceMapSearchPath is an empty array. Use disableSourceMaps ' +
           'to disable source map support instead.'
       );
