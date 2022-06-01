@@ -1015,19 +1015,35 @@ describe('storage', () => {
         await file.save('data', {resumable: false});
       });
 
-      it('should fail to get file ACL', () => {
-        return assert.rejects(
-          () => file.acl.get(),
-          validateUniformBucketLevelAccessEnabledError
-        );
-      });
+      it('should fail to get file ACL', async () => {
+        // Setting uniform bucket level access is eventually consistent and may take up to a minute to be reflected
+        for (;;) {
+          try {
+            await file.acl.get();
+            await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
+          } catch (err) {
+            assert(
+              validateUniformBucketLevelAccessEnabledError(err as ApiError)
+            );
+            break;
+          }
+        }
+      }).timeout(UNIFORM_ACCESS_TIMEOUT);
 
-      it('should fail to update file ACL', () => {
-        return assert.rejects(
-          () => file.acl.update(customAcl),
-          validateUniformBucketLevelAccessEnabledError
-        );
-      });
+      it('should fail to update file ACL', async () => {
+        // Setting uniform bucket level access is eventually consistent and may take up to a minute to be reflected
+        for (;;) {
+          try {
+            await file.acl.update(customAcl);
+            await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
+          } catch (err) {
+            assert(
+              validateUniformBucketLevelAccessEnabledError(err as ApiError)
+            );
+            break;
+          }
+        }
+      }).timeout(UNIFORM_ACCESS_TIMEOUT);
     });
 
     describe('preserves bucket/file ACL over uniform bucket-level access on/off', () => {
