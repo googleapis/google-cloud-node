@@ -8,7 +8,7 @@
     "test": "echo 'no test yet'"
   },
   "engines": {
-    "node": ">=10.4.1"
+    "node": ">=12.0.0"
   },
   "repository": {
     "type": "git",
