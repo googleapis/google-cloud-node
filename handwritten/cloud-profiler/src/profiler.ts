@@ -196,7 +196,7 @@ async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
 /**
  * Error constructed from HTTP server response which indicates backoff.
  */
-class BackoffResponseError extends Error {
+export class BackoffResponseError extends Error {
   constructor(message: string | undefined, readonly backoffMillis: number) {
     super(message);
   }
@@ -392,11 +392,16 @@ export class Profiler extends ServiceObject {
     try {
       prof = await this.createProfile();
     } catch (err) {
-      if (isBackoffResponseError(err)) {
+      if (isBackoffResponseError(err as BackoffResponseError)) {
         this.logger.debug(
-          `Must wait ${msToStr(err.backoffMillis)} to create profile: ${err}`
+          `Must wait ${msToStr(
+            (err as BackoffResponseError).backoffMillis
+          )} to create profile: ${err}`
         );
-        return Math.min(err.backoffMillis, this.config.serverBackoffCapMillis);
+        return Math.min(
+          (err as BackoffResponseError).backoffMillis,
+          this.config.serverBackoffCapMillis
+        );
       }
       const backoff = this.retryer.getBackoff();
       this.logger.warn(
