@@ -28,7 +28,12 @@ import * as zlib from 'zlib';
 
 import {perftools} from '../protos/profile';
 import {ProfilerConfig} from '../src/config';
-import {parseBackoffDuration, Profiler, Retryer} from '../src/profiler';
+import {
+  parseBackoffDuration,
+  Profiler,
+  Retryer,
+  BackoffResponseError,
+} from '../src/profiler';
 
 import {
   decodedHeapProfile,
@@ -163,7 +168,10 @@ describe('Profiler', () => {
         await profiler.profile(requestProf);
         assert.fail('Expected an error to be thrown,');
       } catch (err) {
-        assert.strictEqual(err.message, 'Unexpected profile type UNKNOWN.');
+        assert.strictEqual(
+          (err as Error).message,
+          'Unexpected profile type UNKNOWN.'
+        );
       }
     });
   });
@@ -214,7 +222,7 @@ describe('Profiler', () => {
         assert.fail('expected error, no error thrown');
       } catch (err) {
         assert.strictEqual(
-          err.message,
+          (err as Error).message,
           'Cannot collect time profile, time profiler not enabled.'
         );
       }
@@ -265,7 +273,7 @@ describe('Profiler', () => {
         assert.fail('expected error, no error thrown');
       } catch (err) {
         assert.strictEqual(
-          err.message,
+          (err as Error).message,
           'Cannot collect heap profile, heap profiler not enabled.'
         );
       }
@@ -536,7 +544,7 @@ describe('Profiler', () => {
         assert.fail('expected error, no error thrown');
       } catch (err) {
         assert.strictEqual(
-          err.message,
+          (err as Error).message,
           'Profile not valid: ' +
             '{"name":"projects/12345678901/test-projectId"}.'
         );
@@ -662,7 +670,7 @@ describe('Profiler', () => {
         await profiler.createProfile();
         assert.fail('expected error, no error thrown');
       } catch (err) {
-        assert.strictEqual(err.message, 'Network error');
+        assert.strictEqual((err as Error).message, 'Network error');
       }
     });
     it('should throw status message when response has non-200 status.', async () => {
@@ -679,7 +687,7 @@ describe('Profiler', () => {
         await profiler.createProfile();
         assert.fail('expected error, no error thrown');
       } catch (err) {
-        assert.strictEqual(err.message, '500 status code');
+        assert.strictEqual((err as Error).message, '500 status code');
       }
     });
     it(
@@ -701,7 +709,10 @@ describe('Profiler', () => {
           await profiler.createProfile();
           assert.fail('expected error, no error thrown');
         } catch (err) {
-          assert.strictEqual(err.backoffMillis, 50000);
+          assert.strictEqual(
+            (err as BackoffResponseError).backoffMillis,
+            50000
+          );
         }
       }
     );
@@ -716,7 +727,10 @@ describe('Profiler', () => {
         await profiler.createProfile();
         assert.fail('expected error, no error thrown');
       } catch (err) {
-        assert.strictEqual(err.message, 'Profile not valid: undefined.');
+        assert.strictEqual(
+          (err as Error).message,
+          'Profile not valid: undefined.'
+        );
       }
     });
   });
