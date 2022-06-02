@@ -25,8 +25,10 @@ import {Logging, LogSync} from '@google-cloud/logging';
 const logging = new Logging();
 import {LoggingBunyan} from '../src/index';
 import delay from 'delay';
+import * as instrumentation from '@google-cloud/logging/build/src/utils/instrumentation';
 
 const WRITE_CONSISTENCY_DELAY_MS = 90000;
+const MESSAGE = 'Diagnostic test';
 
 const UUID = uuid.v4();
 function logName(name: string) {
@@ -53,6 +55,43 @@ describe('LoggingBunyan', function () {
       redirectToStdout: true,
     });
     assert.ok(loggingBunyan.cloudLog instanceof LogSync);
+  });
+
+  it('should write diagnostic entry', async () => {
+    instrumentation.setInstrumentationStatus(false);
+    const start = Date.now();
+    logger.info(MESSAGE);
+    const entries = await pollLogs(
+      LOG_NAME,
+      start,
+      2,
+      WRITE_CONSISTENCY_DELAY_MS
+    );
+    assert.strictEqual(entries.length, 2);
+    let isDiagnosticPresent = false;
+    entries.forEach(entry => {
+      assert.ok(entry.data);
+      if (
+        Object.prototype.hasOwnProperty.call(
+          entry.data,
+          instrumentation.DIAGNOSTIC_INFO_KEY
+        )
+      ) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const info = (entry.data as any)[instrumentation.DIAGNOSTIC_INFO_KEY][
+          instrumentation.INSTRUMENTATION_SOURCE_KEY
+        ];
+        assert.equal(info[0].name, 'nodejs');
+        assert.ok(info[0].version.includes('.'));
+        assert.equal(info[1].name, 'nodejs-bunyan');
+        assert.ok(info[1].version.includes('.'));
+        isDiagnosticPresent = true;
+      } else {
+        const data = entry.data as {message: string};
+        assert.ok(data.message.includes(MESSAGE));
+      }
+    });
+    assert.ok(isDiagnosticPresent);
   });
 
   it('should properly write log entries', async function () {

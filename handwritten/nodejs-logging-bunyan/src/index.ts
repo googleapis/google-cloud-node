@@ -16,6 +16,11 @@
 
 import {Writable} from 'stream';
 import * as express from './middleware/express';
+import {
+  setInstrumentationStatus,
+  createDiagnosticEntry,
+} from '@google-cloud/logging/build/src/utils/instrumentation';
+import path = require('path');
 
 // Export the express middleware as 'express'.
 export {express};
@@ -63,6 +68,9 @@ export const LOGGING_SPAN_KEY = 'logging.googleapis.com/spanId';
  * before it gets written to the Cloud logging API.
  */
 export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
+
+// The variable to hold cached library version
+let libraryVersion: string;
 
 /**
  * Gets the current fully qualified trace ID when available from the
@@ -426,6 +434,24 @@ export class LoggingBunyan extends Writable {
    * @param callback The callback supplied by Writable.write
    */
   _writeCall(entries: Entry | Entry[], callback: Function) {
+    // First create instrumentation record if it is never written before
+    const alreadyWritten = setInstrumentationStatus(true);
+    if (!alreadyWritten) {
+      let instrumentationEntry = createDiagnosticEntry(
+        'nodejs-bunyan',
+        this.getNodejsLibraryVersion()
+      );
+      // Update instrumentation record resource and logName
+      instrumentationEntry.metadata.resource = this.resource;
+      instrumentationEntry.metadata.severity = 'INFO';
+      instrumentationEntry = (
+        this.redirectToStdout
+          ? (this.cloudLog as LogSync)
+          : (this.cloudLog as Log)
+      ).entry(instrumentationEntry.metadata, instrumentationEntry.data);
+      entries = Array.isArray(entries) ? entries : [entries];
+      entries.push(instrumentationEntry);
+    }
     if (this.redirectToStdout) {
       (this.cloudLog as LogSync).write(entries);
       // The LogSync class does not supports callback. However if callback provided and
@@ -434,6 +460,22 @@ export class LoggingBunyan extends Writable {
     } else {
       (this.cloudLog as Log).write(entries, this.generateCallback(callback));
     }
+  }
+
+  /**
+   * Method used to retrieve the current logging-bunyan library version
+   * @returns The version of this library
+   */
+  getNodejsLibraryVersion() {
+    if (libraryVersion) {
+      return libraryVersion;
+    }
+    libraryVersion = require(path.resolve(
+      __dirname,
+      '../../',
+      'package.json'
+    )).version;
+    return libraryVersion;
   }
 }
 
