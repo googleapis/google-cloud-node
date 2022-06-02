@@ -15,7 +15,6 @@
 import yargs = require('yargs');
 import {compileVars, getDriftMetadata} from '../get-bootstrap-template-vars';
 import {compileTemplates} from '../templating';
-import * as path from 'path';
 const BOOTSTRAP_TEMPLATES_PATH = '../templates/bootstrap-templates';
 export interface CliArgs {
   'api-id': string;
