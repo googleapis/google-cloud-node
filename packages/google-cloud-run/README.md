@@ -175,7 +175,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-run/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/run/latest
+[client-docs]: https://googleapis.dev/nodejs/run/latest
 [product-docs]: https://cloud.google.com/run
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

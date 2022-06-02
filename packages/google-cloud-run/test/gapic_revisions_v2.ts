@@ -672,7 +672,6 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
@@ -711,7 +710,6 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
       const expectedError = new Error('expected');
       client.descriptors.page.listRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -745,7 +743,6 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
@@ -776,7 +773,6 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
       const expectedError = new Error('expected');
       client.descriptors.page.listRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

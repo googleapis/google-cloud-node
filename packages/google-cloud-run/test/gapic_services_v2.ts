@@ -1431,7 +1431,6 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Service()),
         generateSampleMessage(new protos.google.cloud.run.v2.Service()),
@@ -1470,7 +1469,6 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.createStream = stubPageStreamingCall(
         undefined,
@@ -1506,7 +1504,6 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Service()),
         generateSampleMessage(new protos.google.cloud.run.v2.Service()),
@@ -1537,7 +1534,6 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

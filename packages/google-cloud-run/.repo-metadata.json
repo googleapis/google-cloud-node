@@ -2,7 +2,7 @@
   "name": "run",
   "name_pretty": "Cloud Run",
   "product_documentation": "https://cloud.google.com/run",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/run/latest",
+  "client_documentation": "https://googleapis.dev/nodejs/run/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-run/issues",
   "release_level": "beta",
   "language": "nodejs",

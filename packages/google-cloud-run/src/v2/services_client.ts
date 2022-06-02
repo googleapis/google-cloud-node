@@ -1013,16 +1013,15 @@ export class ServicesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const routingParameter = {};
+    const reqService = request.service || {};
     if (
-      typeof request.service?.name !== 'undefined' &&
+      typeof reqService.name !== 'undefined' &&
       RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?').test(
-        request.service.name!
+        reqService.name!
       )
     ) {
       Object.assign(routingParameter, {
-        location: request.service?.name!.match(
-          RegExp('(?<location>[^/]+)')
-        )![0],
+        location: reqService.name!.match(RegExp('(?<location>[^/]+)'))![0],
       });
     }
 
