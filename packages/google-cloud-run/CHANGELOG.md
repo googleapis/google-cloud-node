@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/nodejs-run/compare/v0.1.0...v0.1.1) (2022-06-02)
+
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#4](https://github.com/googleapis/nodejs-run/issues/4)) ([ba3c84a](https://github.com/googleapis/nodejs-run/commit/ba3c84a3192397bfa2a3e78f5d0a0c6d8d7ec266))
+
 ## 0.1.0 (2022-05-20)
 
 
