@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// import sinon, {SinonStubbedInstance} from 'sinon';
 import * as assert from 'assert';
 import {bootstrapLibrary} from '../src/commands/bootstrap-library';
 import {describe, it} from 'mocha';
