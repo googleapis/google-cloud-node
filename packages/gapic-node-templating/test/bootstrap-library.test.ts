@@ -13,19 +13,50 @@
 // limitations under the License.
 
 // import sinon, {SinonStubbedInstance} from 'sinon';
-import {strictEqual} from 'assert';
+import * as assert from 'assert';
 import {bootstrapLibrary} from '../src/commands/bootstrap-library';
 import {describe, it} from 'mocha';
+import * as sinon from 'sinon';
+import * as vars from '../src/get-bootstrap-template-vars';
+import * as templates from '../src/templating';
 
-const API_ID = 'google.cloud.kms.v1';
+export const API_ID = 'google.cloud.kms.v1';
+export const DESTINATION_FOLDER = './temp';
+export const MONO_REPO_NAME = 'git@github.com:googleapis/google-cloud-node.git';
+export const DISTRIBUTION_NAME = '@google-cloud/kms';
 
 describe('tests running build trigger', () => {
+  let getDriftMetadataStub: sinon.SinonStub;
+  let compileVarsStub: sinon.SinonStub;
+  let compileTemplatesStub: sinon.SinonStub;
+  beforeEach(() => {
+    getDriftMetadataStub = sinon.stub(vars, 'getDriftMetadata');
+    compileVarsStub = sinon.stub(vars, 'compileVars');
+    compileTemplatesStub = sinon.stub(templates, 'compileTemplates');
+  });
+
+  afterEach(() => {
+    getDriftMetadataStub.restore();
+    compileVarsStub.restore();
+    compileTemplatesStub.restore();
+  });
+
   it('it should get correct variable names', async () => {
     await bootstrapLibrary.handler({
       'api-id': API_ID,
       apiId: API_ID,
+      'destination-folder': DESTINATION_FOLDER,
+      destinationFolder: DESTINATION_FOLDER,
+      'mono-repo-name': MONO_REPO_NAME,
+      monoRepoName: MONO_REPO_NAME,
+      'distribution-name': DISTRIBUTION_NAME,
+      distributionName: DISTRIBUTION_NAME,
       _: [],
       $0: 'foo',
     });
+
+    assert.ok(getDriftMetadataStub.calledOnce);
+    assert.ok(compileVarsStub.calledOnce);
+    assert.ok(compileTemplatesStub.calledOnce);
   });
 });

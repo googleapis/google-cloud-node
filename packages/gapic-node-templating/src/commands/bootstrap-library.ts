@@ -13,26 +13,50 @@
 // limitations under the License.
 
 import yargs = require('yargs');
-import {getDriftMetadata} from '../get-drift-metadata';
+import {compileVars, getDriftMetadata} from '../get-bootstrap-template-vars';
 import {compileTemplates} from '../templating';
-
-interface CliArgs {
+import * as path from 'path';
+const BOOTSTRAP_TEMPLATES_PATH = '../templates/bootstrap-templates';
+export interface CliArgs {
   'api-id': string;
+  'mono-repo-name': string;
+  'destination-folder': string;
+  'distribution-name': string;
 }
 
 export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
   command: 'bootstrap-library',
   describe: 'Compiles the templates required for a bare-bones Node library',
   builder(yargs) {
-    return yargs.option('api-id', {
-      describe: 'api ID to generate a library for',
-      type: 'string',
-      demand: true,
-    });
+    return yargs
+      .option('api-id', {
+        describe: 'api ID to generate a library for',
+        type: 'string',
+        demand: true,
+      })
+      .option('mono-repo-name', {
+        describe: 'monorepo',
+        type: 'string',
+        demand: true,
+      })
+      .option('destination-folder', {
+        describe: 'where to copy over the files',
+        type: 'string',
+        demand: true,
+      })
+      .option('distribution-name', {
+        describe: 'distribution name for the package',
+        type: 'string',
+        demand: true,
+      });
   },
   async handler(argv: CliArgs) {
-    console.log('Hello!');
-    // const metadata = getDriftMetadata(argv);
-    // await compileTemplates(metadata);
+    const driftMetadata = await getDriftMetadata(argv);
+    const bootstrapVars = compileVars(argv, driftMetadata);
+    await compileTemplates(
+      BOOTSTRAP_TEMPLATES_PATH,
+      argv['destination-folder'],
+      bootstrapVars
+    );
   },
 };

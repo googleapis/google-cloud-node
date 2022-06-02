@@ -1,0 +1,3 @@
+deep-copy-regex:
+    - source: /{{apiPath}}/.*-{{language}}/(.*)
+      dest: /owl-bot-staging/packages/{{name}}/$1/$2
