@@ -7447,7 +7447,7 @@
             "regionTag": "compute_v1_generated_InstanceGroupManagers_CreateInstances_async",
             "title": "AcceleratorTypes createInstances Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates instances with per-instance configs in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.",
+            "description": " Creates instances with per-instance configurations in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.",
             "canonical": true,
             "file": "instance_group_managers.create_instances.js",
             "language": "JAVASCRIPT",
@@ -7611,7 +7611,7 @@
             "regionTag": "compute_v1_generated_InstanceGroupManagers_DeletePerInstanceConfigs_async",
             "title": "AcceleratorTypes deletePerInstanceConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes selected per-instance configs for the managed instance group.",
+            "description": " Deletes selected per-instance configurations for the managed instance group.",
             "canonical": true,
             "file": "instance_group_managers.delete_per_instance_configs.js",
             "language": "JAVASCRIPT",
@@ -7963,7 +7963,7 @@
             "regionTag": "compute_v1_generated_InstanceGroupManagers_ListPerInstanceConfigs_async",
             "title": "AcceleratorTypes listPerInstanceConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.",
+            "description": " Lists all of the per-instance configurations defined for the managed instance group. The orderBy query parameter is not supported.",
             "canonical": true,
             "file": "instance_group_managers.list_per_instance_configs.js",
             "language": "JAVASCRIPT",
@@ -8087,7 +8087,7 @@
             "regionTag": "compute_v1_generated_InstanceGroupManagers_PatchPerInstanceConfigs_async",
             "title": "AcceleratorTypes patchPerInstanceConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.",
+            "description": " Inserts or patches per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.",
             "canonical": true,
             "file": "instance_group_managers.patch_per_instance_configs.js",
             "language": "JAVASCRIPT",
@@ -8367,7 +8367,7 @@
             "regionTag": "compute_v1_generated_InstanceGroupManagers_UpdatePerInstanceConfigs_async",
             "title": "AcceleratorTypes updatePerInstanceConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.",
+            "description": " Inserts or updates per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.",
             "canonical": true,
             "file": "instance_group_managers.update_per_instance_configs.js",
             "language": "JAVASCRIPT",
@@ -8759,7 +8759,7 @@
             "regionTag": "compute_v1_generated_InstanceGroups_ListInstances_async",
             "title": "AcceleratorTypes listInstances Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists the instances in the specified instance group. The orderBy query parameter is not supported.",
+            "description": " Lists the instances in the specified instance group. The orderBy query parameter is not supported. The filter query parameter is supported, but only for expressions that use `eq` (equal) or `ne` (not equal) operators.",
             "canonical": true,
             "file": "instance_groups.list_instances.js",
             "language": "JAVASCRIPT",
@@ -10611,7 +10611,7 @@
             "regionTag": "compute_v1_generated_Instances_SetScheduling_async",
             "title": "AcceleratorTypes setScheduling Sample",
             "origin": "API_DEFINITION",
-            "description": " Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM availability policies.",
+            "description": " Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM host maintenance policy.",
             "canonical": true,
             "file": "instances.set_scheduling.js",
             "language": "JAVASCRIPT",
@@ -21107,7 +21107,7 @@
             "regionTag": "compute_v1_generated_RegionInstanceGroupManagers_CreateInstances_async",
             "title": "AcceleratorTypes createInstances Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates instances with per-instance configs in this regional managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.",
+            "description": " Creates instances with per-instance configurations in this regional managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.",
             "canonical": true,
             "file": "region_instance_group_managers.create_instances.js",
             "language": "JAVASCRIPT",
@@ -21271,7 +21271,7 @@
             "regionTag": "compute_v1_generated_RegionInstanceGroupManagers_DeletePerInstanceConfigs_async",
             "title": "AcceleratorTypes deletePerInstanceConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes selected per-instance configs for the managed instance group.",
+            "description": " Deletes selected per-instance configurations for the managed instance group.",
             "canonical": true,
             "file": "region_instance_group_managers.delete_per_instance_configs.js",
             "language": "JAVASCRIPT",
@@ -21623,7 +21623,7 @@
             "regionTag": "compute_v1_generated_RegionInstanceGroupManagers_ListPerInstanceConfigs_async",
             "title": "AcceleratorTypes listPerInstanceConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.",
+            "description": " Lists all of the per-instance configurations defined for the managed instance group. The orderBy query parameter is not supported.",
             "canonical": true,
             "file": "region_instance_group_managers.list_per_instance_configs.js",
             "language": "JAVASCRIPT",
@@ -21747,7 +21747,7 @@
             "regionTag": "compute_v1_generated_RegionInstanceGroupManagers_PatchPerInstanceConfigs_async",
             "title": "AcceleratorTypes patchPerInstanceConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.",
+            "description": " Inserts or patches per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.",
             "canonical": true,
             "file": "region_instance_group_managers.patch_per_instance_configs.js",
             "language": "JAVASCRIPT",
@@ -22027,7 +22027,7 @@
             "regionTag": "compute_v1_generated_RegionInstanceGroupManagers_UpdatePerInstanceConfigs_async",
             "title": "AcceleratorTypes updatePerInstanceConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.",
+            "description": " Inserts or updates per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.",
             "canonical": true,
             "file": "region_instance_group_managers.update_per_instance_configs.js",
             "language": "JAVASCRIPT",
@@ -27338,7 +27338,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -27358,6 +27358,10 @@
                     {
                         "name": "security_policy_rule_resource",
                         "type": ".google.cloud.compute.v1.SecurityPolicyRule"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.Operation",
@@ -27590,7 +27594,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -27610,6 +27614,10 @@
                     {
                         "name": "security_policy_resource",
                         "type": ".google.cloud.compute.v1.SecurityPolicy"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.Operation",
@@ -27810,7 +27818,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -27834,6 +27842,10 @@
                     {
                         "name": "security_policy_rule_resource",
                         "type": ".google.cloud.compute.v1.SecurityPolicyRule"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.Operation",
@@ -30964,6 +30976,58 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_TargetHttpsProxies_SetCertificateMap_async",
+            "title": "AcceleratorTypes setCertificateMap Sample",
+            "origin": "API_DEFINITION",
+            "description": " Changes the Certificate Map for TargetHttpsProxy.",
+            "canonical": true,
+            "file": "target_https_proxies.set_certificate_map.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetCertificateMap",
+                "fullName": "google.cloud.compute.v1.TargetHttpsProxies.SetCertificateMap",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target_https_proxies_set_certificate_map_request_resource",
+                        "type": ".google.cloud.compute.v1.TargetHttpsProxiesSetCertificateMapRequest"
+                    },
+                    {
+                        "name": "target_https_proxy",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "TargetHttpsProxiesClient",
+                    "fullName": "google.cloud.compute.v1.TargetHttpsProxiesClient"
+                },
+                "method": {
+                    "shortName": "SetCertificateMap",
+                    "fullName": "google.cloud.compute.v1.TargetHttpsProxies.SetCertificateMap",
+                    "service": {
+                        "shortName": "TargetHttpsProxies",
+                        "fullName": "google.cloud.compute.v1.TargetHttpsProxies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_TargetHttpsProxies_SetQuicOverride_async",
             "title": "AcceleratorTypes setQuicOverride Sample",
             "origin": "API_DEFINITION",
@@ -32312,6 +32376,58 @@
                 "method": {
                     "shortName": "SetBackendService",
                     "fullName": "google.cloud.compute.v1.TargetSslProxies.SetBackendService",
+                    "service": {
+                        "shortName": "TargetSslProxies",
+                        "fullName": "google.cloud.compute.v1.TargetSslProxies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_TargetSslProxies_SetCertificateMap_async",
+            "title": "AcceleratorTypes setCertificateMap Sample",
+            "origin": "API_DEFINITION",
+            "description": " Changes the Certificate Map for TargetSslProxy.",
+            "canonical": true,
+            "file": "target_ssl_proxies.set_certificate_map.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetCertificateMap",
+                "fullName": "google.cloud.compute.v1.TargetSslProxies.SetCertificateMap",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target_ssl_proxies_set_certificate_map_request_resource",
+                        "type": ".google.cloud.compute.v1.TargetSslProxiesSetCertificateMapRequest"
+                    },
+                    {
+                        "name": "target_ssl_proxy",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "TargetSslProxiesClient",
+                    "fullName": "google.cloud.compute.v1.TargetSslProxiesClient"
+                },
+                "method": {
+                    "shortName": "SetCertificateMap",
+                    "fullName": "google.cloud.compute.v1.TargetSslProxies.SetCertificateMap",
                     "service": {
                         "shortName": "TargetSslProxies",
                         "fullName": "google.cloud.compute.v1.TargetSslProxies"

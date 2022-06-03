@@ -7240,6 +7240,11 @@
                 "patch"
               ]
             },
+            "SetCertificateMap": {
+              "methods": [
+                "setCertificateMap"
+              ]
+            },
             "SetQuicOverride": {
               "methods": [
                 "setQuicOverride"
@@ -7297,6 +7302,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetCertificateMap": {
+              "methods": [
+                "setCertificateMap"
               ]
             },
             "SetQuicOverride": {
@@ -7566,6 +7576,11 @@
                 "setBackendService"
               ]
             },
+            "SetCertificateMap": {
+              "methods": [
+                "setCertificateMap"
+              ]
+            },
             "SetProxyHeader": {
               "methods": [
                 "setProxyHeader"
@@ -7611,6 +7626,11 @@
             "SetBackendService": {
               "methods": [
                 "setBackendService"
+              ]
+            },
+            "SetCertificateMap": {
+              "methods": [
+                "setCertificateMap"
               ]
             },
             "SetProxyHeader": {

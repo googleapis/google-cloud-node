@@ -725,6 +725,136 @@ describe('v1.TargetHttpsProxiesClient', () => {
     });
   });
 
+  describe('setCertificateMap', () => {
+    it('invokes setCertificateMap without error', async () => {
+      const client = new targethttpsproxiesModule.v1.TargetHttpsProxiesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetCertificateMapTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_https_proxy=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setCertificateMap = stubSimpleCall(expectedResponse);
+      const [response] = await client.setCertificateMap(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      assert(
+        (client.innerApiCalls.setCertificateMap as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setCertificateMap without error using callback', async () => {
+      const client = new targethttpsproxiesModule.v1.TargetHttpsProxiesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetCertificateMapTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_https_proxy=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setCertificateMap =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setCertificateMap(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setCertificateMap as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setCertificateMap with error', async () => {
+      const client = new targethttpsproxiesModule.v1.TargetHttpsProxiesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetCertificateMapTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      request.targetHttpsProxy = '';
+      const expectedHeaderRequestParams = 'project=&target_https_proxy=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setCertificateMap = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.setCertificateMap(request), expectedError);
+      assert(
+        (client.innerApiCalls.setCertificateMap as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setCertificateMap with closed client', async () => {
+      const client = new targethttpsproxiesModule.v1.TargetHttpsProxiesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetCertificateMapTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      request.targetHttpsProxy = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setCertificateMap(request), expectedError);
+    });
+  });
+
   describe('setQuicOverride', () => {
     it('invokes setQuicOverride without error', async () => {
       const client = new targethttpsproxiesModule.v1.TargetHttpsProxiesClient({

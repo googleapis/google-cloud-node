@@ -1344,6 +1344,13 @@
                       }
                     },
                     "AddRuleSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_validateOnly": {
+                          "oneof": [
+                            "validateOnly"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -1365,6 +1372,13 @@
                           "id": 402693443,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 242744629,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1685,6 +1699,7 @@
                             "IPSEC_INTERCONNECT": 340437251,
                             "NAT_AUTO": 163666477,
                             "PRIVATE_SERVICE_CONNECT": 48134724,
+                            "SERVERLESS": 270492508,
                             "SHARED_LOADBALANCER_VIP": 294447572,
                             "VPC_PEERING": 400800170
                           }
@@ -7626,6 +7641,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "serviceBindings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 133581016
+                        },
                         "sessionAffinity": {
                           "type": "string",
                           "id": 463888561,
@@ -9595,6 +9615,7 @@
                             "GENERAL_PURPOSE_N2D": 232471400,
                             "GENERAL_PURPOSE_T2D": 232477166,
                             "MEMORY_OPTIMIZED": 281753417,
+                            "MEMORY_OPTIMIZED_M3": 276301372,
                             "TYPE_UNSPECIFIED": 437714322
                           }
                         }
@@ -16402,6 +16423,11 @@
                             "networkTier"
                           ]
                         },
+                        "_noAutomateDnsZone": {
+                          "oneof": [
+                            "noAutomateDnsZone"
+                          ]
+                        },
                         "_portRange": {
                           "oneof": [
                             "portRange"
@@ -16574,6 +16600,13 @@
                         "networkTier": {
                           "type": "string",
                           "id": 517397843,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "noAutomateDnsZone": {
+                          "type": "bool",
+                          "id": 64546991,
                           "options": {
                             "proto3_optional": true
                           }
@@ -24986,6 +25019,11 @@
                           "oneof": [
                             "requestId"
                           ]
+                        },
+                        "_validateOnly": {
+                          "oneof": [
+                            "validateOnly"
+                          ]
                         }
                       },
                       "fields": {
@@ -25009,6 +25047,13 @@
                           "id": 216159612,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 242744629,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -38807,11 +38852,35 @@
                       }
                     },
                     "LocationPolicy": {
+                      "oneofs": {
+                        "_targetShape": {
+                          "oneof": [
+                            "targetShape"
+                          ]
+                        }
+                      },
                       "fields": {
                         "locations": {
                           "keyType": "string",
                           "type": "LocationPolicyLocation",
                           "id": 413423454
+                        },
+                        "targetShape": {
+                          "type": "string",
+                          "id": 338621299,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TargetShape": {
+                          "values": {
+                            "UNDEFINED_TARGET_SHAPE": 0,
+                            "ANY": 64972,
+                            "ANY_SINGLE_ZONE": 61100880,
+                            "BALANCED": 468409608
+                          }
                         }
                       }
                     },
@@ -41550,6 +41619,11 @@
                             "peerMtu"
                           ]
                         },
+                        "_stackType": {
+                          "oneof": [
+                            "stackType"
+                          ]
+                        },
                         "_state": {
                           "oneof": [
                             "state"
@@ -41625,6 +41699,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "stackType": {
+                          "type": "string",
+                          "id": 425908881,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "state": {
                           "type": "string",
                           "id": 109757585,
@@ -41641,6 +41722,13 @@
                         }
                       },
                       "nested": {
+                        "StackType": {
+                          "values": {
+                            "UNDEFINED_STACK_TYPE": 0,
+                            "IPV4_IPV6": 22197249,
+                            "IPV4_ONLY": 22373798
+                          }
+                        },
                         "State": {
                           "values": {
                             "UNDEFINED_STATE": 0,
@@ -46397,6 +46485,11 @@
                           "oneof": [
                             "priority"
                           ]
+                        },
+                        "_validateOnly": {
+                          "oneof": [
+                            "validateOnly"
+                          ]
                         }
                       },
                       "fields": {
@@ -46427,6 +46520,13 @@
                           "id": 402693443,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 242744629,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -48243,6 +48343,7 @@
                             "COMMITTED_N2A_CPUS": 40064304,
                             "COMMITTED_N2D_CPUS": 125951757,
                             "COMMITTED_N2_CPUS": 322589603,
+                            "COMMITTED_NVIDIA_A100_80GB_GPUS": 464326565,
                             "COMMITTED_NVIDIA_A100_GPUS": 375799445,
                             "COMMITTED_NVIDIA_K80_GPUS": 3857188,
                             "COMMITTED_NVIDIA_P100_GPUS": 107528100,
@@ -48293,6 +48394,7 @@
                             "NETWORK_FIREWALL_POLICIES": 101117374,
                             "NODE_GROUPS": 24624817,
                             "NODE_TEMPLATES": 474896668,
+                            "NVIDIA_A100_80GB_GPUS": 286389320,
                             "NVIDIA_A100_GPUS": 504872978,
                             "NVIDIA_K80_GPUS": 163886599,
                             "NVIDIA_P100_GPUS": 236601633,
@@ -48306,6 +48408,7 @@
                             "PD_EXTREME_TOTAL_PROVISIONED_IOPS": 69593965,
                             "PREEMPTIBLE_CPUS": 251184841,
                             "PREEMPTIBLE_LOCAL_SSD_GB": 260819336,
+                            "PREEMPTIBLE_NVIDIA_A100_80GB_GPUS": 151942410,
                             "PREEMPTIBLE_NVIDIA_A100_GPUS": 68832784,
                             "PREEMPTIBLE_NVIDIA_K80_GPUS": 374960201,
                             "PREEMPTIBLE_NVIDIA_P100_GPUS": 337432351,
@@ -53153,6 +53256,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "endpointTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 502633807
+                        },
                         "icmpIdleTimeoutSec": {
                           "type": "int32",
                           "id": 3647562,
@@ -53247,6 +53355,13 @@
                         }
                       },
                       "nested": {
+                        "EndpointTypes": {
+                          "values": {
+                            "UNDEFINED_ENDPOINT_TYPES": 0,
+                            "ENDPOINT_TYPE_SWG": 159344456,
+                            "ENDPOINT_TYPE_VM": 57095474
+                          }
+                        },
                         "NatIpAllocateOption": {
                           "values": {
                             "UNDEFINED_NAT_IP_ALLOCATE_OPTION": 0,
@@ -56198,6 +56313,86 @@
                         "targetReferenceResource": {
                           "type": "TargetReference",
                           "id": 523721712,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetCertificateMapTargetHttpsProxyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetHttpsProxiesSetCertificateMapRequestResource": {
+                          "type": "TargetHttpsProxiesSetCertificateMapRequest",
+                          "id": 467639099,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetHttpsProxy": {
+                          "type": "string",
+                          "id": 52336748,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetCertificateMapTargetSslProxyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetSslProxiesSetCertificateMapRequestResource": {
+                          "type": "TargetSslProxiesSetCertificateMapRequest",
+                          "id": 343984954,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetSslProxy": {
+                          "type": "string",
+                          "id": 338795853,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -61721,6 +61916,24 @@
                         }
                       }
                     },
+                    "TargetHttpsProxiesSetCertificateMapRequest": {
+                      "oneofs": {
+                        "_certificateMap": {
+                          "oneof": [
+                            "certificateMap"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "certificateMap": {
+                          "type": "string",
+                          "id": 156463796,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "TargetHttpsProxiesSetQuicOverrideRequest": {
                       "oneofs": {
                         "_quicOverride": {
@@ -61763,6 +61976,11 @@
                         "_authorizationPolicy": {
                           "oneof": [
                             "authorizationPolicy"
+                          ]
+                        },
+                        "_certificateMap": {
+                          "oneof": [
+                            "certificateMap"
                           ]
                         },
                         "_creationTimestamp": {
@@ -61835,6 +62053,13 @@
                         "authorizationPolicy": {
                           "type": "string",
                           "id": 33945528,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "certificateMap": {
+                          "type": "string",
+                          "id": 156463796,
                           "options": {
                             "proto3_optional": true
                           }
@@ -62814,6 +63039,24 @@
                         }
                       }
                     },
+                    "TargetSslProxiesSetCertificateMapRequest": {
+                      "oneofs": {
+                        "_certificateMap": {
+                          "oneof": [
+                            "certificateMap"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "certificateMap": {
+                          "type": "string",
+                          "id": 156463796,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "TargetSslProxiesSetProxyHeaderRequest": {
                       "oneofs": {
                         "_proxyHeader": {
@@ -62852,6 +63095,11 @@
                     },
                     "TargetSslProxy": {
                       "oneofs": {
+                        "_certificateMap": {
+                          "oneof": [
+                            "certificateMap"
+                          ]
+                        },
                         "_creationTimestamp": {
                           "oneof": [
                             "creationTimestamp"
@@ -62899,6 +63147,13 @@
                         }
                       },
                       "fields": {
+                        "certificateMap": {
+                          "type": "string",
+                          "id": 156463796,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "creationTimestamp": {
                           "type": "string",
                           "id": 30525366,
@@ -66039,14 +66294,44 @@
                     },
                     "UsableSubnetwork": {
                       "oneofs": {
+                        "_externalIpv6Prefix": {
+                          "oneof": [
+                            "externalIpv6Prefix"
+                          ]
+                        },
+                        "_internalIpv6Prefix": {
+                          "oneof": [
+                            "internalIpv6Prefix"
+                          ]
+                        },
                         "_ipCidrRange": {
                           "oneof": [
                             "ipCidrRange"
                           ]
                         },
+                        "_ipv6AccessType": {
+                          "oneof": [
+                            "ipv6AccessType"
+                          ]
+                        },
                         "_network": {
                           "oneof": [
                             "network"
+                          ]
+                        },
+                        "_purpose": {
+                          "oneof": [
+                            "purpose"
+                          ]
+                        },
+                        "_role": {
+                          "oneof": [
+                            "role"
+                          ]
+                        },
+                        "_stackType": {
+                          "oneof": [
+                            "stackType"
                           ]
                         },
                         "_subnetwork": {
@@ -66056,9 +66341,30 @@
                         }
                       },
                       "fields": {
+                        "externalIpv6Prefix": {
+                          "type": "string",
+                          "id": 139299190,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "internalIpv6Prefix": {
+                          "type": "string",
+                          "id": 506270056,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "ipCidrRange": {
                           "type": "string",
                           "id": 98117322,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ipv6AccessType": {
+                          "type": "string",
+                          "id": 504658653,
                           "options": {
                             "proto3_optional": true
                           }
@@ -66070,16 +66376,70 @@
                             "proto3_optional": true
                           }
                         },
+                        "purpose": {
+                          "type": "string",
+                          "id": 316407070,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "role": {
+                          "type": "string",
+                          "id": 3506294,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "secondaryIpRanges": {
                           "rule": "repeated",
                           "type": "UsableSubnetworkSecondaryRange",
                           "id": 136658915
+                        },
+                        "stackType": {
+                          "type": "string",
+                          "id": 425908881,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "subnetwork": {
                           "type": "string",
                           "id": 307827694,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Ipv6AccessType": {
+                          "values": {
+                            "UNDEFINED_IPV6_ACCESS_TYPE": 0,
+                            "EXTERNAL": 35607499,
+                            "INTERNAL": 279295677
+                          }
+                        },
+                        "Purpose": {
+                          "values": {
+                            "UNDEFINED_PURPOSE": 0,
+                            "INTERNAL_HTTPS_LOAD_BALANCER": 248748889,
+                            "PRIVATE": 403485027,
+                            "PRIVATE_RFC_1918": 254902107,
+                            "PRIVATE_SERVICE_CONNECT": 48134724,
+                            "REGIONAL_MANAGED_PROXY": 153049966
+                          }
+                        },
+                        "Role": {
+                          "values": {
+                            "UNDEFINED_ROLE": 0,
+                            "ACTIVE": 314733318,
+                            "BACKUP": 341010882
+                          }
+                        },
+                        "StackType": {
+                          "values": {
+                            "UNDEFINED_STACK_TYPE": 0,
+                            "IPV4_IPV6": 22197249,
+                            "IPV4_ONLY": 22373798
                           }
                         }
                       }
@@ -67558,6 +67918,7 @@
                             "MISSING_TYPE_DEPENDENCY": 344505463,
                             "NEXT_HOP_ADDRESS_NOT_ASSIGNED": 324964999,
                             "NEXT_HOP_CANNOT_IP_FORWARD": 383382887,
+                            "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE": 146748434,
                             "NEXT_HOP_INSTANCE_NOT_FOUND": 464250446,
                             "NEXT_HOP_INSTANCE_NOT_ON_NETWORK": 243758146,
                             "NEXT_HOP_NOT_RUNNING": 417081265,
@@ -67625,6 +67986,7 @@
                             "MISSING_TYPE_DEPENDENCY": 344505463,
                             "NEXT_HOP_ADDRESS_NOT_ASSIGNED": 324964999,
                             "NEXT_HOP_CANNOT_IP_FORWARD": 383382887,
+                            "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE": 146748434,
                             "NEXT_HOP_INSTANCE_NOT_FOUND": 464250446,
                             "NEXT_HOP_INSTANCE_NOT_ON_NETWORK": 243758146,
                             "NEXT_HOP_NOT_RUNNING": 417081265,
@@ -80771,6 +81133,30 @@
                             }
                           ]
                         },
+                        "SetCertificateMap": {
+                          "requestType": "SetCertificateMapTargetHttpsProxyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "target_https_proxies_set_certificate_map_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setCertificateMap",
+                            "(google.api.method_signature)": "project,target_https_proxy,target_https_proxies_set_certificate_map_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "target_https_proxies_set_certificate_map_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setCertificateMap"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,target_https_proxy,target_https_proxies_set_certificate_map_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
                         "SetQuicOverride": {
                           "requestType": "SetQuicOverrideTargetHttpsProxyRequest",
                           "responseType": "Operation",
@@ -81331,6 +81717,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,target_ssl_proxy,target_ssl_proxies_set_backend_service_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "SetCertificateMap": {
+                          "requestType": "SetCertificateMapTargetSslProxyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "target_ssl_proxies_set_certificate_map_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setCertificateMap",
+                            "(google.api.method_signature)": "project,target_ssl_proxy,target_ssl_proxies_set_certificate_map_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "target_ssl_proxies_set_certificate_map_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setCertificateMap"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,target_ssl_proxy,target_ssl_proxies_set_certificate_map_request_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"

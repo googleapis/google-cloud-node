@@ -37,6 +37,10 @@ function main(project, securityPolicy, securityPolicyRuleResource) {
    *  The body resource for this request
    */
   // const securityPolicyRuleResource = {}
+  /**
+   *  If true, the request will not be committed.
+   */
+  // const validateOnly = true
 
   // Imports the Compute library
   const {SecurityPoliciesClient} = require('@google-cloud/compute').v1;
