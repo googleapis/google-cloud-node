@@ -3422,7 +3422,8 @@ export namespace google {
                     enum TelecommutePreference {
                         TELECOMMUTE_PREFERENCE_UNSPECIFIED = 0,
                         TELECOMMUTE_EXCLUDED = 1,
-                        TELECOMMUTE_ALLOWED = 2
+                        TELECOMMUTE_ALLOWED = 2,
+                        TELECOMMUTE_JOBS_EXCLUDED = 3
                     }
                 }
 
