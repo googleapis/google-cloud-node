@@ -133,6 +133,34 @@
                             }
                           ]
                         },
+                        "InvalidateApprovalRequest": {
+                          "requestType": "InvalidateApprovalRequestMessage",
+                          "responseType": "ApprovalRequest",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/approvalRequests/*}:invalidate",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=organizations/*/approvalRequests/*}:invalidate",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/approvalRequests/*}:invalidate",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{name=folders/*/approvalRequests/*}:invalidate",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{name=organizations/*/approvalRequests/*}:invalidate",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
                         "GetAccessApprovalSettings": {
                           "requestType": "GetAccessApprovalSettingsMessage",
                           "responseType": "AccessApprovalSettings",
@@ -218,6 +246,33 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "GetAccessApprovalServiceAccount": {
+                          "requestType": "GetAccessApprovalServiceAccountMessage",
+                          "responseType": "AccessApprovalServiceAccount",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/serviceAccount}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/serviceAccount}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/serviceAccount}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/serviceAccount}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=organizations/*/serviceAccount}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -250,8 +305,34 @@
                             "TYPE_UNSPECIFIED": 0,
                             "CUSTOMER_INITIATED_SUPPORT": 1,
                             "GOOGLE_INITIATED_SERVICE": 2,
-                            "GOOGLE_INITIATED_REVIEW": 3
+                            "GOOGLE_INITIATED_REVIEW": 3,
+                            "THIRD_PARTY_DATA_REQUEST": 4,
+                            "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT": 5
                           }
+                        }
+                      }
+                    },
+                    "SignatureInfo": {
+                      "oneofs": {
+                        "verificationInfo": {
+                          "oneof": [
+                            "googlePublicKeyPem",
+                            "customerKmsKeyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "signature": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "googlePublicKeyPem": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "customerKmsKeyVersion": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -264,6 +345,18 @@
                         "expireTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 2
+                        },
+                        "invalidateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "signatureInfo": {
+                          "type": "SignatureInfo",
+                          "id": 4
+                        },
+                        "autoApproved": {
+                          "type": "bool",
+                          "id": 5
                         }
                       }
                     },
@@ -386,6 +479,43 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "activeKeyVersion": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "ancestorHasActiveKeyVersion": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "invalidKeyVersion": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AccessApprovalServiceAccount": {
+                      "options": {
+                        "(google.api.resource).type": "accessapproval.googleapis.com/AccessApprovalServiceAccount",
+                        "(google.api.resource).pattern": "organizations/{organization}/serviceAccount"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "accessapproval.googleapis.com/AccessApprovalServiceAccount"
+                          }
+                        },
+                        "accountEmail": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -462,6 +592,17 @@
                         }
                       }
                     },
+                    "InvalidateApprovalRequestMessage": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "accessapproval.googleapis.com/ApprovalRequest"
+                          }
+                        }
+                      }
+                    },
                     "GetAccessApprovalSettingsMessage": {
                       "fields": {
                         "name": {
@@ -493,6 +634,14 @@
                           "options": {
                             "(google.api.resource_reference).type": "accessapproval.googleapis.com/AccessApprovalSettings"
                           }
+                        }
+                      }
+                    },
+                    "GetAccessApprovalServiceAccountMessage": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     }

@@ -203,12 +203,18 @@ export class AccessApprovalClient {
       folderApprovalRequestPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/approvalRequests/{approval_request}'
       ),
+      folderServiceAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/serviceAccount'
+      ),
       organizationAccessApprovalSettingsPathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/accessApprovalSettings'
         ),
       organizationApprovalRequestPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/approvalRequests/{approval_request}'
+      ),
+      organizationServiceAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/serviceAccount'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -219,6 +225,9 @@ export class AccessApprovalClient {
         ),
       projectApprovalRequestPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/approvalRequests/{approval_request}'
+      ),
+      projectServiceAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/serviceAccount'
       ),
     };
 
@@ -287,9 +296,11 @@ export class AccessApprovalClient {
       'getApprovalRequest',
       'approveApprovalRequest',
       'dismissApprovalRequest',
+      'invalidateApprovalRequest',
       'getAccessApprovalSettings',
       'updateAccessApprovalSettings',
       'deleteAccessApprovalSettings',
+      'getAccessApprovalServiceAccount',
     ];
     for (const methodName of accessApprovalStubMethods) {
       const callPromise = this.accessApprovalStub.then(
@@ -688,6 +699,114 @@ export class AccessApprovalClient {
     );
   }
   /**
+   * Invalidates an existing ApprovalRequest. Returns the updated
+   * ApprovalRequest.
+   *
+   * NOTE: This does not deny access to the resource if another request has been
+   * made and approved. It only invalidates a single approval.
+   *
+   * Returns FAILED_PRECONDITION if the request exists but is not in an approved
+   * state.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the ApprovalRequest to invalidate.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ApprovalRequest]{@link google.cloud.accessapproval.v1.ApprovalRequest}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/access_approval.invalidate_approval_request.js</caption>
+   * region_tag:accessapproval_v1_generated_AccessApproval_InvalidateApprovalRequest_async
+   */
+  invalidateApprovalRequest(
+    request?: protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.accessapproval.v1.IApprovalRequest,
+      (
+        | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  invalidateApprovalRequest(
+    request: protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.accessapproval.v1.IApprovalRequest,
+      | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  invalidateApprovalRequest(
+    request: protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage,
+    callback: Callback<
+      protos.google.cloud.accessapproval.v1.IApprovalRequest,
+      | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  invalidateApprovalRequest(
+    request?: protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.accessapproval.v1.IApprovalRequest,
+      | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.accessapproval.v1.IApprovalRequest,
+      (
+        | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.invalidateApprovalRequest(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Gets the settings associated with a project, folder, or organization.
    *
    * @param {Object} request
@@ -1008,6 +1127,108 @@ export class AccessApprovalClient {
       callback
     );
   }
+  /**
+   * Retrieves the service account that is used by Access Approval to access KMS
+   * keys for signing approved approval requests.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the AccessApprovalServiceAccount to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AccessApprovalServiceAccount]{@link google.cloud.accessapproval.v1.AccessApprovalServiceAccount}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/access_approval.get_access_approval_service_account.js</caption>
+   * region_tag:accessapproval_v1_generated_AccessApproval_GetAccessApprovalServiceAccount_async
+   */
+  getAccessApprovalServiceAccount(
+    request?: protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
+      (
+        | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getAccessApprovalServiceAccount(
+    request: protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
+      | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAccessApprovalServiceAccount(
+    request: protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage,
+    callback: Callback<
+      protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
+      | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAccessApprovalServiceAccount(
+    request?: protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
+          | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
+      | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
+      (
+        | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAccessApprovalServiceAccount(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Lists approval requests associated with a project, folder, or organization.
@@ -1316,6 +1537,31 @@ export class AccessApprovalClient {
   }
 
   /**
+   * Return a fully-qualified folderServiceAccount resource name string.
+   *
+   * @param {string} folder
+   * @returns {string} Resource name string.
+   */
+  folderServiceAccountPath(folder: string) {
+    return this.pathTemplates.folderServiceAccountPathTemplate.render({
+      folder: folder,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderServiceAccount resource.
+   *
+   * @param {string} folderServiceAccountName
+   *   A fully-qualified path representing folder_serviceAccount resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderServiceAccountName(folderServiceAccountName: string) {
+    return this.pathTemplates.folderServiceAccountPathTemplate.match(
+      folderServiceAccountName
+    ).folder;
+  }
+
+  /**
    * Return a fully-qualified organizationAccessApprovalSettings resource name string.
    *
    * @param {string} organization
@@ -1389,6 +1635,33 @@ export class AccessApprovalClient {
     return this.pathTemplates.organizationApprovalRequestPathTemplate.match(
       organizationApprovalRequestName
     ).approval_request;
+  }
+
+  /**
+   * Return a fully-qualified organizationServiceAccount resource name string.
+   *
+   * @param {string} organization
+   * @returns {string} Resource name string.
+   */
+  organizationServiceAccountPath(organization: string) {
+    return this.pathTemplates.organizationServiceAccountPathTemplate.render({
+      organization: organization,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationServiceAccount resource.
+   *
+   * @param {string} organizationServiceAccountName
+   *   A fully-qualified path representing organization_serviceAccount resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationServiceAccountName(
+    organizationServiceAccountName: string
+  ) {
+    return this.pathTemplates.organizationServiceAccountPathTemplate.match(
+      organizationServiceAccountName
+    ).organization;
   }
 
   /**
@@ -1483,6 +1756,31 @@ export class AccessApprovalClient {
     return this.pathTemplates.projectApprovalRequestPathTemplate.match(
       projectApprovalRequestName
     ).approval_request;
+  }
+
+  /**
+   * Return a fully-qualified projectServiceAccount resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectServiceAccountPath(project: string) {
+    return this.pathTemplates.projectServiceAccountPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectServiceAccount resource.
+   *
+   * @param {string} projectServiceAccountName
+   *   A fully-qualified path representing project_serviceAccount resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectServiceAccountName(projectServiceAccountName: string) {
+    return this.pathTemplates.projectServiceAccountPathTemplate.match(
+      projectServiceAccountName
+    ).project;
   }
 
   /**

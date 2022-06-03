@@ -103,6 +103,20 @@ export namespace google {
                     public dismissApprovalRequest(request: google.cloud.accessapproval.v1.IDismissApprovalRequestMessage): Promise<google.cloud.accessapproval.v1.ApprovalRequest>;
 
                     /**
+                     * Calls InvalidateApprovalRequest.
+                     * @param request InvalidateApprovalRequestMessage message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ApprovalRequest
+                     */
+                    public invalidateApprovalRequest(request: google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage, callback: google.cloud.accessapproval.v1.AccessApproval.InvalidateApprovalRequestCallback): void;
+
+                    /**
+                     * Calls InvalidateApprovalRequest.
+                     * @param request InvalidateApprovalRequestMessage message or plain object
+                     * @returns Promise
+                     */
+                    public invalidateApprovalRequest(request: google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage): Promise<google.cloud.accessapproval.v1.ApprovalRequest>;
+
+                    /**
                      * Calls GetAccessApprovalSettings.
                      * @param request GetAccessApprovalSettingsMessage message or plain object
                      * @param callback Node-style callback called with the error, if any, and AccessApprovalSettings
@@ -143,6 +157,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteAccessApprovalSettings(request: google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetAccessApprovalServiceAccount.
+                     * @param request GetAccessApprovalServiceAccountMessage message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AccessApprovalServiceAccount
+                     */
+                    public getAccessApprovalServiceAccount(request: google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage, callback: google.cloud.accessapproval.v1.AccessApproval.GetAccessApprovalServiceAccountCallback): void;
+
+                    /**
+                     * Calls GetAccessApprovalServiceAccount.
+                     * @param request GetAccessApprovalServiceAccountMessage message or plain object
+                     * @returns Promise
+                     */
+                    public getAccessApprovalServiceAccount(request: google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage): Promise<google.cloud.accessapproval.v1.AccessApprovalServiceAccount>;
                 }
 
                 namespace AccessApproval {
@@ -176,6 +204,13 @@ export namespace google {
                     type DismissApprovalRequestCallback = (error: (Error|null), response?: google.cloud.accessapproval.v1.ApprovalRequest) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.accessapproval.v1.AccessApproval#invalidateApprovalRequest}.
+                     * @param error Error, if any
+                     * @param [response] ApprovalRequest
+                     */
+                    type InvalidateApprovalRequestCallback = (error: (Error|null), response?: google.cloud.accessapproval.v1.ApprovalRequest) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.accessapproval.v1.AccessApproval#getAccessApprovalSettings}.
                      * @param error Error, if any
                      * @param [response] AccessApprovalSettings
@@ -195,6 +230,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteAccessApprovalSettingsCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.accessapproval.v1.AccessApproval#getAccessApprovalServiceAccount}.
+                     * @param error Error, if any
+                     * @param [response] AccessApprovalServiceAccount
+                     */
+                    type GetAccessApprovalServiceAccountCallback = (error: (Error|null), response?: google.cloud.accessapproval.v1.AccessApprovalServiceAccount) => void;
                 }
 
                 /** Properties of an AccessLocations. */
@@ -396,8 +438,115 @@ export namespace google {
                         TYPE_UNSPECIFIED = 0,
                         CUSTOMER_INITIATED_SUPPORT = 1,
                         GOOGLE_INITIATED_SERVICE = 2,
-                        GOOGLE_INITIATED_REVIEW = 3
+                        GOOGLE_INITIATED_REVIEW = 3,
+                        THIRD_PARTY_DATA_REQUEST = 4,
+                        GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 5
                     }
+                }
+
+                /** Properties of a SignatureInfo. */
+                interface ISignatureInfo {
+
+                    /** SignatureInfo signature */
+                    signature?: (Uint8Array|string|null);
+
+                    /** SignatureInfo googlePublicKeyPem */
+                    googlePublicKeyPem?: (string|null);
+
+                    /** SignatureInfo customerKmsKeyVersion */
+                    customerKmsKeyVersion?: (string|null);
+                }
+
+                /** Represents a SignatureInfo. */
+                class SignatureInfo implements ISignatureInfo {
+
+                    /**
+                     * Constructs a new SignatureInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.accessapproval.v1.ISignatureInfo);
+
+                    /** SignatureInfo signature. */
+                    public signature: (Uint8Array|string);
+
+                    /** SignatureInfo googlePublicKeyPem. */
+                    public googlePublicKeyPem?: (string|null);
+
+                    /** SignatureInfo customerKmsKeyVersion. */
+                    public customerKmsKeyVersion?: (string|null);
+
+                    /** SignatureInfo verificationInfo. */
+                    public verificationInfo?: ("googlePublicKeyPem"|"customerKmsKeyVersion");
+
+                    /**
+                     * Creates a new SignatureInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SignatureInfo instance
+                     */
+                    public static create(properties?: google.cloud.accessapproval.v1.ISignatureInfo): google.cloud.accessapproval.v1.SignatureInfo;
+
+                    /**
+                     * Encodes the specified SignatureInfo message. Does not implicitly {@link google.cloud.accessapproval.v1.SignatureInfo.verify|verify} messages.
+                     * @param message SignatureInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.accessapproval.v1.ISignatureInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SignatureInfo message, length delimited. Does not implicitly {@link google.cloud.accessapproval.v1.SignatureInfo.verify|verify} messages.
+                     * @param message SignatureInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.accessapproval.v1.ISignatureInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SignatureInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SignatureInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.accessapproval.v1.SignatureInfo;
+
+                    /**
+                     * Decodes a SignatureInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SignatureInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.accessapproval.v1.SignatureInfo;
+
+                    /**
+                     * Verifies a SignatureInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SignatureInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SignatureInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.accessapproval.v1.SignatureInfo;
+
+                    /**
+                     * Creates a plain object from a SignatureInfo message. Also converts values to other types if specified.
+                     * @param message SignatureInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.accessapproval.v1.SignatureInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SignatureInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of an ApproveDecision. */
@@ -408,6 +557,15 @@ export namespace google {
 
                     /** ApproveDecision expireTime */
                     expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ApproveDecision invalidateTime */
+                    invalidateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ApproveDecision signatureInfo */
+                    signatureInfo?: (google.cloud.accessapproval.v1.ISignatureInfo|null);
+
+                    /** ApproveDecision autoApproved */
+                    autoApproved?: (boolean|null);
                 }
 
                 /** Represents an ApproveDecision. */
@@ -424,6 +582,15 @@ export namespace google {
 
                     /** ApproveDecision expireTime. */
                     public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ApproveDecision invalidateTime. */
+                    public invalidateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ApproveDecision signatureInfo. */
+                    public signatureInfo?: (google.cloud.accessapproval.v1.ISignatureInfo|null);
+
+                    /** ApproveDecision autoApproved. */
+                    public autoApproved: boolean;
 
                     /**
                      * Creates a new ApproveDecision instance using the specified properties.
@@ -939,6 +1106,15 @@ export namespace google {
 
                     /** AccessApprovalSettings enrolledAncestor */
                     enrolledAncestor?: (boolean|null);
+
+                    /** AccessApprovalSettings activeKeyVersion */
+                    activeKeyVersion?: (string|null);
+
+                    /** AccessApprovalSettings ancestorHasActiveKeyVersion */
+                    ancestorHasActiveKeyVersion?: (boolean|null);
+
+                    /** AccessApprovalSettings invalidKeyVersion */
+                    invalidKeyVersion?: (boolean|null);
                 }
 
                 /** Represents an AccessApprovalSettings. */
@@ -961,6 +1137,15 @@ export namespace google {
 
                     /** AccessApprovalSettings enrolledAncestor. */
                     public enrolledAncestor: boolean;
+
+                    /** AccessApprovalSettings activeKeyVersion. */
+                    public activeKeyVersion: string;
+
+                    /** AccessApprovalSettings ancestorHasActiveKeyVersion. */
+                    public ancestorHasActiveKeyVersion: boolean;
+
+                    /** AccessApprovalSettings invalidKeyVersion. */
+                    public invalidKeyVersion: boolean;
 
                     /**
                      * Creates a new AccessApprovalSettings instance using the specified properties.
@@ -1028,6 +1213,102 @@ export namespace google {
 
                     /**
                      * Converts this AccessApprovalSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessApprovalServiceAccount. */
+                interface IAccessApprovalServiceAccount {
+
+                    /** AccessApprovalServiceAccount name */
+                    name?: (string|null);
+
+                    /** AccessApprovalServiceAccount accountEmail */
+                    accountEmail?: (string|null);
+                }
+
+                /** Represents an AccessApprovalServiceAccount. */
+                class AccessApprovalServiceAccount implements IAccessApprovalServiceAccount {
+
+                    /**
+                     * Constructs a new AccessApprovalServiceAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.accessapproval.v1.IAccessApprovalServiceAccount);
+
+                    /** AccessApprovalServiceAccount name. */
+                    public name: string;
+
+                    /** AccessApprovalServiceAccount accountEmail. */
+                    public accountEmail: string;
+
+                    /**
+                     * Creates a new AccessApprovalServiceAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessApprovalServiceAccount instance
+                     */
+                    public static create(properties?: google.cloud.accessapproval.v1.IAccessApprovalServiceAccount): google.cloud.accessapproval.v1.AccessApprovalServiceAccount;
+
+                    /**
+                     * Encodes the specified AccessApprovalServiceAccount message. Does not implicitly {@link google.cloud.accessapproval.v1.AccessApprovalServiceAccount.verify|verify} messages.
+                     * @param message AccessApprovalServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.accessapproval.v1.IAccessApprovalServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessApprovalServiceAccount message, length delimited. Does not implicitly {@link google.cloud.accessapproval.v1.AccessApprovalServiceAccount.verify|verify} messages.
+                     * @param message AccessApprovalServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.accessapproval.v1.IAccessApprovalServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessApprovalServiceAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessApprovalServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.accessapproval.v1.AccessApprovalServiceAccount;
+
+                    /**
+                     * Decodes an AccessApprovalServiceAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessApprovalServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.accessapproval.v1.AccessApprovalServiceAccount;
+
+                    /**
+                     * Verifies an AccessApprovalServiceAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessApprovalServiceAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessApprovalServiceAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.accessapproval.v1.AccessApprovalServiceAccount;
+
+                    /**
+                     * Creates a plain object from an AccessApprovalServiceAccount message. Also converts values to other types if specified.
+                     * @param message AccessApprovalServiceAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.accessapproval.v1.AccessApprovalServiceAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessApprovalServiceAccount to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -1513,6 +1794,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an InvalidateApprovalRequestMessage. */
+                interface IInvalidateApprovalRequestMessage {
+
+                    /** InvalidateApprovalRequestMessage name */
+                    name?: (string|null);
+                }
+
+                /** Represents an InvalidateApprovalRequestMessage. */
+                class InvalidateApprovalRequestMessage implements IInvalidateApprovalRequestMessage {
+
+                    /**
+                     * Constructs a new InvalidateApprovalRequestMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage);
+
+                    /** InvalidateApprovalRequestMessage name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new InvalidateApprovalRequestMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InvalidateApprovalRequestMessage instance
+                     */
+                    public static create(properties?: google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage): google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage;
+
+                    /**
+                     * Encodes the specified InvalidateApprovalRequestMessage message. Does not implicitly {@link google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage.verify|verify} messages.
+                     * @param message InvalidateApprovalRequestMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InvalidateApprovalRequestMessage message, length delimited. Does not implicitly {@link google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage.verify|verify} messages.
+                     * @param message InvalidateApprovalRequestMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InvalidateApprovalRequestMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InvalidateApprovalRequestMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage;
+
+                    /**
+                     * Decodes an InvalidateApprovalRequestMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InvalidateApprovalRequestMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage;
+
+                    /**
+                     * Verifies an InvalidateApprovalRequestMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InvalidateApprovalRequestMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InvalidateApprovalRequestMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage;
+
+                    /**
+                     * Creates a plain object from an InvalidateApprovalRequestMessage message. Also converts values to other types if specified.
+                     * @param message InvalidateApprovalRequestMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InvalidateApprovalRequestMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a GetAccessApprovalSettingsMessage. */
                 interface IGetAccessApprovalSettingsMessage {
 
@@ -1784,6 +2155,96 @@ export namespace google {
 
                     /**
                      * Converts this DeleteAccessApprovalSettingsMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetAccessApprovalServiceAccountMessage. */
+                interface IGetAccessApprovalServiceAccountMessage {
+
+                    /** GetAccessApprovalServiceAccountMessage name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAccessApprovalServiceAccountMessage. */
+                class GetAccessApprovalServiceAccountMessage implements IGetAccessApprovalServiceAccountMessage {
+
+                    /**
+                     * Constructs a new GetAccessApprovalServiceAccountMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage);
+
+                    /** GetAccessApprovalServiceAccountMessage name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAccessApprovalServiceAccountMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAccessApprovalServiceAccountMessage instance
+                     */
+                    public static create(properties?: google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage): google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage;
+
+                    /**
+                     * Encodes the specified GetAccessApprovalServiceAccountMessage message. Does not implicitly {@link google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage.verify|verify} messages.
+                     * @param message GetAccessApprovalServiceAccountMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAccessApprovalServiceAccountMessage message, length delimited. Does not implicitly {@link google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage.verify|verify} messages.
+                     * @param message GetAccessApprovalServiceAccountMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAccessApprovalServiceAccountMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAccessApprovalServiceAccountMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage;
+
+                    /**
+                     * Decodes a GetAccessApprovalServiceAccountMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAccessApprovalServiceAccountMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage;
+
+                    /**
+                     * Verifies a GetAccessApprovalServiceAccountMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAccessApprovalServiceAccountMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAccessApprovalServiceAccountMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage;
+
+                    /**
+                     * Creates a plain object from a GetAccessApprovalServiceAccountMessage message. Also converts values to other types if specified.
+                     * @param message GetAccessApprovalServiceAccountMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAccessApprovalServiceAccountMessage to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

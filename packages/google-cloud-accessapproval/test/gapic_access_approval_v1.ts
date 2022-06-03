@@ -603,6 +603,139 @@ describe('v1.AccessApprovalClient', () => {
     });
   });
 
+  describe('invalidateApprovalRequest', () => {
+    it('invokes invalidateApprovalRequest without error', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.ApprovalRequest()
+      );
+      client.innerApiCalls.invalidateApprovalRequest =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.invalidateApprovalRequest(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.invalidateApprovalRequest as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes invalidateApprovalRequest without error using callback', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.ApprovalRequest()
+      );
+      client.innerApiCalls.invalidateApprovalRequest =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.invalidateApprovalRequest(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.accessapproval.v1.IApprovalRequest | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.invalidateApprovalRequest as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes invalidateApprovalRequest with error', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.invalidateApprovalRequest = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.invalidateApprovalRequest(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.invalidateApprovalRequest as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes invalidateApprovalRequest with closed client', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.invalidateApprovalRequest(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getAccessApprovalSettings', () => {
     it('invokes getAccessApprovalSettings without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
@@ -1001,6 +1134,139 @@ describe('v1.AccessApprovalClient', () => {
       client.close();
       await assert.rejects(
         client.deleteAccessApprovalSettings(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getAccessApprovalServiceAccount', () => {
+    it('invokes getAccessApprovalServiceAccount without error', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.AccessApprovalServiceAccount()
+      );
+      client.innerApiCalls.getAccessApprovalServiceAccount =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAccessApprovalServiceAccount(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getAccessApprovalServiceAccount without error using callback', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.AccessApprovalServiceAccount()
+      );
+      client.innerApiCalls.getAccessApprovalServiceAccount =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAccessApprovalServiceAccount(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getAccessApprovalServiceAccount with error', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAccessApprovalServiceAccount = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getAccessApprovalServiceAccount(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getAccessApprovalServiceAccount with closed client', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getAccessApprovalServiceAccount(request),
         expectedError
       );
     });
@@ -1425,6 +1691,50 @@ describe('v1.AccessApprovalClient', () => {
       });
     });
 
+    describe('folderServiceAccount', () => {
+      const fakePath = '/rendered/path/folderServiceAccount';
+      const expectedParameters = {
+        folder: 'folderValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderServiceAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderServiceAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderServiceAccountPath', () => {
+        const result = client.folderServiceAccountPath('folderValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderServiceAccountPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderServiceAccountName', () => {
+        const result = client.matchFolderFromFolderServiceAccountName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderServiceAccountPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationAccessApprovalSettings', () => {
       const fakePath = '/rendered/path/organizationAccessApprovalSettings';
       const expectedParameters = {
@@ -1527,6 +1837,52 @@ describe('v1.AccessApprovalClient', () => {
         assert(
           (
             client.pathTemplates.organizationApprovalRequestPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationServiceAccount', () => {
+      const fakePath = '/rendered/path/organizationServiceAccount';
+      const expectedParameters = {
+        organization: 'organizationValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationServiceAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationServiceAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationServiceAccountPath', () => {
+        const result =
+          client.organizationServiceAccountPath('organizationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationServiceAccountPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationServiceAccountName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationServiceAccountName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationServiceAccountPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -1671,6 +2027,51 @@ describe('v1.AccessApprovalClient', () => {
         assert(
           (
             client.pathTemplates.projectApprovalRequestPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectServiceAccount', () => {
+      const fakePath = '/rendered/path/projectServiceAccount';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectServiceAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectServiceAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectServiceAccountPath', () => {
+        const result = client.projectServiceAccountPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectServiceAccountPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectServiceAccountName', () => {
+        const result =
+          client.matchProjectFromProjectServiceAccountName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectServiceAccountPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

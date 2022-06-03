@@ -43,6 +43,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "InvalidateApprovalRequest": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetAccessApprovalSettings": {
           "timeout_millis": 600000,
           "retry_codes_name": "unavailable",
@@ -55,6 +60,10 @@
         },
         "DeleteAccessApprovalSettings": {
           "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetAccessApprovalServiceAccount": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

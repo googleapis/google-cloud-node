@@ -188,6 +188,46 @@
             }
         },
         {
+            "regionTag": "accessapproval_v1_generated_AccessApproval_InvalidateApprovalRequest_async",
+            "title": "AccessApproval invalidateApprovalRequest Sample",
+            "origin": "API_DEFINITION",
+            "description": " Invalidates an existing ApprovalRequest. Returns the updated ApprovalRequest. NOTE: This does not deny access to the resource if another request has been made and approved. It only invalidates a single approval. Returns FAILED_PRECONDITION if the request exists but is not in an approved state.",
+            "canonical": true,
+            "file": "access_approval.invalidate_approval_request.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 49,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "InvalidateApprovalRequest",
+                "fullName": "google.cloud.accessapproval.v1.AccessApproval.InvalidateApprovalRequest",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.accessapproval.v1.ApprovalRequest",
+                "client": {
+                    "shortName": "AccessApprovalClient",
+                    "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+                },
+                "method": {
+                    "shortName": "InvalidateApprovalRequest",
+                    "fullName": "google.cloud.accessapproval.v1.AccessApproval.InvalidateApprovalRequest",
+                    "service": {
+                        "shortName": "AccessApproval",
+                        "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "accessapproval_v1_generated_AccessApproval_GetAccessApprovalSettings_async",
             "title": "AccessApproval getAccessApprovalSettings Sample",
             "origin": "API_DEFINITION",
@@ -304,6 +344,46 @@
                 "method": {
                     "shortName": "DeleteAccessApprovalSettings",
                     "fullName": "google.cloud.accessapproval.v1.AccessApproval.DeleteAccessApprovalSettings",
+                    "service": {
+                        "shortName": "AccessApproval",
+                        "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "accessapproval_v1_generated_AccessApproval_GetAccessApprovalServiceAccount_async",
+            "title": "AccessApproval getAccessApprovalServiceAccount Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the service account that is used by Access Approval to access KMS keys for signing approved approval requests.",
+            "canonical": true,
+            "file": "access_approval.get_access_approval_service_account.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 49,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAccessApprovalServiceAccount",
+                "fullName": "google.cloud.accessapproval.v1.AccessApproval.GetAccessApprovalServiceAccount",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.accessapproval.v1.AccessApprovalServiceAccount",
+                "client": {
+                    "shortName": "AccessApprovalClient",
+                    "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+                },
+                "method": {
+                    "shortName": "GetAccessApprovalServiceAccount",
+                    "fullName": "google.cloud.accessapproval.v1.AccessApproval.GetAccessApprovalServiceAccount",
                     "service": {
                         "shortName": "AccessApproval",
                         "fullName": "google.cloud.accessapproval.v1.AccessApproval"
