@@ -26,19 +26,18 @@ function main(parent, intendedMembership) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent (project and location) where the Memberships will be
-   *  created. Specified in the format `projects/* /locations/*`.
+   *  Required. The parent (project and location) where the Memberships will be created.
+   *  Specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The YAML of the membership CR in the cluster. Empty if the
-   *  membership CR does not exist.
+   *  Optional. The YAML of the membership CR in the cluster. Empty if the membership
+   *  CR does not exist.
    */
   // const crManifest = 'abc123'
   /**
-   *  Required. The intended membership name under the `parent`. This method only
-   *  does validation in anticipation of a CreateMembership call with the same
-   *  name.
+   *  Required. The intended membership name under the `parent`. This method only does
+   *  validation in anticipation of a CreateMembership call with the same name.
    */
   // const intendedMembership = 'abc123'
 

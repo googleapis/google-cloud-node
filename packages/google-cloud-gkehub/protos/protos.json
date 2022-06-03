@@ -6064,7 +6064,9 @@
                           "oneof": [
                             "gkeCluster",
                             "onPremCluster",
-                            "multiCloudCluster"
+                            "multiCloudCluster",
+                            "edgeCluster",
+                            "applianceCluster"
                           ]
                         }
                       },
@@ -6086,6 +6088,20 @@
                         "multiCloudCluster": {
                           "type": "MultiCloudCluster",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "edgeCluster": {
+                          "type": "EdgeCluster",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "applianceCluster": {
+                          "type": "ApplianceCluster",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -6238,6 +6254,28 @@
                         }
                       }
                     },
+                    "EdgeCluster": {
+                      "fields": {
+                        "resourceLink": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "ApplianceCluster": {
+                      "fields": {
+                        "resourceLink": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
                     "KubernetesMetadata": {
                       "fields": {
                         "kubernetesApiServerVersion": {
@@ -6359,7 +6397,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "pageSize": {
@@ -6416,7 +6455,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         }
                       }
@@ -6427,7 +6467,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "membershipId": {
@@ -6459,7 +6500,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "requestId": {
@@ -6477,7 +6519,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "updateMask": {
@@ -6509,7 +6552,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "connectAgent": {
@@ -6613,7 +6657,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "crManifest": {
@@ -6646,7 +6691,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "crdManifest": {

@@ -26,14 +26,14 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent (project and location) where the Memberships will be
-   *  listed. Specified in the format `projects/* /locations/*`.
+   *  Required. The parent (project and location) where the Memberships will be listed.
+   *  Specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. When requesting a 'page' of resources, `page_size` specifies
-   *  number of resources to return. If unspecified or set to 0, all resources
-   *  will be returned.
+   *  Optional. When requesting a 'page' of resources, `page_size` specifies number of
+   *  resources to return. If unspecified or set to 0, all resources will
+   *  be returned.
    */
   // const pageSize = 1234
   /**
@@ -43,8 +43,8 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Lists Memberships that match the filter expression, following the
-   *  syntax outlined in https://google.aip.dev/160.
+   *  Optional. Lists Memberships that match the filter expression, following the syntax
+   *  outlined in https://google.aip.dev/160.
    *  Examples:
    *    - Name is `bar` in project `foo-proj` and location `global`:
    *        name = "projects/foo-proj/locations/global/membership/bar"

@@ -26,13 +26,13 @@ function main(parent, membershipId, resource) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent (project and location) where the Memberships will be
-   *  created. Specified in the format `projects/* /locations/*`.
+   *  Required. The parent (project and location) where the Memberships will be created.
+   *  Specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Client chosen ID for the membership. `membership_id` must be a
-   *  valid RFC 1123 compliant DNS label:
+   *  Required. Client chosen ID for the membership. `membership_id` must be a valid RFC
+   *  1123 compliant DNS label:
    *    1. At most 63 characters in length
    *    2. It must consist of lower case alphanumeric characters or `-`
    *    3. It must start and end with an alphanumeric character
