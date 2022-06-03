@@ -1852,6 +1852,20 @@ export namespace google {
 
                 namespace Index {
 
+                    /** AncestorMode enum. */
+                    enum AncestorMode {
+                        ANCESTOR_MODE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        ALL_ANCESTORS = 2
+                    }
+
+                    /** Direction enum. */
+                    enum Direction {
+                        DIRECTION_UNSPECIFIED = 0,
+                        ASCENDING = 1,
+                        DESCENDING = 2
+                    }
+
                     /** Properties of an IndexedProperty. */
                     interface IIndexedProperty {
 
@@ -1946,20 +1960,6 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
-                    }
-
-                    /** AncestorMode enum. */
-                    enum AncestorMode {
-                        ANCESTOR_MODE_UNSPECIFIED = 0,
-                        NONE = 1,
-                        ALL_ANCESTORS = 2
-                    }
-
-                    /** Direction enum. */
-                    enum Direction {
-                        DIRECTION_UNSPECIFIED = 0,
-                        ASCENDING = 1,
-                        DESCENDING = 2
                     }
 
                     /** State enum. */
@@ -2169,6 +2169,14 @@ export namespace google {
 
                 namespace MigrationProgressEvent {
 
+                    /** ConcurrencyMode enum. */
+                    enum ConcurrencyMode {
+                        CONCURRENCY_MODE_UNSPECIFIED = 0,
+                        PESSIMISTIC = 1,
+                        OPTIMISTIC = 2,
+                        OPTIMISTIC_WITH_ENTITY_GROUPS = 3
+                    }
+
                     /** Properties of a PrepareStepDetails. */
                     interface IPrepareStepDetails {
 
@@ -2347,13 +2355,6 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
-                    }
-
-                    /** ConcurrencyMode enum. */
-                    enum ConcurrencyMode {
-                        CONCURRENCY_MODE_UNSPECIFIED = 0,
-                        PESSIMISTIC = 1,
-                        OPTIMISTIC = 2
                     }
                 }
 
