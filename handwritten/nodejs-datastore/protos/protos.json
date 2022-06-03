@@ -483,6 +483,20 @@
                         }
                       },
                       "nested": {
+                        "AncestorMode": {
+                          "values": {
+                            "ANCESTOR_MODE_UNSPECIFIED": 0,
+                            "NONE": 1,
+                            "ALL_ANCESTORS": 2
+                          }
+                        },
+                        "Direction": {
+                          "values": {
+                            "DIRECTION_UNSPECIFIED": 0,
+                            "ASCENDING": 1,
+                            "DESCENDING": 2
+                          }
+                        },
                         "IndexedProperty": {
                           "fields": {
                             "name": {
@@ -499,20 +513,6 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
-                          }
-                        },
-                        "AncestorMode": {
-                          "values": {
-                            "ANCESTOR_MODE_UNSPECIFIED": 0,
-                            "NONE": 1,
-                            "ALL_ANCESTORS": 2
-                          }
-                        },
-                        "Direction": {
-                          "values": {
-                            "DIRECTION_UNSPECIFIED": 0,
-                            "ASCENDING": 1,
-                            "DESCENDING": 2
                           }
                         },
                         "State": {
@@ -558,6 +558,14 @@
                         }
                       },
                       "nested": {
+                        "ConcurrencyMode": {
+                          "values": {
+                            "CONCURRENCY_MODE_UNSPECIFIED": 0,
+                            "PESSIMISTIC": 1,
+                            "OPTIMISTIC": 2,
+                            "OPTIMISTIC_WITH_ENTITY_GROUPS": 3
+                          }
+                        },
                         "PrepareStepDetails": {
                           "fields": {
                             "concurrencyMode": {
@@ -572,13 +580,6 @@
                               "type": "ConcurrencyMode",
                               "id": 1
                             }
-                          }
-                        },
-                        "ConcurrencyMode": {
-                          "values": {
-                            "CONCURRENCY_MODE_UNSPECIFIED": 0,
-                            "PESSIMISTIC": 1,
-                            "OPTIMISTIC": 2
                           }
                         }
                       }

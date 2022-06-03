@@ -4588,6 +4588,38 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * AncestorMode enum.
+                         * @name google.datastore.admin.v1.Index.AncestorMode
+                         * @enum {number}
+                         * @property {number} ANCESTOR_MODE_UNSPECIFIED=0 ANCESTOR_MODE_UNSPECIFIED value
+                         * @property {number} NONE=1 NONE value
+                         * @property {number} ALL_ANCESTORS=2 ALL_ANCESTORS value
+                         */
+                        Index.AncestorMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ANCESTOR_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NONE"] = 1;
+                            values[valuesById[2] = "ALL_ANCESTORS"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Direction enum.
+                         * @name google.datastore.admin.v1.Index.Direction
+                         * @enum {number}
+                         * @property {number} DIRECTION_UNSPECIFIED=0 DIRECTION_UNSPECIFIED value
+                         * @property {number} ASCENDING=1 ASCENDING value
+                         * @property {number} DESCENDING=2 DESCENDING value
+                         */
+                        Index.Direction = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DIRECTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ASCENDING"] = 1;
+                            values[valuesById[2] = "DESCENDING"] = 2;
+                            return values;
+                        })();
+    
                         Index.IndexedProperty = (function() {
     
                             /**
@@ -4814,38 +4846,6 @@
                             };
     
                             return IndexedProperty;
-                        })();
-    
-                        /**
-                         * AncestorMode enum.
-                         * @name google.datastore.admin.v1.Index.AncestorMode
-                         * @enum {number}
-                         * @property {number} ANCESTOR_MODE_UNSPECIFIED=0 ANCESTOR_MODE_UNSPECIFIED value
-                         * @property {number} NONE=1 NONE value
-                         * @property {number} ALL_ANCESTORS=2 ALL_ANCESTORS value
-                         */
-                        Index.AncestorMode = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "ANCESTOR_MODE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "NONE"] = 1;
-                            values[valuesById[2] = "ALL_ANCESTORS"] = 2;
-                            return values;
-                        })();
-    
-                        /**
-                         * Direction enum.
-                         * @name google.datastore.admin.v1.Index.Direction
-                         * @enum {number}
-                         * @property {number} DIRECTION_UNSPECIFIED=0 DIRECTION_UNSPECIFIED value
-                         * @property {number} ASCENDING=1 ASCENDING value
-                         * @property {number} DESCENDING=2 DESCENDING value
-                         */
-                        Index.Direction = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "DIRECTION_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "ASCENDING"] = 1;
-                            values[valuesById[2] = "DESCENDING"] = 2;
-                            return values;
                         })();
     
                         /**
@@ -5389,6 +5389,24 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * ConcurrencyMode enum.
+                         * @name google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode
+                         * @enum {number}
+                         * @property {number} CONCURRENCY_MODE_UNSPECIFIED=0 CONCURRENCY_MODE_UNSPECIFIED value
+                         * @property {number} PESSIMISTIC=1 PESSIMISTIC value
+                         * @property {number} OPTIMISTIC=2 OPTIMISTIC value
+                         * @property {number} OPTIMISTIC_WITH_ENTITY_GROUPS=3 OPTIMISTIC_WITH_ENTITY_GROUPS value
+                         */
+                        MigrationProgressEvent.ConcurrencyMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONCURRENCY_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PESSIMISTIC"] = 1;
+                            values[valuesById[2] = "OPTIMISTIC"] = 2;
+                            values[valuesById[3] = "OPTIMISTIC_WITH_ENTITY_GROUPS"] = 3;
+                            return values;
+                        })();
+    
                         MigrationProgressEvent.PrepareStepDetails = (function() {
     
                             /**
@@ -5526,6 +5544,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
                                 return null;
@@ -5555,6 +5574,10 @@
                                 case "OPTIMISTIC":
                                 case 2:
                                     message.concurrencyMode = 2;
+                                    break;
+                                case "OPTIMISTIC_WITH_ENTITY_GROUPS":
+                                case 3:
+                                    message.concurrencyMode = 3;
                                     break;
                                 }
                                 return message;
@@ -5731,6 +5754,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
                                 return null;
@@ -5760,6 +5784,10 @@
                                 case "OPTIMISTIC":
                                 case 2:
                                     message.concurrencyMode = 2;
+                                    break;
+                                case "OPTIMISTIC_WITH_ENTITY_GROUPS":
+                                case 3:
+                                    message.concurrencyMode = 3;
                                     break;
                                 }
                                 return message;
@@ -5797,22 +5825,6 @@
                             };
     
                             return RedirectWritesStepDetails;
-                        })();
-    
-                        /**
-                         * ConcurrencyMode enum.
-                         * @name google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode
-                         * @enum {number}
-                         * @property {number} CONCURRENCY_MODE_UNSPECIFIED=0 CONCURRENCY_MODE_UNSPECIFIED value
-                         * @property {number} PESSIMISTIC=1 PESSIMISTIC value
-                         * @property {number} OPTIMISTIC=2 OPTIMISTIC value
-                         */
-                        MigrationProgressEvent.ConcurrencyMode = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "CONCURRENCY_MODE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "PESSIMISTIC"] = 1;
-                            values[valuesById[2] = "OPTIMISTIC"] = 2;
-                            return values;
                         })();
     
                         return MigrationProgressEvent;
