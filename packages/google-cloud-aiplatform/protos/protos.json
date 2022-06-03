@@ -803,6 +803,10 @@
                         "featureAttributionsSchemaUri": {
                           "type": "string",
                           "id": 3
+                        },
+                        "latentSpaceSource": {
+                          "type": "string",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -3950,6 +3954,27 @@
                             "fixedNodeCount": {
                               "type": "int32",
                               "id": 2
+                            },
+                            "scaling": {
+                              "type": "Scaling",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Scaling": {
+                              "fields": {
+                                "minNodeCount": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxNodeCount": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         },
@@ -11692,6 +11717,13 @@
                         }
                       }
                     },
+                    "PipelineFailurePolicy": {
+                      "values": {
+                        "PIPELINE_FAILURE_POLICY_UNSPECIFIED": 0,
+                        "PIPELINE_FAILURE_POLICY_FAIL_SLOW": 1,
+                        "PIPELINE_FAILURE_POLICY_FAIL_FAST": 2
+                      }
+                    },
                     "PipelineJob": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/PipelineJob",
@@ -11785,6 +11817,17 @@
                           "options": {
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
+                        },
+                        "templateUri": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "templateMetadata": {
+                          "type": "PipelineTemplateMetadata",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -11809,8 +11852,20 @@
                               "keyType": "string",
                               "type": "google.protobuf.Value",
                               "id": 3
+                            },
+                            "failurePolicy": {
+                              "type": "PipelineFailurePolicy",
+                              "id": 4
                             }
                           }
+                        }
+                      }
+                    },
+                    "PipelineTemplateMetadata": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -17121,6 +17176,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "successfulForecastPointCount": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -17404,7 +17466,7 @@
                         "config": {
                           "oneof": [
                             "nearestNeighborSearchConfig",
-                            "preset"
+                            "presets"
                           ]
                         }
                       },
@@ -17413,8 +17475,8 @@
                           "type": "google.protobuf.Value",
                           "id": 2
                         },
-                        "preset": {
-                          "type": "Preset",
+                        "presets": {
+                          "type": "Presets",
                           "id": 4
                         },
                         "gcsSource": {
@@ -17427,7 +17489,7 @@
                         }
                       }
                     },
-                    "Preset": {
+                    "Presets": {
                       "oneofs": {
                         "_query": {
                           "oneof": [
@@ -28773,6 +28835,13 @@
                         }
                       }
                     },
+                    "PipelineFailurePolicy": {
+                      "values": {
+                        "PIPELINE_FAILURE_POLICY_UNSPECIFIED": 0,
+                        "PIPELINE_FAILURE_POLICY_FAIL_SLOW": 1,
+                        "PIPELINE_FAILURE_POLICY_FAIL_FAST": 2
+                      }
+                    },
                     "PipelineJob": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/PipelineJob",
@@ -28901,6 +28970,10 @@
                               "keyType": "string",
                               "type": "google.protobuf.Value",
                               "id": 3
+                            },
+                            "failurePolicy": {
+                              "type": "PipelineFailurePolicy",
+                              "id": 4
                             }
                           }
                         }

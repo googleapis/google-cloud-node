@@ -52,6 +52,7 @@
   "../../protos/google/cloud/aiplatform/v1beta1/model_monitoring.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/model_service.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/operation.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/pipeline_failure_policy.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/pipeline_job.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/pipeline_service.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/pipeline_state.proto",

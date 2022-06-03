@@ -5531,7 +5531,7 @@
             "regionTag": "aiplatform_v1beta1_generated_ModelService_UpdateExplanationDataset_async",
             "title": "DatasetService updateExplanationDataset Sample",
             "origin": "API_DEFINITION",
-            "description": " Incremental update the dataset used for a examples model.",
+            "description": " Incrementally update the dataset used for an examples model.",
             "canonical": true,
             "file": "model_service.update_explanation_dataset.js",
             "language": "JAVASCRIPT",
