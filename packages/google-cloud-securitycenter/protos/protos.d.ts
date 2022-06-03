@@ -929,6 +929,108 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a Compliance. */
+                interface ICompliance {
+
+                    /** Compliance standard */
+                    standard?: (string|null);
+
+                    /** Compliance version */
+                    version?: (string|null);
+
+                    /** Compliance ids */
+                    ids?: (string[]|null);
+                }
+
+                /** Represents a Compliance. */
+                class Compliance implements ICompliance {
+
+                    /**
+                     * Constructs a new Compliance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICompliance);
+
+                    /** Compliance standard. */
+                    public standard: string;
+
+                    /** Compliance version. */
+                    public version: string;
+
+                    /** Compliance ids. */
+                    public ids: string[];
+
+                    /**
+                     * Creates a new Compliance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Compliance instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICompliance): google.cloud.securitycenter.v1.Compliance;
+
+                    /**
+                     * Encodes the specified Compliance message. Does not implicitly {@link google.cloud.securitycenter.v1.Compliance.verify|verify} messages.
+                     * @param message Compliance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICompliance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Compliance message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Compliance.verify|verify} messages.
+                     * @param message Compliance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICompliance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Compliance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Compliance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Compliance;
+
+                    /**
+                     * Decodes a Compliance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Compliance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Compliance;
+
+                    /**
+                     * Verifies a Compliance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Compliance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Compliance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Compliance;
+
+                    /**
+                     * Creates a plain object from a Compliance message. Also converts values to other types if specified.
+                     * @param message Compliance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Compliance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Compliance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Connection. */
                 interface IConnection {
 
@@ -1056,6 +1158,198 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an Exfiltration. */
+                interface IExfiltration {
+
+                    /** Exfiltration sources */
+                    sources?: (google.cloud.securitycenter.v1.IExfilResource[]|null);
+
+                    /** Exfiltration targets */
+                    targets?: (google.cloud.securitycenter.v1.IExfilResource[]|null);
+                }
+
+                /** Represents an Exfiltration. */
+                class Exfiltration implements IExfiltration {
+
+                    /**
+                     * Constructs a new Exfiltration.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IExfiltration);
+
+                    /** Exfiltration sources. */
+                    public sources: google.cloud.securitycenter.v1.IExfilResource[];
+
+                    /** Exfiltration targets. */
+                    public targets: google.cloud.securitycenter.v1.IExfilResource[];
+
+                    /**
+                     * Creates a new Exfiltration instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Exfiltration instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IExfiltration): google.cloud.securitycenter.v1.Exfiltration;
+
+                    /**
+                     * Encodes the specified Exfiltration message. Does not implicitly {@link google.cloud.securitycenter.v1.Exfiltration.verify|verify} messages.
+                     * @param message Exfiltration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IExfiltration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Exfiltration message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Exfiltration.verify|verify} messages.
+                     * @param message Exfiltration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IExfiltration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Exfiltration message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Exfiltration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Exfiltration;
+
+                    /**
+                     * Decodes an Exfiltration message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Exfiltration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Exfiltration;
+
+                    /**
+                     * Verifies an Exfiltration message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Exfiltration message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Exfiltration
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Exfiltration;
+
+                    /**
+                     * Creates a plain object from an Exfiltration message. Also converts values to other types if specified.
+                     * @param message Exfiltration
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Exfiltration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Exfiltration to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExfilResource. */
+                interface IExfilResource {
+
+                    /** ExfilResource name */
+                    name?: (string|null);
+
+                    /** ExfilResource components */
+                    components?: (string[]|null);
+                }
+
+                /** Represents an ExfilResource. */
+                class ExfilResource implements IExfilResource {
+
+                    /**
+                     * Constructs a new ExfilResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IExfilResource);
+
+                    /** ExfilResource name. */
+                    public name: string;
+
+                    /** ExfilResource components. */
+                    public components: string[];
+
+                    /**
+                     * Creates a new ExfilResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExfilResource instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IExfilResource): google.cloud.securitycenter.v1.ExfilResource;
+
+                    /**
+                     * Encodes the specified ExfilResource message. Does not implicitly {@link google.cloud.securitycenter.v1.ExfilResource.verify|verify} messages.
+                     * @param message ExfilResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IExfilResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExfilResource message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ExfilResource.verify|verify} messages.
+                     * @param message ExfilResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IExfilResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExfilResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExfilResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ExfilResource;
+
+                    /**
+                     * Decodes an ExfilResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExfilResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ExfilResource;
+
+                    /**
+                     * Verifies an ExfilResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExfilResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExfilResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ExfilResource;
+
+                    /**
+                     * Creates a plain object from an ExfilResource message. Also converts values to other types if specified.
+                     * @param message ExfilResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ExfilResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExfilResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an ExternalSystem. */
                 interface IExternalSystem {
 
@@ -1170,6 +1464,126 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a File. */
+                interface IFile {
+
+                    /** File path */
+                    path?: (string|null);
+
+                    /** File size */
+                    size?: (number|Long|string|null);
+
+                    /** File sha256 */
+                    sha256?: (string|null);
+
+                    /** File hashedSize */
+                    hashedSize?: (number|Long|string|null);
+
+                    /** File partiallyHashed */
+                    partiallyHashed?: (boolean|null);
+
+                    /** File contents */
+                    contents?: (string|null);
+                }
+
+                /** Represents a File. */
+                class File implements IFile {
+
+                    /**
+                     * Constructs a new File.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IFile);
+
+                    /** File path. */
+                    public path: string;
+
+                    /** File size. */
+                    public size: (number|Long|string);
+
+                    /** File sha256. */
+                    public sha256: string;
+
+                    /** File hashedSize. */
+                    public hashedSize: (number|Long|string);
+
+                    /** File partiallyHashed. */
+                    public partiallyHashed: boolean;
+
+                    /** File contents. */
+                    public contents: string;
+
+                    /**
+                     * Creates a new File instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns File instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IFile): google.cloud.securitycenter.v1.File;
+
+                    /**
+                     * Encodes the specified File message. Does not implicitly {@link google.cloud.securitycenter.v1.File.verify|verify} messages.
+                     * @param message File message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified File message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.File.verify|verify} messages.
+                     * @param message File message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a File message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns File
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.File;
+
+                    /**
+                     * Decodes a File message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns File
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.File;
+
+                    /**
+                     * Verifies a File message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a File message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns File
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.File;
+
+                    /**
+                     * Creates a plain object from a File message. Also converts values to other types if specified.
+                     * @param message File
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.File, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this File to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Finding. */
                 interface IFinding {
 
@@ -1239,8 +1653,17 @@ export namespace google {
                     /** Finding muteInitiator */
                     muteInitiator?: (string|null);
 
+                    /** Finding processes */
+                    processes?: (google.cloud.securitycenter.v1.IProcess[]|null);
+
+                    /** Finding compliances */
+                    compliances?: (google.cloud.securitycenter.v1.ICompliance[]|null);
+
                     /** Finding description */
                     description?: (string|null);
+
+                    /** Finding exfiltration */
+                    exfiltration?: (google.cloud.securitycenter.v1.IExfiltration|null);
 
                     /** Finding iamBindings */
                     iamBindings?: (google.cloud.securitycenter.v1.IIamBinding[]|null);
@@ -1324,8 +1747,17 @@ export namespace google {
                     /** Finding muteInitiator. */
                     public muteInitiator: string;
 
+                    /** Finding processes. */
+                    public processes: google.cloud.securitycenter.v1.IProcess[];
+
+                    /** Finding compliances. */
+                    public compliances: google.cloud.securitycenter.v1.ICompliance[];
+
                     /** Finding description. */
                     public description: string;
+
+                    /** Finding exfiltration. */
+                    public exfiltration?: (google.cloud.securitycenter.v1.IExfiltration|null);
 
                     /** Finding iamBindings. */
                     public iamBindings: google.cloud.securitycenter.v1.IIamBinding[];
@@ -1816,8 +2248,243 @@ export namespace google {
                         EXPLOIT_PUBLIC_FACING_APPLICATION = 27,
                         MODIFY_AUTHENTICATION_PROCESS = 28,
                         DATA_DESTRUCTION = 29,
-                        DOMAIN_POLICY_MODIFICATION = 30
+                        DOMAIN_POLICY_MODIFICATION = 30,
+                        IMPAIR_DEFENSES = 31
                     }
+                }
+
+                /** Properties of a Process. */
+                interface IProcess {
+
+                    /** Process binary */
+                    binary?: (google.cloud.securitycenter.v1.IFile|null);
+
+                    /** Process libraries */
+                    libraries?: (google.cloud.securitycenter.v1.IFile[]|null);
+
+                    /** Process script */
+                    script?: (google.cloud.securitycenter.v1.IFile|null);
+
+                    /** Process args */
+                    args?: (string[]|null);
+
+                    /** Process argumentsTruncated */
+                    argumentsTruncated?: (boolean|null);
+
+                    /** Process envVariables */
+                    envVariables?: (google.cloud.securitycenter.v1.IEnvironmentVariable[]|null);
+
+                    /** Process envVariablesTruncated */
+                    envVariablesTruncated?: (boolean|null);
+
+                    /** Process pid */
+                    pid?: (number|Long|string|null);
+
+                    /** Process parentPid */
+                    parentPid?: (number|Long|string|null);
+                }
+
+                /** Represents a Process. */
+                class Process implements IProcess {
+
+                    /**
+                     * Constructs a new Process.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IProcess);
+
+                    /** Process binary. */
+                    public binary?: (google.cloud.securitycenter.v1.IFile|null);
+
+                    /** Process libraries. */
+                    public libraries: google.cloud.securitycenter.v1.IFile[];
+
+                    /** Process script. */
+                    public script?: (google.cloud.securitycenter.v1.IFile|null);
+
+                    /** Process args. */
+                    public args: string[];
+
+                    /** Process argumentsTruncated. */
+                    public argumentsTruncated: boolean;
+
+                    /** Process envVariables. */
+                    public envVariables: google.cloud.securitycenter.v1.IEnvironmentVariable[];
+
+                    /** Process envVariablesTruncated. */
+                    public envVariablesTruncated: boolean;
+
+                    /** Process pid. */
+                    public pid: (number|Long|string);
+
+                    /** Process parentPid. */
+                    public parentPid: (number|Long|string);
+
+                    /**
+                     * Creates a new Process instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Process instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IProcess): google.cloud.securitycenter.v1.Process;
+
+                    /**
+                     * Encodes the specified Process message. Does not implicitly {@link google.cloud.securitycenter.v1.Process.verify|verify} messages.
+                     * @param message Process message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IProcess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Process message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Process.verify|verify} messages.
+                     * @param message Process message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IProcess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Process message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Process
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Process;
+
+                    /**
+                     * Decodes a Process message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Process
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Process;
+
+                    /**
+                     * Verifies a Process message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Process message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Process
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Process;
+
+                    /**
+                     * Creates a plain object from a Process message. Also converts values to other types if specified.
+                     * @param message Process
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Process, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Process to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EnvironmentVariable. */
+                interface IEnvironmentVariable {
+
+                    /** EnvironmentVariable name */
+                    name?: (string|null);
+
+                    /** EnvironmentVariable val */
+                    val?: (string|null);
+                }
+
+                /** Represents an EnvironmentVariable. */
+                class EnvironmentVariable implements IEnvironmentVariable {
+
+                    /**
+                     * Constructs a new EnvironmentVariable.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IEnvironmentVariable);
+
+                    /** EnvironmentVariable name. */
+                    public name: string;
+
+                    /** EnvironmentVariable val. */
+                    public val: string;
+
+                    /**
+                     * Creates a new EnvironmentVariable instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnvironmentVariable instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IEnvironmentVariable): google.cloud.securitycenter.v1.EnvironmentVariable;
+
+                    /**
+                     * Encodes the specified EnvironmentVariable message. Does not implicitly {@link google.cloud.securitycenter.v1.EnvironmentVariable.verify|verify} messages.
+                     * @param message EnvironmentVariable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IEnvironmentVariable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnvironmentVariable message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.EnvironmentVariable.verify|verify} messages.
+                     * @param message EnvironmentVariable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IEnvironmentVariable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnvironmentVariable message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnvironmentVariable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.EnvironmentVariable;
+
+                    /**
+                     * Decodes an EnvironmentVariable message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnvironmentVariable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.EnvironmentVariable;
+
+                    /**
+                     * Verifies an EnvironmentVariable message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnvironmentVariable message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnvironmentVariable
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.EnvironmentVariable;
+
+                    /**
+                     * Creates a plain object from an EnvironmentVariable message. Also converts values to other types if specified.
+                     * @param message EnvironmentVariable
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.EnvironmentVariable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnvironmentVariable to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a Vulnerability. */

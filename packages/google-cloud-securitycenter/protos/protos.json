@@ -233,6 +233,23 @@
                         }
                       }
                     },
+                    "Compliance": {
+                      "fields": {
+                        "standard": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "ids": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "Connection": {
                       "fields": {
                         "destinationIp": {
@@ -269,6 +286,33 @@
                         }
                       }
                     },
+                    "Exfiltration": {
+                      "fields": {
+                        "sources": {
+                          "rule": "repeated",
+                          "type": "ExfilResource",
+                          "id": 1
+                        },
+                        "targets": {
+                          "rule": "repeated",
+                          "type": "ExfilResource",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExfilResource": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "components": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ExternalSystem": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ExternalSystem",
@@ -295,6 +339,34 @@
                         "externalSystemUpdateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 5
+                        }
+                      }
+                    },
+                    "File": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "size": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "sha256": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "hashedSize": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "partiallyHashed": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "contents": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -404,9 +476,23 @@
                           "type": "string",
                           "id": 28
                         },
+                        "processes": {
+                          "rule": "repeated",
+                          "type": "Process",
+                          "id": 30
+                        },
+                        "compliances": {
+                          "rule": "repeated",
+                          "type": "Compliance",
+                          "id": 34
+                        },
                         "description": {
                           "type": "string",
                           "id": 37
+                        },
+                        "exfiltration": {
+                          "type": "Exfiltration",
+                          "id": 38
                         },
                         "iamBindings": {
                           "rule": "repeated",
@@ -572,8 +658,64 @@
                             "EXPLOIT_PUBLIC_FACING_APPLICATION": 27,
                             "MODIFY_AUTHENTICATION_PROCESS": 28,
                             "DATA_DESTRUCTION": 29,
-                            "DOMAIN_POLICY_MODIFICATION": 30
+                            "DOMAIN_POLICY_MODIFICATION": 30,
+                            "IMPAIR_DEFENSES": 31
                           }
+                        }
+                      }
+                    },
+                    "Process": {
+                      "fields": {
+                        "binary": {
+                          "type": "File",
+                          "id": 3
+                        },
+                        "libraries": {
+                          "rule": "repeated",
+                          "type": "File",
+                          "id": 4
+                        },
+                        "script": {
+                          "type": "File",
+                          "id": 5
+                        },
+                        "args": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "argumentsTruncated": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "envVariables": {
+                          "rule": "repeated",
+                          "type": "EnvironmentVariable",
+                          "id": 8
+                        },
+                        "envVariablesTruncated": {
+                          "type": "bool",
+                          "id": 9
+                        },
+                        "pid": {
+                          "type": "int64",
+                          "id": 10
+                        },
+                        "parentPid": {
+                          "type": "int64",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "EnvironmentVariable": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "val": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

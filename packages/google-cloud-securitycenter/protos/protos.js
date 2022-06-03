@@ -2386,6 +2386,255 @@
                         return BigQueryExport;
                     })();
     
+                    v1.Compliance = (function() {
+    
+                        /**
+                         * Properties of a Compliance.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ICompliance
+                         * @property {string|null} [standard] Compliance standard
+                         * @property {string|null} [version] Compliance version
+                         * @property {Array.<string>|null} [ids] Compliance ids
+                         */
+    
+                        /**
+                         * Constructs a new Compliance.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Compliance.
+                         * @implements ICompliance
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ICompliance=} [properties] Properties to set
+                         */
+                        function Compliance(properties) {
+                            this.ids = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Compliance standard.
+                         * @member {string} standard
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @instance
+                         */
+                        Compliance.prototype.standard = "";
+    
+                        /**
+                         * Compliance version.
+                         * @member {string} version
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @instance
+                         */
+                        Compliance.prototype.version = "";
+    
+                        /**
+                         * Compliance ids.
+                         * @member {Array.<string>} ids
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @instance
+                         */
+                        Compliance.prototype.ids = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Compliance instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICompliance=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Compliance} Compliance instance
+                         */
+                        Compliance.create = function create(properties) {
+                            return new Compliance(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Compliance message. Does not implicitly {@link google.cloud.securitycenter.v1.Compliance.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICompliance} message Compliance message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Compliance.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.standard != null && Object.hasOwnProperty.call(message, "standard"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.standard);
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                            if (message.ids != null && message.ids.length)
+                                for (var i = 0; i < message.ids.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.ids[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Compliance message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Compliance.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICompliance} message Compliance message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Compliance.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Compliance message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Compliance} Compliance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Compliance.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Compliance();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.standard = reader.string();
+                                    break;
+                                case 2:
+                                    message.version = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.ids && message.ids.length))
+                                        message.ids = [];
+                                    message.ids.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Compliance message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Compliance} Compliance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Compliance.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Compliance message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Compliance.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.standard != null && message.hasOwnProperty("standard"))
+                                if (!$util.isString(message.standard))
+                                    return "standard: string expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.ids != null && message.hasOwnProperty("ids")) {
+                                if (!Array.isArray(message.ids))
+                                    return "ids: array expected";
+                                for (var i = 0; i < message.ids.length; ++i)
+                                    if (!$util.isString(message.ids[i]))
+                                        return "ids: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Compliance message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Compliance} Compliance
+                         */
+                        Compliance.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Compliance)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Compliance();
+                            if (object.standard != null)
+                                message.standard = String(object.standard);
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.ids) {
+                                if (!Array.isArray(object.ids))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Compliance.ids: array expected");
+                                message.ids = [];
+                                for (var i = 0; i < object.ids.length; ++i)
+                                    message.ids[i] = String(object.ids[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Compliance message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Compliance} message Compliance
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Compliance.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ids = [];
+                            if (options.defaults) {
+                                object.standard = "";
+                                object.version = "";
+                            }
+                            if (message.standard != null && message.hasOwnProperty("standard"))
+                                object.standard = message.standard;
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.ids && message.ids.length) {
+                                object.ids = [];
+                                for (var j = 0; j < message.ids.length; ++j)
+                                    object.ids[j] = message.ids[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Compliance to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Compliance
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Compliance.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Compliance;
+                    })();
+    
                     v1.Connection = (function() {
     
                         /**
@@ -2717,6 +2966,484 @@
                         return Connection;
                     })();
     
+                    v1.Exfiltration = (function() {
+    
+                        /**
+                         * Properties of an Exfiltration.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IExfiltration
+                         * @property {Array.<google.cloud.securitycenter.v1.IExfilResource>|null} [sources] Exfiltration sources
+                         * @property {Array.<google.cloud.securitycenter.v1.IExfilResource>|null} [targets] Exfiltration targets
+                         */
+    
+                        /**
+                         * Constructs a new Exfiltration.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an Exfiltration.
+                         * @implements IExfiltration
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IExfiltration=} [properties] Properties to set
+                         */
+                        function Exfiltration(properties) {
+                            this.sources = [];
+                            this.targets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Exfiltration sources.
+                         * @member {Array.<google.cloud.securitycenter.v1.IExfilResource>} sources
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @instance
+                         */
+                        Exfiltration.prototype.sources = $util.emptyArray;
+    
+                        /**
+                         * Exfiltration targets.
+                         * @member {Array.<google.cloud.securitycenter.v1.IExfilResource>} targets
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @instance
+                         */
+                        Exfiltration.prototype.targets = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Exfiltration instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExfiltration=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Exfiltration} Exfiltration instance
+                         */
+                        Exfiltration.create = function create(properties) {
+                            return new Exfiltration(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Exfiltration message. Does not implicitly {@link google.cloud.securitycenter.v1.Exfiltration.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExfiltration} message Exfiltration message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Exfiltration.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sources != null && message.sources.length)
+                                for (var i = 0; i < message.sources.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.ExfilResource.encode(message.sources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.targets != null && message.targets.length)
+                                for (var i = 0; i < message.targets.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.ExfilResource.encode(message.targets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Exfiltration message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Exfiltration.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExfiltration} message Exfiltration message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Exfiltration.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Exfiltration message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Exfiltration} Exfiltration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Exfiltration.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Exfiltration();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.sources && message.sources.length))
+                                        message.sources = [];
+                                    message.sources.push($root.google.cloud.securitycenter.v1.ExfilResource.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.targets && message.targets.length))
+                                        message.targets = [];
+                                    message.targets.push($root.google.cloud.securitycenter.v1.ExfilResource.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Exfiltration message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Exfiltration} Exfiltration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Exfiltration.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Exfiltration message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Exfiltration.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sources != null && message.hasOwnProperty("sources")) {
+                                if (!Array.isArray(message.sources))
+                                    return "sources: array expected";
+                                for (var i = 0; i < message.sources.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.ExfilResource.verify(message.sources[i]);
+                                    if (error)
+                                        return "sources." + error;
+                                }
+                            }
+                            if (message.targets != null && message.hasOwnProperty("targets")) {
+                                if (!Array.isArray(message.targets))
+                                    return "targets: array expected";
+                                for (var i = 0; i < message.targets.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.ExfilResource.verify(message.targets[i]);
+                                    if (error)
+                                        return "targets." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Exfiltration message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Exfiltration} Exfiltration
+                         */
+                        Exfiltration.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Exfiltration)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Exfiltration();
+                            if (object.sources) {
+                                if (!Array.isArray(object.sources))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Exfiltration.sources: array expected");
+                                message.sources = [];
+                                for (var i = 0; i < object.sources.length; ++i) {
+                                    if (typeof object.sources[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Exfiltration.sources: object expected");
+                                    message.sources[i] = $root.google.cloud.securitycenter.v1.ExfilResource.fromObject(object.sources[i]);
+                                }
+                            }
+                            if (object.targets) {
+                                if (!Array.isArray(object.targets))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Exfiltration.targets: array expected");
+                                message.targets = [];
+                                for (var i = 0; i < object.targets.length; ++i) {
+                                    if (typeof object.targets[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Exfiltration.targets: object expected");
+                                    message.targets[i] = $root.google.cloud.securitycenter.v1.ExfilResource.fromObject(object.targets[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Exfiltration message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Exfiltration} message Exfiltration
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Exfiltration.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.sources = [];
+                                object.targets = [];
+                            }
+                            if (message.sources && message.sources.length) {
+                                object.sources = [];
+                                for (var j = 0; j < message.sources.length; ++j)
+                                    object.sources[j] = $root.google.cloud.securitycenter.v1.ExfilResource.toObject(message.sources[j], options);
+                            }
+                            if (message.targets && message.targets.length) {
+                                object.targets = [];
+                                for (var j = 0; j < message.targets.length; ++j)
+                                    object.targets[j] = $root.google.cloud.securitycenter.v1.ExfilResource.toObject(message.targets[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Exfiltration to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Exfiltration
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Exfiltration.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Exfiltration;
+                    })();
+    
+                    v1.ExfilResource = (function() {
+    
+                        /**
+                         * Properties of an ExfilResource.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IExfilResource
+                         * @property {string|null} [name] ExfilResource name
+                         * @property {Array.<string>|null} [components] ExfilResource components
+                         */
+    
+                        /**
+                         * Constructs a new ExfilResource.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an ExfilResource.
+                         * @implements IExfilResource
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IExfilResource=} [properties] Properties to set
+                         */
+                        function ExfilResource(properties) {
+                            this.components = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExfilResource name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @instance
+                         */
+                        ExfilResource.prototype.name = "";
+    
+                        /**
+                         * ExfilResource components.
+                         * @member {Array.<string>} components
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @instance
+                         */
+                        ExfilResource.prototype.components = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ExfilResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExfilResource=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ExfilResource} ExfilResource instance
+                         */
+                        ExfilResource.create = function create(properties) {
+                            return new ExfilResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExfilResource message. Does not implicitly {@link google.cloud.securitycenter.v1.ExfilResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExfilResource} message ExfilResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExfilResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.components != null && message.components.length)
+                                for (var i = 0; i < message.components.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.components[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExfilResource message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ExfilResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExfilResource} message ExfilResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExfilResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExfilResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ExfilResource} ExfilResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExfilResource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ExfilResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.components && message.components.length))
+                                        message.components = [];
+                                    message.components.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExfilResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ExfilResource} ExfilResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExfilResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExfilResource message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExfilResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.components != null && message.hasOwnProperty("components")) {
+                                if (!Array.isArray(message.components))
+                                    return "components: array expected";
+                                for (var i = 0; i < message.components.length; ++i)
+                                    if (!$util.isString(message.components[i]))
+                                        return "components: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExfilResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ExfilResource} ExfilResource
+                         */
+                        ExfilResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ExfilResource)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ExfilResource();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.components) {
+                                if (!Array.isArray(object.components))
+                                    throw TypeError(".google.cloud.securitycenter.v1.ExfilResource.components: array expected");
+                                message.components = [];
+                                for (var i = 0; i < object.components.length; ++i)
+                                    message.components[i] = String(object.components[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExfilResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ExfilResource} message ExfilResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExfilResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.components = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.components && message.components.length) {
+                                object.components = [];
+                                for (var j = 0; j < message.components.length; ++j)
+                                    object.components[j] = message.components[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExfilResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ExfilResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExfilResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExfilResource;
+                    })();
+    
                     v1.ExternalSystem = (function() {
     
                         /**
@@ -3015,6 +3742,332 @@
                         return ExternalSystem;
                     })();
     
+                    v1.File = (function() {
+    
+                        /**
+                         * Properties of a File.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IFile
+                         * @property {string|null} [path] File path
+                         * @property {number|Long|null} [size] File size
+                         * @property {string|null} [sha256] File sha256
+                         * @property {number|Long|null} [hashedSize] File hashedSize
+                         * @property {boolean|null} [partiallyHashed] File partiallyHashed
+                         * @property {string|null} [contents] File contents
+                         */
+    
+                        /**
+                         * Constructs a new File.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a File.
+                         * @implements IFile
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IFile=} [properties] Properties to set
+                         */
+                        function File(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * File path.
+                         * @member {string} path
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @instance
+                         */
+                        File.prototype.path = "";
+    
+                        /**
+                         * File size.
+                         * @member {number|Long} size
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @instance
+                         */
+                        File.prototype.size = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * File sha256.
+                         * @member {string} sha256
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @instance
+                         */
+                        File.prototype.sha256 = "";
+    
+                        /**
+                         * File hashedSize.
+                         * @member {number|Long} hashedSize
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @instance
+                         */
+                        File.prototype.hashedSize = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * File partiallyHashed.
+                         * @member {boolean} partiallyHashed
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @instance
+                         */
+                        File.prototype.partiallyHashed = false;
+    
+                        /**
+                         * File contents.
+                         * @member {string} contents
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @instance
+                         */
+                        File.prototype.contents = "";
+    
+                        /**
+                         * Creates a new File instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IFile=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.File} File instance
+                         */
+                        File.create = function create(properties) {
+                            return new File(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified File message. Does not implicitly {@link google.cloud.securitycenter.v1.File.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IFile} message File message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        File.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                            if (message.size != null && Object.hasOwnProperty.call(message, "size"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.size);
+                            if (message.sha256 != null && Object.hasOwnProperty.call(message, "sha256"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.sha256);
+                            if (message.hashedSize != null && Object.hasOwnProperty.call(message, "hashedSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.hashedSize);
+                            if (message.partiallyHashed != null && Object.hasOwnProperty.call(message, "partiallyHashed"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.partiallyHashed);
+                            if (message.contents != null && Object.hasOwnProperty.call(message, "contents"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.contents);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified File message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.File.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IFile} message File message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        File.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a File message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.File} File
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        File.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.File();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.path = reader.string();
+                                    break;
+                                case 2:
+                                    message.size = reader.int64();
+                                    break;
+                                case 3:
+                                    message.sha256 = reader.string();
+                                    break;
+                                case 4:
+                                    message.hashedSize = reader.int64();
+                                    break;
+                                case 5:
+                                    message.partiallyHashed = reader.bool();
+                                    break;
+                                case 6:
+                                    message.contents = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a File message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.File} File
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        File.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a File message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        File.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            if (message.size != null && message.hasOwnProperty("size"))
+                                if (!$util.isInteger(message.size) && !(message.size && $util.isInteger(message.size.low) && $util.isInteger(message.size.high)))
+                                    return "size: integer|Long expected";
+                            if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                                if (!$util.isString(message.sha256))
+                                    return "sha256: string expected";
+                            if (message.hashedSize != null && message.hasOwnProperty("hashedSize"))
+                                if (!$util.isInteger(message.hashedSize) && !(message.hashedSize && $util.isInteger(message.hashedSize.low) && $util.isInteger(message.hashedSize.high)))
+                                    return "hashedSize: integer|Long expected";
+                            if (message.partiallyHashed != null && message.hasOwnProperty("partiallyHashed"))
+                                if (typeof message.partiallyHashed !== "boolean")
+                                    return "partiallyHashed: boolean expected";
+                            if (message.contents != null && message.hasOwnProperty("contents"))
+                                if (!$util.isString(message.contents))
+                                    return "contents: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a File message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.File} File
+                         */
+                        File.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.File)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.File();
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            if (object.size != null)
+                                if ($util.Long)
+                                    (message.size = $util.Long.fromValue(object.size)).unsigned = false;
+                                else if (typeof object.size === "string")
+                                    message.size = parseInt(object.size, 10);
+                                else if (typeof object.size === "number")
+                                    message.size = object.size;
+                                else if (typeof object.size === "object")
+                                    message.size = new $util.LongBits(object.size.low >>> 0, object.size.high >>> 0).toNumber();
+                            if (object.sha256 != null)
+                                message.sha256 = String(object.sha256);
+                            if (object.hashedSize != null)
+                                if ($util.Long)
+                                    (message.hashedSize = $util.Long.fromValue(object.hashedSize)).unsigned = false;
+                                else if (typeof object.hashedSize === "string")
+                                    message.hashedSize = parseInt(object.hashedSize, 10);
+                                else if (typeof object.hashedSize === "number")
+                                    message.hashedSize = object.hashedSize;
+                                else if (typeof object.hashedSize === "object")
+                                    message.hashedSize = new $util.LongBits(object.hashedSize.low >>> 0, object.hashedSize.high >>> 0).toNumber();
+                            if (object.partiallyHashed != null)
+                                message.partiallyHashed = Boolean(object.partiallyHashed);
+                            if (object.contents != null)
+                                message.contents = String(object.contents);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a File message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.File} message File
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        File.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.path = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.size = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.size = options.longs === String ? "0" : 0;
+                                object.sha256 = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.hashedSize = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.hashedSize = options.longs === String ? "0" : 0;
+                                object.partiallyHashed = false;
+                                object.contents = "";
+                            }
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            if (message.size != null && message.hasOwnProperty("size"))
+                                if (typeof message.size === "number")
+                                    object.size = options.longs === String ? String(message.size) : message.size;
+                                else
+                                    object.size = options.longs === String ? $util.Long.prototype.toString.call(message.size) : options.longs === Number ? new $util.LongBits(message.size.low >>> 0, message.size.high >>> 0).toNumber() : message.size;
+                            if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                                object.sha256 = message.sha256;
+                            if (message.hashedSize != null && message.hasOwnProperty("hashedSize"))
+                                if (typeof message.hashedSize === "number")
+                                    object.hashedSize = options.longs === String ? String(message.hashedSize) : message.hashedSize;
+                                else
+                                    object.hashedSize = options.longs === String ? $util.Long.prototype.toString.call(message.hashedSize) : options.longs === Number ? new $util.LongBits(message.hashedSize.low >>> 0, message.hashedSize.high >>> 0).toNumber() : message.hashedSize;
+                            if (message.partiallyHashed != null && message.hasOwnProperty("partiallyHashed"))
+                                object.partiallyHashed = message.partiallyHashed;
+                            if (message.contents != null && message.hasOwnProperty("contents"))
+                                object.contents = message.contents;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this File to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.File
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        File.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return File;
+                    })();
+    
                     v1.Finding = (function() {
     
                         /**
@@ -3043,7 +4096,10 @@
                          * @property {google.cloud.securitycenter.v1.IAccess|null} [access] Finding access
                          * @property {Array.<google.cloud.securitycenter.v1.IConnection>|null} [connections] Finding connections
                          * @property {string|null} [muteInitiator] Finding muteInitiator
+                         * @property {Array.<google.cloud.securitycenter.v1.IProcess>|null} [processes] Finding processes
+                         * @property {Array.<google.cloud.securitycenter.v1.ICompliance>|null} [compliances] Finding compliances
                          * @property {string|null} [description] Finding description
+                         * @property {google.cloud.securitycenter.v1.IExfiltration|null} [exfiltration] Finding exfiltration
                          * @property {Array.<google.cloud.securitycenter.v1.IIamBinding>|null} [iamBindings] Finding iamBindings
                          * @property {string|null} [nextSteps] Finding nextSteps
                          */
@@ -3060,6 +4116,8 @@
                             this.sourceProperties = {};
                             this.externalSystems = {};
                             this.connections = [];
+                            this.processes = [];
+                            this.compliances = [];
                             this.iamBindings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -3244,12 +4302,36 @@
                         Finding.prototype.muteInitiator = "";
     
                         /**
+                         * Finding processes.
+                         * @member {Array.<google.cloud.securitycenter.v1.IProcess>} processes
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.processes = $util.emptyArray;
+    
+                        /**
+                         * Finding compliances.
+                         * @member {Array.<google.cloud.securitycenter.v1.ICompliance>} compliances
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.compliances = $util.emptyArray;
+    
+                        /**
                          * Finding description.
                          * @member {string} description
                          * @memberof google.cloud.securitycenter.v1.Finding
                          * @instance
                          */
                         Finding.prototype.description = "";
+    
+                        /**
+                         * Finding exfiltration.
+                         * @member {google.cloud.securitycenter.v1.IExfiltration|null|undefined} exfiltration
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.exfiltration = null;
     
                         /**
                          * Finding iamBindings.
@@ -3339,11 +4421,19 @@
                                 $root.google.cloud.securitycenter.v1.Access.encode(message.access, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.muteInitiator != null && Object.hasOwnProperty.call(message, "muteInitiator"))
                                 writer.uint32(/* id 28, wireType 2 =*/226).string(message.muteInitiator);
+                            if (message.processes != null && message.processes.length)
+                                for (var i = 0; i < message.processes.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Process.encode(message.processes[i], writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
                             if (message.connections != null && message.connections.length)
                                 for (var i = 0; i < message.connections.length; ++i)
                                     $root.google.cloud.securitycenter.v1.Connection.encode(message.connections[i], writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.compliances != null && message.compliances.length)
+                                for (var i = 0; i < message.compliances.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Compliance.encode(message.compliances[i], writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 37, wireType 2 =*/298).string(message.description);
+                            if (message.exfiltration != null && Object.hasOwnProperty.call(message, "exfiltration"))
+                                $root.google.cloud.securitycenter.v1.Exfiltration.encode(message.exfiltration, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
                             if (message.iamBindings != null && message.iamBindings.length)
                                 for (var i = 0; i < message.iamBindings.length; ++i)
                                     $root.google.cloud.securitycenter.v1.IamBinding.encode(message.iamBindings[i], writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
@@ -3489,8 +4579,21 @@
                                 case 28:
                                     message.muteInitiator = reader.string();
                                     break;
+                                case 30:
+                                    if (!(message.processes && message.processes.length))
+                                        message.processes = [];
+                                    message.processes.push($root.google.cloud.securitycenter.v1.Process.decode(reader, reader.uint32()));
+                                    break;
+                                case 34:
+                                    if (!(message.compliances && message.compliances.length))
+                                        message.compliances = [];
+                                    message.compliances.push($root.google.cloud.securitycenter.v1.Compliance.decode(reader, reader.uint32()));
+                                    break;
                                 case 37:
                                     message.description = reader.string();
+                                    break;
+                                case 38:
+                                    message.exfiltration = $root.google.cloud.securitycenter.v1.Exfiltration.decode(reader, reader.uint32());
                                     break;
                                 case 39:
                                     if (!(message.iamBindings && message.iamBindings.length))
@@ -3667,9 +4770,32 @@
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
                                 if (!$util.isString(message.muteInitiator))
                                     return "muteInitiator: string expected";
+                            if (message.processes != null && message.hasOwnProperty("processes")) {
+                                if (!Array.isArray(message.processes))
+                                    return "processes: array expected";
+                                for (var i = 0; i < message.processes.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Process.verify(message.processes[i]);
+                                    if (error)
+                                        return "processes." + error;
+                                }
+                            }
+                            if (message.compliances != null && message.hasOwnProperty("compliances")) {
+                                if (!Array.isArray(message.compliances))
+                                    return "compliances: array expected";
+                                for (var i = 0; i < message.compliances.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Compliance.verify(message.compliances[i]);
+                                    if (error)
+                                        return "compliances." + error;
+                                }
+                            }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
+                            if (message.exfiltration != null && message.hasOwnProperty("exfiltration")) {
+                                var error = $root.google.cloud.securitycenter.v1.Exfiltration.verify(message.exfiltration);
+                                if (error)
+                                    return "exfiltration." + error;
+                            }
                             if (message.iamBindings != null && message.hasOwnProperty("iamBindings")) {
                                 if (!Array.isArray(message.iamBindings))
                                     return "iamBindings: array expected";
@@ -3861,8 +4987,33 @@
                             }
                             if (object.muteInitiator != null)
                                 message.muteInitiator = String(object.muteInitiator);
+                            if (object.processes) {
+                                if (!Array.isArray(object.processes))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.processes: array expected");
+                                message.processes = [];
+                                for (var i = 0; i < object.processes.length; ++i) {
+                                    if (typeof object.processes[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Finding.processes: object expected");
+                                    message.processes[i] = $root.google.cloud.securitycenter.v1.Process.fromObject(object.processes[i]);
+                                }
+                            }
+                            if (object.compliances) {
+                                if (!Array.isArray(object.compliances))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.compliances: array expected");
+                                message.compliances = [];
+                                for (var i = 0; i < object.compliances.length; ++i) {
+                                    if (typeof object.compliances[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Finding.compliances: object expected");
+                                    message.compliances[i] = $root.google.cloud.securitycenter.v1.Compliance.fromObject(object.compliances[i]);
+                                }
+                            }
                             if (object.description != null)
                                 message.description = String(object.description);
+                            if (object.exfiltration != null) {
+                                if (typeof object.exfiltration !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.exfiltration: object expected");
+                                message.exfiltration = $root.google.cloud.securitycenter.v1.Exfiltration.fromObject(object.exfiltration);
+                            }
                             if (object.iamBindings) {
                                 if (!Array.isArray(object.iamBindings))
                                     throw TypeError(".google.cloud.securitycenter.v1.Finding.iamBindings: array expected");
@@ -3892,7 +5043,9 @@
                                 options = {};
                             var object = {};
                             if (options.arrays || options.defaults) {
+                                object.processes = [];
                                 object.connections = [];
+                                object.compliances = [];
                                 object.iamBindings = [];
                             }
                             if (options.objects || options.defaults) {
@@ -3920,6 +5073,7 @@
                                 object.access = null;
                                 object.muteInitiator = "";
                                 object.description = "";
+                                object.exfiltration = null;
                                 object.nextSteps = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -3971,13 +5125,25 @@
                                 object.access = $root.google.cloud.securitycenter.v1.Access.toObject(message.access, options);
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
                                 object.muteInitiator = message.muteInitiator;
+                            if (message.processes && message.processes.length) {
+                                object.processes = [];
+                                for (var j = 0; j < message.processes.length; ++j)
+                                    object.processes[j] = $root.google.cloud.securitycenter.v1.Process.toObject(message.processes[j], options);
+                            }
                             if (message.connections && message.connections.length) {
                                 object.connections = [];
                                 for (var j = 0; j < message.connections.length; ++j)
                                     object.connections[j] = $root.google.cloud.securitycenter.v1.Connection.toObject(message.connections[j], options);
                             }
+                            if (message.compliances && message.compliances.length) {
+                                object.compliances = [];
+                                for (var j = 0; j < message.compliances.length; ++j)
+                                    object.compliances[j] = $root.google.cloud.securitycenter.v1.Compliance.toObject(message.compliances[j], options);
+                            }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
+                            if (message.exfiltration != null && message.hasOwnProperty("exfiltration"))
+                                object.exfiltration = $root.google.cloud.securitycenter.v1.Exfiltration.toObject(message.exfiltration, options);
                             if (message.iamBindings && message.iamBindings.length) {
                                 object.iamBindings = [];
                                 for (var j = 0; j < message.iamBindings.length; ++j)
@@ -4867,6 +6033,7 @@
                                     case 28:
                                     case 29:
                                     case 30:
+                                    case 31:
                                         break;
                                     }
                             }
@@ -4933,6 +6100,7 @@
                                     case 28:
                                     case 29:
                                     case 30:
+                                    case 31:
                                         break;
                                     }
                             }
@@ -5147,6 +6315,10 @@
                                     case 30:
                                         message.primaryTechniques[i] = 30;
                                         break;
+                                    case "IMPAIR_DEFENSES":
+                                    case 31:
+                                        message.primaryTechniques[i] = 31;
+                                        break;
                                     }
                             }
                             if (object.additionalTactics) {
@@ -5349,6 +6521,10 @@
                                     case 30:
                                         message.additionalTechniques[i] = 30;
                                         break;
+                                    case "IMPAIR_DEFENSES":
+                                    case 31:
+                                        message.additionalTechniques[i] = 31;
+                                        break;
                                     }
                             }
                             if (object.version != null)
@@ -5486,6 +6662,7 @@
                          * @property {number} MODIFY_AUTHENTICATION_PROCESS=28 MODIFY_AUTHENTICATION_PROCESS value
                          * @property {number} DATA_DESTRUCTION=29 DATA_DESTRUCTION value
                          * @property {number} DOMAIN_POLICY_MODIFICATION=30 DOMAIN_POLICY_MODIFICATION value
+                         * @property {number} IMPAIR_DEFENSES=31 IMPAIR_DEFENSES value
                          */
                         MitreAttack.Technique = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -5520,10 +6697,683 @@
                             values[valuesById[28] = "MODIFY_AUTHENTICATION_PROCESS"] = 28;
                             values[valuesById[29] = "DATA_DESTRUCTION"] = 29;
                             values[valuesById[30] = "DOMAIN_POLICY_MODIFICATION"] = 30;
+                            values[valuesById[31] = "IMPAIR_DEFENSES"] = 31;
                             return values;
                         })();
     
                         return MitreAttack;
+                    })();
+    
+                    v1.Process = (function() {
+    
+                        /**
+                         * Properties of a Process.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IProcess
+                         * @property {google.cloud.securitycenter.v1.IFile|null} [binary] Process binary
+                         * @property {Array.<google.cloud.securitycenter.v1.IFile>|null} [libraries] Process libraries
+                         * @property {google.cloud.securitycenter.v1.IFile|null} [script] Process script
+                         * @property {Array.<string>|null} [args] Process args
+                         * @property {boolean|null} [argumentsTruncated] Process argumentsTruncated
+                         * @property {Array.<google.cloud.securitycenter.v1.IEnvironmentVariable>|null} [envVariables] Process envVariables
+                         * @property {boolean|null} [envVariablesTruncated] Process envVariablesTruncated
+                         * @property {number|Long|null} [pid] Process pid
+                         * @property {number|Long|null} [parentPid] Process parentPid
+                         */
+    
+                        /**
+                         * Constructs a new Process.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Process.
+                         * @implements IProcess
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IProcess=} [properties] Properties to set
+                         */
+                        function Process(properties) {
+                            this.libraries = [];
+                            this.args = [];
+                            this.envVariables = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Process binary.
+                         * @member {google.cloud.securitycenter.v1.IFile|null|undefined} binary
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.binary = null;
+    
+                        /**
+                         * Process libraries.
+                         * @member {Array.<google.cloud.securitycenter.v1.IFile>} libraries
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.libraries = $util.emptyArray;
+    
+                        /**
+                         * Process script.
+                         * @member {google.cloud.securitycenter.v1.IFile|null|undefined} script
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.script = null;
+    
+                        /**
+                         * Process args.
+                         * @member {Array.<string>} args
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.args = $util.emptyArray;
+    
+                        /**
+                         * Process argumentsTruncated.
+                         * @member {boolean} argumentsTruncated
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.argumentsTruncated = false;
+    
+                        /**
+                         * Process envVariables.
+                         * @member {Array.<google.cloud.securitycenter.v1.IEnvironmentVariable>} envVariables
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.envVariables = $util.emptyArray;
+    
+                        /**
+                         * Process envVariablesTruncated.
+                         * @member {boolean} envVariablesTruncated
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.envVariablesTruncated = false;
+    
+                        /**
+                         * Process pid.
+                         * @member {number|Long} pid
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.pid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Process parentPid.
+                         * @member {number|Long} parentPid
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.parentPid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new Process instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IProcess=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Process} Process instance
+                         */
+                        Process.create = function create(properties) {
+                            return new Process(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Process message. Does not implicitly {@link google.cloud.securitycenter.v1.Process.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IProcess} message Process message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Process.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.binary != null && Object.hasOwnProperty.call(message, "binary"))
+                                $root.google.cloud.securitycenter.v1.File.encode(message.binary, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.libraries != null && message.libraries.length)
+                                for (var i = 0; i < message.libraries.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.File.encode(message.libraries[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.script != null && Object.hasOwnProperty.call(message, "script"))
+                                $root.google.cloud.securitycenter.v1.File.encode(message.script, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.args != null && message.args.length)
+                                for (var i = 0; i < message.args.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.args[i]);
+                            if (message.argumentsTruncated != null && Object.hasOwnProperty.call(message, "argumentsTruncated"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.argumentsTruncated);
+                            if (message.envVariables != null && message.envVariables.length)
+                                for (var i = 0; i < message.envVariables.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.EnvironmentVariable.encode(message.envVariables[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.envVariablesTruncated != null && Object.hasOwnProperty.call(message, "envVariablesTruncated"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.envVariablesTruncated);
+                            if (message.pid != null && Object.hasOwnProperty.call(message, "pid"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.pid);
+                            if (message.parentPid != null && Object.hasOwnProperty.call(message, "parentPid"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int64(message.parentPid);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Process message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Process.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IProcess} message Process message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Process.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Process message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Process} Process
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Process.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Process();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3:
+                                    message.binary = $root.google.cloud.securitycenter.v1.File.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    if (!(message.libraries && message.libraries.length))
+                                        message.libraries = [];
+                                    message.libraries.push($root.google.cloud.securitycenter.v1.File.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.script = $root.google.cloud.securitycenter.v1.File.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    if (!(message.args && message.args.length))
+                                        message.args = [];
+                                    message.args.push(reader.string());
+                                    break;
+                                case 7:
+                                    message.argumentsTruncated = reader.bool();
+                                    break;
+                                case 8:
+                                    if (!(message.envVariables && message.envVariables.length))
+                                        message.envVariables = [];
+                                    message.envVariables.push($root.google.cloud.securitycenter.v1.EnvironmentVariable.decode(reader, reader.uint32()));
+                                    break;
+                                case 9:
+                                    message.envVariablesTruncated = reader.bool();
+                                    break;
+                                case 10:
+                                    message.pid = reader.int64();
+                                    break;
+                                case 11:
+                                    message.parentPid = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Process message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Process} Process
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Process.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Process message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Process.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.binary != null && message.hasOwnProperty("binary")) {
+                                var error = $root.google.cloud.securitycenter.v1.File.verify(message.binary);
+                                if (error)
+                                    return "binary." + error;
+                            }
+                            if (message.libraries != null && message.hasOwnProperty("libraries")) {
+                                if (!Array.isArray(message.libraries))
+                                    return "libraries: array expected";
+                                for (var i = 0; i < message.libraries.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.File.verify(message.libraries[i]);
+                                    if (error)
+                                        return "libraries." + error;
+                                }
+                            }
+                            if (message.script != null && message.hasOwnProperty("script")) {
+                                var error = $root.google.cloud.securitycenter.v1.File.verify(message.script);
+                                if (error)
+                                    return "script." + error;
+                            }
+                            if (message.args != null && message.hasOwnProperty("args")) {
+                                if (!Array.isArray(message.args))
+                                    return "args: array expected";
+                                for (var i = 0; i < message.args.length; ++i)
+                                    if (!$util.isString(message.args[i]))
+                                        return "args: string[] expected";
+                            }
+                            if (message.argumentsTruncated != null && message.hasOwnProperty("argumentsTruncated"))
+                                if (typeof message.argumentsTruncated !== "boolean")
+                                    return "argumentsTruncated: boolean expected";
+                            if (message.envVariables != null && message.hasOwnProperty("envVariables")) {
+                                if (!Array.isArray(message.envVariables))
+                                    return "envVariables: array expected";
+                                for (var i = 0; i < message.envVariables.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.EnvironmentVariable.verify(message.envVariables[i]);
+                                    if (error)
+                                        return "envVariables." + error;
+                                }
+                            }
+                            if (message.envVariablesTruncated != null && message.hasOwnProperty("envVariablesTruncated"))
+                                if (typeof message.envVariablesTruncated !== "boolean")
+                                    return "envVariablesTruncated: boolean expected";
+                            if (message.pid != null && message.hasOwnProperty("pid"))
+                                if (!$util.isInteger(message.pid) && !(message.pid && $util.isInteger(message.pid.low) && $util.isInteger(message.pid.high)))
+                                    return "pid: integer|Long expected";
+                            if (message.parentPid != null && message.hasOwnProperty("parentPid"))
+                                if (!$util.isInteger(message.parentPid) && !(message.parentPid && $util.isInteger(message.parentPid.low) && $util.isInteger(message.parentPid.high)))
+                                    return "parentPid: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Process message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Process} Process
+                         */
+                        Process.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Process)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Process();
+                            if (object.binary != null) {
+                                if (typeof object.binary !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Process.binary: object expected");
+                                message.binary = $root.google.cloud.securitycenter.v1.File.fromObject(object.binary);
+                            }
+                            if (object.libraries) {
+                                if (!Array.isArray(object.libraries))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Process.libraries: array expected");
+                                message.libraries = [];
+                                for (var i = 0; i < object.libraries.length; ++i) {
+                                    if (typeof object.libraries[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Process.libraries: object expected");
+                                    message.libraries[i] = $root.google.cloud.securitycenter.v1.File.fromObject(object.libraries[i]);
+                                }
+                            }
+                            if (object.script != null) {
+                                if (typeof object.script !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Process.script: object expected");
+                                message.script = $root.google.cloud.securitycenter.v1.File.fromObject(object.script);
+                            }
+                            if (object.args) {
+                                if (!Array.isArray(object.args))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Process.args: array expected");
+                                message.args = [];
+                                for (var i = 0; i < object.args.length; ++i)
+                                    message.args[i] = String(object.args[i]);
+                            }
+                            if (object.argumentsTruncated != null)
+                                message.argumentsTruncated = Boolean(object.argumentsTruncated);
+                            if (object.envVariables) {
+                                if (!Array.isArray(object.envVariables))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Process.envVariables: array expected");
+                                message.envVariables = [];
+                                for (var i = 0; i < object.envVariables.length; ++i) {
+                                    if (typeof object.envVariables[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Process.envVariables: object expected");
+                                    message.envVariables[i] = $root.google.cloud.securitycenter.v1.EnvironmentVariable.fromObject(object.envVariables[i]);
+                                }
+                            }
+                            if (object.envVariablesTruncated != null)
+                                message.envVariablesTruncated = Boolean(object.envVariablesTruncated);
+                            if (object.pid != null)
+                                if ($util.Long)
+                                    (message.pid = $util.Long.fromValue(object.pid)).unsigned = false;
+                                else if (typeof object.pid === "string")
+                                    message.pid = parseInt(object.pid, 10);
+                                else if (typeof object.pid === "number")
+                                    message.pid = object.pid;
+                                else if (typeof object.pid === "object")
+                                    message.pid = new $util.LongBits(object.pid.low >>> 0, object.pid.high >>> 0).toNumber();
+                            if (object.parentPid != null)
+                                if ($util.Long)
+                                    (message.parentPid = $util.Long.fromValue(object.parentPid)).unsigned = false;
+                                else if (typeof object.parentPid === "string")
+                                    message.parentPid = parseInt(object.parentPid, 10);
+                                else if (typeof object.parentPid === "number")
+                                    message.parentPid = object.parentPid;
+                                else if (typeof object.parentPid === "object")
+                                    message.parentPid = new $util.LongBits(object.parentPid.low >>> 0, object.parentPid.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Process message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Process} message Process
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Process.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.libraries = [];
+                                object.args = [];
+                                object.envVariables = [];
+                            }
+                            if (options.defaults) {
+                                object.binary = null;
+                                object.script = null;
+                                object.argumentsTruncated = false;
+                                object.envVariablesTruncated = false;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.pid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.pid = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.parentPid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.parentPid = options.longs === String ? "0" : 0;
+                            }
+                            if (message.binary != null && message.hasOwnProperty("binary"))
+                                object.binary = $root.google.cloud.securitycenter.v1.File.toObject(message.binary, options);
+                            if (message.libraries && message.libraries.length) {
+                                object.libraries = [];
+                                for (var j = 0; j < message.libraries.length; ++j)
+                                    object.libraries[j] = $root.google.cloud.securitycenter.v1.File.toObject(message.libraries[j], options);
+                            }
+                            if (message.script != null && message.hasOwnProperty("script"))
+                                object.script = $root.google.cloud.securitycenter.v1.File.toObject(message.script, options);
+                            if (message.args && message.args.length) {
+                                object.args = [];
+                                for (var j = 0; j < message.args.length; ++j)
+                                    object.args[j] = message.args[j];
+                            }
+                            if (message.argumentsTruncated != null && message.hasOwnProperty("argumentsTruncated"))
+                                object.argumentsTruncated = message.argumentsTruncated;
+                            if (message.envVariables && message.envVariables.length) {
+                                object.envVariables = [];
+                                for (var j = 0; j < message.envVariables.length; ++j)
+                                    object.envVariables[j] = $root.google.cloud.securitycenter.v1.EnvironmentVariable.toObject(message.envVariables[j], options);
+                            }
+                            if (message.envVariablesTruncated != null && message.hasOwnProperty("envVariablesTruncated"))
+                                object.envVariablesTruncated = message.envVariablesTruncated;
+                            if (message.pid != null && message.hasOwnProperty("pid"))
+                                if (typeof message.pid === "number")
+                                    object.pid = options.longs === String ? String(message.pid) : message.pid;
+                                else
+                                    object.pid = options.longs === String ? $util.Long.prototype.toString.call(message.pid) : options.longs === Number ? new $util.LongBits(message.pid.low >>> 0, message.pid.high >>> 0).toNumber() : message.pid;
+                            if (message.parentPid != null && message.hasOwnProperty("parentPid"))
+                                if (typeof message.parentPid === "number")
+                                    object.parentPid = options.longs === String ? String(message.parentPid) : message.parentPid;
+                                else
+                                    object.parentPid = options.longs === String ? $util.Long.prototype.toString.call(message.parentPid) : options.longs === Number ? new $util.LongBits(message.parentPid.low >>> 0, message.parentPid.high >>> 0).toNumber() : message.parentPid;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Process to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Process.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Process;
+                    })();
+    
+                    v1.EnvironmentVariable = (function() {
+    
+                        /**
+                         * Properties of an EnvironmentVariable.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IEnvironmentVariable
+                         * @property {string|null} [name] EnvironmentVariable name
+                         * @property {string|null} [val] EnvironmentVariable val
+                         */
+    
+                        /**
+                         * Constructs a new EnvironmentVariable.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an EnvironmentVariable.
+                         * @implements IEnvironmentVariable
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IEnvironmentVariable=} [properties] Properties to set
+                         */
+                        function EnvironmentVariable(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EnvironmentVariable name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @instance
+                         */
+                        EnvironmentVariable.prototype.name = "";
+    
+                        /**
+                         * EnvironmentVariable val.
+                         * @member {string} val
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @instance
+                         */
+                        EnvironmentVariable.prototype.val = "";
+    
+                        /**
+                         * Creates a new EnvironmentVariable instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IEnvironmentVariable=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.EnvironmentVariable} EnvironmentVariable instance
+                         */
+                        EnvironmentVariable.create = function create(properties) {
+                            return new EnvironmentVariable(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EnvironmentVariable message. Does not implicitly {@link google.cloud.securitycenter.v1.EnvironmentVariable.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IEnvironmentVariable} message EnvironmentVariable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnvironmentVariable.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.val != null && Object.hasOwnProperty.call(message, "val"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.val);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EnvironmentVariable message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.EnvironmentVariable.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IEnvironmentVariable} message EnvironmentVariable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnvironmentVariable.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EnvironmentVariable message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.EnvironmentVariable} EnvironmentVariable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnvironmentVariable.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.EnvironmentVariable();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.val = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EnvironmentVariable message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.EnvironmentVariable} EnvironmentVariable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnvironmentVariable.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EnvironmentVariable message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EnvironmentVariable.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.val != null && message.hasOwnProperty("val"))
+                                if (!$util.isString(message.val))
+                                    return "val: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EnvironmentVariable message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.EnvironmentVariable} EnvironmentVariable
+                         */
+                        EnvironmentVariable.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.EnvironmentVariable)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.EnvironmentVariable();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.val != null)
+                                message.val = String(object.val);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EnvironmentVariable message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.EnvironmentVariable} message EnvironmentVariable
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EnvironmentVariable.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.val = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.val != null && message.hasOwnProperty("val"))
+                                object.val = message.val;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EnvironmentVariable to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.EnvironmentVariable
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EnvironmentVariable.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return EnvironmentVariable;
                     })();
     
                     v1.Vulnerability = (function() {
