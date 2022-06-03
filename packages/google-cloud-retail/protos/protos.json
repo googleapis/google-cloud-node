@@ -305,6 +305,7 @@
                           "type": "bool",
                           "id": 3,
                           "options": {
+                            "deprecated": true,
                             "proto3_optional": true
                           }
                         },
@@ -312,6 +313,7 @@
                           "type": "bool",
                           "id": 4,
                           "options": {
+                            "deprecated": true,
                             "proto3_optional": true
                           }
                         }
@@ -2007,7 +2009,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
                           }
                         },
                         "filter": {
@@ -2056,6 +2059,13 @@
                       }
                     },
                     "SearchRequest": {
+                      "oneofs": {
+                        "_spellCorrectionSpec": {
+                          "oneof": [
+                            "spellCorrectionSpec"
+                          ]
+                        }
+                      },
                       "fields": {
                         "placement": {
                           "type": "string",
@@ -2147,6 +2157,18 @@
                         "personalizationSpec": {
                           "type": "PersonalizationSpec",
                           "id": 32
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 34
+                        },
+                        "spellCorrectionSpec": {
+                          "type": "SpellCorrectionSpec",
+                          "id": 35,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2303,6 +2325,23 @@
                                 "MODE_UNSPECIFIED": 0,
                                 "AUTO": 1,
                                 "DISABLED": 2
+                              }
+                            }
+                          }
+                        },
+                        "SpellCorrectionSpec": {
+                          "fields": {
+                            "mode": {
+                              "type": "Mode",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Mode": {
+                              "values": {
+                                "MODE_UNSPECIFIED": 0,
+                                "SUGGESTION_ONLY": 1,
+                                "AUTO": 2
                               }
                             }
                           }

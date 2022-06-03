@@ -645,6 +645,11 @@ export class ProductServiceClient {
    *
    *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *   is returned.
+   *
+   *   The attribute key can be updated by setting the mask path as
+   *   "attributes.${key_name}". If a key name is present in the mask but not in
+   *   the patching product from the request, this key will be deleted after the
+   *   update.
    * @param {boolean} request.allowMissing
    *   If set to true, and the {@link google.cloud.retail.v2.Product|Product} is not
    *   found, a new {@link google.cloud.retail.v2.Product|Product} will be created. In
@@ -836,7 +841,7 @@ export class ProductServiceClient {
   /**
    * Bulk import of multiple {@link google.cloud.retail.v2.Product|Product}s.
    *
-   * Request processing may be synchronous. No partial updating is supported.
+   * Request processing may be synchronous.
    * Non-existing items are created.
    *
    * Note that it is possible for a subset of the
@@ -864,11 +869,18 @@ export class ProductServiceClient {
    *   imported. Defaults to
    *   {@link google.cloud.retail.v2.ImportProductsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
    * @param {string} request.notificationPubsubTopic
-   *   Pub/Sub topic for receiving notification. If this field is set,
+   *   Full Pub/Sub topic name for receiving notification. If this field is set,
    *   when the import is finished, a notification will be sent to
    *   specified Pub/Sub topic. The message data will be JSON string of a
    *   {@link google.longrunning.Operation|Operation}.
-   *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
+   *
+   *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
+   *   to be within the same project as
+   *   {@link google.cloud.retail.v2.ImportProductsRequest.parent|ImportProductsRequest.parent}.
+   *   Make sure that both
+   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+   *   have the `pubsub.topics.publish` IAM permission on the topic.
    *
    *   Only supported when
    *   {@link google.cloud.retail.v2.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
@@ -1038,7 +1050,7 @@ export class ProductServiceClient {
    *
    * Pre-existing inventory information can only be updated with
    * {@link google.cloud.retail.v2.ProductService.SetInventory|SetInventory},
-   * {@link google.cloud.retail.v2.ProductService.AddFulfillmentPlaces|AddFulfillmentPlaces},
+   * {@link google.cloud.retail.v2.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces},
    * and
    * {@link google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces|RemoveFulfillmentPlaces}.
    *
@@ -1498,7 +1510,8 @@ export class ProductServiceClient {
    *   If this field is set to an invalid value other than these, an
    *   INVALID_ARGUMENT error is returned.
    *
-   *   This field directly corresponds to {@link |Product.fulfillment_info.type}.
+   *   This field directly corresponds to
+   *   {@link google.cloud.retail.v2.FulfillmentInfo.type|Product.fulfillment_info.type}.
    * @param {string[]} request.placeIds
    *   Required. The IDs for this
    *   {@link google.cloud.retail.v2.RemoveFulfillmentPlacesRequest.type|type}, such as

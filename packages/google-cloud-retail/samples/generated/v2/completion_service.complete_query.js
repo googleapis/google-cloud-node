@@ -74,9 +74,9 @@ function main(catalog, query) {
    *  events. If leave empty, it will use the "user-data".
    *  Current supported values:
    *  * user-data
-   *  * cloud-retail
-   *    This option requires additional allowlisting. Before using cloud-retail,
-   *    contact Cloud Retail support team first.
+   *  * cloud-retail:
+   *    This option requires enabling auto-learning function first. See
+   *    guidelines (https://cloud.google.com/retail/docs/completion-overview#generated-completion-dataset).
    */
   // const dataset = 'abc123'
   /**

@@ -392,9 +392,9 @@ export class CompletionServiceClient {
    *
    *   * user-data
    *
-   *   * cloud-retail
-   *     This option requires additional allowlisting. Before using cloud-retail,
-   *     contact Cloud Retail support team first.
+   *   * cloud-retail:
+   *     This option requires enabling auto-learning function first. See
+   *     [guidelines](https://cloud.google.com/retail/docs/completion-overview#generated-completion-dataset).
    * @param {number} request.maxSuggestions
    *   Completion max suggestions. If left unset or set to 0, then will fallback
    *   to the configured value {@link |CompletionConfig.max_suggestions}.
