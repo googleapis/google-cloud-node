@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-domains/compare/v1.2.0...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#129)
+* make v1 default service version (#110)
+
+### Features
+
+* make v1 default service version ([#110](https://github.com/googleapis/nodejs-domains/issues/110)) ([7fd70b8](https://github.com/googleapis/nodejs-domains/commit/7fd70b868314778e49c9d21eff398e0aae7a41c4))
+
+
+### Build System
+
+* update library to use Node 12 ([#129](https://github.com/googleapis/nodejs-domains/issues/129)) ([816aeb9](https://github.com/googleapis/nodejs-domains/commit/816aeb9a7137e0a3956005d8ffbcd2a2e6b3e6bb))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-domains/compare/v1.1.0...v1.2.0) (2021-10-19)
 
 
