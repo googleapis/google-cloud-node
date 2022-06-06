@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.1.1...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#122)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/local-auth to v2 ([#123](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/123)) ([f5d7541](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/f5d7541fe61c1b17ca9ccd339d28759a937e1252))
+
+
+### Build System
+
+* update library to use Node 12 ([#122](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/122)) ([f15ace8](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/f15ace8726ead0dcdf6c643b0e403f7717f85e5c))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.1.0...v1.1.1) (2021-09-09)
 
 
