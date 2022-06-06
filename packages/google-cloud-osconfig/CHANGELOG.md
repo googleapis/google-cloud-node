@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-os-config/compare/v1.12.1...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#204)
+
+### Build System
+
+* update library to use Node 12 ([#204](https://github.com/googleapis/nodejs-os-config/issues/204)) ([39b393c](https://github.com/googleapis/nodejs-os-config/commit/39b393c6031079fba097b38458be6db8625515c5))
+
 ### [1.12.1](https://github.com/googleapis/nodejs-os-config/compare/v1.12.0...v1.12.1) (2022-02-11)
 
 
