@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-billing/compare/v2.4.0...v3.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#230)
+
+### Build System
+
+* update library to use Node 12 ([#230](https://github.com/googleapis/nodejs-billing/issues/230)) ([9521ea0](https://github.com/googleapis/nodejs-billing/commit/9521ea0ab1916f493da9430800b0dd64bd2f3113))
+
 ## [2.4.0](https://github.com/googleapis/nodejs-billing/compare/v2.3.0...v2.4.0) (2022-04-06)
 
 
