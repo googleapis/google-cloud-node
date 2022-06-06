@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/nodejs-security-center/compare/v5.11.0...v6.0.0) (2022-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#486)
+
+### Features
+
+* Add compliances, processes and exfiltration fields to findings attributes. They contain compliance information about a security standard indicating unmet recommendations, represents operating system processes, and data exfiltration attempt of one... ([#490](https://github.com/googleapis/nodejs-security-center/issues/490)) ([c825bb4](https://github.com/googleapis/nodejs-security-center/commit/c825bb42d8a9fcef8f256b25d8d47404895308c7))
+
+
+### Build System
+
+* update library to use Node 12 ([#486](https://github.com/googleapis/nodejs-security-center/issues/486)) ([eb30121](https://github.com/googleapis/nodejs-security-center/commit/eb3012173641734f6ac459560074aa91ffee02f7))
+
 ## [5.11.0](https://github.com/googleapis/nodejs-security-center/compare/v5.10.0...v5.11.0) (2022-05-06)
 
 
