@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-life-sciences/compare/v1.1.1...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#77)
+
+### Build System
+
+* update library to use Node 12 ([#77](https://github.com/googleapis/nodejs-life-sciences/issues/77)) ([3130af4](https://github.com/googleapis/nodejs-life-sciences/commit/3130af44cc9e8d0b98daef92a828a96cbea874c1))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-life-sciences/compare/v1.1.0...v1.1.1) (2021-09-08)
 
 
