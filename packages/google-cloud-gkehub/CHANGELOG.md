@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-gke-hub/compare/v2.2.0...v3.0.0) (2022-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#147)
+
+### Features
+
+* add EdgeCluster as a new membershipEndpoint type ([#150](https://github.com/googleapis/nodejs-gke-hub/issues/150)) ([b5b72e9](https://github.com/googleapis/nodejs-gke-hub/commit/b5b72e96152cb46948491cf875e30c7461e8d963))
+
+
+### Build System
+
+* update library to use Node 12 ([#147](https://github.com/googleapis/nodejs-gke-hub/issues/147)) ([e8dc2ab](https://github.com/googleapis/nodejs-gke-hub/commit/e8dc2ab795a2e5830d31bb856d91d1496eea8408))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-gke-hub/compare/v2.1.0...v2.2.0) (2022-03-02)
 
 
