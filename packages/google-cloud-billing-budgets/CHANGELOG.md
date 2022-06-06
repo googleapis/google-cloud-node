@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/nodejs-billing-budgets/compare/v3.3.0...v4.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#309)
+
+### Build System
+
+* update library to use Node 12 ([#309](https://github.com/googleapis/nodejs-billing-budgets/issues/309)) ([de1bec1](https://github.com/googleapis/nodejs-billing-budgets/commit/de1bec1634f588e0b04f8ba1ec5e96551771a271))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.8...v3.3.0) (2021-08-23)
 
 
