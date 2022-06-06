@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-api-gateway/compare/v1.2.1...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#109)
+
+### Build System
+
+* update library to use Node 12 ([#109](https://github.com/googleapis/nodejs-api-gateway/issues/109)) ([b5a07ad](https://github.com/googleapis/nodejs-api-gateway/commit/b5a07ad01f8a9d74a8a713ff412ef165f5f494d8))
+
 ### [1.2.1](https://github.com/googleapis/nodejs-api-gateway/compare/v1.2.0...v1.2.1) (2022-01-12)
 
 
