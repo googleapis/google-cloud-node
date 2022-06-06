@@ -20,7 +20,7 @@
     "nodemailer-smtp-transport": "^2.7.4"
   },
   "devDependencies": {
-    "@google-cloud/storage": "^5.8.5",
+    "@google-cloud/storage": "^6.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
     "proxyquire": "^2.0.1",
