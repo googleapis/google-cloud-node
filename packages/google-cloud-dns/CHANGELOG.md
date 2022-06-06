@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-dns/compare/v2.2.4...v3.0.0) (2022-06-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#524)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/paginator to v4 ([#525](https://github.com/googleapis/nodejs-dns/issues/525)) ([e82ead7](https://github.com/googleapis/nodejs-dns/commit/e82ead7460db28e4a434ba321e1e1d0e3f7b12ed))
+* **deps:** update dependency @google-cloud/promisify to v3 ([#523](https://github.com/googleapis/nodejs-dns/issues/523)) ([7cfb445](https://github.com/googleapis/nodejs-dns/commit/7cfb445dd432ccdc71d13ef1eea43797dc898157))
+
+
+### Build System
+
+* update library to use Node 12 ([#524](https://github.com/googleapis/nodejs-dns/issues/524)) ([ab3ce39](https://github.com/googleapis/nodejs-dns/commit/ab3ce39f2257cde3740bd51302667d2f24111aa8))
+
 ### [2.2.4](https://www.github.com/googleapis/nodejs-dns/compare/v2.2.3...v2.2.4) (2022-01-06)
 
 
