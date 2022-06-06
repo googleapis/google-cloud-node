@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-essential-contacts/compare/v1.1.1...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#92)
+
+### Build System
+
+* update library to use Node 12 ([#92](https://github.com/googleapis/nodejs-essential-contacts/issues/92)) ([b819928](https://github.com/googleapis/nodejs-essential-contacts/commit/b819928b746a8a819080416da1b06b91f88b1f20))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.1.0...v1.1.1) (2021-08-25)
 
 
