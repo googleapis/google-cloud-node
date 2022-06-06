@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-resource-manager/compare/v3.2.0...v4.0.0) (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#452)
+
+### Build System
+
+* update library to use Node 12 ([#452](https://github.com/googleapis/nodejs-resource-manager/issues/452)) ([b1c7b72](https://github.com/googleapis/nodejs-resource-manager/commit/b1c7b728c44035f3774d19bed47ed03274926212))
+
 ## [3.2.0](https://github.com/googleapis/nodejs-resource-manager/compare/v3.1.0...v3.2.0) (2022-04-06)
 
 
