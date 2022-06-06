@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v1.5.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#135)
+* make v1 default service (#121)
+
+### Features
+
+* make v1 default service ([#121](https://github.com/googleapis/nodejs-network-connectivity/issues/121)) ([7d98433](https://github.com/googleapis/nodejs-network-connectivity/commit/7d98433347dbc19014c0e9650c3955d9d956bfbf))
+
+
+### Build System
+
+* update library to use Node 12 ([#135](https://github.com/googleapis/nodejs-network-connectivity/issues/135)) ([07336d8](https://github.com/googleapis/nodejs-network-connectivity/commit/07336d8ec230f2f890648cbe3a5ec092381c1e5e))
+
 ## [1.5.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v1.4.2...v1.5.0) (2022-02-08)
 
 
