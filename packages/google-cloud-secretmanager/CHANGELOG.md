@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/nodejs-secret-manager/compare/v3.12.0...v4.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#371)
+
+### Build System
+
+* update library to use Node 12 ([#371](https://github.com/googleapis/nodejs-secret-manager/issues/371)) ([1bdf77c](https://github.com/googleapis/nodejs-secret-manager/commit/1bdf77c6a5da8825004957eb03007722fc7967a2))
+
 ## [3.12.0](https://github.com/googleapis/nodejs-secret-manager/compare/v3.11.0...v3.12.0) (2022-04-06)
 
 
