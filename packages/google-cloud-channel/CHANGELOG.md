@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-channel/compare/v1.7.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#149)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/local-auth to v2 ([#150](https://github.com/googleapis/nodejs-channel/issues/150)) ([bab70db](https://github.com/googleapis/nodejs-channel/commit/bab70db6eb59f73d15f2a80cc99e51b83eb9f1bf))
+
+
+### Build System
+
+* update library to use Node 12 ([#149](https://github.com/googleapis/nodejs-channel/issues/149)) ([7e1f923](https://github.com/googleapis/nodejs-channel/commit/7e1f9233f502af839b00a7fcbb2ca10017c5e026))
+
 ## [1.7.0](https://github.com/googleapis/nodejs-channel/compare/v1.6.0...v1.7.0) (2022-05-06)
 
 
