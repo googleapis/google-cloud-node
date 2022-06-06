@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-os-login/compare/v3.3.1...v4.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#527)
+
+### Build System
+
+* update library to use Node 12 ([#527](https://github.com/googleapis/nodejs-os-login/issues/527)) ([32db700](https://github.com/googleapis/nodejs-os-login/commit/32db70055f46499e97607123ec84fd72ff2c749f))
+
 ### [3.3.1](https://www.github.com/googleapis/nodejs-os-login/compare/v3.3.0...v3.3.1) (2021-09-09)
 
 
