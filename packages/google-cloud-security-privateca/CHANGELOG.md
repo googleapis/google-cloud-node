@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/nodejs-security-private-ca/compare/v3.1.0...v4.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#180)
+
+### Build System
+
+* update library to use Node 12 ([#180](https://github.com/googleapis/nodejs-security-private-ca/issues/180)) ([118d786](https://github.com/googleapis/nodejs-security-private-ca/commit/118d786e8520c83baa5c585b55a3970e922c65e5))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-security-private-ca/compare/v3.0.0...v3.1.0) (2022-03-16)
 
 
