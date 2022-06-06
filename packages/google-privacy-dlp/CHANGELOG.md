@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-dlp/compare/v3.5.0...v4.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#713)
+
+### Build System
+
+* update library to use Node 12 ([#713](https://github.com/googleapis/nodejs-dlp/issues/713)) ([2999561](https://github.com/googleapis/nodejs-dlp/commit/2999561d3c1b1f4de78fb11a8c916e2bb06a92a5))
+
 ## [3.5.0](https://github.com/googleapis/nodejs-dlp/compare/v3.4.0...v3.5.0) (2022-04-01)
 
 
