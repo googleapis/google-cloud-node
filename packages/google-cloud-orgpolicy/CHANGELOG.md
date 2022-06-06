@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-org-policy/compare/v1.1.2...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12
+* update library to use Node 12 (#108)
+
+### Build System
+
+* update library to use Node 12 ([#108](https://github.com/googleapis/nodejs-org-policy/issues/108)) ([310e83f](https://github.com/googleapis/nodejs-org-policy/commit/310e83ffe6f8c09ead2d4b82c01ec29aa09a6b6b))
+
+
+### *build
+
+* Update library to use Node 12 ([310e83f](https://github.com/googleapis/nodejs-org-policy/commit/310e83ffe6f8c09ead2d4b82c01ec29aa09a6b6b))
+
 ### [1.1.2](https://github.com/googleapis/nodejs-org-policy/compare/v1.1.1...v1.1.2) (2022-02-16)
 
 
