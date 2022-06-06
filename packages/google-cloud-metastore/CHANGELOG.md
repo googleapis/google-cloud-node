@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v2.2.0...v3.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#137)
+
+### Build System
+
+* update library to use Node 12 ([#137](https://github.com/googleapis/nodejs-dataproc-metastore/issues/137)) ([fd42f32](https://github.com/googleapis/nodejs-dataproc-metastore/commit/fd42f3290bd1f221f0ea3a667414b4f87833980a))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v2.1.0...v2.2.0) (2022-03-23)
 
 
