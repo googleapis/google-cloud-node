@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v2.2.0...v3.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#162)
+
+### Build System
+
+* update library to use Node 12 ([#162](https://github.com/googleapis/nodejs-assured-workloads/issues/162)) ([fab651b](https://github.com/googleapis/nodejs-assured-workloads/commit/fab651b66009a9d747e3a207544c2a5e41a1576c))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v2.1.0...v2.2.0) (2022-03-23)
 
 
