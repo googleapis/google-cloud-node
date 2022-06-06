@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-dms/compare/v1.1.0...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#90)
+
+### Build System
+
+* update library to use Node 12 ([#90](https://github.com/googleapis/nodejs-dms/issues/90)) ([168f46f](https://github.com/googleapis/nodejs-dms/commit/168f46f8314ff0b6ce59ca8e8236b26a98e923ab))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-dms/compare/v1.0.5...v1.1.0) (2021-08-23)
 
 
