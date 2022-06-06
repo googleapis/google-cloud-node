@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-service-control/compare/v1.4.0...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#135)
+
+### Build System
+
+* update library to use Node 12 ([#135](https://github.com/googleapis/nodejs-service-control/issues/135)) ([f2177eb](https://github.com/googleapis/nodejs-service-control/commit/f2177eb862ddf2842b71a46e20524e4f0d7bcbf6))
+
 ## [1.4.0](https://github.com/googleapis/nodejs-service-control/compare/v1.3.0...v1.4.0) (2022-03-23)
 
 
