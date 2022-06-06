@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-service-management/compare/v0.4.0...v1.0.0) (2022-05-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* promote to stable (#140)
+* update library to use Node 12 (#138)
+
+### Features
+
+* promote to stable ([#140](https://github.com/googleapis/nodejs-service-management/issues/140)) ([f40509e](https://github.com/googleapis/nodejs-service-management/commit/f40509ee35dbafff16e4300d2173be5c41abacf4))
+
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#142](https://github.com/googleapis/nodejs-service-management/issues/142)) ([6d02ca8](https://github.com/googleapis/nodejs-service-management/commit/6d02ca800a29eb3b6383127efe43ad8e603992c3))
+
+
+### Build System
+
+* update library to use Node 12 ([#138](https://github.com/googleapis/nodejs-service-management/issues/138)) ([a9eed29](https://github.com/googleapis/nodejs-service-management/commit/a9eed29598c8b56d4c80161d0046be0db4430c66))
+
 ## [0.4.0](https://github.com/googleapis/nodejs-service-management/compare/v0.3.1...v0.4.0) (2022-03-08)
 
 
