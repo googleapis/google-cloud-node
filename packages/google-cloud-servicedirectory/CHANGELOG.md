@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/nodejs-service-directory/compare/v3.4.0...v4.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#229)
+
+### Build System
+
+* update library to use Node 12 ([#229](https://github.com/googleapis/nodejs-service-directory/issues/229)) ([34d5709](https://github.com/googleapis/nodejs-service-directory/commit/34d5709ab1e6e6c51bd2443b674fc22634214e61))
+
 ## [3.4.0](https://github.com/googleapis/nodejs-service-directory/compare/v3.3.2...v3.4.0) (2022-04-11)
 
 
