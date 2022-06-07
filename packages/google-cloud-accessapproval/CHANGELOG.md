@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-access-approval/compare/v1.1.0...v2.0.0) (2022-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#124)
+
+### Features
+
+* update protos to include InvalidateApprovalRequest and GetAccessApprovalServiceAccount APIs ([#126](https://github.com/googleapis/nodejs-access-approval/issues/126)) ([02dfd2c](https://github.com/googleapis/nodejs-access-approval/commit/02dfd2c72e8a87ac3ffebeb40dfa68808b159234))
+
+
+### Build System
+
+* update library to use Node 12 ([#124](https://github.com/googleapis/nodejs-access-approval/issues/124)) ([8c04620](https://github.com/googleapis/nodejs-access-approval/commit/8c04620a20559f41b173be0add720d5e1dcd05f0))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.8...v1.1.0) (2021-08-23)
 
 
