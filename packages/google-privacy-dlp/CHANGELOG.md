@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/nodejs-dlp/compare/v4.0.0...v4.0.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to v3 ([#715](https://github.com/googleapis/nodejs-dlp/issues/715)) ([c8636f8](https://github.com/googleapis/nodejs-dlp/commit/c8636f84d844b594ffd11dd7bfbf5f73b56ee729))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-dlp/compare/v3.5.0...v4.0.0) (2022-05-20)
 
 
