@@ -17,7 +17,7 @@
     "@google-cloud/video-transcoder": "^2.0.0"
   },
   "devDependencies": {
-    "@google-cloud/storage": "^5.4.0",
+    "@google-cloud/storage": "^6.0.0",
     "c8": "^7.3.0",
     "mocha": "^8.1.1",
     "uuid": "^8.0.0"
