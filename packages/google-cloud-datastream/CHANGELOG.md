@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-datastream/compare/v1.1.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#48)
+
+### Build System
+
+* update library to use Node 12 ([#48](https://github.com/googleapis/nodejs-datastream/issues/48)) ([0ba2aaf](https://github.com/googleapis/nodejs-datastream/commit/0ba2aafed08462fb04fe711282af8b35be0da21e))
+
 ## [1.1.0](https://github.com/googleapis/nodejs-datastream/compare/v1.0.0...v1.1.0) (2022-03-24)
 
 
