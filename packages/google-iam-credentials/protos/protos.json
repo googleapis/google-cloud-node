@@ -14,6 +14,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "IAMCredentialsProto",
                     "java_package": "com.google.cloud.iam.credentials.v1",
+                    "php_namespace": "Google\\Cloud\\Iam\\Credentials\\V1",
                     "(google.api.resource_definition).type": "iam.googleapis.com/ServiceAccount",
                     "(google.api.resource_definition).pattern": "projects/{project}/serviceAccounts/{service_account}"
                   },
