@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-network-management/compare/v1.1.2...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#67)
+
+### Build System
+
+* update library to use Node 12 ([#67](https://github.com/googleapis/nodejs-network-management/issues/67)) ([3696c6c](https://github.com/googleapis/nodejs-network-management/commit/3696c6cc5ff042e8637d98a5a3c7fab284affb56))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-network-management/compare/v1.1.1...v1.1.2) (2021-09-21)
 
 
