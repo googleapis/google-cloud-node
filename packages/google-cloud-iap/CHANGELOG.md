@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-iap/compare/v1.2.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#65)
+
+### Features
+
+* add the TunnelDestGroup-related methods and types ([#63](https://github.com/googleapis/nodejs-iap/issues/63)) ([54419ef](https://github.com/googleapis/nodejs-iap/commit/54419efb8876f0705bfde529f160da2a58ec2c71))
+
+
+### Build System
+
+* update library to use Node 12 ([#65](https://github.com/googleapis/nodejs-iap/issues/65)) ([e54b690](https://github.com/googleapis/nodejs-iap/commit/e54b690de51e2287ef416e58d2169b36247cd4dc))
+
 ## [1.2.0](https://github.com/googleapis/nodejs-iap/compare/v1.1.1...v1.2.0) (2022-04-08)
 
 
