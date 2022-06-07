@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-managed-identities/compare/v1.1.3...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#132)
+
+### Build System
+
+* update library to use Node 12 ([#132](https://github.com/googleapis/nodejs-managed-identities/issues/132)) ([ef3cb3b](https://github.com/googleapis/nodejs-managed-identities/commit/ef3cb3b081b61db98a33a85d64ad2659d311477b))
+
 ### [1.1.3](https://github.com/googleapis/nodejs-managed-identities/compare/v1.1.2...v1.1.3) (2022-01-12)
 
 
