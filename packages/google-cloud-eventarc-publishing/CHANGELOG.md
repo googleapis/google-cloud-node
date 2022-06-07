@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-eventarc-publishing/compare/v1.1.0...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#31)
+
+### Build System
+
+* update library to use Node 12 ([#31](https://github.com/googleapis/nodejs-eventarc-publishing/issues/31)) ([117695a](https://github.com/googleapis/nodejs-eventarc-publishing/commit/117695a76a1c58c42a76672dcb5ee3c3baa8a661))
+
 ## [1.1.0](https://github.com/googleapis/nodejs-eventarc-publishing/compare/v1.0.0...v1.1.0) (2022-03-25)
 
 
