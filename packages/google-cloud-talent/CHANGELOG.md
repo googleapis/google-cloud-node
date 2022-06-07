@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-talent/compare/v4.0.0...v4.1.0) (2022-06-03)
+
+
+### Features
+
+* Add a new operator on companyDisplayNames filter to further support fuzzy match by treating input value as a multi word token ([#422](https://github.com/googleapis/nodejs-talent/issues/422)) ([b8b2181](https://github.com/googleapis/nodejs-talent/commit/b8b2181826dbb93a8bd7f3eb4234fb65ae9b0573))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-talent/compare/v3.5.1...v4.0.0) (2022-05-17)
 
 
