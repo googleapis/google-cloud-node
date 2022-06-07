@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-apigee-connect/compare/v1.1.1...v2.0.0) (2022-05-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#81)
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#84](https://github.com/googleapis/nodejs-apigee-connect/issues/84)) ([a1e04af](https://github.com/googleapis/nodejs-apigee-connect/commit/a1e04af2fb52535938ff32cf5579b22c668d6ad2))
+
+
+### Build System
+
+* update library to use Node 12 ([#81](https://github.com/googleapis/nodejs-apigee-connect/issues/81)) ([5d4c69e](https://github.com/googleapis/nodejs-apigee-connect/commit/5d4c69e4268b4b253ed75ce87b2b3f5e61962d44))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.1.0...v1.1.1) (2021-08-25)
 
 
