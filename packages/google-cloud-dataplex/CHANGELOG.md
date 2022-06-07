@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-dataplex/compare/v1.2.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#35)
+
+### Build System
+
+* update library to use Node 12 ([#35](https://github.com/googleapis/nodejs-dataplex/issues/35)) ([5eacc44](https://github.com/googleapis/nodejs-dataplex/commit/5eacc440fb9d16a200d7a4c79edd1a52fbc17848))
+
 ## [1.2.0](https://github.com/googleapis/nodejs-dataplex/compare/v1.1.0...v1.2.0) (2022-03-24)
 
 
