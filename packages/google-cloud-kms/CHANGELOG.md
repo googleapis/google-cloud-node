@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-kms/compare/v2.11.1...v3.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#556)
+
+### Build System
+
+* update library to use Node 12 ([#556](https://github.com/googleapis/nodejs-kms/issues/556)) ([c53f95a](https://github.com/googleapis/nodejs-kms/commit/c53f95abfed91cda76ed480806d38ea77a98aad5))
+
 ### [2.11.1](https://github.com/googleapis/nodejs-kms/compare/v2.11.0...v2.11.1) (2022-04-08)
 
 
