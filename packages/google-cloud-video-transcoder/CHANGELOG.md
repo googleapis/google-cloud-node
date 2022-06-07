@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.0.0...v2.0.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/video-transcoder to v2 ([#177](https://github.com/googleapis/nodejs-video-transcoder/issues/177)) ([ffee92b](https://github.com/googleapis/nodejs-video-transcoder/commit/ffee92b8085a139e279d9f8633f8be51be748f62))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v1.10.0...v2.0.0) (2022-05-17)
 
 
