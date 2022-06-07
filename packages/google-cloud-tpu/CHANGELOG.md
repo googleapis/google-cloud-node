@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-cloud-tpu/compare/v1.2.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#82)
+
+### Build System
+
+* update library to use Node 12 ([#82](https://github.com/googleapis/nodejs-cloud-tpu/issues/82)) ([634cad2](https://github.com/googleapis/nodejs-cloud-tpu/commit/634cad22ed0d3e91e02144a292da68c8cd31c0e2))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.1.1...v1.2.0) (2021-10-19)
 
 

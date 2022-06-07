@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/tpu",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "tpu client for Node.js",
   "repository": "googleapis/nodejs-cloud-tpu",
   "license": "Apache-2.0",
