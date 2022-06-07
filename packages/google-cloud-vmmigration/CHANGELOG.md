@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-vmmigration/compare/v1.0.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#44)
+
+### Build System
+
+* update library to use Node 12 ([#44](https://github.com/googleapis/nodejs-vmmigration/issues/44)) ([fb018e1](https://github.com/googleapis/nodejs-vmmigration/commit/fb018e1b1eab36f07dfe5fc5d8279f1630271fb4))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-vmmigration/compare/v0.2.0...v1.0.0) (2022-03-23)
 
 
