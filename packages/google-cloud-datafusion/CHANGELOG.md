@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-data-fusion/compare/v1.0.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#50)
+
+### Build System
+
+* update library to use Node 12 ([#50](https://github.com/googleapis/nodejs-data-fusion/issues/50)) ([464bde8](https://github.com/googleapis/nodejs-data-fusion/commit/464bde8f22a351f3c1812a8ccae2a322437c5c2b))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-data-fusion/compare/v0.2.0...v1.0.0) (2022-03-23)
 
 
