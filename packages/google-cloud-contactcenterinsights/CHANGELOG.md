@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-contact-center-insights/compare/v2.0.0...v2.0.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/bigquery to v6 ([#127](https://github.com/googleapis/nodejs-contact-center-insights/issues/127)) ([9220f45](https://github.com/googleapis/nodejs-contact-center-insights/commit/9220f45cad762190ac63c2ae4470fc030d0e7f1b))
+* **deps:** update dependency @google-cloud/pubsub to v3 ([#126](https://github.com/googleapis/nodejs-contact-center-insights/issues/126)) ([646b35d](https://github.com/googleapis/nodejs-contact-center-insights/commit/646b35d2bcbb730d5e9c57c43d805c48f86efd44))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-contact-center-insights/compare/v1.11.0...v2.0.0) (2022-05-12)
 
 

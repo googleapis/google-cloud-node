@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@google-cloud/bigquery": "^6.0.0",
-    "@google-cloud/contact-center-insights": "^2.0.0",
+    "@google-cloud/contact-center-insights": "^2.0.1",
     "@google-cloud/pubsub": "^3.0.0"
   },
   "devDependencies": {
