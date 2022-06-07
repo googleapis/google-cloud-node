@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-iam-credentials/compare/v1.2.0...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#134)
+
+### Build System
+
+* update library to use Node 12 ([#134](https://github.com/googleapis/nodejs-iam-credentials/issues/134)) ([ea06272](https://github.com/googleapis/nodejs-iam-credentials/commit/ea06272c7f2b42ef4a8140a088f4f177bb97284c))
+
 ## [1.2.0](https://github.com/googleapis/nodejs-iam-credentials/compare/v1.1.1...v1.2.0) (2022-03-23)
 
 
