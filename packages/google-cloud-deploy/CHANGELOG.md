@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-deploy/compare/v1.0.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#50)
+
+### Build System
+
+* update library to use Node 12 ([#50](https://github.com/googleapis/nodejs-deploy/issues/50)) ([a688caf](https://github.com/googleapis/nodejs-deploy/commit/a688caf817f5f760d951ad6e9570ee0f4a4c0c5f))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-deploy/compare/v0.2.0...v1.0.0) (2022-03-23)
 
 
