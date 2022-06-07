@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.2.0...v0.3.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to stable (#32)
+* update library to use Node 12 (#29)
+
+### Features
+
+* upgrade to stable ([#32](https://github.com/googleapis/nodejs-certificate-manager/issues/32)) ([711b55e](https://github.com/googleapis/nodejs-certificate-manager/commit/711b55e0ae8103cf427e4b8de0da35dd10b1b229))
+
+
+### Build System
+
+* update library to use Node 12 ([#29](https://github.com/googleapis/nodejs-certificate-manager/issues/29)) ([9e101c9](https://github.com/googleapis/nodejs-certificate-manager/commit/9e101c96af3a9b58807cc7ee399cf6e71d5e4d97))
+
+
+### Miscellaneous Chores
+
+* release v0.3.0 ([#33](https://github.com/googleapis/nodejs-certificate-manager/issues/33)) ([eeb8d9b](https://github.com/googleapis/nodejs-certificate-manager/commit/eeb8d9bd45620039a3613fe813a9e9b27647358a))
+
 ## [0.2.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.1.0...v0.2.0) (2022-04-12)
 
 
