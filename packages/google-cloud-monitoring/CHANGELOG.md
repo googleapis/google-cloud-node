@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-monitoring/compare/v2.3.5...v3.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#617)
+
+### Build System
+
+* update library to use Node 12 ([#617](https://github.com/googleapis/nodejs-monitoring/issues/617)) ([965e533](https://github.com/googleapis/nodejs-monitoring/commit/965e5333b6a0561e9147ab940ff1a582207e91ff))
+
 ### [2.3.5](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.3.4...v2.3.5) (2021-09-08)
 
 
