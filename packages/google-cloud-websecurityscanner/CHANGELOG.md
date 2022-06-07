@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-web-security-scanner/compare/v1.1.1...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#124)
+
+### Build System
+
+* update library to use Node 12 ([#124](https://github.com/googleapis/nodejs-web-security-scanner/issues/124)) ([f6f6886](https://github.com/googleapis/nodejs-web-security-scanner/commit/f6f6886ac002dbc95b248bdab22c6d6f1fa28ba2))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.1.0...v1.1.1) (2021-09-09)
 
 
