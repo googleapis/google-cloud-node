@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-resource-settings/compare/v1.1.2...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#74)
+
+### Build System
+
+* update library to use Node 12 ([#74](https://github.com/googleapis/nodejs-resource-settings/issues/74)) ([92bce8d](https://github.com/googleapis/nodejs-resource-settings/commit/92bce8de50a36c426637e19f2e648ec56930f503))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.1.1...v1.1.2) (2021-09-09)
 
 
