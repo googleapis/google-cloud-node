@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-vpc-access/compare/v1.1.2...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#83)
+
+### Build System
+
+* update library to use Node 12 ([#83](https://github.com/googleapis/nodejs-vpc-access/issues/83)) ([4a4427b](https://github.com/googleapis/nodejs-vpc-access/commit/4a4427bc0f2f4d69a589bd951d1cc286666e4cab))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.1.1...v1.1.2) (2021-09-09)
 
 
