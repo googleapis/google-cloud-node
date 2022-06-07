@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-service-usage/compare/v1.2.1...v2.0.0) (2022-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#92)
+
+### Build System
+
+* update library to use Node 12 ([#92](https://github.com/googleapis/nodejs-service-usage/issues/92)) ([9320ff9](https://github.com/googleapis/nodejs-service-usage/commit/9320ff9fa52529a0cb75992f446493fa36165484))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.2.0...v1.2.1) (2021-09-10)
 
 
