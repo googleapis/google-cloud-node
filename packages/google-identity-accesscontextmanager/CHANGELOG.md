@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-access-context-manager/compare/v1.0.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#50)
+
+### Build System
+
+* update library to use Node 12 ([#50](https://github.com/googleapis/nodejs-access-context-manager/issues/50)) ([fe0e2cf](https://github.com/googleapis/nodejs-access-context-manager/commit/fe0e2cf6ca60289f68c7126192c852bf10cbd82b))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-access-context-manager/compare/v0.2.0...v1.0.0) (2022-03-23)
 
 
