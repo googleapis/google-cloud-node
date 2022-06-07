@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-filestore/compare/v1.1.2...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#66)
+
+### Build System
+
+* update library to use Node 12 ([#66](https://github.com/googleapis/nodejs-filestore/issues/66)) ([fed26fc](https://github.com/googleapis/nodejs-filestore/commit/fed26fc96372b8c15237a1500ae27ce88d4ec936))
+
 ### [1.1.2](https://github.com/googleapis/nodejs-filestore/compare/v1.1.1...v1.1.2) (2022-02-03)
 
 
