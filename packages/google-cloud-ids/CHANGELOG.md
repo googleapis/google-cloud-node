@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-ids/compare/v1.1.0...v2.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#38)
+
+### Build System
+
+* update library to use Node 12 ([#38](https://github.com/googleapis/nodejs-ids/issues/38)) ([64e894b](https://github.com/googleapis/nodejs-ids/commit/64e894b0f0f77b5df7ce1a536ae56285b01821c6))
+
 ## [1.1.0](https://github.com/googleapis/nodejs-ids/compare/v1.0.0...v1.1.0) (2022-03-23)
 
 
