@@ -105,7 +105,7 @@ export interface AddLifecycleRuleOptions {
 
 export interface LifecycleRule {
   action: {type: string; storageClass?: string} | string;
-  condition: {[key: string]: boolean | Date | number | string};
+  condition: {[key: string]: boolean | Date | number | string | string[]};
   storageClass?: string;
 }
 

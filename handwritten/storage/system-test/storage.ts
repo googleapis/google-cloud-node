@@ -1397,6 +1397,44 @@ describe('storage', () => {
       );
     });
 
+    it('should add a prefix rule', async () => {
+      await bucket.addLifecycleRule({
+        action: 'delete',
+        condition: {
+          matchesPrefix: [TESTS_PREFIX],
+        },
+      });
+
+      assert(
+        bucket.metadata.lifecycle.rule.some(
+          (rule: LifecycleRule) =>
+            typeof rule.action === 'object' &&
+            rule.action.type === 'Delete' &&
+            typeof rule.condition.matchesPrefix === 'object' &&
+            (rule.condition.matchesPrefix as string[]).length === 1 &&
+            Array.isArray(rule.condition.matchesPrefix)
+        )
+      );
+    });
+
+    it('should add a suffix rule', async () => {
+      await bucket.addLifecycleRule({
+        action: 'delete',
+        condition: {
+          matchesSuffix: [TESTS_PREFIX, 'test_suffix'],
+        },
+      });
+
+      assert(
+        bucket.metadata.lifecycle.rule.some(
+          (rule: LifecycleRule) =>
+            typeof rule.action === 'object' &&
+            rule.action.type === 'Delete' &&
+            Array.isArray(rule.condition.matchesPrefix)
+        )
+      );
+    });
+
     it('should convert a rule with createdBefore to a date in string', done => {
       bucket.addLifecycleRule(
         {
