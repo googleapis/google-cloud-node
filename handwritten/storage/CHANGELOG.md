@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/nodejs-storage/compare/v6.0.1...v6.1.0) (2022-06-08)
+
+
+### Features
+
+* support OLM Prefix/Suffix ([#1847](https://github.com/googleapis/nodejs-storage/issues/1847)) ([c22984c](https://github.com/googleapis/nodejs-storage/commit/c22984caa8e8ae09a61d308876b2b3d97503777b))
+
 ### [6.0.1](https://github.com/googleapis/nodejs-storage/compare/v6.0.0...v6.0.1) (2022-05-25)
 
 
