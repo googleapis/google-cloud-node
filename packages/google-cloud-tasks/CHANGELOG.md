@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-tasks/compare/v2.6.0...v3.0.0) (2022-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#625)
+
+### Build System
+
+* update library to use Node 12 ([#625](https://github.com/googleapis/nodejs-tasks/issues/625)) ([411f5ab](https://github.com/googleapis/nodejs-tasks/commit/411f5ab3960cbc6768f7046102b88d22c203eb24))
+
 ## [2.6.0](https://github.com/googleapis/nodejs-tasks/compare/v2.5.0...v2.6.0) (2022-05-06)
 
 
