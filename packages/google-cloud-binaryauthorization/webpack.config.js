@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'BinauthzManagementServiceV1Beta1',
-    filename: './binauthz-management-service-v1-beta1.js',
+    library: 'BinauthzManagementServiceV1',
+    filename: './binauthz-management-service-v1.js',
   },
   node: {
     child_process: 'empty',

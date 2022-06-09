@@ -9132,5 +9132,287 @@ export namespace grafeas {
              */
             public toJSON(): { [k: string]: any };
         }
+
+        /** Properties of a FileLocation. */
+        interface IFileLocation {
+
+            /** FileLocation filePath */
+            filePath?: (string|null);
+        }
+
+        /** Represents a FileLocation. */
+        class FileLocation implements IFileLocation {
+
+            /**
+             * Constructs a new FileLocation.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IFileLocation);
+
+            /** FileLocation filePath. */
+            public filePath: string;
+
+            /**
+             * Creates a new FileLocation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FileLocation instance
+             */
+            public static create(properties?: grafeas.v1.IFileLocation): grafeas.v1.FileLocation;
+
+            /**
+             * Encodes the specified FileLocation message. Does not implicitly {@link grafeas.v1.FileLocation.verify|verify} messages.
+             * @param message FileLocation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IFileLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FileLocation message, length delimited. Does not implicitly {@link grafeas.v1.FileLocation.verify|verify} messages.
+             * @param message FileLocation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IFileLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FileLocation message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FileLocation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.FileLocation;
+
+            /**
+             * Decodes a FileLocation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FileLocation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.FileLocation;
+
+            /**
+             * Verifies a FileLocation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FileLocation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FileLocation
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.FileLocation;
+
+            /**
+             * Creates a plain object from a FileLocation message. Also converts values to other types if specified.
+             * @param message FileLocation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.FileLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FileLocation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a License. */
+        interface ILicense {
+
+            /** License expression */
+            expression?: (string|null);
+
+            /** License comments */
+            comments?: (string|null);
+        }
+
+        /** Represents a License. */
+        class License implements ILicense {
+
+            /**
+             * Constructs a new License.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ILicense);
+
+            /** License expression. */
+            public expression: string;
+
+            /** License comments. */
+            public comments: string;
+
+            /**
+             * Creates a new License instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns License instance
+             */
+            public static create(properties?: grafeas.v1.ILicense): grafeas.v1.License;
+
+            /**
+             * Encodes the specified License message. Does not implicitly {@link grafeas.v1.License.verify|verify} messages.
+             * @param message License message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ILicense, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified License message, length delimited. Does not implicitly {@link grafeas.v1.License.verify|verify} messages.
+             * @param message License message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ILicense, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a License message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns License
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.License;
+
+            /**
+             * Decodes a License message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns License
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.License;
+
+            /**
+             * Verifies a License message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a License message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns License
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.License;
+
+            /**
+             * Creates a plain object from a License message. Also converts values to other types if specified.
+             * @param message License
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.License, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this License to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Digest. */
+        interface IDigest {
+
+            /** Digest algo */
+            algo?: (string|null);
+
+            /** Digest digestBytes */
+            digestBytes?: (Uint8Array|string|null);
+        }
+
+        /** Represents a Digest. */
+        class Digest implements IDigest {
+
+            /**
+             * Constructs a new Digest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IDigest);
+
+            /** Digest algo. */
+            public algo: string;
+
+            /** Digest digestBytes. */
+            public digestBytes: (Uint8Array|string);
+
+            /**
+             * Creates a new Digest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Digest instance
+             */
+            public static create(properties?: grafeas.v1.IDigest): grafeas.v1.Digest;
+
+            /**
+             * Encodes the specified Digest message. Does not implicitly {@link grafeas.v1.Digest.verify|verify} messages.
+             * @param message Digest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IDigest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Digest message, length delimited. Does not implicitly {@link grafeas.v1.Digest.verify|verify} messages.
+             * @param message Digest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IDigest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Digest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Digest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Digest;
+
+            /**
+             * Decodes a Digest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Digest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Digest;
+
+            /**
+             * Verifies a Digest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Digest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Digest
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.Digest;
+
+            /**
+             * Creates a plain object from a Digest message. Also converts values to other types if specified.
+             * @param message Digest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.Digest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Digest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
     }
 }

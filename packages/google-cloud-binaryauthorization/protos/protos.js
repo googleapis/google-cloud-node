@@ -23057,6 +23057,622 @@
                 return EnvelopeSignature;
             })();
     
+            v1.FileLocation = (function() {
+    
+                /**
+                 * Properties of a FileLocation.
+                 * @memberof grafeas.v1
+                 * @interface IFileLocation
+                 * @property {string|null} [filePath] FileLocation filePath
+                 */
+    
+                /**
+                 * Constructs a new FileLocation.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a FileLocation.
+                 * @implements IFileLocation
+                 * @constructor
+                 * @param {grafeas.v1.IFileLocation=} [properties] Properties to set
+                 */
+                function FileLocation(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FileLocation filePath.
+                 * @member {string} filePath
+                 * @memberof grafeas.v1.FileLocation
+                 * @instance
+                 */
+                FileLocation.prototype.filePath = "";
+    
+                /**
+                 * Creates a new FileLocation instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {grafeas.v1.IFileLocation=} [properties] Properties to set
+                 * @returns {grafeas.v1.FileLocation} FileLocation instance
+                 */
+                FileLocation.create = function create(properties) {
+                    return new FileLocation(properties);
+                };
+    
+                /**
+                 * Encodes the specified FileLocation message. Does not implicitly {@link grafeas.v1.FileLocation.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {grafeas.v1.IFileLocation} message FileLocation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileLocation.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.filePath != null && Object.hasOwnProperty.call(message, "filePath"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePath);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FileLocation message, length delimited. Does not implicitly {@link grafeas.v1.FileLocation.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {grafeas.v1.IFileLocation} message FileLocation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FileLocation message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.FileLocation} FileLocation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileLocation.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.FileLocation();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.filePath = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FileLocation message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.FileLocation} FileLocation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileLocation.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FileLocation message.
+                 * @function verify
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FileLocation.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.filePath != null && message.hasOwnProperty("filePath"))
+                        if (!$util.isString(message.filePath))
+                            return "filePath: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a FileLocation message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.FileLocation} FileLocation
+                 */
+                FileLocation.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.FileLocation)
+                        return object;
+                    var message = new $root.grafeas.v1.FileLocation();
+                    if (object.filePath != null)
+                        message.filePath = String(object.filePath);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FileLocation message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {grafeas.v1.FileLocation} message FileLocation
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FileLocation.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.filePath = "";
+                    if (message.filePath != null && message.hasOwnProperty("filePath"))
+                        object.filePath = message.filePath;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FileLocation to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.FileLocation
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FileLocation.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return FileLocation;
+            })();
+    
+            v1.License = (function() {
+    
+                /**
+                 * Properties of a License.
+                 * @memberof grafeas.v1
+                 * @interface ILicense
+                 * @property {string|null} [expression] License expression
+                 * @property {string|null} [comments] License comments
+                 */
+    
+                /**
+                 * Constructs a new License.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a License.
+                 * @implements ILicense
+                 * @constructor
+                 * @param {grafeas.v1.ILicense=} [properties] Properties to set
+                 */
+                function License(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * License expression.
+                 * @member {string} expression
+                 * @memberof grafeas.v1.License
+                 * @instance
+                 */
+                License.prototype.expression = "";
+    
+                /**
+                 * License comments.
+                 * @member {string} comments
+                 * @memberof grafeas.v1.License
+                 * @instance
+                 */
+                License.prototype.comments = "";
+    
+                /**
+                 * Creates a new License instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {grafeas.v1.ILicense=} [properties] Properties to set
+                 * @returns {grafeas.v1.License} License instance
+                 */
+                License.create = function create(properties) {
+                    return new License(properties);
+                };
+    
+                /**
+                 * Encodes the specified License message. Does not implicitly {@link grafeas.v1.License.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {grafeas.v1.ILicense} message License message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                License.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.expression);
+                    if (message.comments != null && Object.hasOwnProperty.call(message, "comments"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.comments);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified License message, length delimited. Does not implicitly {@link grafeas.v1.License.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {grafeas.v1.ILicense} message License message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                License.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a License message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.License} License
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                License.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.License();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.expression = reader.string();
+                            break;
+                        case 2:
+                            message.comments = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a License message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.License} License
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                License.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a License message.
+                 * @function verify
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                License.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.expression != null && message.hasOwnProperty("expression"))
+                        if (!$util.isString(message.expression))
+                            return "expression: string expected";
+                    if (message.comments != null && message.hasOwnProperty("comments"))
+                        if (!$util.isString(message.comments))
+                            return "comments: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a License message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.License} License
+                 */
+                License.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.License)
+                        return object;
+                    var message = new $root.grafeas.v1.License();
+                    if (object.expression != null)
+                        message.expression = String(object.expression);
+                    if (object.comments != null)
+                        message.comments = String(object.comments);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a License message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {grafeas.v1.License} message License
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                License.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.expression = "";
+                        object.comments = "";
+                    }
+                    if (message.expression != null && message.hasOwnProperty("expression"))
+                        object.expression = message.expression;
+                    if (message.comments != null && message.hasOwnProperty("comments"))
+                        object.comments = message.comments;
+                    return object;
+                };
+    
+                /**
+                 * Converts this License to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.License
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                License.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return License;
+            })();
+    
+            v1.Digest = (function() {
+    
+                /**
+                 * Properties of a Digest.
+                 * @memberof grafeas.v1
+                 * @interface IDigest
+                 * @property {string|null} [algo] Digest algo
+                 * @property {Uint8Array|null} [digestBytes] Digest digestBytes
+                 */
+    
+                /**
+                 * Constructs a new Digest.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Digest.
+                 * @implements IDigest
+                 * @constructor
+                 * @param {grafeas.v1.IDigest=} [properties] Properties to set
+                 */
+                function Digest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Digest algo.
+                 * @member {string} algo
+                 * @memberof grafeas.v1.Digest
+                 * @instance
+                 */
+                Digest.prototype.algo = "";
+    
+                /**
+                 * Digest digestBytes.
+                 * @member {Uint8Array} digestBytes
+                 * @memberof grafeas.v1.Digest
+                 * @instance
+                 */
+                Digest.prototype.digestBytes = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Digest instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {grafeas.v1.IDigest=} [properties] Properties to set
+                 * @returns {grafeas.v1.Digest} Digest instance
+                 */
+                Digest.create = function create(properties) {
+                    return new Digest(properties);
+                };
+    
+                /**
+                 * Encodes the specified Digest message. Does not implicitly {@link grafeas.v1.Digest.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {grafeas.v1.IDigest} message Digest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Digest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.algo != null && Object.hasOwnProperty.call(message, "algo"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.algo);
+                    if (message.digestBytes != null && Object.hasOwnProperty.call(message, "digestBytes"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.digestBytes);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Digest message, length delimited. Does not implicitly {@link grafeas.v1.Digest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {grafeas.v1.IDigest} message Digest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Digest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Digest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Digest} Digest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Digest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Digest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.algo = reader.string();
+                            break;
+                        case 2:
+                            message.digestBytes = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Digest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Digest} Digest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Digest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Digest message.
+                 * @function verify
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Digest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.algo != null && message.hasOwnProperty("algo"))
+                        if (!$util.isString(message.algo))
+                            return "algo: string expected";
+                    if (message.digestBytes != null && message.hasOwnProperty("digestBytes"))
+                        if (!(message.digestBytes && typeof message.digestBytes.length === "number" || $util.isString(message.digestBytes)))
+                            return "digestBytes: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Digest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Digest} Digest
+                 */
+                Digest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Digest)
+                        return object;
+                    var message = new $root.grafeas.v1.Digest();
+                    if (object.algo != null)
+                        message.algo = String(object.algo);
+                    if (object.digestBytes != null)
+                        if (typeof object.digestBytes === "string")
+                            $util.base64.decode(object.digestBytes, message.digestBytes = $util.newBuffer($util.base64.length(object.digestBytes)), 0);
+                        else if (object.digestBytes.length)
+                            message.digestBytes = object.digestBytes;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Digest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {grafeas.v1.Digest} message Digest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Digest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.algo = "";
+                        if (options.bytes === String)
+                            object.digestBytes = "";
+                        else {
+                            object.digestBytes = [];
+                            if (options.bytes !== Array)
+                                object.digestBytes = $util.newBuffer(object.digestBytes);
+                        }
+                    }
+                    if (message.algo != null && message.hasOwnProperty("algo"))
+                        object.algo = message.algo;
+                    if (message.digestBytes != null && message.hasOwnProperty("digestBytes"))
+                        object.digestBytes = options.bytes === String ? $util.base64.encode(message.digestBytes, 0, message.digestBytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.digestBytes) : message.digestBytes;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Digest to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Digest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Digest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Digest;
+            })();
+    
             return v1;
         })();
     

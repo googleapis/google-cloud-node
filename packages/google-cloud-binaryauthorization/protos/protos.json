@@ -2601,6 +2601,38 @@
                   "id": 2
                 }
               }
+            },
+            "FileLocation": {
+              "fields": {
+                "filePath": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "License": {
+              "fields": {
+                "expression": {
+                  "type": "string",
+                  "id": 1
+                },
+                "comments": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Digest": {
+              "fields": {
+                "algo": {
+                  "type": "string",
+                  "id": 1
+                },
+                "digestBytes": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
             }
           }
         }
