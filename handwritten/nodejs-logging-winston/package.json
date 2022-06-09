@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.10",
-    "@google-cloud/common": "^3.0.0",
+    "@google-cloud/common": "^4.0.0",
     "@types/lodash.mapvalues": "^4.6.6",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.0.0",
