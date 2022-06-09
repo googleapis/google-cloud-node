@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-bigquery-reservation/compare/v1.4.0...v2.0.0) (2022-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12
+* update library to use Node 12 (#155)
+
+### Build System
+
+* update library to use Node 12 ([#155](https://github.com/googleapis/nodejs-bigquery-reservation/issues/155)) ([408fedd](https://github.com/googleapis/nodejs-bigquery-reservation/commit/408feddc7218687fcb8c4f0ee332b5231fb705eb))
+
+
+### *build
+
+* Update library to use Node 12 ([408fedd](https://github.com/googleapis/nodejs-bigquery-reservation/commit/408feddc7218687fcb8c4f0ee332b5231fb705eb))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.3.0...v1.4.0) (2021-12-30)
 
 
