@@ -35,7 +35,7 @@
     "gts": "^3.1.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
-    "jsdoc-region-tag": "^1.0.2",
+    "jsdoc-region-tag": "^2.0.0",
     "linkinator": "^2.0.0",
     "mocha": "^9.2.2",
     "null-loader": "^4.0.0",
