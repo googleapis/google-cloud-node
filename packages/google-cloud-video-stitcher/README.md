@@ -14,7 +14,7 @@ stitcher client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-video-stitcher/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-video-stitcher/blob/main/CHANGELOG.md).
 
 * [Video Stitcher API Node.js Client API Reference][client-docs]
 * [Video Stitcher API Documentation][product-docs]
@@ -103,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-video-stitcher/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-video-stitcher/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,10 +115,10 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-video-stitcher/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-video-stitcher/blob/main/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/videostitcher/latest/
-[product-docs]: cloud.google.com/video-stitcher/
+[product-docs]: https://cloud.google.com/video-stitcher/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

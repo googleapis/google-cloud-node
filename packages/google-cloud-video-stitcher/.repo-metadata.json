@@ -1,7 +1,7 @@
 {
   "name": "videostitcher",
   "name_pretty": "Video Stitcher API",
-  "product_documentation": "cloud.google.com/video-stitcher/",
+  "product_documentation": "https://cloud.google.com/video-stitcher/",
   "client_documentation": "https://googleapis.dev/nodejs/videostitcher/latest/",
   "issue_tracker": "https://github.com/googleapis/nodejs-video-stitcher/issues",
   "release_level": "beta",

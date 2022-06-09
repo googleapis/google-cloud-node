@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const stitcher = require('@google-cloud/stitcher');
+const stitcher = require('@google-cloud/video-stitcher');
 
 function main() {
   const videoStitcherServiceClient = new stitcher.VideoStitcherServiceClient();
