@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.0.0...v4.1.0) (2022-06-10)
+
+
+### Features
+
+* Import of Grafeas from Github ([#413](https://github.com/googleapis/nodejs-containeranalysis/issues/413)) ([fda2b32](https://github.com/googleapis/nodejs-containeranalysis/commit/fda2b3218680d9f0b81435ba9913d150eeded826))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to v3 ([#410](https://github.com/googleapis/nodejs-containeranalysis/issues/410)) ([fb503c8](https://github.com/googleapis/nodejs-containeranalysis/commit/fb503c89c6e0b8af7c4a4c60cddae7cf8727bd2b))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v3.4.0...v4.0.0) (2022-05-17)
 
 
