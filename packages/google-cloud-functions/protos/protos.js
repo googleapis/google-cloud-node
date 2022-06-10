@@ -502,6 +502,7 @@
                          * @property {Array.<google.cloud.functions.v1.ISecretVolume>|null} [secretVolumes] CloudFunction secretVolumes
                          * @property {string|null} [sourceToken] CloudFunction sourceToken
                          * @property {string|null} [dockerRepository] CloudFunction dockerRepository
+                         * @property {google.cloud.functions.v1.CloudFunction.DockerRegistry|null} [dockerRegistry] CloudFunction dockerRegistry
                          */
     
                         /**
@@ -780,6 +781,14 @@
                          */
                         CloudFunction.prototype.dockerRepository = "";
     
+                        /**
+                         * CloudFunction dockerRegistry.
+                         * @member {google.cloud.functions.v1.CloudFunction.DockerRegistry} dockerRegistry
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.dockerRegistry = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -898,6 +907,8 @@
                                 writer.uint32(/* id 33, wireType 2 =*/266).string(message.buildName);
                             if (message.dockerRepository != null && Object.hasOwnProperty.call(message, "dockerRepository"))
                                 writer.uint32(/* id 34, wireType 2 =*/274).string(message.dockerRepository);
+                            if (message.dockerRegistry != null && Object.hasOwnProperty.call(message, "dockerRegistry"))
+                                writer.uint32(/* id 35, wireType 0 =*/280).int32(message.dockerRegistry);
                             return writer;
                         };
     
@@ -1088,6 +1099,9 @@
                                     break;
                                 case 34:
                                     message.dockerRepository = reader.string();
+                                    break;
+                                case 35:
+                                    message.dockerRegistry = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1299,6 +1313,15 @@
                             if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
                                 if (!$util.isString(message.dockerRepository))
                                     return "dockerRepository: string expected";
+                            if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
+                                switch (message.dockerRegistry) {
+                                default:
+                                    return "dockerRegistry: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1483,6 +1506,20 @@
                                 message.sourceToken = String(object.sourceToken);
                             if (object.dockerRepository != null)
                                 message.dockerRepository = String(object.dockerRepository);
+                            switch (object.dockerRegistry) {
+                            case "DOCKER_REGISTRY_UNSPECIFIED":
+                            case 0:
+                                message.dockerRegistry = 0;
+                                break;
+                            case "CONTAINER_REGISTRY":
+                            case 1:
+                                message.dockerRegistry = 1;
+                                break;
+                            case "ARTIFACT_REGISTRY":
+                            case 2:
+                                message.dockerRegistry = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1535,6 +1572,7 @@
                                 object.minInstances = 0;
                                 object.buildName = "";
                                 object.dockerRepository = "";
+                                object.dockerRegistry = options.enums === String ? "DOCKER_REGISTRY_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1634,6 +1672,8 @@
                                 object.buildName = message.buildName;
                             if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
                                 object.dockerRepository = message.dockerRepository;
+                            if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
+                                object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
                             return object;
                         };
     
@@ -1679,6 +1719,22 @@
                             values[valuesById[1] = "ALLOW_ALL"] = 1;
                             values[valuesById[2] = "ALLOW_INTERNAL_ONLY"] = 2;
                             values[valuesById[3] = "ALLOW_INTERNAL_AND_GCLB"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * DockerRegistry enum.
+                         * @name google.cloud.functions.v1.CloudFunction.DockerRegistry
+                         * @enum {number}
+                         * @property {number} DOCKER_REGISTRY_UNSPECIFIED=0 DOCKER_REGISTRY_UNSPECIFIED value
+                         * @property {number} CONTAINER_REGISTRY=1 CONTAINER_REGISTRY value
+                         * @property {number} ARTIFACT_REGISTRY=2 ARTIFACT_REGISTRY value
+                         */
+                        CloudFunction.DockerRegistry = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DOCKER_REGISTRY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CONTAINER_REGISTRY"] = 1;
+                            values[valuesById[2] = "ARTIFACT_REGISTRY"] = 2;
                             return values;
                         })();
     
@@ -2767,6 +2823,28 @@
                         })();
     
                         return FailurePolicy;
+                    })();
+    
+                    /**
+                     * CloudFunctionStatus enum.
+                     * @name google.cloud.functions.v1.CloudFunctionStatus
+                     * @enum {number}
+                     * @property {number} CLOUD_FUNCTION_STATUS_UNSPECIFIED=0 CLOUD_FUNCTION_STATUS_UNSPECIFIED value
+                     * @property {number} ACTIVE=1 ACTIVE value
+                     * @property {number} OFFLINE=2 OFFLINE value
+                     * @property {number} DEPLOY_IN_PROGRESS=3 DEPLOY_IN_PROGRESS value
+                     * @property {number} DELETE_IN_PROGRESS=4 DELETE_IN_PROGRESS value
+                     * @property {number} UNKNOWN=5 UNKNOWN value
+                     */
+                    v1.CloudFunctionStatus = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CLOUD_FUNCTION_STATUS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ACTIVE"] = 1;
+                        values[valuesById[2] = "OFFLINE"] = 2;
+                        values[valuesById[3] = "DEPLOY_IN_PROGRESS"] = 3;
+                        values[valuesById[4] = "DELETE_IN_PROGRESS"] = 4;
+                        values[valuesById[5] = "UNKNOWN"] = 5;
+                        return values;
                     })();
     
                     v1.SecretEnvVar = (function() {
@@ -3942,28 +4020,6 @@
                         };
     
                         return UpdateFunctionRequest;
-                    })();
-    
-                    /**
-                     * CloudFunctionStatus enum.
-                     * @name google.cloud.functions.v1.CloudFunctionStatus
-                     * @enum {number}
-                     * @property {number} CLOUD_FUNCTION_STATUS_UNSPECIFIED=0 CLOUD_FUNCTION_STATUS_UNSPECIFIED value
-                     * @property {number} ACTIVE=1 ACTIVE value
-                     * @property {number} OFFLINE=2 OFFLINE value
-                     * @property {number} DEPLOY_IN_PROGRESS=3 DEPLOY_IN_PROGRESS value
-                     * @property {number} DELETE_IN_PROGRESS=4 DELETE_IN_PROGRESS value
-                     * @property {number} UNKNOWN=5 UNKNOWN value
-                     */
-                    v1.CloudFunctionStatus = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "CLOUD_FUNCTION_STATUS_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "ACTIVE"] = 1;
-                        values[valuesById[2] = "OFFLINE"] = 2;
-                        values[valuesById[3] = "DEPLOY_IN_PROGRESS"] = 3;
-                        values[valuesById[4] = "DELETE_IN_PROGRESS"] = 4;
-                        values[valuesById[5] = "UNKNOWN"] = 5;
-                        return values;
                     })();
     
                     v1.GetFunctionRequest = (function() {
@@ -5291,6 +5347,7 @@
                          * @memberof google.cloud.functions.v1
                          * @interface IGenerateUploadUrlRequest
                          * @property {string|null} [parent] GenerateUploadUrlRequest parent
+                         * @property {string|null} [kmsKeyName] GenerateUploadUrlRequest kmsKeyName
                          */
     
                         /**
@@ -5315,6 +5372,14 @@
                          * @instance
                          */
                         GenerateUploadUrlRequest.prototype.parent = "";
+    
+                        /**
+                         * GenerateUploadUrlRequest kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.functions.v1.GenerateUploadUrlRequest
+                         * @instance
+                         */
+                        GenerateUploadUrlRequest.prototype.kmsKeyName = "";
     
                         /**
                          * Creates a new GenerateUploadUrlRequest instance using the specified properties.
@@ -5342,6 +5407,8 @@
                                 writer = $Writer.create();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKeyName);
                             return writer;
                         };
     
@@ -5378,6 +5445,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.kmsKeyName = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5417,6 +5487,9 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
                             return null;
                         };
     
@@ -5434,6 +5507,8 @@
                             var message = new $root.google.cloud.functions.v1.GenerateUploadUrlRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
                             return message;
                         };
     
@@ -5450,10 +5525,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.parent = "";
+                                object.kmsKeyName = "";
+                            }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
                             return object;
                         };
     

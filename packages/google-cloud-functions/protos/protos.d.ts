@@ -379,6 +379,9 @@ export namespace google {
 
                     /** CloudFunction dockerRepository */
                     dockerRepository?: (string|null);
+
+                    /** CloudFunction dockerRegistry */
+                    dockerRegistry?: (google.cloud.functions.v1.CloudFunction.DockerRegistry|keyof typeof google.cloud.functions.v1.CloudFunction.DockerRegistry|null);
                 }
 
                 /** Represents a CloudFunction. */
@@ -486,6 +489,9 @@ export namespace google {
                     /** CloudFunction dockerRepository. */
                     public dockerRepository: string;
 
+                    /** CloudFunction dockerRegistry. */
+                    public dockerRegistry: (google.cloud.functions.v1.CloudFunction.DockerRegistry|keyof typeof google.cloud.functions.v1.CloudFunction.DockerRegistry);
+
                     /** CloudFunction sourceCode. */
                     public sourceCode?: ("sourceArchiveUrl"|"sourceRepository"|"sourceUploadUrl");
 
@@ -578,6 +584,13 @@ export namespace google {
                         ALLOW_ALL = 1,
                         ALLOW_INTERNAL_ONLY = 2,
                         ALLOW_INTERNAL_AND_GCLB = 3
+                    }
+
+                    /** DockerRegistry enum. */
+                    enum DockerRegistry {
+                        DOCKER_REGISTRY_UNSPECIFIED = 0,
+                        CONTAINER_REGISTRY = 1,
+                        ARTIFACT_REGISTRY = 2
                     }
                 }
 
@@ -1069,6 +1082,16 @@ export namespace google {
                          */
                         public toJSON(): { [k: string]: any };
                     }
+                }
+
+                /** CloudFunctionStatus enum. */
+                enum CloudFunctionStatus {
+                    CLOUD_FUNCTION_STATUS_UNSPECIFIED = 0,
+                    ACTIVE = 1,
+                    OFFLINE = 2,
+                    DEPLOY_IN_PROGRESS = 3,
+                    DELETE_IN_PROGRESS = 4,
+                    UNKNOWN = 5
                 }
 
                 /** Properties of a SecretEnvVar. */
@@ -1576,16 +1599,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** CloudFunctionStatus enum. */
-                enum CloudFunctionStatus {
-                    CLOUD_FUNCTION_STATUS_UNSPECIFIED = 0,
-                    ACTIVE = 1,
-                    OFFLINE = 2,
-                    DEPLOY_IN_PROGRESS = 3,
-                    DELETE_IN_PROGRESS = 4,
-                    UNKNOWN = 5
                 }
 
                 /** Properties of a GetFunctionRequest. */
@@ -2175,6 +2188,9 @@ export namespace google {
 
                     /** GenerateUploadUrlRequest parent */
                     parent?: (string|null);
+
+                    /** GenerateUploadUrlRequest kmsKeyName */
+                    kmsKeyName?: (string|null);
                 }
 
                 /** Represents a GenerateUploadUrlRequest. */
@@ -2188,6 +2204,9 @@ export namespace google {
 
                     /** GenerateUploadUrlRequest parent. */
                     public parent: string;
+
+                    /** GenerateUploadUrlRequest kmsKeyName. */
+                    public kmsKeyName: string;
 
                     /**
                      * Creates a new GenerateUploadUrlRequest instance using the specified properties.

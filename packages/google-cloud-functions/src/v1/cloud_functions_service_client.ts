@@ -594,6 +594,24 @@ export class CloudFunctionsServiceClient {
    * @param {string} request.parent
    *   The project and location in which the Google Cloud Storage signed URL
    *   should be generated, specified in the format `projects/* /locations/*`.
+   * @param {string} request.kmsKeyName
+   *   Resource name of a KMS crypto key (managed by the user) used to
+   *   encrypt/decrypt function source code objects in staging Cloud Storage
+   *   buckets. When you generate an upload url and upload your source code, it
+   *   gets copied to a staging Cloud Storage bucket in an internal regional
+   *   project. The source code is then copied to a versioned directory in the
+   *   sources bucket in the consumer project during the function deployment.
+   *
+   *   It must match the pattern
+   *   `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+   *
+   *   The Google Cloud Functions service account
+   *   (service-{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+   *   granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+   *   (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+   *   Key/KeyRing/Project/Organization (least access preferred). GCF will
+   *   delegate access to the Google Storage service account in the internal
+   *   project.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1205,7 +1223,7 @@ export class CloudFunctionsServiceClient {
    * @param {google.cloud.functions.v1.CloudFunction} request.function
    *   Required. New version of the function.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required list of fields to be updated in this request.
+   *   Required. The list of fields in `CloudFunction` that have to be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

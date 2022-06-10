@@ -30,7 +30,7 @@ function main(function1) {
    */
   // const function = {}
   /**
-   *  Required list of fields to be updated in this request.
+   *  Required. The list of fields in `CloudFunction` that have to be updated.
    */
   // const updateMask = {}
 

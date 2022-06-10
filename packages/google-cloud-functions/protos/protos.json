@@ -414,6 +414,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
                           }
+                        },
+                        "dockerRegistry": {
+                          "type": "DockerRegistry",
+                          "id": 35
                         }
                       },
                       "nested": {
@@ -430,6 +434,13 @@
                             "ALLOW_ALL": 1,
                             "ALLOW_INTERNAL_ONLY": 2,
                             "ALLOW_INTERNAL_AND_GCLB": 3
+                          }
+                        },
+                        "DockerRegistry": {
+                          "values": {
+                            "DOCKER_REGISTRY_UNSPECIFIED": 0,
+                            "CONTAINER_REGISTRY": 1,
+                            "ARTIFACT_REGISTRY": 2
                           }
                         }
                       }
@@ -511,6 +522,16 @@
                         "Retry": {
                           "fields": {}
                         }
+                      }
+                    },
+                    "CloudFunctionStatus": {
+                      "values": {
+                        "CLOUD_FUNCTION_STATUS_UNSPECIFIED": 0,
+                        "ACTIVE": 1,
+                        "OFFLINE": 2,
+                        "DEPLOY_IN_PROGRESS": 3,
+                        "DELETE_IN_PROGRESS": 4,
+                        "UNKNOWN": 5
                       }
                     },
                     "SecretEnvVar": {
@@ -600,16 +621,6 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2
                         }
-                      }
-                    },
-                    "CloudFunctionStatus": {
-                      "values": {
-                        "CLOUD_FUNCTION_STATUS_UNSPECIFIED": 0,
-                        "ACTIVE": 1,
-                        "OFFLINE": 2,
-                        "DEPLOY_IN_PROGRESS": 3,
-                        "DELETE_IN_PROGRESS": 4,
-                        "UNKNOWN": 5
                       }
                     },
                     "GetFunctionRequest": {
@@ -713,6 +724,13 @@
                         "parent": {
                           "type": "string",
                           "id": 1
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         }
                       }
                     },

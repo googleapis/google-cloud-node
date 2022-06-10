@@ -30,6 +30,24 @@ function main() {
    *  should be generated, specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
+  /**
+   *  Resource name of a KMS crypto key (managed by the user) used to
+   *  encrypt/decrypt function source code objects in staging Cloud Storage
+   *  buckets. When you generate an upload url and upload your source code, it
+   *  gets copied to a staging Cloud Storage bucket in an internal regional
+   *  project. The source code is then copied to a versioned directory in the
+   *  sources bucket in the consumer project during the function deployment.
+   *  It must match the pattern
+   *  `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+   *  The Google Cloud Functions service account
+   *  (service-{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+   *  granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+   *  (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+   *  Key/KeyRing/Project/Organization (least access preferred). GCF will
+   *  delegate access to the Google Storage service account in the internal
+   *  project.
+   */
+  // const kmsKeyName = 'abc123'
 
   // Imports the Functions library
   const {CloudFunctionsServiceClient} = require('@google-cloud/functions').v1;
