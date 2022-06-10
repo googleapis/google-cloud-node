@@ -53,7 +53,6 @@ describe('tests for templates', () => {
       apiId: 'google.cloud.kms.v1',
       apiPath: 'google/cloud/kms',
       apiPathDashes: 'google-cloud-kms',
-      version: 'v1',
     });
 
     snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));

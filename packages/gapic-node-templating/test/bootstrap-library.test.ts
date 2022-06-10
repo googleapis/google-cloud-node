@@ -22,22 +22,25 @@ import * as templates from '../src/templating';
 export const API_ID = 'google.cloud.kms.v1';
 export const DESTINATION_FOLDER = './temp';
 export const MONO_REPO_NAME = 'git@github.com:googleapis/google-cloud-node.git';
-export const DISTRIBUTION_NAME = '@google-cloud/kms';
+export const GITHUB_TOKEN = 'ghs_1234';
 
 describe('tests running build trigger', () => {
   let getDriftMetadataStub: sinon.SinonStub;
   let compileVarsStub: sinon.SinonStub;
   let compileTemplatesStub: sinon.SinonStub;
+  let getDistributionNameStub: sinon.SinonStub;
   beforeEach(() => {
     getDriftMetadataStub = sinon.stub(vars, 'getDriftMetadata');
     compileVarsStub = sinon.stub(vars, 'compileVars');
     compileTemplatesStub = sinon.stub(templates, 'compileTemplates');
+    getDistributionNameStub = sinon.stub(vars, 'getDistributionName');
   });
 
   afterEach(() => {
     getDriftMetadataStub.restore();
     compileVarsStub.restore();
     compileTemplatesStub.restore();
+    getDistributionNameStub.restore();
   });
 
   it('it should get correct variable names', async () => {
@@ -48,8 +51,8 @@ describe('tests running build trigger', () => {
       destinationFolder: DESTINATION_FOLDER,
       'mono-repo-name': MONO_REPO_NAME,
       monoRepoName: MONO_REPO_NAME,
-      'distribution-name': DISTRIBUTION_NAME,
-      distributionName: DISTRIBUTION_NAME,
+      'github-token': GITHUB_TOKEN,
+      githubToken: GITHUB_TOKEN,
       _: [],
       $0: 'foo',
     });
@@ -57,5 +60,6 @@ describe('tests running build trigger', () => {
     assert.ok(getDriftMetadataStub.calledOnce);
     assert.ok(compileVarsStub.calledOnce);
     assert.ok(compileTemplatesStub.calledOnce);
+    assert.ok(getDistributionNameStub.calledOnce);
   });
 });

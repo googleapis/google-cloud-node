@@ -1,0 +1,13 @@
+- DONE: Talk about Owlbot.yaml structure
+- DONE: Talk about api directory structure (with or without versions?) 
+    Without versions
+- DONE: Are we assuming all packages will be published under @google?
+    - change in owlbot-bootstrapper (grab from googleapis/googleapis)
+- DONE: Will this package just dump the files in a directory?
+    - arguments to a CLI, otherwise assume its running in the cloned version of the monorepo
+- DONE: Templates should not end in .njk
+- DONE: API path should not have version
+- DONE: Folder name should be path without version with dashes
+- Write tests for container
+- Write new folder for container
+- Create a default that creates an issue if language-specific container fails

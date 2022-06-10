@@ -13,14 +13,26 @@
 // limitations under the License.
 
 import yargs = require('yargs');
-import {compileVars, getDriftMetadata} from '../get-bootstrap-template-vars';
+import {
+  compileVars,
+  getDistributionName,
+  getDriftMetadata,
+} from '../get-bootstrap-template-vars';
 import {compileTemplates} from '../templating';
-const BOOTSTRAP_TEMPLATES_PATH = '../templates/bootstrap-templates';
+import * as path from 'path';
+import {Storage} from '@google-cloud/storage';
+import {Octokit} from 'octokit';
+
+const BOOTSTRAP_TEMPLATES_PATH = path.resolve(
+  __dirname,
+  '../../../templates/bootstrap-templates'
+);
+
 export interface CliArgs {
   'api-id': string;
   'mono-repo-name': string;
   'destination-folder': string;
-  'distribution-name': string;
+  'github-token': string;
 }
 
 export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
@@ -43,15 +55,24 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
         type: 'string',
         demand: true,
       })
-      .option('distribution-name', {
-        describe: 'distribution name for the package',
+      .option('github-token', {
+        describe: 'temporary github token',
         type: 'string',
         demand: true,
       });
   },
   async handler(argv: CliArgs) {
-    const driftMetadata = await getDriftMetadata(argv);
-    const bootstrapVars = compileVars(argv, driftMetadata);
+    const distributionName = await getDistributionName(
+      new Octokit({auth: argv['github-token']}),
+      argv['api-id']
+    );
+    const driftMetadata = await getDriftMetadata(argv, new Storage());
+    const bootstrapVars = await compileVars(
+      argv,
+      driftMetadata,
+      distributionName
+    );
+
     await compileTemplates(
       BOOTSTRAP_TEMPLATES_PATH,
       argv['destination-folder'],

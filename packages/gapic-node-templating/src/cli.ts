@@ -13,12 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// This file will be run manually, or when owlbot-bootstrapper
-// is wired up to respond to github webhook events that indicate
-// changes to the googleapis/googleapis/apiindex.json file. This file
-// is the CLI entrypoint to run googleapis-bootstrapper when kicking off
-// the process manually. It then calls run-trigger, which kicks off the build.
-
 import yargs = require('yargs');
 import {bootstrapLibrary} from './commands/bootstrap-library';
 
