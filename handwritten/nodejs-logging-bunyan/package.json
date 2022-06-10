@@ -55,7 +55,7 @@
     "google-auth-library": "^8.0.2"
   },
   "devDependencies": {
-    "@google-cloud/common": "^3.0.0",
+    "@google-cloud/common": "^4.0.0",
     "@types/bunyan": "^1.8.4",
     "@types/express": "^4.16.0",
     "@types/mocha": "^9.0.0",
