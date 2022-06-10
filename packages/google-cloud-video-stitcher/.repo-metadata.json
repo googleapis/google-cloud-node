@@ -7,6 +7,7 @@
   "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/nodejs-video-stitcher",
+  "codeowner_team": "@googleapis/cloud-media-team",
   "distribution_name": "@google-cloud/video-stitcher",
   "api_id": "stitcher.googleapis.com",
   "default_version": "v1",

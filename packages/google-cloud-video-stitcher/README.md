@@ -32,7 +32,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,24 @@ npm install @google-cloud/video-stitcher
 ```
 
 
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-video-stitcher/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Create Cdn Key | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/createCdnKey.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/createCdnKey.js,samples/README.md) |
+| Create Slate | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/createSlate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/createSlate.js,samples/README.md) |
+| Delete Cdn Key | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/deleteCdnKey.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/deleteCdnKey.js,samples/README.md) |
+| Delete Slate | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/deleteSlate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/deleteSlate.js,samples/README.md) |
+| Get Cdn Key | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getCdnKey.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getCdnKey.js,samples/README.md) |
+| Get Slate | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getSlate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getSlate.js,samples/README.md) |
+| List Cdn Keys | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/listCdnKeys.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/listCdnKeys.js,samples/README.md) |
+| List Slates | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/listSlates.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/listSlates.js,samples/README.md) |
+| Update Cdn Key | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/updateCdnKey.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/updateCdnKey.js,samples/README.md) |
+| Update Slate | [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/updateSlate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/updateSlate.js,samples/README.md) |
 
 
 
