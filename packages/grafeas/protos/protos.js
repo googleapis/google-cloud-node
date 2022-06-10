@@ -1841,6 +1841,622 @@
                 return EnvelopeSignature;
             })();
     
+            v1.FileLocation = (function() {
+    
+                /**
+                 * Properties of a FileLocation.
+                 * @memberof grafeas.v1
+                 * @interface IFileLocation
+                 * @property {string|null} [filePath] FileLocation filePath
+                 */
+    
+                /**
+                 * Constructs a new FileLocation.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a FileLocation.
+                 * @implements IFileLocation
+                 * @constructor
+                 * @param {grafeas.v1.IFileLocation=} [properties] Properties to set
+                 */
+                function FileLocation(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FileLocation filePath.
+                 * @member {string} filePath
+                 * @memberof grafeas.v1.FileLocation
+                 * @instance
+                 */
+                FileLocation.prototype.filePath = "";
+    
+                /**
+                 * Creates a new FileLocation instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {grafeas.v1.IFileLocation=} [properties] Properties to set
+                 * @returns {grafeas.v1.FileLocation} FileLocation instance
+                 */
+                FileLocation.create = function create(properties) {
+                    return new FileLocation(properties);
+                };
+    
+                /**
+                 * Encodes the specified FileLocation message. Does not implicitly {@link grafeas.v1.FileLocation.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {grafeas.v1.IFileLocation} message FileLocation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileLocation.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.filePath != null && Object.hasOwnProperty.call(message, "filePath"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePath);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FileLocation message, length delimited. Does not implicitly {@link grafeas.v1.FileLocation.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {grafeas.v1.IFileLocation} message FileLocation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FileLocation message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.FileLocation} FileLocation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileLocation.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.FileLocation();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.filePath = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FileLocation message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.FileLocation} FileLocation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileLocation.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FileLocation message.
+                 * @function verify
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FileLocation.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.filePath != null && message.hasOwnProperty("filePath"))
+                        if (!$util.isString(message.filePath))
+                            return "filePath: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a FileLocation message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.FileLocation} FileLocation
+                 */
+                FileLocation.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.FileLocation)
+                        return object;
+                    var message = new $root.grafeas.v1.FileLocation();
+                    if (object.filePath != null)
+                        message.filePath = String(object.filePath);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FileLocation message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.FileLocation
+                 * @static
+                 * @param {grafeas.v1.FileLocation} message FileLocation
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FileLocation.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.filePath = "";
+                    if (message.filePath != null && message.hasOwnProperty("filePath"))
+                        object.filePath = message.filePath;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FileLocation to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.FileLocation
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FileLocation.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return FileLocation;
+            })();
+    
+            v1.License = (function() {
+    
+                /**
+                 * Properties of a License.
+                 * @memberof grafeas.v1
+                 * @interface ILicense
+                 * @property {string|null} [expression] License expression
+                 * @property {string|null} [comments] License comments
+                 */
+    
+                /**
+                 * Constructs a new License.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a License.
+                 * @implements ILicense
+                 * @constructor
+                 * @param {grafeas.v1.ILicense=} [properties] Properties to set
+                 */
+                function License(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * License expression.
+                 * @member {string} expression
+                 * @memberof grafeas.v1.License
+                 * @instance
+                 */
+                License.prototype.expression = "";
+    
+                /**
+                 * License comments.
+                 * @member {string} comments
+                 * @memberof grafeas.v1.License
+                 * @instance
+                 */
+                License.prototype.comments = "";
+    
+                /**
+                 * Creates a new License instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {grafeas.v1.ILicense=} [properties] Properties to set
+                 * @returns {grafeas.v1.License} License instance
+                 */
+                License.create = function create(properties) {
+                    return new License(properties);
+                };
+    
+                /**
+                 * Encodes the specified License message. Does not implicitly {@link grafeas.v1.License.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {grafeas.v1.ILicense} message License message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                License.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.expression);
+                    if (message.comments != null && Object.hasOwnProperty.call(message, "comments"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.comments);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified License message, length delimited. Does not implicitly {@link grafeas.v1.License.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {grafeas.v1.ILicense} message License message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                License.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a License message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.License} License
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                License.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.License();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.expression = reader.string();
+                            break;
+                        case 2:
+                            message.comments = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a License message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.License} License
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                License.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a License message.
+                 * @function verify
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                License.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.expression != null && message.hasOwnProperty("expression"))
+                        if (!$util.isString(message.expression))
+                            return "expression: string expected";
+                    if (message.comments != null && message.hasOwnProperty("comments"))
+                        if (!$util.isString(message.comments))
+                            return "comments: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a License message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.License} License
+                 */
+                License.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.License)
+                        return object;
+                    var message = new $root.grafeas.v1.License();
+                    if (object.expression != null)
+                        message.expression = String(object.expression);
+                    if (object.comments != null)
+                        message.comments = String(object.comments);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a License message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.License
+                 * @static
+                 * @param {grafeas.v1.License} message License
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                License.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.expression = "";
+                        object.comments = "";
+                    }
+                    if (message.expression != null && message.hasOwnProperty("expression"))
+                        object.expression = message.expression;
+                    if (message.comments != null && message.hasOwnProperty("comments"))
+                        object.comments = message.comments;
+                    return object;
+                };
+    
+                /**
+                 * Converts this License to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.License
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                License.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return License;
+            })();
+    
+            v1.Digest = (function() {
+    
+                /**
+                 * Properties of a Digest.
+                 * @memberof grafeas.v1
+                 * @interface IDigest
+                 * @property {string|null} [algo] Digest algo
+                 * @property {Uint8Array|null} [digestBytes] Digest digestBytes
+                 */
+    
+                /**
+                 * Constructs a new Digest.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Digest.
+                 * @implements IDigest
+                 * @constructor
+                 * @param {grafeas.v1.IDigest=} [properties] Properties to set
+                 */
+                function Digest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Digest algo.
+                 * @member {string} algo
+                 * @memberof grafeas.v1.Digest
+                 * @instance
+                 */
+                Digest.prototype.algo = "";
+    
+                /**
+                 * Digest digestBytes.
+                 * @member {Uint8Array} digestBytes
+                 * @memberof grafeas.v1.Digest
+                 * @instance
+                 */
+                Digest.prototype.digestBytes = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Digest instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {grafeas.v1.IDigest=} [properties] Properties to set
+                 * @returns {grafeas.v1.Digest} Digest instance
+                 */
+                Digest.create = function create(properties) {
+                    return new Digest(properties);
+                };
+    
+                /**
+                 * Encodes the specified Digest message. Does not implicitly {@link grafeas.v1.Digest.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {grafeas.v1.IDigest} message Digest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Digest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.algo != null && Object.hasOwnProperty.call(message, "algo"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.algo);
+                    if (message.digestBytes != null && Object.hasOwnProperty.call(message, "digestBytes"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.digestBytes);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Digest message, length delimited. Does not implicitly {@link grafeas.v1.Digest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {grafeas.v1.IDigest} message Digest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Digest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Digest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Digest} Digest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Digest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Digest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.algo = reader.string();
+                            break;
+                        case 2:
+                            message.digestBytes = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Digest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Digest} Digest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Digest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Digest message.
+                 * @function verify
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Digest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.algo != null && message.hasOwnProperty("algo"))
+                        if (!$util.isString(message.algo))
+                            return "algo: string expected";
+                    if (message.digestBytes != null && message.hasOwnProperty("digestBytes"))
+                        if (!(message.digestBytes && typeof message.digestBytes.length === "number" || $util.isString(message.digestBytes)))
+                            return "digestBytes: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Digest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Digest} Digest
+                 */
+                Digest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Digest)
+                        return object;
+                    var message = new $root.grafeas.v1.Digest();
+                    if (object.algo != null)
+                        message.algo = String(object.algo);
+                    if (object.digestBytes != null)
+                        if (typeof object.digestBytes === "string")
+                            $util.base64.decode(object.digestBytes, message.digestBytes = $util.newBuffer($util.base64.length(object.digestBytes)), 0);
+                        else if (object.digestBytes.length)
+                            message.digestBytes = object.digestBytes;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Digest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Digest
+                 * @static
+                 * @param {grafeas.v1.Digest} message Digest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Digest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.algo = "";
+                        if (options.bytes === String)
+                            object.digestBytes = "";
+                        else {
+                            object.digestBytes = [];
+                            if (options.bytes !== Array)
+                                object.digestBytes = $util.newBuffer(object.digestBytes);
+                        }
+                    }
+                    if (message.algo != null && message.hasOwnProperty("algo"))
+                        object.algo = message.algo;
+                    if (message.digestBytes != null && message.hasOwnProperty("digestBytes"))
+                        object.digestBytes = options.bytes === String ? $util.base64.encode(message.digestBytes, 0, message.digestBytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.digestBytes) : message.digestBytes;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Digest to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Digest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Digest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Digest;
+            })();
+    
             v1.BuildNote = (function() {
     
                 /**
@@ -3638,6 +4254,7 @@
                  * @property {string|null} [predicateType] InTotoStatement predicateType
                  * @property {grafeas.v1.IInTotoProvenance|null} [provenance] InTotoStatement provenance
                  * @property {grafeas.v1.ISlsaProvenance|null} [slsaProvenance] InTotoStatement slsaProvenance
+                 * @property {grafeas.v1.ISlsaProvenanceZeroTwo|null} [slsaProvenanceZeroTwo] InTotoStatement slsaProvenanceZeroTwo
                  */
     
                 /**
@@ -3696,17 +4313,25 @@
                  */
                 InTotoStatement.prototype.slsaProvenance = null;
     
+                /**
+                 * InTotoStatement slsaProvenanceZeroTwo.
+                 * @member {grafeas.v1.ISlsaProvenanceZeroTwo|null|undefined} slsaProvenanceZeroTwo
+                 * @memberof grafeas.v1.InTotoStatement
+                 * @instance
+                 */
+                InTotoStatement.prototype.slsaProvenanceZeroTwo = null;
+    
                 // OneOf field names bound to virtual getters and setters
                 var $oneOfFields;
     
                 /**
                  * InTotoStatement predicate.
-                 * @member {"provenance"|"slsaProvenance"|undefined} predicate
+                 * @member {"provenance"|"slsaProvenance"|"slsaProvenanceZeroTwo"|undefined} predicate
                  * @memberof grafeas.v1.InTotoStatement
                  * @instance
                  */
                 Object.defineProperty(InTotoStatement.prototype, "predicate", {
-                    get: $util.oneOfGetter($oneOfFields = ["provenance", "slsaProvenance"]),
+                    get: $util.oneOfGetter($oneOfFields = ["provenance", "slsaProvenance", "slsaProvenanceZeroTwo"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
     
@@ -3745,6 +4370,8 @@
                         $root.grafeas.v1.InTotoProvenance.encode(message.provenance, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.slsaProvenance != null && Object.hasOwnProperty.call(message, "slsaProvenance"))
                         $root.grafeas.v1.SlsaProvenance.encode(message.slsaProvenance, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.slsaProvenanceZeroTwo != null && Object.hasOwnProperty.call(message, "slsaProvenanceZeroTwo"))
+                        $root.grafeas.v1.SlsaProvenanceZeroTwo.encode(message.slsaProvenanceZeroTwo, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                     return writer;
                 };
     
@@ -3795,6 +4422,9 @@
                             break;
                         case 5:
                             message.slsaProvenance = $root.grafeas.v1.SlsaProvenance.decode(reader, reader.uint32());
+                            break;
+                        case 6:
+                            message.slsaProvenanceZeroTwo = $root.grafeas.v1.SlsaProvenanceZeroTwo.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -3865,6 +4495,16 @@
                                 return "slsaProvenance." + error;
                         }
                     }
+                    if (message.slsaProvenanceZeroTwo != null && message.hasOwnProperty("slsaProvenanceZeroTwo")) {
+                        if (properties.predicate === 1)
+                            return "predicate: multiple values";
+                        properties.predicate = 1;
+                        {
+                            var error = $root.grafeas.v1.SlsaProvenanceZeroTwo.verify(message.slsaProvenanceZeroTwo);
+                            if (error)
+                                return "slsaProvenanceZeroTwo." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -3903,6 +4543,11 @@
                         if (typeof object.slsaProvenance !== "object")
                             throw TypeError(".grafeas.v1.InTotoStatement.slsaProvenance: object expected");
                         message.slsaProvenance = $root.grafeas.v1.SlsaProvenance.fromObject(object.slsaProvenance);
+                    }
+                    if (object.slsaProvenanceZeroTwo != null) {
+                        if (typeof object.slsaProvenanceZeroTwo !== "object")
+                            throw TypeError(".grafeas.v1.InTotoStatement.slsaProvenanceZeroTwo: object expected");
+                        message.slsaProvenanceZeroTwo = $root.grafeas.v1.SlsaProvenanceZeroTwo.fromObject(object.slsaProvenanceZeroTwo);
                     }
                     return message;
                 };
@@ -3944,6 +4589,11 @@
                         object.slsaProvenance = $root.grafeas.v1.SlsaProvenance.toObject(message.slsaProvenance, options);
                         if (options.oneofs)
                             object.predicate = "slsaProvenance";
+                    }
+                    if (message.slsaProvenanceZeroTwo != null && message.hasOwnProperty("slsaProvenanceZeroTwo")) {
+                        object.slsaProvenanceZeroTwo = $root.grafeas.v1.SlsaProvenanceZeroTwo.toObject(message.slsaProvenanceZeroTwo, options);
+                        if (options.oneofs)
+                            object.predicate = "slsaProvenanceZeroTwo";
                     }
                     return object;
                 };
@@ -5751,6 +6401,1816 @@
                 })();
     
                 return SlsaProvenance;
+            })();
+    
+            v1.SlsaProvenanceZeroTwo = (function() {
+    
+                /**
+                 * Properties of a SlsaProvenanceZeroTwo.
+                 * @memberof grafeas.v1
+                 * @interface ISlsaProvenanceZeroTwo
+                 * @property {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaBuilder|null} [builder] SlsaProvenanceZeroTwo builder
+                 * @property {string|null} [buildType] SlsaProvenanceZeroTwo buildType
+                 * @property {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaInvocation|null} [invocation] SlsaProvenanceZeroTwo invocation
+                 * @property {google.protobuf.IStruct|null} [buildConfig] SlsaProvenanceZeroTwo buildConfig
+                 * @property {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMetadata|null} [metadata] SlsaProvenanceZeroTwo metadata
+                 * @property {Array.<grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMaterial>|null} [materials] SlsaProvenanceZeroTwo materials
+                 */
+    
+                /**
+                 * Constructs a new SlsaProvenanceZeroTwo.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a SlsaProvenanceZeroTwo.
+                 * @implements ISlsaProvenanceZeroTwo
+                 * @constructor
+                 * @param {grafeas.v1.ISlsaProvenanceZeroTwo=} [properties] Properties to set
+                 */
+                function SlsaProvenanceZeroTwo(properties) {
+                    this.materials = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SlsaProvenanceZeroTwo builder.
+                 * @member {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaBuilder|null|undefined} builder
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @instance
+                 */
+                SlsaProvenanceZeroTwo.prototype.builder = null;
+    
+                /**
+                 * SlsaProvenanceZeroTwo buildType.
+                 * @member {string} buildType
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @instance
+                 */
+                SlsaProvenanceZeroTwo.prototype.buildType = "";
+    
+                /**
+                 * SlsaProvenanceZeroTwo invocation.
+                 * @member {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaInvocation|null|undefined} invocation
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @instance
+                 */
+                SlsaProvenanceZeroTwo.prototype.invocation = null;
+    
+                /**
+                 * SlsaProvenanceZeroTwo buildConfig.
+                 * @member {google.protobuf.IStruct|null|undefined} buildConfig
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @instance
+                 */
+                SlsaProvenanceZeroTwo.prototype.buildConfig = null;
+    
+                /**
+                 * SlsaProvenanceZeroTwo metadata.
+                 * @member {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMetadata|null|undefined} metadata
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @instance
+                 */
+                SlsaProvenanceZeroTwo.prototype.metadata = null;
+    
+                /**
+                 * SlsaProvenanceZeroTwo materials.
+                 * @member {Array.<grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMaterial>} materials
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @instance
+                 */
+                SlsaProvenanceZeroTwo.prototype.materials = $util.emptyArray;
+    
+                /**
+                 * Creates a new SlsaProvenanceZeroTwo instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @static
+                 * @param {grafeas.v1.ISlsaProvenanceZeroTwo=} [properties] Properties to set
+                 * @returns {grafeas.v1.SlsaProvenanceZeroTwo} SlsaProvenanceZeroTwo instance
+                 */
+                SlsaProvenanceZeroTwo.create = function create(properties) {
+                    return new SlsaProvenanceZeroTwo(properties);
+                };
+    
+                /**
+                 * Encodes the specified SlsaProvenanceZeroTwo message. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @static
+                 * @param {grafeas.v1.ISlsaProvenanceZeroTwo} message SlsaProvenanceZeroTwo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SlsaProvenanceZeroTwo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.builder != null && Object.hasOwnProperty.call(message, "builder"))
+                        $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder.encode(message.builder, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.buildType != null && Object.hasOwnProperty.call(message, "buildType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.buildType);
+                    if (message.invocation != null && Object.hasOwnProperty.call(message, "invocation"))
+                        $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.encode(message.invocation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.buildConfig != null && Object.hasOwnProperty.call(message, "buildConfig"))
+                        $root.google.protobuf.Struct.encode(message.buildConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                        $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.encode(message.metadata, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.materials != null && message.materials.length)
+                        for (var i = 0; i < message.materials.length; ++i)
+                            $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial.encode(message.materials[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SlsaProvenanceZeroTwo message, length delimited. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @static
+                 * @param {grafeas.v1.ISlsaProvenanceZeroTwo} message SlsaProvenanceZeroTwo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SlsaProvenanceZeroTwo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SlsaProvenanceZeroTwo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.SlsaProvenanceZeroTwo} SlsaProvenanceZeroTwo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SlsaProvenanceZeroTwo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SlsaProvenanceZeroTwo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.builder = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder.decode(reader, reader.uint32());
+                            break;
+                        case 2:
+                            message.buildType = reader.string();
+                            break;
+                        case 3:
+                            message.invocation = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.decode(reader, reader.uint32());
+                            break;
+                        case 4:
+                            message.buildConfig = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.metadata = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.decode(reader, reader.uint32());
+                            break;
+                        case 6:
+                            if (!(message.materials && message.materials.length))
+                                message.materials = [];
+                            message.materials.push($root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SlsaProvenanceZeroTwo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.SlsaProvenanceZeroTwo} SlsaProvenanceZeroTwo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SlsaProvenanceZeroTwo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SlsaProvenanceZeroTwo message.
+                 * @function verify
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SlsaProvenanceZeroTwo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.builder != null && message.hasOwnProperty("builder")) {
+                        var error = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder.verify(message.builder);
+                        if (error)
+                            return "builder." + error;
+                    }
+                    if (message.buildType != null && message.hasOwnProperty("buildType"))
+                        if (!$util.isString(message.buildType))
+                            return "buildType: string expected";
+                    if (message.invocation != null && message.hasOwnProperty("invocation")) {
+                        var error = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.verify(message.invocation);
+                        if (error)
+                            return "invocation." + error;
+                    }
+                    if (message.buildConfig != null && message.hasOwnProperty("buildConfig")) {
+                        var error = $root.google.protobuf.Struct.verify(message.buildConfig);
+                        if (error)
+                            return "buildConfig." + error;
+                    }
+                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        var error = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.verify(message.metadata);
+                        if (error)
+                            return "metadata." + error;
+                    }
+                    if (message.materials != null && message.hasOwnProperty("materials")) {
+                        if (!Array.isArray(message.materials))
+                            return "materials: array expected";
+                        for (var i = 0; i < message.materials.length; ++i) {
+                            var error = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial.verify(message.materials[i]);
+                            if (error)
+                                return "materials." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a SlsaProvenanceZeroTwo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.SlsaProvenanceZeroTwo} SlsaProvenanceZeroTwo
+                 */
+                SlsaProvenanceZeroTwo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.SlsaProvenanceZeroTwo)
+                        return object;
+                    var message = new $root.grafeas.v1.SlsaProvenanceZeroTwo();
+                    if (object.builder != null) {
+                        if (typeof object.builder !== "object")
+                            throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.builder: object expected");
+                        message.builder = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder.fromObject(object.builder);
+                    }
+                    if (object.buildType != null)
+                        message.buildType = String(object.buildType);
+                    if (object.invocation != null) {
+                        if (typeof object.invocation !== "object")
+                            throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.invocation: object expected");
+                        message.invocation = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.fromObject(object.invocation);
+                    }
+                    if (object.buildConfig != null) {
+                        if (typeof object.buildConfig !== "object")
+                            throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.buildConfig: object expected");
+                        message.buildConfig = $root.google.protobuf.Struct.fromObject(object.buildConfig);
+                    }
+                    if (object.metadata != null) {
+                        if (typeof object.metadata !== "object")
+                            throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.metadata: object expected");
+                        message.metadata = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.fromObject(object.metadata);
+                    }
+                    if (object.materials) {
+                        if (!Array.isArray(object.materials))
+                            throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.materials: array expected");
+                        message.materials = [];
+                        for (var i = 0; i < object.materials.length; ++i) {
+                            if (typeof object.materials[i] !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.materials: object expected");
+                            message.materials[i] = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial.fromObject(object.materials[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SlsaProvenanceZeroTwo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @static
+                 * @param {grafeas.v1.SlsaProvenanceZeroTwo} message SlsaProvenanceZeroTwo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SlsaProvenanceZeroTwo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.materials = [];
+                    if (options.defaults) {
+                        object.builder = null;
+                        object.buildType = "";
+                        object.invocation = null;
+                        object.buildConfig = null;
+                        object.metadata = null;
+                    }
+                    if (message.builder != null && message.hasOwnProperty("builder"))
+                        object.builder = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder.toObject(message.builder, options);
+                    if (message.buildType != null && message.hasOwnProperty("buildType"))
+                        object.buildType = message.buildType;
+                    if (message.invocation != null && message.hasOwnProperty("invocation"))
+                        object.invocation = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.toObject(message.invocation, options);
+                    if (message.buildConfig != null && message.hasOwnProperty("buildConfig"))
+                        object.buildConfig = $root.google.protobuf.Struct.toObject(message.buildConfig, options);
+                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        object.metadata = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.toObject(message.metadata, options);
+                    if (message.materials && message.materials.length) {
+                        object.materials = [];
+                        for (var j = 0; j < message.materials.length; ++j)
+                            object.materials[j] = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial.toObject(message.materials[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this SlsaProvenanceZeroTwo to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SlsaProvenanceZeroTwo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                SlsaProvenanceZeroTwo.SlsaBuilder = (function() {
+    
+                    /**
+                     * Properties of a SlsaBuilder.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @interface ISlsaBuilder
+                     * @property {string|null} [id] SlsaBuilder id
+                     */
+    
+                    /**
+                     * Constructs a new SlsaBuilder.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @classdesc Represents a SlsaBuilder.
+                     * @implements ISlsaBuilder
+                     * @constructor
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaBuilder=} [properties] Properties to set
+                     */
+                    function SlsaBuilder(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SlsaBuilder id.
+                     * @member {string} id
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @instance
+                     */
+                    SlsaBuilder.prototype.id = "";
+    
+                    /**
+                     * Creates a new SlsaBuilder instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaBuilder=} [properties] Properties to set
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder} SlsaBuilder instance
+                     */
+                    SlsaBuilder.create = function create(properties) {
+                        return new SlsaBuilder(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaBuilder message. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaBuilder} message SlsaBuilder message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaBuilder.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaBuilder message, length delimited. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaBuilder} message SlsaBuilder message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaBuilder.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SlsaBuilder message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder} SlsaBuilder
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaBuilder.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.id = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SlsaBuilder message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder} SlsaBuilder
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaBuilder.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SlsaBuilder message.
+                     * @function verify
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SlsaBuilder.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            if (!$util.isString(message.id))
+                                return "id: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SlsaBuilder message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder} SlsaBuilder
+                     */
+                    SlsaBuilder.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder)
+                            return object;
+                        var message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder();
+                        if (object.id != null)
+                            message.id = String(object.id);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SlsaBuilder message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder} message SlsaBuilder
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SlsaBuilder.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.id = "";
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            object.id = message.id;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SlsaBuilder to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaBuilder
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SlsaBuilder.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SlsaBuilder;
+                })();
+    
+                SlsaProvenanceZeroTwo.SlsaMaterial = (function() {
+    
+                    /**
+                     * Properties of a SlsaMaterial.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @interface ISlsaMaterial
+                     * @property {string|null} [uri] SlsaMaterial uri
+                     * @property {Object.<string,string>|null} [digest] SlsaMaterial digest
+                     */
+    
+                    /**
+                     * Constructs a new SlsaMaterial.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @classdesc Represents a SlsaMaterial.
+                     * @implements ISlsaMaterial
+                     * @constructor
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMaterial=} [properties] Properties to set
+                     */
+                    function SlsaMaterial(properties) {
+                        this.digest = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SlsaMaterial uri.
+                     * @member {string} uri
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @instance
+                     */
+                    SlsaMaterial.prototype.uri = "";
+    
+                    /**
+                     * SlsaMaterial digest.
+                     * @member {Object.<string,string>} digest
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @instance
+                     */
+                    SlsaMaterial.prototype.digest = $util.emptyObject;
+    
+                    /**
+                     * Creates a new SlsaMaterial instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMaterial=} [properties] Properties to set
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial} SlsaMaterial instance
+                     */
+                    SlsaMaterial.create = function create(properties) {
+                        return new SlsaMaterial(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaMaterial message. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMaterial} message SlsaMaterial message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaMaterial.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                        if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                            for (var keys = Object.keys(message.digest), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.digest[keys[i]]).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaMaterial message, length delimited. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMaterial} message SlsaMaterial message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaMaterial.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SlsaMaterial message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial} SlsaMaterial
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaMaterial.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.uri = reader.string();
+                                break;
+                            case 2:
+                                if (message.digest === $util.emptyObject)
+                                    message.digest = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.digest[key] = value;
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SlsaMaterial message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial} SlsaMaterial
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaMaterial.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SlsaMaterial message.
+                     * @function verify
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SlsaMaterial.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            if (!$util.isString(message.uri))
+                                return "uri: string expected";
+                        if (message.digest != null && message.hasOwnProperty("digest")) {
+                            if (!$util.isObject(message.digest))
+                                return "digest: object expected";
+                            var key = Object.keys(message.digest);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.digest[key[i]]))
+                                    return "digest: string{k:string} expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SlsaMaterial message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial} SlsaMaterial
+                     */
+                    SlsaMaterial.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial)
+                            return object;
+                        var message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial();
+                        if (object.uri != null)
+                            message.uri = String(object.uri);
+                        if (object.digest) {
+                            if (typeof object.digest !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial.digest: object expected");
+                            message.digest = {};
+                            for (var keys = Object.keys(object.digest), i = 0; i < keys.length; ++i)
+                                message.digest[keys[i]] = String(object.digest[keys[i]]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SlsaMaterial message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial} message SlsaMaterial
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SlsaMaterial.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.digest = {};
+                        if (options.defaults)
+                            object.uri = "";
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            object.uri = message.uri;
+                        var keys2;
+                        if (message.digest && (keys2 = Object.keys(message.digest)).length) {
+                            object.digest = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.digest[keys2[j]] = message.digest[keys2[j]];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SlsaMaterial to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMaterial
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SlsaMaterial.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SlsaMaterial;
+                })();
+    
+                SlsaProvenanceZeroTwo.SlsaInvocation = (function() {
+    
+                    /**
+                     * Properties of a SlsaInvocation.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @interface ISlsaInvocation
+                     * @property {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaConfigSource|null} [configSource] SlsaInvocation configSource
+                     * @property {google.protobuf.IStruct|null} [parameters] SlsaInvocation parameters
+                     * @property {google.protobuf.IStruct|null} [environment] SlsaInvocation environment
+                     */
+    
+                    /**
+                     * Constructs a new SlsaInvocation.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @classdesc Represents a SlsaInvocation.
+                     * @implements ISlsaInvocation
+                     * @constructor
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaInvocation=} [properties] Properties to set
+                     */
+                    function SlsaInvocation(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SlsaInvocation configSource.
+                     * @member {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaConfigSource|null|undefined} configSource
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @instance
+                     */
+                    SlsaInvocation.prototype.configSource = null;
+    
+                    /**
+                     * SlsaInvocation parameters.
+                     * @member {google.protobuf.IStruct|null|undefined} parameters
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @instance
+                     */
+                    SlsaInvocation.prototype.parameters = null;
+    
+                    /**
+                     * SlsaInvocation environment.
+                     * @member {google.protobuf.IStruct|null|undefined} environment
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @instance
+                     */
+                    SlsaInvocation.prototype.environment = null;
+    
+                    /**
+                     * Creates a new SlsaInvocation instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaInvocation=} [properties] Properties to set
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation} SlsaInvocation instance
+                     */
+                    SlsaInvocation.create = function create(properties) {
+                        return new SlsaInvocation(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaInvocation message. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaInvocation} message SlsaInvocation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaInvocation.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.configSource != null && Object.hasOwnProperty.call(message, "configSource"))
+                            $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource.encode(message.configSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                            $root.google.protobuf.Struct.encode(message.parameters, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                            $root.google.protobuf.Struct.encode(message.environment, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaInvocation message, length delimited. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaInvocation} message SlsaInvocation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaInvocation.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SlsaInvocation message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation} SlsaInvocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaInvocation.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.configSource = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                message.parameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.environment = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SlsaInvocation message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation} SlsaInvocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaInvocation.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SlsaInvocation message.
+                     * @function verify
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SlsaInvocation.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.configSource != null && message.hasOwnProperty("configSource")) {
+                            var error = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource.verify(message.configSource);
+                            if (error)
+                                return "configSource." + error;
+                        }
+                        if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                            var error = $root.google.protobuf.Struct.verify(message.parameters);
+                            if (error)
+                                return "parameters." + error;
+                        }
+                        if (message.environment != null && message.hasOwnProperty("environment")) {
+                            var error = $root.google.protobuf.Struct.verify(message.environment);
+                            if (error)
+                                return "environment." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SlsaInvocation message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation} SlsaInvocation
+                     */
+                    SlsaInvocation.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation)
+                            return object;
+                        var message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation();
+                        if (object.configSource != null) {
+                            if (typeof object.configSource !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.configSource: object expected");
+                            message.configSource = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource.fromObject(object.configSource);
+                        }
+                        if (object.parameters != null) {
+                            if (typeof object.parameters !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.parameters: object expected");
+                            message.parameters = $root.google.protobuf.Struct.fromObject(object.parameters);
+                        }
+                        if (object.environment != null) {
+                            if (typeof object.environment !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation.environment: object expected");
+                            message.environment = $root.google.protobuf.Struct.fromObject(object.environment);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SlsaInvocation message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation} message SlsaInvocation
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SlsaInvocation.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.configSource = null;
+                            object.parameters = null;
+                            object.environment = null;
+                        }
+                        if (message.configSource != null && message.hasOwnProperty("configSource"))
+                            object.configSource = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource.toObject(message.configSource, options);
+                        if (message.parameters != null && message.hasOwnProperty("parameters"))
+                            object.parameters = $root.google.protobuf.Struct.toObject(message.parameters, options);
+                        if (message.environment != null && message.hasOwnProperty("environment"))
+                            object.environment = $root.google.protobuf.Struct.toObject(message.environment, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SlsaInvocation to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaInvocation
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SlsaInvocation.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SlsaInvocation;
+                })();
+    
+                SlsaProvenanceZeroTwo.SlsaConfigSource = (function() {
+    
+                    /**
+                     * Properties of a SlsaConfigSource.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @interface ISlsaConfigSource
+                     * @property {string|null} [uri] SlsaConfigSource uri
+                     * @property {Object.<string,string>|null} [digest] SlsaConfigSource digest
+                     * @property {string|null} [entryPoint] SlsaConfigSource entryPoint
+                     */
+    
+                    /**
+                     * Constructs a new SlsaConfigSource.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @classdesc Represents a SlsaConfigSource.
+                     * @implements ISlsaConfigSource
+                     * @constructor
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaConfigSource=} [properties] Properties to set
+                     */
+                    function SlsaConfigSource(properties) {
+                        this.digest = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SlsaConfigSource uri.
+                     * @member {string} uri
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @instance
+                     */
+                    SlsaConfigSource.prototype.uri = "";
+    
+                    /**
+                     * SlsaConfigSource digest.
+                     * @member {Object.<string,string>} digest
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @instance
+                     */
+                    SlsaConfigSource.prototype.digest = $util.emptyObject;
+    
+                    /**
+                     * SlsaConfigSource entryPoint.
+                     * @member {string} entryPoint
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @instance
+                     */
+                    SlsaConfigSource.prototype.entryPoint = "";
+    
+                    /**
+                     * Creates a new SlsaConfigSource instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaConfigSource=} [properties] Properties to set
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource} SlsaConfigSource instance
+                     */
+                    SlsaConfigSource.create = function create(properties) {
+                        return new SlsaConfigSource(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaConfigSource message. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaConfigSource} message SlsaConfigSource message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaConfigSource.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                        if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                            for (var keys = Object.keys(message.digest), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.digest[keys[i]]).ldelim();
+                        if (message.entryPoint != null && Object.hasOwnProperty.call(message, "entryPoint"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.entryPoint);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaConfigSource message, length delimited. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaConfigSource} message SlsaConfigSource message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaConfigSource.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SlsaConfigSource message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource} SlsaConfigSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaConfigSource.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.uri = reader.string();
+                                break;
+                            case 2:
+                                if (message.digest === $util.emptyObject)
+                                    message.digest = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.digest[key] = value;
+                                break;
+                            case 3:
+                                message.entryPoint = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SlsaConfigSource message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource} SlsaConfigSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaConfigSource.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SlsaConfigSource message.
+                     * @function verify
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SlsaConfigSource.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            if (!$util.isString(message.uri))
+                                return "uri: string expected";
+                        if (message.digest != null && message.hasOwnProperty("digest")) {
+                            if (!$util.isObject(message.digest))
+                                return "digest: object expected";
+                            var key = Object.keys(message.digest);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.digest[key[i]]))
+                                    return "digest: string{k:string} expected";
+                        }
+                        if (message.entryPoint != null && message.hasOwnProperty("entryPoint"))
+                            if (!$util.isString(message.entryPoint))
+                                return "entryPoint: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SlsaConfigSource message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource} SlsaConfigSource
+                     */
+                    SlsaConfigSource.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource)
+                            return object;
+                        var message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource();
+                        if (object.uri != null)
+                            message.uri = String(object.uri);
+                        if (object.digest) {
+                            if (typeof object.digest !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource.digest: object expected");
+                            message.digest = {};
+                            for (var keys = Object.keys(object.digest), i = 0; i < keys.length; ++i)
+                                message.digest[keys[i]] = String(object.digest[keys[i]]);
+                        }
+                        if (object.entryPoint != null)
+                            message.entryPoint = String(object.entryPoint);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SlsaConfigSource message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource} message SlsaConfigSource
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SlsaConfigSource.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.digest = {};
+                        if (options.defaults) {
+                            object.uri = "";
+                            object.entryPoint = "";
+                        }
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            object.uri = message.uri;
+                        var keys2;
+                        if (message.digest && (keys2 = Object.keys(message.digest)).length) {
+                            object.digest = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.digest[keys2[j]] = message.digest[keys2[j]];
+                        }
+                        if (message.entryPoint != null && message.hasOwnProperty("entryPoint"))
+                            object.entryPoint = message.entryPoint;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SlsaConfigSource to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaConfigSource
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SlsaConfigSource.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SlsaConfigSource;
+                })();
+    
+                SlsaProvenanceZeroTwo.SlsaMetadata = (function() {
+    
+                    /**
+                     * Properties of a SlsaMetadata.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @interface ISlsaMetadata
+                     * @property {string|null} [buildInvocationId] SlsaMetadata buildInvocationId
+                     * @property {google.protobuf.ITimestamp|null} [buildStartedOn] SlsaMetadata buildStartedOn
+                     * @property {google.protobuf.ITimestamp|null} [buildFinishedOn] SlsaMetadata buildFinishedOn
+                     * @property {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaCompleteness|null} [completeness] SlsaMetadata completeness
+                     * @property {boolean|null} [reproducible] SlsaMetadata reproducible
+                     */
+    
+                    /**
+                     * Constructs a new SlsaMetadata.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @classdesc Represents a SlsaMetadata.
+                     * @implements ISlsaMetadata
+                     * @constructor
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMetadata=} [properties] Properties to set
+                     */
+                    function SlsaMetadata(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SlsaMetadata buildInvocationId.
+                     * @member {string} buildInvocationId
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @instance
+                     */
+                    SlsaMetadata.prototype.buildInvocationId = "";
+    
+                    /**
+                     * SlsaMetadata buildStartedOn.
+                     * @member {google.protobuf.ITimestamp|null|undefined} buildStartedOn
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @instance
+                     */
+                    SlsaMetadata.prototype.buildStartedOn = null;
+    
+                    /**
+                     * SlsaMetadata buildFinishedOn.
+                     * @member {google.protobuf.ITimestamp|null|undefined} buildFinishedOn
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @instance
+                     */
+                    SlsaMetadata.prototype.buildFinishedOn = null;
+    
+                    /**
+                     * SlsaMetadata completeness.
+                     * @member {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaCompleteness|null|undefined} completeness
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @instance
+                     */
+                    SlsaMetadata.prototype.completeness = null;
+    
+                    /**
+                     * SlsaMetadata reproducible.
+                     * @member {boolean} reproducible
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @instance
+                     */
+                    SlsaMetadata.prototype.reproducible = false;
+    
+                    /**
+                     * Creates a new SlsaMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMetadata=} [properties] Properties to set
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata} SlsaMetadata instance
+                     */
+                    SlsaMetadata.create = function create(properties) {
+                        return new SlsaMetadata(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaMetadata message. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMetadata} message SlsaMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaMetadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.buildInvocationId != null && Object.hasOwnProperty.call(message, "buildInvocationId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.buildInvocationId);
+                        if (message.buildStartedOn != null && Object.hasOwnProperty.call(message, "buildStartedOn"))
+                            $root.google.protobuf.Timestamp.encode(message.buildStartedOn, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.buildFinishedOn != null && Object.hasOwnProperty.call(message, "buildFinishedOn"))
+                            $root.google.protobuf.Timestamp.encode(message.buildFinishedOn, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.completeness != null && Object.hasOwnProperty.call(message, "completeness"))
+                            $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness.encode(message.completeness, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.reproducible != null && Object.hasOwnProperty.call(message, "reproducible"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.reproducible);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaMetadata message, length delimited. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaMetadata} message SlsaMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SlsaMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata} SlsaMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaMetadata.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.buildInvocationId = reader.string();
+                                break;
+                            case 2:
+                                message.buildStartedOn = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.buildFinishedOn = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                message.completeness = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness.decode(reader, reader.uint32());
+                                break;
+                            case 5:
+                                message.reproducible = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SlsaMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata} SlsaMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SlsaMetadata message.
+                     * @function verify
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SlsaMetadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.buildInvocationId != null && message.hasOwnProperty("buildInvocationId"))
+                            if (!$util.isString(message.buildInvocationId))
+                                return "buildInvocationId: string expected";
+                        if (message.buildStartedOn != null && message.hasOwnProperty("buildStartedOn")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.buildStartedOn);
+                            if (error)
+                                return "buildStartedOn." + error;
+                        }
+                        if (message.buildFinishedOn != null && message.hasOwnProperty("buildFinishedOn")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.buildFinishedOn);
+                            if (error)
+                                return "buildFinishedOn." + error;
+                        }
+                        if (message.completeness != null && message.hasOwnProperty("completeness")) {
+                            var error = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness.verify(message.completeness);
+                            if (error)
+                                return "completeness." + error;
+                        }
+                        if (message.reproducible != null && message.hasOwnProperty("reproducible"))
+                            if (typeof message.reproducible !== "boolean")
+                                return "reproducible: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SlsaMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata} SlsaMetadata
+                     */
+                    SlsaMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata)
+                            return object;
+                        var message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata();
+                        if (object.buildInvocationId != null)
+                            message.buildInvocationId = String(object.buildInvocationId);
+                        if (object.buildStartedOn != null) {
+                            if (typeof object.buildStartedOn !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.buildStartedOn: object expected");
+                            message.buildStartedOn = $root.google.protobuf.Timestamp.fromObject(object.buildStartedOn);
+                        }
+                        if (object.buildFinishedOn != null) {
+                            if (typeof object.buildFinishedOn !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.buildFinishedOn: object expected");
+                            message.buildFinishedOn = $root.google.protobuf.Timestamp.fromObject(object.buildFinishedOn);
+                        }
+                        if (object.completeness != null) {
+                            if (typeof object.completeness !== "object")
+                                throw TypeError(".grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata.completeness: object expected");
+                            message.completeness = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness.fromObject(object.completeness);
+                        }
+                        if (object.reproducible != null)
+                            message.reproducible = Boolean(object.reproducible);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SlsaMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata} message SlsaMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SlsaMetadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.buildInvocationId = "";
+                            object.buildStartedOn = null;
+                            object.buildFinishedOn = null;
+                            object.completeness = null;
+                            object.reproducible = false;
+                        }
+                        if (message.buildInvocationId != null && message.hasOwnProperty("buildInvocationId"))
+                            object.buildInvocationId = message.buildInvocationId;
+                        if (message.buildStartedOn != null && message.hasOwnProperty("buildStartedOn"))
+                            object.buildStartedOn = $root.google.protobuf.Timestamp.toObject(message.buildStartedOn, options);
+                        if (message.buildFinishedOn != null && message.hasOwnProperty("buildFinishedOn"))
+                            object.buildFinishedOn = $root.google.protobuf.Timestamp.toObject(message.buildFinishedOn, options);
+                        if (message.completeness != null && message.hasOwnProperty("completeness"))
+                            object.completeness = $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness.toObject(message.completeness, options);
+                        if (message.reproducible != null && message.hasOwnProperty("reproducible"))
+                            object.reproducible = message.reproducible;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SlsaMetadata to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SlsaMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SlsaMetadata;
+                })();
+    
+                SlsaProvenanceZeroTwo.SlsaCompleteness = (function() {
+    
+                    /**
+                     * Properties of a SlsaCompleteness.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @interface ISlsaCompleteness
+                     * @property {boolean|null} [parameters] SlsaCompleteness parameters
+                     * @property {boolean|null} [environment] SlsaCompleteness environment
+                     * @property {boolean|null} [materials] SlsaCompleteness materials
+                     */
+    
+                    /**
+                     * Constructs a new SlsaCompleteness.
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo
+                     * @classdesc Represents a SlsaCompleteness.
+                     * @implements ISlsaCompleteness
+                     * @constructor
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaCompleteness=} [properties] Properties to set
+                     */
+                    function SlsaCompleteness(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SlsaCompleteness parameters.
+                     * @member {boolean} parameters
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @instance
+                     */
+                    SlsaCompleteness.prototype.parameters = false;
+    
+                    /**
+                     * SlsaCompleteness environment.
+                     * @member {boolean} environment
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @instance
+                     */
+                    SlsaCompleteness.prototype.environment = false;
+    
+                    /**
+                     * SlsaCompleteness materials.
+                     * @member {boolean} materials
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @instance
+                     */
+                    SlsaCompleteness.prototype.materials = false;
+    
+                    /**
+                     * Creates a new SlsaCompleteness instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaCompleteness=} [properties] Properties to set
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness} SlsaCompleteness instance
+                     */
+                    SlsaCompleteness.create = function create(properties) {
+                        return new SlsaCompleteness(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaCompleteness message. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaCompleteness} message SlsaCompleteness message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaCompleteness.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.parameters);
+                        if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.environment);
+                        if (message.materials != null && Object.hasOwnProperty.call(message, "materials"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.materials);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaCompleteness message, length delimited. Does not implicitly {@link grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.ISlsaCompleteness} message SlsaCompleteness message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaCompleteness.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SlsaCompleteness message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness} SlsaCompleteness
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaCompleteness.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.parameters = reader.bool();
+                                break;
+                            case 2:
+                                message.environment = reader.bool();
+                                break;
+                            case 3:
+                                message.materials = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SlsaCompleteness message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness} SlsaCompleteness
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaCompleteness.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SlsaCompleteness message.
+                     * @function verify
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SlsaCompleteness.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parameters != null && message.hasOwnProperty("parameters"))
+                            if (typeof message.parameters !== "boolean")
+                                return "parameters: boolean expected";
+                        if (message.environment != null && message.hasOwnProperty("environment"))
+                            if (typeof message.environment !== "boolean")
+                                return "environment: boolean expected";
+                        if (message.materials != null && message.hasOwnProperty("materials"))
+                            if (typeof message.materials !== "boolean")
+                                return "materials: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SlsaCompleteness message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness} SlsaCompleteness
+                     */
+                    SlsaCompleteness.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness)
+                            return object;
+                        var message = new $root.grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness();
+                        if (object.parameters != null)
+                            message.parameters = Boolean(object.parameters);
+                        if (object.environment != null)
+                            message.environment = Boolean(object.environment);
+                        if (object.materials != null)
+                            message.materials = Boolean(object.materials);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SlsaCompleteness message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @static
+                     * @param {grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness} message SlsaCompleteness
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SlsaCompleteness.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parameters = false;
+                            object.environment = false;
+                            object.materials = false;
+                        }
+                        if (message.parameters != null && message.hasOwnProperty("parameters"))
+                            object.parameters = message.parameters;
+                        if (message.environment != null && message.hasOwnProperty("environment"))
+                            object.environment = message.environment;
+                        if (message.materials != null && message.hasOwnProperty("materials"))
+                            object.materials = message.materials;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SlsaCompleteness to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.SlsaProvenanceZeroTwo.SlsaCompleteness
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SlsaCompleteness.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SlsaCompleteness;
+                })();
+    
+                return SlsaProvenanceZeroTwo;
             })();
     
             v1.BuildProvenance = (function() {
@@ -10078,6 +12538,7 @@
                  * @memberof grafeas.v1
                  * @interface IComplianceVersion
                  * @property {string|null} [cpeUri] ComplianceVersion cpeUri
+                 * @property {string|null} [benchmarkDocument] ComplianceVersion benchmarkDocument
                  * @property {string|null} [version] ComplianceVersion version
                  */
     
@@ -10103,6 +12564,14 @@
                  * @instance
                  */
                 ComplianceVersion.prototype.cpeUri = "";
+    
+                /**
+                 * ComplianceVersion benchmarkDocument.
+                 * @member {string} benchmarkDocument
+                 * @memberof grafeas.v1.ComplianceVersion
+                 * @instance
+                 */
+                ComplianceVersion.prototype.benchmarkDocument = "";
     
                 /**
                  * ComplianceVersion version.
@@ -10140,6 +12609,8 @@
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
                     if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                    if (message.benchmarkDocument != null && Object.hasOwnProperty.call(message, "benchmarkDocument"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.benchmarkDocument);
                     return writer;
                 };
     
@@ -10176,6 +12647,9 @@
                         switch (tag >>> 3) {
                         case 1:
                             message.cpeUri = reader.string();
+                            break;
+                        case 3:
+                            message.benchmarkDocument = reader.string();
                             break;
                         case 2:
                             message.version = reader.string();
@@ -10218,6 +12692,9 @@
                     if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
                         if (!$util.isString(message.cpeUri))
                             return "cpeUri: string expected";
+                    if (message.benchmarkDocument != null && message.hasOwnProperty("benchmarkDocument"))
+                        if (!$util.isString(message.benchmarkDocument))
+                            return "benchmarkDocument: string expected";
                     if (message.version != null && message.hasOwnProperty("version"))
                         if (!$util.isString(message.version))
                             return "version: string expected";
@@ -10238,6 +12715,8 @@
                     var message = new $root.grafeas.v1.ComplianceVersion();
                     if (object.cpeUri != null)
                         message.cpeUri = String(object.cpeUri);
+                    if (object.benchmarkDocument != null)
+                        message.benchmarkDocument = String(object.benchmarkDocument);
                     if (object.version != null)
                         message.version = String(object.version);
                     return message;
@@ -10259,11 +12738,14 @@
                     if (options.defaults) {
                         object.cpeUri = "";
                         object.version = "";
+                        object.benchmarkDocument = "";
                     }
                     if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
                         object.cpeUri = message.cpeUri;
                     if (message.version != null && message.hasOwnProperty("version"))
                         object.version = message.version;
+                    if (message.benchmarkDocument != null && message.hasOwnProperty("benchmarkDocument"))
+                        object.benchmarkDocument = message.benchmarkDocument;
                     return object;
                 };
     
@@ -21913,6 +24395,15 @@
                  * @interface IPackageNote
                  * @property {string|null} [name] PackageNote name
                  * @property {Array.<grafeas.v1.IDistribution>|null} [distribution] PackageNote distribution
+                 * @property {string|null} [packageType] PackageNote packageType
+                 * @property {string|null} [cpeUri] PackageNote cpeUri
+                 * @property {grafeas.v1.Architecture|null} [architecture] PackageNote architecture
+                 * @property {grafeas.v1.IVersion|null} [version] PackageNote version
+                 * @property {string|null} [maintainer] PackageNote maintainer
+                 * @property {string|null} [url] PackageNote url
+                 * @property {string|null} [description] PackageNote description
+                 * @property {grafeas.v1.ILicense|null} [license] PackageNote license
+                 * @property {Array.<grafeas.v1.IDigest>|null} [digest] PackageNote digest
                  */
     
                 /**
@@ -21925,6 +24416,7 @@
                  */
                 function PackageNote(properties) {
                     this.distribution = [];
+                    this.digest = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -21946,6 +24438,78 @@
                  * @instance
                  */
                 PackageNote.prototype.distribution = $util.emptyArray;
+    
+                /**
+                 * PackageNote packageType.
+                 * @member {string} packageType
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.packageType = "";
+    
+                /**
+                 * PackageNote cpeUri.
+                 * @member {string} cpeUri
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.cpeUri = "";
+    
+                /**
+                 * PackageNote architecture.
+                 * @member {grafeas.v1.Architecture} architecture
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.architecture = 0;
+    
+                /**
+                 * PackageNote version.
+                 * @member {grafeas.v1.IVersion|null|undefined} version
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.version = null;
+    
+                /**
+                 * PackageNote maintainer.
+                 * @member {string} maintainer
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.maintainer = "";
+    
+                /**
+                 * PackageNote url.
+                 * @member {string} url
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.url = "";
+    
+                /**
+                 * PackageNote description.
+                 * @member {string} description
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.description = "";
+    
+                /**
+                 * PackageNote license.
+                 * @member {grafeas.v1.ILicense|null|undefined} license
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.license = null;
+    
+                /**
+                 * PackageNote digest.
+                 * @member {Array.<grafeas.v1.IDigest>} digest
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.digest = $util.emptyArray;
     
                 /**
                  * Creates a new PackageNote instance using the specified properties.
@@ -21976,6 +24540,25 @@
                     if (message.distribution != null && message.distribution.length)
                         for (var i = 0; i < message.distribution.length; ++i)
                             $root.grafeas.v1.Distribution.encode(message.distribution[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                    if (message.packageType != null && Object.hasOwnProperty.call(message, "packageType"))
+                        writer.uint32(/* id 11, wireType 2 =*/90).string(message.packageType);
+                    if (message.cpeUri != null && Object.hasOwnProperty.call(message, "cpeUri"))
+                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.cpeUri);
+                    if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                        writer.uint32(/* id 13, wireType 0 =*/104).int32(message.architecture);
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                        $root.grafeas.v1.Version.encode(message.version, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                    if (message.maintainer != null && Object.hasOwnProperty.call(message, "maintainer"))
+                        writer.uint32(/* id 15, wireType 2 =*/122).string(message.maintainer);
+                    if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                        writer.uint32(/* id 16, wireType 2 =*/130).string(message.url);
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 17, wireType 2 =*/138).string(message.description);
+                    if (message.license != null && Object.hasOwnProperty.call(message, "license"))
+                        $root.grafeas.v1.License.encode(message.license, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                    if (message.digest != null && message.digest.length)
+                        for (var i = 0; i < message.digest.length; ++i)
+                            $root.grafeas.v1.Digest.encode(message.digest[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                     return writer;
                 };
     
@@ -22017,6 +24600,35 @@
                             if (!(message.distribution && message.distribution.length))
                                 message.distribution = [];
                             message.distribution.push($root.grafeas.v1.Distribution.decode(reader, reader.uint32()));
+                            break;
+                        case 11:
+                            message.packageType = reader.string();
+                            break;
+                        case 12:
+                            message.cpeUri = reader.string();
+                            break;
+                        case 13:
+                            message.architecture = reader.int32();
+                            break;
+                        case 14:
+                            message.version = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                            break;
+                        case 15:
+                            message.maintainer = reader.string();
+                            break;
+                        case 16:
+                            message.url = reader.string();
+                            break;
+                        case 17:
+                            message.description = reader.string();
+                            break;
+                        case 18:
+                            message.license = $root.grafeas.v1.License.decode(reader, reader.uint32());
+                            break;
+                        case 19:
+                            if (!(message.digest && message.digest.length))
+                                message.digest = [];
+                            message.digest.push($root.grafeas.v1.Digest.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -22065,6 +24677,49 @@
                                 return "distribution." + error;
                         }
                     }
+                    if (message.packageType != null && message.hasOwnProperty("packageType"))
+                        if (!$util.isString(message.packageType))
+                            return "packageType: string expected";
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        if (!$util.isString(message.cpeUri))
+                            return "cpeUri: string expected";
+                    if (message.architecture != null && message.hasOwnProperty("architecture"))
+                        switch (message.architecture) {
+                        default:
+                            return "architecture: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.version != null && message.hasOwnProperty("version")) {
+                        var error = $root.grafeas.v1.Version.verify(message.version);
+                        if (error)
+                            return "version." + error;
+                    }
+                    if (message.maintainer != null && message.hasOwnProperty("maintainer"))
+                        if (!$util.isString(message.maintainer))
+                            return "maintainer: string expected";
+                    if (message.url != null && message.hasOwnProperty("url"))
+                        if (!$util.isString(message.url))
+                            return "url: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.license != null && message.hasOwnProperty("license")) {
+                        var error = $root.grafeas.v1.License.verify(message.license);
+                        if (error)
+                            return "license." + error;
+                    }
+                    if (message.digest != null && message.hasOwnProperty("digest")) {
+                        if (!Array.isArray(message.digest))
+                            return "digest: array expected";
+                        for (var i = 0; i < message.digest.length; ++i) {
+                            var error = $root.grafeas.v1.Digest.verify(message.digest[i]);
+                            if (error)
+                                return "digest." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -22092,6 +24747,50 @@
                             message.distribution[i] = $root.grafeas.v1.Distribution.fromObject(object.distribution[i]);
                         }
                     }
+                    if (object.packageType != null)
+                        message.packageType = String(object.packageType);
+                    if (object.cpeUri != null)
+                        message.cpeUri = String(object.cpeUri);
+                    switch (object.architecture) {
+                    case "ARCHITECTURE_UNSPECIFIED":
+                    case 0:
+                        message.architecture = 0;
+                        break;
+                    case "X86":
+                    case 1:
+                        message.architecture = 1;
+                        break;
+                    case "X64":
+                    case 2:
+                        message.architecture = 2;
+                        break;
+                    }
+                    if (object.version != null) {
+                        if (typeof object.version !== "object")
+                            throw TypeError(".grafeas.v1.PackageNote.version: object expected");
+                        message.version = $root.grafeas.v1.Version.fromObject(object.version);
+                    }
+                    if (object.maintainer != null)
+                        message.maintainer = String(object.maintainer);
+                    if (object.url != null)
+                        message.url = String(object.url);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.license != null) {
+                        if (typeof object.license !== "object")
+                            throw TypeError(".grafeas.v1.PackageNote.license: object expected");
+                        message.license = $root.grafeas.v1.License.fromObject(object.license);
+                    }
+                    if (object.digest) {
+                        if (!Array.isArray(object.digest))
+                            throw TypeError(".grafeas.v1.PackageNote.digest: array expected");
+                        message.digest = [];
+                        for (var i = 0; i < object.digest.length; ++i) {
+                            if (typeof object.digest[i] !== "object")
+                                throw TypeError(".grafeas.v1.PackageNote.digest: object expected");
+                            message.digest[i] = $root.grafeas.v1.Digest.fromObject(object.digest[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -22108,16 +24807,48 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.distribution = [];
-                    if (options.defaults)
+                        object.digest = [];
+                    }
+                    if (options.defaults) {
                         object.name = "";
+                        object.packageType = "";
+                        object.cpeUri = "";
+                        object.architecture = options.enums === String ? "ARCHITECTURE_UNSPECIFIED" : 0;
+                        object.version = null;
+                        object.maintainer = "";
+                        object.url = "";
+                        object.description = "";
+                        object.license = null;
+                    }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
                     if (message.distribution && message.distribution.length) {
                         object.distribution = [];
                         for (var j = 0; j < message.distribution.length; ++j)
                             object.distribution[j] = $root.grafeas.v1.Distribution.toObject(message.distribution[j], options);
+                    }
+                    if (message.packageType != null && message.hasOwnProperty("packageType"))
+                        object.packageType = message.packageType;
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        object.cpeUri = message.cpeUri;
+                    if (message.architecture != null && message.hasOwnProperty("architecture"))
+                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = $root.grafeas.v1.Version.toObject(message.version, options);
+                    if (message.maintainer != null && message.hasOwnProperty("maintainer"))
+                        object.maintainer = message.maintainer;
+                    if (message.url != null && message.hasOwnProperty("url"))
+                        object.url = message.url;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.license != null && message.hasOwnProperty("license"))
+                        object.license = $root.grafeas.v1.License.toObject(message.license, options);
+                    if (message.digest && message.digest.length) {
+                        object.digest = [];
+                        for (var j = 0; j < message.digest.length; ++j)
+                            object.digest[j] = $root.grafeas.v1.Digest.toObject(message.digest[j], options);
                     }
                     return object;
                 };
@@ -22144,6 +24875,11 @@
                  * @interface IPackageOccurrence
                  * @property {string|null} [name] PackageOccurrence name
                  * @property {Array.<grafeas.v1.ILocation>|null} [location] PackageOccurrence location
+                 * @property {string|null} [packageType] PackageOccurrence packageType
+                 * @property {string|null} [cpeUri] PackageOccurrence cpeUri
+                 * @property {grafeas.v1.Architecture|null} [architecture] PackageOccurrence architecture
+                 * @property {grafeas.v1.ILicense|null} [license] PackageOccurrence license
+                 * @property {grafeas.v1.IVersion|null} [version] PackageOccurrence version
                  */
     
                 /**
@@ -22179,6 +24915,46 @@
                 PackageOccurrence.prototype.location = $util.emptyArray;
     
                 /**
+                 * PackageOccurrence packageType.
+                 * @member {string} packageType
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @instance
+                 */
+                PackageOccurrence.prototype.packageType = "";
+    
+                /**
+                 * PackageOccurrence cpeUri.
+                 * @member {string} cpeUri
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @instance
+                 */
+                PackageOccurrence.prototype.cpeUri = "";
+    
+                /**
+                 * PackageOccurrence architecture.
+                 * @member {grafeas.v1.Architecture} architecture
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @instance
+                 */
+                PackageOccurrence.prototype.architecture = 0;
+    
+                /**
+                 * PackageOccurrence license.
+                 * @member {grafeas.v1.ILicense|null|undefined} license
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @instance
+                 */
+                PackageOccurrence.prototype.license = null;
+    
+                /**
+                 * PackageOccurrence version.
+                 * @member {grafeas.v1.IVersion|null|undefined} version
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @instance
+                 */
+                PackageOccurrence.prototype.version = null;
+    
+                /**
                  * Creates a new PackageOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.PackageOccurrence
@@ -22207,6 +24983,16 @@
                     if (message.location != null && message.location.length)
                         for (var i = 0; i < message.location.length; ++i)
                             $root.grafeas.v1.Location.encode(message.location[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.packageType != null && Object.hasOwnProperty.call(message, "packageType"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.packageType);
+                    if (message.cpeUri != null && Object.hasOwnProperty.call(message, "cpeUri"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.cpeUri);
+                    if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.architecture);
+                    if (message.license != null && Object.hasOwnProperty.call(message, "license"))
+                        $root.grafeas.v1.License.encode(message.license, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                        $root.grafeas.v1.Version.encode(message.version, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     return writer;
                 };
     
@@ -22248,6 +25034,21 @@
                             if (!(message.location && message.location.length))
                                 message.location = [];
                             message.location.push($root.grafeas.v1.Location.decode(reader, reader.uint32()));
+                            break;
+                        case 3:
+                            message.packageType = reader.string();
+                            break;
+                        case 4:
+                            message.cpeUri = reader.string();
+                            break;
+                        case 5:
+                            message.architecture = reader.int32();
+                            break;
+                        case 6:
+                            message.license = $root.grafeas.v1.License.decode(reader, reader.uint32());
+                            break;
+                        case 7:
+                            message.version = $root.grafeas.v1.Version.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -22296,6 +25097,31 @@
                                 return "location." + error;
                         }
                     }
+                    if (message.packageType != null && message.hasOwnProperty("packageType"))
+                        if (!$util.isString(message.packageType))
+                            return "packageType: string expected";
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        if (!$util.isString(message.cpeUri))
+                            return "cpeUri: string expected";
+                    if (message.architecture != null && message.hasOwnProperty("architecture"))
+                        switch (message.architecture) {
+                        default:
+                            return "architecture: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.license != null && message.hasOwnProperty("license")) {
+                        var error = $root.grafeas.v1.License.verify(message.license);
+                        if (error)
+                            return "license." + error;
+                    }
+                    if (message.version != null && message.hasOwnProperty("version")) {
+                        var error = $root.grafeas.v1.Version.verify(message.version);
+                        if (error)
+                            return "version." + error;
+                    }
                     return null;
                 };
     
@@ -22323,6 +25149,34 @@
                             message.location[i] = $root.grafeas.v1.Location.fromObject(object.location[i]);
                         }
                     }
+                    if (object.packageType != null)
+                        message.packageType = String(object.packageType);
+                    if (object.cpeUri != null)
+                        message.cpeUri = String(object.cpeUri);
+                    switch (object.architecture) {
+                    case "ARCHITECTURE_UNSPECIFIED":
+                    case 0:
+                        message.architecture = 0;
+                        break;
+                    case "X86":
+                    case 1:
+                        message.architecture = 1;
+                        break;
+                    case "X64":
+                    case 2:
+                        message.architecture = 2;
+                        break;
+                    }
+                    if (object.license != null) {
+                        if (typeof object.license !== "object")
+                            throw TypeError(".grafeas.v1.PackageOccurrence.license: object expected");
+                        message.license = $root.grafeas.v1.License.fromObject(object.license);
+                    }
+                    if (object.version != null) {
+                        if (typeof object.version !== "object")
+                            throw TypeError(".grafeas.v1.PackageOccurrence.version: object expected");
+                        message.version = $root.grafeas.v1.Version.fromObject(object.version);
+                    }
                     return message;
                 };
     
@@ -22341,8 +25195,14 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.location = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.name = "";
+                        object.packageType = "";
+                        object.cpeUri = "";
+                        object.architecture = options.enums === String ? "ARCHITECTURE_UNSPECIFIED" : 0;
+                        object.license = null;
+                        object.version = null;
+                    }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
                     if (message.location && message.location.length) {
@@ -22350,6 +25210,16 @@
                         for (var j = 0; j < message.location.length; ++j)
                             object.location[j] = $root.grafeas.v1.Location.toObject(message.location[j], options);
                     }
+                    if (message.packageType != null && message.hasOwnProperty("packageType"))
+                        object.packageType = message.packageType;
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        object.cpeUri = message.cpeUri;
+                    if (message.architecture != null && message.hasOwnProperty("architecture"))
+                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
+                    if (message.license != null && message.hasOwnProperty("license"))
+                        object.license = $root.grafeas.v1.License.toObject(message.license, options);
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = $root.grafeas.v1.Version.toObject(message.version, options);
                     return object;
                 };
     
@@ -26199,6 +29069,7 @@
                      * @property {boolean|null} [fixAvailable] PackageIssue fixAvailable
                      * @property {string|null} [packageType] PackageIssue packageType
                      * @property {grafeas.v1.Severity|null} [effectiveSeverity] PackageIssue effectiveSeverity
+                     * @property {Array.<grafeas.v1.IFileLocation>|null} [fileLocation] PackageIssue fileLocation
                      */
     
                     /**
@@ -26210,6 +29081,7 @@
                      * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue=} [properties] Properties to set
                      */
                     function PackageIssue(properties) {
+                        this.fileLocation = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -26289,6 +29161,14 @@
                     PackageIssue.prototype.effectiveSeverity = 0;
     
                     /**
+                     * PackageIssue fileLocation.
+                     * @member {Array.<grafeas.v1.IFileLocation>} fileLocation
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     */
+                    PackageIssue.prototype.fileLocation = $util.emptyArray;
+    
+                    /**
                      * Creates a new PackageIssue instance using the specified properties.
                      * @function create
                      * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
@@ -26330,6 +29210,9 @@
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.packageType);
                         if (message.effectiveSeverity != null && Object.hasOwnProperty.call(message, "effectiveSeverity"))
                             writer.uint32(/* id 9, wireType 0 =*/72).int32(message.effectiveSeverity);
+                        if (message.fileLocation != null && message.fileLocation.length)
+                            for (var i = 0; i < message.fileLocation.length; ++i)
+                                $root.grafeas.v1.FileLocation.encode(message.fileLocation[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         return writer;
                     };
     
@@ -26390,6 +29273,11 @@
                                 break;
                             case 9:
                                 message.effectiveSeverity = reader.int32();
+                                break;
+                            case 10:
+                                if (!(message.fileLocation && message.fileLocation.length))
+                                    message.fileLocation = [];
+                                message.fileLocation.push($root.grafeas.v1.FileLocation.decode(reader, reader.uint32()));
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -26466,6 +29354,15 @@
                             case 5:
                                 break;
                             }
+                        if (message.fileLocation != null && message.hasOwnProperty("fileLocation")) {
+                            if (!Array.isArray(message.fileLocation))
+                                return "fileLocation: array expected";
+                            for (var i = 0; i < message.fileLocation.length; ++i) {
+                                var error = $root.grafeas.v1.FileLocation.verify(message.fileLocation[i]);
+                                if (error)
+                                    return "fileLocation." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -26529,6 +29426,16 @@
                             message.effectiveSeverity = 5;
                             break;
                         }
+                        if (object.fileLocation) {
+                            if (!Array.isArray(object.fileLocation))
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.PackageIssue.fileLocation: array expected");
+                            message.fileLocation = [];
+                            for (var i = 0; i < object.fileLocation.length; ++i) {
+                                if (typeof object.fileLocation[i] !== "object")
+                                    throw TypeError(".grafeas.v1.VulnerabilityOccurrence.PackageIssue.fileLocation: object expected");
+                                message.fileLocation[i] = $root.grafeas.v1.FileLocation.fromObject(object.fileLocation[i]);
+                            }
+                        }
                         return message;
                     };
     
@@ -26545,6 +29452,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.arrays || options.defaults)
+                            object.fileLocation = [];
                         if (options.defaults) {
                             object.affectedCpeUri = "";
                             object.affectedPackage = "";
@@ -26574,6 +29483,11 @@
                             object.packageType = message.packageType;
                         if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
                             object.effectiveSeverity = options.enums === String ? $root.grafeas.v1.Severity[message.effectiveSeverity] : message.effectiveSeverity;
+                        if (message.fileLocation && message.fileLocation.length) {
+                            object.fileLocation = [];
+                            for (var j = 0; j < message.fileLocation.length; ++j)
+                                object.fileLocation[j] = $root.grafeas.v1.FileLocation.toObject(message.fileLocation[j], options);
+                        }
                         return object;
                     };
     
@@ -27059,6 +29973,820 @@
                 };
     
                 return Timestamp;
+            })();
+    
+            protobuf.Struct = (function() {
+    
+                /**
+                 * Properties of a Struct.
+                 * @memberof google.protobuf
+                 * @interface IStruct
+                 * @property {Object.<string,google.protobuf.IValue>|null} [fields] Struct fields
+                 */
+    
+                /**
+                 * Constructs a new Struct.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Struct.
+                 * @implements IStruct
+                 * @constructor
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 */
+                function Struct(properties) {
+                    this.fields = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Struct fields.
+                 * @member {Object.<string,google.protobuf.IValue>} fields
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 */
+                Struct.prototype.fields = $util.emptyObject;
+    
+                /**
+                 * Creates a new Struct instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 * @returns {google.protobuf.Struct} Struct instance
+                 */
+                Struct.create = function create(properties) {
+                    return new Struct(properties);
+                };
+    
+                /**
+                 * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fields != null && Object.hasOwnProperty.call(message, "fields"))
+                        for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                            $root.google.protobuf.Value.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                        }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (message.fields === $util.emptyObject)
+                                message.fields = {};
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = null;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.fields[key] = value;
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Struct message.
+                 * @function verify
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Struct.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fields != null && message.hasOwnProperty("fields")) {
+                        if (!$util.isObject(message.fields))
+                            return "fields: object expected";
+                        var key = Object.keys(message.fields);
+                        for (var i = 0; i < key.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.fields[key[i]]);
+                            if (error)
+                                return "fields." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Struct} Struct
+                 */
+                Struct.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Struct)
+                        return object;
+                    var message = new $root.google.protobuf.Struct();
+                    if (object.fields) {
+                        if (typeof object.fields !== "object")
+                            throw TypeError(".google.protobuf.Struct.fields: object expected");
+                        message.fields = {};
+                        for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
+                            if (typeof object.fields[keys[i]] !== "object")
+                                throw TypeError(".google.protobuf.Struct.fields: object expected");
+                            message.fields[keys[i]] = $root.google.protobuf.Value.fromObject(object.fields[keys[i]]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Struct message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.Struct} message Struct
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Struct.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.fields = {};
+                    var keys2;
+                    if (message.fields && (keys2 = Object.keys(message.fields)).length) {
+                        object.fields = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.fields[keys2[j]] = $root.google.protobuf.Value.toObject(message.fields[keys2[j]], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Struct to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Struct.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Struct;
+            })();
+    
+            protobuf.Value = (function() {
+    
+                /**
+                 * Properties of a Value.
+                 * @memberof google.protobuf
+                 * @interface IValue
+                 * @property {google.protobuf.NullValue|null} [nullValue] Value nullValue
+                 * @property {number|null} [numberValue] Value numberValue
+                 * @property {string|null} [stringValue] Value stringValue
+                 * @property {boolean|null} [boolValue] Value boolValue
+                 * @property {google.protobuf.IStruct|null} [structValue] Value structValue
+                 * @property {google.protobuf.IListValue|null} [listValue] Value listValue
+                 */
+    
+                /**
+                 * Constructs a new Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Value.
+                 * @implements IValue
+                 * @constructor
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 */
+                function Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Value nullValue.
+                 * @member {google.protobuf.NullValue|null|undefined} nullValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.nullValue = null;
+    
+                /**
+                 * Value numberValue.
+                 * @member {number|null|undefined} numberValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.numberValue = null;
+    
+                /**
+                 * Value stringValue.
+                 * @member {string|null|undefined} stringValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.stringValue = null;
+    
+                /**
+                 * Value boolValue.
+                 * @member {boolean|null|undefined} boolValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.boolValue = null;
+    
+                /**
+                 * Value structValue.
+                 * @member {google.protobuf.IStruct|null|undefined} structValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.structValue = null;
+    
+                /**
+                 * Value listValue.
+                 * @member {google.protobuf.IListValue|null|undefined} listValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.listValue = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Value kind.
+                 * @member {"nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue"|undefined} kind
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Object.defineProperty(Value.prototype, "kind", {
+                    get: $util.oneOfGetter($oneOfFields = ["nullValue", "numberValue", "stringValue", "boolValue", "structValue", "listValue"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 * @returns {google.protobuf.Value} Value instance
+                 */
+                Value.create = function create(properties) {
+                    return new Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nullValue);
+                    if (message.numberValue != null && Object.hasOwnProperty.call(message, "numberValue"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.numberValue);
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
+                    if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
+                    if (message.structValue != null && Object.hasOwnProperty.call(message, "structValue"))
+                        $root.google.protobuf.Struct.encode(message.structValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.listValue != null && Object.hasOwnProperty.call(message, "listValue"))
+                        $root.google.protobuf.ListValue.encode(message.listValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.nullValue = reader.int32();
+                            break;
+                        case 2:
+                            message.numberValue = reader.double();
+                            break;
+                        case 3:
+                            message.stringValue = reader.string();
+                            break;
+                        case 4:
+                            message.boolValue = reader.bool();
+                            break;
+                        case 5:
+                            message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                            break;
+                        case 6:
+                            message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        properties.kind = 1;
+                        switch (message.nullValue) {
+                        default:
+                            return "nullValue: enum value expected";
+                        case 0:
+                            break;
+                        }
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.numberValue !== "number")
+                            return "numberValue: number expected";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (!$util.isString(message.stringValue))
+                            return "stringValue: string expected";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.boolValue !== "boolean")
+                            return "boolValue: boolean expected";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.Struct.verify(message.structValue);
+                            if (error)
+                                return "structValue." + error;
+                        }
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.ListValue.verify(message.listValue);
+                            if (error)
+                                return "listValue." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Value} Value
+                 */
+                Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Value)
+                        return object;
+                    var message = new $root.google.protobuf.Value();
+                    switch (object.nullValue) {
+                    case "NULL_VALUE":
+                    case 0:
+                        message.nullValue = 0;
+                        break;
+                    }
+                    if (object.numberValue != null)
+                        message.numberValue = Number(object.numberValue);
+                    if (object.stringValue != null)
+                        message.stringValue = String(object.stringValue);
+                    if (object.boolValue != null)
+                        message.boolValue = Boolean(object.boolValue);
+                    if (object.structValue != null) {
+                        if (typeof object.structValue !== "object")
+                            throw TypeError(".google.protobuf.Value.structValue: object expected");
+                        message.structValue = $root.google.protobuf.Struct.fromObject(object.structValue);
+                    }
+                    if (object.listValue != null) {
+                        if (typeof object.listValue !== "object")
+                            throw TypeError(".google.protobuf.Value.listValue: object expected");
+                        message.listValue = $root.google.protobuf.ListValue.fromObject(object.listValue);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.Value} message Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        if (options.oneofs)
+                            object.kind = "nullValue";
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        object.numberValue = options.json && !isFinite(message.numberValue) ? String(message.numberValue) : message.numberValue;
+                        if (options.oneofs)
+                            object.kind = "numberValue";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        object.stringValue = message.stringValue;
+                        if (options.oneofs)
+                            object.kind = "stringValue";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        object.boolValue = message.boolValue;
+                        if (options.oneofs)
+                            object.kind = "boolValue";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        object.structValue = $root.google.protobuf.Struct.toObject(message.structValue, options);
+                        if (options.oneofs)
+                            object.kind = "structValue";
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        object.listValue = $root.google.protobuf.ListValue.toObject(message.listValue, options);
+                        if (options.oneofs)
+                            object.kind = "listValue";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Value;
+            })();
+    
+            /**
+             * NullValue enum.
+             * @name google.protobuf.NullValue
+             * @enum {number}
+             * @property {number} NULL_VALUE=0 NULL_VALUE value
+             */
+            protobuf.NullValue = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "NULL_VALUE"] = 0;
+                return values;
+            })();
+    
+            protobuf.ListValue = (function() {
+    
+                /**
+                 * Properties of a ListValue.
+                 * @memberof google.protobuf
+                 * @interface IListValue
+                 * @property {Array.<google.protobuf.IValue>|null} [values] ListValue values
+                 */
+    
+                /**
+                 * Constructs a new ListValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a ListValue.
+                 * @implements IListValue
+                 * @constructor
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 */
+                function ListValue(properties) {
+                    this.values = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListValue values.
+                 * @member {Array.<google.protobuf.IValue>} values
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 */
+                ListValue.prototype.values = $util.emptyArray;
+    
+                /**
+                 * Creates a new ListValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 * @returns {google.protobuf.ListValue} ListValue instance
+                 */
+                ListValue.create = function create(properties) {
+                    return new ListValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.values != null && message.values.length)
+                        for (var i = 0; i < message.values.length; ++i)
+                            $root.google.protobuf.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.values && message.values.length))
+                                message.values = [];
+                            message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListValue message.
+                 * @function verify
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.values != null && message.hasOwnProperty("values")) {
+                        if (!Array.isArray(message.values))
+                            return "values: array expected";
+                        for (var i = 0; i < message.values.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.values[i]);
+                            if (error)
+                                return "values." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.ListValue} ListValue
+                 */
+                ListValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.ListValue)
+                        return object;
+                    var message = new $root.google.protobuf.ListValue();
+                    if (object.values) {
+                        if (!Array.isArray(object.values))
+                            throw TypeError(".google.protobuf.ListValue.values: array expected");
+                        message.values = [];
+                        for (var i = 0; i < object.values.length; ++i) {
+                            if (typeof object.values[i] !== "object")
+                                throw TypeError(".google.protobuf.ListValue.values: object expected");
+                            message.values[i] = $root.google.protobuf.Value.fromObject(object.values[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.ListValue} message ListValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.values = [];
+                    if (message.values && message.values.length) {
+                        object.values = [];
+                        for (var j = 0; j < message.values.length; ++j)
+                            object.values[j] = $root.google.protobuf.Value.toObject(message.values[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ListValue;
             })();
     
             protobuf.FileDescriptorSet = (function() {

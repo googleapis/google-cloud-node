@@ -8,7 +8,7 @@
             "java_multiple_files": true,
             "java_package": "io.grafeas.v1",
             "objc_class_prefix": "GRA",
-            "java_outer_classname": "CvssProto",
+            "java_outer_classname": "CVSSProto",
             "(google.api.resource_definition).type": "grafeas.io/Project",
             "(google.api.resource_definition).pattern": "projects/{project}"
           },
@@ -121,6 +121,38 @@
                 },
                 "keyid": {
                   "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "FileLocation": {
+              "fields": {
+                "filePath": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "License": {
+              "fields": {
+                "expression": {
+                  "type": "string",
+                  "id": 1
+                },
+                "comments": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Digest": {
+              "fields": {
+                "algo": {
+                  "type": "string",
+                  "id": 1
+                },
+                "digestBytes": {
+                  "type": "bytes",
                   "id": 2
                 }
               }
@@ -253,7 +285,8 @@
                 "predicate": {
                   "oneof": [
                     "provenance",
-                    "slsaProvenance"
+                    "slsaProvenance",
+                    "slsaProvenanceZeroTwo"
                   ]
                 }
               },
@@ -281,6 +314,10 @@
                 "slsaProvenance": {
                   "type": "SlsaProvenance",
                   "id": 5
+                },
+                "slsaProvenanceZeroTwo": {
+                  "type": "SlsaProvenanceZeroTwo",
+                  "id": 6
                 }
               }
             },
@@ -400,6 +437,131 @@
                       "keyType": "string",
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SlsaProvenanceZeroTwo": {
+              "fields": {
+                "builder": {
+                  "type": "SlsaBuilder",
+                  "id": 1
+                },
+                "buildType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "invocation": {
+                  "type": "SlsaInvocation",
+                  "id": 3
+                },
+                "buildConfig": {
+                  "type": "google.protobuf.Struct",
+                  "id": 4
+                },
+                "metadata": {
+                  "type": "SlsaMetadata",
+                  "id": 5
+                },
+                "materials": {
+                  "rule": "repeated",
+                  "type": "SlsaMaterial",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "SlsaBuilder": {
+                  "fields": {
+                    "id": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "SlsaMaterial": {
+                  "fields": {
+                    "uri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "digest": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "SlsaInvocation": {
+                  "fields": {
+                    "configSource": {
+                      "type": "SlsaConfigSource",
+                      "id": 1
+                    },
+                    "parameters": {
+                      "type": "google.protobuf.Struct",
+                      "id": 2
+                    },
+                    "environment": {
+                      "type": "google.protobuf.Struct",
+                      "id": 3
+                    }
+                  }
+                },
+                "SlsaConfigSource": {
+                  "fields": {
+                    "uri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "digest": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 2
+                    },
+                    "entryPoint": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "SlsaMetadata": {
+                  "fields": {
+                    "buildInvocationId": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "buildStartedOn": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "buildFinishedOn": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    },
+                    "completeness": {
+                      "type": "SlsaCompleteness",
+                      "id": 4
+                    },
+                    "reproducible": {
+                      "type": "bool",
+                      "id": 5
+                    }
+                  }
+                },
+                "SlsaCompleteness": {
+                  "fields": {
+                    "parameters": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "environment": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "materials": {
+                      "type": "bool",
+                      "id": 3
                     }
                   }
                 }
@@ -762,6 +924,10 @@
                 "cpeUri": {
                   "type": "string",
                   "id": 1
+                },
+                "benchmarkDocument": {
+                  "type": "string",
+                  "id": 3
                 },
                 "version": {
                   "type": "string",
@@ -2021,7 +2187,10 @@
               "fields": {
                 "cpeUri": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
                 },
                 "architecture": {
                   "type": "Architecture",
@@ -2065,12 +2234,52 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "IMMUTABLE"
+                  }
                 },
                 "distribution": {
                   "rule": "repeated",
                   "type": "Distribution",
                   "id": 10
+                },
+                "packageType": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cpeUri": {
+                  "type": "string",
+                  "id": 12
+                },
+                "architecture": {
+                  "type": "Architecture",
+                  "id": 13
+                },
+                "version": {
+                  "type": "Version",
+                  "id": 14
+                },
+                "maintainer": {
+                  "type": "string",
+                  "id": 15
+                },
+                "url": {
+                  "type": "string",
+                  "id": 16
+                },
+                "description": {
+                  "type": "string",
+                  "id": 17
+                },
+                "license": {
+                  "type": "License",
+                  "id": 18
+                },
+                "digest": {
+                  "rule": "repeated",
+                  "type": "Digest",
+                  "id": 19
                 }
               }
             },
@@ -2078,12 +2287,47 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                  }
                 },
                 "location": {
                   "rule": "repeated",
                   "type": "Location",
                   "id": 2
+                },
+                "packageType": {
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                  }
+                },
+                "cpeUri": {
+                  "type": "string",
+                  "id": 4,
+                  "options": {
+                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                  }
+                },
+                "architecture": {
+                  "type": "Architecture",
+                  "id": 5,
+                  "options": {
+                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                  }
+                },
+                "license": {
+                  "type": "License",
+                  "id": 6
+                },
+                "version": {
+                  "type": "Version",
+                  "id": 7,
+                  "options": {
+                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                  }
                 }
               }
             },
@@ -2460,6 +2704,11 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "fileLocation": {
+                      "rule": "repeated",
+                      "type": "FileLocation",
+                      "id": 10
                     }
                   }
                 }
@@ -2503,6 +2752,69 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
                 }
               }
             },
