@@ -16,7 +16,7 @@ import {CliArgs} from './commands/bootstrap-library';
 import {Storage} from '@google-cloud/storage';
 import {Octokit} from 'octokit';
 import {join} from 'path';
-import {execSync} from 'child_process';
+import ChildProcess from 'child_process';
 import {writeFileSync} from 'fs';
 
 const LANGUAGE = 'nodejs';
@@ -76,8 +76,11 @@ export async function getDriftMetadata(
 ): Promise<DriftMetadata> {
   const bucket = 'devrel-prod-settings';
   const file = 'apis.json';
-  const [contents] = await storageClient.bucket(bucket).file(file).download();
-  const apis = JSON.parse(contents.toString('utf-8')).apis;
+  const contents = await storageClient.bucket(bucket)?.file(file)?.download();
+  if (!contents) {
+    throw new Error('apis.json downloaded from Cloud Storage was empty');
+  }
+  const apis = JSON.parse(contents.toString()).apis;
   return getApiInfo(apis, argv['api-id']);
 }
 
@@ -102,7 +105,11 @@ export function getApiInfo(apis: DriftApi[], apiId: string): DriftMetadata {
   };
 }
 
-export async function getDistributionName(octokit: Octokit, apiId: string) {
+export async function getDistributionName(
+  octokit: Octokit,
+  apiId: string,
+  execSync: typeof ChildProcess.execSync
+) {
   const path = apiId.toString().replace(/\./g, '/');
 
   const file = await octokit.rest.repos.getContent({
@@ -121,8 +128,9 @@ export async function getDistributionName(octokit: Octokit, apiId: string) {
 
   const packageName = execSync(
     `/go/bin/buildozer 'print package_name' ${bazelLocation}:%nodejs_gapic_library`
-  ).toString();
-  console.log(packageName);
+  )
+    .toString('utf8')
+    .replace('\n', '');
   execSync(`rm -rf ${bazelLocation}`);
 
   return packageName;

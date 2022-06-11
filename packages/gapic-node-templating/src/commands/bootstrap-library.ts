@@ -22,6 +22,7 @@ import {compileTemplates} from '../templating';
 import * as path from 'path';
 import {Storage} from '@google-cloud/storage';
 import {Octokit} from 'octokit';
+import * as cp from 'child_process';
 
 const BOOTSTRAP_TEMPLATES_PATH = path.resolve(
   __dirname,
@@ -64,7 +65,8 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
   async handler(argv: CliArgs) {
     const distributionName = await getDistributionName(
       new Octokit({auth: argv['github-token']}),
-      argv['api-id']
+      argv['api-id'],
+      cp.execSync
     );
     const driftMetadata = await getDriftMetadata(argv, new Storage());
     const bootstrapVars = await compileVars(

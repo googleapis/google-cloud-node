@@ -29,8 +29,10 @@ export async function compileTemplates(
   files.forEach(file => {
     const fileName = file.toString();
 
-    const readName = path.join(dirNameReadAbsolute, file);
+    const readName = path.join(dirNameReadAbsolute, fileName);
+    console.log(readName);
     const writeName = path.join(dirNameWriteAbsolute, fileName);
+    console.log(writeName);
     if (fs.statSync(readName).isDirectory()) {
       fs.mkdirSync(writeName);
       console.log(writeName + ' generated');

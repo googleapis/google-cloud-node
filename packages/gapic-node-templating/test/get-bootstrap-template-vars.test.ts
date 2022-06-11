@@ -19,6 +19,7 @@ import {
   getApiInfo,
   getApiPath,
   getApiPathWithDashes,
+  getDistributionName,
   getDriftMetadata,
   getMonoRepoName,
   getVersion,
@@ -32,8 +33,11 @@ import {
 import {Storage} from '@google-cloud/storage';
 import * as sinon from 'sinon';
 import nock from 'nock';
-
 const {Octokit} = require('@octokit/rest');
+
+const octokit = new Octokit({
+  auth: 'mypersonalaccesstoken123',
+});
 
 nock.disableNetConnect();
 
@@ -96,84 +100,105 @@ describe('get bootstrap template vars', () => {
           apiId: 'google.cloud.kms.v1',
           apiPath: 'google/cloud/kms',
           apiPathDashes: 'google-cloud-kms',
-          version: 'v1',
         }
       );
     });
   });
   describe('get drift metadata', () => {
     it('should make a call to the Storage bucket', async () => {
-      const storage = sinon.createStubInstance(Storage);
+      const storage = {
+        bucket: sinon.stub().returns({
+          file: sinon.stub().returns({
+            download: sinon
+              .stub()
+              .returns(
+                `{"apis": [{"api_shortname": "${API_ID}", "display_name": "thing1", "docs_root_url": "thing2", "launch_stage": "thing3"}]}`
+              ),
+          }),
+        }),
+      } as unknown as Storage;
 
-      await getDriftMetadata(
+      assert.deepStrictEqual(
+        await getDriftMetadata(
+          {
+            'api-id': API_ID,
+            'destination-folder': DESTINATION_FOLDER,
+            'mono-repo-name': MONO_REPO_NAME,
+            'github-token': GITHUB_TOKEN,
+          },
+          storage
+        ),
         {
-          'api-id': API_ID,
-          'destination-folder': DESTINATION_FOLDER,
-          'mono-repo-name': MONO_REPO_NAME,
-          'github-token': GITHUB_TOKEN,
-        },
-        storage
+          apiShortName: 'kms',
+          displayName: 'thing1',
+          docsRootUrl: 'thing2',
+          launchStage: 'thing3',
+        }
       );
-
-      assert.ok(storage.bucket.calledOnce);
     });
 
-    it('should parse api info from DRIFT', async () => {
-      const apiInfo = await getApiInfo(
-        [
-          {
-            api_shortname: 'kms',
-            display_name: 'Key Management Services',
-            docs_root_url: 'cloud.kms.google.v1',
-            launch_stage: 'GA',
-          },
-        ],
-        'google.cloud.kms.v1'
+    it('should throw an error if apis file is empty', async () => {
+      const storage = {
+        bucket: sinon.stub().returns({
+          file: sinon.stub().returns({
+            download: sinon
+              .stub()
+              .returns('{"apis": [{"api_shortname": "not-the-api-name"}]}'),
+          }),
+        }),
+      } as unknown as Storage;
+
+      assert.rejects(
+        async () =>
+          await getDriftMetadata(
+            {
+              'api-id': API_ID,
+              'destination-folder': DESTINATION_FOLDER,
+              'mono-repo-name': MONO_REPO_NAME,
+              'github-token': GITHUB_TOKEN,
+            },
+            storage
+          ),
+        /apis.json downloaded from Cloud Storage was empty/
       );
-      assert.deepStrictEqual(apiInfo, {
-        apiShortName: 'kms',
-        displayName: 'Key Management Services',
-        docsRootUrl: 'cloud.kms.google.v1',
-        launchStage: 'GA',
-      });
+    });
+
+    it('getAPIInfo should return empty if there was no match', async () => {
+      assert.deepStrictEqual(
+        getApiInfo(
+          [
+            {
+              api_shortname: 'thing4',
+              display_name: 'thing1',
+              docs_root_url: 'thing2',
+              launch_stage: 'thing3',
+            },
+          ],
+          'google.cloud.kms.v1'
+        ),
+        {apiShortName: 'kms', displayName: '', docsRootUrl: '', launchStage: ''}
+      );
     });
   });
 
   describe('get package name', () => {
-    it('should make a call to the Storage bucket', async () => {
-      const storage = sinon.createStubInstance(Storage);
+    it('should get the distribution name', async () => {
+      const fileRequest = nock('https://api.github.com')
+        .get(
+          '/repos/googleapis/googleapis/contents/google%2Fcloud%2Fkms%2Fv1%2FBUILD.bazel'
+        )
+        .reply(200, {
+          name: 'BUILD.bazel',
+          content: 'content',
+        });
 
-      await getDriftMetadata(
-        {
-          'api-id': API_ID,
-          'destination-folder': DESTINATION_FOLDER,
-          'mono-repo-name': MONO_REPO_NAME,
-          'github-token': GITHUB_TOKEN,
-        },
-        storage
+      await getDistributionName(
+        octokit,
+        'google.cloud.kms.v1',
+        sinon.stub().returns(Buffer)
       );
 
-      assert.ok(storage.bucket.calledOnce);
-    });
-
-    it('should parse api info from DRIFT', async () => {
-      const apiInfo = await getApiInfo(
-        [
-          {
-            api_shortname: 'kms',
-            display_name: 'Key Management Services',
-            docs_root_url: 'cloud.kms.google.v1',
-            launch_stage: 'GA',
-          },
-        ],
-        'google.cloud.kms.v1'
-      );
-      assert.deepStrictEqual(apiInfo, {
-        apiShortName: 'kms',
-        displayName: 'Key Management Services',
-        docsRootUrl: 'cloud.kms.google.v1',
-        launchStage: 'GA',
-      });
+      fileRequest.done();
     });
   });
 });

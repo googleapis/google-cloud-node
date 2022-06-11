@@ -18,11 +18,13 @@ import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as vars from '../src/get-bootstrap-template-vars';
 import * as templates from '../src/templating';
+import * as cp from 'child_process';
 
 export const API_ID = 'google.cloud.kms.v1';
 export const DESTINATION_FOLDER = './temp';
 export const MONO_REPO_NAME = 'git@github.com:googleapis/google-cloud-node.git';
 export const GITHUB_TOKEN = 'ghs_1234';
+const {Octokit} = require('@octokit/rest');
 
 describe('tests running build trigger', () => {
   let getDriftMetadataStub: sinon.SinonStub;
@@ -57,9 +59,25 @@ describe('tests running build trigger', () => {
       $0: 'foo',
     });
 
-    assert.ok(getDriftMetadataStub.calledOnce);
+    assert.ok(
+      getDriftMetadataStub.calledWith(
+        {
+          'api-id': API_ID,
+          'destination-folder': DESTINATION_FOLDER,
+          'mono-repo-name': MONO_REPO_NAME,
+          'github-token': GITHUB_TOKEN,
+        },
+        new Storage()
+      )
+    );
     assert.ok(compileVarsStub.calledOnce);
     assert.ok(compileTemplatesStub.calledOnce);
-    assert.ok(getDistributionNameStub.calledOnce);
+    assert.ok(
+      getDistributionNameStub.calledWith(
+        new Octokit({auth: GITHUB_TOKEN}),
+        API_ID,
+        cp.execSync
+      )
+    );
   });
 });
