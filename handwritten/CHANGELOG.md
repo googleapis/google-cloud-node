@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.0...v3.0.1) (2022-06-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to v4 ([#648](https://github.com/googleapis/nodejs-error-reporting/issues/648)) ([8572ecb](https://github.com/googleapis/nodejs-error-reporting/commit/8572ecb884009002475d745af746c8ee7b805bcb))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-error-reporting/compare/v2.0.5...v3.0.0) (2022-05-20)
 
 
