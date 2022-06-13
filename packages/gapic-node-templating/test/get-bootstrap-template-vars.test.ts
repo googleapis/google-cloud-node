@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// eslint-disable-next-line node/no-unpublished-import
 import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import {
@@ -31,9 +32,12 @@ import {
   MONO_REPO_NAME,
 } from './bootstrap-library.test';
 import {Storage} from '@google-cloud/storage';
+// eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'sinon';
+// eslint-disable-next-line node/no-unpublished-import
 import nock from 'nock';
-const {Octokit} = require('@octokit/rest');
+// eslint-disable-next-line node/no-unpublished-import
+import {Octokit} from '@octokit/rest';
 
 const octokit = new Octokit({
   auth: 'mypersonalaccesstoken123',

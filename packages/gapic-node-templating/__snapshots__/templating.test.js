@@ -1,4 +1,6 @@
-exports['tests for templates it should create the templates in the directory 1'] = `
+exports[
+  'tests for templates it should create the templates in the directory 1'
+] = `
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,9 +18,11 @@ exports['tests for templates it should create the templates in the directory 1']
 deep-copy-regex:
     - source: /google/cloud/kms/.*-nodejs/(.*)
       dest: /owl-bot-staging/google-cloud-kms/$1/$2
-`
+`;
 
-exports['tests for templates it should create the templates in the directory 2'] = `
+exports[
+  'tests for templates it should create the templates in the directory 2'
+] = `
 {
   "name": "kms",
   "name_pretty": "Key Management Service",
@@ -35,9 +39,11 @@ exports['tests for templates it should create the templates in the directory 2']
 }
 
 
-`
+`;
 
-exports['tests for templates it should create the templates in the directory 3'] = `
+exports[
+  'tests for templates it should create the templates in the directory 3'
+] = `
 
                                  Apache License
                            Version 2.0, January 2004
@@ -241,9 +247,11 @@ exports['tests for templates it should create the templates in the directory 3']
    See the License for the specific language governing permissions and
    limitations under the License.
 
-`
+`;
 
-exports['tests for templates it should create the templates in the directory 4'] = `
+exports[
+  'tests for templates it should create the templates in the directory 4'
+] = `
 {
     "name": "@google-cloud/kms",
     "version": "0.1.0",
@@ -309,4 +317,4 @@ exports['tests for templates it should create the templates in the directory 4']
       "node": ">=12.0.0"
     }
   }
-`
+`;

@@ -14,7 +14,9 @@
 
 import * as assert from 'assert';
 import {bootstrapLibrary} from '../src/commands/bootstrap-library';
+// eslint-disable-next-line node/no-unpublished-import
 import {describe, it} from 'mocha';
+// eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'sinon';
 import * as vars from '../src/get-bootstrap-template-vars';
 import * as templates from '../src/templating';
