@@ -75,7 +75,7 @@ describe('get bootstrap template vars', () => {
 
     it('should compile the correct vars', async () => {
       assert.deepStrictEqual(
-        compileVars(
+        await compileVars(
           {
             'api-id': API_ID,
             'destination-folder': DESTINATION_FOLDER,
