@@ -1,6 +1,4 @@
-exports[
-  'tests for templates it should create the templates in the directory 1'
-] = `
+exports['tests for templates it should create the templates in the directory 1'] = `
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,11 +16,9 @@ exports[
 deep-copy-regex:
     - source: /google/cloud/kms/.*-nodejs/(.*)
       dest: /owl-bot-staging/google-cloud-kms/$1/$2
-`;
+`
 
-exports[
-  'tests for templates it should create the templates in the directory 2'
-] = `
+exports['tests for templates it should create the templates in the directory 2'] = `
 {
   "name": "kms",
   "name_pretty": "Key Management Service",
@@ -31,7 +27,7 @@ exports[
   "issue_tracker": "undefined",
   "release_level": "beta",
   "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
+  "repo": "googleapis/googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/kms",
   "api_id": "google.cloud.kms.v1",
   "requires_billing": true,
@@ -39,11 +35,9 @@ exports[
 }
 
 
-`;
+`
 
-exports[
-  'tests for templates it should create the templates in the directory 3'
-] = `
+exports['tests for templates it should create the templates in the directory 3'] = `
 
                                  Apache License
                            Version 2.0, January 2004
@@ -247,16 +241,14 @@ exports[
    See the License for the specific language governing permissions and
    limitations under the License.
 
-`;
+`
 
-exports[
-  'tests for templates it should create the templates in the directory 4'
-] = `
+exports['tests for templates it should create the templates in the directory 4'] = `
 {
     "name": "@google-cloud/kms",
     "version": "0.1.0",
     "description": "Key Management Service client for Node.js",
-    "repository": "googleapis/google-cloud-node",
+    "repository": "googleapis/googleapis/google-cloud-node",
     "license": "Apache-2.0",
     "author": "Google LLC",
     "files": [
@@ -317,4 +309,4 @@ exports[
       "node": ">=12.0.0"
     }
   }
-`;
+`
