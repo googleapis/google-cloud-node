@@ -75,7 +75,10 @@ describe('Query', () => {
         .filter('name', '=', 'Title')
         .filter('count', '>', 20)
         .filter('size', '<', 10)
-        .filter('something', '>=', 11);
+        .filter('something', '>=', 11)
+        .filter('neProperty', '!=', 12)
+        .filter('inProperty', 'IN', 13)
+        .filter('notInProperty', 'NOT_IN', 14);
 
       assert.strictEqual(query.filters[0].name, 'date');
       assert.strictEqual(query.filters[0].op, '<=');
@@ -96,6 +99,18 @@ describe('Query', () => {
       assert.strictEqual(query.filters[4].name, 'something');
       assert.strictEqual(query.filters[4].op, '>=');
       assert.strictEqual(query.filters[4].val, 11);
+
+      assert.strictEqual(query.filters[5].name, 'neProperty');
+      assert.strictEqual(query.filters[5].op, '!=');
+      assert.strictEqual(query.filters[5].val, 12);
+
+      assert.strictEqual(query.filters[6].name, 'inProperty');
+      assert.strictEqual(query.filters[6].op, 'IN');
+      assert.strictEqual(query.filters[6].val, 13);
+
+      assert.strictEqual(query.filters[7].name, 'notInProperty');
+      assert.strictEqual(query.filters[7].op, 'NOT_IN');
+      assert.strictEqual(query.filters[7].val, 14);
     });
 
     it('should remove any whitespace surrounding the filter name', () => {

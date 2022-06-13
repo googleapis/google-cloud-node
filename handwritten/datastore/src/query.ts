@@ -22,7 +22,16 @@ import {Transaction} from './transaction';
 import {CallOptions} from 'google-gax';
 import {RunQueryStreamOptions} from '../src/request';
 
-export type Operator = '=' | '<' | '>' | '<=' | '>=' | 'HAS_ANCESTOR';
+export type Operator =
+  | '='
+  | '<'
+  | '>'
+  | '<='
+  | '>='
+  | 'HAS_ANCESTOR'
+  | '!='
+  | 'IN'
+  | 'NOT_IN';
 
 export interface OrderOptions {
   descending?: boolean;
@@ -154,8 +163,7 @@ class Query {
 
   /**
    * Datastore allows querying on properties. Supported comparison operators
-   * are `=`, `<`, `>`, `<=`, and `>=`. "Not equal" and `IN` operators are
-   * currently not supported.
+   * are `=`, `<`, `>`, `<=`, `>=`, `!=`, `HAS_ANCESTOR`, `IN` and `NOT_IN`.
    *
    * *To filter by ancestors, see {module:datastore/query#hasAncestor}.*
    *
