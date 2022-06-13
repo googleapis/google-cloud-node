@@ -17,7 +17,7 @@ Then, you can call the CLI with the following arguments:
 
 * api-id: The api ID of the library you wish to generate, i.e., google.cloud.kms.v1
 * destination-foler: the absolute path of where the generated templates should land (should not be created beforehand)
-* mono-repo-name: The name of the mono-repo in which the Docker container will be creating a new file (assume it's google-cloud-node), in the form `git@github.com:googleapis/google-cloud-node.git`
+* mono-repo-name: The name of the mono-repo in which the Docker container will be creating a new file (assume it's google-cloud-node), in the form `googleapis/google-cloud-node.git`
 * github-token: The string of a github token to authenticate an Octokit instance, in the form of `ghs_1234`
 
 Then, you can run the command like so:

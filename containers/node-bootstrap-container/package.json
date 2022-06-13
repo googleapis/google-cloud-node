@@ -4,7 +4,7 @@
   "description": "container to bootstrap initial files in a Node library",
   "main": "index.js",
   "scripts": {
-    "test": "npm t"
+    "test": "mocha tests/"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,13 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node#readme",
   "dependencies": {
-    "octokit": "^1.7.1"
+    "@octokit/rest": "^18.12.0",
+    "octokit": "^1.7.2"
+  },
+  "devDependencies": {
+    "@octokit/rest": "^18.12.0",
+    "mocha": "^9.0.0",
+    "nock": "^13.2.6",
+    "snap-shot-it": "^7.9.6"
   }
 }

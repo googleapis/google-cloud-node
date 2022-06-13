@@ -147,7 +147,7 @@ export async function compileVars(
     productDocumentation: driftMetadata.docsRootUrl,
     language: LANGUAGE,
     distributionName,
-    monoRepoName: getMonoRepoName(argv['mono-repo-name']),
+    monoRepoName: argv['mono-repo-name'],
     apiId: argv['api-id'],
     apiPath: getApiPath(argv['api-id']),
     apiPathDashes: getApiPathWithDashes(argv['api-id']),
@@ -164,10 +164,4 @@ export function getApiPathWithDashes(apiId: string) {
 
 export function getVersion(apiId: string) {
   return apiId.split('.')[apiId.split('.').length - 1];
-}
-
-export function getMonoRepoName(monoRepo: string) {
-  // Want the repo name in the form of googleapis/google-cloud-node
-  const regexRepoName = /[^.@:][a-z-]*?\/[a-z-]*[^.@:]/;
-  return monoRepo.match(regexRepoName)![0] ?? monoRepo;
 }

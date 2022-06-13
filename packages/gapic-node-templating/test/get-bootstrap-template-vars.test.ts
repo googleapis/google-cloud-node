@@ -22,7 +22,6 @@ import {
   getApiPathWithDashes,
   getDistributionName,
   getDriftMetadata,
-  getMonoRepoName,
   getVersion,
 } from '../src/get-bootstrap-template-vars';
 import {
@@ -63,18 +62,6 @@ describe('get bootstrap template vars', () => {
 
     it('should get just the version', async () => {
       assert.deepStrictEqual(getVersion('cloud.google.kms.v1'), 'v1');
-    });
-
-    it('should get just the monorepo name', async () => {
-      assert.deepStrictEqual(
-        getMonoRepoName('googleapis/google-cloud-node'),
-        'googleapis/google-cloud-node'
-      );
-
-      assert.deepStrictEqual(
-        getMonoRepoName('git@github:googleapis/google-cloud-node.git'),
-        'googleapis/google-cloud-node'
-      );
     });
 
     it('should compile the correct vars', async () => {
