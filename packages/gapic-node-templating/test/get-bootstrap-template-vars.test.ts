@@ -36,7 +36,7 @@ import * as sinon from 'sinon';
 // eslint-disable-next-line node/no-unpublished-import
 import nock from 'nock';
 // eslint-disable-next-line node/no-unpublished-import
-import {Octokit} from '@octokit/rest';
+import {Octokit} from 'octokit';
 
 const octokit = new Octokit({
   auth: 'mypersonalaccesstoken123',
