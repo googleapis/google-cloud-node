@@ -6,7 +6,7 @@
   "issue_tracker": "undefined",
   "release_level": "beta",
   "language": "{{language}}",
-  "repo": "{{monoRepoName}}",
+  "repo": "googleapis/{{monoRepoName}}",
   "distribution_name": "{{distributionName}}",
   "api_id": "{{apiId}}",
   "requires_billing": true,

@@ -87,7 +87,7 @@ describe('get bootstrap template vars', () => {
           productDocumentation: 'https://cloud.google.com/kms',
           language: 'nodejs',
           distributionName: '@google-cloud/kms',
-          monoRepoName: 'googleapis/google-cloud-node',
+          monoRepoName: 'google-cloud-node',
           apiId: 'google.cloud.kms.v1',
           apiPath: 'google/cloud/kms',
           apiPathDashes: 'google-cloud-kms',
