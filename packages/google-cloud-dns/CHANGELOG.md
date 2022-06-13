@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-dns/compare/v3.0.0...v3.0.1) (2022-06-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to v4 ([#529](https://github.com/googleapis/nodejs-dns/issues/529)) ([4e8b02f](https://github.com/googleapis/nodejs-dns/commit/4e8b02ff70ce3158d10cf37970f4d9ea371a2fcb))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-dns/compare/v2.2.4...v3.0.0) (2022-06-06)
 
 
