@@ -36,11 +36,11 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: node --version
       - run: npm install
-      working-directory: packages/gapic-node-templating
+        working-directory: packages/gapic-node-templating
       - run: npm test
-      working-directory: packages/gapic-node-templating
+        working-directory: packages/gapic-node-templating
       - run: npm install
-      working-directory: containers/node-bootstrap-container
+        working-directory: containers/node-bootstrap-container
       - run: npm test
-      working-directory: containers/node-bootstrap-container
+        working-directory: containers/node-bootstrap-container
       
