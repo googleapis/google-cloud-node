@@ -23,7 +23,7 @@ import * as templates from '../src/templating';
 
 export const API_ID = 'google.cloud.kms.v1';
 export const DESTINATION_FOLDER = './temp';
-export const MONO_REPO_NAME = 'git@github.com:googleapis/google-cloud-node.git';
+export const MONO_REPO_NAME = 'google-cloud-node';
 export const GITHUB_TOKEN = 'ghs_1234';
 
 describe('tests running build trigger', () => {
