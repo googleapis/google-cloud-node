@@ -8,6 +8,7 @@
   "api_id": "transcoder.googleapis.com",
   "distribution_name": "@google-cloud/video-transcoder",
   "repo": "googleapis/nodejs-video-transcoder",
+  "codeowner_team": "@googleapis/cloud-media-team",
   "issue_tracker": "https://github.com/googleapis/nodejs-video-transcoder/issues",
   "name_pretty": "Transcoder API",
   "default_version": "v1",
