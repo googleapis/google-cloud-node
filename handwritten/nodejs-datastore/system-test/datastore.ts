@@ -725,6 +725,33 @@ describe('Datastore', () => {
       assert.strictEqual(entities!.length, 6);
     });
 
+    it('should filter queries with NOT_EQUAL', async () => {
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('appearances', '!=', 9);
+      const [entities] = await datastore.runQuery(q);
+      assert.strictEqual(entities!.length, 6);
+    });
+
+    it('should filter queries with IN', async () => {
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('appearances', 'IN', [9, 25]);
+      const [entities] = await datastore.runQuery(q);
+      assert.strictEqual(entities!.length, 3);
+    });
+
+    it('should filter queries with NOT_IN', async () => {
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('appearances', 'NOT_IN', [9, 25]);
+      const [entities] = await datastore.runQuery(q);
+      assert.strictEqual(entities!.length, 5);
+    });
+
     it('should filter queries with defined indexes', async () => {
       const q = datastore
         .createQuery('Character')
