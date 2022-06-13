@@ -24,3 +24,4 @@ jobs:
       - run: rm -rf node_modules
       - run: npm install
       - run: npm run test-generate
+      - run: npm run test
