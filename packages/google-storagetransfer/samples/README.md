@@ -15,7 +15,11 @@
   * [Aws-request](#aws-request)
   * [Check-latest-transfer-operation](#check-latest-transfer-operation)
   * [Get-transfer-job-with-retries](#get-transfer-job-with-retries)
+  * [Manifest-request](#manifest-request)
   * [Nearline-request](#nearline-request)
+  * [Posix-download](#posix-download)
+  * [Posix-request](#posix-request)
+  * [Posix-to-posix-request](#posix-to-posix-request)
   * [Quickstart](#quickstart)
   * [Transfer-check](#transfer-check)
 
@@ -85,6 +89,23 @@ __Usage:__
 
 
 
+### Manifest-request
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/manifest-request.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/manifest-request.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/manifest-request.js`
+
+
+-----
+
+
+
+
 ### Nearline-request
 
 View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/nearline-request.js).
@@ -95,6 +116,57 @@ __Usage:__
 
 
 `node samples/nearline-request.js`
+
+
+-----
+
+
+
+
+### Posix-download
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/posix-download.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/posix-download.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/posix-download.js`
+
+
+-----
+
+
+
+
+### Posix-request
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/posix-request.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/posix-request.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/posix-request.js`
+
+
+-----
+
+
+
+
+### Posix-to-posix-request
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/posix-to-posix-request.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/posix-to-posix-request.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/posix-to-posix-request.js`
 
 
 -----
