@@ -50,5 +50,11 @@ describe('helper functions', () => {
     
         await createGhIssue.createGHIssue(octokit);
         scope.done();
+
+        delete process.env.MONO_REPO_NAME;
+        delete process.env.API_ID;
+        delete process.env.PROJECT_ID;
+        delete process.env.BUILD_ID;
+        delete process.env.GITHUB_TOKEN;
       });
 });
