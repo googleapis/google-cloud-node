@@ -24,3 +24,23 @@ jobs:
       - run: rm -rf node_modules
       - run: npm install
       - run: npm run test-generate
+  unit-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --version
+      - run: npm install
+        working-directory: packages/gapic-node-templating
+      - run: npm test
+        working-directory: packages/gapic-node-templating
+      - run: npm install
+        working-directory: containers/node-bootstrap-container
+      - run: npm test
+        working-directory: containers/node-bootstrap-container
+      

@@ -1,0 +1,15 @@
+{
+  "name": "{{name}}",
+  "name_pretty": "{{namePretty}}",
+  "product_documentation": "{{productDocumentation}}",
+  "client_documentation": "undefined",
+  "issue_tracker": "undefined",
+  "release_level": "beta",
+  "language": "{{language}}",
+  "repo": "googleapis/{{monoRepoName}}",
+  "distribution_name": "{{distributionName}}",
+  "api_id": "{{apiId}}",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+

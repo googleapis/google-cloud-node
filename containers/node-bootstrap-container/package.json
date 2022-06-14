@@ -1,0 +1,28 @@
+{
+  "name": "bootstrap-container",
+  "version": "1.0.0",
+  "description": "container to bootstrap initial files in a Node library",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googleapis/google-cloud-node.git"
+  },
+  "author": "Google LLC",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/googleapis/google-cloud-node/issues"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node#readme",
+  "dependencies": {
+    "@octokit/rest": "^18.12.0"
+  },
+  "devDependencies": {
+    "@octokit/rest": "^18.12.0",
+    "mocha": "^9.0.0",
+    "nock": "^13.2.6",
+    "snap-shot-it": "^7.9.6"
+  }
+}
