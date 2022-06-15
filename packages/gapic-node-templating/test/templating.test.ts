@@ -62,7 +62,12 @@ describe('tests for templates', () => {
       readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8')
     );
     snapshot(readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8'));
-    snapshot(readFileSync(join(templateDirWrite, 'package.json'), 'utf8'));
+    const packageJson = readFileSync(
+      join(templateDirWrite, 'package.json'),
+      'utf8'
+    );
+    assert.ok(packageJson.match(/@google-cloud\/kms/));
+    assert.ok(packageJson.match(/googleapis\/google-cloud-node/));
 
     assert.deepStrictEqual(
       readdirSync(templateDirRead),
