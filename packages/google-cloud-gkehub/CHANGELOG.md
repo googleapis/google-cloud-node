@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-gke-hub/compare/v3.0.0...v3.1.0) (2022-06-15)
+
+
+### Features
+
+* add ClusterType field in MembershipEndpoint.OnPremCluster ([#156](https://github.com/googleapis/nodejs-gke-hub/issues/156)) ([ec72f19](https://github.com/googleapis/nodejs-gke-hub/commit/ec72f19c414dde851b05506ba3f7944772322d8c))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-gke-hub/compare/v2.2.0...v3.0.0) (2022-06-03)
 
 
