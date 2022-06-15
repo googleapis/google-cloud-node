@@ -7,6 +7,7 @@
   "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-video-live-stream",
+  "codeowner_team": "@googleapis/cloud-media-team",
   "distribution_name": "@google-cloud/livestream",
   "api_id": "livestream.googleapis.com",
   "default_version": "v1",
