@@ -6233,6 +6233,24 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "clusterType": {
+                          "type": "ClusterType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ClusterType": {
+                          "values": {
+                            "CLUSTERTYPE_UNSPECIFIED": 0,
+                            "BOOTSTRAP": 1,
+                            "HYBRID": 2,
+                            "STANDALONE": 3,
+                            "USER": 4
+                          }
                         }
                       }
                     },

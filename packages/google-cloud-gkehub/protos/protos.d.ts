@@ -23035,6 +23035,9 @@ export namespace google {
 
                     /** OnPremCluster adminCluster */
                     adminCluster?: (boolean|null);
+
+                    /** OnPremCluster clusterType */
+                    clusterType?: (google.cloud.gkehub.v1beta1.OnPremCluster.ClusterType|keyof typeof google.cloud.gkehub.v1beta1.OnPremCluster.ClusterType|null);
                 }
 
                 /** Represents an OnPremCluster. */
@@ -23054,6 +23057,9 @@ export namespace google {
 
                     /** OnPremCluster adminCluster. */
                     public adminCluster: boolean;
+
+                    /** OnPremCluster clusterType. */
+                    public clusterType: (google.cloud.gkehub.v1beta1.OnPremCluster.ClusterType|keyof typeof google.cloud.gkehub.v1beta1.OnPremCluster.ClusterType);
 
                     /**
                      * Creates a new OnPremCluster instance using the specified properties.
@@ -23124,6 +23130,18 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace OnPremCluster {
+
+                    /** ClusterType enum. */
+                    enum ClusterType {
+                        CLUSTERTYPE_UNSPECIFIED = 0,
+                        BOOTSTRAP = 1,
+                        HYBRID = 2,
+                        STANDALONE = 3,
+                        USER = 4
+                    }
                 }
 
                 /** Properties of a MultiCloudCluster. */
