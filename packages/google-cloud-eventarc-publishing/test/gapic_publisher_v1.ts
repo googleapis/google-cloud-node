@@ -277,4 +277,130 @@ describe('v1.PublisherClient', () => {
       );
     });
   });
+
+  describe('publishEvents', () => {
+    it('invokes publishEvents without error', async () => {
+      const client = new publisherModule.v1.PublisherClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
+      );
+      request.channel = '';
+      const expectedHeaderRequestParams = 'channel=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.publishing.v1.PublishEventsResponse()
+      );
+      client.innerApiCalls.publishEvents = stubSimpleCall(expectedResponse);
+      const [response] = await client.publishEvents(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.publishEvents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes publishEvents without error using callback', async () => {
+      const client = new publisherModule.v1.PublisherClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
+      );
+      request.channel = '';
+      const expectedHeaderRequestParams = 'channel=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.publishing.v1.PublishEventsResponse()
+      );
+      client.innerApiCalls.publishEvents =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.publishEvents(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.publishEvents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes publishEvents with error', async () => {
+      const client = new publisherModule.v1.PublisherClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
+      );
+      request.channel = '';
+      const expectedHeaderRequestParams = 'channel=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.publishEvents = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.publishEvents(request), expectedError);
+      assert(
+        (client.innerApiCalls.publishEvents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes publishEvents with closed client', async () => {
+      const client = new publisherModule.v1.PublisherClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
+      );
+      request.channel = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.publishEvents(request), expectedError);
+    });
+  });
 });

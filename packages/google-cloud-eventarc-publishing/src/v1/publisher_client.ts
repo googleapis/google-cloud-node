@@ -222,7 +222,10 @@ export class PublisherClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const publisherStubMethods = ['publishChannelConnectionEvents'];
+    const publisherStubMethods = [
+      'publishChannelConnectionEvents',
+      'publishEvents',
+    ];
     for (const methodName of publisherStubMethods) {
       const callPromise = this.publisherStub.then(
         stub =>
@@ -407,6 +410,106 @@ export class PublisherClient {
       options,
       callback
     );
+  }
+  /**
+   * Publish events to a subscriber's channel.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.channel
+   *   The full name of the channel to publish to. For example:
+   *   `projects/{project}/locations/{location}/channels/{channel-id}`.
+   * @param {number[]} request.events
+   *   The CloudEvents v1.0 events to publish. No other types are allowed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PublishEventsResponse]{@link google.cloud.eventarc.publishing.v1.PublishEventsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/publisher.publish_events.js</caption>
+   * region_tag:eventarcpublishing_v1_generated_Publisher_PublishEvents_async
+   */
+  publishEvents(
+    request?: protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
+      (
+        | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  publishEvents(
+    request: protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
+      | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  publishEvents(
+    request: protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
+      | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  publishEvents(
+    request?: protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
+          | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
+      | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
+      (
+        | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        channel: request.channel || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.publishEvents(request, options, callback);
   }
 
   /**

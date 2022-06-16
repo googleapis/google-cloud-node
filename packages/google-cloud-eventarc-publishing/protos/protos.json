@@ -10,11 +10,11 @@
                   "nested": {
                     "v1": {
                       "options": {
+                        "csharp_namespace": "Google.Cloud.Eventarc.Publishing.V1",
+                        "go_package": "google.golang.org/genproto/googleapis/cloud/eventarc/publishing/v1;publisher",
                         "java_multiple_files": true,
                         "java_outer_classname": "PublisherProto",
                         "java_package": "com.google.cloud.eventarc.publishing.v1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/eventarc/publishing/v1;publisher",
-                        "csharp_namespace": "Google.Cloud.Eventarc.Publishing.V1",
                         "php_namespace": "Google\\Cloud\\Eventarc\\Publishing\\V1",
                         "ruby_package": "Google::Cloud::Eventarc::Publishing::V1"
                       },
@@ -40,6 +40,22 @@
                                   }
                                 }
                               ]
+                            },
+                            "PublishEvents": {
+                              "requestType": "PublishEventsRequest",
+                              "responseType": "PublishEventsResponse",
+                              "options": {
+                                "(google.api.http).post": "/v1/{channel=projects/*/locations/*/channels/*}:publishEvents",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{channel=projects/*/locations/*/channels/*}:publishEvents",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -57,6 +73,22 @@
                           }
                         },
                         "PublishChannelConnectionEventsResponse": {
+                          "fields": {}
+                        },
+                        "PublishEventsRequest": {
+                          "fields": {
+                            "channel": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "events": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Any",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "PublishEventsResponse": {
                           "fields": {}
                         }
                       }

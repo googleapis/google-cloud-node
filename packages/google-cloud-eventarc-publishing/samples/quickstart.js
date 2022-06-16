@@ -34,6 +34,7 @@ function main(channelConnection, id, providerId, eventType, date, textData) {
   const typeName = `${GOOGLE_API}/${CLOUD_EVENT_ID}`.replace(/^.*\//, '');
 
   // Imports the Publishing library
+  // eslint-disable-next-line node/no-missing-require
   const {PublisherClient} = require('@google-cloud/eventarc-publishing').v1;
 
   // Instantiates a client

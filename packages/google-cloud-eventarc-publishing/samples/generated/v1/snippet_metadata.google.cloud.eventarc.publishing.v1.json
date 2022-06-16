@@ -54,6 +54,50 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "eventarcpublishing_v1_generated_Publisher_PublishEvents_async",
+            "title": "Publisher publishEvents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Publish events to a subscriber's channel.",
+            "canonical": true,
+            "file": "publisher.publish_events.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PublishEvents",
+                "fullName": "google.cloud.eventarc.publishing.v1.Publisher.PublishEvents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "channel",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "events",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.eventarc.publishing.v1.PublishEventsResponse",
+                "client": {
+                    "shortName": "PublisherClient",
+                    "fullName": "google.cloud.eventarc.publishing.v1.PublisherClient"
+                },
+                "method": {
+                    "shortName": "PublishEvents",
+                    "fullName": "google.cloud.eventarc.publishing.v1.Publisher.PublishEvents",
+                    "service": {
+                        "shortName": "Publisher",
+                        "fullName": "google.cloud.eventarc.publishing.v1.Publisher"
+                    }
+                }
+            }
         }
     ]
 }

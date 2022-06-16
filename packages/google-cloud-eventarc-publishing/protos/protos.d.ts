@@ -62,6 +62,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public publishChannelConnectionEvents(request: google.cloud.eventarc.publishing.v1.IPublishChannelConnectionEventsRequest): Promise<google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse>;
+
+                        /**
+                         * Calls PublishEvents.
+                         * @param request PublishEventsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and PublishEventsResponse
+                         */
+                        public publishEvents(request: google.cloud.eventarc.publishing.v1.IPublishEventsRequest, callback: google.cloud.eventarc.publishing.v1.Publisher.PublishEventsCallback): void;
+
+                        /**
+                         * Calls PublishEvents.
+                         * @param request PublishEventsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public publishEvents(request: google.cloud.eventarc.publishing.v1.IPublishEventsRequest): Promise<google.cloud.eventarc.publishing.v1.PublishEventsResponse>;
                     }
 
                     namespace Publisher {
@@ -72,6 +86,13 @@ export namespace google {
                          * @param [response] PublishChannelConnectionEventsResponse
                          */
                         type PublishChannelConnectionEventsCallback = (error: (Error|null), response?: google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.publishing.v1.Publisher#publishEvents}.
+                         * @param error Error, if any
+                         * @param [response] PublishEventsResponse
+                         */
+                        type PublishEventsCallback = (error: (Error|null), response?: google.cloud.eventarc.publishing.v1.PublishEventsResponse) => void;
                     }
 
                     /** Properties of a PublishChannelConnectionEventsRequest. */
@@ -249,6 +270,186 @@ export namespace google {
 
                         /**
                          * Converts this PublishChannelConnectionEventsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a PublishEventsRequest. */
+                    interface IPublishEventsRequest {
+
+                        /** PublishEventsRequest channel */
+                        channel?: (string|null);
+
+                        /** PublishEventsRequest events */
+                        events?: (google.protobuf.IAny[]|null);
+                    }
+
+                    /** Represents a PublishEventsRequest. */
+                    class PublishEventsRequest implements IPublishEventsRequest {
+
+                        /**
+                         * Constructs a new PublishEventsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.eventarc.publishing.v1.IPublishEventsRequest);
+
+                        /** PublishEventsRequest channel. */
+                        public channel: string;
+
+                        /** PublishEventsRequest events. */
+                        public events: google.protobuf.IAny[];
+
+                        /**
+                         * Creates a new PublishEventsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishEventsRequest instance
+                         */
+                        public static create(properties?: google.cloud.eventarc.publishing.v1.IPublishEventsRequest): google.cloud.eventarc.publishing.v1.PublishEventsRequest;
+
+                        /**
+                         * Encodes the specified PublishEventsRequest message. Does not implicitly {@link google.cloud.eventarc.publishing.v1.PublishEventsRequest.verify|verify} messages.
+                         * @param message PublishEventsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.eventarc.publishing.v1.IPublishEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishEventsRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.publishing.v1.PublishEventsRequest.verify|verify} messages.
+                         * @param message PublishEventsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.eventarc.publishing.v1.IPublishEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishEventsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishEventsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.publishing.v1.PublishEventsRequest;
+
+                        /**
+                         * Decodes a PublishEventsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishEventsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.publishing.v1.PublishEventsRequest;
+
+                        /**
+                         * Verifies a PublishEventsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishEventsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishEventsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.publishing.v1.PublishEventsRequest;
+
+                        /**
+                         * Creates a plain object from a PublishEventsRequest message. Also converts values to other types if specified.
+                         * @param message PublishEventsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.eventarc.publishing.v1.PublishEventsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishEventsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a PublishEventsResponse. */
+                    interface IPublishEventsResponse {
+                    }
+
+                    /** Represents a PublishEventsResponse. */
+                    class PublishEventsResponse implements IPublishEventsResponse {
+
+                        /**
+                         * Constructs a new PublishEventsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.eventarc.publishing.v1.IPublishEventsResponse);
+
+                        /**
+                         * Creates a new PublishEventsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishEventsResponse instance
+                         */
+                        public static create(properties?: google.cloud.eventarc.publishing.v1.IPublishEventsResponse): google.cloud.eventarc.publishing.v1.PublishEventsResponse;
+
+                        /**
+                         * Encodes the specified PublishEventsResponse message. Does not implicitly {@link google.cloud.eventarc.publishing.v1.PublishEventsResponse.verify|verify} messages.
+                         * @param message PublishEventsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.eventarc.publishing.v1.IPublishEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishEventsResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.publishing.v1.PublishEventsResponse.verify|verify} messages.
+                         * @param message PublishEventsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.eventarc.publishing.v1.IPublishEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishEventsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishEventsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.publishing.v1.PublishEventsResponse;
+
+                        /**
+                         * Decodes a PublishEventsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishEventsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.publishing.v1.PublishEventsResponse;
+
+                        /**
+                         * Verifies a PublishEventsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishEventsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishEventsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.publishing.v1.PublishEventsResponse;
+
+                        /**
+                         * Creates a plain object from a PublishEventsResponse message. Also converts values to other types if specified.
+                         * @param message PublishEventsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.eventarc.publishing.v1.PublishEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishEventsResponse to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
