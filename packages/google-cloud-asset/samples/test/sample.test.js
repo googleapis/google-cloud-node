@@ -34,11 +34,8 @@ const options = {
 };
 const datasetId = `asset_nodejs_${uuid.v4()}`.replace(/-/gi, '_');
 
-const Compute = require('@google-cloud/compute');
-const zone = new Compute().zone('us-central1-c');
-const vmName = `asset-nodejs-${uuid.v4()}`;
-
-let vm;
+const compute = require('@google-cloud/compute');
+const instancesClient = new compute.InstancesClient();
 
 // Some of these tests can take an extremely long time, and occasionally
 // timeout, see:
@@ -48,17 +45,68 @@ function sleep(ms) {
 }
 
 describe('quickstart sample tests', () => {
+  let projectId;
+  let zone;
+  let instanceName;
+  let machineType;
+  let sourceImage;
+  let networkName;
   before(async () => {
+    zone = 'us-central1-a';
+    instanceName = `asset-nodejs-${uuid.v4()}`;
+    machineType = 'n1-standard-1';
+    sourceImage =
+      'projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts';
+    networkName = 'global/networks/default';
+    projectId = await instancesClient.getProjectId();
+
     await bucket.create();
     await bigquery.createDataset(datasetId, options);
     await bigquery.dataset(datasetId).exists();
-    [vm] = await zone.createVM(vmName, {os: 'ubuntu'});
+    // [vm] = await zone.vm(vmName, {os: 'ubuntu'});
+
+    const [response] = await instancesClient.insert({
+      instanceResource: {
+        name: instanceName,
+        disks: [
+          {
+            // Describe the size and source image of the boot disk to attach to the instance.
+            initializeParams: {
+              diskSizeGb: '10',
+              sourceImage,
+            },
+            autoDelete: true,
+            boot: true,
+            type: 'PERSISTENT',
+          },
+        ],
+        machineType: `zones/${zone}/machineTypes/${machineType}`,
+        networkInterfaces: [
+          {
+            // Use the network interface provided in the networkName argument.
+            name: networkName,
+          },
+        ],
+      },
+      project: projectId,
+      zone,
+    });
+    let operation = response.latestResponse;
+    const operationsClient = new compute.ZoneOperationsClient();
+
+    // Wait for the create operation to complete.
+    while (operation.status !== 'DONE') {
+      [operation] = await operationsClient.wait({
+        operation: operation.name,
+        project: projectId,
+        zone: operation.zone.split('/').pop(),
+      });
+    }
   });
 
   after(async () => {
     await bucket.delete();
     await bigquery.dataset(datasetId).delete({force: true}).catch(console.warn);
-    await vm.delete();
   });
 
   it('should export assets to specified path', async () => {
@@ -114,10 +162,10 @@ describe('quickstart sample tests', () => {
     assert.include(stdout, assetName);
   });
 
-  it.skip('should search all resources successfully', async () => {
-    const query = `name:${vmName}`;
+  it('should search all resources successfully', async () => {
+    const query = `name:${instanceName}`;
     const stdout = execSync(`node searchAllResources '' ${query}`);
-    assert.include(stdout, vmName);
+    assert.include(stdout, instanceName);
   });
 
   it('should search all iam policies successfully', async () => {
