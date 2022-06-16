@@ -1405,7 +1405,7 @@
                             if (message.accountDefenderAssessment != null && Object.hasOwnProperty.call(message, "accountDefenderAssessment"))
                                 $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.encode(message.accountDefenderAssessment, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.privatePasswordLeakVerification != null && Object.hasOwnProperty.call(message, "privatePasswordLeakVerification"))
-                                $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.encode(message.privatePasswordLeakVerification, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.encode(message.privatePasswordLeakVerification, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -1455,7 +1455,7 @@
                                 case 6:
                                     message.accountDefenderAssessment = $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.decode(reader, reader.uint32());
                                     break;
-                                case 7:
+                                case 8:
                                     message.privatePasswordLeakVerification = $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.decode(reader, reader.uint32());
                                     break;
                                 default:
