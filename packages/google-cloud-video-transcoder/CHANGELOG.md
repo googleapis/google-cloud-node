@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.0.1...v2.1.0) (2022-06-16)
+
+
+### Features
+
+* add support for user labels for job and job template ([#184](https://github.com/googleapis/nodejs-video-transcoder/issues/184)) ([675fbd6](https://github.com/googleapis/nodejs-video-transcoder/commit/675fbd6c6f8719f1487c2ef9e19057b71b2e0945))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.0.0...v2.0.1) (2022-06-07)
 
 
