@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-eventarc-publishing/compare/v2.0.0...v2.1.0) (2022-06-16)
+
+
+### Features
+
+* Add publishing methods for channel resources ([#24](https://github.com/googleapis/nodejs-eventarc-publishing/issues/24)) ([df59107](https://github.com/googleapis/nodejs-eventarc-publishing/commit/df591071fd7c3d89089b65df9a00c39bec748f5b))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-eventarc-publishing/compare/v1.1.0...v2.0.0) (2022-05-20)
 
 
