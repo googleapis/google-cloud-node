@@ -91,6 +91,7 @@
                              * @property {google.protobuf.ITimestamp|null} [startTime] Job startTime
                              * @property {google.protobuf.ITimestamp|null} [endTime] Job endTime
                              * @property {number|null} [ttlAfterCompletionDays] Job ttlAfterCompletionDays
+                             * @property {Object.<string,string>|null} [labels] Job labels
                              * @property {google.rpc.IStatus|null} [error] Job error
                              */
     
@@ -103,6 +104,7 @@
                              * @param {google.cloud.video.transcoder.v1.IJob=} [properties] Properties to set
                              */
                             function Job(properties) {
+                                this.labels = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -190,6 +192,14 @@
                             Job.prototype.ttlAfterCompletionDays = 0;
     
                             /**
+                             * Job labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.video.transcoder.v1.Job
+                             * @instance
+                             */
+                            Job.prototype.labels = $util.emptyObject;
+    
+                            /**
                              * Job error.
                              * @member {google.rpc.IStatus|null|undefined} error
                              * @memberof google.cloud.video.transcoder.v1.Job
@@ -255,6 +265,9 @@
                                     $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                                 if (message.ttlAfterCompletionDays != null && Object.hasOwnProperty.call(message, "ttlAfterCompletionDays"))
                                     writer.uint32(/* id 15, wireType 0 =*/120).int32(message.ttlAfterCompletionDays);
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 if (message.error != null && Object.hasOwnProperty.call(message, "error"))
                                     $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 return writer;
@@ -287,7 +300,7 @@
                             Job.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Job();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Job(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
@@ -320,6 +333,28 @@
                                         break;
                                     case 15:
                                         message.ttlAfterCompletionDays = reader.int32();
+                                        break;
+                                    case 16:
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
                                         break;
                                     case 17:
                                         message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
@@ -413,6 +448,14 @@
                                 if (message.ttlAfterCompletionDays != null && message.hasOwnProperty("ttlAfterCompletionDays"))
                                     if (!$util.isInteger(message.ttlAfterCompletionDays))
                                         return "ttlAfterCompletionDays: integer expected";
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
                                 if (message.error != null && message.hasOwnProperty("error")) {
                                     var error = $root.google.rpc.Status.verify(message.error);
                                     if (error)
@@ -485,6 +528,13 @@
                                 }
                                 if (object.ttlAfterCompletionDays != null)
                                     message.ttlAfterCompletionDays = object.ttlAfterCompletionDays | 0;
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Job.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
                                 if (object.error != null) {
                                     if (typeof object.error !== "object")
                                         throw TypeError(".google.cloud.video.transcoder.v1.Job.error: object expected");
@@ -506,6 +556,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
                                 if (options.defaults) {
                                     object.name = "";
                                     object.inputUri = "";
@@ -543,6 +595,12 @@
                                     object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                                 if (message.ttlAfterCompletionDays != null && message.hasOwnProperty("ttlAfterCompletionDays"))
                                     object.ttlAfterCompletionDays = message.ttlAfterCompletionDays;
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
                                 if (message.error != null && message.hasOwnProperty("error"))
                                     object.error = $root.google.rpc.Status.toObject(message.error, options);
                                 return object;
@@ -590,6 +648,7 @@
                              * @interface IJobTemplate
                              * @property {string|null} [name] JobTemplate name
                              * @property {google.cloud.video.transcoder.v1.IJobConfig|null} [config] JobTemplate config
+                             * @property {Object.<string,string>|null} [labels] JobTemplate labels
                              */
     
                             /**
@@ -601,6 +660,7 @@
                              * @param {google.cloud.video.transcoder.v1.IJobTemplate=} [properties] Properties to set
                              */
                             function JobTemplate(properties) {
+                                this.labels = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -622,6 +682,14 @@
                              * @instance
                              */
                             JobTemplate.prototype.config = null;
+    
+                            /**
+                             * JobTemplate labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.video.transcoder.v1.JobTemplate
+                             * @instance
+                             */
+                            JobTemplate.prototype.labels = $util.emptyObject;
     
                             /**
                              * Creates a new JobTemplate instance using the specified properties.
@@ -651,6 +719,9 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.config != null && Object.hasOwnProperty.call(message, "config"))
                                     $root.google.cloud.video.transcoder.v1.JobConfig.encode(message.config, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 return writer;
                             };
     
@@ -681,7 +752,7 @@
                             JobTemplate.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.JobTemplate();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.JobTemplate(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
@@ -690,6 +761,28 @@
                                         break;
                                     case 2:
                                         message.config = $root.google.cloud.video.transcoder.v1.JobConfig.decode(reader, reader.uint32());
+                                        break;
+                                    case 3:
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -734,6 +827,14 @@
                                     if (error)
                                         return "config." + error;
                                 }
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
                                 return null;
                             };
     
@@ -756,6 +857,13 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1.JobTemplate.config: object expected");
                                     message.config = $root.google.cloud.video.transcoder.v1.JobConfig.fromObject(object.config);
                                 }
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.JobTemplate.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
                                 return message;
                             };
     
@@ -772,6 +880,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
                                 if (options.defaults) {
                                     object.name = "";
                                     object.config = null;
@@ -780,6 +890,12 @@
                                     object.name = message.name;
                                 if (message.config != null && message.hasOwnProperty("config"))
                                     object.config = $root.google.cloud.video.transcoder.v1.JobConfig.toObject(message.config, options);
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
                                 return object;
                             };
     
@@ -4679,6 +4795,22 @@
                                 return AnimationStatic;
                             })();
     
+                            /**
+                             * FadeType enum.
+                             * @name google.cloud.video.transcoder.v1.Overlay.FadeType
+                             * @enum {number}
+                             * @property {number} FADE_TYPE_UNSPECIFIED=0 FADE_TYPE_UNSPECIFIED value
+                             * @property {number} FADE_IN=1 FADE_IN value
+                             * @property {number} FADE_OUT=2 FADE_OUT value
+                             */
+                            Overlay.FadeType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "FADE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "FADE_IN"] = 1;
+                                values[valuesById[2] = "FADE_OUT"] = 2;
+                                return values;
+                            })();
+    
                             Overlay.AnimationFade = (function() {
     
                                 /**
@@ -5435,22 +5567,6 @@
                                 };
     
                                 return Animation;
-                            })();
-    
-                            /**
-                             * FadeType enum.
-                             * @name google.cloud.video.transcoder.v1.Overlay.FadeType
-                             * @enum {number}
-                             * @property {number} FADE_TYPE_UNSPECIFIED=0 FADE_TYPE_UNSPECIFIED value
-                             * @property {number} FADE_IN=1 FADE_IN value
-                             * @property {number} FADE_OUT=2 FADE_OUT value
-                             */
-                            Overlay.FadeType = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "FADE_TYPE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "FADE_IN"] = 1;
-                                values[valuesById[2] = "FADE_OUT"] = 2;
-                                return values;
                             })();
     
                             return Overlay;

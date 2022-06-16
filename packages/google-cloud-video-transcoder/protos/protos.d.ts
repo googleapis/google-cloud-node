@@ -62,6 +62,9 @@ export namespace google {
                         /** Job ttlAfterCompletionDays */
                         ttlAfterCompletionDays?: (number|null);
 
+                        /** Job labels */
+                        labels?: ({ [k: string]: string }|null);
+
                         /** Job error */
                         error?: (google.rpc.IStatus|null);
                     }
@@ -104,6 +107,9 @@ export namespace google {
 
                         /** Job ttlAfterCompletionDays. */
                         public ttlAfterCompletionDays: number;
+
+                        /** Job labels. */
+                        public labels: { [k: string]: string };
 
                         /** Job error. */
                         public error?: (google.rpc.IStatus|null);
@@ -202,6 +208,9 @@ export namespace google {
 
                         /** JobTemplate config */
                         config?: (google.cloud.video.transcoder.v1.IJobConfig|null);
+
+                        /** JobTemplate labels */
+                        labels?: ({ [k: string]: string }|null);
                     }
 
                     /** Represents a JobTemplate. */
@@ -218,6 +227,9 @@ export namespace google {
 
                         /** JobTemplate config. */
                         public config?: (google.cloud.video.transcoder.v1.IJobConfig|null);
+
+                        /** JobTemplate labels. */
+                        public labels: { [k: string]: string };
 
                         /**
                          * Creates a new JobTemplate instance using the specified properties.
@@ -1796,6 +1808,13 @@ export namespace google {
                             public toJSON(): { [k: string]: any };
                         }
 
+                        /** FadeType enum. */
+                        enum FadeType {
+                            FADE_TYPE_UNSPECIFIED = 0,
+                            FADE_IN = 1,
+                            FADE_OUT = 2
+                        }
+
                         /** Properties of an AnimationFade. */
                         interface IAnimationFade {
 
@@ -2097,13 +2116,6 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
-                        }
-
-                        /** FadeType enum. */
-                        enum FadeType {
-                            FADE_TYPE_UNSPECIFIED = 0,
-                            FADE_IN = 1,
-                            FADE_OUT = 2
                         }
                     }
 

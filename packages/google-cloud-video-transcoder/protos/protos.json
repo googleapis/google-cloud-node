@@ -94,6 +94,11 @@
                               "type": "int32",
                               "id": 15
                             },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 16
+                            },
                             "error": {
                               "type": "google.rpc.Status",
                               "id": 17,
@@ -127,6 +132,11 @@
                             "config": {
                               "type": "JobConfig",
                               "id": 2
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
@@ -450,6 +460,13 @@
                                 }
                               }
                             },
+                            "FadeType": {
+                              "values": {
+                                "FADE_TYPE_UNSPECIFIED": 0,
+                                "FADE_IN": 1,
+                                "FADE_OUT": 2
+                              }
+                            },
                             "AnimationFade": {
                               "fields": {
                                 "fadeType": {
@@ -504,13 +521,6 @@
                                   "type": "AnimationEnd",
                                   "id": 3
                                 }
-                              }
-                            },
-                            "FadeType": {
-                              "values": {
-                                "FADE_TYPE_UNSPECIFIED": 0,
-                                "FADE_IN": 1,
-                                "FADE_OUT": 2
                               }
                             }
                           }
