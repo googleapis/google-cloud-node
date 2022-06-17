@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-asset/compare/v3.23.1...v4.0.0) (2022-06-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#625)
+
+### Features
+
+* Add SavedQuery CURD support ([#627](https://github.com/googleapis/nodejs-asset/issues/627)) ([d3727de](https://github.com/googleapis/nodejs-asset/commit/d3727de308b7f42bf974b494d4f06d7b4fc91993))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/bigquery to v6 ([#630](https://github.com/googleapis/nodejs-asset/issues/630)) ([d779420](https://github.com/googleapis/nodejs-asset/commit/d77942087598d508cdbe1786b6b6a01d5db46174))
+* **deps:** update dependency @google-cloud/storage to v6 ([#629](https://github.com/googleapis/nodejs-asset/issues/629)) ([1fb5d23](https://github.com/googleapis/nodejs-asset/commit/1fb5d23a0384eb4f67c5c27c367c9dadda201dca))
+
+
+### Build System
+
+* update library to use Node 12 ([#625](https://github.com/googleapis/nodejs-asset/issues/625)) ([20eec3e](https://github.com/googleapis/nodejs-asset/commit/20eec3e3a5e23a469d08b0a9c415a9ad2d4c5b0d))
+
 ### [3.23.1](https://github.com/googleapis/nodejs-asset/compare/v3.23.0...v3.23.1) (2022-02-11)
 
 
