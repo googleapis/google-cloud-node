@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-datacatalog/compare/v2.6.0...v3.0.0) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#362)
+
+### Features
+
+* AuditConfig for IAM v1 ([#349](https://github.com/googleapis/nodejs-datacatalog/issues/349)) ([39a829e](https://github.com/googleapis/nodejs-datacatalog/commit/39a829e7da308c9b1c91e347c8729bfbc5ba39c8))
+
+
+### Bug Fixes
+
+* **deps:** roll back dependency @google-cloud/datacatalog to ^2.5.0 ([#345](https://github.com/googleapis/nodejs-datacatalog/issues/345)) ([5fc48ab](https://github.com/googleapis/nodejs-datacatalog/commit/5fc48ab5bae55c0bc1f62a1418eaa74a8fae1034))
+* **deps:** update dependency @google-cloud/bigquery to v6 ([#365](https://github.com/googleapis/nodejs-datacatalog/issues/365)) ([4d966a1](https://github.com/googleapis/nodejs-datacatalog/commit/4d966a161e034142ad7db54c0c06dc962199caad))
+
+
+### Build System
+
+* update library to use Node 12 ([#362](https://github.com/googleapis/nodejs-datacatalog/issues/362)) ([9d8688b](https://github.com/googleapis/nodejs-datacatalog/commit/9d8688bcf7c9f1ddc4c3cfe0f05d69b138198ec8))
+
 ## [2.6.0](https://github.com/googleapis/nodejs-datacatalog/compare/v2.5.0...v2.6.0) (2022-02-08)
 
 
