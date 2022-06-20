@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-automl",
-        "version": "2.5.2",
+        "version": "3.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
