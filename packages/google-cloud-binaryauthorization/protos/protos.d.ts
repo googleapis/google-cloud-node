@@ -2255,6 +2255,9 @@ export namespace google {
                     /** Properties of a ContinuousValidationPodEvent. */
                     interface IContinuousValidationPodEvent {
 
+                        /** ContinuousValidationPodEvent podNamespace */
+                        podNamespace?: (string|null);
+
                         /** ContinuousValidationPodEvent pod */
                         pod?: (string|null);
 
@@ -2279,6 +2282,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent);
+
+                        /** ContinuousValidationPodEvent podNamespace. */
+                        public podNamespace: string;
 
                         /** ContinuousValidationPodEvent pod. */
                         public pod: string;
@@ -2367,6 +2373,12 @@ export namespace google {
                     }
 
                     namespace ContinuousValidationPodEvent {
+
+                        /** PolicyConformanceVerdict enum. */
+                        enum PolicyConformanceVerdict {
+                            POLICY_CONFORMANCE_VERDICT_UNSPECIFIED = 0,
+                            VIOLATES_POLICY = 1
+                        }
 
                         /** Properties of an ImageDetails. */
                         interface IImageDetails {
@@ -2478,12 +2490,6 @@ export namespace google {
                                 ALLOW = 1,
                                 DENY = 2
                             }
-                        }
-
-                        /** PolicyConformanceVerdict enum. */
-                        enum PolicyConformanceVerdict {
-                            POLICY_CONFORMANCE_VERDICT_UNSPECIFIED = 0,
-                            VIOLATES_POLICY = 1
                         }
                     }
 

@@ -5344,6 +5344,7 @@
                              * Properties of a ContinuousValidationPodEvent.
                              * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
                              * @interface IContinuousValidationPodEvent
+                             * @property {string|null} [podNamespace] ContinuousValidationPodEvent podNamespace
                              * @property {string|null} [pod] ContinuousValidationPodEvent pod
                              * @property {google.protobuf.ITimestamp|null} [deployTime] ContinuousValidationPodEvent deployTime
                              * @property {google.protobuf.ITimestamp|null} [endTime] ContinuousValidationPodEvent endTime
@@ -5366,6 +5367,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * ContinuousValidationPodEvent podNamespace.
+                             * @member {string} podNamespace
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.podNamespace = "";
     
                             /**
                              * ContinuousValidationPodEvent pod.
@@ -5442,6 +5451,8 @@
                                 if (message.images != null && message.images.length)
                                     for (var i = 0; i < message.images.length; ++i)
                                         $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.encode(message.images[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.podNamespace != null && Object.hasOwnProperty.call(message, "podNamespace"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.podNamespace);
                                 return writer;
                             };
     
@@ -5476,6 +5487,9 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
+                                    case 7:
+                                        message.podNamespace = reader.string();
+                                        break;
                                     case 1:
                                         message.pod = reader.string();
                                         break;
@@ -5528,6 +5542,9 @@
                             ContinuousValidationPodEvent.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (message.podNamespace != null && message.hasOwnProperty("podNamespace"))
+                                    if (!$util.isString(message.podNamespace))
+                                        return "podNamespace: string expected";
                                 if (message.pod != null && message.hasOwnProperty("pod"))
                                     if (!$util.isString(message.pod))
                                         return "pod: string expected";
@@ -5573,6 +5590,8 @@
                                 if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent)
                                     return object;
                                 var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent();
+                                if (object.podNamespace != null)
+                                    message.podNamespace = String(object.podNamespace);
                                 if (object.pod != null)
                                     message.pod = String(object.pod);
                                 if (object.deployTime != null) {
@@ -5628,6 +5647,7 @@
                                     object.deployTime = null;
                                     object.endTime = null;
                                     object.verdict = options.enums === String ? "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED" : 0;
+                                    object.podNamespace = "";
                                 }
                                 if (message.pod != null && message.hasOwnProperty("pod"))
                                     object.pod = message.pod;
@@ -5642,6 +5662,8 @@
                                     for (var j = 0; j < message.images.length; ++j)
                                         object.images[j] = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.toObject(message.images[j], options);
                                 }
+                                if (message.podNamespace != null && message.hasOwnProperty("podNamespace"))
+                                    object.podNamespace = message.podNamespace;
                                 return object;
                             };
     
@@ -5655,6 +5677,20 @@
                             ContinuousValidationPodEvent.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
+    
+                            /**
+                             * PolicyConformanceVerdict enum.
+                             * @name google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict
+                             * @enum {number}
+                             * @property {number} POLICY_CONFORMANCE_VERDICT_UNSPECIFIED=0 POLICY_CONFORMANCE_VERDICT_UNSPECIFIED value
+                             * @property {number} VIOLATES_POLICY=1 VIOLATES_POLICY value
+                             */
+                            ContinuousValidationPodEvent.PolicyConformanceVerdict = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "VIOLATES_POLICY"] = 1;
+                                return values;
+                            })();
     
                             ContinuousValidationPodEvent.ImageDetails = (function() {
     
@@ -5920,20 +5956,6 @@
                                 })();
     
                                 return ImageDetails;
-                            })();
-    
-                            /**
-                             * PolicyConformanceVerdict enum.
-                             * @name google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict
-                             * @enum {number}
-                             * @property {number} POLICY_CONFORMANCE_VERDICT_UNSPECIFIED=0 POLICY_CONFORMANCE_VERDICT_UNSPECIFIED value
-                             * @property {number} VIOLATES_POLICY=1 VIOLATES_POLICY value
-                             */
-                            ContinuousValidationPodEvent.PolicyConformanceVerdict = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "VIOLATES_POLICY"] = 1;
-                                return values;
                             })();
     
                             return ContinuousValidationPodEvent;

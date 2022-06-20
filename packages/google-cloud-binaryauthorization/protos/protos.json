@@ -701,6 +701,10 @@
                       "nested": {
                         "ContinuousValidationPodEvent": {
                           "fields": {
+                            "podNamespace": {
+                              "type": "string",
+                              "id": 7
+                            },
                             "pod": {
                               "type": "string",
                               "id": 1
@@ -724,6 +728,12 @@
                             }
                           },
                           "nested": {
+                            "PolicyConformanceVerdict": {
+                              "values": {
+                                "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED": 0,
+                                "VIOLATES_POLICY": 1
+                              }
+                            },
                             "ImageDetails": {
                               "fields": {
                                 "image": {
@@ -747,12 +757,6 @@
                                     "DENY": 2
                                   }
                                 }
-                              }
-                            },
-                            "PolicyConformanceVerdict": {
-                              "values": {
-                                "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED": 0,
-                                "VIOLATES_POLICY": 1
                               }
                             }
                           }
