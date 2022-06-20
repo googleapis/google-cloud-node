@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-appengine-admin/compare/v1.2.0...v2.0.0) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#134)
+
+### Features
+
+* add Application.service_account ([#130](https://github.com/googleapis/nodejs-appengine-admin/issues/130)) ([698f05e](https://github.com/googleapis/nodejs-appengine-admin/commit/698f05e03e81b24602a6f6a681186540722698e8))
+
+
+### Build System
+
+* update library to use Node 12 ([#134](https://github.com/googleapis/nodejs-appengine-admin/issues/134)) ([df3424a](https://github.com/googleapis/nodejs-appengine-admin/commit/df3424ac8a77e8549f42300e4182a721e8ef4755))
+
 ## [1.2.0](https://github.com/googleapis/nodejs-appengine-admin/compare/v1.1.0...v1.2.0) (2022-03-23)
 
 
