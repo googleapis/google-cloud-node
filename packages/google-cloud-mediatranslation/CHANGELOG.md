@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-media-translation/compare/v2.4.0...v3.0.0) (2022-06-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#225)
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#228](https://github.com/googleapis/nodejs-media-translation/issues/228)) ([c1bbe17](https://github.com/googleapis/nodejs-media-translation/commit/c1bbe17e481387dfeda9c842f3d30bbfee11eab6))
+
+
+### Build System
+
+* update library to use Node 12 ([#225](https://github.com/googleapis/nodejs-media-translation/issues/225)) ([25b13e3](https://github.com/googleapis/nodejs-media-translation/commit/25b13e39949ba1694254f7cb85c07f03314f1ad9))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.3.4...v2.4.0) (2021-09-08)
 
 
