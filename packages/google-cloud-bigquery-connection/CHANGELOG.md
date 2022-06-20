@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-bigquery-connection/compare/v1.5.1...v2.0.0) (2022-06-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#177)
+
+### Features
+
+* Add Cloud_Resource Connection Support ([#162](https://github.com/googleapis/nodejs-bigquery-connection/issues/162)) ([afc2727](https://github.com/googleapis/nodejs-bigquery-connection/commit/afc272726d3600f425faca2a8b5bf22a6a24314c))
+* AuditConfig for IAM v1 ([#166](https://github.com/googleapis/nodejs-bigquery-connection/issues/166)) ([53bec44](https://github.com/googleapis/nodejs-bigquery-connection/commit/53bec4434eaec4ffba927554f8cee14b45a3c646))
+
+
+### Build System
+
+* update library to use Node 12 ([#177](https://github.com/googleapis/nodejs-bigquery-connection/issues/177)) ([b034adf](https://github.com/googleapis/nodejs-bigquery-connection/commit/b034adfbd415d1138d5921b51434d28819990cee))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.5.0...v1.5.1) (2021-09-27)
 
 
