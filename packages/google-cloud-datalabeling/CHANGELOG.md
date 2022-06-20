@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-datalabeling/compare/v2.3.0...v3.0.0) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#356)
+
+### Bug Fixes
+
+* **datalabeling:** add ancillary service bindings to service_yaml ([#331](https://github.com/googleapis/nodejs-datalabeling/issues/331)) ([1df9ca2](https://github.com/googleapis/nodejs-datalabeling/commit/1df9ca2c5f3bf0a5c937d5372d6ba1324536683f))
+
+
+### Build System
+
+* update library to use Node 12 ([#356](https://github.com/googleapis/nodejs-datalabeling/issues/356)) ([07afd31](https://github.com/googleapis/nodejs-datalabeling/commit/07afd3120b29225442eb9d38c3756de13766ae50))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.7...v2.3.0) (2021-08-23)
 
 
