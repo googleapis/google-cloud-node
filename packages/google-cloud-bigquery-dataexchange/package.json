@@ -48,7 +48,7 @@
     "c8": "^7.7.2",
     "gts": "^3.1.0",
     "jsdoc": "^3.6.6",
-    "jsdoc-fresh": "^1.0.2",
+    "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^1.0.6",
     "linkinator": "^3.0.0",
     "mocha": "^10.0.0",
