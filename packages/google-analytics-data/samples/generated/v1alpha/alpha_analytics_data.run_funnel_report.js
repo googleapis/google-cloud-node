@@ -58,9 +58,11 @@ function main() {
   /**
    *  If specified, next action adds a dimension to the funnel visualization sub
    *  report response. This next action dimension expands each funnel step to the
-   *  unique values of the next action. For example a breakdown by the
+   *  unique values of the next action. For example a next action of the
    *  `eventName` dimension will create rows for several events (i.e.
    *  `session_start` & `click`) and the total.
+   *  Next action only supports `eventName` and most Page / Screen dimensions
+   *  like `pageTitle` and `pagePath`.
    */
   // const funnelNextAction = {}
   /**

@@ -8535,8 +8535,8 @@ export namespace google {
                     /** FunnelFilterExpression notExpression */
                     notExpression?: (google.analytics.data.v1alpha.IFunnelFilterExpression|null);
 
-                    /** FunnelFilterExpression funnelFilter */
-                    funnelFilter?: (google.analytics.data.v1alpha.IFunnelFilter|null);
+                    /** FunnelFilterExpression funnelFieldFilter */
+                    funnelFieldFilter?: (google.analytics.data.v1alpha.IFunnelFieldFilter|null);
 
                     /** FunnelFilterExpression funnelEventFilter */
                     funnelEventFilter?: (google.analytics.data.v1alpha.IFunnelEventFilter|null);
@@ -8560,14 +8560,14 @@ export namespace google {
                     /** FunnelFilterExpression notExpression. */
                     public notExpression?: (google.analytics.data.v1alpha.IFunnelFilterExpression|null);
 
-                    /** FunnelFilterExpression funnelFilter. */
-                    public funnelFilter?: (google.analytics.data.v1alpha.IFunnelFilter|null);
+                    /** FunnelFilterExpression funnelFieldFilter. */
+                    public funnelFieldFilter?: (google.analytics.data.v1alpha.IFunnelFieldFilter|null);
 
                     /** FunnelFilterExpression funnelEventFilter. */
                     public funnelEventFilter?: (google.analytics.data.v1alpha.IFunnelEventFilter|null);
 
                     /** FunnelFilterExpression expr. */
-                    public expr?: ("andGroup"|"orGroup"|"notExpression"|"funnelFilter"|"funnelEventFilter");
+                    public expr?: ("andGroup"|"orGroup"|"notExpression"|"funnelFieldFilter"|"funnelEventFilter");
 
                     /**
                      * Creates a new FunnelFilterExpression instance using the specified properties.
@@ -8730,118 +8730,118 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a FunnelFilter. */
-                interface IFunnelFilter {
+                /** Properties of a FunnelFieldFilter. */
+                interface IFunnelFieldFilter {
 
-                    /** FunnelFilter fieldName */
+                    /** FunnelFieldFilter fieldName */
                     fieldName?: (string|null);
 
-                    /** FunnelFilter stringFilter */
+                    /** FunnelFieldFilter stringFilter */
                     stringFilter?: (google.analytics.data.v1alpha.IStringFilter|null);
 
-                    /** FunnelFilter inListFilter */
+                    /** FunnelFieldFilter inListFilter */
                     inListFilter?: (google.analytics.data.v1alpha.IInListFilter|null);
 
-                    /** FunnelFilter numericFilter */
+                    /** FunnelFieldFilter numericFilter */
                     numericFilter?: (google.analytics.data.v1alpha.INumericFilter|null);
 
-                    /** FunnelFilter betweenFilter */
+                    /** FunnelFieldFilter betweenFilter */
                     betweenFilter?: (google.analytics.data.v1alpha.IBetweenFilter|null);
                 }
 
-                /** Represents a FunnelFilter. */
-                class FunnelFilter implements IFunnelFilter {
+                /** Represents a FunnelFieldFilter. */
+                class FunnelFieldFilter implements IFunnelFieldFilter {
 
                     /**
-                     * Constructs a new FunnelFilter.
+                     * Constructs a new FunnelFieldFilter.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.analytics.data.v1alpha.IFunnelFilter);
+                    constructor(properties?: google.analytics.data.v1alpha.IFunnelFieldFilter);
 
-                    /** FunnelFilter fieldName. */
+                    /** FunnelFieldFilter fieldName. */
                     public fieldName: string;
 
-                    /** FunnelFilter stringFilter. */
+                    /** FunnelFieldFilter stringFilter. */
                     public stringFilter?: (google.analytics.data.v1alpha.IStringFilter|null);
 
-                    /** FunnelFilter inListFilter. */
+                    /** FunnelFieldFilter inListFilter. */
                     public inListFilter?: (google.analytics.data.v1alpha.IInListFilter|null);
 
-                    /** FunnelFilter numericFilter. */
+                    /** FunnelFieldFilter numericFilter. */
                     public numericFilter?: (google.analytics.data.v1alpha.INumericFilter|null);
 
-                    /** FunnelFilter betweenFilter. */
+                    /** FunnelFieldFilter betweenFilter. */
                     public betweenFilter?: (google.analytics.data.v1alpha.IBetweenFilter|null);
 
-                    /** FunnelFilter oneFilter. */
+                    /** FunnelFieldFilter oneFilter. */
                     public oneFilter?: ("stringFilter"|"inListFilter"|"numericFilter"|"betweenFilter");
 
                     /**
-                     * Creates a new FunnelFilter instance using the specified properties.
+                     * Creates a new FunnelFieldFilter instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns FunnelFilter instance
+                     * @returns FunnelFieldFilter instance
                      */
-                    public static create(properties?: google.analytics.data.v1alpha.IFunnelFilter): google.analytics.data.v1alpha.FunnelFilter;
+                    public static create(properties?: google.analytics.data.v1alpha.IFunnelFieldFilter): google.analytics.data.v1alpha.FunnelFieldFilter;
 
                     /**
-                     * Encodes the specified FunnelFilter message. Does not implicitly {@link google.analytics.data.v1alpha.FunnelFilter.verify|verify} messages.
-                     * @param message FunnelFilter message or plain object to encode
+                     * Encodes the specified FunnelFieldFilter message. Does not implicitly {@link google.analytics.data.v1alpha.FunnelFieldFilter.verify|verify} messages.
+                     * @param message FunnelFieldFilter message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.analytics.data.v1alpha.IFunnelFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.analytics.data.v1alpha.IFunnelFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified FunnelFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.FunnelFilter.verify|verify} messages.
-                     * @param message FunnelFilter message or plain object to encode
+                     * Encodes the specified FunnelFieldFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.FunnelFieldFilter.verify|verify} messages.
+                     * @param message FunnelFieldFilter message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.analytics.data.v1alpha.IFunnelFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.IFunnelFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a FunnelFilter message from the specified reader or buffer.
+                     * Decodes a FunnelFieldFilter message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns FunnelFilter
+                     * @returns FunnelFieldFilter
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.FunnelFilter;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.FunnelFieldFilter;
 
                     /**
-                     * Decodes a FunnelFilter message from the specified reader or buffer, length delimited.
+                     * Decodes a FunnelFieldFilter message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns FunnelFilter
+                     * @returns FunnelFieldFilter
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.FunnelFilter;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.FunnelFieldFilter;
 
                     /**
-                     * Verifies a FunnelFilter message.
+                     * Verifies a FunnelFieldFilter message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a FunnelFilter message from a plain object. Also converts values to their respective internal types.
+                     * Creates a FunnelFieldFilter message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns FunnelFilter
+                     * @returns FunnelFieldFilter
                      */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.FunnelFilter;
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.FunnelFieldFilter;
 
                     /**
-                     * Creates a plain object from a FunnelFilter message. Also converts values to other types if specified.
-                     * @param message FunnelFilter
+                     * Creates a plain object from a FunnelFieldFilter message. Also converts values to other types if specified.
+                     * @param message FunnelFieldFilter
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.analytics.data.v1alpha.FunnelFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.analytics.data.v1alpha.FunnelFieldFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this FunnelFilter to JSON.
+                     * Converts this FunnelFieldFilter to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

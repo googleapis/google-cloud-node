@@ -1976,7 +1976,7 @@
                             "andGroup",
                             "orGroup",
                             "notExpression",
-                            "funnelFilter",
+                            "funnelFieldFilter",
                             "funnelEventFilter"
                           ]
                         }
@@ -1994,8 +1994,8 @@
                           "type": "FunnelFilterExpression",
                           "id": 3
                         },
-                        "funnelFilter": {
-                          "type": "FunnelFilter",
+                        "funnelFieldFilter": {
+                          "type": "FunnelFieldFilter",
                           "id": 4
                         },
                         "funnelEventFilter": {
@@ -2013,7 +2013,7 @@
                         }
                       }
                     },
-                    "FunnelFilter": {
+                    "FunnelFieldFilter": {
                       "oneofs": {
                         "oneFilter": {
                           "oneof": [

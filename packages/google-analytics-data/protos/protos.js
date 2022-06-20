@@ -22215,7 +22215,7 @@
                          * @property {google.analytics.data.v1alpha.IFunnelFilterExpressionList|null} [andGroup] FunnelFilterExpression andGroup
                          * @property {google.analytics.data.v1alpha.IFunnelFilterExpressionList|null} [orGroup] FunnelFilterExpression orGroup
                          * @property {google.analytics.data.v1alpha.IFunnelFilterExpression|null} [notExpression] FunnelFilterExpression notExpression
-                         * @property {google.analytics.data.v1alpha.IFunnelFilter|null} [funnelFilter] FunnelFilterExpression funnelFilter
+                         * @property {google.analytics.data.v1alpha.IFunnelFieldFilter|null} [funnelFieldFilter] FunnelFilterExpression funnelFieldFilter
                          * @property {google.analytics.data.v1alpha.IFunnelEventFilter|null} [funnelEventFilter] FunnelFilterExpression funnelEventFilter
                          */
     
@@ -22259,12 +22259,12 @@
                         FunnelFilterExpression.prototype.notExpression = null;
     
                         /**
-                         * FunnelFilterExpression funnelFilter.
-                         * @member {google.analytics.data.v1alpha.IFunnelFilter|null|undefined} funnelFilter
+                         * FunnelFilterExpression funnelFieldFilter.
+                         * @member {google.analytics.data.v1alpha.IFunnelFieldFilter|null|undefined} funnelFieldFilter
                          * @memberof google.analytics.data.v1alpha.FunnelFilterExpression
                          * @instance
                          */
-                        FunnelFilterExpression.prototype.funnelFilter = null;
+                        FunnelFilterExpression.prototype.funnelFieldFilter = null;
     
                         /**
                          * FunnelFilterExpression funnelEventFilter.
@@ -22279,12 +22279,12 @@
     
                         /**
                          * FunnelFilterExpression expr.
-                         * @member {"andGroup"|"orGroup"|"notExpression"|"funnelFilter"|"funnelEventFilter"|undefined} expr
+                         * @member {"andGroup"|"orGroup"|"notExpression"|"funnelFieldFilter"|"funnelEventFilter"|undefined} expr
                          * @memberof google.analytics.data.v1alpha.FunnelFilterExpression
                          * @instance
                          */
                         Object.defineProperty(FunnelFilterExpression.prototype, "expr", {
-                            get: $util.oneOfGetter($oneOfFields = ["andGroup", "orGroup", "notExpression", "funnelFilter", "funnelEventFilter"]),
+                            get: $util.oneOfGetter($oneOfFields = ["andGroup", "orGroup", "notExpression", "funnelFieldFilter", "funnelEventFilter"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -22318,8 +22318,8 @@
                                 $root.google.analytics.data.v1alpha.FunnelFilterExpressionList.encode(message.orGroup, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.notExpression != null && Object.hasOwnProperty.call(message, "notExpression"))
                                 $root.google.analytics.data.v1alpha.FunnelFilterExpression.encode(message.notExpression, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.funnelFilter != null && Object.hasOwnProperty.call(message, "funnelFilter"))
-                                $root.google.analytics.data.v1alpha.FunnelFilter.encode(message.funnelFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.funnelFieldFilter != null && Object.hasOwnProperty.call(message, "funnelFieldFilter"))
+                                $root.google.analytics.data.v1alpha.FunnelFieldFilter.encode(message.funnelFieldFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.funnelEventFilter != null && Object.hasOwnProperty.call(message, "funnelEventFilter"))
                                 $root.google.analytics.data.v1alpha.FunnelEventFilter.encode(message.funnelEventFilter, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
@@ -22366,7 +22366,7 @@
                                     message.notExpression = $root.google.analytics.data.v1alpha.FunnelFilterExpression.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    message.funnelFilter = $root.google.analytics.data.v1alpha.FunnelFilter.decode(reader, reader.uint32());
+                                    message.funnelFieldFilter = $root.google.analytics.data.v1alpha.FunnelFieldFilter.decode(reader, reader.uint32());
                                     break;
                                 case 5:
                                     message.funnelEventFilter = $root.google.analytics.data.v1alpha.FunnelEventFilter.decode(reader, reader.uint32());
@@ -22435,14 +22435,14 @@
                                         return "notExpression." + error;
                                 }
                             }
-                            if (message.funnelFilter != null && message.hasOwnProperty("funnelFilter")) {
+                            if (message.funnelFieldFilter != null && message.hasOwnProperty("funnelFieldFilter")) {
                                 if (properties.expr === 1)
                                     return "expr: multiple values";
                                 properties.expr = 1;
                                 {
-                                    var error = $root.google.analytics.data.v1alpha.FunnelFilter.verify(message.funnelFilter);
+                                    var error = $root.google.analytics.data.v1alpha.FunnelFieldFilter.verify(message.funnelFieldFilter);
                                     if (error)
-                                        return "funnelFilter." + error;
+                                        return "funnelFieldFilter." + error;
                                 }
                             }
                             if (message.funnelEventFilter != null && message.hasOwnProperty("funnelEventFilter")) {
@@ -22485,10 +22485,10 @@
                                     throw TypeError(".google.analytics.data.v1alpha.FunnelFilterExpression.notExpression: object expected");
                                 message.notExpression = $root.google.analytics.data.v1alpha.FunnelFilterExpression.fromObject(object.notExpression);
                             }
-                            if (object.funnelFilter != null) {
-                                if (typeof object.funnelFilter !== "object")
-                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFilterExpression.funnelFilter: object expected");
-                                message.funnelFilter = $root.google.analytics.data.v1alpha.FunnelFilter.fromObject(object.funnelFilter);
+                            if (object.funnelFieldFilter != null) {
+                                if (typeof object.funnelFieldFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFilterExpression.funnelFieldFilter: object expected");
+                                message.funnelFieldFilter = $root.google.analytics.data.v1alpha.FunnelFieldFilter.fromObject(object.funnelFieldFilter);
                             }
                             if (object.funnelEventFilter != null) {
                                 if (typeof object.funnelEventFilter !== "object")
@@ -22526,10 +22526,10 @@
                                 if (options.oneofs)
                                     object.expr = "notExpression";
                             }
-                            if (message.funnelFilter != null && message.hasOwnProperty("funnelFilter")) {
-                                object.funnelFilter = $root.google.analytics.data.v1alpha.FunnelFilter.toObject(message.funnelFilter, options);
+                            if (message.funnelFieldFilter != null && message.hasOwnProperty("funnelFieldFilter")) {
+                                object.funnelFieldFilter = $root.google.analytics.data.v1alpha.FunnelFieldFilter.toObject(message.funnelFieldFilter, options);
                                 if (options.oneofs)
-                                    object.expr = "funnelFilter";
+                                    object.expr = "funnelFieldFilter";
                             }
                             if (message.funnelEventFilter != null && message.hasOwnProperty("funnelEventFilter")) {
                                 object.funnelEventFilter = $root.google.analytics.data.v1alpha.FunnelEventFilter.toObject(message.funnelEventFilter, options);
@@ -22761,28 +22761,28 @@
                         return FunnelFilterExpressionList;
                     })();
     
-                    v1alpha.FunnelFilter = (function() {
+                    v1alpha.FunnelFieldFilter = (function() {
     
                         /**
-                         * Properties of a FunnelFilter.
+                         * Properties of a FunnelFieldFilter.
                          * @memberof google.analytics.data.v1alpha
-                         * @interface IFunnelFilter
-                         * @property {string|null} [fieldName] FunnelFilter fieldName
-                         * @property {google.analytics.data.v1alpha.IStringFilter|null} [stringFilter] FunnelFilter stringFilter
-                         * @property {google.analytics.data.v1alpha.IInListFilter|null} [inListFilter] FunnelFilter inListFilter
-                         * @property {google.analytics.data.v1alpha.INumericFilter|null} [numericFilter] FunnelFilter numericFilter
-                         * @property {google.analytics.data.v1alpha.IBetweenFilter|null} [betweenFilter] FunnelFilter betweenFilter
+                         * @interface IFunnelFieldFilter
+                         * @property {string|null} [fieldName] FunnelFieldFilter fieldName
+                         * @property {google.analytics.data.v1alpha.IStringFilter|null} [stringFilter] FunnelFieldFilter stringFilter
+                         * @property {google.analytics.data.v1alpha.IInListFilter|null} [inListFilter] FunnelFieldFilter inListFilter
+                         * @property {google.analytics.data.v1alpha.INumericFilter|null} [numericFilter] FunnelFieldFilter numericFilter
+                         * @property {google.analytics.data.v1alpha.IBetweenFilter|null} [betweenFilter] FunnelFieldFilter betweenFilter
                          */
     
                         /**
-                         * Constructs a new FunnelFilter.
+                         * Constructs a new FunnelFieldFilter.
                          * @memberof google.analytics.data.v1alpha
-                         * @classdesc Represents a FunnelFilter.
-                         * @implements IFunnelFilter
+                         * @classdesc Represents a FunnelFieldFilter.
+                         * @implements IFunnelFieldFilter
                          * @constructor
-                         * @param {google.analytics.data.v1alpha.IFunnelFilter=} [properties] Properties to set
+                         * @param {google.analytics.data.v1alpha.IFunnelFieldFilter=} [properties] Properties to set
                          */
-                        function FunnelFilter(properties) {
+                        function FunnelFieldFilter(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -22790,81 +22790,81 @@
                         }
     
                         /**
-                         * FunnelFilter fieldName.
+                         * FunnelFieldFilter fieldName.
                          * @member {string} fieldName
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @instance
                          */
-                        FunnelFilter.prototype.fieldName = "";
+                        FunnelFieldFilter.prototype.fieldName = "";
     
                         /**
-                         * FunnelFilter stringFilter.
+                         * FunnelFieldFilter stringFilter.
                          * @member {google.analytics.data.v1alpha.IStringFilter|null|undefined} stringFilter
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @instance
                          */
-                        FunnelFilter.prototype.stringFilter = null;
+                        FunnelFieldFilter.prototype.stringFilter = null;
     
                         /**
-                         * FunnelFilter inListFilter.
+                         * FunnelFieldFilter inListFilter.
                          * @member {google.analytics.data.v1alpha.IInListFilter|null|undefined} inListFilter
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @instance
                          */
-                        FunnelFilter.prototype.inListFilter = null;
+                        FunnelFieldFilter.prototype.inListFilter = null;
     
                         /**
-                         * FunnelFilter numericFilter.
+                         * FunnelFieldFilter numericFilter.
                          * @member {google.analytics.data.v1alpha.INumericFilter|null|undefined} numericFilter
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @instance
                          */
-                        FunnelFilter.prototype.numericFilter = null;
+                        FunnelFieldFilter.prototype.numericFilter = null;
     
                         /**
-                         * FunnelFilter betweenFilter.
+                         * FunnelFieldFilter betweenFilter.
                          * @member {google.analytics.data.v1alpha.IBetweenFilter|null|undefined} betweenFilter
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @instance
                          */
-                        FunnelFilter.prototype.betweenFilter = null;
+                        FunnelFieldFilter.prototype.betweenFilter = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
-                         * FunnelFilter oneFilter.
+                         * FunnelFieldFilter oneFilter.
                          * @member {"stringFilter"|"inListFilter"|"numericFilter"|"betweenFilter"|undefined} oneFilter
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @instance
                          */
-                        Object.defineProperty(FunnelFilter.prototype, "oneFilter", {
+                        Object.defineProperty(FunnelFieldFilter.prototype, "oneFilter", {
                             get: $util.oneOfGetter($oneOfFields = ["stringFilter", "inListFilter", "numericFilter", "betweenFilter"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
                         /**
-                         * Creates a new FunnelFilter instance using the specified properties.
+                         * Creates a new FunnelFieldFilter instance using the specified properties.
                          * @function create
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @static
-                         * @param {google.analytics.data.v1alpha.IFunnelFilter=} [properties] Properties to set
-                         * @returns {google.analytics.data.v1alpha.FunnelFilter} FunnelFilter instance
+                         * @param {google.analytics.data.v1alpha.IFunnelFieldFilter=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.FunnelFieldFilter} FunnelFieldFilter instance
                          */
-                        FunnelFilter.create = function create(properties) {
-                            return new FunnelFilter(properties);
+                        FunnelFieldFilter.create = function create(properties) {
+                            return new FunnelFieldFilter(properties);
                         };
     
                         /**
-                         * Encodes the specified FunnelFilter message. Does not implicitly {@link google.analytics.data.v1alpha.FunnelFilter.verify|verify} messages.
+                         * Encodes the specified FunnelFieldFilter message. Does not implicitly {@link google.analytics.data.v1alpha.FunnelFieldFilter.verify|verify} messages.
                          * @function encode
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @static
-                         * @param {google.analytics.data.v1alpha.IFunnelFilter} message FunnelFilter message or plain object to encode
+                         * @param {google.analytics.data.v1alpha.IFunnelFieldFilter} message FunnelFieldFilter message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        FunnelFilter.encode = function encode(message, writer) {
+                        FunnelFieldFilter.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.fieldName != null && Object.hasOwnProperty.call(message, "fieldName"))
@@ -22881,33 +22881,33 @@
                         };
     
                         /**
-                         * Encodes the specified FunnelFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.FunnelFilter.verify|verify} messages.
+                         * Encodes the specified FunnelFieldFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.FunnelFieldFilter.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @static
-                         * @param {google.analytics.data.v1alpha.IFunnelFilter} message FunnelFilter message or plain object to encode
+                         * @param {google.analytics.data.v1alpha.IFunnelFieldFilter} message FunnelFieldFilter message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        FunnelFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                        FunnelFieldFilter.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a FunnelFilter message from the specified reader or buffer.
+                         * Decodes a FunnelFieldFilter message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.data.v1alpha.FunnelFilter} FunnelFilter
+                         * @returns {google.analytics.data.v1alpha.FunnelFieldFilter} FunnelFieldFilter
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunnelFilter.decode = function decode(reader, length) {
+                        FunnelFieldFilter.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.FunnelFilter();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.FunnelFieldFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -22935,30 +22935,30 @@
                         };
     
                         /**
-                         * Decodes a FunnelFilter message from the specified reader or buffer, length delimited.
+                         * Decodes a FunnelFieldFilter message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.data.v1alpha.FunnelFilter} FunnelFilter
+                         * @returns {google.analytics.data.v1alpha.FunnelFieldFilter} FunnelFieldFilter
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunnelFilter.decodeDelimited = function decodeDelimited(reader) {
+                        FunnelFieldFilter.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a FunnelFilter message.
+                         * Verifies a FunnelFieldFilter message.
                          * @function verify
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        FunnelFilter.verify = function verify(message) {
+                        FunnelFieldFilter.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
@@ -23007,52 +23007,52 @@
                         };
     
                         /**
-                         * Creates a FunnelFilter message from a plain object. Also converts values to their respective internal types.
+                         * Creates a FunnelFieldFilter message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.data.v1alpha.FunnelFilter} FunnelFilter
+                         * @returns {google.analytics.data.v1alpha.FunnelFieldFilter} FunnelFieldFilter
                          */
-                        FunnelFilter.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.data.v1alpha.FunnelFilter)
+                        FunnelFieldFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.FunnelFieldFilter)
                                 return object;
-                            var message = new $root.google.analytics.data.v1alpha.FunnelFilter();
+                            var message = new $root.google.analytics.data.v1alpha.FunnelFieldFilter();
                             if (object.fieldName != null)
                                 message.fieldName = String(object.fieldName);
                             if (object.stringFilter != null) {
                                 if (typeof object.stringFilter !== "object")
-                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFilter.stringFilter: object expected");
+                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFieldFilter.stringFilter: object expected");
                                 message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.fromObject(object.stringFilter);
                             }
                             if (object.inListFilter != null) {
                                 if (typeof object.inListFilter !== "object")
-                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFilter.inListFilter: object expected");
+                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFieldFilter.inListFilter: object expected");
                                 message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.fromObject(object.inListFilter);
                             }
                             if (object.numericFilter != null) {
                                 if (typeof object.numericFilter !== "object")
-                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFilter.numericFilter: object expected");
+                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFieldFilter.numericFilter: object expected");
                                 message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.fromObject(object.numericFilter);
                             }
                             if (object.betweenFilter != null) {
                                 if (typeof object.betweenFilter !== "object")
-                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFilter.betweenFilter: object expected");
+                                    throw TypeError(".google.analytics.data.v1alpha.FunnelFieldFilter.betweenFilter: object expected");
                                 message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.fromObject(object.betweenFilter);
                             }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a FunnelFilter message. Also converts values to other types if specified.
+                         * Creates a plain object from a FunnelFieldFilter message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @static
-                         * @param {google.analytics.data.v1alpha.FunnelFilter} message FunnelFilter
+                         * @param {google.analytics.data.v1alpha.FunnelFieldFilter} message FunnelFieldFilter
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        FunnelFilter.toObject = function toObject(message, options) {
+                        FunnelFieldFilter.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
@@ -23084,17 +23084,17 @@
                         };
     
                         /**
-                         * Converts this FunnelFilter to JSON.
+                         * Converts this FunnelFieldFilter to JSON.
                          * @function toJSON
-                         * @memberof google.analytics.data.v1alpha.FunnelFilter
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        FunnelFilter.prototype.toJSON = function toJSON() {
+                        FunnelFieldFilter.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return FunnelFilter;
+                        return FunnelFieldFilter;
                     })();
     
                     v1alpha.FunnelEventFilter = (function() {
