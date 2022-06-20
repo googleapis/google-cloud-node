@@ -2695,6 +2695,6678 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
             }
+
+            /** Namespace v2alpha. */
+            namespace v2alpha {
+
+                /** Represents a FunctionService */
+                class FunctionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new FunctionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new FunctionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): FunctionService;
+
+                    /**
+                     * Calls GetFunction.
+                     * @param request GetFunctionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Function
+                     */
+                    public getFunction(request: google.cloud.functions.v2alpha.IGetFunctionRequest, callback: google.cloud.functions.v2alpha.FunctionService.GetFunctionCallback): void;
+
+                    /**
+                     * Calls GetFunction.
+                     * @param request GetFunctionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFunction(request: google.cloud.functions.v2alpha.IGetFunctionRequest): Promise<google.cloud.functions.v2alpha.Function>;
+
+                    /**
+                     * Calls ListFunctions.
+                     * @param request ListFunctionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFunctionsResponse
+                     */
+                    public listFunctions(request: google.cloud.functions.v2alpha.IListFunctionsRequest, callback: google.cloud.functions.v2alpha.FunctionService.ListFunctionsCallback): void;
+
+                    /**
+                     * Calls ListFunctions.
+                     * @param request ListFunctionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFunctions(request: google.cloud.functions.v2alpha.IListFunctionsRequest): Promise<google.cloud.functions.v2alpha.ListFunctionsResponse>;
+
+                    /**
+                     * Calls CreateFunction.
+                     * @param request CreateFunctionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createFunction(request: google.cloud.functions.v2alpha.ICreateFunctionRequest, callback: google.cloud.functions.v2alpha.FunctionService.CreateFunctionCallback): void;
+
+                    /**
+                     * Calls CreateFunction.
+                     * @param request CreateFunctionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createFunction(request: google.cloud.functions.v2alpha.ICreateFunctionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateFunction.
+                     * @param request UpdateFunctionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateFunction(request: google.cloud.functions.v2alpha.IUpdateFunctionRequest, callback: google.cloud.functions.v2alpha.FunctionService.UpdateFunctionCallback): void;
+
+                    /**
+                     * Calls UpdateFunction.
+                     * @param request UpdateFunctionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFunction(request: google.cloud.functions.v2alpha.IUpdateFunctionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteFunction.
+                     * @param request DeleteFunctionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteFunction(request: google.cloud.functions.v2alpha.IDeleteFunctionRequest, callback: google.cloud.functions.v2alpha.FunctionService.DeleteFunctionCallback): void;
+
+                    /**
+                     * Calls DeleteFunction.
+                     * @param request DeleteFunctionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFunction(request: google.cloud.functions.v2alpha.IDeleteFunctionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GenerateUploadUrl.
+                     * @param request GenerateUploadUrlRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateUploadUrlResponse
+                     */
+                    public generateUploadUrl(request: google.cloud.functions.v2alpha.IGenerateUploadUrlRequest, callback: google.cloud.functions.v2alpha.FunctionService.GenerateUploadUrlCallback): void;
+
+                    /**
+                     * Calls GenerateUploadUrl.
+                     * @param request GenerateUploadUrlRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateUploadUrl(request: google.cloud.functions.v2alpha.IGenerateUploadUrlRequest): Promise<google.cloud.functions.v2alpha.GenerateUploadUrlResponse>;
+
+                    /**
+                     * Calls GenerateDownloadUrl.
+                     * @param request GenerateDownloadUrlRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateDownloadUrlResponse
+                     */
+                    public generateDownloadUrl(request: google.cloud.functions.v2alpha.IGenerateDownloadUrlRequest, callback: google.cloud.functions.v2alpha.FunctionService.GenerateDownloadUrlCallback): void;
+
+                    /**
+                     * Calls GenerateDownloadUrl.
+                     * @param request GenerateDownloadUrlRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateDownloadUrl(request: google.cloud.functions.v2alpha.IGenerateDownloadUrlRequest): Promise<google.cloud.functions.v2alpha.GenerateDownloadUrlResponse>;
+
+                    /**
+                     * Calls ListRuntimes.
+                     * @param request ListRuntimesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRuntimesResponse
+                     */
+                    public listRuntimes(request: google.cloud.functions.v2alpha.IListRuntimesRequest, callback: google.cloud.functions.v2alpha.FunctionService.ListRuntimesCallback): void;
+
+                    /**
+                     * Calls ListRuntimes.
+                     * @param request ListRuntimesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRuntimes(request: google.cloud.functions.v2alpha.IListRuntimesRequest): Promise<google.cloud.functions.v2alpha.ListRuntimesResponse>;
+                }
+
+                namespace FunctionService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2alpha.FunctionService#getFunction}.
+                     * @param error Error, if any
+                     * @param [response] Function
+                     */
+                    type GetFunctionCallback = (error: (Error|null), response?: google.cloud.functions.v2alpha.Function) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2alpha.FunctionService#listFunctions}.
+                     * @param error Error, if any
+                     * @param [response] ListFunctionsResponse
+                     */
+                    type ListFunctionsCallback = (error: (Error|null), response?: google.cloud.functions.v2alpha.ListFunctionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2alpha.FunctionService#createFunction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateFunctionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2alpha.FunctionService#updateFunction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateFunctionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2alpha.FunctionService#deleteFunction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteFunctionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2alpha.FunctionService#generateUploadUrl}.
+                     * @param error Error, if any
+                     * @param [response] GenerateUploadUrlResponse
+                     */
+                    type GenerateUploadUrlCallback = (error: (Error|null), response?: google.cloud.functions.v2alpha.GenerateUploadUrlResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2alpha.FunctionService#generateDownloadUrl}.
+                     * @param error Error, if any
+                     * @param [response] GenerateDownloadUrlResponse
+                     */
+                    type GenerateDownloadUrlCallback = (error: (Error|null), response?: google.cloud.functions.v2alpha.GenerateDownloadUrlResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2alpha.FunctionService#listRuntimes}.
+                     * @param error Error, if any
+                     * @param [response] ListRuntimesResponse
+                     */
+                    type ListRuntimesCallback = (error: (Error|null), response?: google.cloud.functions.v2alpha.ListRuntimesResponse) => void;
+                }
+
+                /** Environment enum. */
+                enum Environment {
+                    ENVIRONMENT_UNSPECIFIED = 0,
+                    GEN_1 = 1,
+                    GEN_2 = 2
+                }
+
+                /** Properties of a Function. */
+                interface IFunction {
+
+                    /** Function name */
+                    name?: (string|null);
+
+                    /** Function environment */
+                    environment?: (google.cloud.functions.v2alpha.Environment|keyof typeof google.cloud.functions.v2alpha.Environment|null);
+
+                    /** Function description */
+                    description?: (string|null);
+
+                    /** Function buildConfig */
+                    buildConfig?: (google.cloud.functions.v2alpha.IBuildConfig|null);
+
+                    /** Function serviceConfig */
+                    serviceConfig?: (google.cloud.functions.v2alpha.IServiceConfig|null);
+
+                    /** Function eventTrigger */
+                    eventTrigger?: (google.cloud.functions.v2alpha.IEventTrigger|null);
+
+                    /** Function state */
+                    state?: (google.cloud.functions.v2alpha.Function.State|keyof typeof google.cloud.functions.v2alpha.Function.State|null);
+
+                    /** Function updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Function labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Function stateMessages */
+                    stateMessages?: (google.cloud.functions.v2alpha.IStateMessage[]|null);
+                }
+
+                /** Represents a Function. */
+                class Function implements IFunction {
+
+                    /**
+                     * Constructs a new Function.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IFunction);
+
+                    /** Function name. */
+                    public name: string;
+
+                    /** Function environment. */
+                    public environment: (google.cloud.functions.v2alpha.Environment|keyof typeof google.cloud.functions.v2alpha.Environment);
+
+                    /** Function description. */
+                    public description: string;
+
+                    /** Function buildConfig. */
+                    public buildConfig?: (google.cloud.functions.v2alpha.IBuildConfig|null);
+
+                    /** Function serviceConfig. */
+                    public serviceConfig?: (google.cloud.functions.v2alpha.IServiceConfig|null);
+
+                    /** Function eventTrigger. */
+                    public eventTrigger?: (google.cloud.functions.v2alpha.IEventTrigger|null);
+
+                    /** Function state. */
+                    public state: (google.cloud.functions.v2alpha.Function.State|keyof typeof google.cloud.functions.v2alpha.Function.State);
+
+                    /** Function updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Function labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Function stateMessages. */
+                    public stateMessages: google.cloud.functions.v2alpha.IStateMessage[];
+
+                    /**
+                     * Creates a new Function instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Function instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IFunction): google.cloud.functions.v2alpha.Function;
+
+                    /**
+                     * Encodes the specified Function message. Does not implicitly {@link google.cloud.functions.v2alpha.Function.verify|verify} messages.
+                     * @param message Function message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IFunction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Function message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.Function.verify|verify} messages.
+                     * @param message Function message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IFunction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Function message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Function
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.Function;
+
+                    /**
+                     * Decodes a Function message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Function
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.Function;
+
+                    /**
+                     * Verifies a Function message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Function message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Function
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.Function;
+
+                    /**
+                     * Creates a plain object from a Function message. Also converts values to other types if specified.
+                     * @param message Function
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.Function, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Function to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Function {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        FAILED = 2,
+                        DEPLOYING = 3,
+                        DELETING = 4,
+                        UNKNOWN = 5
+                    }
+                }
+
+                /** Properties of a StateMessage. */
+                interface IStateMessage {
+
+                    /** StateMessage severity */
+                    severity?: (google.cloud.functions.v2alpha.StateMessage.Severity|keyof typeof google.cloud.functions.v2alpha.StateMessage.Severity|null);
+
+                    /** StateMessage type */
+                    type?: (string|null);
+
+                    /** StateMessage message */
+                    message?: (string|null);
+                }
+
+                /** Represents a StateMessage. */
+                class StateMessage implements IStateMessage {
+
+                    /**
+                     * Constructs a new StateMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IStateMessage);
+
+                    /** StateMessage severity. */
+                    public severity: (google.cloud.functions.v2alpha.StateMessage.Severity|keyof typeof google.cloud.functions.v2alpha.StateMessage.Severity);
+
+                    /** StateMessage type. */
+                    public type: string;
+
+                    /** StateMessage message. */
+                    public message: string;
+
+                    /**
+                     * Creates a new StateMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StateMessage instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IStateMessage): google.cloud.functions.v2alpha.StateMessage;
+
+                    /**
+                     * Encodes the specified StateMessage message. Does not implicitly {@link google.cloud.functions.v2alpha.StateMessage.verify|verify} messages.
+                     * @param message StateMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IStateMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StateMessage message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.StateMessage.verify|verify} messages.
+                     * @param message StateMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IStateMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StateMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StateMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.StateMessage;
+
+                    /**
+                     * Decodes a StateMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StateMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.StateMessage;
+
+                    /**
+                     * Verifies a StateMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StateMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StateMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.StateMessage;
+
+                    /**
+                     * Creates a plain object from a StateMessage message. Also converts values to other types if specified.
+                     * @param message StateMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.StateMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StateMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace StateMessage {
+
+                    /** Severity enum. */
+                    enum Severity {
+                        SEVERITY_UNSPECIFIED = 0,
+                        ERROR = 1,
+                        WARNING = 2,
+                        INFO = 3
+                    }
+                }
+
+                /** Properties of a StorageSource. */
+                interface IStorageSource {
+
+                    /** StorageSource bucket */
+                    bucket?: (string|null);
+
+                    /** StorageSource object */
+                    object?: (string|null);
+
+                    /** StorageSource generation */
+                    generation?: (number|Long|string|null);
+                }
+
+                /** Represents a StorageSource. */
+                class StorageSource implements IStorageSource {
+
+                    /**
+                     * Constructs a new StorageSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IStorageSource);
+
+                    /** StorageSource bucket. */
+                    public bucket: string;
+
+                    /** StorageSource object. */
+                    public object: string;
+
+                    /** StorageSource generation. */
+                    public generation: (number|Long|string);
+
+                    /**
+                     * Creates a new StorageSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageSource instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IStorageSource): google.cloud.functions.v2alpha.StorageSource;
+
+                    /**
+                     * Encodes the specified StorageSource message. Does not implicitly {@link google.cloud.functions.v2alpha.StorageSource.verify|verify} messages.
+                     * @param message StorageSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageSource message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.StorageSource.verify|verify} messages.
+                     * @param message StorageSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.StorageSource;
+
+                    /**
+                     * Decodes a StorageSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.StorageSource;
+
+                    /**
+                     * Verifies a StorageSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.StorageSource;
+
+                    /**
+                     * Creates a plain object from a StorageSource message. Also converts values to other types if specified.
+                     * @param message StorageSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.StorageSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RepoSource. */
+                interface IRepoSource {
+
+                    /** RepoSource branchName */
+                    branchName?: (string|null);
+
+                    /** RepoSource tagName */
+                    tagName?: (string|null);
+
+                    /** RepoSource commitSha */
+                    commitSha?: (string|null);
+
+                    /** RepoSource projectId */
+                    projectId?: (string|null);
+
+                    /** RepoSource repoName */
+                    repoName?: (string|null);
+
+                    /** RepoSource dir */
+                    dir?: (string|null);
+
+                    /** RepoSource invertRegex */
+                    invertRegex?: (boolean|null);
+                }
+
+                /** Represents a RepoSource. */
+                class RepoSource implements IRepoSource {
+
+                    /**
+                     * Constructs a new RepoSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IRepoSource);
+
+                    /** RepoSource branchName. */
+                    public branchName?: (string|null);
+
+                    /** RepoSource tagName. */
+                    public tagName?: (string|null);
+
+                    /** RepoSource commitSha. */
+                    public commitSha?: (string|null);
+
+                    /** RepoSource projectId. */
+                    public projectId: string;
+
+                    /** RepoSource repoName. */
+                    public repoName: string;
+
+                    /** RepoSource dir. */
+                    public dir: string;
+
+                    /** RepoSource invertRegex. */
+                    public invertRegex: boolean;
+
+                    /** RepoSource revision. */
+                    public revision?: ("branchName"|"tagName"|"commitSha");
+
+                    /**
+                     * Creates a new RepoSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RepoSource instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IRepoSource): google.cloud.functions.v2alpha.RepoSource;
+
+                    /**
+                     * Encodes the specified RepoSource message. Does not implicitly {@link google.cloud.functions.v2alpha.RepoSource.verify|verify} messages.
+                     * @param message RepoSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IRepoSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RepoSource message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.RepoSource.verify|verify} messages.
+                     * @param message RepoSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IRepoSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RepoSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RepoSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.RepoSource;
+
+                    /**
+                     * Decodes a RepoSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RepoSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.RepoSource;
+
+                    /**
+                     * Verifies a RepoSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RepoSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RepoSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.RepoSource;
+
+                    /**
+                     * Creates a plain object from a RepoSource message. Also converts values to other types if specified.
+                     * @param message RepoSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.RepoSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RepoSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Source. */
+                interface ISource {
+
+                    /** Source storageSource */
+                    storageSource?: (google.cloud.functions.v2alpha.IStorageSource|null);
+
+                    /** Source repoSource */
+                    repoSource?: (google.cloud.functions.v2alpha.IRepoSource|null);
+                }
+
+                /** Represents a Source. */
+                class Source implements ISource {
+
+                    /**
+                     * Constructs a new Source.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.ISource);
+
+                    /** Source storageSource. */
+                    public storageSource?: (google.cloud.functions.v2alpha.IStorageSource|null);
+
+                    /** Source repoSource. */
+                    public repoSource?: (google.cloud.functions.v2alpha.IRepoSource|null);
+
+                    /** Source source. */
+                    public source?: ("storageSource"|"repoSource");
+
+                    /**
+                     * Creates a new Source instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Source instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.ISource): google.cloud.functions.v2alpha.Source;
+
+                    /**
+                     * Encodes the specified Source message. Does not implicitly {@link google.cloud.functions.v2alpha.Source.verify|verify} messages.
+                     * @param message Source message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.ISource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Source message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.Source.verify|verify} messages.
+                     * @param message Source message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.ISource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Source message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Source
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.Source;
+
+                    /**
+                     * Decodes a Source message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Source
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.Source;
+
+                    /**
+                     * Verifies a Source message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Source message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Source
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.Source;
+
+                    /**
+                     * Creates a plain object from a Source message. Also converts values to other types if specified.
+                     * @param message Source
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.Source, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Source to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SourceProvenance. */
+                interface ISourceProvenance {
+
+                    /** SourceProvenance resolvedStorageSource */
+                    resolvedStorageSource?: (google.cloud.functions.v2alpha.IStorageSource|null);
+
+                    /** SourceProvenance resolvedRepoSource */
+                    resolvedRepoSource?: (google.cloud.functions.v2alpha.IRepoSource|null);
+                }
+
+                /** Represents a SourceProvenance. */
+                class SourceProvenance implements ISourceProvenance {
+
+                    /**
+                     * Constructs a new SourceProvenance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.ISourceProvenance);
+
+                    /** SourceProvenance resolvedStorageSource. */
+                    public resolvedStorageSource?: (google.cloud.functions.v2alpha.IStorageSource|null);
+
+                    /** SourceProvenance resolvedRepoSource. */
+                    public resolvedRepoSource?: (google.cloud.functions.v2alpha.IRepoSource|null);
+
+                    /**
+                     * Creates a new SourceProvenance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceProvenance instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.ISourceProvenance): google.cloud.functions.v2alpha.SourceProvenance;
+
+                    /**
+                     * Encodes the specified SourceProvenance message. Does not implicitly {@link google.cloud.functions.v2alpha.SourceProvenance.verify|verify} messages.
+                     * @param message SourceProvenance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.ISourceProvenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceProvenance message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.SourceProvenance.verify|verify} messages.
+                     * @param message SourceProvenance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.ISourceProvenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceProvenance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceProvenance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.SourceProvenance;
+
+                    /**
+                     * Decodes a SourceProvenance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceProvenance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.SourceProvenance;
+
+                    /**
+                     * Verifies a SourceProvenance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceProvenance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceProvenance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.SourceProvenance;
+
+                    /**
+                     * Creates a plain object from a SourceProvenance message. Also converts values to other types if specified.
+                     * @param message SourceProvenance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.SourceProvenance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceProvenance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BuildConfig. */
+                interface IBuildConfig {
+
+                    /** BuildConfig build */
+                    build?: (string|null);
+
+                    /** BuildConfig runtime */
+                    runtime?: (string|null);
+
+                    /** BuildConfig entryPoint */
+                    entryPoint?: (string|null);
+
+                    /** BuildConfig source */
+                    source?: (google.cloud.functions.v2alpha.ISource|null);
+
+                    /** BuildConfig sourceProvenance */
+                    sourceProvenance?: (google.cloud.functions.v2alpha.ISourceProvenance|null);
+
+                    /** BuildConfig workerPool */
+                    workerPool?: (string|null);
+
+                    /** BuildConfig environmentVariables */
+                    environmentVariables?: ({ [k: string]: string }|null);
+
+                    /** BuildConfig dockerRepository */
+                    dockerRepository?: (string|null);
+                }
+
+                /** Represents a BuildConfig. */
+                class BuildConfig implements IBuildConfig {
+
+                    /**
+                     * Constructs a new BuildConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IBuildConfig);
+
+                    /** BuildConfig build. */
+                    public build: string;
+
+                    /** BuildConfig runtime. */
+                    public runtime: string;
+
+                    /** BuildConfig entryPoint. */
+                    public entryPoint: string;
+
+                    /** BuildConfig source. */
+                    public source?: (google.cloud.functions.v2alpha.ISource|null);
+
+                    /** BuildConfig sourceProvenance. */
+                    public sourceProvenance?: (google.cloud.functions.v2alpha.ISourceProvenance|null);
+
+                    /** BuildConfig workerPool. */
+                    public workerPool: string;
+
+                    /** BuildConfig environmentVariables. */
+                    public environmentVariables: { [k: string]: string };
+
+                    /** BuildConfig dockerRepository. */
+                    public dockerRepository: string;
+
+                    /**
+                     * Creates a new BuildConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BuildConfig instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IBuildConfig): google.cloud.functions.v2alpha.BuildConfig;
+
+                    /**
+                     * Encodes the specified BuildConfig message. Does not implicitly {@link google.cloud.functions.v2alpha.BuildConfig.verify|verify} messages.
+                     * @param message BuildConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IBuildConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BuildConfig message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.BuildConfig.verify|verify} messages.
+                     * @param message BuildConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IBuildConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BuildConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BuildConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.BuildConfig;
+
+                    /**
+                     * Decodes a BuildConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BuildConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.BuildConfig;
+
+                    /**
+                     * Verifies a BuildConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BuildConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BuildConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.BuildConfig;
+
+                    /**
+                     * Creates a plain object from a BuildConfig message. Also converts values to other types if specified.
+                     * @param message BuildConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.BuildConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BuildConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ServiceConfig. */
+                interface IServiceConfig {
+
+                    /** ServiceConfig service */
+                    service?: (string|null);
+
+                    /** ServiceConfig timeoutSeconds */
+                    timeoutSeconds?: (number|null);
+
+                    /** ServiceConfig availableMemory */
+                    availableMemory?: (string|null);
+
+                    /** ServiceConfig environmentVariables */
+                    environmentVariables?: ({ [k: string]: string }|null);
+
+                    /** ServiceConfig maxInstanceCount */
+                    maxInstanceCount?: (number|null);
+
+                    /** ServiceConfig minInstanceCount */
+                    minInstanceCount?: (number|null);
+
+                    /** ServiceConfig vpcConnector */
+                    vpcConnector?: (string|null);
+
+                    /** ServiceConfig vpcConnectorEgressSettings */
+                    vpcConnectorEgressSettings?: (google.cloud.functions.v2alpha.ServiceConfig.VpcConnectorEgressSettings|keyof typeof google.cloud.functions.v2alpha.ServiceConfig.VpcConnectorEgressSettings|null);
+
+                    /** ServiceConfig ingressSettings */
+                    ingressSettings?: (google.cloud.functions.v2alpha.ServiceConfig.IngressSettings|keyof typeof google.cloud.functions.v2alpha.ServiceConfig.IngressSettings|null);
+
+                    /** ServiceConfig uri */
+                    uri?: (string|null);
+
+                    /** ServiceConfig serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** ServiceConfig allTrafficOnLatestRevision */
+                    allTrafficOnLatestRevision?: (boolean|null);
+
+                    /** ServiceConfig secretEnvironmentVariables */
+                    secretEnvironmentVariables?: (google.cloud.functions.v2alpha.ISecretEnvVar[]|null);
+
+                    /** ServiceConfig secretVolumes */
+                    secretVolumes?: (google.cloud.functions.v2alpha.ISecretVolume[]|null);
+
+                    /** ServiceConfig revision */
+                    revision?: (string|null);
+                }
+
+                /** Represents a ServiceConfig. */
+                class ServiceConfig implements IServiceConfig {
+
+                    /**
+                     * Constructs a new ServiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IServiceConfig);
+
+                    /** ServiceConfig service. */
+                    public service: string;
+
+                    /** ServiceConfig timeoutSeconds. */
+                    public timeoutSeconds: number;
+
+                    /** ServiceConfig availableMemory. */
+                    public availableMemory: string;
+
+                    /** ServiceConfig environmentVariables. */
+                    public environmentVariables: { [k: string]: string };
+
+                    /** ServiceConfig maxInstanceCount. */
+                    public maxInstanceCount: number;
+
+                    /** ServiceConfig minInstanceCount. */
+                    public minInstanceCount: number;
+
+                    /** ServiceConfig vpcConnector. */
+                    public vpcConnector: string;
+
+                    /** ServiceConfig vpcConnectorEgressSettings. */
+                    public vpcConnectorEgressSettings: (google.cloud.functions.v2alpha.ServiceConfig.VpcConnectorEgressSettings|keyof typeof google.cloud.functions.v2alpha.ServiceConfig.VpcConnectorEgressSettings);
+
+                    /** ServiceConfig ingressSettings. */
+                    public ingressSettings: (google.cloud.functions.v2alpha.ServiceConfig.IngressSettings|keyof typeof google.cloud.functions.v2alpha.ServiceConfig.IngressSettings);
+
+                    /** ServiceConfig uri. */
+                    public uri: string;
+
+                    /** ServiceConfig serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** ServiceConfig allTrafficOnLatestRevision. */
+                    public allTrafficOnLatestRevision: boolean;
+
+                    /** ServiceConfig secretEnvironmentVariables. */
+                    public secretEnvironmentVariables: google.cloud.functions.v2alpha.ISecretEnvVar[];
+
+                    /** ServiceConfig secretVolumes. */
+                    public secretVolumes: google.cloud.functions.v2alpha.ISecretVolume[];
+
+                    /** ServiceConfig revision. */
+                    public revision: string;
+
+                    /**
+                     * Creates a new ServiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceConfig instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IServiceConfig): google.cloud.functions.v2alpha.ServiceConfig;
+
+                    /**
+                     * Encodes the specified ServiceConfig message. Does not implicitly {@link google.cloud.functions.v2alpha.ServiceConfig.verify|verify} messages.
+                     * @param message ServiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceConfig message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.ServiceConfig.verify|verify} messages.
+                     * @param message ServiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.ServiceConfig;
+
+                    /**
+                     * Decodes a ServiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.ServiceConfig;
+
+                    /**
+                     * Verifies a ServiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.ServiceConfig;
+
+                    /**
+                     * Creates a plain object from a ServiceConfig message. Also converts values to other types if specified.
+                     * @param message ServiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.ServiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ServiceConfig {
+
+                    /** VpcConnectorEgressSettings enum. */
+                    enum VpcConnectorEgressSettings {
+                        VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED = 0,
+                        PRIVATE_RANGES_ONLY = 1,
+                        ALL_TRAFFIC = 2
+                    }
+
+                    /** IngressSettings enum. */
+                    enum IngressSettings {
+                        INGRESS_SETTINGS_UNSPECIFIED = 0,
+                        ALLOW_ALL = 1,
+                        ALLOW_INTERNAL_ONLY = 2,
+                        ALLOW_INTERNAL_AND_GCLB = 3
+                    }
+                }
+
+                /** Properties of a SecretEnvVar. */
+                interface ISecretEnvVar {
+
+                    /** SecretEnvVar key */
+                    key?: (string|null);
+
+                    /** SecretEnvVar projectId */
+                    projectId?: (string|null);
+
+                    /** SecretEnvVar secret */
+                    secret?: (string|null);
+
+                    /** SecretEnvVar version */
+                    version?: (string|null);
+                }
+
+                /** Represents a SecretEnvVar. */
+                class SecretEnvVar implements ISecretEnvVar {
+
+                    /**
+                     * Constructs a new SecretEnvVar.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.ISecretEnvVar);
+
+                    /** SecretEnvVar key. */
+                    public key: string;
+
+                    /** SecretEnvVar projectId. */
+                    public projectId: string;
+
+                    /** SecretEnvVar secret. */
+                    public secret: string;
+
+                    /** SecretEnvVar version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new SecretEnvVar instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretEnvVar instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.ISecretEnvVar): google.cloud.functions.v2alpha.SecretEnvVar;
+
+                    /**
+                     * Encodes the specified SecretEnvVar message. Does not implicitly {@link google.cloud.functions.v2alpha.SecretEnvVar.verify|verify} messages.
+                     * @param message SecretEnvVar message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.ISecretEnvVar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretEnvVar message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.SecretEnvVar.verify|verify} messages.
+                     * @param message SecretEnvVar message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.ISecretEnvVar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretEnvVar message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretEnvVar
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.SecretEnvVar;
+
+                    /**
+                     * Decodes a SecretEnvVar message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretEnvVar
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.SecretEnvVar;
+
+                    /**
+                     * Verifies a SecretEnvVar message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretEnvVar message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretEnvVar
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.SecretEnvVar;
+
+                    /**
+                     * Creates a plain object from a SecretEnvVar message. Also converts values to other types if specified.
+                     * @param message SecretEnvVar
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.SecretEnvVar, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretEnvVar to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SecretVolume. */
+                interface ISecretVolume {
+
+                    /** SecretVolume mountPath */
+                    mountPath?: (string|null);
+
+                    /** SecretVolume projectId */
+                    projectId?: (string|null);
+
+                    /** SecretVolume secret */
+                    secret?: (string|null);
+
+                    /** SecretVolume versions */
+                    versions?: (google.cloud.functions.v2alpha.SecretVolume.ISecretVersion[]|null);
+                }
+
+                /** Represents a SecretVolume. */
+                class SecretVolume implements ISecretVolume {
+
+                    /**
+                     * Constructs a new SecretVolume.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.ISecretVolume);
+
+                    /** SecretVolume mountPath. */
+                    public mountPath: string;
+
+                    /** SecretVolume projectId. */
+                    public projectId: string;
+
+                    /** SecretVolume secret. */
+                    public secret: string;
+
+                    /** SecretVolume versions. */
+                    public versions: google.cloud.functions.v2alpha.SecretVolume.ISecretVersion[];
+
+                    /**
+                     * Creates a new SecretVolume instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretVolume instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.ISecretVolume): google.cloud.functions.v2alpha.SecretVolume;
+
+                    /**
+                     * Encodes the specified SecretVolume message. Does not implicitly {@link google.cloud.functions.v2alpha.SecretVolume.verify|verify} messages.
+                     * @param message SecretVolume message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.ISecretVolume, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretVolume message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.SecretVolume.verify|verify} messages.
+                     * @param message SecretVolume message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.ISecretVolume, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretVolume message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretVolume
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.SecretVolume;
+
+                    /**
+                     * Decodes a SecretVolume message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretVolume
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.SecretVolume;
+
+                    /**
+                     * Verifies a SecretVolume message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretVolume message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretVolume
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.SecretVolume;
+
+                    /**
+                     * Creates a plain object from a SecretVolume message. Also converts values to other types if specified.
+                     * @param message SecretVolume
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.SecretVolume, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretVolume to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace SecretVolume {
+
+                    /** Properties of a SecretVersion. */
+                    interface ISecretVersion {
+
+                        /** SecretVersion version */
+                        version?: (string|null);
+
+                        /** SecretVersion path */
+                        path?: (string|null);
+                    }
+
+                    /** Represents a SecretVersion. */
+                    class SecretVersion implements ISecretVersion {
+
+                        /**
+                         * Constructs a new SecretVersion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.functions.v2alpha.SecretVolume.ISecretVersion);
+
+                        /** SecretVersion version. */
+                        public version: string;
+
+                        /** SecretVersion path. */
+                        public path: string;
+
+                        /**
+                         * Creates a new SecretVersion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SecretVersion instance
+                         */
+                        public static create(properties?: google.cloud.functions.v2alpha.SecretVolume.ISecretVersion): google.cloud.functions.v2alpha.SecretVolume.SecretVersion;
+
+                        /**
+                         * Encodes the specified SecretVersion message. Does not implicitly {@link google.cloud.functions.v2alpha.SecretVolume.SecretVersion.verify|verify} messages.
+                         * @param message SecretVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.functions.v2alpha.SecretVolume.ISecretVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SecretVersion message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.SecretVolume.SecretVersion.verify|verify} messages.
+                         * @param message SecretVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.functions.v2alpha.SecretVolume.ISecretVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SecretVersion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SecretVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.SecretVolume.SecretVersion;
+
+                        /**
+                         * Decodes a SecretVersion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SecretVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.SecretVolume.SecretVersion;
+
+                        /**
+                         * Verifies a SecretVersion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SecretVersion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SecretVersion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.SecretVolume.SecretVersion;
+
+                        /**
+                         * Creates a plain object from a SecretVersion message. Also converts values to other types if specified.
+                         * @param message SecretVersion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.functions.v2alpha.SecretVolume.SecretVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SecretVersion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of an EventTrigger. */
+                interface IEventTrigger {
+
+                    /** EventTrigger trigger */
+                    trigger?: (string|null);
+
+                    /** EventTrigger triggerRegion */
+                    triggerRegion?: (string|null);
+
+                    /** EventTrigger eventType */
+                    eventType?: (string|null);
+
+                    /** EventTrigger eventFilters */
+                    eventFilters?: (google.cloud.functions.v2alpha.IEventFilter[]|null);
+
+                    /** EventTrigger pubsubTopic */
+                    pubsubTopic?: (string|null);
+
+                    /** EventTrigger serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** EventTrigger retryPolicy */
+                    retryPolicy?: (google.cloud.functions.v2alpha.EventTrigger.RetryPolicy|keyof typeof google.cloud.functions.v2alpha.EventTrigger.RetryPolicy|null);
+
+                    /** EventTrigger channel */
+                    channel?: (string|null);
+                }
+
+                /** Represents an EventTrigger. */
+                class EventTrigger implements IEventTrigger {
+
+                    /**
+                     * Constructs a new EventTrigger.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IEventTrigger);
+
+                    /** EventTrigger trigger. */
+                    public trigger: string;
+
+                    /** EventTrigger triggerRegion. */
+                    public triggerRegion: string;
+
+                    /** EventTrigger eventType. */
+                    public eventType: string;
+
+                    /** EventTrigger eventFilters. */
+                    public eventFilters: google.cloud.functions.v2alpha.IEventFilter[];
+
+                    /** EventTrigger pubsubTopic. */
+                    public pubsubTopic: string;
+
+                    /** EventTrigger serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** EventTrigger retryPolicy. */
+                    public retryPolicy: (google.cloud.functions.v2alpha.EventTrigger.RetryPolicy|keyof typeof google.cloud.functions.v2alpha.EventTrigger.RetryPolicy);
+
+                    /** EventTrigger channel. */
+                    public channel: string;
+
+                    /**
+                     * Creates a new EventTrigger instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EventTrigger instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IEventTrigger): google.cloud.functions.v2alpha.EventTrigger;
+
+                    /**
+                     * Encodes the specified EventTrigger message. Does not implicitly {@link google.cloud.functions.v2alpha.EventTrigger.verify|verify} messages.
+                     * @param message EventTrigger message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IEventTrigger, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EventTrigger message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.EventTrigger.verify|verify} messages.
+                     * @param message EventTrigger message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IEventTrigger, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EventTrigger message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EventTrigger
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.EventTrigger;
+
+                    /**
+                     * Decodes an EventTrigger message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EventTrigger
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.EventTrigger;
+
+                    /**
+                     * Verifies an EventTrigger message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EventTrigger message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EventTrigger
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.EventTrigger;
+
+                    /**
+                     * Creates a plain object from an EventTrigger message. Also converts values to other types if specified.
+                     * @param message EventTrigger
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.EventTrigger, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EventTrigger to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace EventTrigger {
+
+                    /** RetryPolicy enum. */
+                    enum RetryPolicy {
+                        RETRY_POLICY_UNSPECIFIED = 0,
+                        RETRY_POLICY_DO_NOT_RETRY = 1,
+                        RETRY_POLICY_RETRY = 2
+                    }
+                }
+
+                /** Properties of an EventFilter. */
+                interface IEventFilter {
+
+                    /** EventFilter attribute */
+                    attribute?: (string|null);
+
+                    /** EventFilter value */
+                    value?: (string|null);
+
+                    /** EventFilter operator */
+                    operator?: (string|null);
+                }
+
+                /** Represents an EventFilter. */
+                class EventFilter implements IEventFilter {
+
+                    /**
+                     * Constructs a new EventFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IEventFilter);
+
+                    /** EventFilter attribute. */
+                    public attribute: string;
+
+                    /** EventFilter value. */
+                    public value: string;
+
+                    /** EventFilter operator. */
+                    public operator: string;
+
+                    /**
+                     * Creates a new EventFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EventFilter instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IEventFilter): google.cloud.functions.v2alpha.EventFilter;
+
+                    /**
+                     * Encodes the specified EventFilter message. Does not implicitly {@link google.cloud.functions.v2alpha.EventFilter.verify|verify} messages.
+                     * @param message EventFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IEventFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EventFilter message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.EventFilter.verify|verify} messages.
+                     * @param message EventFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IEventFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EventFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EventFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.EventFilter;
+
+                    /**
+                     * Decodes an EventFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EventFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.EventFilter;
+
+                    /**
+                     * Verifies an EventFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EventFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EventFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.EventFilter;
+
+                    /**
+                     * Creates a plain object from an EventFilter message. Also converts values to other types if specified.
+                     * @param message EventFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.EventFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EventFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetFunctionRequest. */
+                interface IGetFunctionRequest {
+
+                    /** GetFunctionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFunctionRequest. */
+                class GetFunctionRequest implements IGetFunctionRequest {
+
+                    /**
+                     * Constructs a new GetFunctionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IGetFunctionRequest);
+
+                    /** GetFunctionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFunctionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFunctionRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IGetFunctionRequest): google.cloud.functions.v2alpha.GetFunctionRequest;
+
+                    /**
+                     * Encodes the specified GetFunctionRequest message. Does not implicitly {@link google.cloud.functions.v2alpha.GetFunctionRequest.verify|verify} messages.
+                     * @param message GetFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IGetFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFunctionRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.GetFunctionRequest.verify|verify} messages.
+                     * @param message GetFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IGetFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFunctionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.GetFunctionRequest;
+
+                    /**
+                     * Decodes a GetFunctionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.GetFunctionRequest;
+
+                    /**
+                     * Verifies a GetFunctionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFunctionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFunctionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.GetFunctionRequest;
+
+                    /**
+                     * Creates a plain object from a GetFunctionRequest message. Also converts values to other types if specified.
+                     * @param message GetFunctionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.GetFunctionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFunctionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListFunctionsRequest. */
+                interface IListFunctionsRequest {
+
+                    /** ListFunctionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFunctionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFunctionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListFunctionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListFunctionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListFunctionsRequest. */
+                class ListFunctionsRequest implements IListFunctionsRequest {
+
+                    /**
+                     * Constructs a new ListFunctionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IListFunctionsRequest);
+
+                    /** ListFunctionsRequest parent. */
+                    public parent: string;
+
+                    /** ListFunctionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFunctionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListFunctionsRequest filter. */
+                    public filter: string;
+
+                    /** ListFunctionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListFunctionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFunctionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IListFunctionsRequest): google.cloud.functions.v2alpha.ListFunctionsRequest;
+
+                    /**
+                     * Encodes the specified ListFunctionsRequest message. Does not implicitly {@link google.cloud.functions.v2alpha.ListFunctionsRequest.verify|verify} messages.
+                     * @param message ListFunctionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IListFunctionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFunctionsRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.ListFunctionsRequest.verify|verify} messages.
+                     * @param message ListFunctionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IListFunctionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFunctionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFunctionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.ListFunctionsRequest;
+
+                    /**
+                     * Decodes a ListFunctionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFunctionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.ListFunctionsRequest;
+
+                    /**
+                     * Verifies a ListFunctionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFunctionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFunctionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.ListFunctionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListFunctionsRequest message. Also converts values to other types if specified.
+                     * @param message ListFunctionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.ListFunctionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFunctionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListFunctionsResponse. */
+                interface IListFunctionsResponse {
+
+                    /** ListFunctionsResponse functions */
+                    functions?: (google.cloud.functions.v2alpha.IFunction[]|null);
+
+                    /** ListFunctionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListFunctionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListFunctionsResponse. */
+                class ListFunctionsResponse implements IListFunctionsResponse {
+
+                    /**
+                     * Constructs a new ListFunctionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IListFunctionsResponse);
+
+                    /** ListFunctionsResponse functions. */
+                    public functions: google.cloud.functions.v2alpha.IFunction[];
+
+                    /** ListFunctionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListFunctionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListFunctionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFunctionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IListFunctionsResponse): google.cloud.functions.v2alpha.ListFunctionsResponse;
+
+                    /**
+                     * Encodes the specified ListFunctionsResponse message. Does not implicitly {@link google.cloud.functions.v2alpha.ListFunctionsResponse.verify|verify} messages.
+                     * @param message ListFunctionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IListFunctionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFunctionsResponse message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.ListFunctionsResponse.verify|verify} messages.
+                     * @param message ListFunctionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IListFunctionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFunctionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFunctionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.ListFunctionsResponse;
+
+                    /**
+                     * Decodes a ListFunctionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFunctionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.ListFunctionsResponse;
+
+                    /**
+                     * Verifies a ListFunctionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFunctionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFunctionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.ListFunctionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListFunctionsResponse message. Also converts values to other types if specified.
+                     * @param message ListFunctionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.ListFunctionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFunctionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateFunctionRequest. */
+                interface ICreateFunctionRequest {
+
+                    /** CreateFunctionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateFunctionRequest function */
+                    "function"?: (google.cloud.functions.v2alpha.IFunction|null);
+
+                    /** CreateFunctionRequest functionId */
+                    functionId?: (string|null);
+                }
+
+                /** Represents a CreateFunctionRequest. */
+                class CreateFunctionRequest implements ICreateFunctionRequest {
+
+                    /**
+                     * Constructs a new CreateFunctionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.ICreateFunctionRequest);
+
+                    /** CreateFunctionRequest parent. */
+                    public parent: string;
+
+                    /** CreateFunctionRequest function. */
+                    public function?: (google.cloud.functions.v2alpha.IFunction|null);
+
+                    /** CreateFunctionRequest functionId. */
+                    public functionId: string;
+
+                    /**
+                     * Creates a new CreateFunctionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFunctionRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.ICreateFunctionRequest): google.cloud.functions.v2alpha.CreateFunctionRequest;
+
+                    /**
+                     * Encodes the specified CreateFunctionRequest message. Does not implicitly {@link google.cloud.functions.v2alpha.CreateFunctionRequest.verify|verify} messages.
+                     * @param message CreateFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.ICreateFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFunctionRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.CreateFunctionRequest.verify|verify} messages.
+                     * @param message CreateFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.ICreateFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFunctionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.CreateFunctionRequest;
+
+                    /**
+                     * Decodes a CreateFunctionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.CreateFunctionRequest;
+
+                    /**
+                     * Verifies a CreateFunctionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFunctionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFunctionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.CreateFunctionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateFunctionRequest message. Also converts values to other types if specified.
+                     * @param message CreateFunctionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.CreateFunctionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFunctionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateFunctionRequest. */
+                interface IUpdateFunctionRequest {
+
+                    /** UpdateFunctionRequest function */
+                    "function"?: (google.cloud.functions.v2alpha.IFunction|null);
+
+                    /** UpdateFunctionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFunctionRequest. */
+                class UpdateFunctionRequest implements IUpdateFunctionRequest {
+
+                    /**
+                     * Constructs a new UpdateFunctionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IUpdateFunctionRequest);
+
+                    /** UpdateFunctionRequest function. */
+                    public function?: (google.cloud.functions.v2alpha.IFunction|null);
+
+                    /** UpdateFunctionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFunctionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFunctionRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IUpdateFunctionRequest): google.cloud.functions.v2alpha.UpdateFunctionRequest;
+
+                    /**
+                     * Encodes the specified UpdateFunctionRequest message. Does not implicitly {@link google.cloud.functions.v2alpha.UpdateFunctionRequest.verify|verify} messages.
+                     * @param message UpdateFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IUpdateFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFunctionRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.UpdateFunctionRequest.verify|verify} messages.
+                     * @param message UpdateFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IUpdateFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFunctionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.UpdateFunctionRequest;
+
+                    /**
+                     * Decodes an UpdateFunctionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.UpdateFunctionRequest;
+
+                    /**
+                     * Verifies an UpdateFunctionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFunctionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFunctionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.UpdateFunctionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFunctionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFunctionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.UpdateFunctionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFunctionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteFunctionRequest. */
+                interface IDeleteFunctionRequest {
+
+                    /** DeleteFunctionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteFunctionRequest. */
+                class DeleteFunctionRequest implements IDeleteFunctionRequest {
+
+                    /**
+                     * Constructs a new DeleteFunctionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IDeleteFunctionRequest);
+
+                    /** DeleteFunctionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteFunctionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFunctionRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IDeleteFunctionRequest): google.cloud.functions.v2alpha.DeleteFunctionRequest;
+
+                    /**
+                     * Encodes the specified DeleteFunctionRequest message. Does not implicitly {@link google.cloud.functions.v2alpha.DeleteFunctionRequest.verify|verify} messages.
+                     * @param message DeleteFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IDeleteFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFunctionRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.DeleteFunctionRequest.verify|verify} messages.
+                     * @param message DeleteFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IDeleteFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFunctionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.DeleteFunctionRequest;
+
+                    /**
+                     * Decodes a DeleteFunctionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.DeleteFunctionRequest;
+
+                    /**
+                     * Verifies a DeleteFunctionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFunctionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFunctionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.DeleteFunctionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFunctionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFunctionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.DeleteFunctionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFunctionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GenerateUploadUrlRequest. */
+                interface IGenerateUploadUrlRequest {
+
+                    /** GenerateUploadUrlRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a GenerateUploadUrlRequest. */
+                class GenerateUploadUrlRequest implements IGenerateUploadUrlRequest {
+
+                    /**
+                     * Constructs a new GenerateUploadUrlRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IGenerateUploadUrlRequest);
+
+                    /** GenerateUploadUrlRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new GenerateUploadUrlRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateUploadUrlRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IGenerateUploadUrlRequest): google.cloud.functions.v2alpha.GenerateUploadUrlRequest;
+
+                    /**
+                     * Encodes the specified GenerateUploadUrlRequest message. Does not implicitly {@link google.cloud.functions.v2alpha.GenerateUploadUrlRequest.verify|verify} messages.
+                     * @param message GenerateUploadUrlRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IGenerateUploadUrlRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateUploadUrlRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.GenerateUploadUrlRequest.verify|verify} messages.
+                     * @param message GenerateUploadUrlRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IGenerateUploadUrlRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateUploadUrlRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateUploadUrlRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.GenerateUploadUrlRequest;
+
+                    /**
+                     * Decodes a GenerateUploadUrlRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateUploadUrlRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.GenerateUploadUrlRequest;
+
+                    /**
+                     * Verifies a GenerateUploadUrlRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateUploadUrlRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateUploadUrlRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.GenerateUploadUrlRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateUploadUrlRequest message. Also converts values to other types if specified.
+                     * @param message GenerateUploadUrlRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.GenerateUploadUrlRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateUploadUrlRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GenerateUploadUrlResponse. */
+                interface IGenerateUploadUrlResponse {
+
+                    /** GenerateUploadUrlResponse uploadUrl */
+                    uploadUrl?: (string|null);
+
+                    /** GenerateUploadUrlResponse storageSource */
+                    storageSource?: (google.cloud.functions.v2alpha.IStorageSource|null);
+                }
+
+                /** Represents a GenerateUploadUrlResponse. */
+                class GenerateUploadUrlResponse implements IGenerateUploadUrlResponse {
+
+                    /**
+                     * Constructs a new GenerateUploadUrlResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IGenerateUploadUrlResponse);
+
+                    /** GenerateUploadUrlResponse uploadUrl. */
+                    public uploadUrl: string;
+
+                    /** GenerateUploadUrlResponse storageSource. */
+                    public storageSource?: (google.cloud.functions.v2alpha.IStorageSource|null);
+
+                    /**
+                     * Creates a new GenerateUploadUrlResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateUploadUrlResponse instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IGenerateUploadUrlResponse): google.cloud.functions.v2alpha.GenerateUploadUrlResponse;
+
+                    /**
+                     * Encodes the specified GenerateUploadUrlResponse message. Does not implicitly {@link google.cloud.functions.v2alpha.GenerateUploadUrlResponse.verify|verify} messages.
+                     * @param message GenerateUploadUrlResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IGenerateUploadUrlResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateUploadUrlResponse message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.GenerateUploadUrlResponse.verify|verify} messages.
+                     * @param message GenerateUploadUrlResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IGenerateUploadUrlResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateUploadUrlResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateUploadUrlResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.GenerateUploadUrlResponse;
+
+                    /**
+                     * Decodes a GenerateUploadUrlResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateUploadUrlResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.GenerateUploadUrlResponse;
+
+                    /**
+                     * Verifies a GenerateUploadUrlResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateUploadUrlResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateUploadUrlResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.GenerateUploadUrlResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateUploadUrlResponse message. Also converts values to other types if specified.
+                     * @param message GenerateUploadUrlResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.GenerateUploadUrlResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateUploadUrlResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GenerateDownloadUrlRequest. */
+                interface IGenerateDownloadUrlRequest {
+
+                    /** GenerateDownloadUrlRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GenerateDownloadUrlRequest. */
+                class GenerateDownloadUrlRequest implements IGenerateDownloadUrlRequest {
+
+                    /**
+                     * Constructs a new GenerateDownloadUrlRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IGenerateDownloadUrlRequest);
+
+                    /** GenerateDownloadUrlRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GenerateDownloadUrlRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateDownloadUrlRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IGenerateDownloadUrlRequest): google.cloud.functions.v2alpha.GenerateDownloadUrlRequest;
+
+                    /**
+                     * Encodes the specified GenerateDownloadUrlRequest message. Does not implicitly {@link google.cloud.functions.v2alpha.GenerateDownloadUrlRequest.verify|verify} messages.
+                     * @param message GenerateDownloadUrlRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IGenerateDownloadUrlRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateDownloadUrlRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.GenerateDownloadUrlRequest.verify|verify} messages.
+                     * @param message GenerateDownloadUrlRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IGenerateDownloadUrlRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateDownloadUrlRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateDownloadUrlRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.GenerateDownloadUrlRequest;
+
+                    /**
+                     * Decodes a GenerateDownloadUrlRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateDownloadUrlRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.GenerateDownloadUrlRequest;
+
+                    /**
+                     * Verifies a GenerateDownloadUrlRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateDownloadUrlRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateDownloadUrlRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.GenerateDownloadUrlRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateDownloadUrlRequest message. Also converts values to other types if specified.
+                     * @param message GenerateDownloadUrlRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.GenerateDownloadUrlRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateDownloadUrlRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GenerateDownloadUrlResponse. */
+                interface IGenerateDownloadUrlResponse {
+
+                    /** GenerateDownloadUrlResponse downloadUrl */
+                    downloadUrl?: (string|null);
+                }
+
+                /** Represents a GenerateDownloadUrlResponse. */
+                class GenerateDownloadUrlResponse implements IGenerateDownloadUrlResponse {
+
+                    /**
+                     * Constructs a new GenerateDownloadUrlResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IGenerateDownloadUrlResponse);
+
+                    /** GenerateDownloadUrlResponse downloadUrl. */
+                    public downloadUrl: string;
+
+                    /**
+                     * Creates a new GenerateDownloadUrlResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateDownloadUrlResponse instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IGenerateDownloadUrlResponse): google.cloud.functions.v2alpha.GenerateDownloadUrlResponse;
+
+                    /**
+                     * Encodes the specified GenerateDownloadUrlResponse message. Does not implicitly {@link google.cloud.functions.v2alpha.GenerateDownloadUrlResponse.verify|verify} messages.
+                     * @param message GenerateDownloadUrlResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IGenerateDownloadUrlResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateDownloadUrlResponse message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.GenerateDownloadUrlResponse.verify|verify} messages.
+                     * @param message GenerateDownloadUrlResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IGenerateDownloadUrlResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateDownloadUrlResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateDownloadUrlResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.GenerateDownloadUrlResponse;
+
+                    /**
+                     * Decodes a GenerateDownloadUrlResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateDownloadUrlResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.GenerateDownloadUrlResponse;
+
+                    /**
+                     * Verifies a GenerateDownloadUrlResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateDownloadUrlResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateDownloadUrlResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.GenerateDownloadUrlResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateDownloadUrlResponse message. Also converts values to other types if specified.
+                     * @param message GenerateDownloadUrlResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.GenerateDownloadUrlResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateDownloadUrlResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRuntimesRequest. */
+                interface IListRuntimesRequest {
+
+                    /** ListRuntimesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRuntimesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListRuntimesRequest. */
+                class ListRuntimesRequest implements IListRuntimesRequest {
+
+                    /**
+                     * Constructs a new ListRuntimesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IListRuntimesRequest);
+
+                    /** ListRuntimesRequest parent. */
+                    public parent: string;
+
+                    /** ListRuntimesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListRuntimesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRuntimesRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IListRuntimesRequest): google.cloud.functions.v2alpha.ListRuntimesRequest;
+
+                    /**
+                     * Encodes the specified ListRuntimesRequest message. Does not implicitly {@link google.cloud.functions.v2alpha.ListRuntimesRequest.verify|verify} messages.
+                     * @param message ListRuntimesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IListRuntimesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRuntimesRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.ListRuntimesRequest.verify|verify} messages.
+                     * @param message ListRuntimesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IListRuntimesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRuntimesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRuntimesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.ListRuntimesRequest;
+
+                    /**
+                     * Decodes a ListRuntimesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRuntimesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.ListRuntimesRequest;
+
+                    /**
+                     * Verifies a ListRuntimesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRuntimesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRuntimesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.ListRuntimesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRuntimesRequest message. Also converts values to other types if specified.
+                     * @param message ListRuntimesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.ListRuntimesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRuntimesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRuntimesResponse. */
+                interface IListRuntimesResponse {
+
+                    /** ListRuntimesResponse runtimes */
+                    runtimes?: (google.cloud.functions.v2alpha.ListRuntimesResponse.IRuntime[]|null);
+                }
+
+                /** Represents a ListRuntimesResponse. */
+                class ListRuntimesResponse implements IListRuntimesResponse {
+
+                    /**
+                     * Constructs a new ListRuntimesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IListRuntimesResponse);
+
+                    /** ListRuntimesResponse runtimes. */
+                    public runtimes: google.cloud.functions.v2alpha.ListRuntimesResponse.IRuntime[];
+
+                    /**
+                     * Creates a new ListRuntimesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRuntimesResponse instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IListRuntimesResponse): google.cloud.functions.v2alpha.ListRuntimesResponse;
+
+                    /**
+                     * Encodes the specified ListRuntimesResponse message. Does not implicitly {@link google.cloud.functions.v2alpha.ListRuntimesResponse.verify|verify} messages.
+                     * @param message ListRuntimesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IListRuntimesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRuntimesResponse message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.ListRuntimesResponse.verify|verify} messages.
+                     * @param message ListRuntimesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IListRuntimesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRuntimesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRuntimesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.ListRuntimesResponse;
+
+                    /**
+                     * Decodes a ListRuntimesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRuntimesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.ListRuntimesResponse;
+
+                    /**
+                     * Verifies a ListRuntimesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRuntimesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRuntimesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.ListRuntimesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRuntimesResponse message. Also converts values to other types if specified.
+                     * @param message ListRuntimesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.ListRuntimesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRuntimesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ListRuntimesResponse {
+
+                    /** Properties of a Runtime. */
+                    interface IRuntime {
+
+                        /** Runtime name */
+                        name?: (string|null);
+
+                        /** Runtime displayName */
+                        displayName?: (string|null);
+
+                        /** Runtime stage */
+                        stage?: (google.cloud.functions.v2alpha.ListRuntimesResponse.RuntimeStage|keyof typeof google.cloud.functions.v2alpha.ListRuntimesResponse.RuntimeStage|null);
+
+                        /** Runtime warnings */
+                        warnings?: (string[]|null);
+
+                        /** Runtime environment */
+                        environment?: (google.cloud.functions.v2alpha.Environment|keyof typeof google.cloud.functions.v2alpha.Environment|null);
+                    }
+
+                    /** Represents a Runtime. */
+                    class Runtime implements IRuntime {
+
+                        /**
+                         * Constructs a new Runtime.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.functions.v2alpha.ListRuntimesResponse.IRuntime);
+
+                        /** Runtime name. */
+                        public name: string;
+
+                        /** Runtime displayName. */
+                        public displayName: string;
+
+                        /** Runtime stage. */
+                        public stage: (google.cloud.functions.v2alpha.ListRuntimesResponse.RuntimeStage|keyof typeof google.cloud.functions.v2alpha.ListRuntimesResponse.RuntimeStage);
+
+                        /** Runtime warnings. */
+                        public warnings: string[];
+
+                        /** Runtime environment. */
+                        public environment: (google.cloud.functions.v2alpha.Environment|keyof typeof google.cloud.functions.v2alpha.Environment);
+
+                        /**
+                         * Creates a new Runtime instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Runtime instance
+                         */
+                        public static create(properties?: google.cloud.functions.v2alpha.ListRuntimesResponse.IRuntime): google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime;
+
+                        /**
+                         * Encodes the specified Runtime message. Does not implicitly {@link google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime.verify|verify} messages.
+                         * @param message Runtime message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.functions.v2alpha.ListRuntimesResponse.IRuntime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Runtime message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime.verify|verify} messages.
+                         * @param message Runtime message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.functions.v2alpha.ListRuntimesResponse.IRuntime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Runtime message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Runtime
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime;
+
+                        /**
+                         * Decodes a Runtime message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Runtime
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime;
+
+                        /**
+                         * Verifies a Runtime message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Runtime message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Runtime
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime;
+
+                        /**
+                         * Creates a plain object from a Runtime message. Also converts values to other types if specified.
+                         * @param message Runtime
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Runtime to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** RuntimeStage enum. */
+                    enum RuntimeStage {
+                        RUNTIME_STAGE_UNSPECIFIED = 0,
+                        DEVELOPMENT = 1,
+                        ALPHA = 2,
+                        BETA = 3,
+                        GA = 4,
+                        DEPRECATED = 5,
+                        DECOMMISSIONED = 6
+                    }
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusDetail */
+                    statusDetail?: (string|null);
+
+                    /** OperationMetadata cancelRequested */
+                    cancelRequested?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+
+                    /** OperationMetadata requestResource */
+                    requestResource?: (google.protobuf.IAny|null);
+
+                    /** OperationMetadata stages */
+                    stages?: (google.cloud.functions.v2alpha.IStage[]|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusDetail. */
+                    public statusDetail: string;
+
+                    /** OperationMetadata cancelRequested. */
+                    public cancelRequested: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /** OperationMetadata requestResource. */
+                    public requestResource?: (google.protobuf.IAny|null);
+
+                    /** OperationMetadata stages. */
+                    public stages: google.cloud.functions.v2alpha.IStage[];
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IOperationMetadata): google.cloud.functions.v2alpha.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.functions.v2alpha.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Stage. */
+                interface IStage {
+
+                    /** Stage name */
+                    name?: (google.cloud.functions.v2alpha.Stage.Name|keyof typeof google.cloud.functions.v2alpha.Stage.Name|null);
+
+                    /** Stage message */
+                    message?: (string|null);
+
+                    /** Stage state */
+                    state?: (google.cloud.functions.v2alpha.Stage.State|keyof typeof google.cloud.functions.v2alpha.Stage.State|null);
+
+                    /** Stage resource */
+                    resource?: (string|null);
+
+                    /** Stage resourceUri */
+                    resourceUri?: (string|null);
+
+                    /** Stage stateMessages */
+                    stateMessages?: (google.cloud.functions.v2alpha.IStateMessage[]|null);
+                }
+
+                /** Represents a Stage. */
+                class Stage implements IStage {
+
+                    /**
+                     * Constructs a new Stage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2alpha.IStage);
+
+                    /** Stage name. */
+                    public name: (google.cloud.functions.v2alpha.Stage.Name|keyof typeof google.cloud.functions.v2alpha.Stage.Name);
+
+                    /** Stage message. */
+                    public message: string;
+
+                    /** Stage state. */
+                    public state: (google.cloud.functions.v2alpha.Stage.State|keyof typeof google.cloud.functions.v2alpha.Stage.State);
+
+                    /** Stage resource. */
+                    public resource: string;
+
+                    /** Stage resourceUri. */
+                    public resourceUri: string;
+
+                    /** Stage stateMessages. */
+                    public stateMessages: google.cloud.functions.v2alpha.IStateMessage[];
+
+                    /**
+                     * Creates a new Stage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Stage instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2alpha.IStage): google.cloud.functions.v2alpha.Stage;
+
+                    /**
+                     * Encodes the specified Stage message. Does not implicitly {@link google.cloud.functions.v2alpha.Stage.verify|verify} messages.
+                     * @param message Stage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2alpha.IStage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Stage message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.Stage.verify|verify} messages.
+                     * @param message Stage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2alpha.IStage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Stage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Stage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2alpha.Stage;
+
+                    /**
+                     * Decodes a Stage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Stage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2alpha.Stage;
+
+                    /**
+                     * Verifies a Stage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Stage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Stage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2alpha.Stage;
+
+                    /**
+                     * Creates a plain object from a Stage message. Also converts values to other types if specified.
+                     * @param message Stage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2alpha.Stage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Stage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Stage {
+
+                    /** Name enum. */
+                    enum Name {
+                        NAME_UNSPECIFIED = 0,
+                        ARTIFACT_REGISTRY = 1,
+                        BUILD = 2,
+                        SERVICE = 3,
+                        TRIGGER = 4,
+                        SERVICE_ROLLBACK = 5,
+                        TRIGGER_ROLLBACK = 6
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        NOT_STARTED = 1,
+                        IN_PROGRESS = 2,
+                        COMPLETE = 3
+                    }
+                }
+            }
+
+            /** Namespace v2beta. */
+            namespace v2beta {
+
+                /** Represents a FunctionService */
+                class FunctionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new FunctionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new FunctionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): FunctionService;
+
+                    /**
+                     * Calls GetFunction.
+                     * @param request GetFunctionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Function
+                     */
+                    public getFunction(request: google.cloud.functions.v2beta.IGetFunctionRequest, callback: google.cloud.functions.v2beta.FunctionService.GetFunctionCallback): void;
+
+                    /**
+                     * Calls GetFunction.
+                     * @param request GetFunctionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFunction(request: google.cloud.functions.v2beta.IGetFunctionRequest): Promise<google.cloud.functions.v2beta.Function>;
+
+                    /**
+                     * Calls ListFunctions.
+                     * @param request ListFunctionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFunctionsResponse
+                     */
+                    public listFunctions(request: google.cloud.functions.v2beta.IListFunctionsRequest, callback: google.cloud.functions.v2beta.FunctionService.ListFunctionsCallback): void;
+
+                    /**
+                     * Calls ListFunctions.
+                     * @param request ListFunctionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFunctions(request: google.cloud.functions.v2beta.IListFunctionsRequest): Promise<google.cloud.functions.v2beta.ListFunctionsResponse>;
+
+                    /**
+                     * Calls CreateFunction.
+                     * @param request CreateFunctionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createFunction(request: google.cloud.functions.v2beta.ICreateFunctionRequest, callback: google.cloud.functions.v2beta.FunctionService.CreateFunctionCallback): void;
+
+                    /**
+                     * Calls CreateFunction.
+                     * @param request CreateFunctionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createFunction(request: google.cloud.functions.v2beta.ICreateFunctionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateFunction.
+                     * @param request UpdateFunctionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateFunction(request: google.cloud.functions.v2beta.IUpdateFunctionRequest, callback: google.cloud.functions.v2beta.FunctionService.UpdateFunctionCallback): void;
+
+                    /**
+                     * Calls UpdateFunction.
+                     * @param request UpdateFunctionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFunction(request: google.cloud.functions.v2beta.IUpdateFunctionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteFunction.
+                     * @param request DeleteFunctionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteFunction(request: google.cloud.functions.v2beta.IDeleteFunctionRequest, callback: google.cloud.functions.v2beta.FunctionService.DeleteFunctionCallback): void;
+
+                    /**
+                     * Calls DeleteFunction.
+                     * @param request DeleteFunctionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFunction(request: google.cloud.functions.v2beta.IDeleteFunctionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GenerateUploadUrl.
+                     * @param request GenerateUploadUrlRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateUploadUrlResponse
+                     */
+                    public generateUploadUrl(request: google.cloud.functions.v2beta.IGenerateUploadUrlRequest, callback: google.cloud.functions.v2beta.FunctionService.GenerateUploadUrlCallback): void;
+
+                    /**
+                     * Calls GenerateUploadUrl.
+                     * @param request GenerateUploadUrlRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateUploadUrl(request: google.cloud.functions.v2beta.IGenerateUploadUrlRequest): Promise<google.cloud.functions.v2beta.GenerateUploadUrlResponse>;
+
+                    /**
+                     * Calls GenerateDownloadUrl.
+                     * @param request GenerateDownloadUrlRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateDownloadUrlResponse
+                     */
+                    public generateDownloadUrl(request: google.cloud.functions.v2beta.IGenerateDownloadUrlRequest, callback: google.cloud.functions.v2beta.FunctionService.GenerateDownloadUrlCallback): void;
+
+                    /**
+                     * Calls GenerateDownloadUrl.
+                     * @param request GenerateDownloadUrlRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateDownloadUrl(request: google.cloud.functions.v2beta.IGenerateDownloadUrlRequest): Promise<google.cloud.functions.v2beta.GenerateDownloadUrlResponse>;
+
+                    /**
+                     * Calls ListRuntimes.
+                     * @param request ListRuntimesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRuntimesResponse
+                     */
+                    public listRuntimes(request: google.cloud.functions.v2beta.IListRuntimesRequest, callback: google.cloud.functions.v2beta.FunctionService.ListRuntimesCallback): void;
+
+                    /**
+                     * Calls ListRuntimes.
+                     * @param request ListRuntimesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRuntimes(request: google.cloud.functions.v2beta.IListRuntimesRequest): Promise<google.cloud.functions.v2beta.ListRuntimesResponse>;
+                }
+
+                namespace FunctionService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2beta.FunctionService#getFunction}.
+                     * @param error Error, if any
+                     * @param [response] Function
+                     */
+                    type GetFunctionCallback = (error: (Error|null), response?: google.cloud.functions.v2beta.Function) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2beta.FunctionService#listFunctions}.
+                     * @param error Error, if any
+                     * @param [response] ListFunctionsResponse
+                     */
+                    type ListFunctionsCallback = (error: (Error|null), response?: google.cloud.functions.v2beta.ListFunctionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2beta.FunctionService#createFunction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateFunctionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2beta.FunctionService#updateFunction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateFunctionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2beta.FunctionService#deleteFunction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteFunctionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2beta.FunctionService#generateUploadUrl}.
+                     * @param error Error, if any
+                     * @param [response] GenerateUploadUrlResponse
+                     */
+                    type GenerateUploadUrlCallback = (error: (Error|null), response?: google.cloud.functions.v2beta.GenerateUploadUrlResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2beta.FunctionService#generateDownloadUrl}.
+                     * @param error Error, if any
+                     * @param [response] GenerateDownloadUrlResponse
+                     */
+                    type GenerateDownloadUrlCallback = (error: (Error|null), response?: google.cloud.functions.v2beta.GenerateDownloadUrlResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.functions.v2beta.FunctionService#listRuntimes}.
+                     * @param error Error, if any
+                     * @param [response] ListRuntimesResponse
+                     */
+                    type ListRuntimesCallback = (error: (Error|null), response?: google.cloud.functions.v2beta.ListRuntimesResponse) => void;
+                }
+
+                /** Environment enum. */
+                enum Environment {
+                    ENVIRONMENT_UNSPECIFIED = 0,
+                    GEN_1 = 1,
+                    GEN_2 = 2
+                }
+
+                /** Properties of a Function. */
+                interface IFunction {
+
+                    /** Function name */
+                    name?: (string|null);
+
+                    /** Function environment */
+                    environment?: (google.cloud.functions.v2beta.Environment|keyof typeof google.cloud.functions.v2beta.Environment|null);
+
+                    /** Function description */
+                    description?: (string|null);
+
+                    /** Function buildConfig */
+                    buildConfig?: (google.cloud.functions.v2beta.IBuildConfig|null);
+
+                    /** Function serviceConfig */
+                    serviceConfig?: (google.cloud.functions.v2beta.IServiceConfig|null);
+
+                    /** Function eventTrigger */
+                    eventTrigger?: (google.cloud.functions.v2beta.IEventTrigger|null);
+
+                    /** Function state */
+                    state?: (google.cloud.functions.v2beta.Function.State|keyof typeof google.cloud.functions.v2beta.Function.State|null);
+
+                    /** Function updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Function labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Function stateMessages */
+                    stateMessages?: (google.cloud.functions.v2beta.IStateMessage[]|null);
+                }
+
+                /** Represents a Function. */
+                class Function implements IFunction {
+
+                    /**
+                     * Constructs a new Function.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IFunction);
+
+                    /** Function name. */
+                    public name: string;
+
+                    /** Function environment. */
+                    public environment: (google.cloud.functions.v2beta.Environment|keyof typeof google.cloud.functions.v2beta.Environment);
+
+                    /** Function description. */
+                    public description: string;
+
+                    /** Function buildConfig. */
+                    public buildConfig?: (google.cloud.functions.v2beta.IBuildConfig|null);
+
+                    /** Function serviceConfig. */
+                    public serviceConfig?: (google.cloud.functions.v2beta.IServiceConfig|null);
+
+                    /** Function eventTrigger. */
+                    public eventTrigger?: (google.cloud.functions.v2beta.IEventTrigger|null);
+
+                    /** Function state. */
+                    public state: (google.cloud.functions.v2beta.Function.State|keyof typeof google.cloud.functions.v2beta.Function.State);
+
+                    /** Function updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Function labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Function stateMessages. */
+                    public stateMessages: google.cloud.functions.v2beta.IStateMessage[];
+
+                    /**
+                     * Creates a new Function instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Function instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IFunction): google.cloud.functions.v2beta.Function;
+
+                    /**
+                     * Encodes the specified Function message. Does not implicitly {@link google.cloud.functions.v2beta.Function.verify|verify} messages.
+                     * @param message Function message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IFunction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Function message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.Function.verify|verify} messages.
+                     * @param message Function message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IFunction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Function message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Function
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.Function;
+
+                    /**
+                     * Decodes a Function message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Function
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.Function;
+
+                    /**
+                     * Verifies a Function message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Function message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Function
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.Function;
+
+                    /**
+                     * Creates a plain object from a Function message. Also converts values to other types if specified.
+                     * @param message Function
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.Function, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Function to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Function {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        FAILED = 2,
+                        DEPLOYING = 3,
+                        DELETING = 4,
+                        UNKNOWN = 5
+                    }
+                }
+
+                /** Properties of a StateMessage. */
+                interface IStateMessage {
+
+                    /** StateMessage severity */
+                    severity?: (google.cloud.functions.v2beta.StateMessage.Severity|keyof typeof google.cloud.functions.v2beta.StateMessage.Severity|null);
+
+                    /** StateMessage type */
+                    type?: (string|null);
+
+                    /** StateMessage message */
+                    message?: (string|null);
+                }
+
+                /** Represents a StateMessage. */
+                class StateMessage implements IStateMessage {
+
+                    /**
+                     * Constructs a new StateMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IStateMessage);
+
+                    /** StateMessage severity. */
+                    public severity: (google.cloud.functions.v2beta.StateMessage.Severity|keyof typeof google.cloud.functions.v2beta.StateMessage.Severity);
+
+                    /** StateMessage type. */
+                    public type: string;
+
+                    /** StateMessage message. */
+                    public message: string;
+
+                    /**
+                     * Creates a new StateMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StateMessage instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IStateMessage): google.cloud.functions.v2beta.StateMessage;
+
+                    /**
+                     * Encodes the specified StateMessage message. Does not implicitly {@link google.cloud.functions.v2beta.StateMessage.verify|verify} messages.
+                     * @param message StateMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IStateMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StateMessage message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.StateMessage.verify|verify} messages.
+                     * @param message StateMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IStateMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StateMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StateMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.StateMessage;
+
+                    /**
+                     * Decodes a StateMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StateMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.StateMessage;
+
+                    /**
+                     * Verifies a StateMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StateMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StateMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.StateMessage;
+
+                    /**
+                     * Creates a plain object from a StateMessage message. Also converts values to other types if specified.
+                     * @param message StateMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.StateMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StateMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace StateMessage {
+
+                    /** Severity enum. */
+                    enum Severity {
+                        SEVERITY_UNSPECIFIED = 0,
+                        ERROR = 1,
+                        WARNING = 2,
+                        INFO = 3
+                    }
+                }
+
+                /** Properties of a StorageSource. */
+                interface IStorageSource {
+
+                    /** StorageSource bucket */
+                    bucket?: (string|null);
+
+                    /** StorageSource object */
+                    object?: (string|null);
+
+                    /** StorageSource generation */
+                    generation?: (number|Long|string|null);
+                }
+
+                /** Represents a StorageSource. */
+                class StorageSource implements IStorageSource {
+
+                    /**
+                     * Constructs a new StorageSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IStorageSource);
+
+                    /** StorageSource bucket. */
+                    public bucket: string;
+
+                    /** StorageSource object. */
+                    public object: string;
+
+                    /** StorageSource generation. */
+                    public generation: (number|Long|string);
+
+                    /**
+                     * Creates a new StorageSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageSource instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IStorageSource): google.cloud.functions.v2beta.StorageSource;
+
+                    /**
+                     * Encodes the specified StorageSource message. Does not implicitly {@link google.cloud.functions.v2beta.StorageSource.verify|verify} messages.
+                     * @param message StorageSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageSource message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.StorageSource.verify|verify} messages.
+                     * @param message StorageSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.StorageSource;
+
+                    /**
+                     * Decodes a StorageSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.StorageSource;
+
+                    /**
+                     * Verifies a StorageSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.StorageSource;
+
+                    /**
+                     * Creates a plain object from a StorageSource message. Also converts values to other types if specified.
+                     * @param message StorageSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.StorageSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RepoSource. */
+                interface IRepoSource {
+
+                    /** RepoSource branchName */
+                    branchName?: (string|null);
+
+                    /** RepoSource tagName */
+                    tagName?: (string|null);
+
+                    /** RepoSource commitSha */
+                    commitSha?: (string|null);
+
+                    /** RepoSource projectId */
+                    projectId?: (string|null);
+
+                    /** RepoSource repoName */
+                    repoName?: (string|null);
+
+                    /** RepoSource dir */
+                    dir?: (string|null);
+
+                    /** RepoSource invertRegex */
+                    invertRegex?: (boolean|null);
+                }
+
+                /** Represents a RepoSource. */
+                class RepoSource implements IRepoSource {
+
+                    /**
+                     * Constructs a new RepoSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IRepoSource);
+
+                    /** RepoSource branchName. */
+                    public branchName?: (string|null);
+
+                    /** RepoSource tagName. */
+                    public tagName?: (string|null);
+
+                    /** RepoSource commitSha. */
+                    public commitSha?: (string|null);
+
+                    /** RepoSource projectId. */
+                    public projectId: string;
+
+                    /** RepoSource repoName. */
+                    public repoName: string;
+
+                    /** RepoSource dir. */
+                    public dir: string;
+
+                    /** RepoSource invertRegex. */
+                    public invertRegex: boolean;
+
+                    /** RepoSource revision. */
+                    public revision?: ("branchName"|"tagName"|"commitSha");
+
+                    /**
+                     * Creates a new RepoSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RepoSource instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IRepoSource): google.cloud.functions.v2beta.RepoSource;
+
+                    /**
+                     * Encodes the specified RepoSource message. Does not implicitly {@link google.cloud.functions.v2beta.RepoSource.verify|verify} messages.
+                     * @param message RepoSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IRepoSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RepoSource message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.RepoSource.verify|verify} messages.
+                     * @param message RepoSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IRepoSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RepoSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RepoSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.RepoSource;
+
+                    /**
+                     * Decodes a RepoSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RepoSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.RepoSource;
+
+                    /**
+                     * Verifies a RepoSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RepoSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RepoSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.RepoSource;
+
+                    /**
+                     * Creates a plain object from a RepoSource message. Also converts values to other types if specified.
+                     * @param message RepoSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.RepoSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RepoSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Source. */
+                interface ISource {
+
+                    /** Source storageSource */
+                    storageSource?: (google.cloud.functions.v2beta.IStorageSource|null);
+
+                    /** Source repoSource */
+                    repoSource?: (google.cloud.functions.v2beta.IRepoSource|null);
+                }
+
+                /** Represents a Source. */
+                class Source implements ISource {
+
+                    /**
+                     * Constructs a new Source.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.ISource);
+
+                    /** Source storageSource. */
+                    public storageSource?: (google.cloud.functions.v2beta.IStorageSource|null);
+
+                    /** Source repoSource. */
+                    public repoSource?: (google.cloud.functions.v2beta.IRepoSource|null);
+
+                    /** Source source. */
+                    public source?: ("storageSource"|"repoSource");
+
+                    /**
+                     * Creates a new Source instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Source instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.ISource): google.cloud.functions.v2beta.Source;
+
+                    /**
+                     * Encodes the specified Source message. Does not implicitly {@link google.cloud.functions.v2beta.Source.verify|verify} messages.
+                     * @param message Source message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.ISource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Source message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.Source.verify|verify} messages.
+                     * @param message Source message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.ISource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Source message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Source
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.Source;
+
+                    /**
+                     * Decodes a Source message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Source
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.Source;
+
+                    /**
+                     * Verifies a Source message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Source message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Source
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.Source;
+
+                    /**
+                     * Creates a plain object from a Source message. Also converts values to other types if specified.
+                     * @param message Source
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.Source, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Source to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SourceProvenance. */
+                interface ISourceProvenance {
+
+                    /** SourceProvenance resolvedStorageSource */
+                    resolvedStorageSource?: (google.cloud.functions.v2beta.IStorageSource|null);
+
+                    /** SourceProvenance resolvedRepoSource */
+                    resolvedRepoSource?: (google.cloud.functions.v2beta.IRepoSource|null);
+                }
+
+                /** Represents a SourceProvenance. */
+                class SourceProvenance implements ISourceProvenance {
+
+                    /**
+                     * Constructs a new SourceProvenance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.ISourceProvenance);
+
+                    /** SourceProvenance resolvedStorageSource. */
+                    public resolvedStorageSource?: (google.cloud.functions.v2beta.IStorageSource|null);
+
+                    /** SourceProvenance resolvedRepoSource. */
+                    public resolvedRepoSource?: (google.cloud.functions.v2beta.IRepoSource|null);
+
+                    /**
+                     * Creates a new SourceProvenance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceProvenance instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.ISourceProvenance): google.cloud.functions.v2beta.SourceProvenance;
+
+                    /**
+                     * Encodes the specified SourceProvenance message. Does not implicitly {@link google.cloud.functions.v2beta.SourceProvenance.verify|verify} messages.
+                     * @param message SourceProvenance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.ISourceProvenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceProvenance message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.SourceProvenance.verify|verify} messages.
+                     * @param message SourceProvenance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.ISourceProvenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceProvenance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceProvenance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.SourceProvenance;
+
+                    /**
+                     * Decodes a SourceProvenance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceProvenance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.SourceProvenance;
+
+                    /**
+                     * Verifies a SourceProvenance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceProvenance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceProvenance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.SourceProvenance;
+
+                    /**
+                     * Creates a plain object from a SourceProvenance message. Also converts values to other types if specified.
+                     * @param message SourceProvenance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.SourceProvenance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceProvenance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BuildConfig. */
+                interface IBuildConfig {
+
+                    /** BuildConfig build */
+                    build?: (string|null);
+
+                    /** BuildConfig runtime */
+                    runtime?: (string|null);
+
+                    /** BuildConfig entryPoint */
+                    entryPoint?: (string|null);
+
+                    /** BuildConfig source */
+                    source?: (google.cloud.functions.v2beta.ISource|null);
+
+                    /** BuildConfig sourceProvenance */
+                    sourceProvenance?: (google.cloud.functions.v2beta.ISourceProvenance|null);
+
+                    /** BuildConfig workerPool */
+                    workerPool?: (string|null);
+
+                    /** BuildConfig environmentVariables */
+                    environmentVariables?: ({ [k: string]: string }|null);
+
+                    /** BuildConfig dockerRepository */
+                    dockerRepository?: (string|null);
+                }
+
+                /** Represents a BuildConfig. */
+                class BuildConfig implements IBuildConfig {
+
+                    /**
+                     * Constructs a new BuildConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IBuildConfig);
+
+                    /** BuildConfig build. */
+                    public build: string;
+
+                    /** BuildConfig runtime. */
+                    public runtime: string;
+
+                    /** BuildConfig entryPoint. */
+                    public entryPoint: string;
+
+                    /** BuildConfig source. */
+                    public source?: (google.cloud.functions.v2beta.ISource|null);
+
+                    /** BuildConfig sourceProvenance. */
+                    public sourceProvenance?: (google.cloud.functions.v2beta.ISourceProvenance|null);
+
+                    /** BuildConfig workerPool. */
+                    public workerPool: string;
+
+                    /** BuildConfig environmentVariables. */
+                    public environmentVariables: { [k: string]: string };
+
+                    /** BuildConfig dockerRepository. */
+                    public dockerRepository: string;
+
+                    /**
+                     * Creates a new BuildConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BuildConfig instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IBuildConfig): google.cloud.functions.v2beta.BuildConfig;
+
+                    /**
+                     * Encodes the specified BuildConfig message. Does not implicitly {@link google.cloud.functions.v2beta.BuildConfig.verify|verify} messages.
+                     * @param message BuildConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IBuildConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BuildConfig message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.BuildConfig.verify|verify} messages.
+                     * @param message BuildConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IBuildConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BuildConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BuildConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.BuildConfig;
+
+                    /**
+                     * Decodes a BuildConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BuildConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.BuildConfig;
+
+                    /**
+                     * Verifies a BuildConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BuildConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BuildConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.BuildConfig;
+
+                    /**
+                     * Creates a plain object from a BuildConfig message. Also converts values to other types if specified.
+                     * @param message BuildConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.BuildConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BuildConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ServiceConfig. */
+                interface IServiceConfig {
+
+                    /** ServiceConfig service */
+                    service?: (string|null);
+
+                    /** ServiceConfig timeoutSeconds */
+                    timeoutSeconds?: (number|null);
+
+                    /** ServiceConfig availableMemory */
+                    availableMemory?: (string|null);
+
+                    /** ServiceConfig environmentVariables */
+                    environmentVariables?: ({ [k: string]: string }|null);
+
+                    /** ServiceConfig maxInstanceCount */
+                    maxInstanceCount?: (number|null);
+
+                    /** ServiceConfig minInstanceCount */
+                    minInstanceCount?: (number|null);
+
+                    /** ServiceConfig vpcConnector */
+                    vpcConnector?: (string|null);
+
+                    /** ServiceConfig vpcConnectorEgressSettings */
+                    vpcConnectorEgressSettings?: (google.cloud.functions.v2beta.ServiceConfig.VpcConnectorEgressSettings|keyof typeof google.cloud.functions.v2beta.ServiceConfig.VpcConnectorEgressSettings|null);
+
+                    /** ServiceConfig ingressSettings */
+                    ingressSettings?: (google.cloud.functions.v2beta.ServiceConfig.IngressSettings|keyof typeof google.cloud.functions.v2beta.ServiceConfig.IngressSettings|null);
+
+                    /** ServiceConfig uri */
+                    uri?: (string|null);
+
+                    /** ServiceConfig serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** ServiceConfig allTrafficOnLatestRevision */
+                    allTrafficOnLatestRevision?: (boolean|null);
+
+                    /** ServiceConfig secretEnvironmentVariables */
+                    secretEnvironmentVariables?: (google.cloud.functions.v2beta.ISecretEnvVar[]|null);
+
+                    /** ServiceConfig secretVolumes */
+                    secretVolumes?: (google.cloud.functions.v2beta.ISecretVolume[]|null);
+
+                    /** ServiceConfig revision */
+                    revision?: (string|null);
+                }
+
+                /** Represents a ServiceConfig. */
+                class ServiceConfig implements IServiceConfig {
+
+                    /**
+                     * Constructs a new ServiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IServiceConfig);
+
+                    /** ServiceConfig service. */
+                    public service: string;
+
+                    /** ServiceConfig timeoutSeconds. */
+                    public timeoutSeconds: number;
+
+                    /** ServiceConfig availableMemory. */
+                    public availableMemory: string;
+
+                    /** ServiceConfig environmentVariables. */
+                    public environmentVariables: { [k: string]: string };
+
+                    /** ServiceConfig maxInstanceCount. */
+                    public maxInstanceCount: number;
+
+                    /** ServiceConfig minInstanceCount. */
+                    public minInstanceCount: number;
+
+                    /** ServiceConfig vpcConnector. */
+                    public vpcConnector: string;
+
+                    /** ServiceConfig vpcConnectorEgressSettings. */
+                    public vpcConnectorEgressSettings: (google.cloud.functions.v2beta.ServiceConfig.VpcConnectorEgressSettings|keyof typeof google.cloud.functions.v2beta.ServiceConfig.VpcConnectorEgressSettings);
+
+                    /** ServiceConfig ingressSettings. */
+                    public ingressSettings: (google.cloud.functions.v2beta.ServiceConfig.IngressSettings|keyof typeof google.cloud.functions.v2beta.ServiceConfig.IngressSettings);
+
+                    /** ServiceConfig uri. */
+                    public uri: string;
+
+                    /** ServiceConfig serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** ServiceConfig allTrafficOnLatestRevision. */
+                    public allTrafficOnLatestRevision: boolean;
+
+                    /** ServiceConfig secretEnvironmentVariables. */
+                    public secretEnvironmentVariables: google.cloud.functions.v2beta.ISecretEnvVar[];
+
+                    /** ServiceConfig secretVolumes. */
+                    public secretVolumes: google.cloud.functions.v2beta.ISecretVolume[];
+
+                    /** ServiceConfig revision. */
+                    public revision: string;
+
+                    /**
+                     * Creates a new ServiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceConfig instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IServiceConfig): google.cloud.functions.v2beta.ServiceConfig;
+
+                    /**
+                     * Encodes the specified ServiceConfig message. Does not implicitly {@link google.cloud.functions.v2beta.ServiceConfig.verify|verify} messages.
+                     * @param message ServiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceConfig message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.ServiceConfig.verify|verify} messages.
+                     * @param message ServiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.ServiceConfig;
+
+                    /**
+                     * Decodes a ServiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.ServiceConfig;
+
+                    /**
+                     * Verifies a ServiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.ServiceConfig;
+
+                    /**
+                     * Creates a plain object from a ServiceConfig message. Also converts values to other types if specified.
+                     * @param message ServiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.ServiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ServiceConfig {
+
+                    /** VpcConnectorEgressSettings enum. */
+                    enum VpcConnectorEgressSettings {
+                        VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED = 0,
+                        PRIVATE_RANGES_ONLY = 1,
+                        ALL_TRAFFIC = 2
+                    }
+
+                    /** IngressSettings enum. */
+                    enum IngressSettings {
+                        INGRESS_SETTINGS_UNSPECIFIED = 0,
+                        ALLOW_ALL = 1,
+                        ALLOW_INTERNAL_ONLY = 2,
+                        ALLOW_INTERNAL_AND_GCLB = 3
+                    }
+                }
+
+                /** Properties of a SecretEnvVar. */
+                interface ISecretEnvVar {
+
+                    /** SecretEnvVar key */
+                    key?: (string|null);
+
+                    /** SecretEnvVar projectId */
+                    projectId?: (string|null);
+
+                    /** SecretEnvVar secret */
+                    secret?: (string|null);
+
+                    /** SecretEnvVar version */
+                    version?: (string|null);
+                }
+
+                /** Represents a SecretEnvVar. */
+                class SecretEnvVar implements ISecretEnvVar {
+
+                    /**
+                     * Constructs a new SecretEnvVar.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.ISecretEnvVar);
+
+                    /** SecretEnvVar key. */
+                    public key: string;
+
+                    /** SecretEnvVar projectId. */
+                    public projectId: string;
+
+                    /** SecretEnvVar secret. */
+                    public secret: string;
+
+                    /** SecretEnvVar version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new SecretEnvVar instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretEnvVar instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.ISecretEnvVar): google.cloud.functions.v2beta.SecretEnvVar;
+
+                    /**
+                     * Encodes the specified SecretEnvVar message. Does not implicitly {@link google.cloud.functions.v2beta.SecretEnvVar.verify|verify} messages.
+                     * @param message SecretEnvVar message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.ISecretEnvVar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretEnvVar message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.SecretEnvVar.verify|verify} messages.
+                     * @param message SecretEnvVar message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.ISecretEnvVar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretEnvVar message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretEnvVar
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.SecretEnvVar;
+
+                    /**
+                     * Decodes a SecretEnvVar message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretEnvVar
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.SecretEnvVar;
+
+                    /**
+                     * Verifies a SecretEnvVar message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretEnvVar message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretEnvVar
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.SecretEnvVar;
+
+                    /**
+                     * Creates a plain object from a SecretEnvVar message. Also converts values to other types if specified.
+                     * @param message SecretEnvVar
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.SecretEnvVar, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretEnvVar to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SecretVolume. */
+                interface ISecretVolume {
+
+                    /** SecretVolume mountPath */
+                    mountPath?: (string|null);
+
+                    /** SecretVolume projectId */
+                    projectId?: (string|null);
+
+                    /** SecretVolume secret */
+                    secret?: (string|null);
+
+                    /** SecretVolume versions */
+                    versions?: (google.cloud.functions.v2beta.SecretVolume.ISecretVersion[]|null);
+                }
+
+                /** Represents a SecretVolume. */
+                class SecretVolume implements ISecretVolume {
+
+                    /**
+                     * Constructs a new SecretVolume.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.ISecretVolume);
+
+                    /** SecretVolume mountPath. */
+                    public mountPath: string;
+
+                    /** SecretVolume projectId. */
+                    public projectId: string;
+
+                    /** SecretVolume secret. */
+                    public secret: string;
+
+                    /** SecretVolume versions. */
+                    public versions: google.cloud.functions.v2beta.SecretVolume.ISecretVersion[];
+
+                    /**
+                     * Creates a new SecretVolume instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretVolume instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.ISecretVolume): google.cloud.functions.v2beta.SecretVolume;
+
+                    /**
+                     * Encodes the specified SecretVolume message. Does not implicitly {@link google.cloud.functions.v2beta.SecretVolume.verify|verify} messages.
+                     * @param message SecretVolume message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.ISecretVolume, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretVolume message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.SecretVolume.verify|verify} messages.
+                     * @param message SecretVolume message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.ISecretVolume, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretVolume message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretVolume
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.SecretVolume;
+
+                    /**
+                     * Decodes a SecretVolume message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretVolume
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.SecretVolume;
+
+                    /**
+                     * Verifies a SecretVolume message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretVolume message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretVolume
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.SecretVolume;
+
+                    /**
+                     * Creates a plain object from a SecretVolume message. Also converts values to other types if specified.
+                     * @param message SecretVolume
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.SecretVolume, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretVolume to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace SecretVolume {
+
+                    /** Properties of a SecretVersion. */
+                    interface ISecretVersion {
+
+                        /** SecretVersion version */
+                        version?: (string|null);
+
+                        /** SecretVersion path */
+                        path?: (string|null);
+                    }
+
+                    /** Represents a SecretVersion. */
+                    class SecretVersion implements ISecretVersion {
+
+                        /**
+                         * Constructs a new SecretVersion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.functions.v2beta.SecretVolume.ISecretVersion);
+
+                        /** SecretVersion version. */
+                        public version: string;
+
+                        /** SecretVersion path. */
+                        public path: string;
+
+                        /**
+                         * Creates a new SecretVersion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SecretVersion instance
+                         */
+                        public static create(properties?: google.cloud.functions.v2beta.SecretVolume.ISecretVersion): google.cloud.functions.v2beta.SecretVolume.SecretVersion;
+
+                        /**
+                         * Encodes the specified SecretVersion message. Does not implicitly {@link google.cloud.functions.v2beta.SecretVolume.SecretVersion.verify|verify} messages.
+                         * @param message SecretVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.functions.v2beta.SecretVolume.ISecretVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SecretVersion message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.SecretVolume.SecretVersion.verify|verify} messages.
+                         * @param message SecretVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.functions.v2beta.SecretVolume.ISecretVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SecretVersion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SecretVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.SecretVolume.SecretVersion;
+
+                        /**
+                         * Decodes a SecretVersion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SecretVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.SecretVolume.SecretVersion;
+
+                        /**
+                         * Verifies a SecretVersion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SecretVersion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SecretVersion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.SecretVolume.SecretVersion;
+
+                        /**
+                         * Creates a plain object from a SecretVersion message. Also converts values to other types if specified.
+                         * @param message SecretVersion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.functions.v2beta.SecretVolume.SecretVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SecretVersion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of an EventTrigger. */
+                interface IEventTrigger {
+
+                    /** EventTrigger trigger */
+                    trigger?: (string|null);
+
+                    /** EventTrigger triggerRegion */
+                    triggerRegion?: (string|null);
+
+                    /** EventTrigger eventType */
+                    eventType?: (string|null);
+
+                    /** EventTrigger eventFilters */
+                    eventFilters?: (google.cloud.functions.v2beta.IEventFilter[]|null);
+
+                    /** EventTrigger pubsubTopic */
+                    pubsubTopic?: (string|null);
+
+                    /** EventTrigger serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** EventTrigger retryPolicy */
+                    retryPolicy?: (google.cloud.functions.v2beta.EventTrigger.RetryPolicy|keyof typeof google.cloud.functions.v2beta.EventTrigger.RetryPolicy|null);
+
+                    /** EventTrigger channel */
+                    channel?: (string|null);
+                }
+
+                /** Represents an EventTrigger. */
+                class EventTrigger implements IEventTrigger {
+
+                    /**
+                     * Constructs a new EventTrigger.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IEventTrigger);
+
+                    /** EventTrigger trigger. */
+                    public trigger: string;
+
+                    /** EventTrigger triggerRegion. */
+                    public triggerRegion: string;
+
+                    /** EventTrigger eventType. */
+                    public eventType: string;
+
+                    /** EventTrigger eventFilters. */
+                    public eventFilters: google.cloud.functions.v2beta.IEventFilter[];
+
+                    /** EventTrigger pubsubTopic. */
+                    public pubsubTopic: string;
+
+                    /** EventTrigger serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** EventTrigger retryPolicy. */
+                    public retryPolicy: (google.cloud.functions.v2beta.EventTrigger.RetryPolicy|keyof typeof google.cloud.functions.v2beta.EventTrigger.RetryPolicy);
+
+                    /** EventTrigger channel. */
+                    public channel: string;
+
+                    /**
+                     * Creates a new EventTrigger instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EventTrigger instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IEventTrigger): google.cloud.functions.v2beta.EventTrigger;
+
+                    /**
+                     * Encodes the specified EventTrigger message. Does not implicitly {@link google.cloud.functions.v2beta.EventTrigger.verify|verify} messages.
+                     * @param message EventTrigger message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IEventTrigger, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EventTrigger message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.EventTrigger.verify|verify} messages.
+                     * @param message EventTrigger message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IEventTrigger, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EventTrigger message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EventTrigger
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.EventTrigger;
+
+                    /**
+                     * Decodes an EventTrigger message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EventTrigger
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.EventTrigger;
+
+                    /**
+                     * Verifies an EventTrigger message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EventTrigger message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EventTrigger
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.EventTrigger;
+
+                    /**
+                     * Creates a plain object from an EventTrigger message. Also converts values to other types if specified.
+                     * @param message EventTrigger
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.EventTrigger, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EventTrigger to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace EventTrigger {
+
+                    /** RetryPolicy enum. */
+                    enum RetryPolicy {
+                        RETRY_POLICY_UNSPECIFIED = 0,
+                        RETRY_POLICY_DO_NOT_RETRY = 1,
+                        RETRY_POLICY_RETRY = 2
+                    }
+                }
+
+                /** Properties of an EventFilter. */
+                interface IEventFilter {
+
+                    /** EventFilter attribute */
+                    attribute?: (string|null);
+
+                    /** EventFilter value */
+                    value?: (string|null);
+
+                    /** EventFilter operator */
+                    operator?: (string|null);
+                }
+
+                /** Represents an EventFilter. */
+                class EventFilter implements IEventFilter {
+
+                    /**
+                     * Constructs a new EventFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IEventFilter);
+
+                    /** EventFilter attribute. */
+                    public attribute: string;
+
+                    /** EventFilter value. */
+                    public value: string;
+
+                    /** EventFilter operator. */
+                    public operator: string;
+
+                    /**
+                     * Creates a new EventFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EventFilter instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IEventFilter): google.cloud.functions.v2beta.EventFilter;
+
+                    /**
+                     * Encodes the specified EventFilter message. Does not implicitly {@link google.cloud.functions.v2beta.EventFilter.verify|verify} messages.
+                     * @param message EventFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IEventFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EventFilter message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.EventFilter.verify|verify} messages.
+                     * @param message EventFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IEventFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EventFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EventFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.EventFilter;
+
+                    /**
+                     * Decodes an EventFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EventFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.EventFilter;
+
+                    /**
+                     * Verifies an EventFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EventFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EventFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.EventFilter;
+
+                    /**
+                     * Creates a plain object from an EventFilter message. Also converts values to other types if specified.
+                     * @param message EventFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.EventFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EventFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetFunctionRequest. */
+                interface IGetFunctionRequest {
+
+                    /** GetFunctionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFunctionRequest. */
+                class GetFunctionRequest implements IGetFunctionRequest {
+
+                    /**
+                     * Constructs a new GetFunctionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IGetFunctionRequest);
+
+                    /** GetFunctionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFunctionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFunctionRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IGetFunctionRequest): google.cloud.functions.v2beta.GetFunctionRequest;
+
+                    /**
+                     * Encodes the specified GetFunctionRequest message. Does not implicitly {@link google.cloud.functions.v2beta.GetFunctionRequest.verify|verify} messages.
+                     * @param message GetFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IGetFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFunctionRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.GetFunctionRequest.verify|verify} messages.
+                     * @param message GetFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IGetFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFunctionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.GetFunctionRequest;
+
+                    /**
+                     * Decodes a GetFunctionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.GetFunctionRequest;
+
+                    /**
+                     * Verifies a GetFunctionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFunctionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFunctionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.GetFunctionRequest;
+
+                    /**
+                     * Creates a plain object from a GetFunctionRequest message. Also converts values to other types if specified.
+                     * @param message GetFunctionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.GetFunctionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFunctionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListFunctionsRequest. */
+                interface IListFunctionsRequest {
+
+                    /** ListFunctionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFunctionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFunctionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListFunctionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListFunctionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListFunctionsRequest. */
+                class ListFunctionsRequest implements IListFunctionsRequest {
+
+                    /**
+                     * Constructs a new ListFunctionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IListFunctionsRequest);
+
+                    /** ListFunctionsRequest parent. */
+                    public parent: string;
+
+                    /** ListFunctionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFunctionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListFunctionsRequest filter. */
+                    public filter: string;
+
+                    /** ListFunctionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListFunctionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFunctionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IListFunctionsRequest): google.cloud.functions.v2beta.ListFunctionsRequest;
+
+                    /**
+                     * Encodes the specified ListFunctionsRequest message. Does not implicitly {@link google.cloud.functions.v2beta.ListFunctionsRequest.verify|verify} messages.
+                     * @param message ListFunctionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IListFunctionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFunctionsRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.ListFunctionsRequest.verify|verify} messages.
+                     * @param message ListFunctionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IListFunctionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFunctionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFunctionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.ListFunctionsRequest;
+
+                    /**
+                     * Decodes a ListFunctionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFunctionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.ListFunctionsRequest;
+
+                    /**
+                     * Verifies a ListFunctionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFunctionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFunctionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.ListFunctionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListFunctionsRequest message. Also converts values to other types if specified.
+                     * @param message ListFunctionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.ListFunctionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFunctionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListFunctionsResponse. */
+                interface IListFunctionsResponse {
+
+                    /** ListFunctionsResponse functions */
+                    functions?: (google.cloud.functions.v2beta.IFunction[]|null);
+
+                    /** ListFunctionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListFunctionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListFunctionsResponse. */
+                class ListFunctionsResponse implements IListFunctionsResponse {
+
+                    /**
+                     * Constructs a new ListFunctionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IListFunctionsResponse);
+
+                    /** ListFunctionsResponse functions. */
+                    public functions: google.cloud.functions.v2beta.IFunction[];
+
+                    /** ListFunctionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListFunctionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListFunctionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFunctionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IListFunctionsResponse): google.cloud.functions.v2beta.ListFunctionsResponse;
+
+                    /**
+                     * Encodes the specified ListFunctionsResponse message. Does not implicitly {@link google.cloud.functions.v2beta.ListFunctionsResponse.verify|verify} messages.
+                     * @param message ListFunctionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IListFunctionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFunctionsResponse message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.ListFunctionsResponse.verify|verify} messages.
+                     * @param message ListFunctionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IListFunctionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFunctionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFunctionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.ListFunctionsResponse;
+
+                    /**
+                     * Decodes a ListFunctionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFunctionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.ListFunctionsResponse;
+
+                    /**
+                     * Verifies a ListFunctionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFunctionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFunctionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.ListFunctionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListFunctionsResponse message. Also converts values to other types if specified.
+                     * @param message ListFunctionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.ListFunctionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFunctionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateFunctionRequest. */
+                interface ICreateFunctionRequest {
+
+                    /** CreateFunctionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateFunctionRequest function */
+                    "function"?: (google.cloud.functions.v2beta.IFunction|null);
+
+                    /** CreateFunctionRequest functionId */
+                    functionId?: (string|null);
+                }
+
+                /** Represents a CreateFunctionRequest. */
+                class CreateFunctionRequest implements ICreateFunctionRequest {
+
+                    /**
+                     * Constructs a new CreateFunctionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.ICreateFunctionRequest);
+
+                    /** CreateFunctionRequest parent. */
+                    public parent: string;
+
+                    /** CreateFunctionRequest function. */
+                    public function?: (google.cloud.functions.v2beta.IFunction|null);
+
+                    /** CreateFunctionRequest functionId. */
+                    public functionId: string;
+
+                    /**
+                     * Creates a new CreateFunctionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFunctionRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.ICreateFunctionRequest): google.cloud.functions.v2beta.CreateFunctionRequest;
+
+                    /**
+                     * Encodes the specified CreateFunctionRequest message. Does not implicitly {@link google.cloud.functions.v2beta.CreateFunctionRequest.verify|verify} messages.
+                     * @param message CreateFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.ICreateFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFunctionRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.CreateFunctionRequest.verify|verify} messages.
+                     * @param message CreateFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.ICreateFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFunctionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.CreateFunctionRequest;
+
+                    /**
+                     * Decodes a CreateFunctionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.CreateFunctionRequest;
+
+                    /**
+                     * Verifies a CreateFunctionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFunctionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFunctionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.CreateFunctionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateFunctionRequest message. Also converts values to other types if specified.
+                     * @param message CreateFunctionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.CreateFunctionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFunctionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateFunctionRequest. */
+                interface IUpdateFunctionRequest {
+
+                    /** UpdateFunctionRequest function */
+                    "function"?: (google.cloud.functions.v2beta.IFunction|null);
+
+                    /** UpdateFunctionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFunctionRequest. */
+                class UpdateFunctionRequest implements IUpdateFunctionRequest {
+
+                    /**
+                     * Constructs a new UpdateFunctionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IUpdateFunctionRequest);
+
+                    /** UpdateFunctionRequest function. */
+                    public function?: (google.cloud.functions.v2beta.IFunction|null);
+
+                    /** UpdateFunctionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFunctionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFunctionRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IUpdateFunctionRequest): google.cloud.functions.v2beta.UpdateFunctionRequest;
+
+                    /**
+                     * Encodes the specified UpdateFunctionRequest message. Does not implicitly {@link google.cloud.functions.v2beta.UpdateFunctionRequest.verify|verify} messages.
+                     * @param message UpdateFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IUpdateFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFunctionRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.UpdateFunctionRequest.verify|verify} messages.
+                     * @param message UpdateFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IUpdateFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFunctionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.UpdateFunctionRequest;
+
+                    /**
+                     * Decodes an UpdateFunctionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.UpdateFunctionRequest;
+
+                    /**
+                     * Verifies an UpdateFunctionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFunctionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFunctionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.UpdateFunctionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFunctionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFunctionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.UpdateFunctionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFunctionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteFunctionRequest. */
+                interface IDeleteFunctionRequest {
+
+                    /** DeleteFunctionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteFunctionRequest. */
+                class DeleteFunctionRequest implements IDeleteFunctionRequest {
+
+                    /**
+                     * Constructs a new DeleteFunctionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IDeleteFunctionRequest);
+
+                    /** DeleteFunctionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteFunctionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFunctionRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IDeleteFunctionRequest): google.cloud.functions.v2beta.DeleteFunctionRequest;
+
+                    /**
+                     * Encodes the specified DeleteFunctionRequest message. Does not implicitly {@link google.cloud.functions.v2beta.DeleteFunctionRequest.verify|verify} messages.
+                     * @param message DeleteFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IDeleteFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFunctionRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.DeleteFunctionRequest.verify|verify} messages.
+                     * @param message DeleteFunctionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IDeleteFunctionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFunctionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.DeleteFunctionRequest;
+
+                    /**
+                     * Decodes a DeleteFunctionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFunctionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.DeleteFunctionRequest;
+
+                    /**
+                     * Verifies a DeleteFunctionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFunctionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFunctionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.DeleteFunctionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFunctionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFunctionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.DeleteFunctionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFunctionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GenerateUploadUrlRequest. */
+                interface IGenerateUploadUrlRequest {
+
+                    /** GenerateUploadUrlRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a GenerateUploadUrlRequest. */
+                class GenerateUploadUrlRequest implements IGenerateUploadUrlRequest {
+
+                    /**
+                     * Constructs a new GenerateUploadUrlRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IGenerateUploadUrlRequest);
+
+                    /** GenerateUploadUrlRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new GenerateUploadUrlRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateUploadUrlRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IGenerateUploadUrlRequest): google.cloud.functions.v2beta.GenerateUploadUrlRequest;
+
+                    /**
+                     * Encodes the specified GenerateUploadUrlRequest message. Does not implicitly {@link google.cloud.functions.v2beta.GenerateUploadUrlRequest.verify|verify} messages.
+                     * @param message GenerateUploadUrlRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IGenerateUploadUrlRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateUploadUrlRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.GenerateUploadUrlRequest.verify|verify} messages.
+                     * @param message GenerateUploadUrlRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IGenerateUploadUrlRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateUploadUrlRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateUploadUrlRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.GenerateUploadUrlRequest;
+
+                    /**
+                     * Decodes a GenerateUploadUrlRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateUploadUrlRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.GenerateUploadUrlRequest;
+
+                    /**
+                     * Verifies a GenerateUploadUrlRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateUploadUrlRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateUploadUrlRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.GenerateUploadUrlRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateUploadUrlRequest message. Also converts values to other types if specified.
+                     * @param message GenerateUploadUrlRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.GenerateUploadUrlRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateUploadUrlRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GenerateUploadUrlResponse. */
+                interface IGenerateUploadUrlResponse {
+
+                    /** GenerateUploadUrlResponse uploadUrl */
+                    uploadUrl?: (string|null);
+
+                    /** GenerateUploadUrlResponse storageSource */
+                    storageSource?: (google.cloud.functions.v2beta.IStorageSource|null);
+                }
+
+                /** Represents a GenerateUploadUrlResponse. */
+                class GenerateUploadUrlResponse implements IGenerateUploadUrlResponse {
+
+                    /**
+                     * Constructs a new GenerateUploadUrlResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IGenerateUploadUrlResponse);
+
+                    /** GenerateUploadUrlResponse uploadUrl. */
+                    public uploadUrl: string;
+
+                    /** GenerateUploadUrlResponse storageSource. */
+                    public storageSource?: (google.cloud.functions.v2beta.IStorageSource|null);
+
+                    /**
+                     * Creates a new GenerateUploadUrlResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateUploadUrlResponse instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IGenerateUploadUrlResponse): google.cloud.functions.v2beta.GenerateUploadUrlResponse;
+
+                    /**
+                     * Encodes the specified GenerateUploadUrlResponse message. Does not implicitly {@link google.cloud.functions.v2beta.GenerateUploadUrlResponse.verify|verify} messages.
+                     * @param message GenerateUploadUrlResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IGenerateUploadUrlResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateUploadUrlResponse message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.GenerateUploadUrlResponse.verify|verify} messages.
+                     * @param message GenerateUploadUrlResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IGenerateUploadUrlResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateUploadUrlResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateUploadUrlResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.GenerateUploadUrlResponse;
+
+                    /**
+                     * Decodes a GenerateUploadUrlResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateUploadUrlResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.GenerateUploadUrlResponse;
+
+                    /**
+                     * Verifies a GenerateUploadUrlResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateUploadUrlResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateUploadUrlResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.GenerateUploadUrlResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateUploadUrlResponse message. Also converts values to other types if specified.
+                     * @param message GenerateUploadUrlResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.GenerateUploadUrlResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateUploadUrlResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GenerateDownloadUrlRequest. */
+                interface IGenerateDownloadUrlRequest {
+
+                    /** GenerateDownloadUrlRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GenerateDownloadUrlRequest. */
+                class GenerateDownloadUrlRequest implements IGenerateDownloadUrlRequest {
+
+                    /**
+                     * Constructs a new GenerateDownloadUrlRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IGenerateDownloadUrlRequest);
+
+                    /** GenerateDownloadUrlRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GenerateDownloadUrlRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateDownloadUrlRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IGenerateDownloadUrlRequest): google.cloud.functions.v2beta.GenerateDownloadUrlRequest;
+
+                    /**
+                     * Encodes the specified GenerateDownloadUrlRequest message. Does not implicitly {@link google.cloud.functions.v2beta.GenerateDownloadUrlRequest.verify|verify} messages.
+                     * @param message GenerateDownloadUrlRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IGenerateDownloadUrlRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateDownloadUrlRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.GenerateDownloadUrlRequest.verify|verify} messages.
+                     * @param message GenerateDownloadUrlRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IGenerateDownloadUrlRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateDownloadUrlRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateDownloadUrlRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.GenerateDownloadUrlRequest;
+
+                    /**
+                     * Decodes a GenerateDownloadUrlRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateDownloadUrlRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.GenerateDownloadUrlRequest;
+
+                    /**
+                     * Verifies a GenerateDownloadUrlRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateDownloadUrlRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateDownloadUrlRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.GenerateDownloadUrlRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateDownloadUrlRequest message. Also converts values to other types if specified.
+                     * @param message GenerateDownloadUrlRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.GenerateDownloadUrlRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateDownloadUrlRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GenerateDownloadUrlResponse. */
+                interface IGenerateDownloadUrlResponse {
+
+                    /** GenerateDownloadUrlResponse downloadUrl */
+                    downloadUrl?: (string|null);
+                }
+
+                /** Represents a GenerateDownloadUrlResponse. */
+                class GenerateDownloadUrlResponse implements IGenerateDownloadUrlResponse {
+
+                    /**
+                     * Constructs a new GenerateDownloadUrlResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IGenerateDownloadUrlResponse);
+
+                    /** GenerateDownloadUrlResponse downloadUrl. */
+                    public downloadUrl: string;
+
+                    /**
+                     * Creates a new GenerateDownloadUrlResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateDownloadUrlResponse instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IGenerateDownloadUrlResponse): google.cloud.functions.v2beta.GenerateDownloadUrlResponse;
+
+                    /**
+                     * Encodes the specified GenerateDownloadUrlResponse message. Does not implicitly {@link google.cloud.functions.v2beta.GenerateDownloadUrlResponse.verify|verify} messages.
+                     * @param message GenerateDownloadUrlResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IGenerateDownloadUrlResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateDownloadUrlResponse message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.GenerateDownloadUrlResponse.verify|verify} messages.
+                     * @param message GenerateDownloadUrlResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IGenerateDownloadUrlResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateDownloadUrlResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateDownloadUrlResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.GenerateDownloadUrlResponse;
+
+                    /**
+                     * Decodes a GenerateDownloadUrlResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateDownloadUrlResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.GenerateDownloadUrlResponse;
+
+                    /**
+                     * Verifies a GenerateDownloadUrlResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateDownloadUrlResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateDownloadUrlResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.GenerateDownloadUrlResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateDownloadUrlResponse message. Also converts values to other types if specified.
+                     * @param message GenerateDownloadUrlResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.GenerateDownloadUrlResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateDownloadUrlResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRuntimesRequest. */
+                interface IListRuntimesRequest {
+
+                    /** ListRuntimesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRuntimesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListRuntimesRequest. */
+                class ListRuntimesRequest implements IListRuntimesRequest {
+
+                    /**
+                     * Constructs a new ListRuntimesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IListRuntimesRequest);
+
+                    /** ListRuntimesRequest parent. */
+                    public parent: string;
+
+                    /** ListRuntimesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListRuntimesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRuntimesRequest instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IListRuntimesRequest): google.cloud.functions.v2beta.ListRuntimesRequest;
+
+                    /**
+                     * Encodes the specified ListRuntimesRequest message. Does not implicitly {@link google.cloud.functions.v2beta.ListRuntimesRequest.verify|verify} messages.
+                     * @param message ListRuntimesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IListRuntimesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRuntimesRequest message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.ListRuntimesRequest.verify|verify} messages.
+                     * @param message ListRuntimesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IListRuntimesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRuntimesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRuntimesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.ListRuntimesRequest;
+
+                    /**
+                     * Decodes a ListRuntimesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRuntimesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.ListRuntimesRequest;
+
+                    /**
+                     * Verifies a ListRuntimesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRuntimesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRuntimesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.ListRuntimesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRuntimesRequest message. Also converts values to other types if specified.
+                     * @param message ListRuntimesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.ListRuntimesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRuntimesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRuntimesResponse. */
+                interface IListRuntimesResponse {
+
+                    /** ListRuntimesResponse runtimes */
+                    runtimes?: (google.cloud.functions.v2beta.ListRuntimesResponse.IRuntime[]|null);
+                }
+
+                /** Represents a ListRuntimesResponse. */
+                class ListRuntimesResponse implements IListRuntimesResponse {
+
+                    /**
+                     * Constructs a new ListRuntimesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IListRuntimesResponse);
+
+                    /** ListRuntimesResponse runtimes. */
+                    public runtimes: google.cloud.functions.v2beta.ListRuntimesResponse.IRuntime[];
+
+                    /**
+                     * Creates a new ListRuntimesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRuntimesResponse instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IListRuntimesResponse): google.cloud.functions.v2beta.ListRuntimesResponse;
+
+                    /**
+                     * Encodes the specified ListRuntimesResponse message. Does not implicitly {@link google.cloud.functions.v2beta.ListRuntimesResponse.verify|verify} messages.
+                     * @param message ListRuntimesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IListRuntimesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRuntimesResponse message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.ListRuntimesResponse.verify|verify} messages.
+                     * @param message ListRuntimesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IListRuntimesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRuntimesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRuntimesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.ListRuntimesResponse;
+
+                    /**
+                     * Decodes a ListRuntimesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRuntimesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.ListRuntimesResponse;
+
+                    /**
+                     * Verifies a ListRuntimesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRuntimesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRuntimesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.ListRuntimesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRuntimesResponse message. Also converts values to other types if specified.
+                     * @param message ListRuntimesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.ListRuntimesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRuntimesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ListRuntimesResponse {
+
+                    /** Properties of a Runtime. */
+                    interface IRuntime {
+
+                        /** Runtime name */
+                        name?: (string|null);
+
+                        /** Runtime displayName */
+                        displayName?: (string|null);
+
+                        /** Runtime stage */
+                        stage?: (google.cloud.functions.v2beta.ListRuntimesResponse.RuntimeStage|keyof typeof google.cloud.functions.v2beta.ListRuntimesResponse.RuntimeStage|null);
+
+                        /** Runtime warnings */
+                        warnings?: (string[]|null);
+
+                        /** Runtime environment */
+                        environment?: (google.cloud.functions.v2beta.Environment|keyof typeof google.cloud.functions.v2beta.Environment|null);
+                    }
+
+                    /** Represents a Runtime. */
+                    class Runtime implements IRuntime {
+
+                        /**
+                         * Constructs a new Runtime.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.functions.v2beta.ListRuntimesResponse.IRuntime);
+
+                        /** Runtime name. */
+                        public name: string;
+
+                        /** Runtime displayName. */
+                        public displayName: string;
+
+                        /** Runtime stage. */
+                        public stage: (google.cloud.functions.v2beta.ListRuntimesResponse.RuntimeStage|keyof typeof google.cloud.functions.v2beta.ListRuntimesResponse.RuntimeStage);
+
+                        /** Runtime warnings. */
+                        public warnings: string[];
+
+                        /** Runtime environment. */
+                        public environment: (google.cloud.functions.v2beta.Environment|keyof typeof google.cloud.functions.v2beta.Environment);
+
+                        /**
+                         * Creates a new Runtime instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Runtime instance
+                         */
+                        public static create(properties?: google.cloud.functions.v2beta.ListRuntimesResponse.IRuntime): google.cloud.functions.v2beta.ListRuntimesResponse.Runtime;
+
+                        /**
+                         * Encodes the specified Runtime message. Does not implicitly {@link google.cloud.functions.v2beta.ListRuntimesResponse.Runtime.verify|verify} messages.
+                         * @param message Runtime message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.functions.v2beta.ListRuntimesResponse.IRuntime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Runtime message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.ListRuntimesResponse.Runtime.verify|verify} messages.
+                         * @param message Runtime message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.functions.v2beta.ListRuntimesResponse.IRuntime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Runtime message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Runtime
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.ListRuntimesResponse.Runtime;
+
+                        /**
+                         * Decodes a Runtime message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Runtime
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.ListRuntimesResponse.Runtime;
+
+                        /**
+                         * Verifies a Runtime message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Runtime message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Runtime
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.ListRuntimesResponse.Runtime;
+
+                        /**
+                         * Creates a plain object from a Runtime message. Also converts values to other types if specified.
+                         * @param message Runtime
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.functions.v2beta.ListRuntimesResponse.Runtime, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Runtime to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** RuntimeStage enum. */
+                    enum RuntimeStage {
+                        RUNTIME_STAGE_UNSPECIFIED = 0,
+                        DEVELOPMENT = 1,
+                        ALPHA = 2,
+                        BETA = 3,
+                        GA = 4,
+                        DEPRECATED = 5,
+                        DECOMMISSIONED = 6
+                    }
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusDetail */
+                    statusDetail?: (string|null);
+
+                    /** OperationMetadata cancelRequested */
+                    cancelRequested?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+
+                    /** OperationMetadata requestResource */
+                    requestResource?: (google.protobuf.IAny|null);
+
+                    /** OperationMetadata stages */
+                    stages?: (google.cloud.functions.v2beta.IStage[]|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusDetail. */
+                    public statusDetail: string;
+
+                    /** OperationMetadata cancelRequested. */
+                    public cancelRequested: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /** OperationMetadata requestResource. */
+                    public requestResource?: (google.protobuf.IAny|null);
+
+                    /** OperationMetadata stages. */
+                    public stages: google.cloud.functions.v2beta.IStage[];
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IOperationMetadata): google.cloud.functions.v2beta.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.functions.v2beta.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Stage. */
+                interface IStage {
+
+                    /** Stage name */
+                    name?: (google.cloud.functions.v2beta.Stage.Name|keyof typeof google.cloud.functions.v2beta.Stage.Name|null);
+
+                    /** Stage message */
+                    message?: (string|null);
+
+                    /** Stage state */
+                    state?: (google.cloud.functions.v2beta.Stage.State|keyof typeof google.cloud.functions.v2beta.Stage.State|null);
+
+                    /** Stage resource */
+                    resource?: (string|null);
+
+                    /** Stage resourceUri */
+                    resourceUri?: (string|null);
+
+                    /** Stage stateMessages */
+                    stateMessages?: (google.cloud.functions.v2beta.IStateMessage[]|null);
+                }
+
+                /** Represents a Stage. */
+                class Stage implements IStage {
+
+                    /**
+                     * Constructs a new Stage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.IStage);
+
+                    /** Stage name. */
+                    public name: (google.cloud.functions.v2beta.Stage.Name|keyof typeof google.cloud.functions.v2beta.Stage.Name);
+
+                    /** Stage message. */
+                    public message: string;
+
+                    /** Stage state. */
+                    public state: (google.cloud.functions.v2beta.Stage.State|keyof typeof google.cloud.functions.v2beta.Stage.State);
+
+                    /** Stage resource. */
+                    public resource: string;
+
+                    /** Stage resourceUri. */
+                    public resourceUri: string;
+
+                    /** Stage stateMessages. */
+                    public stateMessages: google.cloud.functions.v2beta.IStateMessage[];
+
+                    /**
+                     * Creates a new Stage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Stage instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.IStage): google.cloud.functions.v2beta.Stage;
+
+                    /**
+                     * Encodes the specified Stage message. Does not implicitly {@link google.cloud.functions.v2beta.Stage.verify|verify} messages.
+                     * @param message Stage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.IStage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Stage message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.Stage.verify|verify} messages.
+                     * @param message Stage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.IStage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Stage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Stage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.Stage;
+
+                    /**
+                     * Decodes a Stage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Stage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.Stage;
+
+                    /**
+                     * Verifies a Stage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Stage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Stage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.Stage;
+
+                    /**
+                     * Creates a plain object from a Stage message. Also converts values to other types if specified.
+                     * @param message Stage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.Stage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Stage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Stage {
+
+                    /** Name enum. */
+                    enum Name {
+                        NAME_UNSPECIFIED = 0,
+                        ARTIFACT_REGISTRY = 1,
+                        BUILD = 2,
+                        SERVICE = 3,
+                        TRIGGER = 4,
+                        SERVICE_ROLLBACK = 5,
+                        TRIGGER_ROLLBACK = 6
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        NOT_STARTED = 1,
+                        IN_PROGRESS = 2,
+                        COMPLETE = 3
+                    }
+                }
+            }
         }
     }
 
