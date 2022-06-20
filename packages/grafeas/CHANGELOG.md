@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-grafeas/compare/v3.6.1...v4.0.0) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#347)
+
+### Features
+
+* Import of Grafeas from Github ([#351](https://github.com/googleapis/nodejs-grafeas/issues/351)) ([8aa9f5d](https://github.com/googleapis/nodejs-grafeas/commit/8aa9f5dd79a6c67e4ec062ceff5d6efca7673a15))
+
+
+### Build System
+
+* update library to use Node 12 ([#347](https://github.com/googleapis/nodejs-grafeas/issues/347)) ([31bd179](https://github.com/googleapis/nodejs-grafeas/commit/31bd179301b3096929a4ce4ab57b27cbb538e8eb))
+
 ### [3.6.1](https://github.com/googleapis/nodejs-grafeas/compare/v3.6.0...v3.6.1) (2022-03-14)
 
 
