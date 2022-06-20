@@ -1,5 +1,28 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/nodejs-document-ai/compare/v3.3.0...v4.0.0) (2022-06-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#333)
+* mark Document.Entity.type as REQUIRED in all versions (#326)
+
+### Features
+
+* add `content` field in TextAnchor ([#315](https://github.com/googleapis/nodejs-document-ai/issues/315)) ([1fa9195](https://github.com/googleapis/nodejs-document-ai/commit/1fa9195d555bef2fc2c45668338200d95fec47cb))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v6 ([#335](https://github.com/googleapis/nodejs-document-ai/issues/335)) ([0259e67](https://github.com/googleapis/nodejs-document-ai/commit/0259e67e411622dbe4acf2ece931b09adf7aaafd))
+* mark Document.Entity.type as REQUIRED in all versions ([#326](https://github.com/googleapis/nodejs-document-ai/issues/326)) ([8ef4cca](https://github.com/googleapis/nodejs-document-ai/commit/8ef4cca05d7095ed51befbb791991209b0d1a3f8))
+
+
+### Build System
+
+* update library to use Node 12 ([#333](https://github.com/googleapis/nodejs-document-ai/issues/333)) ([f51470c](https://github.com/googleapis/nodejs-document-ai/commit/f51470cff119edca6d5ad38ba89652fec80cb429))
+
 ## [3.3.0](https://github.com/googleapis/nodejs-document-ai/compare/v3.2.1...v3.3.0) (2022-02-22)
 
 
