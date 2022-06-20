@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-functions/compare/v2.0.0...v2.1.0) (2022-06-20)
+
+
+### Features
+
+* added support for CMEK ([#166](https://github.com/googleapis/nodejs-functions/issues/166)) ([5f5e7e0](https://github.com/googleapis/nodejs-functions/commit/5f5e7e00282783095af067268972b72e68a17ebe))
+* generating GAPIC libraries for Google Cloud Functions v2alpha ([25c6047](https://github.com/googleapis/nodejs-functions/commit/25c60474a412fc26d1f91a12e47d259fcf3b7445))
+* generating GAPIC libraries for Google Cloud Functions v2beta ([#171](https://github.com/googleapis/nodejs-functions/issues/171)) ([25c6047](https://github.com/googleapis/nodejs-functions/commit/25c60474a412fc26d1f91a12e47d259fcf3b7445))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-functions/compare/v1.3.0...v2.0.0) (2022-05-17)
 
 
