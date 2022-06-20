@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.0...v3.0.1) (2022-06-16)
+
+
+### Bug Fixes
+
+* set the right field number for reCAPTCHA private password leak ([#385](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/385)) ([1d571f3](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/1d571f3eb1eeb8f83bb52a32a39ee527e8411af1))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.5.0...v3.0.0) (2022-05-19)
 
 
