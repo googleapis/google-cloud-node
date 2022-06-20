@@ -14,6 +14,7 @@
 
 'use strict';
 
+// TODO: revert threat types to strings once https://github.com/googleapis/gax-nodejs/issues/1205 is fixed
 // [START web_risk_quickstart]
 /**
  * Check a URI against the WebRisk API.
@@ -21,14 +22,18 @@
  */
 async function quickstart(uri) {
   // Create the WebRisk client library.
-  const {WebRiskServiceClient} = require('@google-cloud/web-risk');
+  const {WebRiskServiceClient, protos} = require('@google-cloud/web-risk');
   const client = new WebRiskServiceClient();
 
   // Create an API request to check for malware, social engineering,
   // and unwanted software.
   const request = {
     uri: uri,
-    threatTypes: ['MALWARE', 'SOCIAL_ENGINEERING', 'UNWANTED_SOFTWARE'],
+    threatTypes: [
+      protos.google.cloud.webrisk.v1.ThreatType.MALWARE,
+      protos.google.cloud.webrisk.v1.ThreatType.SOCIAL_ENGINEERING,
+      protos.google.cloud.webrisk.v1.ThreatType.UNWANTED_SOFTWARE,
+    ],
   };
 
   // call the WebRisk searchUris API.
