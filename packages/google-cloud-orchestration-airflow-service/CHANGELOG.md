@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-orchestration-airflow/compare/v1.0.0...v2.0.0) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#46)
+
+### Build System
+
+* update library to use Node 12 ([#46](https://github.com/googleapis/nodejs-orchestration-airflow/issues/46)) ([8050138](https://github.com/googleapis/nodejs-orchestration-airflow/commit/8050138459f45ca557dee0a38ecc82962c4b8da2))
+
 ## 1.0.0 (2021-09-30)
 
 
