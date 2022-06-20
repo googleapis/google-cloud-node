@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/nodejs-cloud-container/compare/v4.0.0...v4.0.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#541](https://github.com/googleapis/nodejs-cloud-container/issues/541)) ([87d8c3f](https://github.com/googleapis/nodejs-cloud-container/commit/87d8c3f7488fa122ebefcdabaa597625e1d60d9c))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-cloud-container/compare/v3.0.1...v4.0.0) (2022-05-20)
 
 
