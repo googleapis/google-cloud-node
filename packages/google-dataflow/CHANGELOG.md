@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-dataflow/compare/v1.2.0...v2.0.0) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#65)
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#68](https://github.com/googleapis/nodejs-dataflow/issues/68)) ([f6432cb](https://github.com/googleapis/nodejs-dataflow/commit/f6432cb34bae0773494dc29f30782c854892e6a0))
+
+
+### Build System
+
+* update library to use Node 12 ([#65](https://github.com/googleapis/nodejs-dataflow/issues/65)) ([a515a4a](https://github.com/googleapis/nodejs-dataflow/commit/a515a4a9be3a6dd0e307858312906f2022d65d25))
+
 ## [1.2.0](https://github.com/googleapis/nodejs-dataflow/compare/v1.1.0...v1.2.0) (2022-04-04)
 
 
