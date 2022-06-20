@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/nodejs-language/compare/v4.3.2...v5.0.0) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#666)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v6 ([#668](https://github.com/googleapis/nodejs-language/issues/668)) ([4120d2d](https://github.com/googleapis/nodejs-language/commit/4120d2d1da4ce6bd99bd51c5ee180929007d7051))
+
+
+### Build System
+
+* update library to use Node 12 ([#666](https://github.com/googleapis/nodejs-language/issues/666)) ([c6edf4a](https://github.com/googleapis/nodejs-language/commit/c6edf4a10b43c2706de89d5d553fb9f74b59ee98))
+
 ### [4.3.2](https://www.github.com/googleapis/nodejs-language/compare/v4.3.1...v4.3.2) (2021-11-10)
 
 
