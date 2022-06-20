@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-data-qna/compare/v1.1.0...v2.0.0) (2022-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#112)
+
+### Build System
+
+* update library to use Node 12 ([#112](https://github.com/googleapis/nodejs-data-qna/issues/112)) ([7ff17f3](https://github.com/googleapis/nodejs-data-qna/commit/7ff17f3aaad5ad986b2b1432664424b14be3cfae))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.8...v1.1.0) (2021-09-13)
 
 
