@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-notebooks/compare/v1.3.1...v2.0.0) (2022-06-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#140)
+* make v1 default service (#126)
+
+### Features
+
+* make v1 default service ([#126](https://github.com/googleapis/nodejs-notebooks/issues/126)) ([57b21a7](https://github.com/googleapis/nodejs-notebooks/commit/57b21a7926f2170afdb8536fb4ad14311ef70e90))
+
+
+### Build System
+
+* update library to use Node 12 ([#140](https://github.com/googleapis/nodejs-notebooks/issues/140)) ([9a2359e](https://github.com/googleapis/nodejs-notebooks/commit/9a2359e000b052950ddab5cead1db77868499e65))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.3.0...v1.3.1) (2021-09-09)
 
 
