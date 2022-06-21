@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/nodejs-dialogflow/compare/v4.7.0...v5.0.0) (2022-06-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#955)
+* correct broken ConversationModelEvaluation resource pattern (#945)
+
+### Features
+
+* add the API of StreamingAnalyzeContent ([#952](https://github.com/googleapis/nodejs-dialogflow/issues/952)) ([ca02d94](https://github.com/googleapis/nodejs-dialogflow/commit/ca02d9456fdfbbd0d2855f07ef1c6e9a972be7ac))
+
+
+### Bug Fixes
+
+* correct broken ConversationModelEvaluation resource pattern ([#945](https://github.com/googleapis/nodejs-dialogflow/issues/945)) ([e1785d6](https://github.com/googleapis/nodejs-dialogflow/commit/e1785d61f45e409dd7ad5005db0ae88a8c1e69d5))
+* fixes for dynamic routing and streaming descriptors ([#958](https://github.com/googleapis/nodejs-dialogflow/issues/958)) ([3330957](https://github.com/googleapis/nodejs-dialogflow/commit/33309570f0200264ac4fe6cf3052ccd8648665f8))
+
+
+### Build System
+
+* update library to use Node 12 ([#955](https://github.com/googleapis/nodejs-dialogflow/issues/955)) ([6755bed](https://github.com/googleapis/nodejs-dialogflow/commit/6755bed996af1582cf06ea9ef05281f1de880f80))
+
 ## [4.7.0](https://github.com/googleapis/nodejs-dialogflow/compare/v4.6.0...v4.7.0) (2022-03-25)
 
 
