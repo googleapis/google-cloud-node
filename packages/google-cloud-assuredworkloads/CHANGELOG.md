@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.0.0...v3.1.0) (2022-06-16)
+
+
+### Features
+
+* proto file name is changed from assuredworkloads_v1beta1.proto to assuredworkloads.proto ([e1ff7cd](https://github.com/googleapis/nodejs-assured-workloads/commit/e1ff7cd5272c99a5824a0319ab0aec73135aa667))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v2.2.0...v3.0.0) (2022-05-19)
 
 
