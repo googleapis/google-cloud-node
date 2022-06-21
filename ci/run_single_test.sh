@@ -45,7 +45,7 @@ npm install
 retval=0
 
 set +e
-case ${JOB_TYPE} in
+case ${TEST_TYPE} in
 lint)
     npm run lint
     retval=$?
