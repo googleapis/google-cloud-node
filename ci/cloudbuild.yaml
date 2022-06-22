@@ -23,7 +23,7 @@ logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node/${_BUILD_TYPE}/${COMMIT
 timeout: 7200s
 
 steps:
-  - name: gcr.io/cloud-devrel-kokoro-resources/node:14-user
+  - name: gcr.io/cloud-devrel-public-resources/node:14-user
     id: "run-tests"
     timeout: 7200s
     entrypoint: "ci/run_conditional_tests.sh"
