@@ -22,7 +22,11 @@ import {Request} from 'teeny-request';
 import {AuthClient, GoogleAuth, OAuth2Client} from 'google-auth-library';
 
 import {Interceptor} from '../../src/nodejs-common';
-import {ServiceConfig, ServiceOptions} from '../../src/nodejs-common/service';
+import {
+  DEFAULT_PROJECT_ID_TOKEN,
+  ServiceConfig,
+  ServiceOptions,
+} from '../../src/nodejs-common/service';
 import {
   BodyResponseCallback,
   DecorateRequestOptions,
@@ -228,7 +232,7 @@ describe('Service', () => {
 
     it('should default projectId with placeholder', () => {
       const service = new Service(fakeCfg, {});
-      assert.strictEqual(service.projectId, '{{projectId}}');
+      assert.strictEqual(service.projectId, DEFAULT_PROJECT_ID_TOKEN);
     });
 
     it('should localize the projectIdRequired', () => {

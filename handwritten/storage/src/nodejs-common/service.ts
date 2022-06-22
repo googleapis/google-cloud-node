@@ -28,7 +28,7 @@ import {
   util,
 } from './util';
 
-const PROJECT_ID_TOKEN = '{{projectId}}';
+export const DEFAULT_PROJECT_ID_TOKEN = '{{projectId}}';
 
 export interface StreamRequestOptions extends DecorateRequestOptions {
   shouldReturnStream: true;
@@ -106,7 +106,7 @@ export class Service {
     this.globalInterceptors = arrify(options.interceptors_!);
     this.interceptors = [];
     this.packageJson = config.packageJson;
-    this.projectId = options.projectId || PROJECT_ID_TOKEN;
+    this.projectId = options.projectId || DEFAULT_PROJECT_ID_TOKEN;
     this.projectIdRequired = config.projectIdRequired !== false;
     this.providedUserAgent = options.userAgent;
 
@@ -167,7 +167,7 @@ export class Service {
 
   protected async getProjectIdAsync(): Promise<string> {
     const projectId = await this.authClient.getProjectId();
-    if (this.projectId === PROJECT_ID_TOKEN && projectId) {
+    if (this.projectId === DEFAULT_PROJECT_ID_TOKEN && projectId) {
       this.projectId = projectId;
     }
     return this.projectId;

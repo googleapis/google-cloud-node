@@ -18,7 +18,10 @@
  * @module common/util
  */
 
-import {replaceProjectIdToken} from '@google-cloud/projectify';
+import {
+  replaceProjectIdToken,
+  MissingProjectIdError,
+} from '@google-cloud/projectify';
 import * as ent from 'ent';
 import * as extend from 'extend';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
@@ -29,6 +32,8 @@ import {Duplex, DuplexOptions, Readable, Transform, Writable} from 'stream';
 import {teenyRequest} from 'teeny-request';
 import {Interceptor} from './service-object';
 import * as uuid from 'uuid';
+import {DEFAULT_PROJECT_ID_TOKEN} from './service';
+
 const packageJson = require('../../../package.json');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -164,6 +169,11 @@ export interface MakeAuthenticatedRequestFactoryConfig
    * A new will be created if this is not set.
    */
   authClient?: AuthClient | GoogleAuth;
+
+  /**
+   * Determines if a projectId is required for authenticated requests. Defaults to `true`.
+   */
+  projectIdRequired?: boolean;
 }
 
 export interface MakeAuthenticatedRequestOptions {
@@ -592,7 +602,7 @@ export class Util {
     config: MakeAuthenticatedRequestFactoryConfig
   ) {
     const googleAutoAuthConfig = extend({}, config);
-    if (googleAutoAuthConfig.projectId === '{{projectId}}') {
+    if (googleAutoAuthConfig.projectId === DEFAULT_PROJECT_ID_TOKEN) {
       delete googleAutoAuthConfig.projectId;
     }
 
@@ -650,7 +660,11 @@ export class Util {
       const callback =
         typeof optionsOrCallback === 'function' ? optionsOrCallback : undefined;
 
-      const onAuthenticated = (
+      async function setProjectId() {
+        projectId = await authClient.getProjectId();
+      }
+
+      const onAuthenticated = async (
         err: Error | null,
         authenticatedReqOpts?: DecorateRequestOptions
       ) => {
@@ -667,16 +681,35 @@ export class Util {
 
         if (!err || autoAuthFailed) {
           try {
+            // Try with existing `projectId` value
             authenticatedReqOpts = util.decorateRequest(
               authenticatedReqOpts!,
               projectId
             );
+
             err = null;
           } catch (e) {
-            // A projectId was required, but we don't have one.
-            // Re-use the "Could not load the default credentials error" if
-            // auto auth failed.
-            err = err || (e as Error);
+            if (e instanceof MissingProjectIdError) {
+              // A `projectId` was required, but we don't have one.
+              try {
+                // Attempt to get the `projectId`
+                await setProjectId();
+
+                authenticatedReqOpts = util.decorateRequest(
+                  authenticatedReqOpts!,
+                  projectId
+                );
+
+                err = null;
+              } catch (e) {
+                // Re-use the "Could not load the default credentials error" if
+                // auto auth failed.
+                err = err || (e as Error);
+              }
+            } else {
+              // Some other error unrelated to missing `projectId`
+              err = err || (e as Error);
+            }
           }
         }
 
@@ -715,23 +748,58 @@ export class Util {
         }
       };
 
-      Promise.all([
-        config.projectId && config.projectId !== '{{projectId}}'
-          ? // The user provided a project ID. We don't need to check with the
-            // auth client, it could be incorrect.
-            new Promise(resolve => resolve(config.projectId))
-          : authClient.getProjectId(),
-        reqConfig.customEndpoint && reqConfig.useAuthWithCustomEndpoint !== true
-          ? // Using a custom API override. Do not use `google-auth-library` for
-            // authentication. (ex: connecting to a local Datastore server)
-            new Promise(resolve => resolve(reqOpts))
-          : authClient.authorizeRequest(reqOpts),
-      ])
-        .then(([_projectId, authorizedReqOpts]) => {
-          projectId = _projectId as string;
-          onAuthenticated(null, authorizedReqOpts as DecorateRequestOptions);
-        })
-        .catch(onAuthenticated);
+      const prepareRequest = async () => {
+        try {
+          const getProjectId = async () => {
+            if (
+              config.projectId &&
+              config.projectId !== DEFAULT_PROJECT_ID_TOKEN
+            ) {
+              // The user provided a project ID. We don't need to check with the
+              // auth client, it could be incorrect.
+              return config.projectId;
+            }
+
+            if (config.projectIdRequired === false) {
+              // A projectId is not required. Return the default.
+              return DEFAULT_PROJECT_ID_TOKEN;
+            }
+
+            return setProjectId();
+          };
+
+          const authorizeRequest = async () => {
+            if (
+              reqConfig.customEndpoint &&
+              !reqConfig.useAuthWithCustomEndpoint
+            ) {
+              // Using a custom API override. Do not use `google-auth-library` for
+              // authentication. (ex: connecting to a local Datastore server)
+              return reqOpts;
+            } else {
+              return authClient.authorizeRequest(reqOpts);
+            }
+          };
+
+          const [_projectId, authorizedReqOpts] = await Promise.all([
+            getProjectId(),
+            authorizeRequest(),
+          ]);
+
+          if (_projectId) {
+            projectId = _projectId;
+          }
+
+          return onAuthenticated(
+            null,
+            authorizedReqOpts as DecorateRequestOptions
+          );
+        } catch (e) {
+          return onAuthenticated(e as Error);
+        }
+      };
+
+      prepareRequest();
 
       if (stream!) {
         return stream!;
