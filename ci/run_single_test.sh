@@ -36,7 +36,6 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER_OUTPUT=${PROJECT}_sponge_log.xml
     export MOCHA_REPORTER_SUITENAME=${PROJECT}
     export MOCHA_REPORTER=xunit
-    cp ${PROJECT_ROOT}/ci/.mocharc.js .
 fi
 
 # Install dependencies
