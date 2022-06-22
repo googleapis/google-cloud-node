@@ -29,6 +29,8 @@ branchProtectionRules:
   # List of required status check contexts that must pass for commits to be accepted to matching branches.
   requiredStatusCheckContexts:
     - "cla/google"
+    - "lint (14)"
+    - "units (14)"
 # List of explicit permissions to add (additive only)
 permissionRules:
     # Team slug to add to repository permissions
