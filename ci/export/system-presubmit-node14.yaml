@@ -9,8 +9,9 @@ github:
     commentControl: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
 id: 28cdf776-546a-430e-b5ed-94cbbbcf493f
 includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
-name: gcb-presubmit-node14
+name: system-presubmit-node14
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: presubmit
+  _TEST_TYPE: system
   _LOGS_BUCKET: cloud-node-public-logs

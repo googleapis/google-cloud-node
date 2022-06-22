@@ -33,9 +33,9 @@ echo "exporting Cloud Build triggers"
 
 for NODE_VERSION in ${NODE_VERSIONS[@]}; do
     echo "exporting presubmit build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "gcb-presubmit-node${NODE_VERSION}" --destination "ci/export/gcb-presubmit-node${NODE_VERSION}.yaml"
+    gcloud beta builds triggers export "system-presubmit-node${NODE_VERSION}" --destination "ci/export/system-presubmit-node${NODE_VERSION}.yaml"
     echo "exporting continuous build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "gcb-continuous-node${NODE_VERSION}" --destination "ci/export/gcb-continuous-node${NODE_VERSION}.yaml"
+    gcloud beta builds triggers export "system-continuous-node${NODE_VERSION}" --destination "ci/export/system-continuous-node${NODE_VERSION}.yaml"
     echo "exporting nightly build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "gcb-nightly-node${NODE_VERSION}" --destination "ci/export/gcb-nightly-node${NODE_VERSION}.yaml"
+    gcloud beta builds triggers export "system-nightly-node${NODE_VERSION}" --destination "ci/export/system-nightly-node${NODE_VERSION}.yaml"
 done

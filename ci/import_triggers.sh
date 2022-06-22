@@ -33,9 +33,9 @@ echo "importing Cloud Build triggers"
 
 for NODE_VERSION in ${NODE_VERSIONS[@]}; do
     echo "importing presubmit build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/gcb-presubmit-node${NODE_VERSION}.yaml"
+    gcloud beta builds triggers import --source "ci/export/system-presubmit-node${NODE_VERSION}.yaml"
     echo "importing continuous build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/gcb-continuous-node${NODE_VERSION}.yaml"
+    gcloud beta builds triggers import --source "ci/export/system-continuous-node${NODE_VERSION}.yaml"
     echo "importing nightly build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/gcb-nightly-node${NODE_VERSION}.yaml"
+    gcloud beta builds triggers import --source "ci/export/system-nightly-node${NODE_VERSION}.yaml"
 done

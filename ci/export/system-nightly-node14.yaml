@@ -6,7 +6,7 @@ gitFileSource:
   revision: refs/heads/main
   uri: https://github.com/googleapis/google-cloud-node
 id: 99dfe29e-f360-4f08-a026-2cbd7c24cd41
-name: gcb-nightly-node14
+name: system-nightly-node14
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 sourceToBuild:
   ref: refs/heads/main
@@ -14,4 +14,5 @@ sourceToBuild:
   uri: https://github.com/googleapis/google-cloud-node
 substitutions:
   _BUILD_TYPE: nightly
+  _TEST_TYPE: system
   _LOGS_BUCKET: cloud-node-public-logs
