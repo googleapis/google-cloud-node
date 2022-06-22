@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/nodejs-storage/compare/v6.1.0...v6.2.0) (2022-06-22)
+
+
+### Features
+
+* Convenient `gs://` URI retrieval ([#1987](https://github.com/googleapis/nodejs-storage/issues/1987)) ([58fad6d](https://github.com/googleapis/nodejs-storage/commit/58fad6d9a3bd92966306e98fd7dedd3992995cb7))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/projectify to v3 ([#1986](https://github.com/googleapis/nodejs-storage/issues/1986)) ([71a61ec](https://github.com/googleapis/nodejs-storage/commit/71a61ec4ef2436bc091f390af14a02b6920b2b87))
+* **deps:** update dependency @google-cloud/pubsub to v3 ([#1972](https://github.com/googleapis/nodejs-storage/issues/1972)) ([004b97e](https://github.com/googleapis/nodejs-storage/commit/004b97ec0ae866997c84ee2327db87e59f510f00))
+* Requests Respect `config.projectIdRequired` === `false` ([#1988](https://github.com/googleapis/nodejs-storage/issues/1988)) ([8813369](https://github.com/googleapis/nodejs-storage/commit/881336944be37e15c45b12973064245adc519860))
+
 ## [6.1.0](https://github.com/googleapis/nodejs-storage/compare/v6.0.1...v6.1.0) (2022-06-08)
 
 
