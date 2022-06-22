@@ -18,12 +18,24 @@ options:
 substitutions:
   _BUILD_TYPE: "presubmit"
   _TEST_TYPE: "system"
+  _NODE_VERSION: "14"
 
 logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node/${_BUILD_TYPE}/${COMMIT_SHA}/${TRIGGER_NAME}'
 timeout: 7200s
 
 steps:
-  - name: gcr.io/cloud-devrel-public-resources/node:14-user
+  - name: 'gcr.io/kaniko-project/executor:v1.8.1'
+    args: [
+      '--log-format=text',
+      '--context=dir:///workspace/testing',
+      '--build-arg=NODE_VERSION=${_NODE_VERSION}',
+      '--dockerfile=ci/Dockerfile',
+      '--cache=true',
+      '--destination=gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}',
+      '--push-retry=3',
+      '--image-fs-extract-retry=3'
+    ]
+  - name: gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}
     id: "run-tests"
     timeout: 7200s
     entrypoint: "ci/run_conditional_tests.sh"
