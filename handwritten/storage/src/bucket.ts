@@ -1048,6 +1048,27 @@ class Bucket extends ServiceObject {
     this.instancePreconditionOpts = options?.preconditionOpts;
   }
 
+  /**
+   * The bucket's Cloud Storage URI (`gs://`)
+   *
+   * @example
+   * ```ts
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const bucket = storage.bucket('my-bucket');
+   *
+   * // `gs://my-bucket`
+   * const href = bucket.cloudStorageURI.href;
+   * ```
+   */
+  get cloudStorageURI(): URL {
+    const uri = new URL('gs://');
+
+    uri.host = this.name;
+
+    return uri;
+  }
+
   addLifecycleRule(
     rule: LifecycleRule,
     options?: AddLifecycleRuleOptions
@@ -4149,7 +4170,7 @@ paginator.extend(Bucket, 'getFiles');
  * that a callback is omitted.
  */
 promisifyAll(Bucket, {
-  exclude: ['request', 'file', 'notification'],
+  exclude: ['cloudStorageURI', 'request', 'file', 'notification'],
 });
 
 /**

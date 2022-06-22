@@ -113,6 +113,7 @@ const fakePromisify = {
 
     promisified = true;
     assert.deepStrictEqual(options.exclude, [
+      'cloudStorageURI',
       'request',
       'file',
       'notification',
@@ -440,6 +441,15 @@ describe('Bucket', () => {
 
     it("should use storage's `crc32cGenerator` by default", () => {
       assert.strictEqual(bucket.crc32cGenerator, STORAGE.crc32cGenerator);
+    });
+  });
+
+  describe('cloudStorageURI', () => {
+    it('should return the appropriate `gs://` URI', () => {
+      const bucket = new Bucket(STORAGE, BUCKET_NAME);
+
+      assert(bucket.cloudStorageURI instanceof URL);
+      assert.equal(bucket.cloudStorageURI.host, BUCKET_NAME);
     });
   });
 

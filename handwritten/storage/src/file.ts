@@ -884,6 +884,28 @@ class File extends ServiceObject<File> {
   }
 
   /**
+   * The object's Cloud Storage URI (`gs://`)
+   *
+   * @example
+   * ```ts
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const bucket = storage.bucket('my-bucket');
+   * const file = bucket.file('image.png');
+   *
+   * // `gs://my-bucket/image.png`
+   * const href = file.cloudStorageURI.href;
+   * ```
+   */
+  get cloudStorageURI(): URL {
+    const uri = this.bucket.cloudStorageURI;
+
+    uri.pathname = this.name;
+
+    return uri;
+  }
+
+  /**
    * A helper method for determining if a request should be retried based on preconditions.
    * This should only be used for methods where the idempotency is determined by
    * `ifGenerationMatch`
@@ -2415,7 +2437,7 @@ class File extends ServiceObject<File> {
    * @param {boolean} [config.virtualHostedStyle=false] Use virtual hosted-style
    *     URLs ('https://mybucket.storage.googleapis.com/...') instead of path-style
    *     ('https://storage.googleapis.com/mybucket/...'). Virtual hosted-style URLs
-   *     should generally be preferred instaed of path-style URL.
+   *     should generally be preferred instead of path-style URL.
    *     Currently defaults to `false` for path-style, although this may change in a
    *     future major-version release.
    * @param {string} [config.bucketBoundHostname] The bucket-bound hostname to return in
@@ -3855,6 +3877,7 @@ class File extends ServiceObject<File> {
  */
 promisifyAll(File, {
   exclude: [
+    'cloudStorageURI',
     'publicUrl',
     'request',
     'save',
