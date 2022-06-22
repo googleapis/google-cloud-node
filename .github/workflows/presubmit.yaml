@@ -1,0 +1,36 @@
+on:
+  pull_request:
+name: presubmit
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --version
+      - run: ci/run_conditional_tests.sh
+        name: Check lint
+        env:
+          BUILD_TYPE: presubmit
+          TEST_TYPE: lint
+  units:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --version
+      - run: ci/run_conditional_tests.sh
+        name: Run unit tests
+        env:
+          BUILD_TYPE: presubmit
+          TEST_TYPE: units
