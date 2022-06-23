@@ -10,6 +10,8 @@
     "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
+    "samples-test": "echo 'FIXME: no sample tests'",
+    "system-test": "echo 'FIXME: no system tests'",
     "test:snap": "SNAPSHOT_UPDATE=1 npm test",
     "test": "cross-env c8 mocha --exit build/test",
     "prelint": "npm install",
