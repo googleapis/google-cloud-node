@@ -17,6 +17,7 @@
   * [Create-page](#create-page)
   * [Delete-page](#delete-page)
   * [Detect-intent-audio](#detect-intent-audio)
+  * [Detect-intent-disabled-webhook](#detect-intent-disabled-webhook)
   * [Detect-intent-event](#detect-intent-event)
   * [Detect-intent-streaming](#detect-intent-streaming)
   * [Detect-intent-synthesize-tts-response](#detect-intent-synthesize-tts-response)
@@ -29,6 +30,7 @@
   * [List Training Phrases](#list-training-phrases)
   * [Long-running-operation](#long-running-operation)
   * [Quickstart](#quickstart)
+  * [Streaming-detect-intent-partial-response](#streaming-detect-intent-partial-response)
   * [Update-intent](#update-intent)
   * [Webhook-configure-session-parameters](#webhook-configure-session-parameters)
   * [Webhook-validate-form-parameter](#webhook-validate-form-parameter)
@@ -127,6 +129,23 @@ __Usage:__
 
 
 `node samples/detect-intent-audio.js`
+
+
+-----
+
+
+
+
+### Detect-intent-disabled-webhook
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-disabled-webhook.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-disabled-webhook.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/detect-intent-disabled-webhook.js`
 
 
 -----
@@ -331,6 +350,23 @@ __Usage:__
 
 
 `node samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Streaming-detect-intent-partial-response
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/streaming-detect-intent-partial-response.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/streaming-detect-intent-partial-response.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/streaming-detect-intent-partial-response.js`
 
 
 -----
