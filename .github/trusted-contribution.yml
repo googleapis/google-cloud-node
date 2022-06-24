@@ -1,0 +1,10 @@
+annotations:
+  - type: comment
+    text: "/gcbrun"
+trustedContributors:
+  - gcf-merge-on-green[bot]
+  - gcf-owl-bot[bot]
+  - owlbot-bootstrapper[bot]
+  - release-please[bot]
+  - renovate-bot
+  - yoshi-code-bot
