@@ -68,15 +68,19 @@ set -e
 
 # Run flakybot for non-presubmit builds
 if [ ${BUILD_TYPE} != "presubmit" ]; then
-    echo "Contents in ${PROJECT}_sponge_log.xml:"
-    cat ${PROJECT}_sponge_log.xml
+    if [ -f "${PROJECT}_sponge_log.xml" ]; then
+        echo "Contents in ${PROJECT}_sponge_log.xml:"
+        cat ${PROJECT}_sponge_log.xml
 
-    echo "Calling flakybot --repo ${REPO_OWNER}/${REPO_NAME} --commit_hash ${COMMIT_SHA} --build_url https://console.cloud.google.com/cloud-build/builds;region=global/${BUILD_ID}?project=${PROJECT_ID}"
-    flakybot \
-	    --repo "${REPO_OWNER}/${REPO_NAME}" \
-	    --commit_hash "${COMMIT_SHA}" \
-	    --build_url \
-	    "https://console.cloud.google.com/cloud-build/builds;region=global/${BUILD_ID}?project=${PROJECT_ID}"
+        echo "Calling flakybot --repo ${REPO_OWNER}/${REPO_NAME} --commit_hash ${COMMIT_SHA} --build_url https://console.cloud.google.com/cloud-build/builds;region=global/${BUILD_ID}?project=${PROJECT_ID}"
+        flakybot \
+            --repo "${REPO_OWNER}/${REPO_NAME}" \
+            --commit_hash "${COMMIT_SHA}" \
+            --build_url \
+            "https://console.cloud.google.com/cloud-build/builds;region=global/${BUILD_ID}?project=${PROJECT_ID}"
+    else
+        echo "Missing sponge log: ${PROJECT}_sponge_log.xml"
+    fi
 fi
 
 exit ${retval}
