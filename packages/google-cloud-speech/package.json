@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=10"
+    "node": ">=12.0.0"
   },
   "repository": "googleapis/nodejs-speech",
   "main": "./build/src/index.js",
@@ -48,7 +48,7 @@
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
     "@types/pumpify": "^1.4.1",
-    "google-gax": "^2.30.1",
+    "google-gax": "^3.0.1",
     "protobufjs": "^6.8.6",
     "pumpify": "^2.0.0",
     "stream-events": "^1.0.4",
@@ -60,17 +60,17 @@
     "@types/sinon": "^10.0.0",
     "c8": "^7.0.0",
     "codecov": "^3.0.2",
-    "gts": "^3.0.0",
+    "gts": "^3.1.0",
     "jsdoc": "^3.5.5",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^2.0.0",
     "linkinator": "^2.0.0",
-    "mocha": "^8.0.0",
+    "mocha": "^9.2.2",
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
     "sinon": "^14.0.0",
     "ts-loader": "^8.0.0",
-    "typescript": "^3.8.3",
+    "typescript": "^4.6.4",
     "webpack": "^5.0.0",
     "webpack-cli": "^4.0.0"
   }
