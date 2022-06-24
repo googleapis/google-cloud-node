@@ -10,29 +10,45 @@ applications that interact with individual Google Cloud services:
 | Repo | Release Level | Version |
 |------|----------|-----------------|
 | [Access Approval](https://github.com/googleapis/nodejs-access-approval) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/access-approval)](https://npm.im/@google-cloud/access-approval) |
+| [Access Context Manager](https://github.com/googleapis/nodejs-access-context-manager) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/access-context-manager)](https://npm.im/@google-cloud/access-context-manager) |
+| [AI Platform Notebooks](https://github.com/googleapis/nodejs-notebooks) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/notebooks)](https://npm.im/@google-cloud/notebooks) |
 | [API Gateway](https://github.com/googleapis/nodejs-api-gateway) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/api-gateway)](https://npm.im/@google-cloud/api-gateway) |
 | [Apigee Connect API](https://github.com/googleapis/nodejs-apigee-connect) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/apigee-connect)](https://npm.im/@google-cloud/apigee-connect) |
+| [App Engine Admin API](https://github.com/googleapis/nodejs-appengine-admin) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/appengine-admin)](https://npm.im/@google-cloud/appengine-admin) |
+| [Artifact Registry](https://github.com/googleapis/nodejs-artifact-registry) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/artifact-registry)](https://npm.im/@google-cloud/artifact-registry) |
 | [Asset Inventory](https://github.com/googleapis/nodejs-asset) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/asset)](https://npm.im/@google-cloud/asset) |
+| [Assured Workloads for Government](https://github.com/googleapis/nodejs-assured-workloads) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/assured-workloads)](https://npm.im/@google-cloud/assured-workloads) |
 | [AutoML](https://github.com/googleapis/nodejs-automl) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/automl)](https://npm.im/@google-cloud/automl) |
 | [Bigtable](https://github.com/googleapis/nodejs-bigtable) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/bigtable)](https://npm.im/@google-cloud/bigtable) |
 | [Billing](https://github.com/googleapis/nodejs-billing) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/billing)](https://npm.im/@google-cloud/billing) |
 | [Billing Budgets](https://github.com/googleapis/nodejs-billing-budgets) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/billing-budgets)](https://npm.im/@google-cloud/billing-budgets) |
+| [Binary Authorization](https://github.com/googleapis/nodejs-binary-authorization) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/binary-authorization)](https://npm.im/@google-cloud/binary-authorization) |
 | [Build](https://github.com/googleapis/nodejs-cloudbuild) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/cloudbuild)](https://npm.im/@google-cloud/cloudbuild) |
 | [Certificate Authority Service](https://github.com/googleapis/nodejs-security-private-ca) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/security-private-ca)](https://npm.im/@google-cloud/security-private-ca) |
+| [Certificate Manager](https://github.com/googleapis/nodejs-certificate-manager) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/certificate-manager)](https://npm.im/@google-cloud/certificate-manager) |
 | [Channel API](https://github.com/googleapis/nodejs-channel) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/channel)](https://npm.im/@google-cloud/channel) |
 | [Composer](https://github.com/googleapis/nodejs-orchestration-airflow) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/orchestration-airflow)](https://npm.im/@google-cloud/orchestration-airflow) |
+| [Contact Center AI Insights API](https://github.com/googleapis/nodejs-contact-center-insights) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/contact-center-insights)](https://npm.im/@google-cloud/contact-center-insights) |
 | [Data Catalog](https://github.com/googleapis/nodejs-datacatalog) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/datacatalog)](https://npm.im/@google-cloud/datacatalog) |
+| [Data Fusion](https://github.com/googleapis/nodejs-data-fusion) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/data-fusion)](https://npm.im/@google-cloud/data-fusion) |
 | [Data Loss Prevention](https://github.com/googleapis/nodejs-dlp) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dlp)](https://npm.im/@google-cloud/dlp) |
 | [Database Migration Service](https://github.com/googleapis/nodejs-dms) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dms)](https://npm.im/@google-cloud/dms) |
+| [Dataplex](https://github.com/googleapis/nodejs-dataplex) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dataplex)](https://npm.im/@google-cloud/dataplex) |
 | [Dataproc](https://github.com/googleapis/nodejs-dataproc) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dataproc)](https://npm.im/@google-cloud/dataproc) |
+| [Dataproc Metastore](https://github.com/googleapis/nodejs-dataproc-metastore) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dataproc-metastore)](https://npm.im/@google-cloud/dataproc-metastore) |
 | [Datastore](https://github.com/googleapis/nodejs-datastore) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/datastore)](https://npm.im/@google-cloud/datastore) |
 | [Datastore Session](https://github.com/googleapis/nodejs-datastore-session) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/connect-datastore)](https://npm.im/@google-cloud/connect-datastore) |
+| [Datastream](https://github.com/googleapis/nodejs-datastream) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/datastream)](https://npm.im/@google-cloud/datastream) |
+| [Deploy](https://github.com/googleapis/nodejs-deploy) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/deploy)](https://npm.im/@google-cloud/deploy) |
 | [Dialogflow API](https://github.com/googleapis/nodejs-dialogflow) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dialogflow)](https://npm.im/@google-cloud/dialogflow) |
 | [Dialogflow CX API](https://github.com/googleapis/nodejs-dialogflow-cx) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dialogflow-cx)](https://npm.im/@google-cloud/dialogflow-cx) |
 | [DNS](https://github.com/googleapis/nodejs-dns) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dns)](https://npm.im/@google-cloud/dns) |
 | [Document AI](https://github.com/googleapis/nodejs-document-ai) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/documentai)](https://npm.im/@google-cloud/documentai) |
+| [Domains](https://github.com/googleapis/nodejs-domains) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/domains)](https://npm.im/@google-cloud/domains) |
+| [Error Reporting](https://github.com/googleapis/nodejs-error-reporting) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/error-reporting)](https://npm.im/@google-cloud/error-reporting) |
 | [Essential Contacts API](https://github.com/googleapis/nodejs-essential-contacts) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/essential-contacts)](https://npm.im/@google-cloud/essential-contacts) |
 | [Eventarc](https://github.com/googleapis/nodejs-eventarc) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/eventarc)](https://npm.im/@google-cloud/eventarc) |
+| [Eventarc Publishing API](https://github.com/googleapis/nodejs-eventarc-publishing) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/eventarc-publishing)](https://npm.im/@google-cloud/eventarc-publishing) |
 | [Filestore](https://github.com/googleapis/nodejs-filestore) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/filestore)](https://npm.im/@google-cloud/filestore) |
 | [Firestore](https://github.com/googleapis/nodejs-firestore) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/firestore)](https://npm.im/@google-cloud/firestore) |
 | [Firestore Session](https://github.com/googleapis/nodejs-firestore-session) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/connect-firestore)](https://npm.im/@google-cloud/connect-firestore) |
@@ -48,18 +64,25 @@ applications that interact with individual Google Cloud services:
 | [Google Container Analysis](https://github.com/googleapis/nodejs-containeranalysis) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/containeranalysis)](https://npm.im/@google-cloud/containeranalysis) |
 | [Grafeas](https://github.com/googleapis/nodejs-grafeas) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/grafeas)](https://npm.im/@google-cloud/grafeas) |
 | [IAM Policy Troubleshooter API](https://github.com/googleapis/nodejs-policy-troubleshooter) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/policy-troubleshooter)](https://npm.im/@google-cloud/policy-troubleshooter) |
+| [IAM Service Account Credentials API](https://github.com/googleapis/nodejs-iam-credentials) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/iam-credentials)](https://npm.im/@google-cloud/iam-credentials) |
 | [Identity-Aware Proxy](https://github.com/googleapis/nodejs-iap) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/iap)](https://npm.im/@google-cloud/iap) |
+| [IDS](https://github.com/googleapis/nodejs-ids) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/ids)](https://npm.im/@google-cloud/ids) |
 | [Internet of Things (IoT) Core](https://github.com/googleapis/nodejs-iot) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/iot)](https://npm.im/@google-cloud/iot) |
 | [Key Management Service](https://github.com/googleapis/nodejs-kms) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/kms)](https://npm.im/@google-cloud/kms) |
 | [Kubernetes Engine Cluster Manager API](https://github.com/googleapis/nodejs-cloud-container) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/container)](https://npm.im/@google-cloud/container) |
+| [Live Stream API](https://github.com/googleapis/nodejs-video-live-stream) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/livestream)](https://npm.im/@google-cloud/livestream) |
 | [Logging](https://github.com/googleapis/nodejs-logging) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/logging)](https://npm.im/@google-cloud/logging) |
 | [Logging for Bunyan](https://github.com/googleapis/nodejs-logging-bunyan) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/logging-bunyan)](https://npm.im/@google-cloud/logging-bunyan) |
 | [Logging for Winston](https://github.com/googleapis/nodejs-logging-winston) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/logging-winston)](https://npm.im/@google-cloud/logging-winston) |
 | [Managed Service for Microsoft Active Directory](https://github.com/googleapis/nodejs-managed-identities) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/managed-identities)](https://npm.im/@google-cloud/managed-identities) |
+| [Media Translation](https://github.com/googleapis/nodejs-media-translation) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/media-translation)](https://npm.im/@google-cloud/media-translation) |
 | [Memorystore for Memcached](https://github.com/googleapis/nodejs-memcache) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/memcache)](https://npm.im/@google-cloud/memcache) |
+| [Migrate for Compute Engine](https://github.com/googleapis/nodejs-vmmigration) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vmmigration)](https://npm.im/@google-cloud/vmmigration) |
 | [Monitoring Dashboards](https://github.com/googleapis/nodejs-monitoring-dashboards) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/monitoring-dashboards)](https://npm.im/@google-cloud/monitoring-dashboards) |
 | [Natural Language](https://github.com/googleapis/nodejs-language) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/language)](https://npm.im/@google-cloud/language) |
+| [Network Connectivity Center](https://github.com/googleapis/nodejs-network-connectivity) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/network-connectivity)](https://npm.im/@google-cloud/network-connectivity) |
 | [Network Management API](https://github.com/googleapis/nodejs-network-management) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/network-management)](https://npm.im/@google-cloud/network-management) |
+| [Optimization AI](https://github.com/googleapis/nodejs-cloud-optimization) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/optimization)](https://npm.im/@google-cloud/optimization) |
 | [Organization Policy](https://github.com/googleapis/nodejs-org-policy) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/org-policy)](https://npm.im/@google-cloud/org-policy) |
 | [OS Config API](https://github.com/googleapis/nodejs-os-config) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/os-config)](https://npm.im/@google-cloud/os-config) |
 | [OS Login](https://github.com/googleapis/nodejs-os-login) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/os-login)](https://npm.im/@google-cloud/os-login) |
@@ -68,16 +91,20 @@ applications that interact with individual Google Cloud services:
 | [reCAPTCHA Enterprise](https://github.com/googleapis/nodejs-recaptcha-enterprise) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/recaptcha-enterprise)](https://npm.im/@google-cloud/recaptcha-enterprise) |
 | [Recommender](https://github.com/googleapis/nodejs-recommender) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/recommender)](https://npm.im/@google-cloud/recommender) |
 | [Redis](https://github.com/googleapis/nodejs-redis) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/redis)](https://npm.im/@google-cloud/redis) |
+| [Resource Manager API](https://github.com/googleapis/nodejs-resource-manager) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/resource-manager)](https://npm.im/@google-cloud/resource-manager) |
 | [Resource Settings API](https://github.com/googleapis/nodejs-resource-settings) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/resource-settings)](https://npm.im/@google-cloud/resource-settings) |
 | [Retail API](https://github.com/googleapis/nodejs-retail) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/retail)](https://npm.im/@google-cloud/retail) |
 | [Scheduler](https://github.com/googleapis/nodejs-scheduler) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/scheduler)](https://npm.im/@google-cloud/scheduler) |
 | [Secret Manager](https://github.com/googleapis/nodejs-secret-manager) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/secret-manager)](https://npm.im/@google-cloud/secret-manager) |
 | [Security Command Center](https://github.com/googleapis/nodejs-security-center) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/security-center)](https://npm.im/@google-cloud/security-center) |
+| [Service Control API](https://github.com/googleapis/nodejs-service-control) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/service-control)](https://npm.im/@google-cloud/service-control) |
 | [Service Directory](https://github.com/googleapis/nodejs-service-directory) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/service-directory)](https://npm.im/@google-cloud/service-directory) |
+| [Service Management API](https://github.com/googleapis/nodejs-service-management) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/service-management)](https://npm.im/@google-cloud/service-management) |
 | [Service Usage](https://github.com/googleapis/nodejs-service-usage) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/service-usage)](https://npm.im/@google-cloud/service-usage) |
 | [Shell](https://github.com/googleapis/nodejs-cloud-shell) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/shell)](https://npm.im/@google-cloud/shell) |
 | [Spanner](https://github.com/googleapis/nodejs-spanner) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/spanner)](https://npm.im/@google-cloud/spanner) |
 | [Speech](https://github.com/googleapis/nodejs-speech) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/speech)](https://npm.im/@google-cloud/speech) |
+| [Stackdriver Debugger](https://github.com/googleapis/cloud-debug-nodejs) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/debug-agent)](https://npm.im/@google-cloud/debug-agent) |
 | [Stackdriver Monitoring](https://github.com/googleapis/nodejs-monitoring) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/monitoring)](https://npm.im/@google-cloud/monitoring) |
 | [Storage](https://github.com/googleapis/nodejs-storage) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/storage)](https://npm.im/@google-cloud/storage) |
 | [Storage Transfer Service](https://github.com/googleapis/nodejs-storage-transfer) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/storage-transfer)](https://npm.im/@google-cloud/storage-transfer) |
@@ -94,42 +121,21 @@ applications that interact with individual Google Cloud services:
 | [Web Risk API](https://github.com/googleapis/nodejs-web-risk) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/web-risk)](https://npm.im/@google-cloud/web-risk) |
 | [Web Security Scanner](https://github.com/googleapis/nodejs-web-security-scanner) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/web-security-scanner)](https://npm.im/@google-cloud/web-security-scanner) |
 | [Workflows](https://github.com/googleapis/nodejs-workflows) | [![Stable][stable-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/workflows)](https://npm.im/@google-cloud/workflows) |
-| [Access Context Manager](https://github.com/googleapis/nodejs-access-context-manager) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/access-context-manager)](https://npm.im/@google-cloud/access-context-manager) |
-| [AI Platform Notebooks](https://github.com/googleapis/nodejs-notebooks) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/notebooks)](https://npm.im/@google-cloud/notebooks) |
-| [App Engine Admin API](https://github.com/googleapis/nodejs-appengine-admin) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/appengine-admin)](https://npm.im/@google-cloud/appengine-admin) |
+| [Analytics Hub API](https://github.com/googleapis/nodejs-bigquery-data-exchange) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/bigquery-data-exchange)](https://npm.im/@google-cloud/bigquery-data-exchange) |
 | [Area120 Tables API](https://github.com/googleapis/nodejs-area120-tables) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google/area120-tables)](https://npm.im/@google/area120-tables) |
-| [Artifact Registry](https://github.com/googleapis/nodejs-artifact-registry) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/artifact-registry)](https://npm.im/@google-cloud/artifact-registry) |
-| [Assured Workloads for Government](https://github.com/googleapis/nodejs-assured-workloads) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/assured-workloads)](https://npm.im/@google-cloud/assured-workloads) |
-| [Binary Authorization](https://github.com/googleapis/nodejs-binary-authorization) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/binary-authorization)](https://npm.im/@google-cloud/binary-authorization) |
-| [Contact Center AI Insights API](https://github.com/googleapis/nodejs-contact-center-insights) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/contact-center-insights)](https://npm.im/@google-cloud/contact-center-insights) |
-| [Data Fusion](https://github.com/googleapis/nodejs-data-fusion) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/data-fusion)](https://npm.im/@google-cloud/data-fusion) |
 | [Data Labeling](https://github.com/googleapis/nodejs-datalabeling) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/datalabeling)](https://npm.im/@google-cloud/datalabeling) |
 | [Data QnA](https://github.com/googleapis/nodejs-data-qna) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/data-qna)](https://npm.im/@google-cloud/data-qna) |
 | [Dataflow](https://github.com/googleapis/nodejs-dataflow) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dataflow)](https://npm.im/@google-cloud/dataflow) |
-| [Dataplex](https://github.com/googleapis/nodejs-dataplex) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dataplex)](https://npm.im/@google-cloud/dataplex) |
-| [Dataproc Metastore](https://github.com/googleapis/nodejs-dataproc-metastore) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dataproc-metastore)](https://npm.im/@google-cloud/dataproc-metastore) |
-| [Datastream](https://github.com/googleapis/nodejs-datastream) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/datastream)](https://npm.im/@google-cloud/datastream) |
-| [Deploy](https://github.com/googleapis/nodejs-deploy) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/deploy)](https://npm.im/@google-cloud/deploy) |
-| [Domains](https://github.com/googleapis/nodejs-domains) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/domains)](https://npm.im/@google-cloud/domains) |
-| [Error Reporting](https://github.com/googleapis/nodejs-error-reporting) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/error-reporting)](https://npm.im/@google-cloud/error-reporting) |
 | [GKE Connect Gateway](https://github.com/googleapis/nodejs-gke-connect-gateway) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/gke-connect-gateway)](https://npm.im/@google-cloud/gke-connect-gateway) |
 | [Google Analytics Admin](https://github.com/googleapis/nodejs-analytics-admin) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-analytics/admin)](https://npm.im/@google-analytics/admin) |
 | [Google Analytics Data](https://github.com/googleapis/nodejs-analytics-data) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-analytics/data)](https://npm.im/@google-analytics/data) |
-| [IAM Service Account Credentials API](https://github.com/googleapis/nodejs-iam-credentials) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/iam-credentials)](https://npm.im/@google-cloud/iam-credentials) |
-| [IDS](https://github.com/googleapis/nodejs-ids) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/ids)](https://npm.im/@google-cloud/ids) |
 | [Life Sciences](https://github.com/googleapis/nodejs-life-sciences) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/life-sciences)](https://npm.im/@google-cloud/life-sciences) |
-| [Live Stream API](https://github.com/googleapis/nodejs-video-live-stream) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/livestream)](https://npm.im/@google-cloud/livestream) |
-| [Media Translation](https://github.com/googleapis/nodejs-media-translation) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/media-translation)](https://npm.im/@google-cloud/media-translation) |
-| [Migrate for Compute Engine](https://github.com/googleapis/nodejs-vmmigration) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vmmigration)](https://npm.im/@google-cloud/vmmigration) |
-| [Network Connectivity Center](https://github.com/googleapis/nodejs-network-connectivity) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/network-connectivity)](https://npm.im/@google-cloud/network-connectivity) |
 | [Network Security API](https://github.com/googleapis/nodejs-network-security) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/network-security)](https://npm.im/@google-cloud/network-security) |
 | [Phishing Protection](https://github.com/googleapis/nodejs-phishing-protection) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/phishing-protection)](https://npm.im/@google-cloud/phishing-protection) |
 | [Private Catalog](https://github.com/googleapis/nodejs-private-catalog) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/private-catalog)](https://npm.im/@google-cloud/private-catalog) |
-| [Resource Manager API](https://github.com/googleapis/nodejs-resource-manager) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/resource-manager)](https://npm.im/@google-cloud/resource-manager) |
-| [Service Control API](https://github.com/googleapis/nodejs-service-control) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/service-control)](https://npm.im/@google-cloud/service-control) |
-| [Service Management API](https://github.com/googleapis/nodejs-service-management) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/service-management)](https://npm.im/@google-cloud/service-management) |
-| [Stackdriver Debugger](https://github.com/googleapis/cloud-debug-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/debug-agent)](https://npm.im/@google-cloud/debug-agent) |
+| [Run](https://github.com/googleapis/nodejs-run) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/run)](https://npm.im/@google-cloud/run) |
 | [Trace](https://github.com/googleapis/cloud-trace-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/trace-agent)](https://npm.im/@google-cloud/trace-agent) |
+| [Video Stitcher API](https://github.com/googleapis/nodejs-video-stitcher) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/video-stitcher)](https://npm.im/@google-cloud/video-stitcher) |
 
 
 If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces
@@ -175,21 +181,21 @@ which is the authentication library used by all Google Cloud Node.js clients.
 Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
+If you are using an end-of-life version of Node.js, we recommend that you update
+as soon as possible to an actively supported LTS version.
 
-Client libraries targetting some end-of-life versions of Node.js are available, and
-can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+Google's client libraries support legacy versions of Node.js runtimes on a
+best-efforts basis with the following warnings:
+
+* Legacy versions are not tested in continuous integration.
+* Some security patches and features cannot be backported.
+* Dependencies cannot be kept up-to-date.
+
+Client libraries targeting some end-of-life versions of Node.js are available, and
+can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-
-_Legacy Node.js versions are supported as a best effort:_
-
-* Legacy versions will not be tested in continuous integration.
-* Some security patches may not be able to be backported.
-* Dependencies will not be kept up-to-date, and features will not be backported.
-
-#### Legacy tags available
-
-* `legacy-8`: install client libraries from this dist-tag for versions
-  compatible with Node.js 8.
+For example, `{{ metadata['lib_install_cmd'] }}@legacy-10` installs client libraries
+for versions compatible with Node.js 10.
 
 ## Versioning
 
