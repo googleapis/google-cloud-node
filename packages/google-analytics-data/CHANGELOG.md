@@ -1,5 +1,30 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-analytics-data/compare/v2.8.0...v3.0.0) (2022-06-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename the `funnel_filter` field of the `FunnelFilterExpression` type to `funnel_field_filter`
+* rename the type `FunnelFilter` to `FunnelFieldFilter` (#218)
+* update library to use Node 12 (#213)
+
+### Features
+
+* add `runFunnelReport` method to the Alpha version of the Data API ([#208](https://github.com/googleapis/nodejs-analytics-data/issues/208)) ([2390a92](https://github.com/googleapis/nodejs-analytics-data/commit/2390a922100c4ad0415f914a88b13dd39c487477))
+* support regapic LRO ([#219](https://github.com/googleapis/nodejs-analytics-data/issues/219)) ([547ecd7](https://github.com/googleapis/nodejs-analytics-data/commit/547ecd76afd553051ba4f9d330b355422b7114c5))
+
+
+### Bug Fixes
+
+* rename the `funnel_filter` field of the `FunnelFilterExpression` type to `funnel_field_filter` ([9ff9521](https://github.com/googleapis/nodejs-analytics-data/commit/9ff9521b386c674809f528892cf1dd49db81edc3))
+* rename the type `FunnelFilter` to `FunnelFieldFilter` ([#218](https://github.com/googleapis/nodejs-analytics-data/issues/218)) ([9ff9521](https://github.com/googleapis/nodejs-analytics-data/commit/9ff9521b386c674809f528892cf1dd49db81edc3))
+
+
+### Build System
+
+* update library to use Node 12 ([#213](https://github.com/googleapis/nodejs-analytics-data/issues/213)) ([c227cda](https://github.com/googleapis/nodejs-analytics-data/commit/c227cdac99df8c671812bb7d1244bd83d23d01e8))
+
 ## [2.8.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.7.0...v2.8.0) (2021-11-08)
 
 
