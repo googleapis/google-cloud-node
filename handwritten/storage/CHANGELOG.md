@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.2.1](https://github.com/googleapis/nodejs-storage/compare/v6.2.0...v6.2.1) (2022-06-27)
+
+
+### Bug Fixes
+
+* explicitly import URL so that .d.ts file is correctly generated ([#1992](https://github.com/googleapis/nodejs-storage/issues/1992)) ([a968f50](https://github.com/googleapis/nodejs-storage/commit/a968f508e7c98e160b658ffc3ab568997548172f))
+
 ## [6.2.0](https://github.com/googleapis/nodejs-storage/compare/v6.1.0...v6.2.0) (2022-06-22)
 
 
