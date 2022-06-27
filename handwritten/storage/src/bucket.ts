@@ -64,6 +64,7 @@ import {
 } from './signer';
 import {Readable} from 'stream';
 import {CRC32CValidatorGenerator} from './crc32c';
+import {URL} from 'url';
 
 interface SourceObject {
   name: string;

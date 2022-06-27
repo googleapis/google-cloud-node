@@ -68,6 +68,7 @@ import {
 } from './util';
 import {CRC32CValidatorGenerator} from './crc32c';
 import {HashStreamValidator} from './hash-stream-validator';
+import {URL} from 'url';
 
 import retry = require('async-retry');
 
