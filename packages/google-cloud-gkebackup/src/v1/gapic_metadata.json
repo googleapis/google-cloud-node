@@ -1,0 +1,287 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.gkebackup.v1",
+  "libraryPackage": "@google-cloud/gkebackup",
+  "services": {
+    "BackupForGKE": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BackupForGKEClient",
+          "rpcs": {
+            "GetBackupPlan": {
+              "methods": [
+                "getBackupPlan"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetVolumeBackup": {
+              "methods": [
+                "getVolumeBackup"
+              ]
+            },
+            "GetRestorePlan": {
+              "methods": [
+                "getRestorePlan"
+              ]
+            },
+            "GetRestore": {
+              "methods": [
+                "getRestore"
+              ]
+            },
+            "GetVolumeRestore": {
+              "methods": [
+                "getVolumeRestore"
+              ]
+            },
+            "CreateBackupPlan": {
+              "methods": [
+                "createBackupPlan"
+              ]
+            },
+            "UpdateBackupPlan": {
+              "methods": [
+                "updateBackupPlan"
+              ]
+            },
+            "DeleteBackupPlan": {
+              "methods": [
+                "deleteBackupPlan"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "CreateRestorePlan": {
+              "methods": [
+                "createRestorePlan"
+              ]
+            },
+            "UpdateRestorePlan": {
+              "methods": [
+                "updateRestorePlan"
+              ]
+            },
+            "DeleteRestorePlan": {
+              "methods": [
+                "deleteRestorePlan"
+              ]
+            },
+            "CreateRestore": {
+              "methods": [
+                "createRestore"
+              ]
+            },
+            "UpdateRestore": {
+              "methods": [
+                "updateRestore"
+              ]
+            },
+            "DeleteRestore": {
+              "methods": [
+                "deleteRestore"
+              ]
+            },
+            "ListBackupPlans": {
+              "methods": [
+                "listBackupPlans",
+                "listBackupPlansStream",
+                "listBackupPlansAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListVolumeBackups": {
+              "methods": [
+                "listVolumeBackups",
+                "listVolumeBackupsStream",
+                "listVolumeBackupsAsync"
+              ]
+            },
+            "ListRestorePlans": {
+              "methods": [
+                "listRestorePlans",
+                "listRestorePlansStream",
+                "listRestorePlansAsync"
+              ]
+            },
+            "ListRestores": {
+              "methods": [
+                "listRestores",
+                "listRestoresStream",
+                "listRestoresAsync"
+              ]
+            },
+            "ListVolumeRestores": {
+              "methods": [
+                "listVolumeRestores",
+                "listVolumeRestoresStream",
+                "listVolumeRestoresAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BackupForGKEClient",
+          "rpcs": {
+            "GetBackupPlan": {
+              "methods": [
+                "getBackupPlan"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetVolumeBackup": {
+              "methods": [
+                "getVolumeBackup"
+              ]
+            },
+            "GetRestorePlan": {
+              "methods": [
+                "getRestorePlan"
+              ]
+            },
+            "GetRestore": {
+              "methods": [
+                "getRestore"
+              ]
+            },
+            "GetVolumeRestore": {
+              "methods": [
+                "getVolumeRestore"
+              ]
+            },
+            "CreateBackupPlan": {
+              "methods": [
+                "createBackupPlan"
+              ]
+            },
+            "UpdateBackupPlan": {
+              "methods": [
+                "updateBackupPlan"
+              ]
+            },
+            "DeleteBackupPlan": {
+              "methods": [
+                "deleteBackupPlan"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "CreateRestorePlan": {
+              "methods": [
+                "createRestorePlan"
+              ]
+            },
+            "UpdateRestorePlan": {
+              "methods": [
+                "updateRestorePlan"
+              ]
+            },
+            "DeleteRestorePlan": {
+              "methods": [
+                "deleteRestorePlan"
+              ]
+            },
+            "CreateRestore": {
+              "methods": [
+                "createRestore"
+              ]
+            },
+            "UpdateRestore": {
+              "methods": [
+                "updateRestore"
+              ]
+            },
+            "DeleteRestore": {
+              "methods": [
+                "deleteRestore"
+              ]
+            },
+            "ListBackupPlans": {
+              "methods": [
+                "listBackupPlans",
+                "listBackupPlansStream",
+                "listBackupPlansAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListVolumeBackups": {
+              "methods": [
+                "listVolumeBackups",
+                "listVolumeBackupsStream",
+                "listVolumeBackupsAsync"
+              ]
+            },
+            "ListRestorePlans": {
+              "methods": [
+                "listRestorePlans",
+                "listRestorePlansStream",
+                "listRestorePlansAsync"
+              ]
+            },
+            "ListRestores": {
+              "methods": [
+                "listRestores",
+                "listRestoresStream",
+                "listRestoresAsync"
+              ]
+            },
+            "ListVolumeRestores": {
+              "methods": [
+                "listVolumeRestores",
+                "listVolumeRestoresStream",
+                "listVolumeRestoresAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
