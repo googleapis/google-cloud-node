@@ -2,9 +2,9 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [:  Client](https://github.com/)
+# [Backup for GKE API: Node.js Client](https://github.com/googleapis/nodejs-gke-backup)
 
-
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/gke-backup.svg)](https://www.npmjs.org/package/@google-cloud/gke-backup)
 
 
@@ -14,11 +14,11 @@ gkebackup client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com//blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-gke-backup/blob/main/CHANGELOG.md).
 
-
-
-* [github.com/](https://github.com/)
+* [Backup for GKE API Node.js Client API Reference][client-docs]
+* [Backup for GKE API Documentation][product-docs]
+* [github.com/googleapis/nodejs-gke-backup](https://github.com/googleapis/nodejs-gke-backup)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -29,7 +29,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 
 * [Quickstart](#quickstart)
-
+  * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
 
@@ -38,6 +38,14 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [License](#license)
 
 ## Quickstart
+
+### Before you begin
+
+1.  [Select or create a Cloud Platform project][projects].
+1.  [Enable billing for your project][billing].
+1.  [Enable the Backup for GKE API API][enable_api].
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
 
 ### Installing the client library
 
@@ -48,6 +56,9 @@ npm install @google-cloud/gke-backup
 
 
 
+
+The [Backup for GKE API Node.js Client API Reference][client-docs] documentation
+also contains samples.
 
 ## Supported Node.js Versions
 
@@ -76,6 +87,11 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority.
+
 
 
 
@@ -87,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com//blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-gke-backup/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -99,12 +115,12 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com//blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-gke-backup/blob/main/LICENSE)
 
-
-
+[client-docs]: https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke
+[product-docs]: https://cloud.google.com/gke-backup/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=gkebackup.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
