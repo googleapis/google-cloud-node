@@ -281,6 +281,8 @@ describe('Compute', () => {
 
     it('instances patch', async function () {
       this.timeout(10 * 60 * 1000);
+      this.retries(3);
+      await delay(this.test);
       const [stopResponse] = await client.stop({
         project,
         zone,
@@ -326,6 +328,8 @@ describe('Compute', () => {
 
     it('instances update desc to an empty string', async function () {
       this.timeout(10 * 60 * 1000);
+      this.retries(3);
+      await delay(this.test);
       const [instance] = await client.get({
         project,
         zone,
