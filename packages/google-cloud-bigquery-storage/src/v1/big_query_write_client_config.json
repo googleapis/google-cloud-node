@@ -7,6 +7,11 @@
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
+        "deadline_exceeded_resource_exhausted_unavailable": [
+          "DEADLINE_EXCEEDED",
+          "RESOURCE_EXHAUSTED",
+          "UNAVAILABLE"
+        ],
         "unavailable": [
           "UNAVAILABLE"
         ]
@@ -20,13 +25,22 @@
           "rpc_timeout_multiplier": 1,
           "max_rpc_timeout_millis": 60000,
           "total_timeout_millis": 600000
+        },
+        "ec82364a95d03873ac5f61710bb6b9b42e40f31d": {
+          "initial_retry_delay_millis": 10000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 120000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
         }
       },
       "methods": {
         "CreateWriteStream": {
-          "timeout_millis": 600000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 1200000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_unavailable",
+          "retry_params_name": "ec82364a95d03873ac5f61710bb6b9b42e40f31d"
         },
         "AppendRows": {
           "timeout_millis": 86400000,

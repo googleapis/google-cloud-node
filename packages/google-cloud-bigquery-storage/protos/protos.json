@@ -523,6 +523,11 @@
                             "updatedSchema": {
                               "type": "TableSchema",
                               "id": 3
+                            },
+                            "rowErrors": {
+                              "rule": "repeated",
+                              "type": "RowError",
+                              "id": 4
                             }
                           },
                           "nested": {
@@ -653,6 +658,30 @@
                                 "SCHEMA_MISMATCH_EXTRA_FIELDS": 7,
                                 "OFFSET_ALREADY_EXISTS": 8,
                                 "OFFSET_OUT_OF_RANGE": 9
+                              }
+                            }
+                          }
+                        },
+                        "RowError": {
+                          "fields": {
+                            "index": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "code": {
+                              "type": "RowErrorCode",
+                              "id": 2
+                            },
+                            "message": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "RowErrorCode": {
+                              "values": {
+                                "ROW_ERROR_CODE_UNSPECIFIED": 0,
+                                "FIELDS_ERROR": 1
                               }
                             }
                           }

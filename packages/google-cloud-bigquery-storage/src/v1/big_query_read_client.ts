@@ -70,7 +70,7 @@ export class BigQueryReadClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -93,11 +93,10 @@ export class BigQueryReadClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
+   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
@@ -370,11 +369,13 @@ export class BigQueryReadClient {
    *   Max initial number of streams. If unset or zero, the server will
    *   provide a value of streams so as to produce reasonable throughput. Must be
    *   non-negative. The number of streams may be lower than the requested number,
-   *   depending on the amount parallelism that is reasonable for the table. Error
-   *   will be returned if the max count is greater than the current system
-   *   max limit of 1,000.
+   *   depending on the amount parallelism that is reasonable for the table.
+   *   There is a default system max limit of 1,000.
    *
-   *   Streams must be read starting from offset 0.
+   *   This must be greater than or equal to preferred_min_stream_count.
+   *   Typically, clients should either leave this unset to let the system to
+   *   determine an upper bound OR set this a size for the maximum "units of work"
+   *   it can gracefully handle.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

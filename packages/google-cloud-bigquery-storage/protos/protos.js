@@ -4532,6 +4532,7 @@
                              * @property {google.cloud.bigquery.storage.v1.AppendRowsResponse.IAppendResult|null} [appendResult] AppendRowsResponse appendResult
                              * @property {google.rpc.IStatus|null} [error] AppendRowsResponse error
                              * @property {google.cloud.bigquery.storage.v1.ITableSchema|null} [updatedSchema] AppendRowsResponse updatedSchema
+                             * @property {Array.<google.cloud.bigquery.storage.v1.IRowError>|null} [rowErrors] AppendRowsResponse rowErrors
                              */
     
                             /**
@@ -4543,6 +4544,7 @@
                              * @param {google.cloud.bigquery.storage.v1.IAppendRowsResponse=} [properties] Properties to set
                              */
                             function AppendRowsResponse(properties) {
+                                this.rowErrors = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -4572,6 +4574,14 @@
                              * @instance
                              */
                             AppendRowsResponse.prototype.updatedSchema = null;
+    
+                            /**
+                             * AppendRowsResponse rowErrors.
+                             * @member {Array.<google.cloud.bigquery.storage.v1.IRowError>} rowErrors
+                             * @memberof google.cloud.bigquery.storage.v1.AppendRowsResponse
+                             * @instance
+                             */
+                            AppendRowsResponse.prototype.rowErrors = $util.emptyArray;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -4617,6 +4627,9 @@
                                     $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 if (message.updatedSchema != null && Object.hasOwnProperty.call(message, "updatedSchema"))
                                     $root.google.cloud.bigquery.storage.v1.TableSchema.encode(message.updatedSchema, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.rowErrors != null && message.rowErrors.length)
+                                    for (var i = 0; i < message.rowErrors.length; ++i)
+                                        $root.google.cloud.bigquery.storage.v1.RowError.encode(message.rowErrors[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4659,6 +4672,11 @@
                                         break;
                                     case 3:
                                         message.updatedSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.decode(reader, reader.uint32());
+                                        break;
+                                    case 4:
+                                        if (!(message.rowErrors && message.rowErrors.length))
+                                            message.rowErrors = [];
+                                        message.rowErrors.push($root.google.cloud.bigquery.storage.v1.RowError.decode(reader, reader.uint32()));
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -4719,6 +4737,15 @@
                                     if (error)
                                         return "updatedSchema." + error;
                                 }
+                                if (message.rowErrors != null && message.hasOwnProperty("rowErrors")) {
+                                    if (!Array.isArray(message.rowErrors))
+                                        return "rowErrors: array expected";
+                                    for (var i = 0; i < message.rowErrors.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.storage.v1.RowError.verify(message.rowErrors[i]);
+                                        if (error)
+                                            return "rowErrors." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -4749,6 +4776,16 @@
                                         throw TypeError(".google.cloud.bigquery.storage.v1.AppendRowsResponse.updatedSchema: object expected");
                                     message.updatedSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.fromObject(object.updatedSchema);
                                 }
+                                if (object.rowErrors) {
+                                    if (!Array.isArray(object.rowErrors))
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.AppendRowsResponse.rowErrors: array expected");
+                                    message.rowErrors = [];
+                                    for (var i = 0; i < object.rowErrors.length; ++i) {
+                                        if (typeof object.rowErrors[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.storage.v1.AppendRowsResponse.rowErrors: object expected");
+                                        message.rowErrors[i] = $root.google.cloud.bigquery.storage.v1.RowError.fromObject(object.rowErrors[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -4765,6 +4802,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.rowErrors = [];
                                 if (options.defaults)
                                     object.updatedSchema = null;
                                 if (message.appendResult != null && message.hasOwnProperty("appendResult")) {
@@ -4779,6 +4818,11 @@
                                 }
                                 if (message.updatedSchema != null && message.hasOwnProperty("updatedSchema"))
                                     object.updatedSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.toObject(message.updatedSchema, options);
+                                if (message.rowErrors && message.rowErrors.length) {
+                                    object.rowErrors = [];
+                                    for (var j = 0; j < message.rowErrors.length; ++j)
+                                        object.rowErrors[j] = $root.google.cloud.bigquery.storage.v1.RowError.toObject(message.rowErrors[j], options);
+                                }
                                 return object;
                             };
     
@@ -6754,6 +6798,279 @@
                             })();
     
                             return StorageError;
+                        })();
+    
+                        v1.RowError = (function() {
+    
+                            /**
+                             * Properties of a RowError.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IRowError
+                             * @property {number|Long|null} [index] RowError index
+                             * @property {google.cloud.bigquery.storage.v1.RowError.RowErrorCode|null} [code] RowError code
+                             * @property {string|null} [message] RowError message
+                             */
+    
+                            /**
+                             * Constructs a new RowError.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a RowError.
+                             * @implements IRowError
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IRowError=} [properties] Properties to set
+                             */
+                            function RowError(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RowError index.
+                             * @member {number|Long} index
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @instance
+                             */
+                            RowError.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * RowError code.
+                             * @member {google.cloud.bigquery.storage.v1.RowError.RowErrorCode} code
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @instance
+                             */
+                            RowError.prototype.code = 0;
+    
+                            /**
+                             * RowError message.
+                             * @member {string} message
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @instance
+                             */
+                            RowError.prototype.message = "";
+    
+                            /**
+                             * Creates a new RowError instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IRowError=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.RowError} RowError instance
+                             */
+                            RowError.create = function create(properties) {
+                                return new RowError(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RowError message. Does not implicitly {@link google.cloud.bigquery.storage.v1.RowError.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IRowError} message RowError message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RowError.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.index);
+                                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.code);
+                                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RowError message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.RowError.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IRowError} message RowError message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RowError.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RowError message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.RowError} RowError
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RowError.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.RowError();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.index = reader.int64();
+                                        break;
+                                    case 2:
+                                        message.code = reader.int32();
+                                        break;
+                                    case 3:
+                                        message.message = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RowError message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.RowError} RowError
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RowError.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RowError message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RowError.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.index != null && message.hasOwnProperty("index"))
+                                    if (!$util.isInteger(message.index) && !(message.index && $util.isInteger(message.index.low) && $util.isInteger(message.index.high)))
+                                        return "index: integer|Long expected";
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    switch (message.code) {
+                                    default:
+                                        return "code: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    if (!$util.isString(message.message))
+                                        return "message: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RowError message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.RowError} RowError
+                             */
+                            RowError.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.RowError)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.RowError();
+                                if (object.index != null)
+                                    if ($util.Long)
+                                        (message.index = $util.Long.fromValue(object.index)).unsigned = false;
+                                    else if (typeof object.index === "string")
+                                        message.index = parseInt(object.index, 10);
+                                    else if (typeof object.index === "number")
+                                        message.index = object.index;
+                                    else if (typeof object.index === "object")
+                                        message.index = new $util.LongBits(object.index.low >>> 0, object.index.high >>> 0).toNumber();
+                                switch (object.code) {
+                                case "ROW_ERROR_CODE_UNSPECIFIED":
+                                case 0:
+                                    message.code = 0;
+                                    break;
+                                case "FIELDS_ERROR":
+                                case 1:
+                                    message.code = 1;
+                                    break;
+                                }
+                                if (object.message != null)
+                                    message.message = String(object.message);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RowError message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.RowError} message RowError
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RowError.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.index = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.index = options.longs === String ? "0" : 0;
+                                    object.code = options.enums === String ? "ROW_ERROR_CODE_UNSPECIFIED" : 0;
+                                    object.message = "";
+                                }
+                                if (message.index != null && message.hasOwnProperty("index"))
+                                    if (typeof message.index === "number")
+                                        object.index = options.longs === String ? String(message.index) : message.index;
+                                    else
+                                        object.index = options.longs === String ? $util.Long.prototype.toString.call(message.index) : options.longs === Number ? new $util.LongBits(message.index.low >>> 0, message.index.high >>> 0).toNumber() : message.index;
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    object.code = options.enums === String ? $root.google.cloud.bigquery.storage.v1.RowError.RowErrorCode[message.code] : message.code;
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    object.message = message.message;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RowError to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RowError.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * RowErrorCode enum.
+                             * @name google.cloud.bigquery.storage.v1.RowError.RowErrorCode
+                             * @enum {number}
+                             * @property {number} ROW_ERROR_CODE_UNSPECIFIED=0 ROW_ERROR_CODE_UNSPECIFIED value
+                             * @property {number} FIELDS_ERROR=1 FIELDS_ERROR value
+                             */
+                            RowError.RowErrorCode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ROW_ERROR_CODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "FIELDS_ERROR"] = 1;
+                                return values;
+                            })();
+    
+                            return RowError;
                         })();
     
                         /**

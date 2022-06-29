@@ -2036,6 +2036,9 @@ export namespace google {
 
                         /** AppendRowsResponse updatedSchema */
                         updatedSchema?: (google.cloud.bigquery.storage.v1.ITableSchema|null);
+
+                        /** AppendRowsResponse rowErrors */
+                        rowErrors?: (google.cloud.bigquery.storage.v1.IRowError[]|null);
                     }
 
                     /** Represents an AppendRowsResponse. */
@@ -2055,6 +2058,9 @@ export namespace google {
 
                         /** AppendRowsResponse updatedSchema. */
                         public updatedSchema?: (google.cloud.bigquery.storage.v1.ITableSchema|null);
+
+                        /** AppendRowsResponse rowErrors. */
+                        public rowErrors: google.cloud.bigquery.storage.v1.IRowError[];
 
                         /** AppendRowsResponse response. */
                         public response?: ("appendResult"|"error");
@@ -2987,6 +2993,117 @@ export namespace google {
                             SCHEMA_MISMATCH_EXTRA_FIELDS = 7,
                             OFFSET_ALREADY_EXISTS = 8,
                             OFFSET_OUT_OF_RANGE = 9
+                        }
+                    }
+
+                    /** Properties of a RowError. */
+                    interface IRowError {
+
+                        /** RowError index */
+                        index?: (number|Long|string|null);
+
+                        /** RowError code */
+                        code?: (google.cloud.bigquery.storage.v1.RowError.RowErrorCode|keyof typeof google.cloud.bigquery.storage.v1.RowError.RowErrorCode|null);
+
+                        /** RowError message */
+                        message?: (string|null);
+                    }
+
+                    /** Represents a RowError. */
+                    class RowError implements IRowError {
+
+                        /**
+                         * Constructs a new RowError.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.storage.v1.IRowError);
+
+                        /** RowError index. */
+                        public index: (number|Long|string);
+
+                        /** RowError code. */
+                        public code: (google.cloud.bigquery.storage.v1.RowError.RowErrorCode|keyof typeof google.cloud.bigquery.storage.v1.RowError.RowErrorCode);
+
+                        /** RowError message. */
+                        public message: string;
+
+                        /**
+                         * Creates a new RowError instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RowError instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.storage.v1.IRowError): google.cloud.bigquery.storage.v1.RowError;
+
+                        /**
+                         * Encodes the specified RowError message. Does not implicitly {@link google.cloud.bigquery.storage.v1.RowError.verify|verify} messages.
+                         * @param message RowError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.storage.v1.IRowError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RowError message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.RowError.verify|verify} messages.
+                         * @param message RowError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.storage.v1.IRowError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RowError message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RowError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.storage.v1.RowError;
+
+                        /**
+                         * Decodes a RowError message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RowError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.storage.v1.RowError;
+
+                        /**
+                         * Verifies a RowError message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RowError message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RowError
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.storage.v1.RowError;
+
+                        /**
+                         * Creates a plain object from a RowError message. Also converts values to other types if specified.
+                         * @param message RowError
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.storage.v1.RowError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RowError to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace RowError {
+
+                        /** RowErrorCode enum. */
+                        enum RowErrorCode {
+                            ROW_ERROR_CODE_UNSPECIFIED = 0,
+                            FIELDS_ERROR = 1
                         }
                     }
 
