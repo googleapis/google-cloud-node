@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.2.2](https://github.com/googleapis/nodejs-storage/compare/v6.2.1...v6.2.2) (2022-06-29)
+
+
+### Bug Fixes
+
+* correctly handle an empty file in download function ([#1995](https://github.com/googleapis/nodejs-storage/issues/1995)) ([f1a5a0b](https://github.com/googleapis/nodejs-storage/commit/f1a5a0bd121b84c3d56a9eddbd31593089634574))
+
 ## [6.2.1](https://github.com/googleapis/nodejs-storage/compare/v6.2.0...v6.2.1) (2022-06-27)
 
 
