@@ -96,6 +96,9 @@ describe('storage', () => {
     html: {
       path: path.join(__dirname, '../../system-test/data/long-html-file.html'),
     },
+    empty: {
+      path: path.join(__dirname, '../../system-test/data/empty-file.txt'),
+    },
   };
 
   before(() => {
@@ -2407,6 +2410,21 @@ describe('storage', () => {
           done();
         });
       });
+    });
+
+    it('should download an empty file', done => {
+      const fileContents = fs.readFileSync(FILES.empty.path);
+      bucket.upload(
+        FILES.empty.path,
+        (err: Error | null, file?: File | null) => {
+          assert.ifError(err);
+          file!.download((err, remoteContents) => {
+            assert.ifError(err);
+            assert.strictEqual(String(fileContents), String(remoteContents));
+            done();
+          });
+        }
+      );
     });
 
     it('should download the specified bytes of a file', done => {

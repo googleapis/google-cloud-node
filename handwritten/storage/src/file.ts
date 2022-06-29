@@ -2044,14 +2044,27 @@ class File extends ServiceObject<File> {
     delete options.destination;
 
     const fileStream = this.createReadStream(options);
-
+    let receivedData = false;
     if (destination) {
-      fileStream.on('error', callback).once('data', data => {
-        // We know that the file exists the server - now we can truncate/write to a file
-        const writable = fs.createWriteStream(destination);
-        writable.write(data);
-        fileStream.pipe(writable).on('error', callback).on('finish', callback);
-      });
+      fileStream
+        .on('error', callback)
+        .once('data', data => {
+          // We know that the file exists the server - now we can truncate/write to a file
+          receivedData = true;
+          const writable = fs.createWriteStream(destination);
+          writable.write(data);
+          fileStream
+            .pipe(writable)
+            .on('error', callback)
+            .on('finish', callback);
+        })
+        .on('end', () => {
+          // In the case of an empty file no data will be received before the end event fires
+          if (!receivedData) {
+            fs.openSync(destination, 'w');
+            callback(null, Buffer.alloc(0));
+          }
+        });
     } else {
       this.getBufferFromReadable(fileStream)
         .then(contents => callback?.(null, contents))
