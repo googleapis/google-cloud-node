@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/nodejs-dataproc/compare/v4.0.0...v4.0.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v6 ([#592](https://github.com/googleapis/nodejs-dataproc/issues/592)) ([54ffbec](https://github.com/googleapis/nodejs-dataproc/commit/54ffbec48e0ae5c07cf2cedc1231cbffcb673e93))
+* fixes for dynamic routing and streaming descriptors ([#591](https://github.com/googleapis/nodejs-dataproc/issues/591)) ([3d1dc28](https://github.com/googleapis/nodejs-dataproc/commit/3d1dc2820924bfdc97d24c509b967b0e55aca962))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-dataproc/compare/v3.2.0...v4.0.0) (2022-05-13)
 
 
