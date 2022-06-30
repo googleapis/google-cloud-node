@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-binary-authorization/compare/v1.5.1...v2.0.0) (2022-06-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* make v1 default service version (#139)
+* update library to use Node 12 (#153)
+
+### Features
+
+* Adds a pod_namespace field to pod events created by Continuous Validation, to distinguish pods with the same name that run in different namespaces ([#159](https://github.com/googleapis/nodejs-binary-authorization/issues/159)) ([db983a2](https://github.com/googleapis/nodejs-binary-authorization/commit/db983a2911ae969da1ebf2096e48a33e78ea5ea1))
+* Import of Grafeas from Github ([#156](https://github.com/googleapis/nodejs-binary-authorization/issues/156)) ([d0f06b7](https://github.com/googleapis/nodejs-binary-authorization/commit/d0f06b73b78137400461486d7b6020d370fd3efe))
+* make v1 default service version ([#139](https://github.com/googleapis/nodejs-binary-authorization/issues/139)) ([308286e](https://github.com/googleapis/nodejs-binary-authorization/commit/308286e8d92d62ba8d1c0e6c7ec3d0a921e63294))
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#160](https://github.com/googleapis/nodejs-binary-authorization/issues/160)) ([dc48528](https://github.com/googleapis/nodejs-binary-authorization/commit/dc48528c213f6eb2557a647333879370494a00e7))
+
+
+### Build System
+
+* update library to use Node 12 ([#153](https://github.com/googleapis/nodejs-binary-authorization/issues/153)) ([cafc43b](https://github.com/googleapis/nodejs-binary-authorization/commit/cafc43b1d91f0aa23b8db9848a05fbd2cb65da10))
+
 ### [1.5.1](https://github.com/googleapis/nodejs-binary-authorization/compare/v1.5.0...v1.5.1) (2022-01-13)
 
 
