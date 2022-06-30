@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/nodejs-os-login/compare/v4.0.0...v4.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#534](https://github.com/googleapis/nodejs-os-login/issues/534)) ([52d5d5c](https://github.com/googleapis/nodejs-os-login/commit/52d5d5cc99d50a9a469a54ca1c75943c082b26dc))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-os-login/compare/v3.3.1...v4.0.0) (2022-05-20)
 
 
