@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/nodejs-network-security/compare/v0.4.0...v0.5.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#59](https://github.com/googleapis/nodejs-network-security/issues/59)) ([7448c6d](https://github.com/googleapis/nodejs-network-security/commit/7448c6d295bea98a42f0d9d9956b180783f2c803))
+
 ## [0.4.0](https://github.com/googleapis/nodejs-network-security/compare/v0.3.0...v0.4.0) (2022-05-20)
 
 
