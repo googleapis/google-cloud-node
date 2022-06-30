@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-org-policy/compare/v2.0.0...v2.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#115](https://github.com/googleapis/nodejs-org-policy/issues/115)) ([c54a19b](https://github.com/googleapis/nodejs-org-policy/commit/c54a19be2c28a298906ee5b451cc2180951ce1f4))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-org-policy/compare/v1.1.2...v2.0.0) (2022-05-20)
 
 
