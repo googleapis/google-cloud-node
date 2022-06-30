@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'NotebookService',
-    filename: './notebook-service.js',
+    library: 'ManagedNotebookService',
+    filename: './managed-notebook-service.js',
   },
   node: {
     child_process: 'empty',

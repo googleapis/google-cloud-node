@@ -20,6 +20,8 @@
 const notebooks = require('@google-cloud/notebooks');
 
 function main() {
+  const managedNotebookServiceClient =
+    new notebooks.ManagedNotebookServiceClient();
   const notebookServiceClient = new notebooks.NotebookServiceClient();
 }
 
