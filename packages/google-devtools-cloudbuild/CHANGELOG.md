@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.0.0...v3.0.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#327](https://github.com/googleapis/nodejs-cloudbuild/issues/327)) ([4cf9b63](https://github.com/googleapis/nodejs-cloudbuild/commit/4cf9b6342121cdff09767321ab3a24d56f7f13d9))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-cloudbuild/compare/v2.6.0...v3.0.0) (2022-05-17)
 
 
