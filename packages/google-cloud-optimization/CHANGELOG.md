@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-cloud-optimization/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#21](https://github.com/googleapis/nodejs-cloud-optimization/issues/21)) ([29c8275](https://github.com/googleapis/nodejs-cloud-optimization/commit/29c8275335cb2a4bfbb1910eb0a15731d58b70cf))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-cloud-optimization/compare/v1.0.0...v2.0.0) (2022-05-20)
 
 
