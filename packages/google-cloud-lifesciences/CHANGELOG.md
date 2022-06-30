@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-life-sciences/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#83](https://github.com/googleapis/nodejs-life-sciences/issues/83)) ([c43760a](https://github.com/googleapis/nodejs-life-sciences/commit/c43760a40221e78ed755bf357bf5d76bec8dff6f))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-life-sciences/compare/v1.1.1...v2.0.0) (2022-05-19)
 
 
