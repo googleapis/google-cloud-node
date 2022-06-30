@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/nodejs-security-private-ca/compare/v4.0.0...v4.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#187](https://github.com/googleapis/nodejs-security-private-ca/issues/187)) ([2b2f553](https://github.com/googleapis/nodejs-security-private-ca/commit/2b2f553e60256ad6308447b4a8d1062186982f42))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-security-private-ca/compare/v3.1.0...v4.0.0) (2022-05-19)
 
 
