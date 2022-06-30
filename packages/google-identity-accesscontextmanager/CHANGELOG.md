@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-access-context-manager/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#55](https://github.com/googleapis/nodejs-access-context-manager/issues/55)) ([585f329](https://github.com/googleapis/nodejs-access-context-manager/commit/585f329f40cd1034584f56dc800d0d55e13f39a3))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-access-context-manager/compare/v1.0.0...v2.0.0) (2022-05-19)
 
 
