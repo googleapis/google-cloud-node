@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-eventarc/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#79](https://github.com/googleapis/nodejs-eventarc/issues/79)) ([dcdcd8a](https://github.com/googleapis/nodejs-eventarc/commit/dcdcd8ac2f282f4bbf373e803da88487c7a81f1d))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-eventarc/compare/v1.2.0...v2.0.0) (2022-05-20)
 
 
