@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-area120-tables/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#147](https://github.com/googleapis/nodejs-area120-tables/issues/147)) ([2909e6d](https://github.com/googleapis/nodejs-area120-tables/commit/2909e6da18f99021b4f81eb60e991ab020e65e5f))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-area120-tables/compare/v1.3.0...v2.0.0) (2022-05-17)
 
 
