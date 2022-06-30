@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* **samples:** Add POSIX & Manifest samples ([#67](https://github.com/googleapis/nodejs-storage-transfer/issues/67)) ([1056c9f](https://github.com/googleapis/nodejs-storage-transfer/commit/1056c9fde90c0c7b79a235d4c9f5f861efce3169))
+* support regapic LRO ([#75](https://github.com/googleapis/nodejs-storage-transfer/issues/75)) ([cc80906](https://github.com/googleapis/nodejs-storage-transfer/commit/cc80906bcf86b68485fd62970b1b6f8a30c1123b))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-storage-transfer/compare/v1.2.0...v2.0.0) (2022-05-31)
 
 
