@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.1.0...v2.2.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#187](https://github.com/googleapis/nodejs-video-transcoder/issues/187)) ([7924434](https://github.com/googleapis/nodejs-video-transcoder/commit/79244348cb6075c157edf3146c511e2214aa3d90))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.0.1...v2.1.0) (2022-06-16)
 
 
