@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [5.0.1](https://github.com/googleapis/nodejs-language/compare/v5.0.0...v5.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#673](https://github.com/googleapis/nodejs-language/issues/673)) ([6767804](https://github.com/googleapis/nodejs-language/commit/67678040029a2cdfe1ed1a7488ec2c8ba5920db8))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-language/compare/v4.3.2...v5.0.0) (2022-06-10)
 
 
