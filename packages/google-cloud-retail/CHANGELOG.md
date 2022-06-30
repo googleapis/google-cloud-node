@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-retail/compare/v1.8.1...v2.0.0) (2022-06-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#181)
+
+### Features
+
+* allow users to disable spell check in search requests ([#183](https://github.com/googleapis/nodejs-retail/issues/183)) ([05005ea](https://github.com/googleapis/nodejs-retail/commit/05005ea09accff4d04b152f2fa2bf452f6b9768b))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/bigquery to v6 ([#186](https://github.com/googleapis/nodejs-retail/issues/186)) ([fc07923](https://github.com/googleapis/nodejs-retail/commit/fc0792311aac235e917fe045fc491858408bd770))
+
+
+### Build System
+
+* update library to use Node 12 ([#181](https://github.com/googleapis/nodejs-retail/issues/181)) ([809853f](https://github.com/googleapis/nodejs-retail/commit/809853f84e0bfe0f09ccb59ca750963732e23965))
+
 ### [1.8.1](https://github.com/googleapis/nodejs-retail/compare/v1.8.0...v1.8.1) (2022-05-06)
 
 
