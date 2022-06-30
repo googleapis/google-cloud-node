@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.1.0...v0.1.1) (2022-06-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to v3 ([#15](https://github.com/googleapis/nodejs-video-stitcher/issues/15)) ([345085f](https://github.com/googleapis/nodejs-video-stitcher/commit/345085f378b7ab6299a593cd8f8d200160b6106e))
+
 ## 0.1.0 (2022-06-09)
 
 
