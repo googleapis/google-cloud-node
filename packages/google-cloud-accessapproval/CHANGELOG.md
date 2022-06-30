@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-access-approval/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#130](https://github.com/googleapis/nodejs-access-approval/issues/130)) ([bd6e505](https://github.com/googleapis/nodejs-access-approval/commit/bd6e5057024a00800cf343e1715023744c42dca1))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-access-approval/compare/v1.1.0...v2.0.0) (2022-06-03)
 
 
