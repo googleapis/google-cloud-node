@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-memcache/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#201](https://github.com/googleapis/nodejs-memcache/issues/201)) ([2151fc9](https://github.com/googleapis/nodejs-memcache/commit/2151fc9b1524bd8f3eed8492dc7baeb26d2db3ed))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-memcache/compare/v1.5.1...v2.0.0) (2022-05-17)
 
 
