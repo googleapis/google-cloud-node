@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/nodejs-speech/compare/v4.10.2...v5.0.0) (2022-06-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#891)
+
+### Build System
+
+* update library to use Node 12 ([#891](https://github.com/googleapis/nodejs-speech/issues/891)) ([73a2f72](https://github.com/googleapis/nodejs-speech/commit/73a2f7223274d75be929ed074083970425bd3997))
+
 ### [4.10.2](https://github.com/googleapis/nodejs-speech/compare/v4.10.1...v4.10.2) (2022-05-02)
 
 
