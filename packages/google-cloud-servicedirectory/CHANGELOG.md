@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/googleapis/nodejs-service-directory/compare/v4.0.0...v4.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#236](https://github.com/googleapis/nodejs-service-directory/issues/236)) ([f72541a](https://github.com/googleapis/nodejs-service-directory/commit/f72541a014de7b748dde57d1f29064f48d935b36))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-service-directory/compare/v3.4.0...v4.0.0) (2022-05-20)
 
 
