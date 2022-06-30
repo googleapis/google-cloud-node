@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-redis/compare/v3.0.0...v3.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#572](https://github.com/googleapis/nodejs-redis/issues/572)) ([5b30a33](https://github.com/googleapis/nodejs-redis/commit/5b30a33745a72257596f9a612dcd1c9db3263d03))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-redis/compare/v2.4.0...v3.0.0) (2022-05-17)
 
 
