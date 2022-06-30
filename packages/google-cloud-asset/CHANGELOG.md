@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-asset/compare/v4.0.0...v4.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#635](https://github.com/googleapis/nodejs-asset/issues/635)) ([140ce9d](https://github.com/googleapis/nodejs-asset/commit/140ce9d312545671ad3f3f4bbcd4657081f2298e))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-asset/compare/v3.23.1...v4.0.0) (2022-06-16)
 
 
