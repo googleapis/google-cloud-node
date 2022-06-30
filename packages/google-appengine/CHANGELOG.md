@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-appengine-admin/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#140](https://github.com/googleapis/nodejs-appengine-admin/issues/140)) ([0185670](https://github.com/googleapis/nodejs-appengine-admin/commit/01856700f02bd5ec178aac4ab0378feebee0fda9))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-appengine-admin/compare/v1.2.0...v2.0.0) (2022-06-10)
 
 
