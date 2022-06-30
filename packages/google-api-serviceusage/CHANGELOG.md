@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-service-usage/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#98](https://github.com/googleapis/nodejs-service-usage/issues/98)) ([b433238](https://github.com/googleapis/nodejs-service-usage/commit/b433238b176cd86469c4951a0b43c5bdb00d4540))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-service-usage/compare/v1.2.1...v2.0.0) (2022-05-20)
 
 
