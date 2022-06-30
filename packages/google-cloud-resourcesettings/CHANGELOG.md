@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-resource-settings/compare/v2.0.0...v2.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#79](https://github.com/googleapis/nodejs-resource-settings/issues/79)) ([6932e86](https://github.com/googleapis/nodejs-resource-settings/commit/6932e86920a85adf5167508542b336fde1d45240))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-resource-settings/compare/v1.1.2...v2.0.0) (2022-05-19)
 
 
