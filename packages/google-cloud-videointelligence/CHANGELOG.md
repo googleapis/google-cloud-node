@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-video-intelligence/compare/v3.4.1...v4.0.0) (2022-06-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#714)
+* field ObjectTrackingAnnotation.segment moved into oneof, added track_id (#704)
+
+### Features
+
+* field ObjectTrackingAnnotation.segment moved into oneof, added track_id ([#704](https://github.com/googleapis/nodejs-video-intelligence/issues/704)) ([b55757b](https://github.com/googleapis/nodejs-video-intelligence/commit/b55757bedbc2563f2304a6596c50104b499f73d5))
+* support regapic LRO ([#720](https://github.com/googleapis/nodejs-video-intelligence/issues/720)) ([903e5ca](https://github.com/googleapis/nodejs-video-intelligence/commit/903e5cad702bfcaab49ed141fe503ff0d22c3b83))
+
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#716](https://github.com/googleapis/nodejs-video-intelligence/issues/716)) ([853d91e](https://github.com/googleapis/nodejs-video-intelligence/commit/853d91e57929323e18ac599e52d436f0f5c3288c))
+
+
+### Build System
+
+* update library to use Node 12 ([#714](https://github.com/googleapis/nodejs-video-intelligence/issues/714)) ([a9fbbcd](https://github.com/googleapis/nodejs-video-intelligence/commit/a9fbbcd7ab5f7cc49026b3a39b89512ba21c481c))
+
 ### [3.4.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.4.0...v3.4.1) (2021-09-15)
 
 
