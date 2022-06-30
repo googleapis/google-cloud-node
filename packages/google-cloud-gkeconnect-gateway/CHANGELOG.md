@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-gke-connect-gateway/compare/v2.0.0...v2.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#75](https://github.com/googleapis/nodejs-gke-connect-gateway/issues/75)) ([aa8cdc8](https://github.com/googleapis/nodejs-gke-connect-gateway/commit/aa8cdc8607b44eea8bcc6b7065c01818857a8d70))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.1.0...v2.0.0) (2022-05-19)
 
 
