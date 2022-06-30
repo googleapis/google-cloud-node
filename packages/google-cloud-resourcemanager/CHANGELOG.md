@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-resource-manager/compare/v4.0.0...v4.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#458](https://github.com/googleapis/nodejs-resource-manager/issues/458)) ([5c42451](https://github.com/googleapis/nodejs-resource-manager/commit/5c42451843379918f25cf1692a19d263663cec37))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-resource-manager/compare/v3.2.0...v4.0.0) (2022-05-17)
 
 
