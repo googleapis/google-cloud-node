@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v4.0.0...v4.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#210](https://github.com/googleapis/nodejs-analytics-admin/issues/210)) ([a783ccd](https://github.com/googleapis/nodejs-analytics-admin/commit/a783ccd7c69123b337813c0ee751e292bdb5be5c))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v3.2.0...v4.0.0) (2022-05-13)
 
 
