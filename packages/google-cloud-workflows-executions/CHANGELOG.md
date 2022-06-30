@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-workflows/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#146](https://github.com/googleapis/nodejs-workflows/issues/146)) ([a513afb](https://github.com/googleapis/nodejs-workflows/commit/a513afb8499dd3e377b0c43ee31aeaacbf39c0e9))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-workflows/compare/v1.4.0...v2.0.0) (2022-05-20)
 
 
