@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/nodejs-translate/compare/v6.3.1...v7.0.0) (2022-06-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#789)
+
+### Features
+
+* support regapic LRO ([#798](https://github.com/googleapis/nodejs-translate/issues/798)) ([9f1ddc1](https://github.com/googleapis/nodejs-translate/commit/9f1ddc167b20e1b5c3eeadf68867ba2294f2bb12))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to v4 ([#793](https://github.com/googleapis/nodejs-translate/issues/793)) ([a2d079b](https://github.com/googleapis/nodejs-translate/commit/a2d079b6b36c67a21d2c3860c1c1fb497f56c499))
+* **test:** fix language detection test ([#779](https://github.com/googleapis/nodejs-translate/issues/779)) ([b6df5e2](https://github.com/googleapis/nodejs-translate/commit/b6df5e27ce37bab53f654bcfdfabf40b8db3e8a0))
+
+
+### Build System
+
+* update library to use Node 12 ([#789](https://github.com/googleapis/nodejs-translate/issues/789)) ([3060301](https://github.com/googleapis/nodejs-translate/commit/30603014cecb2da9cc73c561bd1fb127a158d84d))
+
 ### [6.3.1](https://www.github.com/googleapis/nodejs-translate/compare/v6.3.0...v6.3.1) (2021-10-18)
 
 
