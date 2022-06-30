@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.2.0...v0.3.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#45](https://github.com/googleapis/nodejs-video-live-stream/issues/45)) ([fc3c1b4](https://github.com/googleapis/nodejs-video-live-stream/commit/fc3c1b426407d6ff8b825483c0ab892e25a28d09))
+
 ## [0.2.0](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.1.0...v0.2.0) (2022-06-03)
 
 
