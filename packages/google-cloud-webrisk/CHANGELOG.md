@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-web-risk/compare/v3.0.0...v3.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#331](https://github.com/googleapis/nodejs-web-risk/issues/331)) ([265c092](https://github.com/googleapis/nodejs-web-risk/commit/265c092562ea66e985950c27ae8dd030b2c45925))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-web-risk/compare/v2.2.0...v3.0.0) (2022-05-17)
 
 
