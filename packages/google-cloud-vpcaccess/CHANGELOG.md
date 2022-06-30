@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-vpc-access/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#89](https://github.com/googleapis/nodejs-vpc-access/issues/89)) ([c42528e](https://github.com/googleapis/nodejs-vpc-access/commit/c42528ec15d5421ddd6a554c3b2ee46402299706))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-vpc-access/compare/v1.1.2...v2.0.0) (2022-05-20)
 
 
