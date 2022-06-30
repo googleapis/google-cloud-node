@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-service-control/compare/v2.0.0...v2.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#143](https://github.com/googleapis/nodejs-service-control/issues/143)) ([0368172](https://github.com/googleapis/nodejs-service-control/commit/03681724fd6bfb1a4ed49b43b5e47c319b8b3be0))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-service-control/compare/v1.4.0...v2.0.0) (2022-05-20)
 
 
