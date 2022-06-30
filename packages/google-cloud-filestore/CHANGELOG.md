@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-filestore/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#71](https://github.com/googleapis/nodejs-filestore/issues/71)) ([69dedbe](https://github.com/googleapis/nodejs-filestore/commit/69dedbeb0ba429dbb768b4823a53bab01caa3e7d))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-filestore/compare/v1.1.2...v2.0.0) (2022-05-19)
 
 
