@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-iot/compare/v2.5.1...v3.0.0) (2022-06-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#566)
+
+### Features
+
+* AuditConfig for IAM v1 ([#552](https://github.com/googleapis/nodejs-iot/issues/552)) ([1b1a3d2](https://github.com/googleapis/nodejs-iot/commit/1b1a3d226374bb7e9df3444d7384ae6e4d4ece4d))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to v3 ([#569](https://github.com/googleapis/nodejs-iot/issues/569)) ([77a2005](https://github.com/googleapis/nodejs-iot/commit/77a2005a44866ef0261791da592878fca1d067bd))
+* **deps:** update dependency @google-cloud/storage to v6 ([#568](https://github.com/googleapis/nodejs-iot/issues/568)) ([b15efb4](https://github.com/googleapis/nodejs-iot/commit/b15efb4f8319eab0e1e01dbd38f163b7fa844d39))
+
+
+### Build System
+
+* update library to use Node 12 ([#566](https://github.com/googleapis/nodejs-iot/issues/566)) ([1efe654](https://github.com/googleapis/nodejs-iot/commit/1efe6549ae7d0a84bd4388dd4cf89f924a118db4))
+
 ### [2.5.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.5.0...v2.5.1) (2021-09-27)
 
 
