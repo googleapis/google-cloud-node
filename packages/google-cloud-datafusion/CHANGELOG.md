@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-data-fusion/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#55](https://github.com/googleapis/nodejs-data-fusion/issues/55)) ([4b66ef0](https://github.com/googleapis/nodejs-data-fusion/commit/4b66ef068c5d82e150b4bf6f2943d1708d5b0194))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-data-fusion/compare/v1.0.0...v2.0.0) (2022-05-19)
 
 
