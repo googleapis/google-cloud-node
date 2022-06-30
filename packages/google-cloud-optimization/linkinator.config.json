@@ -5,10 +5,7 @@
     "www.googleapis.com",
     "img.shields.io",
     "https://console.cloud.google.com/cloudshell",
-    "https://support.google.com",
-    "https://github.com/googleapis/nodejs-cloud-optimization",
-    "https://googleapis.dev/nodejs/cloudoptimization/latest/",
-    "https://cloud.google.com/optimization/"
+    "https://support.google.com"
   ],
   "silent": true,
   "concurrency": 5,
