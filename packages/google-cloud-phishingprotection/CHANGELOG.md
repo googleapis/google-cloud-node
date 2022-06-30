@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.0...v3.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#392](https://github.com/googleapis/nodejs-phishing-protection/issues/392)) ([fa7610b](https://github.com/googleapis/nodejs-phishing-protection/commit/fa7610bb1c8efdd2ff30964e6d18eaea81591f71))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-phishing-protection/compare/v2.5.0...v3.0.0) (2022-05-17)
 
 
