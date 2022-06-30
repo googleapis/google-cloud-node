@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-notebooks/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO, add import for system tests ([#146](https://github.com/googleapis/nodejs-notebooks/issues/146)) ([be0c483](https://github.com/googleapis/nodejs-notebooks/commit/be0c48337e659cc1e1ce94069e25722b05de215b))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-notebooks/compare/v1.3.1...v2.0.0) (2022-06-09)
 
 
