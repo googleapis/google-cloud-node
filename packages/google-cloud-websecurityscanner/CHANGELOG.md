@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-web-security-scanner/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#129](https://github.com/googleapis/nodejs-web-security-scanner/issues/129)) ([bc9ba59](https://github.com/googleapis/nodejs-web-security-scanner/commit/bc9ba59369cf1945d1352076c01a2139e8d3c1ce))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-web-security-scanner/compare/v1.1.1...v2.0.0) (2022-05-19)
 
 
