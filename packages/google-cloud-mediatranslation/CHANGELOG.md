@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/nodejs-media-translation/compare/v3.0.0...v3.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#233](https://github.com/googleapis/nodejs-media-translation/issues/233)) ([f83d3ed](https://github.com/googleapis/nodejs-media-translation/commit/f83d3ed1a04e4d382071df6202a1b2fb394ee2d0))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-media-translation/compare/v2.4.0...v3.0.0) (2022-06-09)
 
 
