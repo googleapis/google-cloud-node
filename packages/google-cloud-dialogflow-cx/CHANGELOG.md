@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v2.15.0...v3.0.0) (2022-06-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#288)
+
+### Features
+
+* add Webhook samples ([#259](https://github.com/googleapis/nodejs-dialogflow-cx/issues/259)) ([709dc6d](https://github.com/googleapis/nodejs-dialogflow-cx/commit/709dc6d88d768a9b553187787e9fb3808be8d991))
+* added audio_export_settings ([#257](https://github.com/googleapis/nodejs-dialogflow-cx/issues/257)) ([39f1d1c](https://github.com/googleapis/nodejs-dialogflow-cx/commit/39f1d1ced3401e7cfa72f1448745d424837d42f2))
+* added data format specification for export agent ([361e7d9](https://github.com/googleapis/nodejs-dialogflow-cx/commit/361e7d9d1f596a6280f07a1ce20456195a943d7a))
+* added data format specification for export agent ([361e7d9](https://github.com/googleapis/nodejs-dialogflow-cx/commit/361e7d9d1f596a6280f07a1ce20456195a943d7a))
+* added page in TestConfig ([7adaf67](https://github.com/googleapis/nodejs-dialogflow-cx/commit/7adaf6735cbef19d38e1288fd40ea27cf595b20f))
+* added page in TestConfig ([#239](https://github.com/googleapis/nodejs-dialogflow-cx/issues/239)) ([283c389](https://github.com/googleapis/nodejs-dialogflow-cx/commit/283c389cc220b9f192f15822ef2d1e38f35d6103))
+* added support for locking an agent for changes ([361e7d9](https://github.com/googleapis/nodejs-dialogflow-cx/commit/361e7d9d1f596a6280f07a1ce20456195a943d7a))
+* added support for locking an agent for changes ([361e7d9](https://github.com/googleapis/nodejs-dialogflow-cx/commit/361e7d9d1f596a6280f07a1ce20456195a943d7a))
+
+
+### Build System
+
+* update library to use Node 12 ([#288](https://github.com/googleapis/nodejs-dialogflow-cx/issues/288)) ([9a72b32](https://github.com/googleapis/nodejs-dialogflow-cx/commit/9a72b3214b65c59ef6a34471dc93050bd61e846c))
+
 ## [2.15.0](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v2.14.0...v2.15.0) (2022-01-19)
 
 
