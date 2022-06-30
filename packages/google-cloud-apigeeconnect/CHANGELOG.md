@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-apigee-connect/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#88](https://github.com/googleapis/nodejs-apigee-connect/issues/88)) ([6ef6bed](https://github.com/googleapis/nodejs-apigee-connect/commit/6ef6bed421e56459dac29deab71898ce5c061206))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-apigee-connect/compare/v1.1.1...v2.0.0) (2022-05-31)
 
 
