@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.1.0...v3.2.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#172](https://github.com/googleapis/nodejs-assured-workloads/issues/172)) ([d0dcdef](https://github.com/googleapis/nodejs-assured-workloads/commit/d0dcdefe8846cf0629a0aeca19c013b8ce53fc90))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.0.0...v3.1.0) (2022-06-16)
 
 
