@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-api-gateway/compare/v2.0.0...v2.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#116](https://github.com/googleapis/nodejs-api-gateway/issues/116)) ([b3761fc](https://github.com/googleapis/nodejs-api-gateway/commit/b3761fc10fc5f3160ac29dbebfd86fda99de00e6))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-api-gateway/compare/v1.2.1...v2.0.0) (2022-05-20)
 
 
