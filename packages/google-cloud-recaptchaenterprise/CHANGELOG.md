@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [3.0.2](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.1...v3.0.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#387](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/387)) ([fe11f09](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/fe11f09fb6b12af1194ac63bccec4c6a79f5d9a4))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.0...v3.0.1) (2022-06-16)
 
 
