@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v3.0.0...v3.1.0) (2022-06-29)
+
+
+### Features
+
+* support regapic LRO ([#550](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/550)) ([20e2d96](https://github.com/googleapis/nodejs-bigquery-data-transfer/commit/20e2d96389c9a49a40c1db7102bd2b0f3bef5c49))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.3.0...v3.0.0) (2022-05-17)
 
 
