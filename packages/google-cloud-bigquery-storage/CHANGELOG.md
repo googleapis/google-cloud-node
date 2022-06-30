@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/nodejs-bigquery-storage/compare/v2.8.0...v3.0.0) (2022-06-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#272)
+
+### Features
+
+* Deprecate format specific `row_count` field in Read API ([#249](https://github.com/googleapis/nodejs-bigquery-storage/issues/249)) ([fb8acf1](https://github.com/googleapis/nodejs-bigquery-storage/commit/fb8acf1f4eab7823132159bcf5927c9eda6374e2))
+
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([#274](https://github.com/googleapis/nodejs-bigquery-storage/issues/274)) ([4271ea0](https://github.com/googleapis/nodejs-bigquery-storage/commit/4271ea0aaa98286696eb6822d0bef82a655a5811))
+* Modify client lib retry policy for CreateWriteStream with longer backoff, more error code and longer overall time ([#279](https://github.com/googleapis/nodejs-bigquery-storage/issues/279)) ([849cc23](https://github.com/googleapis/nodejs-bigquery-storage/commit/849cc237081e63a585264a62d49e9407d2f14450))
+
+
+### Build System
+
+* update library to use Node 12 ([#272](https://github.com/googleapis/nodejs-bigquery-storage/issues/272)) ([5e774e6](https://github.com/googleapis/nodejs-bigquery-storage/commit/5e774e614132f189362d56c502960d87200a11a0))
+
 ## [2.8.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.7.0...v2.8.0) (2021-12-30)
 
 
