@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-orchestration-airflow/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#51](https://github.com/googleapis/nodejs-orchestration-airflow/issues/51)) ([6061472](https://github.com/googleapis/nodejs-orchestration-airflow/commit/60614729ab1fbc7885d2b07baff89cb8e052d2fa))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-orchestration-airflow/compare/v1.0.0...v2.0.0) (2022-06-10)
 
 
