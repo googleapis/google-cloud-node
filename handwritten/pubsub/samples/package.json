@@ -24,7 +24,7 @@
     "updatejs": "cp build/*.js ."
   },
   "dependencies": {
-    "@google-cloud/pubsub": "^3.0.1",
+    "@google-cloud/pubsub": "^3.0.2",
     "@opentelemetry/api": "^1.0.0",
     "@opentelemetry/tracing": "^0.24.0",
     "avro-js": "^1.10.1",
