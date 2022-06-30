@@ -1,5 +1,44 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.19.0...v2.0.0) (2022-06-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#304)
+
+### Features
+
+* add ConvexAutomatedStoppingSpec to StudySpec in aiplatform v1beta1 study.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add display_name and metadata to ModelEvaluation in aiplatform model_evaluation.proto ([#297](https://github.com/googleapis/nodejs-ai-platform/issues/297)) ([1e6dcb6](https://github.com/googleapis/nodejs-ai-platform/commit/1e6dcb65e39c0c9e9ec211a743c38ee8385a3423))
+* add Examples to Explanation related messages in aiplatform v1beta1 explanation.proto ([#307](https://github.com/googleapis/nodejs-ai-platform/issues/307)) ([c69ac2b](https://github.com/googleapis/nodejs-ai-platform/commit/c69ac2bb8d64e443fa4296204a770f5120cb9682))
+* add IAM policy to aiplatform_v1beta1.yaml ([#308](https://github.com/googleapis/nodejs-ai-platform/issues/308)) ([6557767](https://github.com/googleapis/nodejs-ai-platform/commit/6557767c67d2b4461aa8e7c44d10b1572eceefeb))
+* add JOB_STATE_UPDATING to JobState in aiplatform v1beta1 job_state.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add LatestMonitoringPipelineMetadata to ModelDeploymentMonitoringJob in aiplatform v1beta1 model_deployment_monitoring_job.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add ListModelVersion, DeleteModelVersion, and MergeVersionAliases rpcs to aiplatform v1beta1 model_service.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add MfsMount in aiplatform v1beta1 machine_resources.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add model_id and parent_model to TrainingPipeline in aiplatform v1beta1 training_pipeline.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add model_version_id to DeployedModel in aiplatform v1beta1 endpoint.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add model_version_id to PredictResponse in aiplatform v1beta1 prediction_service.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add model_version_id to UploadModelRequest and UploadModelResponse in aiplatform v1beta1 model_service.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add nfs_mounts to WorkPoolSpec in aiplatform v1beta1 custom_job.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add PredictRequestResponseLoggingConfig to aiplatform v1beta1 endpoint.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add reserved_ip_ranges to CustomJobSpec in aiplatform v1 custom_job.proto ([#286](https://github.com/googleapis/nodejs-ai-platform/issues/286)) ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add reserved_ip_ranges to CustomJobSpec in aiplatform v1beta1 custom_job.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* add version_id to Model in aiplatform v1beta1 model.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* rename Similarity to Examples, and similarity to examples in ExplanationParameters in aiplatform v1beta1 explanation.proto ([863748a](https://github.com/googleapis/nodejs-ai-platform/commit/863748aa5ca44064a8affafda5e5ae050b948a03))
+* **samples:** add create-featurestore samples ([#317](https://github.com/googleapis/nodejs-ai-platform/issues/317)) ([5876d81](https://github.com/googleapis/nodejs-ai-platform/commit/5876d81482b7bd247ef02a6b9f7f062bfae9d4b0))
+
+
+### Bug Fixes
+
+* added retries to flaky test ([#299](https://github.com/googleapis/nodejs-ai-platform/issues/299)) ([ffc9a3f](https://github.com/googleapis/nodejs-ai-platform/commit/ffc9a3f972802d8483d1f0c02a685ea8f1500998))
+
+
+### Build System
+
+* update library to use Node 12 ([#304](https://github.com/googleapis/nodejs-ai-platform/issues/304)) ([0679cda](https://github.com/googleapis/nodejs-ai-platform/commit/0679cda64a937bd68f27705b607a406ed01d02c4))
+
 ## [1.19.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.18.0...v1.19.0) (2022-03-24)
 
 
