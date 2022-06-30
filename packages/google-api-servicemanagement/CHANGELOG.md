@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/nodejs-service-management/compare/v1.0.0...v1.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#154](https://github.com/googleapis/nodejs-service-management/issues/154)) ([9871067](https://github.com/googleapis/nodejs-service-management/commit/9871067a828e4ec332906f2013956f9b2ade2b00))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-service-management/compare/v0.4.0...v1.0.0) (2022-05-31)
 
 
