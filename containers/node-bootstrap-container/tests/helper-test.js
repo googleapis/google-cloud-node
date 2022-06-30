@@ -42,7 +42,7 @@ describe('helper functions', () => {
       );
     });
 
-    it.only('should add the .OwlBot.yaml name to the interContainerVars.json', async () => { 
+    it('should add the .OwlBot.yaml name to the interContainerVars.json', async () => { 
        cp.execSync(
         `node ./add-to-well-known-path.js ${__dirname} google-cloud-kms`);
 
