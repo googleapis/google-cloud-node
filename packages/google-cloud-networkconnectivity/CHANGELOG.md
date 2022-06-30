@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#140](https://github.com/googleapis/nodejs-network-connectivity/issues/140)) ([1a369b4](https://github.com/googleapis/nodejs-network-connectivity/commit/1a369b4bec661a9c69f26ca7440b85c94c82b9ca))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v1.5.0...v2.0.0) (2022-05-19)
 
 
