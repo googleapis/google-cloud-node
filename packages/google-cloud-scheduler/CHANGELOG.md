@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-scheduler/compare/v3.0.0...v3.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#457](https://github.com/googleapis/nodejs-scheduler/issues/457)) ([e8e4c14](https://github.com/googleapis/nodejs-scheduler/commit/e8e4c14699b7c080634f287a3bcd2c6ac372ef1a))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-scheduler/compare/v2.3.0...v3.0.0) (2022-05-20)
 
 
