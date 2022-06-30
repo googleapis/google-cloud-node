@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/cloud-profiler-nodejs/compare/v4.2.0...v5.0.0) (2022-06-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#835)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to v4 ([#843](https://github.com/googleapis/cloud-profiler-nodejs/issues/843)) ([1af6b0f](https://github.com/googleapis/cloud-profiler-nodejs/commit/1af6b0f18aec665b042a27ea90158b99d7435d4e))
+* **deps:** update dependency @google-cloud/logging-min to v10 ([#838](https://github.com/googleapis/cloud-profiler-nodejs/issues/838)) ([1120298](https://github.com/googleapis/cloud-profiler-nodejs/commit/11202986b7d4501637e7c30c5e9787789e98ccba))
+
+
+### Build System
+
+* update library to use Node 12 ([#835](https://github.com/googleapis/cloud-profiler-nodejs/issues/835)) ([07221ef](https://github.com/googleapis/cloud-profiler-nodejs/commit/07221ef0503c25311834a50b987b70d51393420c))
+
 ## [4.2.0](https://github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.7...v4.2.0) (2022-05-13)
 
 
