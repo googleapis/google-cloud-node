@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-managed-identities/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#137](https://github.com/googleapis/nodejs-managed-identities/issues/137)) ([ee4fadb](https://github.com/googleapis/nodejs-managed-identities/commit/ee4fadbda9b4ecc7495be743e0644daeafc5e5f9))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-managed-identities/compare/v1.1.3...v2.0.0) (2022-05-19)
 
 
