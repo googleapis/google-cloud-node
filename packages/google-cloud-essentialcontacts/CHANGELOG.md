@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-essential-contacts/compare/v2.0.0...v2.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#98](https://github.com/googleapis/nodejs-essential-contacts/issues/98)) ([1ed45c6](https://github.com/googleapis/nodejs-essential-contacts/commit/1ed45c6a2b197f7784e13857c481d097da96dc6d))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-essential-contacts/compare/v1.1.1...v2.0.0) (2022-05-19)
 
 
