@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-tasks/compare/v3.0.0...v3.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#631](https://github.com/googleapis/nodejs-tasks/issues/631)) ([df558e9](https://github.com/googleapis/nodejs-tasks/commit/df558e95c7d1a92ba1133ba046e6bc33e840669b))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-tasks/compare/v2.6.0...v3.0.0) (2022-06-07)
 
 
