@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v2.0.0...v2.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** describe fallback rest option ([#129](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/129)) ([e84320f](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/e84320ffdea95006a57a29db73b5e0e4286de5a7))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.1.1...v2.0.0) (2022-05-19)
 
 
