@@ -1,0 +1,243 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.baremetalsolution.v2",
+  "libraryPackage": "@google-cloud/baremetalsolution",
+  "services": {
+    "BareMetalSolution": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BareMetalSolutionClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "GetVolume": {
+              "methods": [
+                "getVolume"
+              ]
+            },
+            "ListNetworkUsage": {
+              "methods": [
+                "listNetworkUsage"
+              ]
+            },
+            "GetNetwork": {
+              "methods": [
+                "getNetwork"
+              ]
+            },
+            "GetLun": {
+              "methods": [
+                "getLun"
+              ]
+            },
+            "GetNfsShare": {
+              "methods": [
+                "getNfsShare"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "resetInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "DetachLun": {
+              "methods": [
+                "detachLun"
+              ]
+            },
+            "UpdateVolume": {
+              "methods": [
+                "updateVolume"
+              ]
+            },
+            "ResizeVolume": {
+              "methods": [
+                "resizeVolume"
+              ]
+            },
+            "UpdateNetwork": {
+              "methods": [
+                "updateNetwork"
+              ]
+            },
+            "UpdateNfsShare": {
+              "methods": [
+                "updateNfsShare"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListVolumes": {
+              "methods": [
+                "listVolumes",
+                "listVolumesStream",
+                "listVolumesAsync"
+              ]
+            },
+            "ListNetworks": {
+              "methods": [
+                "listNetworks",
+                "listNetworksStream",
+                "listNetworksAsync"
+              ]
+            },
+            "ListLuns": {
+              "methods": [
+                "listLuns",
+                "listLunsStream",
+                "listLunsAsync"
+              ]
+            },
+            "ListNfsShares": {
+              "methods": [
+                "listNfsShares",
+                "listNfsSharesStream",
+                "listNfsSharesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BareMetalSolutionClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "GetVolume": {
+              "methods": [
+                "getVolume"
+              ]
+            },
+            "ListNetworkUsage": {
+              "methods": [
+                "listNetworkUsage"
+              ]
+            },
+            "GetNetwork": {
+              "methods": [
+                "getNetwork"
+              ]
+            },
+            "GetLun": {
+              "methods": [
+                "getLun"
+              ]
+            },
+            "GetNfsShare": {
+              "methods": [
+                "getNfsShare"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "resetInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "DetachLun": {
+              "methods": [
+                "detachLun"
+              ]
+            },
+            "UpdateVolume": {
+              "methods": [
+                "updateVolume"
+              ]
+            },
+            "ResizeVolume": {
+              "methods": [
+                "resizeVolume"
+              ]
+            },
+            "UpdateNetwork": {
+              "methods": [
+                "updateNetwork"
+              ]
+            },
+            "UpdateNfsShare": {
+              "methods": [
+                "updateNfsShare"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListVolumes": {
+              "methods": [
+                "listVolumes",
+                "listVolumesStream",
+                "listVolumesAsync"
+              ]
+            },
+            "ListNetworks": {
+              "methods": [
+                "listNetworks",
+                "listNetworksStream",
+                "listNetworksAsync"
+              ]
+            },
+            "ListLuns": {
+              "methods": [
+                "listLuns",
+                "listLunsStream",
+                "listLunsAsync"
+              ]
+            },
+            "ListNfsShares": {
+              "methods": [
+                "listNfsShares",
+                "listNfsSharesStream",
+                "listNfsSharesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
