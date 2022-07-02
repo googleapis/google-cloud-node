@@ -273,12 +273,12 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignment()
       );
-      client.innerApiCalls.getOSPolicyAssignment =
+      client.innerApiCalls.getOsPolicyAssignment =
         stubSimpleCall(expectedResponse);
       const [response] = await client.getOSPolicyAssignment(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.getOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -306,7 +306,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignment()
       );
-      client.innerApiCalls.getOSPolicyAssignment =
+      client.innerApiCalls.getOsPolicyAssignment =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getOSPolicyAssignment(
@@ -326,7 +326,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.getOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -352,7 +352,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.getOSPolicyAssignment = stubSimpleCall(
+      client.innerApiCalls.getOsPolicyAssignment = stubSimpleCall(
         undefined,
         expectedError
       );
@@ -361,7 +361,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         expectedError
       );
       assert(
-        (client.innerApiCalls.getOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.getOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -411,13 +411,13 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.InstanceOSPoliciesCompliance()
       );
-      client.innerApiCalls.getInstanceOSPoliciesCompliance =
+      client.innerApiCalls.getInstanceOsPoliciesCompliance =
         stubSimpleCall(expectedResponse);
       const [response] = await client.getInstanceOSPoliciesCompliance(request);
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getInstanceOSPoliciesCompliance as SinonStub)
+        (client.innerApiCalls.getInstanceOsPoliciesCompliance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -446,7 +446,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.InstanceOSPoliciesCompliance()
       );
-      client.innerApiCalls.getInstanceOSPoliciesCompliance =
+      client.innerApiCalls.getInstanceOsPoliciesCompliance =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getInstanceOSPoliciesCompliance(
@@ -467,7 +467,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getInstanceOSPoliciesCompliance as SinonStub)
+        (client.innerApiCalls.getInstanceOsPoliciesCompliance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -494,7 +494,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.getInstanceOSPoliciesCompliance = stubSimpleCall(
+      client.innerApiCalls.getInstanceOsPoliciesCompliance = stubSimpleCall(
         undefined,
         expectedError
       );
@@ -504,7 +504,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       );
       assert(stub.calledOnce);
       assert(
-        (client.innerApiCalls.getInstanceOSPoliciesCompliance as SinonStub)
+        (client.innerApiCalls.getInstanceOsPoliciesCompliance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -555,12 +555,12 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentReport()
       );
-      client.innerApiCalls.getOSPolicyAssignmentReport =
+      client.innerApiCalls.getOsPolicyAssignmentReport =
         stubSimpleCall(expectedResponse);
       const [response] = await client.getOSPolicyAssignmentReport(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getOSPolicyAssignmentReport as SinonStub)
+        (client.innerApiCalls.getOsPolicyAssignmentReport as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -588,7 +588,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentReport()
       );
-      client.innerApiCalls.getOSPolicyAssignmentReport =
+      client.innerApiCalls.getOsPolicyAssignmentReport =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getOSPolicyAssignmentReport(
@@ -608,7 +608,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getOSPolicyAssignmentReport as SinonStub)
+        (client.innerApiCalls.getOsPolicyAssignmentReport as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -634,7 +634,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.getOSPolicyAssignmentReport = stubSimpleCall(
+      client.innerApiCalls.getOsPolicyAssignmentReport = stubSimpleCall(
         undefined,
         expectedError
       );
@@ -643,7 +643,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         expectedError
       );
       assert(
-        (client.innerApiCalls.getOSPolicyAssignmentReport as SinonStub)
+        (client.innerApiCalls.getOsPolicyAssignmentReport as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -959,13 +959,13 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createOSPolicyAssignment =
+      client.innerApiCalls.createOsPolicyAssignment =
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.createOSPolicyAssignment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.createOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -993,7 +993,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createOSPolicyAssignment =
+      client.innerApiCalls.createOsPolicyAssignment =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createOSPolicyAssignment(
@@ -1020,7 +1020,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.createOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -1046,7 +1046,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.createOSPolicyAssignment = stubLongRunningCall(
+      client.innerApiCalls.createOsPolicyAssignment = stubLongRunningCall(
         undefined,
         expectedError
       );
@@ -1055,7 +1055,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         expectedError
       );
       assert(
-        (client.innerApiCalls.createOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.createOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1081,7 +1081,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.createOSPolicyAssignment = stubLongRunningCall(
+      client.innerApiCalls.createOsPolicyAssignment = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
@@ -1089,7 +1089,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const [operation] = await client.createOSPolicyAssignment(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(
-        (client.innerApiCalls.createOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.createOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1164,13 +1164,13 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateOSPolicyAssignment =
+      client.innerApiCalls.updateOsPolicyAssignment =
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateOSPolicyAssignment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.updateOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.updateOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1199,7 +1199,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateOSPolicyAssignment =
+      client.innerApiCalls.updateOsPolicyAssignment =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateOSPolicyAssignment(
@@ -1226,7 +1226,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.updateOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.updateOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -1253,7 +1253,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateOSPolicyAssignment = stubLongRunningCall(
+      client.innerApiCalls.updateOsPolicyAssignment = stubLongRunningCall(
         undefined,
         expectedError
       );
@@ -1262,7 +1262,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         expectedError
       );
       assert(
-        (client.innerApiCalls.updateOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.updateOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1289,7 +1289,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateOSPolicyAssignment = stubLongRunningCall(
+      client.innerApiCalls.updateOsPolicyAssignment = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
@@ -1297,7 +1297,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const [operation] = await client.updateOSPolicyAssignment(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(
-        (client.innerApiCalls.updateOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.updateOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1371,13 +1371,13 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteOSPolicyAssignment =
+      client.innerApiCalls.deleteOsPolicyAssignment =
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteOSPolicyAssignment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.deleteOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1405,7 +1405,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteOSPolicyAssignment =
+      client.innerApiCalls.deleteOsPolicyAssignment =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteOSPolicyAssignment(
@@ -1432,7 +1432,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.deleteOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -1458,7 +1458,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteOSPolicyAssignment = stubLongRunningCall(
+      client.innerApiCalls.deleteOsPolicyAssignment = stubLongRunningCall(
         undefined,
         expectedError
       );
@@ -1467,7 +1467,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         expectedError
       );
       assert(
-        (client.innerApiCalls.deleteOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.deleteOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1493,7 +1493,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteOSPolicyAssignment = stubLongRunningCall(
+      client.innerApiCalls.deleteOsPolicyAssignment = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
@@ -1501,7 +1501,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const [operation] = await client.deleteOSPolicyAssignment(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(
-        (client.innerApiCalls.deleteOSPolicyAssignment as SinonStub)
+        (client.innerApiCalls.deleteOsPolicyAssignment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1583,12 +1583,12 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignment()
         ),
       ];
-      client.innerApiCalls.listOSPolicyAssignments =
+      client.innerApiCalls.listOsPolicyAssignments =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listOSPolicyAssignments(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listOSPolicyAssignments as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignments as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1624,7 +1624,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignment()
         ),
       ];
-      client.innerApiCalls.listOSPolicyAssignments =
+      client.innerApiCalls.listOsPolicyAssignments =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listOSPolicyAssignments(
@@ -1646,7 +1646,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listOSPolicyAssignments as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignments as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -1672,7 +1672,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.listOSPolicyAssignments = stubSimpleCall(
+      client.innerApiCalls.listOsPolicyAssignments = stubSimpleCall(
         undefined,
         expectedError
       );
@@ -1681,7 +1681,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         expectedError
       );
       assert(
-        (client.innerApiCalls.listOSPolicyAssignments as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignments as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1739,7 +1739,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
             .createStream as SinonStub
         )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listOSPolicyAssignments, request)
+          .calledWith(client.innerApiCalls.listOsPolicyAssignments, request)
       );
       assert.strictEqual(
         (
@@ -1791,7 +1791,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
             .createStream as SinonStub
         )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listOSPolicyAssignments, request)
+          .calledWith(client.innerApiCalls.listOsPolicyAssignments, request)
       );
       assert.strictEqual(
         (
@@ -1921,12 +1921,12 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignment()
         ),
       ];
-      client.innerApiCalls.listOSPolicyAssignmentRevisions =
+      client.innerApiCalls.listOsPolicyAssignmentRevisions =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listOSPolicyAssignmentRevisions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listOSPolicyAssignmentRevisions as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignmentRevisions as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1962,7 +1962,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignment()
         ),
       ];
-      client.innerApiCalls.listOSPolicyAssignmentRevisions =
+      client.innerApiCalls.listOsPolicyAssignmentRevisions =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listOSPolicyAssignmentRevisions(
@@ -1984,7 +1984,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listOSPolicyAssignmentRevisions as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignmentRevisions as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -2010,7 +2010,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.listOSPolicyAssignmentRevisions = stubSimpleCall(
+      client.innerApiCalls.listOsPolicyAssignmentRevisions = stubSimpleCall(
         undefined,
         expectedError
       );
@@ -2019,7 +2019,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         expectedError
       );
       assert(
-        (client.innerApiCalls.listOSPolicyAssignmentRevisions as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignmentRevisions as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -2078,7 +2078,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         )
           .getCall(0)
           .calledWith(
-            client.innerApiCalls.listOSPolicyAssignmentRevisions,
+            client.innerApiCalls.listOsPolicyAssignmentRevisions,
             request
           )
       );
@@ -2133,7 +2133,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         )
           .getCall(0)
           .calledWith(
-            client.innerApiCalls.listOSPolicyAssignmentRevisions,
+            client.innerApiCalls.listOsPolicyAssignmentRevisions,
             request
           )
       );
@@ -2266,7 +2266,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           new protos.google.cloud.osconfig.v1alpha.InstanceOSPoliciesCompliance()
         ),
       ];
-      client.innerApiCalls.listInstanceOSPoliciesCompliances =
+      client.innerApiCalls.listInstanceOsPoliciesCompliances =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listInstanceOSPoliciesCompliances(
         request
@@ -2274,7 +2274,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listInstanceOSPoliciesCompliances as SinonStub)
+        (client.innerApiCalls.listInstanceOsPoliciesCompliances as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -2311,7 +2311,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           new protos.google.cloud.osconfig.v1alpha.InstanceOSPoliciesCompliance()
         ),
       ];
-      client.innerApiCalls.listInstanceOSPoliciesCompliances =
+      client.innerApiCalls.listInstanceOsPoliciesCompliances =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listInstanceOSPoliciesCompliances(
@@ -2334,7 +2334,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listInstanceOSPoliciesCompliances as SinonStub)
+        (client.innerApiCalls.listInstanceOsPoliciesCompliances as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -2361,7 +2361,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.listInstanceOSPoliciesCompliances = stubSimpleCall(
+      client.innerApiCalls.listInstanceOsPoliciesCompliances = stubSimpleCall(
         undefined,
         expectedError
       );
@@ -2371,7 +2371,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       );
       assert(stub.calledOnce);
       assert(
-        (client.innerApiCalls.listInstanceOSPoliciesCompliances as SinonStub)
+        (client.innerApiCalls.listInstanceOsPoliciesCompliances as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -2432,7 +2432,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         )
           .getCall(0)
           .calledWith(
-            client.innerApiCalls.listInstanceOSPoliciesCompliances,
+            client.innerApiCalls.listInstanceOsPoliciesCompliances,
             request
           )
       );
@@ -2489,7 +2489,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         )
           .getCall(0)
           .calledWith(
-            client.innerApiCalls.listInstanceOSPoliciesCompliances,
+            client.innerApiCalls.listInstanceOsPoliciesCompliances,
             request
           )
       );
@@ -2625,12 +2625,12 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentReport()
         ),
       ];
-      client.innerApiCalls.listOSPolicyAssignmentReports =
+      client.innerApiCalls.listOsPolicyAssignmentReports =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listOSPolicyAssignmentReports(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listOSPolicyAssignmentReports as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignmentReports as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -2666,7 +2666,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           new protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentReport()
         ),
       ];
-      client.innerApiCalls.listOSPolicyAssignmentReports =
+      client.innerApiCalls.listOsPolicyAssignmentReports =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listOSPolicyAssignmentReports(
@@ -2688,7 +2688,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listOSPolicyAssignmentReports as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignmentReports as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
@@ -2714,7 +2714,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.listOSPolicyAssignmentReports = stubSimpleCall(
+      client.innerApiCalls.listOsPolicyAssignmentReports = stubSimpleCall(
         undefined,
         expectedError
       );
@@ -2723,7 +2723,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         expectedError
       );
       assert(
-        (client.innerApiCalls.listOSPolicyAssignmentReports as SinonStub)
+        (client.innerApiCalls.listOsPolicyAssignmentReports as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -2782,7 +2782,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         )
           .getCall(0)
           .calledWith(
-            client.innerApiCalls.listOSPolicyAssignmentReports,
+            client.innerApiCalls.listOsPolicyAssignmentReports,
             request
           )
       );
@@ -2837,7 +2837,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         )
           .getCall(0)
           .calledWith(
-            client.innerApiCalls.listOSPolicyAssignmentReports,
+            client.innerApiCalls.listOsPolicyAssignmentReports,
             request
           )
       );

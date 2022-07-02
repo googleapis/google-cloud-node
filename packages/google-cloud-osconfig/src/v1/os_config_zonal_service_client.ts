@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
   LROperation,
   PaginationCallback,
   GaxCall,
@@ -75,7 +76,7 @@ export class OsConfigZonalServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -98,11 +99,10 @@ export class OsConfigZonalServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
+   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
@@ -221,16 +221,29 @@ export class OsConfigZonalServiceClient {
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback === 'rest') {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/osPolicyAssignments/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/osPolicyAssignments/*/operations/*}',
+        },
+      ];
+    }
     this.operationsClient = this._gaxModule
-      .lro({
-        auth: this.auth,
-        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-      })
+      .lro(lroOptions)
       .operationsClient(opts);
     const createOSPolicyAssignmentResponse = protoFilesRoot.lookup(
       '.google.cloud.osconfig.v1.OSPolicyAssignment'
@@ -331,14 +344,14 @@ export class OsConfigZonalServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const osConfigZonalServiceStubMethods = [
-      'createOSPolicyAssignment',
-      'updateOSPolicyAssignment',
-      'getOSPolicyAssignment',
-      'listOSPolicyAssignments',
-      'listOSPolicyAssignmentRevisions',
-      'deleteOSPolicyAssignment',
-      'getOSPolicyAssignmentReport',
-      'listOSPolicyAssignmentReports',
+      'createOsPolicyAssignment',
+      'updateOsPolicyAssignment',
+      'getOsPolicyAssignment',
+      'listOsPolicyAssignments',
+      'listOsPolicyAssignmentRevisions',
+      'deleteOsPolicyAssignment',
+      'getOsPolicyAssignmentReport',
+      'listOsPolicyAssignmentReports',
       'getInventory',
       'listInventories',
       'getVulnerabilityReport',
@@ -524,7 +537,7 @@ export class OsConfigZonalServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.getOSPolicyAssignment(request, options, callback);
+    return this.innerApiCalls.getOsPolicyAssignment(request, options, callback);
   }
   /**
    * Get the OS policy asssignment report for the specified Compute Engine VM
@@ -630,7 +643,7 @@ export class OsConfigZonalServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.getOSPolicyAssignmentReport(
+    return this.innerApiCalls.getOsPolicyAssignmentReport(
       request,
       options,
       callback
@@ -963,7 +976,7 @@ export class OsConfigZonalServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.createOSPolicyAssignment(
+    return this.innerApiCalls.createOsPolicyAssignment(
       request,
       options,
       callback
@@ -1115,7 +1128,7 @@ export class OsConfigZonalServiceClient {
         'os_policy_assignment.name': request.osPolicyAssignment!.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.updateOSPolicyAssignment(
+    return this.innerApiCalls.updateOsPolicyAssignment(
       request,
       options,
       callback
@@ -1267,7 +1280,7 @@ export class OsConfigZonalServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteOSPolicyAssignment(
+    return this.innerApiCalls.deleteOsPolicyAssignment(
       request,
       options,
       callback
@@ -1407,7 +1420,7 @@ export class OsConfigZonalServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.listOSPolicyAssignments(
+    return this.innerApiCalls.listOsPolicyAssignments(
       request,
       options,
       callback
@@ -1450,11 +1463,11 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listOSPolicyAssignments'];
+    const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignments.createStream(
-      this.innerApiCalls.listOSPolicyAssignments as gax.GaxCall,
+      this.innerApiCalls.listOsPolicyAssignments as gax.GaxCall,
       request,
       callSettings
     );
@@ -1499,11 +1512,11 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listOSPolicyAssignments'];
+    const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignments.asyncIterate(
-      this.innerApiCalls['listOSPolicyAssignments'] as GaxCall,
+      this.innerApiCalls['listOsPolicyAssignments'] as GaxCall,
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IOSPolicyAssignment>;
@@ -1606,7 +1619,7 @@ export class OsConfigZonalServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.listOSPolicyAssignmentRevisions(
+    return this.innerApiCalls.listOsPolicyAssignmentRevisions(
       request,
       options,
       callback
@@ -1650,11 +1663,11 @@ export class OsConfigZonalServiceClient {
         name: request.name || '',
       });
     const defaultCallSettings =
-      this._defaults['listOSPolicyAssignmentRevisions'];
+      this._defaults['listOsPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignmentRevisions.createStream(
-      this.innerApiCalls.listOSPolicyAssignmentRevisions as gax.GaxCall,
+      this.innerApiCalls.listOsPolicyAssignmentRevisions as gax.GaxCall,
       request,
       callSettings
     );
@@ -1700,11 +1713,11 @@ export class OsConfigZonalServiceClient {
         name: request.name || '',
       });
     const defaultCallSettings =
-      this._defaults['listOSPolicyAssignmentRevisions'];
+      this._defaults['listOsPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignmentRevisions.asyncIterate(
-      this.innerApiCalls['listOSPolicyAssignmentRevisions'] as GaxCall,
+      this.innerApiCalls['listOsPolicyAssignmentRevisions'] as GaxCall,
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IOSPolicyAssignment>;
@@ -1831,7 +1844,7 @@ export class OsConfigZonalServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.listOSPolicyAssignmentReports(
+    return this.innerApiCalls.listOsPolicyAssignmentReports(
       request,
       options,
       callback
@@ -1897,11 +1910,11 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listOSPolicyAssignmentReports'];
+    const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignmentReports.createStream(
-      this.innerApiCalls.listOSPolicyAssignmentReports as gax.GaxCall,
+      this.innerApiCalls.listOsPolicyAssignmentReports as gax.GaxCall,
       request,
       callSettings
     );
@@ -1969,11 +1982,11 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listOSPolicyAssignmentReports'];
+    const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignmentReports.asyncIterate(
-      this.innerApiCalls['listOSPolicyAssignmentReports'] as GaxCall,
+      this.innerApiCalls['listOsPolicyAssignmentReports'] as GaxCall,
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport>;
