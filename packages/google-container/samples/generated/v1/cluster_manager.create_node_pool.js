@@ -30,7 +30,7 @@ function main(nodePool) {
    */
   // const nodePool = {}
   /**
-   *  The parent (project, location, cluster id) where the node pool will be
+   *  The parent (project, location, cluster name) where the node pool will be
    *  created. Specified in the format
    *  `projects/* /locations/* /clusters/*`.
    */

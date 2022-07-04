@@ -30,7 +30,7 @@ function main(networkPolicy) {
    */
   // const networkPolicy = {}
   /**
-   *  The name (project, location, cluster id) of the cluster to set networking
+   *  The name (project, location, cluster name) of the cluster to set networking
    *  policy. Specified in the format `projects/* /locations/* /clusters/*`.
    */
   // const name = 'abc123'

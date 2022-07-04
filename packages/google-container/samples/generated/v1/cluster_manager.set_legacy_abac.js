@@ -30,8 +30,8 @@ function main(enabled) {
    */
   // const enabled = true
   /**
-   *  The name (project, location, cluster id) of the cluster to set legacy abac.
-   *  Specified in the format `projects/* /locations/* /clusters/*`.
+   *  The name (project, location, cluster name) of the cluster to set legacy
+   *  abac. Specified in the format `projects/* /locations/* /clusters/*`.
    */
   // const name = 'abc123'
 

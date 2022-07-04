@@ -27,7 +27,7 @@ function main(projectId, zone, clusterId, maintenancePolicy) {
    */
   /**
    *  Required. The Google Developers Console project ID or project
-   *  number (https://support.google.com/cloud/answer/6158840).
+   *  number (https://cloud.google.com/resource-manager/docs/creating-managing-projects).
    */
   // const projectId = 'abc123'
   /**
@@ -46,8 +46,8 @@ function main(projectId, zone, clusterId, maintenancePolicy) {
    */
   // const maintenancePolicy = {}
   /**
-   *  The name (project, location, cluster id) of the cluster to set maintenance
-   *  policy.
+   *  The name (project, location, cluster name) of the cluster to set
+   *  maintenance policy.
    *  Specified in the format `projects/* /locations/* /clusters/*`.
    */
   // const name = 'abc123'

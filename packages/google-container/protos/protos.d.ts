@@ -352,6 +352,20 @@ export namespace google {
                 public deleteNodePool(request: google.container.v1.IDeleteNodePoolRequest): Promise<google.container.v1.Operation>;
 
                 /**
+                 * Calls CompleteNodePoolUpgrade.
+                 * @param request CompleteNodePoolUpgradeRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public completeNodePoolUpgrade(request: google.container.v1.ICompleteNodePoolUpgradeRequest, callback: google.container.v1.ClusterManager.CompleteNodePoolUpgradeCallback): void;
+
+                /**
+                 * Calls CompleteNodePoolUpgrade.
+                 * @param request CompleteNodePoolUpgradeRequest message or plain object
+                 * @returns Promise
+                 */
+                public completeNodePoolUpgrade(request: google.container.v1.ICompleteNodePoolUpgradeRequest): Promise<google.protobuf.Empty>;
+
+                /**
                  * Calls RollbackNodePoolUpgrade.
                  * @param request RollbackNodePoolUpgradeRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and Operation
@@ -649,6 +663,13 @@ export namespace google {
                 type DeleteNodePoolCallback = (error: (Error|null), response?: google.container.v1.Operation) => void;
 
                 /**
+                 * Callback as used by {@link google.container.v1.ClusterManager#completeNodePoolUpgrade}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type CompleteNodePoolUpgradeCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                /**
                  * Callback as used by {@link google.container.v1.ClusterManager#rollbackNodePoolUpgrade}.
                  * @param error Error, if any
                  * @param [response] Operation
@@ -820,6 +841,9 @@ export namespace google {
 
                 /** NodeKubeletConfig cpuCfsQuotaPeriod */
                 cpuCfsQuotaPeriod?: (string|null);
+
+                /** NodeKubeletConfig podPidsLimit */
+                podPidsLimit?: (number|Long|string|null);
             }
 
             /** Represents a NodeKubeletConfig. */
@@ -839,6 +863,9 @@ export namespace google {
 
                 /** NodeKubeletConfig cpuCfsQuotaPeriod. */
                 public cpuCfsQuotaPeriod: string;
+
+                /** NodeKubeletConfig podPidsLimit. */
+                public podPidsLimit: (number|Long|string);
 
                 /**
                  * Creates a new NodeKubeletConfig instance using the specified properties.
@@ -988,6 +1015,12 @@ export namespace google {
 
                 /** NodeConfig gvnic */
                 gvnic?: (google.container.v1.IVirtualNIC|null);
+
+                /** NodeConfig spot */
+                spot?: (boolean|null);
+
+                /** NodeConfig confidentialNodes */
+                confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
             }
 
             /** Represents a NodeConfig. */
@@ -1073,6 +1106,12 @@ export namespace google {
 
                 /** NodeConfig gvnic. */
                 public gvnic?: (google.container.v1.IVirtualNIC|null);
+
+                /** NodeConfig spot. */
+                public spot: boolean;
+
+                /** NodeConfig confidentialNodes. */
+                public confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
 
                 /**
                  * Creates a new NodeConfig instance using the specified properties.
@@ -1249,6 +1288,9 @@ export namespace google {
 
                 /** NodeNetworkConfig podIpv4CidrBlock */
                 podIpv4CidrBlock?: (string|null);
+
+                /** NodeNetworkConfig networkPerformanceConfig */
+                networkPerformanceConfig?: (google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig|null);
             }
 
             /** Represents a NodeNetworkConfig. */
@@ -1268,6 +1310,12 @@ export namespace google {
 
                 /** NodeNetworkConfig podIpv4CidrBlock. */
                 public podIpv4CidrBlock: string;
+
+                /** NodeNetworkConfig networkPerformanceConfig. */
+                public networkPerformanceConfig?: (google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig|null);
+
+                /** NodeNetworkConfig _networkPerformanceConfig. */
+                public _networkPerformanceConfig?: "networkPerformanceConfig";
 
                 /**
                  * Creates a new NodeNetworkConfig instance using the specified properties.
@@ -1338,6 +1386,111 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+            }
+
+            namespace NodeNetworkConfig {
+
+                /** Properties of a NetworkPerformanceConfig. */
+                interface INetworkPerformanceConfig {
+
+                    /** NetworkPerformanceConfig totalEgressBandwidthTier */
+                    totalEgressBandwidthTier?: (google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig.Tier|keyof typeof google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig.Tier|null);
+                }
+
+                /** Represents a NetworkPerformanceConfig. */
+                class NetworkPerformanceConfig implements INetworkPerformanceConfig {
+
+                    /**
+                     * Constructs a new NetworkPerformanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig);
+
+                    /** NetworkPerformanceConfig totalEgressBandwidthTier. */
+                    public totalEgressBandwidthTier?: (google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig.Tier|keyof typeof google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig.Tier|null);
+
+                    /** NetworkPerformanceConfig _totalEgressBandwidthTier. */
+                    public _totalEgressBandwidthTier?: "totalEgressBandwidthTier";
+
+                    /**
+                     * Creates a new NetworkPerformanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkPerformanceConfig instance
+                     */
+                    public static create(properties?: google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig): google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig;
+
+                    /**
+                     * Encodes the specified NetworkPerformanceConfig message. Does not implicitly {@link google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig.verify|verify} messages.
+                     * @param message NetworkPerformanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkPerformanceConfig message, length delimited. Does not implicitly {@link google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig.verify|verify} messages.
+                     * @param message NetworkPerformanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkPerformanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkPerformanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig;
+
+                    /**
+                     * Decodes a NetworkPerformanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkPerformanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig;
+
+                    /**
+                     * Verifies a NetworkPerformanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkPerformanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkPerformanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig;
+
+                    /**
+                     * Creates a plain object from a NetworkPerformanceConfig message. Also converts values to other types if specified.
+                     * @param message NetworkPerformanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkPerformanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace NetworkPerformanceConfig {
+
+                    /** Tier enum. */
+                    enum Tier {
+                        TIER_UNSPECIFIED = 0,
+                        TIER_1 = 1
+                    }
+                }
             }
 
             /** Properties of a ShieldedInstanceConfig. */
@@ -1849,6 +2002,276 @@ export namespace google {
                     PREFER_NO_SCHEDULE = 2,
                     NO_EXECUTE = 3
                 }
+            }
+
+            /** Properties of a NodeTaints. */
+            interface INodeTaints {
+
+                /** NodeTaints taints */
+                taints?: (google.container.v1.INodeTaint[]|null);
+            }
+
+            /** Represents a NodeTaints. */
+            class NodeTaints implements INodeTaints {
+
+                /**
+                 * Constructs a new NodeTaints.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.INodeTaints);
+
+                /** NodeTaints taints. */
+                public taints: google.container.v1.INodeTaint[];
+
+                /**
+                 * Creates a new NodeTaints instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns NodeTaints instance
+                 */
+                public static create(properties?: google.container.v1.INodeTaints): google.container.v1.NodeTaints;
+
+                /**
+                 * Encodes the specified NodeTaints message. Does not implicitly {@link google.container.v1.NodeTaints.verify|verify} messages.
+                 * @param message NodeTaints message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.INodeTaints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified NodeTaints message, length delimited. Does not implicitly {@link google.container.v1.NodeTaints.verify|verify} messages.
+                 * @param message NodeTaints message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.INodeTaints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a NodeTaints message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns NodeTaints
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodeTaints;
+
+                /**
+                 * Decodes a NodeTaints message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns NodeTaints
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodeTaints;
+
+                /**
+                 * Verifies a NodeTaints message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a NodeTaints message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns NodeTaints
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.NodeTaints;
+
+                /**
+                 * Creates a plain object from a NodeTaints message. Also converts values to other types if specified.
+                 * @param message NodeTaints
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.NodeTaints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this NodeTaints to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a NodeLabels. */
+            interface INodeLabels {
+
+                /** NodeLabels labels */
+                labels?: ({ [k: string]: string }|null);
+            }
+
+            /** Represents a NodeLabels. */
+            class NodeLabels implements INodeLabels {
+
+                /**
+                 * Constructs a new NodeLabels.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.INodeLabels);
+
+                /** NodeLabels labels. */
+                public labels: { [k: string]: string };
+
+                /**
+                 * Creates a new NodeLabels instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns NodeLabels instance
+                 */
+                public static create(properties?: google.container.v1.INodeLabels): google.container.v1.NodeLabels;
+
+                /**
+                 * Encodes the specified NodeLabels message. Does not implicitly {@link google.container.v1.NodeLabels.verify|verify} messages.
+                 * @param message NodeLabels message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.INodeLabels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified NodeLabels message, length delimited. Does not implicitly {@link google.container.v1.NodeLabels.verify|verify} messages.
+                 * @param message NodeLabels message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.INodeLabels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a NodeLabels message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns NodeLabels
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodeLabels;
+
+                /**
+                 * Decodes a NodeLabels message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns NodeLabels
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodeLabels;
+
+                /**
+                 * Verifies a NodeLabels message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a NodeLabels message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns NodeLabels
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.NodeLabels;
+
+                /**
+                 * Creates a plain object from a NodeLabels message. Also converts values to other types if specified.
+                 * @param message NodeLabels
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.NodeLabels, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this NodeLabels to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a NetworkTags. */
+            interface INetworkTags {
+
+                /** NetworkTags tags */
+                tags?: (string[]|null);
+            }
+
+            /** Represents a NetworkTags. */
+            class NetworkTags implements INetworkTags {
+
+                /**
+                 * Constructs a new NetworkTags.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.INetworkTags);
+
+                /** NetworkTags tags. */
+                public tags: string[];
+
+                /**
+                 * Creates a new NetworkTags instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns NetworkTags instance
+                 */
+                public static create(properties?: google.container.v1.INetworkTags): google.container.v1.NetworkTags;
+
+                /**
+                 * Encodes the specified NetworkTags message. Does not implicitly {@link google.container.v1.NetworkTags.verify|verify} messages.
+                 * @param message NetworkTags message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.INetworkTags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified NetworkTags message, length delimited. Does not implicitly {@link google.container.v1.NetworkTags.verify|verify} messages.
+                 * @param message NetworkTags message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.INetworkTags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a NetworkTags message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns NetworkTags
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NetworkTags;
+
+                /**
+                 * Decodes a NetworkTags message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns NetworkTags
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NetworkTags;
+
+                /**
+                 * Verifies a NetworkTags message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a NetworkTags message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns NetworkTags
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.NetworkTags;
+
+                /**
+                 * Creates a plain object from a NetworkTags message. Also converts values to other types if specified.
+                 * @param message NetworkTags
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.NetworkTags, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this NetworkTags to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
             }
 
             /** Properties of a MasterAuth. */
@@ -3732,6 +4155,9 @@ export namespace google {
 
                 /** BinaryAuthorization enabled */
                 enabled?: (boolean|null);
+
+                /** BinaryAuthorization evaluationMode */
+                evaluationMode?: (google.container.v1.BinaryAuthorization.EvaluationMode|keyof typeof google.container.v1.BinaryAuthorization.EvaluationMode|null);
             }
 
             /** Represents a BinaryAuthorization. */
@@ -3745,6 +4171,9 @@ export namespace google {
 
                 /** BinaryAuthorization enabled. */
                 public enabled: boolean;
+
+                /** BinaryAuthorization evaluationMode. */
+                public evaluationMode: (google.container.v1.BinaryAuthorization.EvaluationMode|keyof typeof google.container.v1.BinaryAuthorization.EvaluationMode);
 
                 /**
                  * Creates a new BinaryAuthorization instance using the specified properties.
@@ -3815,6 +4244,16 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+            }
+
+            namespace BinaryAuthorization {
+
+                /** EvaluationMode enum. */
+                enum EvaluationMode {
+                    EVALUATION_MODE_UNSPECIFIED = 0,
+                    DISABLED = 1,
+                    PROJECT_SINGLETON_POLICY_ENFORCE = 2
+                }
             }
 
             /** Properties of a IPAllocationPolicy. */
@@ -4090,6 +4529,9 @@ export namespace google {
                 /** Cluster confidentialNodes */
                 confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
 
+                /** Cluster identityServiceConfig */
+                identityServiceConfig?: (google.container.v1.IIdentityServiceConfig|null);
+
                 /** Cluster selfLink */
                 selfLink?: (string|null);
 
@@ -4158,6 +4600,9 @@ export namespace google {
 
                 /** Cluster monitoringConfig */
                 monitoringConfig?: (google.container.v1.IMonitoringConfig|null);
+
+                /** Cluster nodePoolAutoConfig */
+                nodePoolAutoConfig?: (google.container.v1.INodePoolAutoConfig|null);
             }
 
             /** Represents a Cluster. */
@@ -4277,6 +4722,9 @@ export namespace google {
                 /** Cluster confidentialNodes. */
                 public confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
 
+                /** Cluster identityServiceConfig. */
+                public identityServiceConfig?: (google.container.v1.IIdentityServiceConfig|null);
+
                 /** Cluster selfLink. */
                 public selfLink: string;
 
@@ -4345,6 +4793,9 @@ export namespace google {
 
                 /** Cluster monitoringConfig. */
                 public monitoringConfig?: (google.container.v1.IMonitoringConfig|null);
+
+                /** Cluster nodePoolAutoConfig. */
+                public nodePoolAutoConfig?: (google.container.v1.INodePoolAutoConfig|null);
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -4432,6 +4883,96 @@ export namespace google {
                     ERROR = 5,
                     DEGRADED = 6
                 }
+            }
+
+            /** Properties of a NodePoolAutoConfig. */
+            interface INodePoolAutoConfig {
+
+                /** NodePoolAutoConfig networkTags */
+                networkTags?: (google.container.v1.INetworkTags|null);
+            }
+
+            /** Represents a NodePoolAutoConfig. */
+            class NodePoolAutoConfig implements INodePoolAutoConfig {
+
+                /**
+                 * Constructs a new NodePoolAutoConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.INodePoolAutoConfig);
+
+                /** NodePoolAutoConfig networkTags. */
+                public networkTags?: (google.container.v1.INetworkTags|null);
+
+                /**
+                 * Creates a new NodePoolAutoConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns NodePoolAutoConfig instance
+                 */
+                public static create(properties?: google.container.v1.INodePoolAutoConfig): google.container.v1.NodePoolAutoConfig;
+
+                /**
+                 * Encodes the specified NodePoolAutoConfig message. Does not implicitly {@link google.container.v1.NodePoolAutoConfig.verify|verify} messages.
+                 * @param message NodePoolAutoConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.INodePoolAutoConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified NodePoolAutoConfig message, length delimited. Does not implicitly {@link google.container.v1.NodePoolAutoConfig.verify|verify} messages.
+                 * @param message NodePoolAutoConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.INodePoolAutoConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a NodePoolAutoConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns NodePoolAutoConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodePoolAutoConfig;
+
+                /**
+                 * Decodes a NodePoolAutoConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns NodePoolAutoConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodePoolAutoConfig;
+
+                /**
+                 * Verifies a NodePoolAutoConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a NodePoolAutoConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns NodePoolAutoConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.NodePoolAutoConfig;
+
+                /**
+                 * Creates a plain object from a NodePoolAutoConfig message. Also converts values to other types if specified.
+                 * @param message NodePoolAutoConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.NodePoolAutoConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this NodePoolAutoConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
             }
 
             /** Properties of a NodePoolDefaults. */
@@ -4704,6 +5245,9 @@ export namespace google {
                 /** ClusterUpdate desiredMonitoringConfig */
                 desiredMonitoringConfig?: (google.container.v1.IMonitoringConfig|null);
 
+                /** ClusterUpdate desiredIdentityServiceConfig */
+                desiredIdentityServiceConfig?: (google.container.v1.IIdentityServiceConfig|null);
+
                 /** ClusterUpdate desiredServiceExternalIpsConfig */
                 desiredServiceExternalIpsConfig?: (google.container.v1.IServiceExternalIPsConfig|null);
 
@@ -4712,6 +5256,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredGcfsConfig */
                 desiredGcfsConfig?: (google.container.v1.IGcfsConfig|null);
+
+                /** ClusterUpdate desiredNodePoolAutoConfigNetworkTags */
+                desiredNodePoolAutoConfigNetworkTags?: (google.container.v1.INetworkTags|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -4810,6 +5357,9 @@ export namespace google {
                 /** ClusterUpdate desiredMonitoringConfig. */
                 public desiredMonitoringConfig?: (google.container.v1.IMonitoringConfig|null);
 
+                /** ClusterUpdate desiredIdentityServiceConfig. */
+                public desiredIdentityServiceConfig?: (google.container.v1.IIdentityServiceConfig|null);
+
                 /** ClusterUpdate desiredServiceExternalIpsConfig. */
                 public desiredServiceExternalIpsConfig?: (google.container.v1.IServiceExternalIPsConfig|null);
 
@@ -4818,6 +5368,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredGcfsConfig. */
                 public desiredGcfsConfig?: (google.container.v1.IGcfsConfig|null);
+
+                /** ClusterUpdate desiredNodePoolAutoConfigNetworkTags. */
+                public desiredNodePoolAutoConfigNetworkTags?: (google.container.v1.INetworkTags|null);
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -5682,14 +6235,29 @@ export namespace google {
                 /** UpdateNodePoolRequest upgradeSettings */
                 upgradeSettings?: (google.container.v1.NodePool.IUpgradeSettings|null);
 
+                /** UpdateNodePoolRequest tags */
+                tags?: (google.container.v1.INetworkTags|null);
+
+                /** UpdateNodePoolRequest taints */
+                taints?: (google.container.v1.INodeTaints|null);
+
+                /** UpdateNodePoolRequest labels */
+                labels?: (google.container.v1.INodeLabels|null);
+
                 /** UpdateNodePoolRequest linuxNodeConfig */
                 linuxNodeConfig?: (google.container.v1.ILinuxNodeConfig|null);
 
                 /** UpdateNodePoolRequest kubeletConfig */
                 kubeletConfig?: (google.container.v1.INodeKubeletConfig|null);
 
+                /** UpdateNodePoolRequest nodeNetworkConfig */
+                nodeNetworkConfig?: (google.container.v1.INodeNetworkConfig|null);
+
                 /** UpdateNodePoolRequest gcfsConfig */
                 gcfsConfig?: (google.container.v1.IGcfsConfig|null);
+
+                /** UpdateNodePoolRequest confidentialNodes */
+                confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
 
                 /** UpdateNodePoolRequest gvnic */
                 gvnic?: (google.container.v1.IVirtualNIC|null);
@@ -5734,14 +6302,29 @@ export namespace google {
                 /** UpdateNodePoolRequest upgradeSettings. */
                 public upgradeSettings?: (google.container.v1.NodePool.IUpgradeSettings|null);
 
+                /** UpdateNodePoolRequest tags. */
+                public tags?: (google.container.v1.INetworkTags|null);
+
+                /** UpdateNodePoolRequest taints. */
+                public taints?: (google.container.v1.INodeTaints|null);
+
+                /** UpdateNodePoolRequest labels. */
+                public labels?: (google.container.v1.INodeLabels|null);
+
                 /** UpdateNodePoolRequest linuxNodeConfig. */
                 public linuxNodeConfig?: (google.container.v1.ILinuxNodeConfig|null);
 
                 /** UpdateNodePoolRequest kubeletConfig. */
                 public kubeletConfig?: (google.container.v1.INodeKubeletConfig|null);
 
+                /** UpdateNodePoolRequest nodeNetworkConfig. */
+                public nodeNetworkConfig?: (google.container.v1.INodeNetworkConfig|null);
+
                 /** UpdateNodePoolRequest gcfsConfig. */
                 public gcfsConfig?: (google.container.v1.IGcfsConfig|null);
+
+                /** UpdateNodePoolRequest confidentialNodes. */
+                public confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
 
                 /** UpdateNodePoolRequest gvnic. */
                 public gvnic?: (google.container.v1.IVirtualNIC|null);
@@ -8135,6 +8718,219 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of a BlueGreenSettings. */
+            interface IBlueGreenSettings {
+
+                /** BlueGreenSettings standardRolloutPolicy */
+                standardRolloutPolicy?: (google.container.v1.BlueGreenSettings.IStandardRolloutPolicy|null);
+
+                /** BlueGreenSettings nodePoolSoakDuration */
+                nodePoolSoakDuration?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a BlueGreenSettings. */
+            class BlueGreenSettings implements IBlueGreenSettings {
+
+                /**
+                 * Constructs a new BlueGreenSettings.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IBlueGreenSettings);
+
+                /** BlueGreenSettings standardRolloutPolicy. */
+                public standardRolloutPolicy?: (google.container.v1.BlueGreenSettings.IStandardRolloutPolicy|null);
+
+                /** BlueGreenSettings nodePoolSoakDuration. */
+                public nodePoolSoakDuration?: (google.protobuf.IDuration|null);
+
+                /** BlueGreenSettings rolloutPolicy. */
+                public rolloutPolicy?: "standardRolloutPolicy";
+
+                /** BlueGreenSettings _nodePoolSoakDuration. */
+                public _nodePoolSoakDuration?: "nodePoolSoakDuration";
+
+                /**
+                 * Creates a new BlueGreenSettings instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BlueGreenSettings instance
+                 */
+                public static create(properties?: google.container.v1.IBlueGreenSettings): google.container.v1.BlueGreenSettings;
+
+                /**
+                 * Encodes the specified BlueGreenSettings message. Does not implicitly {@link google.container.v1.BlueGreenSettings.verify|verify} messages.
+                 * @param message BlueGreenSettings message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IBlueGreenSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BlueGreenSettings message, length delimited. Does not implicitly {@link google.container.v1.BlueGreenSettings.verify|verify} messages.
+                 * @param message BlueGreenSettings message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IBlueGreenSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BlueGreenSettings message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BlueGreenSettings
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.BlueGreenSettings;
+
+                /**
+                 * Decodes a BlueGreenSettings message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BlueGreenSettings
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.BlueGreenSettings;
+
+                /**
+                 * Verifies a BlueGreenSettings message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BlueGreenSettings message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BlueGreenSettings
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.BlueGreenSettings;
+
+                /**
+                 * Creates a plain object from a BlueGreenSettings message. Also converts values to other types if specified.
+                 * @param message BlueGreenSettings
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.BlueGreenSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BlueGreenSettings to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace BlueGreenSettings {
+
+                /** Properties of a StandardRolloutPolicy. */
+                interface IStandardRolloutPolicy {
+
+                    /** StandardRolloutPolicy batchPercentage */
+                    batchPercentage?: (number|null);
+
+                    /** StandardRolloutPolicy batchNodeCount */
+                    batchNodeCount?: (number|null);
+
+                    /** StandardRolloutPolicy batchSoakDuration */
+                    batchSoakDuration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a StandardRolloutPolicy. */
+                class StandardRolloutPolicy implements IStandardRolloutPolicy {
+
+                    /**
+                     * Constructs a new StandardRolloutPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1.BlueGreenSettings.IStandardRolloutPolicy);
+
+                    /** StandardRolloutPolicy batchPercentage. */
+                    public batchPercentage?: (number|null);
+
+                    /** StandardRolloutPolicy batchNodeCount. */
+                    public batchNodeCount?: (number|null);
+
+                    /** StandardRolloutPolicy batchSoakDuration. */
+                    public batchSoakDuration?: (google.protobuf.IDuration|null);
+
+                    /** StandardRolloutPolicy updateBatchSize. */
+                    public updateBatchSize?: ("batchPercentage"|"batchNodeCount");
+
+                    /** StandardRolloutPolicy _batchSoakDuration. */
+                    public _batchSoakDuration?: "batchSoakDuration";
+
+                    /**
+                     * Creates a new StandardRolloutPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StandardRolloutPolicy instance
+                     */
+                    public static create(properties?: google.container.v1.BlueGreenSettings.IStandardRolloutPolicy): google.container.v1.BlueGreenSettings.StandardRolloutPolicy;
+
+                    /**
+                     * Encodes the specified StandardRolloutPolicy message. Does not implicitly {@link google.container.v1.BlueGreenSettings.StandardRolloutPolicy.verify|verify} messages.
+                     * @param message StandardRolloutPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1.BlueGreenSettings.IStandardRolloutPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StandardRolloutPolicy message, length delimited. Does not implicitly {@link google.container.v1.BlueGreenSettings.StandardRolloutPolicy.verify|verify} messages.
+                     * @param message StandardRolloutPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1.BlueGreenSettings.IStandardRolloutPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StandardRolloutPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StandardRolloutPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.BlueGreenSettings.StandardRolloutPolicy;
+
+                    /**
+                     * Decodes a StandardRolloutPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StandardRolloutPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.BlueGreenSettings.StandardRolloutPolicy;
+
+                    /**
+                     * Verifies a StandardRolloutPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StandardRolloutPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StandardRolloutPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1.BlueGreenSettings.StandardRolloutPolicy;
+
+                    /**
+                     * Creates a plain object from a StandardRolloutPolicy message. Also converts values to other types if specified.
+                     * @param message StandardRolloutPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1.BlueGreenSettings.StandardRolloutPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StandardRolloutPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Properties of a NodePool. */
             interface INodePool {
 
@@ -8185,6 +8981,9 @@ export namespace google {
 
                 /** NodePool upgradeSettings */
                 upgradeSettings?: (google.container.v1.NodePool.IUpgradeSettings|null);
+
+                /** NodePool updateInfo */
+                updateInfo?: (google.container.v1.NodePool.IUpdateInfo|null);
             }
 
             /** Represents a NodePool. */
@@ -8243,6 +9042,9 @@ export namespace google {
 
                 /** NodePool upgradeSettings. */
                 public upgradeSettings?: (google.container.v1.NodePool.IUpgradeSettings|null);
+
+                /** NodePool updateInfo. */
+                public updateInfo?: (google.container.v1.NodePool.IUpdateInfo|null);
 
                 /**
                  * Creates a new NodePool instance using the specified properties.
@@ -8325,6 +9127,12 @@ export namespace google {
 
                     /** UpgradeSettings maxUnavailable */
                     maxUnavailable?: (number|null);
+
+                    /** UpgradeSettings strategy */
+                    strategy?: (google.container.v1.NodePoolUpdateStrategy|keyof typeof google.container.v1.NodePoolUpdateStrategy|null);
+
+                    /** UpgradeSettings blueGreenSettings */
+                    blueGreenSettings?: (google.container.v1.IBlueGreenSettings|null);
                 }
 
                 /** Represents an UpgradeSettings. */
@@ -8341,6 +9149,18 @@ export namespace google {
 
                     /** UpgradeSettings maxUnavailable. */
                     public maxUnavailable: number;
+
+                    /** UpgradeSettings strategy. */
+                    public strategy?: (google.container.v1.NodePoolUpdateStrategy|keyof typeof google.container.v1.NodePoolUpdateStrategy|null);
+
+                    /** UpgradeSettings blueGreenSettings. */
+                    public blueGreenSettings?: (google.container.v1.IBlueGreenSettings|null);
+
+                    /** UpgradeSettings _strategy. */
+                    public _strategy?: "strategy";
+
+                    /** UpgradeSettings _blueGreenSettings. */
+                    public _blueGreenSettings?: "blueGreenSettings";
 
                     /**
                      * Creates a new UpgradeSettings instance using the specified properties.
@@ -8411,6 +9231,228 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateInfo. */
+                interface IUpdateInfo {
+
+                    /** UpdateInfo blueGreenInfo */
+                    blueGreenInfo?: (google.container.v1.NodePool.UpdateInfo.IBlueGreenInfo|null);
+                }
+
+                /** Represents an UpdateInfo. */
+                class UpdateInfo implements IUpdateInfo {
+
+                    /**
+                     * Constructs a new UpdateInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1.NodePool.IUpdateInfo);
+
+                    /** UpdateInfo blueGreenInfo. */
+                    public blueGreenInfo?: (google.container.v1.NodePool.UpdateInfo.IBlueGreenInfo|null);
+
+                    /**
+                     * Creates a new UpdateInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateInfo instance
+                     */
+                    public static create(properties?: google.container.v1.NodePool.IUpdateInfo): google.container.v1.NodePool.UpdateInfo;
+
+                    /**
+                     * Encodes the specified UpdateInfo message. Does not implicitly {@link google.container.v1.NodePool.UpdateInfo.verify|verify} messages.
+                     * @param message UpdateInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1.NodePool.IUpdateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateInfo message, length delimited. Does not implicitly {@link google.container.v1.NodePool.UpdateInfo.verify|verify} messages.
+                     * @param message UpdateInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1.NodePool.IUpdateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodePool.UpdateInfo;
+
+                    /**
+                     * Decodes an UpdateInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodePool.UpdateInfo;
+
+                    /**
+                     * Verifies an UpdateInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1.NodePool.UpdateInfo;
+
+                    /**
+                     * Creates a plain object from an UpdateInfo message. Also converts values to other types if specified.
+                     * @param message UpdateInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1.NodePool.UpdateInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace UpdateInfo {
+
+                    /** Properties of a BlueGreenInfo. */
+                    interface IBlueGreenInfo {
+
+                        /** BlueGreenInfo phase */
+                        phase?: (google.container.v1.NodePool.UpdateInfo.BlueGreenInfo.Phase|keyof typeof google.container.v1.NodePool.UpdateInfo.BlueGreenInfo.Phase|null);
+
+                        /** BlueGreenInfo blueInstanceGroupUrls */
+                        blueInstanceGroupUrls?: (string[]|null);
+
+                        /** BlueGreenInfo greenInstanceGroupUrls */
+                        greenInstanceGroupUrls?: (string[]|null);
+
+                        /** BlueGreenInfo bluePoolDeletionStartTime */
+                        bluePoolDeletionStartTime?: (string|null);
+
+                        /** BlueGreenInfo greenPoolVersion */
+                        greenPoolVersion?: (string|null);
+                    }
+
+                    /** Represents a BlueGreenInfo. */
+                    class BlueGreenInfo implements IBlueGreenInfo {
+
+                        /**
+                         * Constructs a new BlueGreenInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.container.v1.NodePool.UpdateInfo.IBlueGreenInfo);
+
+                        /** BlueGreenInfo phase. */
+                        public phase: (google.container.v1.NodePool.UpdateInfo.BlueGreenInfo.Phase|keyof typeof google.container.v1.NodePool.UpdateInfo.BlueGreenInfo.Phase);
+
+                        /** BlueGreenInfo blueInstanceGroupUrls. */
+                        public blueInstanceGroupUrls: string[];
+
+                        /** BlueGreenInfo greenInstanceGroupUrls. */
+                        public greenInstanceGroupUrls: string[];
+
+                        /** BlueGreenInfo bluePoolDeletionStartTime. */
+                        public bluePoolDeletionStartTime: string;
+
+                        /** BlueGreenInfo greenPoolVersion. */
+                        public greenPoolVersion: string;
+
+                        /**
+                         * Creates a new BlueGreenInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BlueGreenInfo instance
+                         */
+                        public static create(properties?: google.container.v1.NodePool.UpdateInfo.IBlueGreenInfo): google.container.v1.NodePool.UpdateInfo.BlueGreenInfo;
+
+                        /**
+                         * Encodes the specified BlueGreenInfo message. Does not implicitly {@link google.container.v1.NodePool.UpdateInfo.BlueGreenInfo.verify|verify} messages.
+                         * @param message BlueGreenInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.container.v1.NodePool.UpdateInfo.IBlueGreenInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BlueGreenInfo message, length delimited. Does not implicitly {@link google.container.v1.NodePool.UpdateInfo.BlueGreenInfo.verify|verify} messages.
+                         * @param message BlueGreenInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.container.v1.NodePool.UpdateInfo.IBlueGreenInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BlueGreenInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BlueGreenInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodePool.UpdateInfo.BlueGreenInfo;
+
+                        /**
+                         * Decodes a BlueGreenInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BlueGreenInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodePool.UpdateInfo.BlueGreenInfo;
+
+                        /**
+                         * Verifies a BlueGreenInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BlueGreenInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BlueGreenInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.container.v1.NodePool.UpdateInfo.BlueGreenInfo;
+
+                        /**
+                         * Creates a plain object from a BlueGreenInfo message. Also converts values to other types if specified.
+                         * @param message BlueGreenInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.container.v1.NodePool.UpdateInfo.BlueGreenInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BlueGreenInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace BlueGreenInfo {
+
+                        /** Phase enum. */
+                        enum Phase {
+                            PHASE_UNSPECIFIED = 0,
+                            UPDATE_STARTED = 1,
+                            CREATING_GREEN_POOL = 2,
+                            CORDONING_BLUE_POOL = 3,
+                            DRAINING_BLUE_POOL = 4,
+                            NODE_POOL_SOAKING = 5,
+                            DELETING_BLUE_POOL = 6,
+                            ROLLBACK_STARTED = 7
+                        }
+                    }
                 }
 
                 /** Status enum. */
@@ -9461,6 +10503,96 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of a CompleteNodePoolUpgradeRequest. */
+            interface ICompleteNodePoolUpgradeRequest {
+
+                /** CompleteNodePoolUpgradeRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a CompleteNodePoolUpgradeRequest. */
+            class CompleteNodePoolUpgradeRequest implements ICompleteNodePoolUpgradeRequest {
+
+                /**
+                 * Constructs a new CompleteNodePoolUpgradeRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ICompleteNodePoolUpgradeRequest);
+
+                /** CompleteNodePoolUpgradeRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new CompleteNodePoolUpgradeRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CompleteNodePoolUpgradeRequest instance
+                 */
+                public static create(properties?: google.container.v1.ICompleteNodePoolUpgradeRequest): google.container.v1.CompleteNodePoolUpgradeRequest;
+
+                /**
+                 * Encodes the specified CompleteNodePoolUpgradeRequest message. Does not implicitly {@link google.container.v1.CompleteNodePoolUpgradeRequest.verify|verify} messages.
+                 * @param message CompleteNodePoolUpgradeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ICompleteNodePoolUpgradeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CompleteNodePoolUpgradeRequest message, length delimited. Does not implicitly {@link google.container.v1.CompleteNodePoolUpgradeRequest.verify|verify} messages.
+                 * @param message CompleteNodePoolUpgradeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ICompleteNodePoolUpgradeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CompleteNodePoolUpgradeRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CompleteNodePoolUpgradeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.CompleteNodePoolUpgradeRequest;
+
+                /**
+                 * Decodes a CompleteNodePoolUpgradeRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CompleteNodePoolUpgradeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.CompleteNodePoolUpgradeRequest;
+
+                /**
+                 * Verifies a CompleteNodePoolUpgradeRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CompleteNodePoolUpgradeRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CompleteNodePoolUpgradeRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.CompleteNodePoolUpgradeRequest;
+
+                /**
+                 * Creates a plain object from a CompleteNodePoolUpgradeRequest message. Also converts values to other types if specified.
+                 * @param message CompleteNodePoolUpgradeRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.CompleteNodePoolUpgradeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CompleteNodePoolUpgradeRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
             /** Properties of a RollbackNodePoolUpgradeRequest. */
             interface IRollbackNodePoolUpgradeRequest {
 
@@ -9478,6 +10610,9 @@ export namespace google {
 
                 /** RollbackNodePoolUpgradeRequest name */
                 name?: (string|null);
+
+                /** RollbackNodePoolUpgradeRequest respectPdb */
+                respectPdb?: (boolean|null);
             }
 
             /** Represents a RollbackNodePoolUpgradeRequest. */
@@ -9503,6 +10638,9 @@ export namespace google {
 
                 /** RollbackNodePoolUpgradeRequest name. */
                 public name: string;
+
+                /** RollbackNodePoolUpgradeRequest respectPdb. */
+                public respectPdb: boolean;
 
                 /**
                  * Creates a new RollbackNodePoolUpgradeRequest instance using the specified properties.
@@ -10049,6 +11187,15 @@ export namespace google {
 
                 /** NodePoolAutoscaling autoprovisioned */
                 autoprovisioned?: (boolean|null);
+
+                /** NodePoolAutoscaling locationPolicy */
+                locationPolicy?: (google.container.v1.NodePoolAutoscaling.LocationPolicy|keyof typeof google.container.v1.NodePoolAutoscaling.LocationPolicy|null);
+
+                /** NodePoolAutoscaling totalMinNodeCount */
+                totalMinNodeCount?: (number|null);
+
+                /** NodePoolAutoscaling totalMaxNodeCount */
+                totalMaxNodeCount?: (number|null);
             }
 
             /** Represents a NodePoolAutoscaling. */
@@ -10071,6 +11218,15 @@ export namespace google {
 
                 /** NodePoolAutoscaling autoprovisioned. */
                 public autoprovisioned: boolean;
+
+                /** NodePoolAutoscaling locationPolicy. */
+                public locationPolicy: (google.container.v1.NodePoolAutoscaling.LocationPolicy|keyof typeof google.container.v1.NodePoolAutoscaling.LocationPolicy);
+
+                /** NodePoolAutoscaling totalMinNodeCount. */
+                public totalMinNodeCount: number;
+
+                /** NodePoolAutoscaling totalMaxNodeCount. */
+                public totalMaxNodeCount: number;
 
                 /**
                  * Creates a new NodePoolAutoscaling instance using the specified properties.
@@ -10141,6 +11297,16 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+            }
+
+            namespace NodePoolAutoscaling {
+
+                /** LocationPolicy enum. */
+                enum LocationPolicy {
+                    LOCATION_POLICY_UNSPECIFIED = 0,
+                    BALANCED = 1,
+                    ANY = 2
+                }
             }
 
             /** Properties of a SetLabelsRequest. */
@@ -10610,6 +11776,9 @@ export namespace google {
 
                 /** AcceleratorConfig gpuPartitionSize */
                 gpuPartitionSize?: (string|null);
+
+                /** AcceleratorConfig gpuSharingConfig */
+                gpuSharingConfig?: (google.container.v1.IGPUSharingConfig|null);
             }
 
             /** Represents an AcceleratorConfig. */
@@ -10629,6 +11798,12 @@ export namespace google {
 
                 /** AcceleratorConfig gpuPartitionSize. */
                 public gpuPartitionSize: string;
+
+                /** AcceleratorConfig gpuSharingConfig. */
+                public gpuSharingConfig?: (google.container.v1.IGPUSharingConfig|null);
+
+                /** AcceleratorConfig _gpuSharingConfig. */
+                public _gpuSharingConfig?: "gpuSharingConfig";
 
                 /**
                  * Creates a new AcceleratorConfig instance using the specified properties.
@@ -10699,6 +11874,114 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a GPUSharingConfig. */
+            interface IGPUSharingConfig {
+
+                /** GPUSharingConfig maxSharedClientsPerGpu */
+                maxSharedClientsPerGpu?: (number|Long|string|null);
+
+                /** GPUSharingConfig gpuSharingStrategy */
+                gpuSharingStrategy?: (google.container.v1.GPUSharingConfig.GPUSharingStrategy|keyof typeof google.container.v1.GPUSharingConfig.GPUSharingStrategy|null);
+            }
+
+            /** Represents a GPUSharingConfig. */
+            class GPUSharingConfig implements IGPUSharingConfig {
+
+                /**
+                 * Constructs a new GPUSharingConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IGPUSharingConfig);
+
+                /** GPUSharingConfig maxSharedClientsPerGpu. */
+                public maxSharedClientsPerGpu: (number|Long|string);
+
+                /** GPUSharingConfig gpuSharingStrategy. */
+                public gpuSharingStrategy?: (google.container.v1.GPUSharingConfig.GPUSharingStrategy|keyof typeof google.container.v1.GPUSharingConfig.GPUSharingStrategy|null);
+
+                /** GPUSharingConfig _gpuSharingStrategy. */
+                public _gpuSharingStrategy?: "gpuSharingStrategy";
+
+                /**
+                 * Creates a new GPUSharingConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GPUSharingConfig instance
+                 */
+                public static create(properties?: google.container.v1.IGPUSharingConfig): google.container.v1.GPUSharingConfig;
+
+                /**
+                 * Encodes the specified GPUSharingConfig message. Does not implicitly {@link google.container.v1.GPUSharingConfig.verify|verify} messages.
+                 * @param message GPUSharingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IGPUSharingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GPUSharingConfig message, length delimited. Does not implicitly {@link google.container.v1.GPUSharingConfig.verify|verify} messages.
+                 * @param message GPUSharingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IGPUSharingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GPUSharingConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GPUSharingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.GPUSharingConfig;
+
+                /**
+                 * Decodes a GPUSharingConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GPUSharingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.GPUSharingConfig;
+
+                /**
+                 * Verifies a GPUSharingConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GPUSharingConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GPUSharingConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.GPUSharingConfig;
+
+                /**
+                 * Creates a plain object from a GPUSharingConfig message. Also converts values to other types if specified.
+                 * @param message GPUSharingConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.GPUSharingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GPUSharingConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace GPUSharingConfig {
+
+                /** GPUSharingStrategy enum. */
+                enum GPUSharingStrategy {
+                    GPU_SHARING_STRATEGY_UNSPECIFIED = 0,
+                    TIME_SHARING = 1
+                }
             }
 
             /** Properties of a WorkloadMetadataConfig. */
@@ -12486,6 +13769,96 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of an IdentityServiceConfig. */
+            interface IIdentityServiceConfig {
+
+                /** IdentityServiceConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents an IdentityServiceConfig. */
+            class IdentityServiceConfig implements IIdentityServiceConfig {
+
+                /**
+                 * Constructs a new IdentityServiceConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IIdentityServiceConfig);
+
+                /** IdentityServiceConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new IdentityServiceConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns IdentityServiceConfig instance
+                 */
+                public static create(properties?: google.container.v1.IIdentityServiceConfig): google.container.v1.IdentityServiceConfig;
+
+                /**
+                 * Encodes the specified IdentityServiceConfig message. Does not implicitly {@link google.container.v1.IdentityServiceConfig.verify|verify} messages.
+                 * @param message IdentityServiceConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IIdentityServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified IdentityServiceConfig message, length delimited. Does not implicitly {@link google.container.v1.IdentityServiceConfig.verify|verify} messages.
+                 * @param message IdentityServiceConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IIdentityServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an IdentityServiceConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns IdentityServiceConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.IdentityServiceConfig;
+
+                /**
+                 * Decodes an IdentityServiceConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns IdentityServiceConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.IdentityServiceConfig;
+
+                /**
+                 * Verifies an IdentityServiceConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an IdentityServiceConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns IdentityServiceConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.IdentityServiceConfig;
+
+                /**
+                 * Creates a plain object from an IdentityServiceConfig message. Also converts values to other types if specified.
+                 * @param message IdentityServiceConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.IdentityServiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this IdentityServiceConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
             /** Properties of a MeshCertificates. */
             interface IMeshCertificates {
 
@@ -13767,13 +15140,6 @@ export namespace google {
                 PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL = 3
             }
 
-            /** DatapathProvider enum. */
-            enum DatapathProvider {
-                DATAPATH_PROVIDER_UNSPECIFIED = 0,
-                LEGACY_DATAPATH = 1,
-                ADVANCED_DATAPATH = 2
-            }
-
             /** Properties of a NotificationConfig. */
             interface INotificationConfig {
 
@@ -14821,6 +16187,9 @@ export namespace google {
 
                 /** MonitoringConfig componentConfig */
                 componentConfig?: (google.container.v1.IMonitoringComponentConfig|null);
+
+                /** MonitoringConfig managedPrometheusConfig */
+                managedPrometheusConfig?: (google.container.v1.IManagedPrometheusConfig|null);
             }
 
             /** Represents a MonitoringConfig. */
@@ -14834,6 +16203,9 @@ export namespace google {
 
                 /** MonitoringConfig componentConfig. */
                 public componentConfig?: (google.container.v1.IMonitoringComponentConfig|null);
+
+                /** MonitoringConfig managedPrometheusConfig. */
+                public managedPrometheusConfig?: (google.container.v1.IManagedPrometheusConfig|null);
 
                 /**
                  * Creates a new MonitoringConfig instance using the specified properties.
@@ -15001,8 +16373,115 @@ export namespace google {
                 /** Component enum. */
                 enum Component {
                     COMPONENT_UNSPECIFIED = 0,
-                    SYSTEM_COMPONENTS = 1
+                    SYSTEM_COMPONENTS = 1,
+                    APISERVER = 3,
+                    SCHEDULER = 4,
+                    CONTROLLER_MANAGER = 5
                 }
+            }
+
+            /** DatapathProvider enum. */
+            enum DatapathProvider {
+                DATAPATH_PROVIDER_UNSPECIFIED = 0,
+                LEGACY_DATAPATH = 1,
+                ADVANCED_DATAPATH = 2
+            }
+
+            /** NodePoolUpdateStrategy enum. */
+            enum NodePoolUpdateStrategy {
+                NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED = 0,
+                BLUE_GREEN = 2,
+                SURGE = 3
+            }
+
+            /** Properties of a ManagedPrometheusConfig. */
+            interface IManagedPrometheusConfig {
+
+                /** ManagedPrometheusConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a ManagedPrometheusConfig. */
+            class ManagedPrometheusConfig implements IManagedPrometheusConfig {
+
+                /**
+                 * Constructs a new ManagedPrometheusConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IManagedPrometheusConfig);
+
+                /** ManagedPrometheusConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new ManagedPrometheusConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ManagedPrometheusConfig instance
+                 */
+                public static create(properties?: google.container.v1.IManagedPrometheusConfig): google.container.v1.ManagedPrometheusConfig;
+
+                /**
+                 * Encodes the specified ManagedPrometheusConfig message. Does not implicitly {@link google.container.v1.ManagedPrometheusConfig.verify|verify} messages.
+                 * @param message ManagedPrometheusConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IManagedPrometheusConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ManagedPrometheusConfig message, length delimited. Does not implicitly {@link google.container.v1.ManagedPrometheusConfig.verify|verify} messages.
+                 * @param message ManagedPrometheusConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IManagedPrometheusConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ManagedPrometheusConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ManagedPrometheusConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.ManagedPrometheusConfig;
+
+                /**
+                 * Decodes a ManagedPrometheusConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ManagedPrometheusConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.ManagedPrometheusConfig;
+
+                /**
+                 * Verifies a ManagedPrometheusConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ManagedPrometheusConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ManagedPrometheusConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.ManagedPrometheusConfig;
+
+                /**
+                 * Creates a plain object from a ManagedPrometheusConfig message. Also converts values to other types if specified.
+                 * @param message ManagedPrometheusConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.ManagedPrometheusConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ManagedPrometheusConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
             }
         }
     }
@@ -18727,6 +20206,102 @@ export namespace google {
                  */
                 public toJSON(): { [k: string]: any };
             }
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of an Empty. */

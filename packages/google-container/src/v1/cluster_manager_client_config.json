@@ -129,6 +129,10 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "CompleteNodePoolUpgrade": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "RollbackNodePoolUpgrade": {
           "timeout_millis": 45000,
           "retry_codes_name": "non_idempotent",

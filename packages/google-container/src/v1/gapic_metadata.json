@@ -120,6 +120,11 @@
                 "deleteNodePool"
               ]
             },
+            "CompleteNodePoolUpgrade": {
+              "methods": [
+                "completeNodePoolUpgrade"
+              ]
+            },
             "RollbackNodePoolUpgrade": {
               "methods": [
                 "rollbackNodePoolUpgrade"
@@ -285,6 +290,11 @@
             "DeleteNodePool": {
               "methods": [
                 "deleteNodePool"
+              ]
+            },
+            "CompleteNodePoolUpgrade": {
+              "methods": [
+                "completeNodePoolUpgrade"
               ]
             },
             "RollbackNodePoolUpgrade": {

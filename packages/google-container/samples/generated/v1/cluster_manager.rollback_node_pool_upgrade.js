@@ -31,6 +31,11 @@ function main() {
    *  Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
    */
   // const name = 'abc123'
+  /**
+   *  Option for rollback to ignore the PodDisruptionBudget.
+   *  Default value is false.
+   */
+  // const respectPdb = true
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

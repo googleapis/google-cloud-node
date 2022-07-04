@@ -39,7 +39,7 @@ function main(resourceLabels, labelFingerprint) {
    */
   // const labelFingerprint = 'abc123'
   /**
-   *  The name (project, location, cluster id) of the cluster to set labels.
+   *  The name (project, location, cluster name) of the cluster to set labels.
    *  Specified in the format `projects/* /locations/* /clusters/*`.
    */
   // const name = 'abc123'

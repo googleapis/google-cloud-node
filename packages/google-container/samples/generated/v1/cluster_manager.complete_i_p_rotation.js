@@ -26,7 +26,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name (project, location, cluster id) of the cluster to complete IP
+   *  The name (project, location, cluster name) of the cluster to complete IP
    *  rotation. Specified in the format `projects/* /locations/* /clusters/*`.
    */
   // const name = 'abc123'

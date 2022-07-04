@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 101,
+                    "end": 128,
                     "type": "FULL"
                 }
             ],
@@ -280,6 +280,18 @@
                         "type": ".google.container.v1.NodePool.UpgradeSettings"
                     },
                     {
+                        "name": "tags",
+                        "type": ".google.container.v1.NetworkTags"
+                    },
+                    {
+                        "name": "taints",
+                        "type": ".google.container.v1.NodeTaints"
+                    },
+                    {
+                        "name": "labels",
+                        "type": ".google.container.v1.NodeLabels"
+                    },
+                    {
                         "name": "linux_node_config",
                         "type": ".google.container.v1.LinuxNodeConfig"
                     },
@@ -288,8 +300,16 @@
                         "type": ".google.container.v1.NodeKubeletConfig"
                     },
                     {
+                        "name": "node_network_config",
+                        "type": ".google.container.v1.NodeNetworkConfig"
+                    },
+                    {
                         "name": "gcfs_config",
                         "type": ".google.container.v1.GcfsConfig"
+                    },
+                    {
+                        "name": "confidential_nodes",
+                        "type": ".google.container.v1.ConfidentialNodes"
                     },
                     {
                         "name": "gvnic",
@@ -1224,6 +1244,46 @@
             }
         },
         {
+            "regionTag": "container_v1_generated_ClusterManager_CompleteNodePoolUpgrade_async",
+            "title": "ClusterManager completeNodePoolUpgrade Sample",
+            "origin": "API_DEFINITION",
+            "description": " CompleteNodePoolUpgrade will signal an on-going node pool upgrade to complete.",
+            "canonical": true,
+            "file": "cluster_manager.complete_node_pool_upgrade.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 51,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CompleteNodePoolUpgrade",
+                "fullName": "google.container.v1.ClusterManager.CompleteNodePoolUpgrade",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ClusterManagerClient",
+                    "fullName": "google.container.v1.ClusterManagerClient"
+                },
+                "method": {
+                    "shortName": "CompleteNodePoolUpgrade",
+                    "fullName": "google.container.v1.ClusterManager.CompleteNodePoolUpgrade",
+                    "service": {
+                        "shortName": "ClusterManager",
+                        "fullName": "google.container.v1.ClusterManager"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "container_v1_generated_ClusterManager_RollbackNodePoolUpgrade_async",
             "title": "ClusterManager rollbackNodePoolUpgrade Sample",
             "origin": "API_DEFINITION",
@@ -1234,7 +1294,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -1262,6 +1322,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "respect_pdb",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",

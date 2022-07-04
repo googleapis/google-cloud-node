@@ -26,7 +26,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The parent (project, location, cluster id) where the node pools will be
+   *  The parent (project, location, cluster name) where the node pools will be
    *  listed. Specified in the format `projects/* /locations/* /clusters/*`.
    */
   // const parent = 'abc123'

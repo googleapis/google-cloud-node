@@ -21,15 +21,16 @@
 'use strict';
 
 function main() {
-  // [START container_v1_generated_ClusterManager_GetJSONWebKeys_async]
+  // [START container_v1_generated_ClusterManager_CompleteNodePoolUpgrade_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The cluster (project, location, cluster name) to get keys for. Specified in
-   *  the format `projects/* /locations/* /clusters/*`.
+   *  The name (project, location, cluster, node pool id) of the node pool to
+   *  complete upgrade.
+   *  Specified in the format 'projects/* /locations/* /clusters/* /nodePools/*'.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;
@@ -37,18 +38,18 @@ function main() {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function callGetJSONWebKeys() {
+  async function callCompleteNodePoolUpgrade() {
     // Construct request
     const request = {
     };
 
     // Run request
-    const response = await containerClient.getJSONWebKeys(request);
+    const response = await containerClient.completeNodePoolUpgrade(request);
     console.log(response);
   }
 
-  callGetJSONWebKeys();
-  // [END container_v1_generated_ClusterManager_GetJSONWebKeys_async]
+  callCompleteNodePoolUpgrade();
+  // [END container_v1_generated_ClusterManager_CompleteNodePoolUpgrade_async]
 }
 
 process.on('unhandledRejection', err => {

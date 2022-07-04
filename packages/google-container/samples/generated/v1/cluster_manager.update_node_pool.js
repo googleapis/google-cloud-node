@@ -64,6 +64,24 @@ function main(nodeVersion, imageType) {
    */
   // const upgradeSettings = {}
   /**
+   *  The desired network tags to be applied to all nodes in the node pool.
+   *  If this field is not present, the tags will not be changed. Otherwise,
+   *  the existing network tags will be *replaced* with the provided tags.
+   */
+  // const tags = {}
+  /**
+   *  The desired node taints to be applied to all nodes in the node pool.
+   *  If this field is not present, the taints will not be changed. Otherwise,
+   *  the existing node taints will be *replaced* with the provided taints.
+   */
+  // const taints = {}
+  /**
+   *  The desired node labels to be applied to all nodes in the node pool.
+   *  If this field is not present, the labels will not be changed. Otherwise,
+   *  the existing node labels will be *replaced* with the provided labels.
+   */
+  // const labels = {}
+  /**
    *  Parameters that can be configured on Linux nodes.
    */
   // const linuxNodeConfig = {}
@@ -72,9 +90,18 @@ function main(nodeVersion, imageType) {
    */
   // const kubeletConfig = {}
   /**
+   *  Node network config.
+   */
+  // const nodeNetworkConfig = {}
+  /**
    *  GCFS config.
    */
   // const gcfsConfig = {}
+  /**
+   *  Confidential nodes config.
+   *  All the nodes in the node pool will be Confidential VM once enabled.
+   */
+  // const confidentialNodes = {}
   /**
    *  Enable or disable gvnic on the node pool.
    */

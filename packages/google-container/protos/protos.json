@@ -590,6 +590,22 @@
                         }
                       ]
                     },
+                    "CompleteNodePoolUpgrade": {
+                      "requestType": "CompleteNodePoolUpgradeRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*/nodePools/*}:completeUpgrade",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=projects/*/locations/*/clusters/*/nodePools/*}:completeUpgrade",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
                     "RollbackNodePoolUpgrade": {
                       "requestType": "RollbackNodePoolUpgradeRequest",
                       "responseType": "Operation",
@@ -868,6 +884,10 @@
                     "cpuCfsQuotaPeriod": {
                       "type": "string",
                       "id": 3
+                    },
+                    "podPidsLimit": {
+                      "type": "int64",
+                      "id": 4
                     }
                   }
                 },
@@ -978,6 +998,14 @@
                     "gvnic": {
                       "type": "VirtualNIC",
                       "id": 29
+                    },
+                    "spot": {
+                      "type": "bool",
+                      "id": 32
+                    },
+                    "confidentialNodes": {
+                      "type": "ConfidentialNodes",
+                      "id": 35
                     }
                   }
                 },
@@ -1000,6 +1028,13 @@
                   }
                 },
                 "NodeNetworkConfig": {
+                  "oneofs": {
+                    "_networkPerformanceConfig": {
+                      "oneof": [
+                        "networkPerformanceConfig"
+                      ]
+                    }
+                  },
                   "fields": {
                     "createPodRange": {
                       "type": "bool",
@@ -1015,6 +1050,41 @@
                     "podIpv4CidrBlock": {
                       "type": "string",
                       "id": 6
+                    },
+                    "networkPerformanceConfig": {
+                      "type": "NetworkPerformanceConfig",
+                      "id": 11,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "NetworkPerformanceConfig": {
+                      "oneofs": {
+                        "_totalEgressBandwidthTier": {
+                          "oneof": [
+                            "totalEgressBandwidthTier"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "totalEgressBandwidthTier": {
+                          "type": "Tier",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Tier": {
+                          "values": {
+                            "TIER_UNSPECIFIED": 0,
+                            "TIER_1": 1
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -1104,6 +1174,33 @@
                         "PREFER_NO_SCHEDULE": 2,
                         "NO_EXECUTE": 3
                       }
+                    }
+                  }
+                },
+                "NodeTaints": {
+                  "fields": {
+                    "taints": {
+                      "rule": "repeated",
+                      "type": "NodeTaint",
+                      "id": 1
+                    }
+                  }
+                },
+                "NodeLabels": {
+                  "fields": {
+                    "labels": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "NetworkTags": {
+                  "fields": {
+                    "tags": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
                     }
                   }
                 },
@@ -1389,6 +1486,19 @@
                     "enabled": {
                       "type": "bool",
                       "id": 1
+                    },
+                    "evaluationMode": {
+                      "type": "EvaluationMode",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "EvaluationMode": {
+                      "values": {
+                        "EVALUATION_MODE_UNSPECIFIED": 0,
+                        "DISABLED": 1,
+                        "PROJECT_SINGLETON_POLICY_ENFORCE": 2
+                      }
                     }
                   }
                 },
@@ -1619,6 +1729,10 @@
                       "type": "ConfidentialNodes",
                       "id": 50
                     },
+                    "identityServiceConfig": {
+                      "type": "IdentityServiceConfig",
+                      "id": 54
+                    },
                     "selfLink": {
                       "type": "string",
                       "id": 100
@@ -1733,6 +1847,10 @@
                     "monitoringConfig": {
                       "type": "MonitoringConfig",
                       "id": 133
+                    },
+                    "nodePoolAutoConfig": {
+                      "type": "NodePoolAutoConfig",
+                      "id": 136
                     }
                   },
                   "nested": {
@@ -1746,6 +1864,14 @@
                         "ERROR": 5,
                         "DEGRADED": 6
                       }
+                    }
+                  }
+                },
+                "NodePoolAutoConfig": {
+                  "fields": {
+                    "networkTags": {
+                      "type": "NetworkTags",
+                      "id": 1
                     }
                   }
                 },
@@ -1884,6 +2010,10 @@
                       "type": "MonitoringConfig",
                       "id": 65
                     },
+                    "desiredIdentityServiceConfig": {
+                      "type": "IdentityServiceConfig",
+                      "id": 66
+                    },
                     "desiredServiceExternalIpsConfig": {
                       "type": "ServiceExternalIPsConfig",
                       "id": 60
@@ -1895,6 +2025,10 @@
                     "desiredGcfsConfig": {
                       "type": "GcfsConfig",
                       "id": 109
+                    },
+                    "desiredNodePoolAutoConfigNetworkTags": {
+                      "type": "NetworkTags",
+                      "id": 110
                     }
                   }
                 },
@@ -2223,6 +2357,18 @@
                       "type": "NodePool.UpgradeSettings",
                       "id": 15
                     },
+                    "tags": {
+                      "type": "NetworkTags",
+                      "id": 16
+                    },
+                    "taints": {
+                      "type": "NodeTaints",
+                      "id": 17
+                    },
+                    "labels": {
+                      "type": "NodeLabels",
+                      "id": 18
+                    },
                     "linuxNodeConfig": {
                       "type": "LinuxNodeConfig",
                       "id": 19
@@ -2231,9 +2377,17 @@
                       "type": "NodeKubeletConfig",
                       "id": 20
                     },
+                    "nodeNetworkConfig": {
+                      "type": "NodeNetworkConfig",
+                      "id": 21
+                    },
                     "gcfsConfig": {
                       "type": "GcfsConfig",
                       "id": 22
+                    },
+                    "confidentialNodes": {
+                      "type": "ConfidentialNodes",
+                      "id": 23
                     },
                     "gvnic": {
                       "type": "VirtualNIC",
@@ -2887,6 +3041,67 @@
                     }
                   }
                 },
+                "BlueGreenSettings": {
+                  "oneofs": {
+                    "rolloutPolicy": {
+                      "oneof": [
+                        "standardRolloutPolicy"
+                      ]
+                    },
+                    "_nodePoolSoakDuration": {
+                      "oneof": [
+                        "nodePoolSoakDuration"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "standardRolloutPolicy": {
+                      "type": "StandardRolloutPolicy",
+                      "id": 1
+                    },
+                    "nodePoolSoakDuration": {
+                      "type": "google.protobuf.Duration",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "StandardRolloutPolicy": {
+                      "oneofs": {
+                        "updateBatchSize": {
+                          "oneof": [
+                            "batchPercentage",
+                            "batchNodeCount"
+                          ]
+                        },
+                        "_batchSoakDuration": {
+                          "oneof": [
+                            "batchSoakDuration"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "batchPercentage": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "batchNodeCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "batchSoakDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "NodePool": {
                   "fields": {
                     "name": {
@@ -2958,10 +3173,29 @@
                     "upgradeSettings": {
                       "type": "UpgradeSettings",
                       "id": 107
+                    },
+                    "updateInfo": {
+                      "type": "UpdateInfo",
+                      "id": 109,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
                     "UpgradeSettings": {
+                      "oneofs": {
+                        "_strategy": {
+                          "oneof": [
+                            "strategy"
+                          ]
+                        },
+                        "_blueGreenSettings": {
+                          "oneof": [
+                            "blueGreenSettings"
+                          ]
+                        }
+                      },
                       "fields": {
                         "maxSurge": {
                           "type": "int32",
@@ -2970,6 +3204,70 @@
                         "maxUnavailable": {
                           "type": "int32",
                           "id": 2
+                        },
+                        "strategy": {
+                          "type": "NodePoolUpdateStrategy",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "blueGreenSettings": {
+                          "type": "BlueGreenSettings",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "UpdateInfo": {
+                      "fields": {
+                        "blueGreenInfo": {
+                          "type": "BlueGreenInfo",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "BlueGreenInfo": {
+                          "fields": {
+                            "phase": {
+                              "type": "Phase",
+                              "id": 1
+                            },
+                            "blueInstanceGroupUrls": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "greenInstanceGroupUrls": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "bluePoolDeletionStartTime": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "greenPoolVersion": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "Phase": {
+                              "values": {
+                                "PHASE_UNSPECIFIED": 0,
+                                "UPDATE_STARTED": 1,
+                                "CREATING_GREEN_POOL": 2,
+                                "CORDONING_BLUE_POOL": 3,
+                                "DRAINING_BLUE_POOL": 4,
+                                "NODE_POOL_SOAKING": 5,
+                                "DELETING_BLUE_POOL": 6,
+                                "ROLLBACK_STARTED": 7
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3201,6 +3499,14 @@
                     }
                   }
                 },
+                "CompleteNodePoolUpgradeRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
                 "RollbackNodePoolUpgradeRequest": {
                   "fields": {
                     "projectId": {
@@ -3234,6 +3540,10 @@
                     "name": {
                       "type": "string",
                       "id": 6
+                    },
+                    "respectPdb": {
+                      "type": "bool",
+                      "id": 7
                     }
                   }
                 },
@@ -3302,7 +3612,10 @@
                     },
                     "minCpuPlatform": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "diskSizeGb": {
                       "type": "int32",
@@ -3359,6 +3672,27 @@
                     "autoprovisioned": {
                       "type": "bool",
                       "id": 4
+                    },
+                    "locationPolicy": {
+                      "type": "LocationPolicy",
+                      "id": 5
+                    },
+                    "totalMinNodeCount": {
+                      "type": "int32",
+                      "id": 6
+                    },
+                    "totalMaxNodeCount": {
+                      "type": "int32",
+                      "id": 7
+                    }
+                  },
+                  "nested": {
+                    "LocationPolicy": {
+                      "values": {
+                        "LOCATION_POLICY_UNSPECIFIED": 0,
+                        "BALANCED": 1,
+                        "ANY": 2
+                      }
                     }
                   }
                 },
@@ -3505,6 +3839,13 @@
                   }
                 },
                 "AcceleratorConfig": {
+                  "oneofs": {
+                    "_gpuSharingConfig": {
+                      "oneof": [
+                        "gpuSharingConfig"
+                      ]
+                    }
+                  },
                   "fields": {
                     "acceleratorCount": {
                       "type": "int64",
@@ -3517,6 +3858,43 @@
                     "gpuPartitionSize": {
                       "type": "string",
                       "id": 3
+                    },
+                    "gpuSharingConfig": {
+                      "type": "GPUSharingConfig",
+                      "id": 5,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  }
+                },
+                "GPUSharingConfig": {
+                  "oneofs": {
+                    "_gpuSharingStrategy": {
+                      "oneof": [
+                        "gpuSharingStrategy"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "maxSharedClientsPerGpu": {
+                      "type": "int64",
+                      "id": 1
+                    },
+                    "gpuSharingStrategy": {
+                      "type": "GPUSharingStrategy",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "GPUSharingStrategy": {
+                      "values": {
+                        "GPU_SHARING_STRATEGY_UNSPECIFIED": 0,
+                        "TIME_SHARING": 1
+                      }
                     }
                   }
                 },
@@ -3872,6 +4250,14 @@
                     }
                   }
                 },
+                "IdentityServiceConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "MeshCertificates": {
                   "fields": {
                     "enableCertificates": {
@@ -4058,13 +4444,6 @@
                     "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED": 1,
                     "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE": 2,
                     "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL": 3
-                  }
-                },
-                "DatapathProvider": {
-                  "values": {
-                    "DATAPATH_PROVIDER_UNSPECIFIED": 0,
-                    "LEGACY_DATAPATH": 1,
-                    "ADVANCED_DATAPATH": 2
                   }
                 },
                 "NotificationConfig": {
@@ -4262,6 +4641,10 @@
                     "componentConfig": {
                       "type": "MonitoringComponentConfig",
                       "id": 1
+                    },
+                    "managedPrometheusConfig": {
+                      "type": "ManagedPrometheusConfig",
+                      "id": 2
                     }
                   }
                 },
@@ -4277,8 +4660,33 @@
                     "Component": {
                       "values": {
                         "COMPONENT_UNSPECIFIED": 0,
-                        "SYSTEM_COMPONENTS": 1
+                        "SYSTEM_COMPONENTS": 1,
+                        "APISERVER": 3,
+                        "SCHEDULER": 4,
+                        "CONTROLLER_MANAGER": 5
                       }
+                    }
+                  }
+                },
+                "DatapathProvider": {
+                  "values": {
+                    "DATAPATH_PROVIDER_UNSPECIFIED": 0,
+                    "LEGACY_DATAPATH": 1,
+                    "ADVANCED_DATAPATH": 2
+                  }
+                },
+                "NodePoolUpdateStrategy": {
+                  "values": {
+                    "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED": 0,
+                    "BLUE_GREEN": 2,
+                    "SURGE": 3
+                  }
+                },
+                "ManagedPrometheusConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
                     }
                   }
                 }
@@ -5400,6 +5808,18 @@
                       "id": 4
                     }
                   }
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             },
