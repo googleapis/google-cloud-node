@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.2.0...v3.3.0) (2022-07-04)
+
+
+### Features
+
+* ITAR June Preview Launch ([f4304b4](https://github.com/googleapis/nodejs-assured-workloads/commit/f4304b4c6974445d22d03f890e784e3767e30dd4))
+
 ## [3.2.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.1.0...v3.2.0) (2022-06-29)
 
 
