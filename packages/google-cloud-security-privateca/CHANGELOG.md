@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/googleapis/nodejs-security-private-ca/compare/v4.1.0...v4.1.1) (2022-07-04)
+
+
+### Bug Fixes
+
+* **privateca:** publish v1beta1 LRO HTTP rules ([cc4a64a](https://github.com/googleapis/nodejs-security-private-ca/commit/cc4a64a47ec713f87d66da7d9a4e6dc004af4bca))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-security-private-ca/compare/v4.0.0...v4.1.0) (2022-06-30)
 
 
