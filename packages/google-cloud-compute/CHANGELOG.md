@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [3.4.0](https://github.com/googleapis/nodejs-compute/compare/v3.3.0...v3.4.0) (2022-07-04)
+
+
+### Features
+
+* support regapic LRO ([93343f6](https://github.com/googleapis/nodejs-compute/commit/93343f6913e8a8991093cac9f8db0d4336fe0b05))
+
 ## [3.3.0](https://github.com/googleapis/nodejs-compute/compare/v3.2.1...v3.3.0) (2022-06-06)
 
 
