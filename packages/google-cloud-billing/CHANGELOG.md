@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-billing/compare/v3.0.0...v3.1.0) (2022-07-04)
+
+
+### Features
+
+* support regapic LRO ([caf329e](https://github.com/googleapis/nodejs-billing/commit/caf329e7a9661a35a3b0600cc7bc0bdb983aa115))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-billing/compare/v2.4.0...v3.0.0) (2022-05-20)
 
 
