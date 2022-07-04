@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/nodejs-bigquery-data-exchange/compare/v0.1.0...v0.2.0) (2022-07-04)
+
+
+### Features
+
+* support regapic LRO ([e4e9083](https://github.com/googleapis/nodejs-bigquery-data-exchange/commit/e4e90832a8d3b33284c176d89196511e9f3739d9))
+
 ## 0.1.0 (2022-05-30)
 
 
