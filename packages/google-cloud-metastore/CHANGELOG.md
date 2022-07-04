@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v3.0.0...v3.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#143](https://github.com/googleapis/nodejs-dataproc-metastore/issues/143)) ([e77a813](https://github.com/googleapis/nodejs-dataproc-metastore/commit/e77a813aeb04a20d32c9c1f0096d4115220c90e2))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v2.2.0...v3.0.0) (2022-05-19)
 
 
