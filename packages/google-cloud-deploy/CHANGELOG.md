@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-deploy/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#55](https://github.com/googleapis/nodejs-deploy/issues/55)) ([5c7ba12](https://github.com/googleapis/nodejs-deploy/commit/5c7ba1270c9f7b386614a1efa4ef4e752b591fda))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-deploy/compare/v1.0.0...v2.0.0) (2022-05-19)
 
 
