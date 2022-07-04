@@ -28,13 +28,6 @@ function main(parent, liveSession) {
   /**
    *  Required. The project and location in which the live session should be created,
    *  in the form of `projects/{project_number}/locations/{location}`.
-   *  Valid locations:
-   *  * `-` (Video Stitcher API will pick a location that is closest to the
-   *  caller.)
-   *  * `us-east1`
-   *  * `us-west1`
-   *  * `us-central1`
-   *  * `europe-west1`
    */
   // const parent = 'abc123'
   /**
@@ -43,7 +36,7 @@ function main(parent, liveSession) {
   // const liveSession = {}
 
   // Imports the Stitcher library
-  const {VideoStitcherServiceClient} = require('@google-cloud/stitcher').v1;
+  const {VideoStitcherServiceClient} = require('@google-cloud/video-stitcher').v1;
 
   // Instantiates a client
   const stitcherClient = new VideoStitcherServiceClient();

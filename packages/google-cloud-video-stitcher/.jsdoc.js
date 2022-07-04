@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2022 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/stitcher',
+    systemName: '@google-cloud/video-stitcher',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

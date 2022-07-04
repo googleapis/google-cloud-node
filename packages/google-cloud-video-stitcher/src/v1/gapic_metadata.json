@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.video.stitcher.v1",
-  "libraryPackage": "@google-cloud/stitcher",
+  "libraryPackage": "@google-cloud/video-stitcher",
   "services": {
     "VideoStitcherService": {
       "clients": {

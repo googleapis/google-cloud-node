@@ -49,7 +49,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Stitcher library
-  const {VideoStitcherServiceClient} = require('@google-cloud/stitcher').v1;
+  const {VideoStitcherServiceClient} = require('@google-cloud/video-stitcher').v1;
 
   // Instantiates a client
   const stitcherClient = new VideoStitcherServiceClient();

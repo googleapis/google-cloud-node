@@ -390,6 +390,13 @@
                             "manifestOptions": {
                               "type": "ManifestOptions",
                               "id": 9
+                            },
+                            "assetId": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -506,6 +513,13 @@
                             "manifestOptions": {
                               "type": "ManifestOptions",
                               "id": 10
+                            },
+                            "streamId": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -513,7 +527,6 @@
                               "values": {
                                 "STITCHING_POLICY_UNSPECIFIED": 0,
                                 "COMPLETE_AD": 1,
-                                "COMPLETE_POD": 2,
                                 "CUT_CURRENT": 3
                               }
                             }
@@ -2651,18 +2664,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             }
