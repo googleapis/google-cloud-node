@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-ai-platform/compare/v2.0.0...v2.1.0) (2022-07-04)
+
+
+### Features
+
+* add BatchImportModelEvaluationSlices API in aiplatform v1 model_service.proto ([0a7e609](https://github.com/googleapis/nodejs-ai-platform/commit/0a7e60980bce5850d016d2b6e3df35f0d5b55360))
+* add ListSavedQueries rpc to aiplatform v1 dataset_service.proto ([0a7e609](https://github.com/googleapis/nodejs-ai-platform/commit/0a7e60980bce5850d016d2b6e3df35f0d5b55360))
+* add ListSavedQueries rpc to aiplatform v1beta1 dataset_service.proto ([0a7e609](https://github.com/googleapis/nodejs-ai-platform/commit/0a7e60980bce5850d016d2b6e3df35f0d5b55360))
+* add monitor_window to ModelDeploymentMonitoringScheduleConfig proto in aiplatform v1/v1beta1 model_deployment_monitoring_job.proto ([0a7e609](https://github.com/googleapis/nodejs-ai-platform/commit/0a7e60980bce5850d016d2b6e3df35f0d5b55360))
+* add saved_query_id to InputDataConfig in aiplatform v1 training_pipeline.proto ([0a7e609](https://github.com/googleapis/nodejs-ai-platform/commit/0a7e60980bce5850d016d2b6e3df35f0d5b55360))
+* add saved_query_id to InputDataConfig in aiplatform v1beta1 training_pipeline.proto ([0a7e609](https://github.com/googleapis/nodejs-ai-platform/commit/0a7e60980bce5850d016d2b6e3df35f0d5b55360))
+* add saved_query.proto to aiplatform v1 ([0a7e609](https://github.com/googleapis/nodejs-ai-platform/commit/0a7e60980bce5850d016d2b6e3df35f0d5b55360))
+* add saved_query.proto to aiplatform v1beta1 ([0a7e609](https://github.com/googleapis/nodejs-ai-platform/commit/0a7e60980bce5850d016d2b6e3df35f0d5b55360))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.19.0...v2.0.0) (2022-06-23)
 
 
