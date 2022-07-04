@@ -20,6 +20,7 @@
 const speech = require('@google-cloud/speech');
 
 function main() {
+  const adaptationClient = new speech.AdaptationClient();
   const speechClient = new speech.SpeechClient();
 }
 

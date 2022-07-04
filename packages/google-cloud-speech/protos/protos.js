@@ -6791,6 +6791,2959 @@
                         return SpeechAdaptation;
                     })();
     
+                    v1.Adaptation = (function() {
+    
+                        /**
+                         * Constructs a new Adaptation service.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents an Adaptation
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function Adaptation(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (Adaptation.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Adaptation;
+    
+                        /**
+                         * Creates new Adaptation service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {Adaptation} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        Adaptation.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#createPhraseSet}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef CreatePhraseSetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.speech.v1.PhraseSet} [response] PhraseSet
+                         */
+    
+                        /**
+                         * Calls CreatePhraseSet.
+                         * @function createPhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.ICreatePhraseSetRequest} request CreatePhraseSetRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.CreatePhraseSetCallback} callback Node-style callback called with the error, if any, and PhraseSet
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.createPhraseSet = function createPhraseSet(request, callback) {
+                            return this.rpcCall(createPhraseSet, $root.google.cloud.speech.v1.CreatePhraseSetRequest, $root.google.cloud.speech.v1.PhraseSet, request, callback);
+                        }, "name", { value: "CreatePhraseSet" });
+    
+                        /**
+                         * Calls CreatePhraseSet.
+                         * @function createPhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.ICreatePhraseSetRequest} request CreatePhraseSetRequest message or plain object
+                         * @returns {Promise<google.cloud.speech.v1.PhraseSet>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#getPhraseSet}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef GetPhraseSetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.speech.v1.PhraseSet} [response] PhraseSet
+                         */
+    
+                        /**
+                         * Calls GetPhraseSet.
+                         * @function getPhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IGetPhraseSetRequest} request GetPhraseSetRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.GetPhraseSetCallback} callback Node-style callback called with the error, if any, and PhraseSet
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.getPhraseSet = function getPhraseSet(request, callback) {
+                            return this.rpcCall(getPhraseSet, $root.google.cloud.speech.v1.GetPhraseSetRequest, $root.google.cloud.speech.v1.PhraseSet, request, callback);
+                        }, "name", { value: "GetPhraseSet" });
+    
+                        /**
+                         * Calls GetPhraseSet.
+                         * @function getPhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IGetPhraseSetRequest} request GetPhraseSetRequest message or plain object
+                         * @returns {Promise<google.cloud.speech.v1.PhraseSet>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#listPhraseSet}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef ListPhraseSetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.speech.v1.ListPhraseSetResponse} [response] ListPhraseSetResponse
+                         */
+    
+                        /**
+                         * Calls ListPhraseSet.
+                         * @function listPhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IListPhraseSetRequest} request ListPhraseSetRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.ListPhraseSetCallback} callback Node-style callback called with the error, if any, and ListPhraseSetResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.listPhraseSet = function listPhraseSet(request, callback) {
+                            return this.rpcCall(listPhraseSet, $root.google.cloud.speech.v1.ListPhraseSetRequest, $root.google.cloud.speech.v1.ListPhraseSetResponse, request, callback);
+                        }, "name", { value: "ListPhraseSet" });
+    
+                        /**
+                         * Calls ListPhraseSet.
+                         * @function listPhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IListPhraseSetRequest} request ListPhraseSetRequest message or plain object
+                         * @returns {Promise<google.cloud.speech.v1.ListPhraseSetResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#updatePhraseSet}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef UpdatePhraseSetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.speech.v1.PhraseSet} [response] PhraseSet
+                         */
+    
+                        /**
+                         * Calls UpdatePhraseSet.
+                         * @function updatePhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IUpdatePhraseSetRequest} request UpdatePhraseSetRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.UpdatePhraseSetCallback} callback Node-style callback called with the error, if any, and PhraseSet
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.updatePhraseSet = function updatePhraseSet(request, callback) {
+                            return this.rpcCall(updatePhraseSet, $root.google.cloud.speech.v1.UpdatePhraseSetRequest, $root.google.cloud.speech.v1.PhraseSet, request, callback);
+                        }, "name", { value: "UpdatePhraseSet" });
+    
+                        /**
+                         * Calls UpdatePhraseSet.
+                         * @function updatePhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IUpdatePhraseSetRequest} request UpdatePhraseSetRequest message or plain object
+                         * @returns {Promise<google.cloud.speech.v1.PhraseSet>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#deletePhraseSet}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef DeletePhraseSetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeletePhraseSet.
+                         * @function deletePhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IDeletePhraseSetRequest} request DeletePhraseSetRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.DeletePhraseSetCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.deletePhraseSet = function deletePhraseSet(request, callback) {
+                            return this.rpcCall(deletePhraseSet, $root.google.cloud.speech.v1.DeletePhraseSetRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeletePhraseSet" });
+    
+                        /**
+                         * Calls DeletePhraseSet.
+                         * @function deletePhraseSet
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IDeletePhraseSetRequest} request DeletePhraseSetRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#createCustomClass}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef CreateCustomClassCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.speech.v1.CustomClass} [response] CustomClass
+                         */
+    
+                        /**
+                         * Calls CreateCustomClass.
+                         * @function createCustomClass
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.ICreateCustomClassRequest} request CreateCustomClassRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.CreateCustomClassCallback} callback Node-style callback called with the error, if any, and CustomClass
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.createCustomClass = function createCustomClass(request, callback) {
+                            return this.rpcCall(createCustomClass, $root.google.cloud.speech.v1.CreateCustomClassRequest, $root.google.cloud.speech.v1.CustomClass, request, callback);
+                        }, "name", { value: "CreateCustomClass" });
+    
+                        /**
+                         * Calls CreateCustomClass.
+                         * @function createCustomClass
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.ICreateCustomClassRequest} request CreateCustomClassRequest message or plain object
+                         * @returns {Promise<google.cloud.speech.v1.CustomClass>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#getCustomClass}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef GetCustomClassCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.speech.v1.CustomClass} [response] CustomClass
+                         */
+    
+                        /**
+                         * Calls GetCustomClass.
+                         * @function getCustomClass
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IGetCustomClassRequest} request GetCustomClassRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.GetCustomClassCallback} callback Node-style callback called with the error, if any, and CustomClass
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.getCustomClass = function getCustomClass(request, callback) {
+                            return this.rpcCall(getCustomClass, $root.google.cloud.speech.v1.GetCustomClassRequest, $root.google.cloud.speech.v1.CustomClass, request, callback);
+                        }, "name", { value: "GetCustomClass" });
+    
+                        /**
+                         * Calls GetCustomClass.
+                         * @function getCustomClass
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IGetCustomClassRequest} request GetCustomClassRequest message or plain object
+                         * @returns {Promise<google.cloud.speech.v1.CustomClass>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#listCustomClasses}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef ListCustomClassesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.speech.v1.ListCustomClassesResponse} [response] ListCustomClassesResponse
+                         */
+    
+                        /**
+                         * Calls ListCustomClasses.
+                         * @function listCustomClasses
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IListCustomClassesRequest} request ListCustomClassesRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.ListCustomClassesCallback} callback Node-style callback called with the error, if any, and ListCustomClassesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.listCustomClasses = function listCustomClasses(request, callback) {
+                            return this.rpcCall(listCustomClasses, $root.google.cloud.speech.v1.ListCustomClassesRequest, $root.google.cloud.speech.v1.ListCustomClassesResponse, request, callback);
+                        }, "name", { value: "ListCustomClasses" });
+    
+                        /**
+                         * Calls ListCustomClasses.
+                         * @function listCustomClasses
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IListCustomClassesRequest} request ListCustomClassesRequest message or plain object
+                         * @returns {Promise<google.cloud.speech.v1.ListCustomClassesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#updateCustomClass}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef UpdateCustomClassCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.speech.v1.CustomClass} [response] CustomClass
+                         */
+    
+                        /**
+                         * Calls UpdateCustomClass.
+                         * @function updateCustomClass
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IUpdateCustomClassRequest} request UpdateCustomClassRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.UpdateCustomClassCallback} callback Node-style callback called with the error, if any, and CustomClass
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.updateCustomClass = function updateCustomClass(request, callback) {
+                            return this.rpcCall(updateCustomClass, $root.google.cloud.speech.v1.UpdateCustomClassRequest, $root.google.cloud.speech.v1.CustomClass, request, callback);
+                        }, "name", { value: "UpdateCustomClass" });
+    
+                        /**
+                         * Calls UpdateCustomClass.
+                         * @function updateCustomClass
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IUpdateCustomClassRequest} request UpdateCustomClassRequest message or plain object
+                         * @returns {Promise<google.cloud.speech.v1.CustomClass>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.speech.v1.Adaptation#deleteCustomClass}.
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @typedef DeleteCustomClassCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteCustomClass.
+                         * @function deleteCustomClass
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IDeleteCustomClassRequest} request DeleteCustomClassRequest message or plain object
+                         * @param {google.cloud.speech.v1.Adaptation.DeleteCustomClassCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Adaptation.prototype.deleteCustomClass = function deleteCustomClass(request, callback) {
+                            return this.rpcCall(deleteCustomClass, $root.google.cloud.speech.v1.DeleteCustomClassRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteCustomClass" });
+    
+                        /**
+                         * Calls DeleteCustomClass.
+                         * @function deleteCustomClass
+                         * @memberof google.cloud.speech.v1.Adaptation
+                         * @instance
+                         * @param {google.cloud.speech.v1.IDeleteCustomClassRequest} request DeleteCustomClassRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        return Adaptation;
+                    })();
+    
+                    v1.CreatePhraseSetRequest = (function() {
+    
+                        /**
+                         * Properties of a CreatePhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface ICreatePhraseSetRequest
+                         * @property {string|null} [parent] CreatePhraseSetRequest parent
+                         * @property {string|null} [phraseSetId] CreatePhraseSetRequest phraseSetId
+                         * @property {google.cloud.speech.v1.IPhraseSet|null} [phraseSet] CreatePhraseSetRequest phraseSet
+                         */
+    
+                        /**
+                         * Constructs a new CreatePhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a CreatePhraseSetRequest.
+                         * @implements ICreatePhraseSetRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.ICreatePhraseSetRequest=} [properties] Properties to set
+                         */
+                        function CreatePhraseSetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreatePhraseSetRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @instance
+                         */
+                        CreatePhraseSetRequest.prototype.parent = "";
+    
+                        /**
+                         * CreatePhraseSetRequest phraseSetId.
+                         * @member {string} phraseSetId
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @instance
+                         */
+                        CreatePhraseSetRequest.prototype.phraseSetId = "";
+    
+                        /**
+                         * CreatePhraseSetRequest phraseSet.
+                         * @member {google.cloud.speech.v1.IPhraseSet|null|undefined} phraseSet
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @instance
+                         */
+                        CreatePhraseSetRequest.prototype.phraseSet = null;
+    
+                        /**
+                         * Creates a new CreatePhraseSetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.ICreatePhraseSetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.CreatePhraseSetRequest} CreatePhraseSetRequest instance
+                         */
+                        CreatePhraseSetRequest.create = function create(properties) {
+                            return new CreatePhraseSetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePhraseSetRequest message. Does not implicitly {@link google.cloud.speech.v1.CreatePhraseSetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.ICreatePhraseSetRequest} message CreatePhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePhraseSetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.phraseSetId != null && Object.hasOwnProperty.call(message, "phraseSetId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.phraseSetId);
+                            if (message.phraseSet != null && Object.hasOwnProperty.call(message, "phraseSet"))
+                                $root.google.cloud.speech.v1.PhraseSet.encode(message.phraseSet, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePhraseSetRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.CreatePhraseSetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.ICreatePhraseSetRequest} message CreatePhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePhraseSetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreatePhraseSetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.CreatePhraseSetRequest} CreatePhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePhraseSetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.CreatePhraseSetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.phraseSetId = reader.string();
+                                    break;
+                                case 3:
+                                    message.phraseSet = $root.google.cloud.speech.v1.PhraseSet.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreatePhraseSetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.CreatePhraseSetRequest} CreatePhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePhraseSetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreatePhraseSetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreatePhraseSetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.phraseSetId != null && message.hasOwnProperty("phraseSetId"))
+                                if (!$util.isString(message.phraseSetId))
+                                    return "phraseSetId: string expected";
+                            if (message.phraseSet != null && message.hasOwnProperty("phraseSet")) {
+                                var error = $root.google.cloud.speech.v1.PhraseSet.verify(message.phraseSet);
+                                if (error)
+                                    return "phraseSet." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreatePhraseSetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.CreatePhraseSetRequest} CreatePhraseSetRequest
+                         */
+                        CreatePhraseSetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.CreatePhraseSetRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.CreatePhraseSetRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.phraseSetId != null)
+                                message.phraseSetId = String(object.phraseSetId);
+                            if (object.phraseSet != null) {
+                                if (typeof object.phraseSet !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.CreatePhraseSetRequest.phraseSet: object expected");
+                                message.phraseSet = $root.google.cloud.speech.v1.PhraseSet.fromObject(object.phraseSet);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreatePhraseSetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.CreatePhraseSetRequest} message CreatePhraseSetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreatePhraseSetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.phraseSetId = "";
+                                object.phraseSet = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.phraseSetId != null && message.hasOwnProperty("phraseSetId"))
+                                object.phraseSetId = message.phraseSetId;
+                            if (message.phraseSet != null && message.hasOwnProperty("phraseSet"))
+                                object.phraseSet = $root.google.cloud.speech.v1.PhraseSet.toObject(message.phraseSet, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreatePhraseSetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.CreatePhraseSetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreatePhraseSetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreatePhraseSetRequest;
+                    })();
+    
+                    v1.UpdatePhraseSetRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdatePhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IUpdatePhraseSetRequest
+                         * @property {google.cloud.speech.v1.IPhraseSet|null} [phraseSet] UpdatePhraseSetRequest phraseSet
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePhraseSetRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdatePhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents an UpdatePhraseSetRequest.
+                         * @implements IUpdatePhraseSetRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IUpdatePhraseSetRequest=} [properties] Properties to set
+                         */
+                        function UpdatePhraseSetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdatePhraseSetRequest phraseSet.
+                         * @member {google.cloud.speech.v1.IPhraseSet|null|undefined} phraseSet
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @instance
+                         */
+                        UpdatePhraseSetRequest.prototype.phraseSet = null;
+    
+                        /**
+                         * UpdatePhraseSetRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @instance
+                         */
+                        UpdatePhraseSetRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdatePhraseSetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IUpdatePhraseSetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.UpdatePhraseSetRequest} UpdatePhraseSetRequest instance
+                         */
+                        UpdatePhraseSetRequest.create = function create(properties) {
+                            return new UpdatePhraseSetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePhraseSetRequest message. Does not implicitly {@link google.cloud.speech.v1.UpdatePhraseSetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IUpdatePhraseSetRequest} message UpdatePhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePhraseSetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.phraseSet != null && Object.hasOwnProperty.call(message, "phraseSet"))
+                                $root.google.cloud.speech.v1.PhraseSet.encode(message.phraseSet, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePhraseSetRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.UpdatePhraseSetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IUpdatePhraseSetRequest} message UpdatePhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePhraseSetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdatePhraseSetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.UpdatePhraseSetRequest} UpdatePhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePhraseSetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.UpdatePhraseSetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.phraseSet = $root.google.cloud.speech.v1.PhraseSet.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdatePhraseSetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.UpdatePhraseSetRequest} UpdatePhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePhraseSetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdatePhraseSetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdatePhraseSetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.phraseSet != null && message.hasOwnProperty("phraseSet")) {
+                                var error = $root.google.cloud.speech.v1.PhraseSet.verify(message.phraseSet);
+                                if (error)
+                                    return "phraseSet." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdatePhraseSetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.UpdatePhraseSetRequest} UpdatePhraseSetRequest
+                         */
+                        UpdatePhraseSetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.UpdatePhraseSetRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.UpdatePhraseSetRequest();
+                            if (object.phraseSet != null) {
+                                if (typeof object.phraseSet !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.UpdatePhraseSetRequest.phraseSet: object expected");
+                                message.phraseSet = $root.google.cloud.speech.v1.PhraseSet.fromObject(object.phraseSet);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.UpdatePhraseSetRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdatePhraseSetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.UpdatePhraseSetRequest} message UpdatePhraseSetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdatePhraseSetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.phraseSet = null;
+                                object.updateMask = null;
+                            }
+                            if (message.phraseSet != null && message.hasOwnProperty("phraseSet"))
+                                object.phraseSet = $root.google.cloud.speech.v1.PhraseSet.toObject(message.phraseSet, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdatePhraseSetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.UpdatePhraseSetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdatePhraseSetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdatePhraseSetRequest;
+                    })();
+    
+                    v1.GetPhraseSetRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IGetPhraseSetRequest
+                         * @property {string|null} [name] GetPhraseSetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a GetPhraseSetRequest.
+                         * @implements IGetPhraseSetRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IGetPhraseSetRequest=} [properties] Properties to set
+                         */
+                        function GetPhraseSetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPhraseSetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @instance
+                         */
+                        GetPhraseSetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPhraseSetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IGetPhraseSetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.GetPhraseSetRequest} GetPhraseSetRequest instance
+                         */
+                        GetPhraseSetRequest.create = function create(properties) {
+                            return new GetPhraseSetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPhraseSetRequest message. Does not implicitly {@link google.cloud.speech.v1.GetPhraseSetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IGetPhraseSetRequest} message GetPhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPhraseSetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPhraseSetRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.GetPhraseSetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IGetPhraseSetRequest} message GetPhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPhraseSetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPhraseSetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.GetPhraseSetRequest} GetPhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPhraseSetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.GetPhraseSetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPhraseSetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.GetPhraseSetRequest} GetPhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPhraseSetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPhraseSetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPhraseSetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPhraseSetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.GetPhraseSetRequest} GetPhraseSetRequest
+                         */
+                        GetPhraseSetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.GetPhraseSetRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.GetPhraseSetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPhraseSetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.GetPhraseSetRequest} message GetPhraseSetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPhraseSetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPhraseSetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.GetPhraseSetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPhraseSetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetPhraseSetRequest;
+                    })();
+    
+                    v1.ListPhraseSetRequest = (function() {
+    
+                        /**
+                         * Properties of a ListPhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IListPhraseSetRequest
+                         * @property {string|null} [parent] ListPhraseSetRequest parent
+                         * @property {number|null} [pageSize] ListPhraseSetRequest pageSize
+                         * @property {string|null} [pageToken] ListPhraseSetRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a ListPhraseSetRequest.
+                         * @implements IListPhraseSetRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IListPhraseSetRequest=} [properties] Properties to set
+                         */
+                        function ListPhraseSetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPhraseSetRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @instance
+                         */
+                        ListPhraseSetRequest.prototype.parent = "";
+    
+                        /**
+                         * ListPhraseSetRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @instance
+                         */
+                        ListPhraseSetRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListPhraseSetRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @instance
+                         */
+                        ListPhraseSetRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListPhraseSetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IListPhraseSetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.ListPhraseSetRequest} ListPhraseSetRequest instance
+                         */
+                        ListPhraseSetRequest.create = function create(properties) {
+                            return new ListPhraseSetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPhraseSetRequest message. Does not implicitly {@link google.cloud.speech.v1.ListPhraseSetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IListPhraseSetRequest} message ListPhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPhraseSetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPhraseSetRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.ListPhraseSetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IListPhraseSetRequest} message ListPhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPhraseSetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPhraseSetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.ListPhraseSetRequest} ListPhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPhraseSetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.ListPhraseSetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPhraseSetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.ListPhraseSetRequest} ListPhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPhraseSetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPhraseSetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPhraseSetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPhraseSetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.ListPhraseSetRequest} ListPhraseSetRequest
+                         */
+                        ListPhraseSetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.ListPhraseSetRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.ListPhraseSetRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPhraseSetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.ListPhraseSetRequest} message ListPhraseSetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPhraseSetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPhraseSetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.ListPhraseSetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPhraseSetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListPhraseSetRequest;
+                    })();
+    
+                    v1.ListPhraseSetResponse = (function() {
+    
+                        /**
+                         * Properties of a ListPhraseSetResponse.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IListPhraseSetResponse
+                         * @property {Array.<google.cloud.speech.v1.IPhraseSet>|null} [phraseSets] ListPhraseSetResponse phraseSets
+                         * @property {string|null} [nextPageToken] ListPhraseSetResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPhraseSetResponse.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a ListPhraseSetResponse.
+                         * @implements IListPhraseSetResponse
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IListPhraseSetResponse=} [properties] Properties to set
+                         */
+                        function ListPhraseSetResponse(properties) {
+                            this.phraseSets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPhraseSetResponse phraseSets.
+                         * @member {Array.<google.cloud.speech.v1.IPhraseSet>} phraseSets
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @instance
+                         */
+                        ListPhraseSetResponse.prototype.phraseSets = $util.emptyArray;
+    
+                        /**
+                         * ListPhraseSetResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @instance
+                         */
+                        ListPhraseSetResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListPhraseSetResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @static
+                         * @param {google.cloud.speech.v1.IListPhraseSetResponse=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.ListPhraseSetResponse} ListPhraseSetResponse instance
+                         */
+                        ListPhraseSetResponse.create = function create(properties) {
+                            return new ListPhraseSetResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPhraseSetResponse message. Does not implicitly {@link google.cloud.speech.v1.ListPhraseSetResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @static
+                         * @param {google.cloud.speech.v1.IListPhraseSetResponse} message ListPhraseSetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPhraseSetResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.phraseSets != null && message.phraseSets.length)
+                                for (var i = 0; i < message.phraseSets.length; ++i)
+                                    $root.google.cloud.speech.v1.PhraseSet.encode(message.phraseSets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPhraseSetResponse message, length delimited. Does not implicitly {@link google.cloud.speech.v1.ListPhraseSetResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @static
+                         * @param {google.cloud.speech.v1.IListPhraseSetResponse} message ListPhraseSetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPhraseSetResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPhraseSetResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.ListPhraseSetResponse} ListPhraseSetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPhraseSetResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.ListPhraseSetResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.phraseSets && message.phraseSets.length))
+                                        message.phraseSets = [];
+                                    message.phraseSets.push($root.google.cloud.speech.v1.PhraseSet.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPhraseSetResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.ListPhraseSetResponse} ListPhraseSetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPhraseSetResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPhraseSetResponse message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPhraseSetResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.phraseSets != null && message.hasOwnProperty("phraseSets")) {
+                                if (!Array.isArray(message.phraseSets))
+                                    return "phraseSets: array expected";
+                                for (var i = 0; i < message.phraseSets.length; ++i) {
+                                    var error = $root.google.cloud.speech.v1.PhraseSet.verify(message.phraseSets[i]);
+                                    if (error)
+                                        return "phraseSets." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPhraseSetResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.ListPhraseSetResponse} ListPhraseSetResponse
+                         */
+                        ListPhraseSetResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.ListPhraseSetResponse)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.ListPhraseSetResponse();
+                            if (object.phraseSets) {
+                                if (!Array.isArray(object.phraseSets))
+                                    throw TypeError(".google.cloud.speech.v1.ListPhraseSetResponse.phraseSets: array expected");
+                                message.phraseSets = [];
+                                for (var i = 0; i < object.phraseSets.length; ++i) {
+                                    if (typeof object.phraseSets[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v1.ListPhraseSetResponse.phraseSets: object expected");
+                                    message.phraseSets[i] = $root.google.cloud.speech.v1.PhraseSet.fromObject(object.phraseSets[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPhraseSetResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @static
+                         * @param {google.cloud.speech.v1.ListPhraseSetResponse} message ListPhraseSetResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPhraseSetResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.phraseSets = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.phraseSets && message.phraseSets.length) {
+                                object.phraseSets = [];
+                                for (var j = 0; j < message.phraseSets.length; ++j)
+                                    object.phraseSets[j] = $root.google.cloud.speech.v1.PhraseSet.toObject(message.phraseSets[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPhraseSetResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.ListPhraseSetResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPhraseSetResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListPhraseSetResponse;
+                    })();
+    
+                    v1.DeletePhraseSetRequest = (function() {
+    
+                        /**
+                         * Properties of a DeletePhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IDeletePhraseSetRequest
+                         * @property {string|null} [name] DeletePhraseSetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeletePhraseSetRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a DeletePhraseSetRequest.
+                         * @implements IDeletePhraseSetRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IDeletePhraseSetRequest=} [properties] Properties to set
+                         */
+                        function DeletePhraseSetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeletePhraseSetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @instance
+                         */
+                        DeletePhraseSetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeletePhraseSetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IDeletePhraseSetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.DeletePhraseSetRequest} DeletePhraseSetRequest instance
+                         */
+                        DeletePhraseSetRequest.create = function create(properties) {
+                            return new DeletePhraseSetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePhraseSetRequest message. Does not implicitly {@link google.cloud.speech.v1.DeletePhraseSetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IDeletePhraseSetRequest} message DeletePhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePhraseSetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePhraseSetRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.DeletePhraseSetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IDeletePhraseSetRequest} message DeletePhraseSetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePhraseSetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeletePhraseSetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.DeletePhraseSetRequest} DeletePhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePhraseSetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.DeletePhraseSetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeletePhraseSetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.DeletePhraseSetRequest} DeletePhraseSetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePhraseSetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeletePhraseSetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeletePhraseSetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeletePhraseSetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.DeletePhraseSetRequest} DeletePhraseSetRequest
+                         */
+                        DeletePhraseSetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.DeletePhraseSetRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.DeletePhraseSetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeletePhraseSetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.DeletePhraseSetRequest} message DeletePhraseSetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeletePhraseSetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeletePhraseSetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.DeletePhraseSetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeletePhraseSetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeletePhraseSetRequest;
+                    })();
+    
+                    v1.CreateCustomClassRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCustomClassRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface ICreateCustomClassRequest
+                         * @property {string|null} [parent] CreateCustomClassRequest parent
+                         * @property {string|null} [customClassId] CreateCustomClassRequest customClassId
+                         * @property {google.cloud.speech.v1.ICustomClass|null} [customClass] CreateCustomClassRequest customClass
+                         */
+    
+                        /**
+                         * Constructs a new CreateCustomClassRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a CreateCustomClassRequest.
+                         * @implements ICreateCustomClassRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.ICreateCustomClassRequest=} [properties] Properties to set
+                         */
+                        function CreateCustomClassRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCustomClassRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @instance
+                         */
+                        CreateCustomClassRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCustomClassRequest customClassId.
+                         * @member {string} customClassId
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @instance
+                         */
+                        CreateCustomClassRequest.prototype.customClassId = "";
+    
+                        /**
+                         * CreateCustomClassRequest customClass.
+                         * @member {google.cloud.speech.v1.ICustomClass|null|undefined} customClass
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @instance
+                         */
+                        CreateCustomClassRequest.prototype.customClass = null;
+    
+                        /**
+                         * Creates a new CreateCustomClassRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.ICreateCustomClassRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.CreateCustomClassRequest} CreateCustomClassRequest instance
+                         */
+                        CreateCustomClassRequest.create = function create(properties) {
+                            return new CreateCustomClassRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomClassRequest message. Does not implicitly {@link google.cloud.speech.v1.CreateCustomClassRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.ICreateCustomClassRequest} message CreateCustomClassRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomClassRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.customClassId != null && Object.hasOwnProperty.call(message, "customClassId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.customClassId);
+                            if (message.customClass != null && Object.hasOwnProperty.call(message, "customClass"))
+                                $root.google.cloud.speech.v1.CustomClass.encode(message.customClass, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomClassRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.CreateCustomClassRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.ICreateCustomClassRequest} message CreateCustomClassRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomClassRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomClassRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.CreateCustomClassRequest} CreateCustomClassRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomClassRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.CreateCustomClassRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.customClassId = reader.string();
+                                    break;
+                                case 3:
+                                    message.customClass = $root.google.cloud.speech.v1.CustomClass.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomClassRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.CreateCustomClassRequest} CreateCustomClassRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomClassRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCustomClassRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCustomClassRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.customClassId != null && message.hasOwnProperty("customClassId"))
+                                if (!$util.isString(message.customClassId))
+                                    return "customClassId: string expected";
+                            if (message.customClass != null && message.hasOwnProperty("customClass")) {
+                                var error = $root.google.cloud.speech.v1.CustomClass.verify(message.customClass);
+                                if (error)
+                                    return "customClass." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCustomClassRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.CreateCustomClassRequest} CreateCustomClassRequest
+                         */
+                        CreateCustomClassRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.CreateCustomClassRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.CreateCustomClassRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.customClassId != null)
+                                message.customClassId = String(object.customClassId);
+                            if (object.customClass != null) {
+                                if (typeof object.customClass !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.CreateCustomClassRequest.customClass: object expected");
+                                message.customClass = $root.google.cloud.speech.v1.CustomClass.fromObject(object.customClass);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCustomClassRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.CreateCustomClassRequest} message CreateCustomClassRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCustomClassRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.customClassId = "";
+                                object.customClass = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.customClassId != null && message.hasOwnProperty("customClassId"))
+                                object.customClassId = message.customClassId;
+                            if (message.customClass != null && message.hasOwnProperty("customClass"))
+                                object.customClass = $root.google.cloud.speech.v1.CustomClass.toObject(message.customClass, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCustomClassRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.CreateCustomClassRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCustomClassRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateCustomClassRequest;
+                    })();
+    
+                    v1.UpdateCustomClassRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCustomClassRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IUpdateCustomClassRequest
+                         * @property {google.cloud.speech.v1.ICustomClass|null} [customClass] UpdateCustomClassRequest customClass
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCustomClassRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCustomClassRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents an UpdateCustomClassRequest.
+                         * @implements IUpdateCustomClassRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IUpdateCustomClassRequest=} [properties] Properties to set
+                         */
+                        function UpdateCustomClassRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCustomClassRequest customClass.
+                         * @member {google.cloud.speech.v1.ICustomClass|null|undefined} customClass
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @instance
+                         */
+                        UpdateCustomClassRequest.prototype.customClass = null;
+    
+                        /**
+                         * UpdateCustomClassRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @instance
+                         */
+                        UpdateCustomClassRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateCustomClassRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IUpdateCustomClassRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.UpdateCustomClassRequest} UpdateCustomClassRequest instance
+                         */
+                        UpdateCustomClassRequest.create = function create(properties) {
+                            return new UpdateCustomClassRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomClassRequest message. Does not implicitly {@link google.cloud.speech.v1.UpdateCustomClassRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IUpdateCustomClassRequest} message UpdateCustomClassRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomClassRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customClass != null && Object.hasOwnProperty.call(message, "customClass"))
+                                $root.google.cloud.speech.v1.CustomClass.encode(message.customClass, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomClassRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.UpdateCustomClassRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IUpdateCustomClassRequest} message UpdateCustomClassRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomClassRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomClassRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.UpdateCustomClassRequest} UpdateCustomClassRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomClassRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.UpdateCustomClassRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.customClass = $root.google.cloud.speech.v1.CustomClass.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomClassRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.UpdateCustomClassRequest} UpdateCustomClassRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomClassRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCustomClassRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCustomClassRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customClass != null && message.hasOwnProperty("customClass")) {
+                                var error = $root.google.cloud.speech.v1.CustomClass.verify(message.customClass);
+                                if (error)
+                                    return "customClass." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCustomClassRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.UpdateCustomClassRequest} UpdateCustomClassRequest
+                         */
+                        UpdateCustomClassRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.UpdateCustomClassRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.UpdateCustomClassRequest();
+                            if (object.customClass != null) {
+                                if (typeof object.customClass !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.UpdateCustomClassRequest.customClass: object expected");
+                                message.customClass = $root.google.cloud.speech.v1.CustomClass.fromObject(object.customClass);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.UpdateCustomClassRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCustomClassRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.UpdateCustomClassRequest} message UpdateCustomClassRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCustomClassRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.customClass = null;
+                                object.updateMask = null;
+                            }
+                            if (message.customClass != null && message.hasOwnProperty("customClass"))
+                                object.customClass = $root.google.cloud.speech.v1.CustomClass.toObject(message.customClass, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCustomClassRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.UpdateCustomClassRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCustomClassRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateCustomClassRequest;
+                    })();
+    
+                    v1.GetCustomClassRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCustomClassRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IGetCustomClassRequest
+                         * @property {string|null} [name] GetCustomClassRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCustomClassRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a GetCustomClassRequest.
+                         * @implements IGetCustomClassRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IGetCustomClassRequest=} [properties] Properties to set
+                         */
+                        function GetCustomClassRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCustomClassRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @instance
+                         */
+                        GetCustomClassRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCustomClassRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IGetCustomClassRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.GetCustomClassRequest} GetCustomClassRequest instance
+                         */
+                        GetCustomClassRequest.create = function create(properties) {
+                            return new GetCustomClassRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomClassRequest message. Does not implicitly {@link google.cloud.speech.v1.GetCustomClassRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IGetCustomClassRequest} message GetCustomClassRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomClassRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomClassRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.GetCustomClassRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IGetCustomClassRequest} message GetCustomClassRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomClassRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCustomClassRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.GetCustomClassRequest} GetCustomClassRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomClassRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.GetCustomClassRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCustomClassRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.GetCustomClassRequest} GetCustomClassRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomClassRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCustomClassRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCustomClassRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCustomClassRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.GetCustomClassRequest} GetCustomClassRequest
+                         */
+                        GetCustomClassRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.GetCustomClassRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.GetCustomClassRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCustomClassRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.GetCustomClassRequest} message GetCustomClassRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCustomClassRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCustomClassRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.GetCustomClassRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCustomClassRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetCustomClassRequest;
+                    })();
+    
+                    v1.ListCustomClassesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListCustomClassesRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IListCustomClassesRequest
+                         * @property {string|null} [parent] ListCustomClassesRequest parent
+                         * @property {number|null} [pageSize] ListCustomClassesRequest pageSize
+                         * @property {string|null} [pageToken] ListCustomClassesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomClassesRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a ListCustomClassesRequest.
+                         * @implements IListCustomClassesRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IListCustomClassesRequest=} [properties] Properties to set
+                         */
+                        function ListCustomClassesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomClassesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @instance
+                         */
+                        ListCustomClassesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListCustomClassesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @instance
+                         */
+                        ListCustomClassesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListCustomClassesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @instance
+                         */
+                        ListCustomClassesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomClassesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IListCustomClassesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.ListCustomClassesRequest} ListCustomClassesRequest instance
+                         */
+                        ListCustomClassesRequest.create = function create(properties) {
+                            return new ListCustomClassesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomClassesRequest message. Does not implicitly {@link google.cloud.speech.v1.ListCustomClassesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IListCustomClassesRequest} message ListCustomClassesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomClassesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomClassesRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.ListCustomClassesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IListCustomClassesRequest} message ListCustomClassesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomClassesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomClassesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.ListCustomClassesRequest} ListCustomClassesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomClassesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.ListCustomClassesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomClassesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.ListCustomClassesRequest} ListCustomClassesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomClassesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomClassesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomClassesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomClassesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.ListCustomClassesRequest} ListCustomClassesRequest
+                         */
+                        ListCustomClassesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.ListCustomClassesRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.ListCustomClassesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomClassesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.ListCustomClassesRequest} message ListCustomClassesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomClassesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomClassesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.ListCustomClassesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomClassesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListCustomClassesRequest;
+                    })();
+    
+                    v1.ListCustomClassesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListCustomClassesResponse.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IListCustomClassesResponse
+                         * @property {Array.<google.cloud.speech.v1.ICustomClass>|null} [customClasses] ListCustomClassesResponse customClasses
+                         * @property {string|null} [nextPageToken] ListCustomClassesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomClassesResponse.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a ListCustomClassesResponse.
+                         * @implements IListCustomClassesResponse
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IListCustomClassesResponse=} [properties] Properties to set
+                         */
+                        function ListCustomClassesResponse(properties) {
+                            this.customClasses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomClassesResponse customClasses.
+                         * @member {Array.<google.cloud.speech.v1.ICustomClass>} customClasses
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @instance
+                         */
+                        ListCustomClassesResponse.prototype.customClasses = $util.emptyArray;
+    
+                        /**
+                         * ListCustomClassesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @instance
+                         */
+                        ListCustomClassesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomClassesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @static
+                         * @param {google.cloud.speech.v1.IListCustomClassesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.ListCustomClassesResponse} ListCustomClassesResponse instance
+                         */
+                        ListCustomClassesResponse.create = function create(properties) {
+                            return new ListCustomClassesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomClassesResponse message. Does not implicitly {@link google.cloud.speech.v1.ListCustomClassesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @static
+                         * @param {google.cloud.speech.v1.IListCustomClassesResponse} message ListCustomClassesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomClassesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customClasses != null && message.customClasses.length)
+                                for (var i = 0; i < message.customClasses.length; ++i)
+                                    $root.google.cloud.speech.v1.CustomClass.encode(message.customClasses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomClassesResponse message, length delimited. Does not implicitly {@link google.cloud.speech.v1.ListCustomClassesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @static
+                         * @param {google.cloud.speech.v1.IListCustomClassesResponse} message ListCustomClassesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomClassesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomClassesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.ListCustomClassesResponse} ListCustomClassesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomClassesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.ListCustomClassesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.customClasses && message.customClasses.length))
+                                        message.customClasses = [];
+                                    message.customClasses.push($root.google.cloud.speech.v1.CustomClass.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomClassesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.ListCustomClassesResponse} ListCustomClassesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomClassesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomClassesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomClassesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customClasses != null && message.hasOwnProperty("customClasses")) {
+                                if (!Array.isArray(message.customClasses))
+                                    return "customClasses: array expected";
+                                for (var i = 0; i < message.customClasses.length; ++i) {
+                                    var error = $root.google.cloud.speech.v1.CustomClass.verify(message.customClasses[i]);
+                                    if (error)
+                                        return "customClasses." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomClassesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.ListCustomClassesResponse} ListCustomClassesResponse
+                         */
+                        ListCustomClassesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.ListCustomClassesResponse)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.ListCustomClassesResponse();
+                            if (object.customClasses) {
+                                if (!Array.isArray(object.customClasses))
+                                    throw TypeError(".google.cloud.speech.v1.ListCustomClassesResponse.customClasses: array expected");
+                                message.customClasses = [];
+                                for (var i = 0; i < object.customClasses.length; ++i) {
+                                    if (typeof object.customClasses[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v1.ListCustomClassesResponse.customClasses: object expected");
+                                    message.customClasses[i] = $root.google.cloud.speech.v1.CustomClass.fromObject(object.customClasses[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomClassesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @static
+                         * @param {google.cloud.speech.v1.ListCustomClassesResponse} message ListCustomClassesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomClassesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.customClasses = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.customClasses && message.customClasses.length) {
+                                object.customClasses = [];
+                                for (var j = 0; j < message.customClasses.length; ++j)
+                                    object.customClasses[j] = $root.google.cloud.speech.v1.CustomClass.toObject(message.customClasses[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomClassesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.ListCustomClassesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomClassesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListCustomClassesResponse;
+                    })();
+    
+                    v1.DeleteCustomClassRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteCustomClassRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @interface IDeleteCustomClassRequest
+                         * @property {string|null} [name] DeleteCustomClassRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCustomClassRequest.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a DeleteCustomClassRequest.
+                         * @implements IDeleteCustomClassRequest
+                         * @constructor
+                         * @param {google.cloud.speech.v1.IDeleteCustomClassRequest=} [properties] Properties to set
+                         */
+                        function DeleteCustomClassRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCustomClassRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @instance
+                         */
+                        DeleteCustomClassRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteCustomClassRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IDeleteCustomClassRequest=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.DeleteCustomClassRequest} DeleteCustomClassRequest instance
+                         */
+                        DeleteCustomClassRequest.create = function create(properties) {
+                            return new DeleteCustomClassRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomClassRequest message. Does not implicitly {@link google.cloud.speech.v1.DeleteCustomClassRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IDeleteCustomClassRequest} message DeleteCustomClassRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomClassRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomClassRequest message, length delimited. Does not implicitly {@link google.cloud.speech.v1.DeleteCustomClassRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.IDeleteCustomClassRequest} message DeleteCustomClassRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomClassRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomClassRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.DeleteCustomClassRequest} DeleteCustomClassRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomClassRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.DeleteCustomClassRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomClassRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.DeleteCustomClassRequest} DeleteCustomClassRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomClassRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCustomClassRequest message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCustomClassRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCustomClassRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.DeleteCustomClassRequest} DeleteCustomClassRequest
+                         */
+                        DeleteCustomClassRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.DeleteCustomClassRequest)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.DeleteCustomClassRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCustomClassRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @static
+                         * @param {google.cloud.speech.v1.DeleteCustomClassRequest} message DeleteCustomClassRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCustomClassRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCustomClassRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.DeleteCustomClassRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCustomClassRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteCustomClassRequest;
+                    })();
+    
                     return v1;
                 })();
     

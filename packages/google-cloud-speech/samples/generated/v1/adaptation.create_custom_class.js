@@ -20,14 +20,14 @@
 
 'use strict';
 
-function main(parent, phraseSetId, phraseSet) {
-  // [START speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_async]
+function main(parent, customClassId, customClass) {
+  // [START speech_v1_generated_Adaptation_CreateCustomClass_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource where this phrase set will be created. Format:
-   *  `projects/{project}/locations/{location}/phraseSets`
+   *  Required. The parent resource where this custom class will be created. Format:
+   *  `projects/{project}/locations/{location}/customClasses`
    *  Speech-to-Text supports three locations: `global`, `us` (US North America),
    *  and `eu` (Europe). If you are calling the `speech.googleapis.com`
    *  endpoint, use the `global` location. To specify a region, use a
@@ -36,38 +36,38 @@ function main(parent, phraseSetId, phraseSet) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The ID to use for the phrase set, which will become the final
-   *  component of the phrase set's resource name.
+   *  Required. The ID to use for the custom class, which will become the final
+   *  component of the custom class' resource name.
    *  This value should restrict to letters, numbers, and hyphens, with the first
    *  character a letter, the last a letter or a number, and be 4-63 characters.
    */
-  // const phraseSetId = 'abc123'
+  // const customClassId = 'abc123'
   /**
-   *  Required. The phrase set to create.
+   *  Required. The custom class to create.
    */
-  // const phraseSet = {}
+  // const customClass = {}
 
   // Imports the Speech library
-  const {AdaptationClient} = require('@google-cloud/speech').v1p1beta1;
+  const {AdaptationClient} = require('@google-cloud/speech').v1;
 
   // Instantiates a client
   const speechClient = new AdaptationClient();
 
-  async function callCreatePhraseSet() {
+  async function callCreateCustomClass() {
     // Construct request
     const request = {
       parent,
-      phraseSetId,
-      phraseSet,
+      customClassId,
+      customClass,
     };
 
     // Run request
-    const response = await speechClient.createPhraseSet(request);
+    const response = await speechClient.createCustomClass(request);
     console.log(response);
   }
 
-  callCreatePhraseSet();
-  // [END speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_async]
+  callCreateCustomClass();
+  // [END speech_v1_generated_Adaptation_CreateCustomClass_async]
 }
 
 process.on('unhandledRejection', err => {

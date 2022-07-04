@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent, phraseSetId, phraseSet) {
-  // [START speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_async]
+  // [START speech_v1_generated_Adaptation_CreatePhraseSet_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -48,7 +48,7 @@ function main(parent, phraseSetId, phraseSet) {
   // const phraseSet = {}
 
   // Imports the Speech library
-  const {AdaptationClient} = require('@google-cloud/speech').v1p1beta1;
+  const {AdaptationClient} = require('@google-cloud/speech').v1;
 
   // Instantiates a client
   const speechClient = new AdaptationClient();
@@ -67,7 +67,7 @@ function main(parent, phraseSetId, phraseSet) {
   }
 
   callCreatePhraseSet();
-  // [END speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_async]
+  // [END speech_v1_generated_Adaptation_CreatePhraseSet_async]
 }
 
 process.on('unhandledRejection', err => {

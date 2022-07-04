@@ -26,8 +26,7 @@ function main(parent, customClassId, customClass) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource where this custom class will be created.
-   *  Format:
+   *  Required. The parent resource where this custom class will be created. Format:
    *  `projects/{project}/locations/{location}/customClasses`
    *  Speech-to-Text supports three locations: `global`, `us` (US North America),
    *  and `eu` (Europe). If you are calling the `speech.googleapis.com`
@@ -39,8 +38,8 @@ function main(parent, customClassId, customClass) {
   /**
    *  Required. The ID to use for the custom class, which will become the final
    *  component of the custom class' resource name.
-   *  This value should be 4-63 characters, and valid characters
-   *  are /[a-z][0-9]-/.
+   *  This value should restrict to letters, numbers, and hyphens, with the first
+   *  character a letter, the last a letter or a number, and be 4-63 characters.
    */
   // const customClassId = 'abc123'
   /**

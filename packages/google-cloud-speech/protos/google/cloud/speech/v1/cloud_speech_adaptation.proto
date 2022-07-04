@@ -14,21 +14,21 @@
 
 syntax = "proto3";
 
-package google.cloud.speech.v1p1beta1;
+package google.cloud.speech.v1;
 
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
-import "google/cloud/speech/v1p1beta1/resource.proto";
+import "google/cloud/speech/v1/resource.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 
 option cc_enable_arenas = true;
-option go_package = "google.golang.org/genproto/googleapis/cloud/speech/v1p1beta1;speech";
+option go_package = "google.golang.org/genproto/googleapis/cloud/speech/v1;speech";
 option java_multiple_files = true;
 option java_outer_classname = "SpeechAdaptationProto";
-option java_package = "com.google.cloud.speech.v1p1beta1";
+option java_package = "com.google.cloud.speech.v1";
 option objc_class_prefix = "GCS";
 
 // Service that implements Google Cloud Speech Adaptation API.
@@ -41,7 +41,7 @@ service Adaptation {
   // recognition model when you send a call that includes the PhraseSet.
   rpc CreatePhraseSet(CreatePhraseSetRequest) returns (PhraseSet) {
     option (google.api.http) = {
-      post: "/v1p1beta1/{parent=projects/*/locations/*}/phraseSets"
+      post: "/v1/{parent=projects/*/locations/*}/phraseSets"
       body: "*"
     };
     option (google.api.method_signature) = "parent,phrase_set,phrase_set_id";
@@ -50,7 +50,7 @@ service Adaptation {
   // Get a phrase set.
   rpc GetPhraseSet(GetPhraseSetRequest) returns (PhraseSet) {
     option (google.api.http) = {
-      get: "/v1p1beta1/{name=projects/*/locations/*/phraseSets/*}"
+      get: "/v1/{name=projects/*/locations/*/phraseSets/*}"
     };
     option (google.api.method_signature) = "name";
   }
@@ -58,7 +58,7 @@ service Adaptation {
   // List phrase sets.
   rpc ListPhraseSet(ListPhraseSetRequest) returns (ListPhraseSetResponse) {
     option (google.api.http) = {
-      get: "/v1p1beta1/{parent=projects/*/locations/*}/phraseSets"
+      get: "/v1/{parent=projects/*/locations/*}/phraseSets"
     };
     option (google.api.method_signature) = "parent";
   }
@@ -66,7 +66,7 @@ service Adaptation {
   // Update a phrase set.
   rpc UpdatePhraseSet(UpdatePhraseSetRequest) returns (PhraseSet) {
     option (google.api.http) = {
-      patch: "/v1p1beta1/{phrase_set.name=projects/*/locations/*/phraseSets/*}"
+      patch: "/v1/{phrase_set.name=projects/*/locations/*/phraseSets/*}"
       body: "phrase_set"
     };
     option (google.api.method_signature) = "phrase_set,update_mask";
@@ -75,7 +75,7 @@ service Adaptation {
   // Delete a phrase set.
   rpc DeletePhraseSet(DeletePhraseSetRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1p1beta1/{name=projects/*/locations/*/phraseSets/*}"
+      delete: "/v1/{name=projects/*/locations/*/phraseSets/*}"
     };
     option (google.api.method_signature) = "name";
   }
@@ -83,7 +83,7 @@ service Adaptation {
   // Create a custom class.
   rpc CreateCustomClass(CreateCustomClassRequest) returns (CustomClass) {
     option (google.api.http) = {
-      post: "/v1p1beta1/{parent=projects/*/locations/*}/customClasses"
+      post: "/v1/{parent=projects/*/locations/*}/customClasses"
       body: "*"
     };
     option (google.api.method_signature) = "parent,custom_class,custom_class_id";
@@ -92,7 +92,7 @@ service Adaptation {
   // Get a custom class.
   rpc GetCustomClass(GetCustomClassRequest) returns (CustomClass) {
     option (google.api.http) = {
-      get: "/v1p1beta1/{name=projects/*/locations/*/customClasses/*}"
+      get: "/v1/{name=projects/*/locations/*/customClasses/*}"
     };
     option (google.api.method_signature) = "name";
   }
@@ -100,7 +100,7 @@ service Adaptation {
   // List custom classes.
   rpc ListCustomClasses(ListCustomClassesRequest) returns (ListCustomClassesResponse) {
     option (google.api.http) = {
-      get: "/v1p1beta1/{parent=projects/*/locations/*}/customClasses"
+      get: "/v1/{parent=projects/*/locations/*}/customClasses"
     };
     option (google.api.method_signature) = "parent";
   }
@@ -108,7 +108,7 @@ service Adaptation {
   // Update a custom class.
   rpc UpdateCustomClass(UpdateCustomClassRequest) returns (CustomClass) {
     option (google.api.http) = {
-      patch: "/v1p1beta1/{custom_class.name=projects/*/locations/*/customClasses/*}"
+      patch: "/v1/{custom_class.name=projects/*/locations/*/customClasses/*}"
       body: "custom_class"
     };
     option (google.api.method_signature) = "custom_class,update_mask";
@@ -117,7 +117,7 @@ service Adaptation {
   // Delete a custom class.
   rpc DeleteCustomClass(DeleteCustomClassRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1p1beta1/{name=projects/*/locations/*/customClasses/*}"
+      delete: "/v1/{name=projects/*/locations/*/customClasses/*}"
     };
     option (google.api.method_signature) = "name";
   }
