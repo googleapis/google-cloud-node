@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-network-management/compare/v2.0.0...v2.1.0) (2022-07-04)
+
+
+### Features
+
+* support regapic LRO ([f725753](https://github.com/googleapis/nodejs-network-management/commit/f7257531090d1ef5fe1f0c889d7fe0869ab7e0b1))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-network-management/compare/v1.1.2...v2.0.0) (2022-05-19)
 
 
