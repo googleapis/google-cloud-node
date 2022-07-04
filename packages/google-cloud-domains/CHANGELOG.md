@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-domains/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#135](https://github.com/googleapis/nodejs-domains/issues/135)) ([b1694a2](https://github.com/googleapis/nodejs-domains/commit/b1694a2669359b73efb7860fb30bafa60af77ca2))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-domains/compare/v1.2.0...v2.0.0) (2022-05-20)
 
 
