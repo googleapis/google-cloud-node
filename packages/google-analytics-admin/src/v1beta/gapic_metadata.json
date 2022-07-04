@@ -1,0 +1,537 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.analytics.admin.v1beta",
+  "libraryPackage": "@google-cloud/admin",
+  "services": {
+    "AnalyticsAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AnalyticsAdminServiceClient",
+          "rpcs": {
+            "GetAccount": {
+              "methods": [
+                "getAccount"
+              ]
+            },
+            "DeleteAccount": {
+              "methods": [
+                "deleteAccount"
+              ]
+            },
+            "UpdateAccount": {
+              "methods": [
+                "updateAccount"
+              ]
+            },
+            "ProvisionAccountTicket": {
+              "methods": [
+                "provisionAccountTicket"
+              ]
+            },
+            "GetProperty": {
+              "methods": [
+                "getProperty"
+              ]
+            },
+            "CreateProperty": {
+              "methods": [
+                "createProperty"
+              ]
+            },
+            "DeleteProperty": {
+              "methods": [
+                "deleteProperty"
+              ]
+            },
+            "UpdateProperty": {
+              "methods": [
+                "updateProperty"
+              ]
+            },
+            "CreateFirebaseLink": {
+              "methods": [
+                "createFirebaseLink"
+              ]
+            },
+            "DeleteFirebaseLink": {
+              "methods": [
+                "deleteFirebaseLink"
+              ]
+            },
+            "CreateGoogleAdsLink": {
+              "methods": [
+                "createGoogleAdsLink"
+              ]
+            },
+            "UpdateGoogleAdsLink": {
+              "methods": [
+                "updateGoogleAdsLink"
+              ]
+            },
+            "DeleteGoogleAdsLink": {
+              "methods": [
+                "deleteGoogleAdsLink"
+              ]
+            },
+            "GetDataSharingSettings": {
+              "methods": [
+                "getDataSharingSettings"
+              ]
+            },
+            "GetMeasurementProtocolSecret": {
+              "methods": [
+                "getMeasurementProtocolSecret"
+              ]
+            },
+            "CreateMeasurementProtocolSecret": {
+              "methods": [
+                "createMeasurementProtocolSecret"
+              ]
+            },
+            "DeleteMeasurementProtocolSecret": {
+              "methods": [
+                "deleteMeasurementProtocolSecret"
+              ]
+            },
+            "UpdateMeasurementProtocolSecret": {
+              "methods": [
+                "updateMeasurementProtocolSecret"
+              ]
+            },
+            "AcknowledgeUserDataCollection": {
+              "methods": [
+                "acknowledgeUserDataCollection"
+              ]
+            },
+            "CreateConversionEvent": {
+              "methods": [
+                "createConversionEvent"
+              ]
+            },
+            "GetConversionEvent": {
+              "methods": [
+                "getConversionEvent"
+              ]
+            },
+            "DeleteConversionEvent": {
+              "methods": [
+                "deleteConversionEvent"
+              ]
+            },
+            "CreateCustomDimension": {
+              "methods": [
+                "createCustomDimension"
+              ]
+            },
+            "UpdateCustomDimension": {
+              "methods": [
+                "updateCustomDimension"
+              ]
+            },
+            "ArchiveCustomDimension": {
+              "methods": [
+                "archiveCustomDimension"
+              ]
+            },
+            "GetCustomDimension": {
+              "methods": [
+                "getCustomDimension"
+              ]
+            },
+            "CreateCustomMetric": {
+              "methods": [
+                "createCustomMetric"
+              ]
+            },
+            "UpdateCustomMetric": {
+              "methods": [
+                "updateCustomMetric"
+              ]
+            },
+            "ArchiveCustomMetric": {
+              "methods": [
+                "archiveCustomMetric"
+              ]
+            },
+            "GetCustomMetric": {
+              "methods": [
+                "getCustomMetric"
+              ]
+            },
+            "GetDataRetentionSettings": {
+              "methods": [
+                "getDataRetentionSettings"
+              ]
+            },
+            "UpdateDataRetentionSettings": {
+              "methods": [
+                "updateDataRetentionSettings"
+              ]
+            },
+            "CreateDataStream": {
+              "methods": [
+                "createDataStream"
+              ]
+            },
+            "DeleteDataStream": {
+              "methods": [
+                "deleteDataStream"
+              ]
+            },
+            "UpdateDataStream": {
+              "methods": [
+                "updateDataStream"
+              ]
+            },
+            "GetDataStream": {
+              "methods": [
+                "getDataStream"
+              ]
+            },
+            "ListAccounts": {
+              "methods": [
+                "listAccounts",
+                "listAccountsStream",
+                "listAccountsAsync"
+              ]
+            },
+            "ListAccountSummaries": {
+              "methods": [
+                "listAccountSummaries",
+                "listAccountSummariesStream",
+                "listAccountSummariesAsync"
+              ]
+            },
+            "ListProperties": {
+              "methods": [
+                "listProperties",
+                "listPropertiesStream",
+                "listPropertiesAsync"
+              ]
+            },
+            "ListFirebaseLinks": {
+              "methods": [
+                "listFirebaseLinks",
+                "listFirebaseLinksStream",
+                "listFirebaseLinksAsync"
+              ]
+            },
+            "ListGoogleAdsLinks": {
+              "methods": [
+                "listGoogleAdsLinks",
+                "listGoogleAdsLinksStream",
+                "listGoogleAdsLinksAsync"
+              ]
+            },
+            "ListMeasurementProtocolSecrets": {
+              "methods": [
+                "listMeasurementProtocolSecrets",
+                "listMeasurementProtocolSecretsStream",
+                "listMeasurementProtocolSecretsAsync"
+              ]
+            },
+            "SearchChangeHistoryEvents": {
+              "methods": [
+                "searchChangeHistoryEvents",
+                "searchChangeHistoryEventsStream",
+                "searchChangeHistoryEventsAsync"
+              ]
+            },
+            "ListConversionEvents": {
+              "methods": [
+                "listConversionEvents",
+                "listConversionEventsStream",
+                "listConversionEventsAsync"
+              ]
+            },
+            "ListCustomDimensions": {
+              "methods": [
+                "listCustomDimensions",
+                "listCustomDimensionsStream",
+                "listCustomDimensionsAsync"
+              ]
+            },
+            "ListCustomMetrics": {
+              "methods": [
+                "listCustomMetrics",
+                "listCustomMetricsStream",
+                "listCustomMetricsAsync"
+              ]
+            },
+            "ListDataStreams": {
+              "methods": [
+                "listDataStreams",
+                "listDataStreamsStream",
+                "listDataStreamsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AnalyticsAdminServiceClient",
+          "rpcs": {
+            "GetAccount": {
+              "methods": [
+                "getAccount"
+              ]
+            },
+            "DeleteAccount": {
+              "methods": [
+                "deleteAccount"
+              ]
+            },
+            "UpdateAccount": {
+              "methods": [
+                "updateAccount"
+              ]
+            },
+            "ProvisionAccountTicket": {
+              "methods": [
+                "provisionAccountTicket"
+              ]
+            },
+            "GetProperty": {
+              "methods": [
+                "getProperty"
+              ]
+            },
+            "CreateProperty": {
+              "methods": [
+                "createProperty"
+              ]
+            },
+            "DeleteProperty": {
+              "methods": [
+                "deleteProperty"
+              ]
+            },
+            "UpdateProperty": {
+              "methods": [
+                "updateProperty"
+              ]
+            },
+            "CreateFirebaseLink": {
+              "methods": [
+                "createFirebaseLink"
+              ]
+            },
+            "DeleteFirebaseLink": {
+              "methods": [
+                "deleteFirebaseLink"
+              ]
+            },
+            "CreateGoogleAdsLink": {
+              "methods": [
+                "createGoogleAdsLink"
+              ]
+            },
+            "UpdateGoogleAdsLink": {
+              "methods": [
+                "updateGoogleAdsLink"
+              ]
+            },
+            "DeleteGoogleAdsLink": {
+              "methods": [
+                "deleteGoogleAdsLink"
+              ]
+            },
+            "GetDataSharingSettings": {
+              "methods": [
+                "getDataSharingSettings"
+              ]
+            },
+            "GetMeasurementProtocolSecret": {
+              "methods": [
+                "getMeasurementProtocolSecret"
+              ]
+            },
+            "CreateMeasurementProtocolSecret": {
+              "methods": [
+                "createMeasurementProtocolSecret"
+              ]
+            },
+            "DeleteMeasurementProtocolSecret": {
+              "methods": [
+                "deleteMeasurementProtocolSecret"
+              ]
+            },
+            "UpdateMeasurementProtocolSecret": {
+              "methods": [
+                "updateMeasurementProtocolSecret"
+              ]
+            },
+            "AcknowledgeUserDataCollection": {
+              "methods": [
+                "acknowledgeUserDataCollection"
+              ]
+            },
+            "CreateConversionEvent": {
+              "methods": [
+                "createConversionEvent"
+              ]
+            },
+            "GetConversionEvent": {
+              "methods": [
+                "getConversionEvent"
+              ]
+            },
+            "DeleteConversionEvent": {
+              "methods": [
+                "deleteConversionEvent"
+              ]
+            },
+            "CreateCustomDimension": {
+              "methods": [
+                "createCustomDimension"
+              ]
+            },
+            "UpdateCustomDimension": {
+              "methods": [
+                "updateCustomDimension"
+              ]
+            },
+            "ArchiveCustomDimension": {
+              "methods": [
+                "archiveCustomDimension"
+              ]
+            },
+            "GetCustomDimension": {
+              "methods": [
+                "getCustomDimension"
+              ]
+            },
+            "CreateCustomMetric": {
+              "methods": [
+                "createCustomMetric"
+              ]
+            },
+            "UpdateCustomMetric": {
+              "methods": [
+                "updateCustomMetric"
+              ]
+            },
+            "ArchiveCustomMetric": {
+              "methods": [
+                "archiveCustomMetric"
+              ]
+            },
+            "GetCustomMetric": {
+              "methods": [
+                "getCustomMetric"
+              ]
+            },
+            "GetDataRetentionSettings": {
+              "methods": [
+                "getDataRetentionSettings"
+              ]
+            },
+            "UpdateDataRetentionSettings": {
+              "methods": [
+                "updateDataRetentionSettings"
+              ]
+            },
+            "CreateDataStream": {
+              "methods": [
+                "createDataStream"
+              ]
+            },
+            "DeleteDataStream": {
+              "methods": [
+                "deleteDataStream"
+              ]
+            },
+            "UpdateDataStream": {
+              "methods": [
+                "updateDataStream"
+              ]
+            },
+            "GetDataStream": {
+              "methods": [
+                "getDataStream"
+              ]
+            },
+            "ListAccounts": {
+              "methods": [
+                "listAccounts",
+                "listAccountsStream",
+                "listAccountsAsync"
+              ]
+            },
+            "ListAccountSummaries": {
+              "methods": [
+                "listAccountSummaries",
+                "listAccountSummariesStream",
+                "listAccountSummariesAsync"
+              ]
+            },
+            "ListProperties": {
+              "methods": [
+                "listProperties",
+                "listPropertiesStream",
+                "listPropertiesAsync"
+              ]
+            },
+            "ListFirebaseLinks": {
+              "methods": [
+                "listFirebaseLinks",
+                "listFirebaseLinksStream",
+                "listFirebaseLinksAsync"
+              ]
+            },
+            "ListGoogleAdsLinks": {
+              "methods": [
+                "listGoogleAdsLinks",
+                "listGoogleAdsLinksStream",
+                "listGoogleAdsLinksAsync"
+              ]
+            },
+            "ListMeasurementProtocolSecrets": {
+              "methods": [
+                "listMeasurementProtocolSecrets",
+                "listMeasurementProtocolSecretsStream",
+                "listMeasurementProtocolSecretsAsync"
+              ]
+            },
+            "SearchChangeHistoryEvents": {
+              "methods": [
+                "searchChangeHistoryEvents",
+                "searchChangeHistoryEventsStream",
+                "searchChangeHistoryEventsAsync"
+              ]
+            },
+            "ListConversionEvents": {
+              "methods": [
+                "listConversionEvents",
+                "listConversionEventsStream",
+                "listConversionEventsAsync"
+              ]
+            },
+            "ListCustomDimensions": {
+              "methods": [
+                "listCustomDimensions",
+                "listCustomDimensionsStream",
+                "listCustomDimensionsAsync"
+              ]
+            },
+            "ListCustomMetrics": {
+              "methods": [
+                "listCustomMetrics",
+                "listCustomMetricsStream",
+                "listCustomMetricsAsync"
+              ]
+            },
+            "ListDataStreams": {
+              "methods": [
+                "listDataStreams",
+                "listDataStreamsStream",
+                "listDataStreamsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
