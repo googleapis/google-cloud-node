@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.1.0...v4.2.0) (2022-07-04)
+
+
+### Features
+
+* support regapic LRO ([1290f13](https://github.com/googleapis/nodejs-containeranalysis/commit/1290f1322a788735340ac1c10b57a38d78396bb8))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/grafeas to v4 ([#420](https://github.com/googleapis/nodejs-containeranalysis/issues/420)) ([6e40ebe](https://github.com/googleapis/nodejs-containeranalysis/commit/6e40ebe146d61bb6594c3b7e76514250843a5ff0))
+* **issue-417:** adding additional asserts to track flaky error ([#421](https://github.com/googleapis/nodejs-containeranalysis/issues/421)) ([23cd446](https://github.com/googleapis/nodejs-containeranalysis/commit/23cd446962c3e2a3ec00981d87dd9d41c17873ee))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.0.0...v4.1.0) (2022-06-10)
 
 
