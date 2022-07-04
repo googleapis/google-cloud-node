@@ -4,6 +4,37 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-cloud-container/compare/v4.0.1...v4.1.0) (2022-07-04)
+
+
+### Features
+
+* add Binauthz Evaluation mode support to GKE Classic ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add Binauthz Evaluation mode support to GKE Classic ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add cgroup mode to node system config ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add GKE Identity Service ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add Location Policy API ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add Location Policy API ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add managed prometheus feature ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add network tags to autopilot cluster ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add network tags to autopilot cluster ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add protect config audit api ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add support to modify kubelet pod pid limit in node system configuration ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* add support to modify kubelet pod pid limit in node system configuration ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support enabling Confidential Nodes in the node pool ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support enabling Confidential Nodes in the node pool ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support GKE Cost Allocations ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support GPU timesharing ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support GPU timesharing ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support IPV6 Dual Stack (stack_type) ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support node pool blue-green upgrade ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support node pool blue-green upgrade ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support regapic LRO ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support spot VM ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support Tier 1 bandwidth ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* support Tier 1 bandwidth ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+* update support for node pool labels, taints and network tags ([ebe6500](https://github.com/googleapis/nodejs-cloud-container/commit/ebe650079d2c0dd32780379616f20fe1eaf36ca7))
+
 ## [4.0.1](https://github.com/googleapis/nodejs-cloud-container/compare/v4.0.0...v4.0.1) (2022-06-10)
 
 
