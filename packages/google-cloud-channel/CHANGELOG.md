@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-channel/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#156](https://github.com/googleapis/nodejs-channel/issues/156)) ([2082b3f](https://github.com/googleapis/nodejs-channel/commit/2082b3fdb4b1214ae9a70fa9e575231167a02a06))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-channel/compare/v1.7.0...v2.0.0) (2022-05-19)
 
 
