@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-iam-credentials/compare/v2.0.0...v2.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** document fallback rest option ([#141](https://github.com/googleapis/nodejs-iam-credentials/issues/141)) ([8f19e16](https://github.com/googleapis/nodejs-iam-credentials/commit/8f19e164586ea78e24657575c4d8670e31bf9d8d))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-iam-credentials/compare/v1.2.0...v2.0.0) (2022-05-20)
 
 
