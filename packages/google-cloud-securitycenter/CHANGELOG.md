@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/nodejs-security-center/compare/v6.0.0...v6.1.0) (2022-07-04)
+
+
+### Features
+
+* Added contacts field to findings attributes, specifying Essential Contacts defined at org, folder or project level within a GCP org ([3937d33](https://github.com/googleapis/nodejs-security-center/commit/3937d335f081077364f52253e72d028389cd3602))
+* support regapic LRO ([#495](https://github.com/googleapis/nodejs-security-center/issues/495)) ([7bfc2bd](https://github.com/googleapis/nodejs-security-center/commit/7bfc2bd641078d5a3b46950d61d77bac3b1b077b))
+
 ## [6.0.0](https://github.com/googleapis/nodejs-security-center/compare/v5.11.0...v6.0.0) (2022-06-03)
 
 
