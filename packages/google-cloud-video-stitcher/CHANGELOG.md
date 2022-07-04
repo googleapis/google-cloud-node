@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.1.1...v0.2.0) (2022-07-04)
+
+
+### Features
+
+* add asset_id and stream_id fields to VodSession and LiveSession responses ([194dcc2](https://github.com/googleapis/nodejs-video-stitcher/commit/194dcc247e4a6887ed204d8b188f61750a65ef43))
+* support regapic LRO ([194dcc2](https://github.com/googleapis/nodejs-video-stitcher/commit/194dcc247e4a6887ed204d8b188f61750a65ef43))
+
+
+### Bug Fixes
+
+* remove COMPLETE_POD stitching option ([194dcc2](https://github.com/googleapis/nodejs-video-stitcher/commit/194dcc247e4a6887ed204d8b188f61750a65ef43))
+
 ## [0.1.1](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.1.0...v0.1.1) (2022-06-23)
 
 
