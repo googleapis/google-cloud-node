@@ -31,6 +31,18 @@ function main(parent, model) {
    */
   // const parent = 'abc123'
   /**
+   *  Optional. The resource name of the model into which to upload the version. Only
+   *  specify this field when uploading a new version.
+   */
+  // const parentModel = 'abc123'
+  /**
+   *  Optional. The ID to use for the uploaded Model, which will become the final
+   *  component of the model resource name.
+   *  This value may be up to 63 characters, and valid characters are
+   *  `[a-z0-9_-]`. The first character cannot be a number or hyphen.
+   */
+  // const modelId = 'abc123'
+  /**
    *  Required. The Model to create.
    */
   // const model = {}

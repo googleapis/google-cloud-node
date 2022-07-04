@@ -59,6 +59,13 @@
                 "listDataItemsAsync"
               ]
             },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
+              ]
+            },
             "ListAnnotations": {
               "methods": [
                 "listAnnotations",
@@ -118,6 +125,13 @@
                 "listDataItems",
                 "listDataItemsStream",
                 "listDataItemsAsync"
+              ]
+            },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
               ]
             },
             "ListAnnotations": {
@@ -1359,9 +1373,19 @@
                 "updateModel"
               ]
             },
+            "MergeVersionAliases": {
+              "methods": [
+                "mergeVersionAliases"
+              ]
+            },
             "ImportModelEvaluation": {
               "methods": [
                 "importModelEvaluation"
+              ]
+            },
+            "BatchImportModelEvaluationSlices": {
+              "methods": [
+                "batchImportModelEvaluationSlices"
               ]
             },
             "GetModelEvaluation": {
@@ -1384,6 +1408,11 @@
                 "deleteModel"
               ]
             },
+            "DeleteModelVersion": {
+              "methods": [
+                "deleteModelVersion"
+              ]
+            },
             "ExportModel": {
               "methods": [
                 "exportModel"
@@ -1394,6 +1423,13 @@
                 "listModels",
                 "listModelsStream",
                 "listModelsAsync"
+              ]
+            },
+            "ListModelVersions": {
+              "methods": [
+                "listModelVersions",
+                "listModelVersionsStream",
+                "listModelVersionsAsync"
               ]
             },
             "ListModelEvaluations": {
@@ -1425,9 +1461,19 @@
                 "updateModel"
               ]
             },
+            "MergeVersionAliases": {
+              "methods": [
+                "mergeVersionAliases"
+              ]
+            },
             "ImportModelEvaluation": {
               "methods": [
                 "importModelEvaluation"
+              ]
+            },
+            "BatchImportModelEvaluationSlices": {
+              "methods": [
+                "batchImportModelEvaluationSlices"
               ]
             },
             "GetModelEvaluation": {
@@ -1450,6 +1496,11 @@
                 "deleteModel"
               ]
             },
+            "DeleteModelVersion": {
+              "methods": [
+                "deleteModelVersion"
+              ]
+            },
             "ExportModel": {
               "methods": [
                 "exportModel"
@@ -1460,6 +1511,13 @@
                 "listModels",
                 "listModelsStream",
                 "listModelsAsync"
+              ]
+            },
+            "ListModelVersions": {
+              "methods": [
+                "listModelVersions",
+                "listModelVersionsStream",
+                "listModelVersionsAsync"
               ]
             },
             "ListModelEvaluations": {

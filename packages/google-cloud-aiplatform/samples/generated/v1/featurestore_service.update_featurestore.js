@@ -43,6 +43,7 @@ function main(featurestore) {
    *  Updatable fields:
    *    * `labels`
    *    * `online_serving_config.fixed_node_count`
+   *    * `online_serving_config.scaling`
    */
   // const updateMask = {}
 

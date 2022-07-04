@@ -59,6 +59,13 @@
                 "listDataItemsAsync"
               ]
             },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
+              ]
+            },
             "ListAnnotations": {
               "methods": [
                 "listAnnotations",
@@ -118,6 +125,13 @@
                 "listDataItems",
                 "listDataItemsStream",
                 "listDataItemsAsync"
+              ]
+            },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
               ]
             },
             "ListAnnotations": {
@@ -1369,6 +1383,11 @@
                 "importModelEvaluation"
               ]
             },
+            "BatchImportModelEvaluationSlices": {
+              "methods": [
+                "batchImportModelEvaluationSlices"
+              ]
+            },
             "GetModelEvaluation": {
               "methods": [
                 "getModelEvaluation"
@@ -1455,6 +1474,11 @@
             "ImportModelEvaluation": {
               "methods": [
                 "importModelEvaluation"
+              ]
+            },
+            "BatchImportModelEvaluationSlices": {
+              "methods": [
+                "batchImportModelEvaluationSlices"
               ]
             },
             "GetModelEvaluation": {

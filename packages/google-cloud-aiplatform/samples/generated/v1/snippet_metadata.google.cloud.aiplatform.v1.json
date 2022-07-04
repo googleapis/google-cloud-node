@@ -392,6 +392,66 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_DatasetService_ListSavedQueries_async",
+            "title": "DatasetService listSavedQueries Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists SavedQueries in a Dataset.",
+            "canonical": true,
+            "file": "dataset_service.list_saved_queries.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSavedQueries",
+                "fullName": "google.cloud.aiplatform.v1.DatasetService.ListSavedQueries",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ListSavedQueriesResponse",
+                "client": {
+                    "shortName": "DatasetServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.DatasetServiceClient"
+                },
+                "method": {
+                    "shortName": "ListSavedQueries",
+                    "fullName": "google.cloud.aiplatform.v1.DatasetService.ListSavedQueries",
+                    "service": {
+                        "shortName": "DatasetService",
+                        "fullName": "google.cloud.aiplatform.v1.DatasetService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_DatasetService_GetAnnotationSpec_async",
             "title": "DatasetService getAnnotationSpec Sample",
             "origin": "API_DEFINITION",
@@ -1078,7 +1138,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -5294,7 +5354,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -5305,6 +5365,14 @@
                 "parameters": [
                     {
                         "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "parent_model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_id",
                         "type": "TYPE_STRING"
                     },
                     {
@@ -5338,7 +5406,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -5420,6 +5488,62 @@
                 "method": {
                     "shortName": "ListModels",
                     "fullName": "google.cloud.aiplatform.v1.ModelService.ListModels",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ModelService_ListModelVersions_async",
+            "title": "DatasetService listModelVersions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists versions of the specified model.",
+            "canonical": true,
+            "file": "model_service.list_model_versions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListModelVersions",
+                "fullName": "google.cloud.aiplatform.v1.ModelService.ListModelVersions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ListModelVersionsResponse",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "ListModelVersions",
+                    "fullName": "google.cloud.aiplatform.v1.ModelService.ListModelVersions",
                     "service": {
                         "shortName": "ModelService",
                         "fullName": "google.cloud.aiplatform.v1.ModelService"
@@ -5512,6 +5636,90 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_ModelService_DeleteModelVersion_async",
+            "title": "DatasetService deleteModelVersion Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a Model version. Model version can only be deleted if there are no [DeployedModels][] created from it. Deleting the only version in the Model is not allowed. Use [DeleteModel][google.cloud.aiplatform.v1.ModelService.DeleteModel] for deleting the Model instead.",
+            "canonical": true,
+            "file": "model_service.delete_model_version.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteModelVersion",
+                "fullName": "google.cloud.aiplatform.v1.ModelService.DeleteModelVersion",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteModelVersion",
+                    "fullName": "google.cloud.aiplatform.v1.ModelService.DeleteModelVersion",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ModelService_MergeVersionAliases_async",
+            "title": "DatasetService mergeVersionAliases Sample",
+            "origin": "API_DEFINITION",
+            "description": " Merges a set of aliases for a Model version.",
+            "canonical": true,
+            "file": "model_service.merge_version_aliases.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "MergeVersionAliases",
+                "fullName": "google.cloud.aiplatform.v1.ModelService.MergeVersionAliases",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "version_aliases",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.Model",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "MergeVersionAliases",
+                    "fullName": "google.cloud.aiplatform.v1.ModelService.MergeVersionAliases",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_ModelService_ExportModel_async",
             "title": "DatasetService exportModel Sample",
             "origin": "API_DEFINITION",
@@ -5522,7 +5730,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],
@@ -5592,6 +5800,50 @@
                 "method": {
                     "shortName": "ImportModelEvaluation",
                     "fullName": "google.cloud.aiplatform.v1.ModelService.ImportModelEvaluation",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ModelService_BatchImportModelEvaluationSlices_async",
+            "title": "DatasetService batchImportModelEvaluationSlices Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports a list of externally generated ModelEvaluationSlice.",
+            "canonical": true,
+            "file": "model_service.batch_import_model_evaluation_slices.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchImportModelEvaluationSlices",
+                "fullName": "google.cloud.aiplatform.v1.ModelService.BatchImportModelEvaluationSlices",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_evaluation_slices",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesResponse",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchImportModelEvaluationSlices",
+                    "fullName": "google.cloud.aiplatform.v1.ModelService.BatchImportModelEvaluationSlices",
                     "service": {
                         "shortName": "ModelService",
                         "fullName": "google.cloud.aiplatform.v1.ModelService"

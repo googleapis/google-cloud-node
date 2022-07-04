@@ -32,6 +32,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListModelVersions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateModel": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -40,11 +44,23 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "DeleteModelVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "MergeVersionAliases": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ExportModel": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ImportModelEvaluation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchImportModelEvaluationSlices": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
