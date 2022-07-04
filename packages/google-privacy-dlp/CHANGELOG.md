@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [4.0.2](https://github.com/googleapis/nodejs-dlp/compare/v4.0.1...v4.0.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** document fallback rest option ([#724](https://github.com/googleapis/nodejs-dlp/issues/724)) ([3d4518f](https://github.com/googleapis/nodejs-dlp/commit/3d4518f5d13e0a13fd993f541dbf6d5a6bb0febb))
+
 ## [4.0.1](https://github.com/googleapis/nodejs-dlp/compare/v4.0.0...v4.0.1) (2022-06-07)
 
 
