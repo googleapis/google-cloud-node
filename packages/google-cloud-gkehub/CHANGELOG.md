@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/nodejs-gke-hub/compare/v3.1.0...v3.2.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#158](https://github.com/googleapis/nodejs-gke-hub/issues/158)) ([8565d02](https://github.com/googleapis/nodejs-gke-hub/commit/8565d02508ed1273b9656f662104db0b99d3bf71))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-gke-hub/compare/v3.0.0...v3.1.0) (2022-06-15)
 
 
