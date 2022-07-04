@@ -1158,6 +1158,186 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ContactDetails. */
+                interface IContactDetails {
+
+                    /** ContactDetails contacts */
+                    contacts?: (google.cloud.securitycenter.v1.IContact[]|null);
+                }
+
+                /** Represents a ContactDetails. */
+                class ContactDetails implements IContactDetails {
+
+                    /**
+                     * Constructs a new ContactDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IContactDetails);
+
+                    /** ContactDetails contacts. */
+                    public contacts: google.cloud.securitycenter.v1.IContact[];
+
+                    /**
+                     * Creates a new ContactDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContactDetails instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IContactDetails): google.cloud.securitycenter.v1.ContactDetails;
+
+                    /**
+                     * Encodes the specified ContactDetails message. Does not implicitly {@link google.cloud.securitycenter.v1.ContactDetails.verify|verify} messages.
+                     * @param message ContactDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IContactDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContactDetails message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ContactDetails.verify|verify} messages.
+                     * @param message ContactDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IContactDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContactDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContactDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ContactDetails;
+
+                    /**
+                     * Decodes a ContactDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContactDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ContactDetails;
+
+                    /**
+                     * Verifies a ContactDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContactDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContactDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ContactDetails;
+
+                    /**
+                     * Creates a plain object from a ContactDetails message. Also converts values to other types if specified.
+                     * @param message ContactDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ContactDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContactDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Contact. */
+                interface IContact {
+
+                    /** Contact email */
+                    email?: (string|null);
+                }
+
+                /** Represents a Contact. */
+                class Contact implements IContact {
+
+                    /**
+                     * Constructs a new Contact.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IContact);
+
+                    /** Contact email. */
+                    public email: string;
+
+                    /**
+                     * Creates a new Contact instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Contact instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IContact): google.cloud.securitycenter.v1.Contact;
+
+                    /**
+                     * Encodes the specified Contact message. Does not implicitly {@link google.cloud.securitycenter.v1.Contact.verify|verify} messages.
+                     * @param message Contact message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IContact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Contact message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Contact.verify|verify} messages.
+                     * @param message Contact message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IContact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Contact message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Contact
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Contact;
+
+                    /**
+                     * Decodes a Contact message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Contact
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Contact;
+
+                    /**
+                     * Verifies a Contact message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Contact message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Contact
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Contact;
+
+                    /**
+                     * Creates a plain object from a Contact message. Also converts values to other types if specified.
+                     * @param message Contact
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Contact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Contact to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an Exfiltration. */
                 interface IExfiltration {
 
@@ -1656,6 +1836,9 @@ export namespace google {
                     /** Finding processes */
                     processes?: (google.cloud.securitycenter.v1.IProcess[]|null);
 
+                    /** Finding contacts */
+                    contacts?: ({ [k: string]: google.cloud.securitycenter.v1.IContactDetails }|null);
+
                     /** Finding compliances */
                     compliances?: (google.cloud.securitycenter.v1.ICompliance[]|null);
 
@@ -1749,6 +1932,9 @@ export namespace google {
 
                     /** Finding processes. */
                     public processes: google.cloud.securitycenter.v1.IProcess[];
+
+                    /** Finding contacts. */
+                    public contacts: { [k: string]: google.cloud.securitycenter.v1.IContactDetails };
 
                     /** Finding compliances. */
                     public compliances: google.cloud.securitycenter.v1.ICompliance[];
@@ -1993,6 +2179,9 @@ export namespace google {
 
                     /** Indicator domains */
                     domains?: (string[]|null);
+
+                    /** Indicator signatures */
+                    signatures?: (google.cloud.securitycenter.v1.Indicator.IProcessSignature[]|null);
                 }
 
                 /** Represents an Indicator. */
@@ -2009,6 +2198,9 @@ export namespace google {
 
                     /** Indicator domains. */
                     public domains: string[];
+
+                    /** Indicator signatures. */
+                    public signatures: google.cloud.securitycenter.v1.Indicator.IProcessSignature[];
 
                     /**
                      * Creates a new Indicator instance using the specified properties.
@@ -2079,6 +2271,396 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace Indicator {
+
+                    /** Properties of a ProcessSignature. */
+                    interface IProcessSignature {
+
+                        /** ProcessSignature memoryHashSignature */
+                        memoryHashSignature?: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature|null);
+
+                        /** ProcessSignature yaraRuleSignature */
+                        yaraRuleSignature?: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature|null);
+                    }
+
+                    /** Represents a ProcessSignature. */
+                    class ProcessSignature implements IProcessSignature {
+
+                        /**
+                         * Constructs a new ProcessSignature.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Indicator.IProcessSignature);
+
+                        /** ProcessSignature memoryHashSignature. */
+                        public memoryHashSignature?: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature|null);
+
+                        /** ProcessSignature yaraRuleSignature. */
+                        public yaraRuleSignature?: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature|null);
+
+                        /** ProcessSignature signature. */
+                        public signature?: ("memoryHashSignature"|"yaraRuleSignature");
+
+                        /**
+                         * Creates a new ProcessSignature instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProcessSignature instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Indicator.IProcessSignature): google.cloud.securitycenter.v1.Indicator.ProcessSignature;
+
+                        /**
+                         * Encodes the specified ProcessSignature message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.verify|verify} messages.
+                         * @param message ProcessSignature message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Indicator.IProcessSignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProcessSignature message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.verify|verify} messages.
+                         * @param message ProcessSignature message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Indicator.IProcessSignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProcessSignature message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProcessSignature
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Indicator.ProcessSignature;
+
+                        /**
+                         * Decodes a ProcessSignature message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProcessSignature
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Indicator.ProcessSignature;
+
+                        /**
+                         * Verifies a ProcessSignature message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProcessSignature message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProcessSignature
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Indicator.ProcessSignature;
+
+                        /**
+                         * Creates a plain object from a ProcessSignature message. Also converts values to other types if specified.
+                         * @param message ProcessSignature
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProcessSignature to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ProcessSignature {
+
+                        /** Properties of a MemoryHashSignature. */
+                        interface IMemoryHashSignature {
+
+                            /** MemoryHashSignature binaryFamily */
+                            binaryFamily?: (string|null);
+
+                            /** MemoryHashSignature detections */
+                            detections?: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection[]|null);
+                        }
+
+                        /** Represents a MemoryHashSignature. */
+                        class MemoryHashSignature implements IMemoryHashSignature {
+
+                            /**
+                             * Constructs a new MemoryHashSignature.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature);
+
+                            /** MemoryHashSignature binaryFamily. */
+                            public binaryFamily: string;
+
+                            /** MemoryHashSignature detections. */
+                            public detections: google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection[];
+
+                            /**
+                             * Creates a new MemoryHashSignature instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MemoryHashSignature instance
+                             */
+                            public static create(properties?: google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature): google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature;
+
+                            /**
+                             * Encodes the specified MemoryHashSignature message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.verify|verify} messages.
+                             * @param message MemoryHashSignature message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MemoryHashSignature message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.verify|verify} messages.
+                             * @param message MemoryHashSignature message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MemoryHashSignature message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MemoryHashSignature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature;
+
+                            /**
+                             * Decodes a MemoryHashSignature message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MemoryHashSignature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature;
+
+                            /**
+                             * Verifies a MemoryHashSignature message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MemoryHashSignature message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MemoryHashSignature
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature;
+
+                            /**
+                             * Creates a plain object from a MemoryHashSignature message. Also converts values to other types if specified.
+                             * @param message MemoryHashSignature
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MemoryHashSignature to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace MemoryHashSignature {
+
+                            /** Properties of a Detection. */
+                            interface IDetection {
+
+                                /** Detection binary */
+                                binary?: (string|null);
+
+                                /** Detection percentPagesMatched */
+                                percentPagesMatched?: (number|null);
+                            }
+
+                            /** Represents a Detection. */
+                            class Detection implements IDetection {
+
+                                /**
+                                 * Constructs a new Detection.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection);
+
+                                /** Detection binary. */
+                                public binary: string;
+
+                                /** Detection percentPagesMatched. */
+                                public percentPagesMatched: number;
+
+                                /**
+                                 * Creates a new Detection instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Detection instance
+                                 */
+                                public static create(properties?: google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection): google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection;
+
+                                /**
+                                 * Encodes the specified Detection message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.verify|verify} messages.
+                                 * @param message Detection message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Detection message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.verify|verify} messages.
+                                 * @param message Detection message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Detection message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Detection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection;
+
+                                /**
+                                 * Decodes a Detection message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Detection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection;
+
+                                /**
+                                 * Verifies a Detection message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Detection message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Detection
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection;
+
+                                /**
+                                 * Creates a plain object from a Detection message. Also converts values to other types if specified.
+                                 * @param message Detection
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Detection to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+                        }
+
+                        /** Properties of a YaraRuleSignature. */
+                        interface IYaraRuleSignature {
+
+                            /** YaraRuleSignature yaraRule */
+                            yaraRule?: (string|null);
+                        }
+
+                        /** Represents a YaraRuleSignature. */
+                        class YaraRuleSignature implements IYaraRuleSignature {
+
+                            /**
+                             * Constructs a new YaraRuleSignature.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature);
+
+                            /** YaraRuleSignature yaraRule. */
+                            public yaraRule: string;
+
+                            /**
+                             * Creates a new YaraRuleSignature instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns YaraRuleSignature instance
+                             */
+                            public static create(properties?: google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature): google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature;
+
+                            /**
+                             * Encodes the specified YaraRuleSignature message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.verify|verify} messages.
+                             * @param message YaraRuleSignature message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified YaraRuleSignature message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.verify|verify} messages.
+                             * @param message YaraRuleSignature message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a YaraRuleSignature message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns YaraRuleSignature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature;
+
+                            /**
+                             * Decodes a YaraRuleSignature message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns YaraRuleSignature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature;
+
+                            /**
+                             * Verifies a YaraRuleSignature message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a YaraRuleSignature message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns YaraRuleSignature
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature;
+
+                            /**
+                             * Creates a plain object from a YaraRuleSignature message. Also converts values to other types if specified.
+                             * @param message YaraRuleSignature
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this YaraRuleSignature to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
                 }
 
                 /** Properties of a MitreAttack. */
@@ -2256,6 +2838,9 @@ export namespace google {
                 /** Properties of a Process. */
                 interface IProcess {
 
+                    /** Process name */
+                    name?: (string|null);
+
                     /** Process binary */
                     binary?: (google.cloud.securitycenter.v1.IFile|null);
 
@@ -2292,6 +2877,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.securitycenter.v1.IProcess);
+
+                    /** Process name. */
+                    public name: string;
 
                     /** Process binary. */
                     public binary?: (google.cloud.securitycenter.v1.IFile|null);

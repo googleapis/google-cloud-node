@@ -2966,6 +2966,401 @@
                         return Connection;
                     })();
     
+                    v1.ContactDetails = (function() {
+    
+                        /**
+                         * Properties of a ContactDetails.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IContactDetails
+                         * @property {Array.<google.cloud.securitycenter.v1.IContact>|null} [contacts] ContactDetails contacts
+                         */
+    
+                        /**
+                         * Constructs a new ContactDetails.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a ContactDetails.
+                         * @implements IContactDetails
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IContactDetails=} [properties] Properties to set
+                         */
+                        function ContactDetails(properties) {
+                            this.contacts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ContactDetails contacts.
+                         * @member {Array.<google.cloud.securitycenter.v1.IContact>} contacts
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @instance
+                         */
+                        ContactDetails.prototype.contacts = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ContactDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContactDetails=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ContactDetails} ContactDetails instance
+                         */
+                        ContactDetails.create = function create(properties) {
+                            return new ContactDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ContactDetails message. Does not implicitly {@link google.cloud.securitycenter.v1.ContactDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContactDetails} message ContactDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContactDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.contacts != null && message.contacts.length)
+                                for (var i = 0; i < message.contacts.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Contact.encode(message.contacts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ContactDetails message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ContactDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContactDetails} message ContactDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContactDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ContactDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ContactDetails} ContactDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContactDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ContactDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.contacts && message.contacts.length))
+                                        message.contacts = [];
+                                    message.contacts.push($root.google.cloud.securitycenter.v1.Contact.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ContactDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ContactDetails} ContactDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContactDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ContactDetails message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ContactDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.contacts != null && message.hasOwnProperty("contacts")) {
+                                if (!Array.isArray(message.contacts))
+                                    return "contacts: array expected";
+                                for (var i = 0; i < message.contacts.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Contact.verify(message.contacts[i]);
+                                    if (error)
+                                        return "contacts." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ContactDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ContactDetails} ContactDetails
+                         */
+                        ContactDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ContactDetails)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ContactDetails();
+                            if (object.contacts) {
+                                if (!Array.isArray(object.contacts))
+                                    throw TypeError(".google.cloud.securitycenter.v1.ContactDetails.contacts: array expected");
+                                message.contacts = [];
+                                for (var i = 0; i < object.contacts.length; ++i) {
+                                    if (typeof object.contacts[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.ContactDetails.contacts: object expected");
+                                    message.contacts[i] = $root.google.cloud.securitycenter.v1.Contact.fromObject(object.contacts[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ContactDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ContactDetails} message ContactDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ContactDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.contacts = [];
+                            if (message.contacts && message.contacts.length) {
+                                object.contacts = [];
+                                for (var j = 0; j < message.contacts.length; ++j)
+                                    object.contacts[j] = $root.google.cloud.securitycenter.v1.Contact.toObject(message.contacts[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ContactDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ContactDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ContactDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ContactDetails;
+                    })();
+    
+                    v1.Contact = (function() {
+    
+                        /**
+                         * Properties of a Contact.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IContact
+                         * @property {string|null} [email] Contact email
+                         */
+    
+                        /**
+                         * Constructs a new Contact.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Contact.
+                         * @implements IContact
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IContact=} [properties] Properties to set
+                         */
+                        function Contact(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Contact email.
+                         * @member {string} email
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @instance
+                         */
+                        Contact.prototype.email = "";
+    
+                        /**
+                         * Creates a new Contact instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContact=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Contact} Contact instance
+                         */
+                        Contact.create = function create(properties) {
+                            return new Contact(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Contact message. Does not implicitly {@link google.cloud.securitycenter.v1.Contact.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContact} message Contact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Contact.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.email != null && Object.hasOwnProperty.call(message, "email"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.email);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Contact message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Contact.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContact} message Contact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Contact.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Contact message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Contact} Contact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Contact.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Contact();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.email = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Contact message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Contact} Contact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Contact.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Contact message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Contact.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.email != null && message.hasOwnProperty("email"))
+                                if (!$util.isString(message.email))
+                                    return "email: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Contact message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Contact} Contact
+                         */
+                        Contact.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Contact)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Contact();
+                            if (object.email != null)
+                                message.email = String(object.email);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Contact message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Contact} message Contact
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Contact.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.email = "";
+                            if (message.email != null && message.hasOwnProperty("email"))
+                                object.email = message.email;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Contact to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Contact
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Contact.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Contact;
+                    })();
+    
                     v1.Exfiltration = (function() {
     
                         /**
@@ -4097,6 +4492,7 @@
                          * @property {Array.<google.cloud.securitycenter.v1.IConnection>|null} [connections] Finding connections
                          * @property {string|null} [muteInitiator] Finding muteInitiator
                          * @property {Array.<google.cloud.securitycenter.v1.IProcess>|null} [processes] Finding processes
+                         * @property {Object.<string,google.cloud.securitycenter.v1.IContactDetails>|null} [contacts] Finding contacts
                          * @property {Array.<google.cloud.securitycenter.v1.ICompliance>|null} [compliances] Finding compliances
                          * @property {string|null} [description] Finding description
                          * @property {google.cloud.securitycenter.v1.IExfiltration|null} [exfiltration] Finding exfiltration
@@ -4117,6 +4513,7 @@
                             this.externalSystems = {};
                             this.connections = [];
                             this.processes = [];
+                            this.contacts = {};
                             this.compliances = [];
                             this.iamBindings = [];
                             if (properties)
@@ -4310,6 +4707,14 @@
                         Finding.prototype.processes = $util.emptyArray;
     
                         /**
+                         * Finding contacts.
+                         * @member {Object.<string,google.cloud.securitycenter.v1.IContactDetails>} contacts
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.contacts = $util.emptyObject;
+    
+                        /**
                          * Finding compliances.
                          * @member {Array.<google.cloud.securitycenter.v1.ICompliance>} compliances
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -4427,6 +4832,11 @@
                             if (message.connections != null && message.connections.length)
                                 for (var i = 0; i < message.connections.length; ++i)
                                     $root.google.cloud.securitycenter.v1.Connection.encode(message.connections[i], writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.contacts != null && Object.hasOwnProperty.call(message, "contacts"))
+                                for (var keys = Object.keys(message.contacts), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 33, wireType 2 =*/266).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.securitycenter.v1.ContactDetails.encode(message.contacts[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
                             if (message.compliances != null && message.compliances.length)
                                 for (var i = 0; i < message.compliances.length; ++i)
                                     $root.google.cloud.securitycenter.v1.Compliance.encode(message.compliances[i], writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
@@ -4583,6 +4993,28 @@
                                     if (!(message.processes && message.processes.length))
                                         message.processes = [];
                                     message.processes.push($root.google.cloud.securitycenter.v1.Process.decode(reader, reader.uint32()));
+                                    break;
+                                case 33:
+                                    if (message.contacts === $util.emptyObject)
+                                        message.contacts = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.securitycenter.v1.ContactDetails.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.contacts[key] = value;
                                     break;
                                 case 34:
                                     if (!(message.compliances && message.compliances.length))
@@ -4777,6 +5209,16 @@
                                     var error = $root.google.cloud.securitycenter.v1.Process.verify(message.processes[i]);
                                     if (error)
                                         return "processes." + error;
+                                }
+                            }
+                            if (message.contacts != null && message.hasOwnProperty("contacts")) {
+                                if (!$util.isObject(message.contacts))
+                                    return "contacts: object expected";
+                                var key = Object.keys(message.contacts);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.ContactDetails.verify(message.contacts[key[i]]);
+                                    if (error)
+                                        return "contacts." + error;
                                 }
                             }
                             if (message.compliances != null && message.hasOwnProperty("compliances")) {
@@ -4997,6 +5439,16 @@
                                     message.processes[i] = $root.google.cloud.securitycenter.v1.Process.fromObject(object.processes[i]);
                                 }
                             }
+                            if (object.contacts) {
+                                if (typeof object.contacts !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.contacts: object expected");
+                                message.contacts = {};
+                                for (var keys = Object.keys(object.contacts), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.contacts[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Finding.contacts: object expected");
+                                    message.contacts[keys[i]] = $root.google.cloud.securitycenter.v1.ContactDetails.fromObject(object.contacts[keys[i]]);
+                                }
+                            }
                             if (object.compliances) {
                                 if (!Array.isArray(object.compliances))
                                     throw TypeError(".google.cloud.securitycenter.v1.Finding.compliances: array expected");
@@ -5051,6 +5503,7 @@
                             if (options.objects || options.defaults) {
                                 object.sourceProperties = {};
                                 object.externalSystems = {};
+                                object.contacts = {};
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -5134,6 +5587,11 @@
                                 object.connections = [];
                                 for (var j = 0; j < message.connections.length; ++j)
                                     object.connections[j] = $root.google.cloud.securitycenter.v1.Connection.toObject(message.connections[j], options);
+                            }
+                            if (message.contacts && (keys2 = Object.keys(message.contacts)).length) {
+                                object.contacts = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.contacts[keys2[j]] = $root.google.cloud.securitycenter.v1.ContactDetails.toObject(message.contacts[keys2[j]], options);
                             }
                             if (message.compliances && message.compliances.length) {
                                 object.compliances = [];
@@ -5518,6 +5976,7 @@
                          * @interface IIndicator
                          * @property {Array.<string>|null} [ipAddresses] Indicator ipAddresses
                          * @property {Array.<string>|null} [domains] Indicator domains
+                         * @property {Array.<google.cloud.securitycenter.v1.Indicator.IProcessSignature>|null} [signatures] Indicator signatures
                          */
     
                         /**
@@ -5531,6 +5990,7 @@
                         function Indicator(properties) {
                             this.ipAddresses = [];
                             this.domains = [];
+                            this.signatures = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -5552,6 +6012,14 @@
                          * @instance
                          */
                         Indicator.prototype.domains = $util.emptyArray;
+    
+                        /**
+                         * Indicator signatures.
+                         * @member {Array.<google.cloud.securitycenter.v1.Indicator.IProcessSignature>} signatures
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @instance
+                         */
+                        Indicator.prototype.signatures = $util.emptyArray;
     
                         /**
                          * Creates a new Indicator instance using the specified properties.
@@ -5583,6 +6051,9 @@
                             if (message.domains != null && message.domains.length)
                                 for (var i = 0; i < message.domains.length; ++i)
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.domains[i]);
+                            if (message.signatures != null && message.signatures.length)
+                                for (var i = 0; i < message.signatures.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.encode(message.signatures[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -5626,6 +6097,11 @@
                                     if (!(message.domains && message.domains.length))
                                         message.domains = [];
                                     message.domains.push(reader.string());
+                                    break;
+                                case 3:
+                                    if (!(message.signatures && message.signatures.length))
+                                        message.signatures = [];
+                                    message.signatures.push($root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.decode(reader, reader.uint32()));
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5676,6 +6152,15 @@
                                     if (!$util.isString(message.domains[i]))
                                         return "domains: string[] expected";
                             }
+                            if (message.signatures != null && message.hasOwnProperty("signatures")) {
+                                if (!Array.isArray(message.signatures))
+                                    return "signatures: array expected";
+                                for (var i = 0; i < message.signatures.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.verify(message.signatures[i]);
+                                    if (error)
+                                        return "signatures." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -5705,6 +6190,16 @@
                                 for (var i = 0; i < object.domains.length; ++i)
                                     message.domains[i] = String(object.domains[i]);
                             }
+                            if (object.signatures) {
+                                if (!Array.isArray(object.signatures))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Indicator.signatures: array expected");
+                                message.signatures = [];
+                                for (var i = 0; i < object.signatures.length; ++i) {
+                                    if (typeof object.signatures[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Indicator.signatures: object expected");
+                                    message.signatures[i] = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.fromObject(object.signatures[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -5724,6 +6219,7 @@
                             if (options.arrays || options.defaults) {
                                 object.ipAddresses = [];
                                 object.domains = [];
+                                object.signatures = [];
                             }
                             if (message.ipAddresses && message.ipAddresses.length) {
                                 object.ipAddresses = [];
@@ -5734,6 +6230,11 @@
                                 object.domains = [];
                                 for (var j = 0; j < message.domains.length; ++j)
                                     object.domains[j] = message.domains[j];
+                            }
+                            if (message.signatures && message.signatures.length) {
+                                object.signatures = [];
+                                for (var j = 0; j < message.signatures.length; ++j)
+                                    object.signatures[j] = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.toObject(message.signatures[j], options);
                             }
                             return object;
                         };
@@ -5748,6 +6249,879 @@
                         Indicator.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        Indicator.ProcessSignature = (function() {
+    
+                            /**
+                             * Properties of a ProcessSignature.
+                             * @memberof google.cloud.securitycenter.v1.Indicator
+                             * @interface IProcessSignature
+                             * @property {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature|null} [memoryHashSignature] ProcessSignature memoryHashSignature
+                             * @property {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature|null} [yaraRuleSignature] ProcessSignature yaraRuleSignature
+                             */
+    
+                            /**
+                             * Constructs a new ProcessSignature.
+                             * @memberof google.cloud.securitycenter.v1.Indicator
+                             * @classdesc Represents a ProcessSignature.
+                             * @implements IProcessSignature
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.Indicator.IProcessSignature=} [properties] Properties to set
+                             */
+                            function ProcessSignature(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ProcessSignature memoryHashSignature.
+                             * @member {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature|null|undefined} memoryHashSignature
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @instance
+                             */
+                            ProcessSignature.prototype.memoryHashSignature = null;
+    
+                            /**
+                             * ProcessSignature yaraRuleSignature.
+                             * @member {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature|null|undefined} yaraRuleSignature
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @instance
+                             */
+                            ProcessSignature.prototype.yaraRuleSignature = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ProcessSignature signature.
+                             * @member {"memoryHashSignature"|"yaraRuleSignature"|undefined} signature
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @instance
+                             */
+                            Object.defineProperty(ProcessSignature.prototype, "signature", {
+                                get: $util.oneOfGetter($oneOfFields = ["memoryHashSignature", "yaraRuleSignature"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ProcessSignature instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Indicator.IProcessSignature=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature} ProcessSignature instance
+                             */
+                            ProcessSignature.create = function create(properties) {
+                                return new ProcessSignature(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProcessSignature message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Indicator.IProcessSignature} message ProcessSignature message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProcessSignature.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.memoryHashSignature != null && Object.hasOwnProperty.call(message, "memoryHashSignature"))
+                                    $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.encode(message.memoryHashSignature, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.yaraRuleSignature != null && Object.hasOwnProperty.call(message, "yaraRuleSignature"))
+                                    $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.encode(message.yaraRuleSignature, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProcessSignature message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Indicator.IProcessSignature} message ProcessSignature message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProcessSignature.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProcessSignature message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature} ProcessSignature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProcessSignature.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 6:
+                                        message.memoryHashSignature = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.decode(reader, reader.uint32());
+                                        break;
+                                    case 7:
+                                        message.yaraRuleSignature = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProcessSignature message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature} ProcessSignature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProcessSignature.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProcessSignature message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProcessSignature.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.memoryHashSignature != null && message.hasOwnProperty("memoryHashSignature")) {
+                                    properties.signature = 1;
+                                    {
+                                        var error = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.verify(message.memoryHashSignature);
+                                        if (error)
+                                            return "memoryHashSignature." + error;
+                                    }
+                                }
+                                if (message.yaraRuleSignature != null && message.hasOwnProperty("yaraRuleSignature")) {
+                                    if (properties.signature === 1)
+                                        return "signature: multiple values";
+                                    properties.signature = 1;
+                                    {
+                                        var error = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.verify(message.yaraRuleSignature);
+                                        if (error)
+                                            return "yaraRuleSignature." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProcessSignature message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature} ProcessSignature
+                             */
+                            ProcessSignature.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature();
+                                if (object.memoryHashSignature != null) {
+                                    if (typeof object.memoryHashSignature !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Indicator.ProcessSignature.memoryHashSignature: object expected");
+                                    message.memoryHashSignature = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.fromObject(object.memoryHashSignature);
+                                }
+                                if (object.yaraRuleSignature != null) {
+                                    if (typeof object.yaraRuleSignature !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Indicator.ProcessSignature.yaraRuleSignature: object expected");
+                                    message.yaraRuleSignature = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.fromObject(object.yaraRuleSignature);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProcessSignature message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature} message ProcessSignature
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProcessSignature.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.memoryHashSignature != null && message.hasOwnProperty("memoryHashSignature")) {
+                                    object.memoryHashSignature = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.toObject(message.memoryHashSignature, options);
+                                    if (options.oneofs)
+                                        object.signature = "memoryHashSignature";
+                                }
+                                if (message.yaraRuleSignature != null && message.hasOwnProperty("yaraRuleSignature")) {
+                                    object.yaraRuleSignature = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.toObject(message.yaraRuleSignature, options);
+                                    if (options.oneofs)
+                                        object.signature = "yaraRuleSignature";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ProcessSignature to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProcessSignature.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            ProcessSignature.MemoryHashSignature = (function() {
+    
+                                /**
+                                 * Properties of a MemoryHashSignature.
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                                 * @interface IMemoryHashSignature
+                                 * @property {string|null} [binaryFamily] MemoryHashSignature binaryFamily
+                                 * @property {Array.<google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection>|null} [detections] MemoryHashSignature detections
+                                 */
+    
+                                /**
+                                 * Constructs a new MemoryHashSignature.
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                                 * @classdesc Represents a MemoryHashSignature.
+                                 * @implements IMemoryHashSignature
+                                 * @constructor
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature=} [properties] Properties to set
+                                 */
+                                function MemoryHashSignature(properties) {
+                                    this.detections = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MemoryHashSignature binaryFamily.
+                                 * @member {string} binaryFamily
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @instance
+                                 */
+                                MemoryHashSignature.prototype.binaryFamily = "";
+    
+                                /**
+                                 * MemoryHashSignature detections.
+                                 * @member {Array.<google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection>} detections
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @instance
+                                 */
+                                MemoryHashSignature.prototype.detections = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new MemoryHashSignature instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @static
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature=} [properties] Properties to set
+                                 * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature} MemoryHashSignature instance
+                                 */
+                                MemoryHashSignature.create = function create(properties) {
+                                    return new MemoryHashSignature(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MemoryHashSignature message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @static
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature} message MemoryHashSignature message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MemoryHashSignature.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.binaryFamily != null && Object.hasOwnProperty.call(message, "binaryFamily"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.binaryFamily);
+                                    if (message.detections != null && message.detections.length)
+                                        for (var i = 0; i < message.detections.length; ++i)
+                                            $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.encode(message.detections[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MemoryHashSignature message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @static
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IMemoryHashSignature} message MemoryHashSignature message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MemoryHashSignature.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MemoryHashSignature message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature} MemoryHashSignature
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MemoryHashSignature.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.binaryFamily = reader.string();
+                                            break;
+                                        case 4:
+                                            if (!(message.detections && message.detections.length))
+                                                message.detections = [];
+                                            message.detections.push($root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.decode(reader, reader.uint32()));
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MemoryHashSignature message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature} MemoryHashSignature
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MemoryHashSignature.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MemoryHashSignature message.
+                                 * @function verify
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MemoryHashSignature.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.binaryFamily != null && message.hasOwnProperty("binaryFamily"))
+                                        if (!$util.isString(message.binaryFamily))
+                                            return "binaryFamily: string expected";
+                                    if (message.detections != null && message.hasOwnProperty("detections")) {
+                                        if (!Array.isArray(message.detections))
+                                            return "detections: array expected";
+                                        for (var i = 0; i < message.detections.length; ++i) {
+                                            var error = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.verify(message.detections[i]);
+                                            if (error)
+                                                return "detections." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MemoryHashSignature message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature} MemoryHashSignature
+                                 */
+                                MemoryHashSignature.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature)
+                                        return object;
+                                    var message = new $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature();
+                                    if (object.binaryFamily != null)
+                                        message.binaryFamily = String(object.binaryFamily);
+                                    if (object.detections) {
+                                        if (!Array.isArray(object.detections))
+                                            throw TypeError(".google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.detections: array expected");
+                                        message.detections = [];
+                                        for (var i = 0; i < object.detections.length; ++i) {
+                                            if (typeof object.detections[i] !== "object")
+                                                throw TypeError(".google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.detections: object expected");
+                                            message.detections[i] = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.fromObject(object.detections[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MemoryHashSignature message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @static
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature} message MemoryHashSignature
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MemoryHashSignature.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.detections = [];
+                                    if (options.defaults)
+                                        object.binaryFamily = "";
+                                    if (message.binaryFamily != null && message.hasOwnProperty("binaryFamily"))
+                                        object.binaryFamily = message.binaryFamily;
+                                    if (message.detections && message.detections.length) {
+                                        object.detections = [];
+                                        for (var j = 0; j < message.detections.length; ++j)
+                                            object.detections[j] = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.toObject(message.detections[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MemoryHashSignature to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MemoryHashSignature.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                MemoryHashSignature.Detection = (function() {
+    
+                                    /**
+                                     * Properties of a Detection.
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                     * @interface IDetection
+                                     * @property {string|null} [binary] Detection binary
+                                     * @property {number|null} [percentPagesMatched] Detection percentPagesMatched
+                                     */
+    
+                                    /**
+                                     * Constructs a new Detection.
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature
+                                     * @classdesc Represents a Detection.
+                                     * @implements IDetection
+                                     * @constructor
+                                     * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection=} [properties] Properties to set
+                                     */
+                                    function Detection(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Detection binary.
+                                     * @member {string} binary
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @instance
+                                     */
+                                    Detection.prototype.binary = "";
+    
+                                    /**
+                                     * Detection percentPagesMatched.
+                                     * @member {number} percentPagesMatched
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @instance
+                                     */
+                                    Detection.prototype.percentPagesMatched = 0;
+    
+                                    /**
+                                     * Creates a new Detection instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @static
+                                     * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection=} [properties] Properties to set
+                                     * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection} Detection instance
+                                     */
+                                    Detection.create = function create(properties) {
+                                        return new Detection(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Detection message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @static
+                                     * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection} message Detection message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Detection.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.binary != null && Object.hasOwnProperty.call(message, "binary"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.binary);
+                                        if (message.percentPagesMatched != null && Object.hasOwnProperty.call(message, "percentPagesMatched"))
+                                            writer.uint32(/* id 3, wireType 1 =*/25).double(message.percentPagesMatched);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Detection message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @static
+                                     * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.IDetection} message Detection message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Detection.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Detection message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection} Detection
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Detection.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 2:
+                                                message.binary = reader.string();
+                                                break;
+                                            case 3:
+                                                message.percentPagesMatched = reader.double();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Detection message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection} Detection
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Detection.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Detection message.
+                                     * @function verify
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Detection.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.binary != null && message.hasOwnProperty("binary"))
+                                            if (!$util.isString(message.binary))
+                                                return "binary: string expected";
+                                        if (message.percentPagesMatched != null && message.hasOwnProperty("percentPagesMatched"))
+                                            if (typeof message.percentPagesMatched !== "number")
+                                                return "percentPagesMatched: number expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Detection message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection} Detection
+                                     */
+                                    Detection.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection)
+                                            return object;
+                                        var message = new $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection();
+                                        if (object.binary != null)
+                                            message.binary = String(object.binary);
+                                        if (object.percentPagesMatched != null)
+                                            message.percentPagesMatched = Number(object.percentPagesMatched);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Detection message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @static
+                                     * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection} message Detection
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Detection.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.binary = "";
+                                            object.percentPagesMatched = 0;
+                                        }
+                                        if (message.binary != null && message.hasOwnProperty("binary"))
+                                            object.binary = message.binary;
+                                        if (message.percentPagesMatched != null && message.hasOwnProperty("percentPagesMatched"))
+                                            object.percentPagesMatched = options.json && !isFinite(message.percentPagesMatched) ? String(message.percentPagesMatched) : message.percentPagesMatched;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Detection to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.MemoryHashSignature.Detection
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Detection.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return Detection;
+                                })();
+    
+                                return MemoryHashSignature;
+                            })();
+    
+                            ProcessSignature.YaraRuleSignature = (function() {
+    
+                                /**
+                                 * Properties of a YaraRuleSignature.
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                                 * @interface IYaraRuleSignature
+                                 * @property {string|null} [yaraRule] YaraRuleSignature yaraRule
+                                 */
+    
+                                /**
+                                 * Constructs a new YaraRuleSignature.
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature
+                                 * @classdesc Represents a YaraRuleSignature.
+                                 * @implements IYaraRuleSignature
+                                 * @constructor
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature=} [properties] Properties to set
+                                 */
+                                function YaraRuleSignature(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * YaraRuleSignature yaraRule.
+                                 * @member {string} yaraRule
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @instance
+                                 */
+                                YaraRuleSignature.prototype.yaraRule = "";
+    
+                                /**
+                                 * Creates a new YaraRuleSignature instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @static
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature=} [properties] Properties to set
+                                 * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature} YaraRuleSignature instance
+                                 */
+                                YaraRuleSignature.create = function create(properties) {
+                                    return new YaraRuleSignature(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified YaraRuleSignature message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @static
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature} message YaraRuleSignature message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                YaraRuleSignature.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.yaraRule != null && Object.hasOwnProperty.call(message, "yaraRule"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.yaraRule);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified YaraRuleSignature message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @static
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature} message YaraRuleSignature message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                YaraRuleSignature.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a YaraRuleSignature message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature} YaraRuleSignature
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                YaraRuleSignature.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 5:
+                                            message.yaraRule = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a YaraRuleSignature message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature} YaraRuleSignature
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                YaraRuleSignature.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a YaraRuleSignature message.
+                                 * @function verify
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                YaraRuleSignature.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.yaraRule != null && message.hasOwnProperty("yaraRule"))
+                                        if (!$util.isString(message.yaraRule))
+                                            return "yaraRule: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a YaraRuleSignature message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature} YaraRuleSignature
+                                 */
+                                YaraRuleSignature.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature)
+                                        return object;
+                                    var message = new $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature();
+                                    if (object.yaraRule != null)
+                                        message.yaraRule = String(object.yaraRule);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a YaraRuleSignature message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @static
+                                 * @param {google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature} message YaraRuleSignature
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                YaraRuleSignature.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.yaraRule = "";
+                                    if (message.yaraRule != null && message.hasOwnProperty("yaraRule"))
+                                        object.yaraRule = message.yaraRule;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this YaraRuleSignature to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.securitycenter.v1.Indicator.ProcessSignature.YaraRuleSignature
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                YaraRuleSignature.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return YaraRuleSignature;
+                            })();
+    
+                            return ProcessSignature;
+                        })();
     
                         return Indicator;
                     })();
@@ -6710,6 +8084,7 @@
                          * Properties of a Process.
                          * @memberof google.cloud.securitycenter.v1
                          * @interface IProcess
+                         * @property {string|null} [name] Process name
                          * @property {google.cloud.securitycenter.v1.IFile|null} [binary] Process binary
                          * @property {Array.<google.cloud.securitycenter.v1.IFile>|null} [libraries] Process libraries
                          * @property {google.cloud.securitycenter.v1.IFile|null} [script] Process script
@@ -6738,6 +8113,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * Process name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.Process
+                         * @instance
+                         */
+                        Process.prototype.name = "";
     
                         /**
                          * Process binary.
@@ -6856,6 +8239,8 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).int64(message.pid);
                             if (message.parentPid != null && Object.hasOwnProperty.call(message, "parentPid"))
                                 writer.uint32(/* id 11, wireType 0 =*/88).int64(message.parentPid);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.name);
                             return writer;
                         };
     
@@ -6890,6 +8275,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 12:
+                                    message.name = reader.string();
+                                    break;
                                 case 3:
                                     message.binary = $root.google.cloud.securitycenter.v1.File.decode(reader, reader.uint32());
                                     break;
@@ -6958,6 +8346,9 @@
                         Process.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             if (message.binary != null && message.hasOwnProperty("binary")) {
                                 var error = $root.google.cloud.securitycenter.v1.File.verify(message.binary);
                                 if (error)
@@ -7020,6 +8411,8 @@
                             if (object instanceof $root.google.cloud.securitycenter.v1.Process)
                                 return object;
                             var message = new $root.google.cloud.securitycenter.v1.Process();
+                            if (object.name != null)
+                                message.name = String(object.name);
                             if (object.binary != null) {
                                 if (typeof object.binary !== "object")
                                     throw TypeError(".google.cloud.securitycenter.v1.Process.binary: object expected");
@@ -7115,6 +8508,7 @@
                                     object.parentPid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.parentPid = options.longs === String ? "0" : 0;
+                                object.name = "";
                             }
                             if (message.binary != null && message.hasOwnProperty("binary"))
                                 object.binary = $root.google.cloud.securitycenter.v1.File.toObject(message.binary, options);
@@ -7149,6 +8543,8 @@
                                     object.parentPid = options.longs === String ? String(message.parentPid) : message.parentPid;
                                 else
                                     object.parentPid = options.longs === String ? $util.Long.prototype.toString.call(message.parentPid) : options.longs === Number ? new $util.LongBits(message.parentPid.low >>> 0, message.parentPid.high >>> 0).toNumber() : message.parentPid;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     

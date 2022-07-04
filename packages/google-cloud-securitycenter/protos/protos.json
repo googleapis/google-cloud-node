@@ -286,6 +286,23 @@
                         }
                       }
                     },
+                    "ContactDetails": {
+                      "fields": {
+                        "contacts": {
+                          "rule": "repeated",
+                          "type": "Contact",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Contact": {
+                      "fields": {
+                        "email": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "Exfiltration": {
                       "fields": {
                         "sources": {
@@ -481,6 +498,14 @@
                           "type": "Process",
                           "id": 30
                         },
+                        "contacts": {
+                          "keyType": "string",
+                          "type": "ContactDetails",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "compliances": {
                           "rule": "repeated",
                           "type": "Compliance",
@@ -577,6 +602,70 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        },
+                        "signatures": {
+                          "rule": "repeated",
+                          "type": "ProcessSignature",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ProcessSignature": {
+                          "oneofs": {
+                            "signature": {
+                              "oneof": [
+                                "memoryHashSignature",
+                                "yaraRuleSignature"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "memoryHashSignature": {
+                              "type": "MemoryHashSignature",
+                              "id": 6
+                            },
+                            "yaraRuleSignature": {
+                              "type": "YaraRuleSignature",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "MemoryHashSignature": {
+                              "fields": {
+                                "binaryFamily": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "detections": {
+                                  "rule": "repeated",
+                                  "type": "Detection",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "Detection": {
+                                  "fields": {
+                                    "binary": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "percentPagesMatched": {
+                                      "type": "double",
+                                      "id": 3
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "YaraRuleSignature": {
+                              "fields": {
+                                "yaraRule": {
+                                  "type": "string",
+                                  "id": 5
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -666,6 +755,10 @@
                     },
                     "Process": {
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 12
+                        },
                         "binary": {
                           "type": "File",
                           "id": 3
