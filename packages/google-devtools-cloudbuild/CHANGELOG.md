@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.0.1...v3.1.0) (2022-07-04)
+
+
+### Features
+
+* support regapic LRO ([d769170](https://github.com/googleapis/nodejs-cloudbuild/commit/d7691703d9948ddfec8f253f9569e7b603f40ce8))
+* support regapic LRO ([#333](https://github.com/googleapis/nodejs-cloudbuild/issues/333)) ([eb65473](https://github.com/googleapis/nodejs-cloudbuild/commit/eb65473efeedf235a28de62e352db78d5d038e25))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.0.0...v3.0.1) (2022-06-20)
 
 
