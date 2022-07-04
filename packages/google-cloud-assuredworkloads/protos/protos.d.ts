@@ -1347,7 +1347,8 @@ export namespace google {
                         HIPAA = 6,
                         HITRUST = 7,
                         EU_REGIONS_AND_SUPPORT = 8,
-                        CA_REGIONS_AND_SUPPORT = 9
+                        CA_REGIONS_AND_SUPPORT = 9,
+                        ITAR = 10
                     }
 
                     /** KajEnrollmentState enum. */
@@ -3179,7 +3180,8 @@ export namespace google {
                         HIPAA = 6,
                         HITRUST = 7,
                         EU_REGIONS_AND_SUPPORT = 8,
-                        CA_REGIONS_AND_SUPPORT = 9
+                        CA_REGIONS_AND_SUPPORT = 9,
+                        ITAR = 10
                     }
 
                     /** KajEnrollmentState enum. */

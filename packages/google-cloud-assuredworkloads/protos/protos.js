@@ -1975,6 +1975,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -2099,6 +2100,10 @@
                             case "CA_REGIONS_AND_SUPPORT":
                             case 9:
                                 message.complianceRegime = 9;
+                                break;
+                            case "ITAR":
+                            case 10:
+                                message.complianceRegime = 10;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -3332,6 +3337,7 @@
                          * @property {number} HITRUST=7 HITRUST value
                          * @property {number} EU_REGIONS_AND_SUPPORT=8 EU_REGIONS_AND_SUPPORT value
                          * @property {number} CA_REGIONS_AND_SUPPORT=9 CA_REGIONS_AND_SUPPORT value
+                         * @property {number} ITAR=10 ITAR value
                          */
                         Workload.ComplianceRegime = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3345,6 +3351,7 @@
                             values[valuesById[7] = "HITRUST"] = 7;
                             values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
                             values[valuesById[9] = "CA_REGIONS_AND_SUPPORT"] = 9;
+                            values[valuesById[10] = "ITAR"] = 10;
                             return values;
                         })();
     
@@ -3564,6 +3571,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             return null;
@@ -3630,6 +3638,10 @@
                             case "CA_REGIONS_AND_SUPPORT":
                             case 9:
                                 message.complianceRegime = 9;
+                                break;
+                            case "ITAR":
+                            case 10:
+                                message.complianceRegime = 10;
                                 break;
                             }
                             return message;
@@ -5671,6 +5683,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -5833,6 +5846,10 @@
                             case "CA_REGIONS_AND_SUPPORT":
                             case 9:
                                 message.complianceRegime = 9;
+                                break;
+                            case "ITAR":
+                            case 10:
+                                message.complianceRegime = 10;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -7886,6 +7903,7 @@
                          * @property {number} HITRUST=7 HITRUST value
                          * @property {number} EU_REGIONS_AND_SUPPORT=8 EU_REGIONS_AND_SUPPORT value
                          * @property {number} CA_REGIONS_AND_SUPPORT=9 CA_REGIONS_AND_SUPPORT value
+                         * @property {number} ITAR=10 ITAR value
                          */
                         Workload.ComplianceRegime = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7899,6 +7917,7 @@
                             values[valuesById[7] = "HITRUST"] = 7;
                             values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
                             values[valuesById[9] = "CA_REGIONS_AND_SUPPORT"] = 9;
+                            values[valuesById[10] = "ITAR"] = 10;
                             return values;
                         })();
     
@@ -8136,6 +8155,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.resourceSettings != null && message.hasOwnProperty("resourceSettings")) {
@@ -8211,6 +8231,10 @@
                             case "CA_REGIONS_AND_SUPPORT":
                             case 9:
                                 message.complianceRegime = 9;
+                                break;
+                            case "ITAR":
+                            case 10:
+                                message.complianceRegime = 10;
                                 break;
                             }
                             if (object.resourceSettings) {
