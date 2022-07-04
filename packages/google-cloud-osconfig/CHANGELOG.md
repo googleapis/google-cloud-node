@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-os-config/compare/v2.0.0...v2.1.0) (2022-07-02)
+
+
+### Features
+
+* REGAPIC LRO; fix: make some camelcased methods work ([#211](https://github.com/googleapis/nodejs-os-config/issues/211)) ([af5d7d2](https://github.com/googleapis/nodejs-os-config/commit/af5d7d2c688c081a028c33f14490271ce2e52725))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-os-config/compare/v1.12.1...v2.0.0) (2022-05-20)
 
 
