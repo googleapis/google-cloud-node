@@ -2327,6 +2327,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** AbortInfo projectsMissingPermission */
+                    projectsMissingPermission?: (string[]|null);
                 }
 
                 /** Represents an AbortInfo. */
@@ -2343,6 +2346,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** AbortInfo projectsMissingPermission. */
+                    public projectsMissingPermission: string[];
 
                     /**
                      * Creates a new AbortInfo instance using the specified properties.
@@ -6398,6 +6404,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** AbortInfo projectsMissingPermission */
+                    projectsMissingPermission?: (string[]|null);
                 }
 
                 /** Represents an AbortInfo. */
@@ -6414,6 +6423,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** AbortInfo projectsMissingPermission. */
+                    public projectsMissingPermission: string[];
 
                     /**
                      * Creates a new AbortInfo instance using the specified properties.

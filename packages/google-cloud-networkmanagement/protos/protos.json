@@ -772,6 +772,11 @@
                         "resourceUri": {
                           "type": "string",
                           "id": 2
+                        },
+                        "projectsMissingPermission": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -2037,6 +2042,11 @@
                         "resourceUri": {
                           "type": "string",
                           "id": 2
+                        },
+                        "projectsMissingPermission": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {

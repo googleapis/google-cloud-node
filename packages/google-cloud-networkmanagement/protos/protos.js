@@ -6653,6 +6653,7 @@
                          * @interface IAbortInfo
                          * @property {google.cloud.networkmanagement.v1.AbortInfo.Cause|null} [cause] AbortInfo cause
                          * @property {string|null} [resourceUri] AbortInfo resourceUri
+                         * @property {Array.<string>|null} [projectsMissingPermission] AbortInfo projectsMissingPermission
                          */
     
                         /**
@@ -6664,6 +6665,7 @@
                          * @param {google.cloud.networkmanagement.v1.IAbortInfo=} [properties] Properties to set
                          */
                         function AbortInfo(properties) {
+                            this.projectsMissingPermission = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6685,6 +6687,14 @@
                          * @instance
                          */
                         AbortInfo.prototype.resourceUri = "";
+    
+                        /**
+                         * AbortInfo projectsMissingPermission.
+                         * @member {Array.<string>} projectsMissingPermission
+                         * @memberof google.cloud.networkmanagement.v1.AbortInfo
+                         * @instance
+                         */
+                        AbortInfo.prototype.projectsMissingPermission = $util.emptyArray;
     
                         /**
                          * Creates a new AbortInfo instance using the specified properties.
@@ -6714,6 +6724,9 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cause);
                             if (message.resourceUri != null && Object.hasOwnProperty.call(message, "resourceUri"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceUri);
+                            if (message.projectsMissingPermission != null && message.projectsMissingPermission.length)
+                                for (var i = 0; i < message.projectsMissingPermission.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectsMissingPermission[i]);
                             return writer;
                         };
     
@@ -6753,6 +6766,11 @@
                                     break;
                                 case 2:
                                     message.resourceUri = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.projectsMissingPermission && message.projectsMissingPermission.length))
+                                        message.projectsMissingPermission = [];
+                                    message.projectsMissingPermission.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6813,6 +6831,13 @@
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 if (!$util.isString(message.resourceUri))
                                     return "resourceUri: string expected";
+                            if (message.projectsMissingPermission != null && message.hasOwnProperty("projectsMissingPermission")) {
+                                if (!Array.isArray(message.projectsMissingPermission))
+                                    return "projectsMissingPermission: array expected";
+                                for (var i = 0; i < message.projectsMissingPermission.length; ++i)
+                                    if (!$util.isString(message.projectsMissingPermission[i]))
+                                        return "projectsMissingPermission: string[] expected";
+                            }
                             return null;
                         };
     
@@ -6892,6 +6917,13 @@
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
+                            if (object.projectsMissingPermission) {
+                                if (!Array.isArray(object.projectsMissingPermission))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.AbortInfo.projectsMissingPermission: array expected");
+                                message.projectsMissingPermission = [];
+                                for (var i = 0; i < object.projectsMissingPermission.length; ++i)
+                                    message.projectsMissingPermission[i] = String(object.projectsMissingPermission[i]);
+                            }
                             return message;
                         };
     
@@ -6908,6 +6940,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.projectsMissingPermission = [];
                             if (options.defaults) {
                                 object.cause = options.enums === String ? "CAUSE_UNSPECIFIED" : 0;
                                 object.resourceUri = "";
@@ -6916,6 +6950,11 @@
                                 object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1.AbortInfo.Cause[message.cause] : message.cause;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
+                            if (message.projectsMissingPermission && message.projectsMissingPermission.length) {
+                                object.projectsMissingPermission = [];
+                                for (var j = 0; j < message.projectsMissingPermission.length; ++j)
+                                    object.projectsMissingPermission[j] = message.projectsMissingPermission[j];
+                            }
                             return object;
                         };
     
@@ -17531,6 +17570,7 @@
                          * @interface IAbortInfo
                          * @property {google.cloud.networkmanagement.v1beta1.AbortInfo.Cause|null} [cause] AbortInfo cause
                          * @property {string|null} [resourceUri] AbortInfo resourceUri
+                         * @property {Array.<string>|null} [projectsMissingPermission] AbortInfo projectsMissingPermission
                          */
     
                         /**
@@ -17542,6 +17582,7 @@
                          * @param {google.cloud.networkmanagement.v1beta1.IAbortInfo=} [properties] Properties to set
                          */
                         function AbortInfo(properties) {
+                            this.projectsMissingPermission = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -17563,6 +17604,14 @@
                          * @instance
                          */
                         AbortInfo.prototype.resourceUri = "";
+    
+                        /**
+                         * AbortInfo projectsMissingPermission.
+                         * @member {Array.<string>} projectsMissingPermission
+                         * @memberof google.cloud.networkmanagement.v1beta1.AbortInfo
+                         * @instance
+                         */
+                        AbortInfo.prototype.projectsMissingPermission = $util.emptyArray;
     
                         /**
                          * Creates a new AbortInfo instance using the specified properties.
@@ -17592,6 +17641,9 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cause);
                             if (message.resourceUri != null && Object.hasOwnProperty.call(message, "resourceUri"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceUri);
+                            if (message.projectsMissingPermission != null && message.projectsMissingPermission.length)
+                                for (var i = 0; i < message.projectsMissingPermission.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectsMissingPermission[i]);
                             return writer;
                         };
     
@@ -17631,6 +17683,11 @@
                                     break;
                                 case 2:
                                     message.resourceUri = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.projectsMissingPermission && message.projectsMissingPermission.length))
+                                        message.projectsMissingPermission = [];
+                                    message.projectsMissingPermission.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -17691,6 +17748,13 @@
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 if (!$util.isString(message.resourceUri))
                                     return "resourceUri: string expected";
+                            if (message.projectsMissingPermission != null && message.hasOwnProperty("projectsMissingPermission")) {
+                                if (!Array.isArray(message.projectsMissingPermission))
+                                    return "projectsMissingPermission: array expected";
+                                for (var i = 0; i < message.projectsMissingPermission.length; ++i)
+                                    if (!$util.isString(message.projectsMissingPermission[i]))
+                                        return "projectsMissingPermission: string[] expected";
+                            }
                             return null;
                         };
     
@@ -17770,6 +17834,13 @@
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
+                            if (object.projectsMissingPermission) {
+                                if (!Array.isArray(object.projectsMissingPermission))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.AbortInfo.projectsMissingPermission: array expected");
+                                message.projectsMissingPermission = [];
+                                for (var i = 0; i < object.projectsMissingPermission.length; ++i)
+                                    message.projectsMissingPermission[i] = String(object.projectsMissingPermission[i]);
+                            }
                             return message;
                         };
     
@@ -17786,6 +17857,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.projectsMissingPermission = [];
                             if (options.defaults) {
                                 object.cause = options.enums === String ? "CAUSE_UNSPECIFIED" : 0;
                                 object.resourceUri = "";
@@ -17794,6 +17867,11 @@
                                 object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.AbortInfo.Cause[message.cause] : message.cause;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
+                            if (message.projectsMissingPermission && message.projectsMissingPermission.length) {
+                                object.projectsMissingPermission = [];
+                                for (var j = 0; j < message.projectsMissingPermission.length; ++j)
+                                    object.projectsMissingPermission[j] = message.projectsMissingPermission[j];
+                            }
                             return object;
                         };
     
