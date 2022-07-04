@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-kms/compare/v3.0.0...v3.0.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **docs:** document fallback rest option ([#561](https://github.com/googleapis/nodejs-kms/issues/561)) ([df8b28f](https://github.com/googleapis/nodejs-kms/commit/df8b28ff9db20a089bbf730038e4051f89f5c4dd))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-kms/compare/v2.11.1...v3.0.0) (2022-05-20)
 
 
