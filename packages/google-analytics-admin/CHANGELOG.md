@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v4.1.0...v4.2.0) (2022-07-04)
+
+
+### Features
+
+* release the Google Analytics Admin API V1 Beta ([bb17208](https://github.com/googleapis/nodejs-analytics-admin/commit/bb17208fbd0a9dd945bb51e8e9281886da35a9cc))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v4.0.0...v4.1.0) (2022-06-29)
 
 
