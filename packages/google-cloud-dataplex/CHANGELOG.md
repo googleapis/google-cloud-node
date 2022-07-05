@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-dataplex/compare/v2.0.0...v2.1.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#40](https://github.com/googleapis/nodejs-dataplex/issues/40)) ([b41c45d](https://github.com/googleapis/nodejs-dataplex/commit/b41c45db754f2bbead96bd6a1ee327d7db7d05ae))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-dataplex/compare/v1.2.0...v2.0.0) (2022-05-19)
 
 
