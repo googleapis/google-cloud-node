@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-iot/compare/v3.0.0...v3.1.0) (2022-07-05)
+
+
+### Features
+
+* support regapic LRO ([b02cd4d](https://github.com/googleapis/nodejs-iot/commit/b02cd4d8f954fa1c34ef77055eb5c0b628095482))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-iot/compare/v2.5.1...v3.0.0) (2022-06-20)
 
 
