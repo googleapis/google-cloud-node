@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-datalabeling/compare/v3.0.0...v3.1.0) (2022-07-05)
+
+
+### Features
+
+* support regapic LRO ([aa77671](https://github.com/googleapis/nodejs-datalabeling/commit/aa77671435d69c4270af35f0d6e5f2be71f1b4b2))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-datalabeling/compare/v2.3.0...v3.0.0) (2022-06-10)
 
 
