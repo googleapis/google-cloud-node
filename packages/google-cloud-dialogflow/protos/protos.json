@@ -729,7 +729,8 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "pageSize": {
