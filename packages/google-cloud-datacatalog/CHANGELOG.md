@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-datacatalog/compare/v3.0.0...v3.1.0) (2022-07-05)
+
+
+### Features
+
+* support regapic LRO ([a6fa419](https://github.com/googleapis/nodejs-datacatalog/commit/a6fa419299bae1d425477387eae3853dc343c69b))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-datacatalog/compare/v2.6.0...v3.0.0) (2022-06-10)
 
 
