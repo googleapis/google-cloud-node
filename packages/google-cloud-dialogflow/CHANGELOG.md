@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/nodejs-dialogflow/compare/v5.0.0...v5.1.0) (2022-07-05)
+
+
+### Features
+
+* deprecated the filter field and add resource_definition ([0d0b5c9](https://github.com/googleapis/nodejs-dialogflow/commit/0d0b5c99f68726cc53f5442f745713551bed55c2))
+* support regapic LRO ([#962](https://github.com/googleapis/nodejs-dialogflow/issues/962)) ([6957ec1](https://github.com/googleapis/nodejs-dialogflow/commit/6957ec16f4ed5cac469c8bf9cc95b048a192c62a))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-dialogflow/compare/v4.7.0...v5.0.0) (2022-06-20)
 
 
