@@ -50,7 +50,7 @@
     "is": "^3.3.0"
   },
   "devDependencies": {
-    "@google-cloud/storage": "^5.0.0",
+    "@google-cloud/storage": "^6.0.0",
     "@types/is": "0.0.21",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.0.0",
