@@ -36,7 +36,7 @@ function main() {
   // const events = 1234
 
   // Imports the Publishing library
-  const {PublisherClient} = require('@google-cloud/publishing').v1;
+  const {PublisherClient} = require('@google-cloud/eventarc-publishing').v1;
 
   // Instantiates a client
   const publishingClient = new PublisherClient();

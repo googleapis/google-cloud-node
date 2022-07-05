@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.eventarc.publishing.v1",
-  "libraryPackage": "@google-cloud/publishing",
+  "libraryPackage": "@google-cloud/eventarc-publishing",
   "services": {
     "Publisher": {
       "clients": {
