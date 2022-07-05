@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-grafeas/compare/v4.0.0...v4.1.0) (2022-07-05)
+
+
+### Features
+
+* support regapic LRO ([0b9a987](https://github.com/googleapis/nodejs-grafeas/commit/0b9a9870ddccd9ef9631dd01c2a73d260317d301))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-grafeas/compare/v3.6.1...v4.0.0) (2022-06-10)
 
 
