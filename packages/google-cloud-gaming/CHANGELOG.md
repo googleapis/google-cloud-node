@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-game-servers/compare/v3.0.0...v3.1.0) (2022-07-05)
+
+
+### Features
+
+* support regapic LRO ([7ddd5e7](https://github.com/googleapis/nodejs-game-servers/commit/7ddd5e7b31d99e2f26970b930beef8b317415ada))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-game-servers/compare/v2.5.0...v3.0.0) (2022-05-17)
 
 
