@@ -10,7 +10,7 @@
   "name_pretty": "Google Cloud Vision API",
   "name": "vision",
   "codeowner_team": "@googleapis/ml-apis",
-  "default_version": "v1p4beta1",
+  "default_version": "v1",
   "language": "nodejs",
   "api_shortname": "vision",
   "library_type": "GAPIC_COMBO"
