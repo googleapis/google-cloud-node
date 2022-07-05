@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.3.0...v0.4.0) (2022-06-30)
+
+
+### Features
+
+* support regapic LRO ([#38](https://github.com/googleapis/nodejs-certificate-manager/issues/38)) ([0d7b185](https://github.com/googleapis/nodejs-certificate-manager/commit/0d7b18581a8141caa1e9091450b1da603cb2bbe9))
+
 ## [0.3.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.2.0...v0.3.0) (2022-05-20)
 
 
