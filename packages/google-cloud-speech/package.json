@@ -46,7 +46,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/common": "^3.0.0",
+    "@google-cloud/common": "^4.0.0",
     "@types/pumpify": "^1.4.1",
     "google-gax": "^3.1.2",
     "protobufjs": "^6.8.6",
