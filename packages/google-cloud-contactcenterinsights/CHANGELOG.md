@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-contact-center-insights/compare/v2.0.1...v2.1.0) (2022-07-05)
+
+
+### Features
+
+* add LRO to API list ([3676403](https://github.com/googleapis/nodejs-contact-center-insights/commit/36764038e82fdb7a383fa697c8764ee7ccb19853))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-contact-center-insights/compare/v2.0.0...v2.0.1) (2022-06-07)
 
 
