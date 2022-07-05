@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
   LROperation,
   PaginationCallback,
   GaxCall,
@@ -73,7 +74,7 @@ export class WorkflowTemplateServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -96,11 +97,10 @@ export class WorkflowTemplateServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
+   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
@@ -207,16 +207,129 @@ export class WorkflowTemplateServiceClient {
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback === 'rest') {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          post: '/v1/{resource=projects/*/regions/*/clusters/*}:getIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/regions/*/jobs/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/operations/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:getIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/regions/*/clusters/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/regions/*/jobs/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/operations/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/regions/*/clusters/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/regions/*/jobs/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/operations/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/regions/*/operations/*}:cancel',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/regions/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/regions/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/regions/*/operations}',
+        },
+      ];
+    }
     this.operationsClient = this._gaxModule
-      .lro({
-        auth: this.auth,
-        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-      })
+      .lro(lroOptions)
       .operationsClient(opts);
     const instantiateWorkflowTemplateResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
