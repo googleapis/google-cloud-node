@@ -23,7 +23,5 @@
     "posttest": "npm run check"
   },
   "devDependencies": {},
-  "dependencies": {
-    "@google-cloud/profiler": "^4.2.0"
-  }
+  "dependencies": {}
 }
