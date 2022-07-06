@@ -20,7 +20,6 @@
     "@babel/preset-typescript": "^7.16.0",
     "chalk": "^5.0.1",
     "debug": "^4.3.4",
-    "figures": "^4.0.1",
     "recast": "^0.21.1",
     "yargs": "^17.4.1"
   },
