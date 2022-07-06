@@ -26,12 +26,20 @@ export async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
   return output;
 }
 
-export async function* findSamples(rootDir: string, matcher?: RegExp): AsyncIterable<string> {
-  for await (const fn of treeWalk(rootDir)) {
-    if (matcher && !matcher.test(fn)) {
-      continue;
+export async function* fromArray<T>(array: T[]): AsyncIterable<T> {
+  for (const i of array) {
+    yield i;
+  }
+}
+
+export async function* findSamples(rootDirs: string[], matcher?: RegExp): AsyncIterable<string> {
+  for (const rootDir of rootDirs) {
+    for await (const fn of treeWalk(rootDir)) {
+      if (matcher && !matcher.test(fn)) {
+        continue;
+      }
+      yield fn;
     }
-    yield fn;
   }
 }
 

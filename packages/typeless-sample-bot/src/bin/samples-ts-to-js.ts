@@ -17,7 +17,7 @@ import loggers from '../loggers.js';
 import {createLoggers} from '../loggers.js';
 import util from 'node:util';
 import {symbols} from '../symbols.js';
-import {filterByContents, findSamples, transformSamples, writeSamples, waitForAllSamples} from '../samples.js';
+import {filterByContents, findSamples, transformSamples, writeSamples, waitForAllSamples, fromArray} from '../samples.js';
 
 export function consolize(args: unknown[]): string {
   const strings = args.map(a => {
@@ -36,20 +36,28 @@ async function main(): Promise<number> {
   console.log(symbols.green('Typeless sample bot, converts TS to JS sample snippets'));
 
   const argv = await yargs(process.argv.slice(2)).options({
+    targets: {
+      demandOption: true,
+      type: 'array',
+      describe: 'one or more items to process',
+      alias: [ 't' ],
+    },
     recursive: {
       demandOption: false,
       boolean: true,
-      describe: 'process the target as a directory, recursively',
+      describe: 'process the target(s) as directories, recursively',
       alias: [ 'r' ],
     },
     verbose: {
       demandOption: false,
+      default: false,
       boolean: true,
       describe: 'set flag to get verbose output about actions (GCP_DEBUG=verbose)',
       alias: [ 'v' ],
     },
     debug: {
       demandOption: false,
+      default: false,
       boolean: true,
       describe: 'same as using GCP_DEBUG=*',
       alias: [ 'd' ],
@@ -81,7 +89,12 @@ async function main(): Promise<number> {
     returnValue = 1;
   });
 
-  const sampleFns = findSamples('./samples', /.*samples\/(?!node_modules).*\.ts$/);
+  let sampleFns: AsyncIterable<string>;
+  if (argv.recursive) {
+    sampleFns = findSamples(argv.targets.map(i => i.toString()), /.*samples\/(?!node_modules).*\.ts$/);
+  } else {
+    sampleFns = fromArray(argv.targets.map(i => i.toString()));
+  }
   const filtered = filterByContents(sampleFns);
   const transformed = transformSamples(filtered);
   const written = writeSamples(transformed);
