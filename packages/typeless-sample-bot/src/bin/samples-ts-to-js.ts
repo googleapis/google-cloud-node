@@ -16,8 +16,7 @@ import yargs from 'yargs';
 import loggers from '../loggers.js';
 import {createLoggers} from '../loggers.js';
 import util from 'node:util';
-
-import chalk from 'chalk';
+import {symbols} from '../symbols.js';
 import {filterByContents, findSamples, transformSamples, writeSamples, waitForAllSamples} from '../samples.js';
 
 export function consolize(args: unknown[]): string {
@@ -34,7 +33,7 @@ export function consolize(args: unknown[]): string {
 }
 
 async function main(): Promise<number> {
-  console.log(chalk.green('Typeless sample bot, converts TS to JS sample snippets'));
+  console.log(symbols.green('Typeless sample bot, converts TS to JS sample snippets'));
 
   const argv = await yargs(process.argv.slice(2)).options({
     recursive: {
@@ -68,16 +67,17 @@ async function main(): Promise<number> {
     return 0;
   }
 
+  symbols.art = argv.art;
   await createLoggers();
 
   // Set up our log outputs as needed
   let returnValue = 0;
   if (argv.verbose) {
-    loggers.verbose.on('log', (args: any[]) => console.debug(chalk.grey(consolize(['🐞', ...args]))));
+    loggers.verbose.on('log', (args: any[]) => console.debug(symbols.grey(consolize([symbols.bug, ...args]))));
   }
-  loggers.step.on('log', (args: any[]) => console.log(consolize(['○', ...args])));
+  loggers.step.on('log', (args: any[]) => console.log(consolize([symbols.step, ...args])));
   loggers.error.on('log', (args: any[]) => {
-    console.error(chalk.red(consolize(['❌', ...args])))
+    console.error(symbols.red(consolize([symbols.failure, ...args])))
     returnValue = 1;
   });
 
@@ -88,9 +88,9 @@ async function main(): Promise<number> {
   await waitForAllSamples(written);
 
   if (!returnValue) {
-    console.log('✅', chalk.green('Generation complete!'));
+    console.log(symbols.success, symbols.green('Generation complete!'));
   } else {
-    console.log('❌', chalk.redBright('Something failed. (Maybe not everything, check the log above.)'));
+    console.log(symbols.failure, symbols.redBright('Something failed. (Maybe not everything, check the log above.)'));
   }
 
   return returnValue;
