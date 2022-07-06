@@ -11,7 +11,8 @@
     "compile": "tsc",
     "test": "c8 mocha build/test --recursive",
     "pretest": "npm run compile",
-    "system-test": "echo no system tests yet 🙀"
+    "system-test": "echo no system tests yet 🙀",
+    "lint": "echo no linter yet 🙀"
   },
   "dependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.0",
