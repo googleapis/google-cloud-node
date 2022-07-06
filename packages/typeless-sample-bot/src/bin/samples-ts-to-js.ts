@@ -55,10 +55,11 @@ async function main(): Promise<number> {
       describe: 'same as using GCP_DEBUG=*',
       alias: [ 'd' ],
     },
-    noart: {
+    art: {
       demandOption: false,
       boolean: true,
-      describe: 'remove ASCII/ANSI art/colours for screen readers',
+      default: true,
+      describe: 'allow ASCII/ANSI art/colours',
       alias: [ 'c' ],
     },
   }).help().argv;
