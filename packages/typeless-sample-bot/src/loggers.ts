@@ -15,6 +15,10 @@
 import {GcpDebugLogFunction, placeholder} from './gcp-debuglog.js';
 import makeLog from './gcp-debuglog.js';
 
+// This creates our topical loggers. Since this is ESM, loading modules is
+// now an async operation, so we have to put some placeholders in (to get
+// typings) until these are actually ready.
+
 const loggers = {
   verbose: placeholder,
   step: placeholder,

@@ -15,6 +15,8 @@
 import {resolve} from 'node:path';
 import {readdir} from 'node:fs/promises';
 
+// Given a root directory, traverse its tree to find all files. This
+// will be done using async iterators, returning results opportunistically.
 export async function* treeWalk(rootDir: string): AsyncIterable<string> {
   const entries = await readdir(rootDir, {withFileTypes: true});
   for (const entry of entries) {
