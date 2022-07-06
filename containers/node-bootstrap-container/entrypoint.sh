@@ -17,7 +17,7 @@ set -e
 MONO_REPO_NAME="google-cloud-node"
 WORKSPACE_DIR="/workspace"
 cd  "${WORKSPACE_DIR}/${MONO_REPO_NAME}/packages/gapic-node-templating"
-npm ci
+npm i
 npm run compile
 npm link .
 
