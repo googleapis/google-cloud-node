@@ -22,16 +22,33 @@ const {describe, it} = require('mocha');
 const assert = require('assert');
 const cp = require('child_process');
 const { Octokit } = require('@octokit/rest');
+const fs = require('fs');
 
 nock.disableNetConnect();
 
 describe('helper functions', () => {
+    beforeEach(() => {
+      fs.writeFileSync(path.resolve(__dirname, 'interContainerVars.json'), JSON.stringify({branchName: 'branchName'}, null, 4))
+    })
+
+    afterEach(() => {
+      cp.execSync(`rm -rf ${path.resolve(__dirname, 'interContainerVars.json')}`)
+    })
+
     it('should return the API path without the version, with dashes', async () => {
       assert.deepStrictEqual(cp.execSync(
         `node ${createFolderNamePath} 'google.cloud.kms.v1'`).toString('utf-8'),
         'google-cloud-kms\n'
       );
     });
+
+    it('should add the .OwlBot.yaml name to the interContainerVars.json', async () => { 
+       cp.execSync(
+        `node ./add-to-well-known-path.js ${__dirname} google-cloud-kms`);
+
+        assert.deepStrictEqual(JSON.parse(fs.readFileSync(path.resolve(__dirname, 'interContainerVars.json')).toString('utf8')), {branchName: 'branchName', owlbotYamlPath: 'packages/google-cloud-kms/.OwlBot.yaml'})
+    });
+
 
   
       it('should open an issue on a given repo', async () => {
