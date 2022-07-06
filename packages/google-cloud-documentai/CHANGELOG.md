@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/nodejs-document-ai/compare/v4.0.0...v4.1.0) (2022-07-01)
+
+
+### Features
+
+* support regapic LRO ([#339](https://github.com/googleapis/nodejs-document-ai/issues/339)) ([2be6744](https://github.com/googleapis/nodejs-document-ai/commit/2be67448def326a68a4f81557c536a8a4eed6aad))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-document-ai/compare/v3.3.0...v4.0.0) (2022-06-20)
 
 
