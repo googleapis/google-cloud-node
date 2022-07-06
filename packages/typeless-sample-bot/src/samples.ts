@@ -35,7 +35,8 @@ export async function* findSamples(rootDir: string, matcher?: RegExp): AsyncIter
   }
 }
 
-const sampleChecker = /\[START .*\]/;
+// Ironically, this triggers snippet-bot, so there's a nonce in the middle: ()?
+const sampleChecker = /\[()?START .*\]/;
 
 export interface Sample {
   filename: string;
