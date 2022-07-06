@@ -16,7 +16,8 @@
   "scripts": {
     "compile": "tsc",
     "test": "c8 mocha build/test --recursive",
-    "pretest": "npm run compile"
+    "pretest": "npm run compile",
+    "system-test": "echo no system tests yet 🙀"
   },
   "main": "node build/src/bin/samples-ts-to-js.js",
   "dependencies": {
