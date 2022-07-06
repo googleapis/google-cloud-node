@@ -102,8 +102,12 @@ export async function* writeSamples(samples: AsyncIterable<Sample>): AsyncIterab
   }
 }
 
-export async function waitForAllSamples(samples: AsyncIterable<Sample>): Promise<void> {
+export async function waitForAllSamples(samples: AsyncIterable<Sample>): Promise<number> {
+  let count = 0;
   for await (const s of samples) {
     loggers.step('Generated', s.filename);
+    count++;
   }
+
+  return count;
 }

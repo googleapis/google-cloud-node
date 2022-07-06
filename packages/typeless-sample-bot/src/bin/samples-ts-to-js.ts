@@ -19,6 +19,10 @@ import util from 'node:util';
 import {symbols} from '../symbols.js';
 import {filterByContents, findSamples, transformSamples, writeSamples, waitForAllSamples, fromArray} from '../samples.js';
 
+let returnValue = 0;
+
+// Converts an array of unknown-type items into a string suitable for
+// printing to the console.
 export function consolize(args: unknown[]): string {
   const strings = args.map(a => {
     if (typeof(a) === 'string') {
@@ -32,9 +36,7 @@ export function consolize(args: unknown[]): string {
   return strings.join(' ');
 }
 
-async function main(): Promise<number> {
-  console.log(symbols.green('Typeless sample bot, converts TS to JS sample snippets'));
-
+async function processArgs() {
   const argv = await yargs(process.argv.slice(2)).options({
     targets: {
       demandOption: true,
@@ -72,33 +74,64 @@ async function main(): Promise<number> {
   }).help().argv;
 
   if (argv.mode === 'help') {
-    return 0;
+    return undefined;
   }
 
   symbols.art = argv.art;
+
+  return argv;
+}
+
+async function setupLoggers(verbose: boolean) {
   await createLoggers();
 
   // Set up our log outputs as needed
-  let returnValue = 0;
-  if (argv.verbose) {
+  if (verbose) {
     loggers.verbose.on('log', (args: any[]) => console.debug(symbols.grey(consolize([symbols.bug, ...args]))));
   }
   loggers.step.on('log', (args: any[]) => console.log(consolize([symbols.step, ...args])));
   loggers.error.on('log', (args: any[]) => {
     console.error(symbols.red(consolize([symbols.failure, ...args])))
+
+    // Also cause main() to return a failure.
     returnValue = 1;
   });
+}
 
+async function main(): Promise<number> {
+  console.log(symbols.green('Typeless sample bot, converts TS to JS sample snippets'));
+
+  // Process command line args and get loggers configured.
+  const argv = await processArgs();
+  if (!argv) {
+    return 0;
+  }
+  await setupLoggers(argv.verbose);
+
+  // Find all of the samples we're interested in working on.
   let sampleFns: AsyncIterable<string>;
   if (argv.recursive) {
     sampleFns = findSamples(argv.targets.map(i => i.toString()), /.*samples\/(?!node_modules).*\.ts$/);
   } else {
     sampleFns = fromArray(argv.targets.map(i => i.toString()));
   }
+
+  // Filter down to samples that have a snippet tag.
   const filtered = filterByContents(sampleFns);
+
+  // Transform those samples using Babel.
   const transformed = transformSamples(filtered);
+
+  // Write out all of the output samples.
   const written = writeSamples(transformed);
-  await waitForAllSamples(written);
+
+  // Wait for the pipeline to complete.
+  const count = await waitForAllSamples(written);
+
+  if (!count) {
+    // Should this be considred a failure?
+    loggers.error('No samples were selected.');
+  }
 
   if (!returnValue) {
     console.log(symbols.success, symbols.green('Generation complete!'));
