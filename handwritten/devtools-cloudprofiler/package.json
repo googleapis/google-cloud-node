@@ -70,7 +70,6 @@
   "files": [
     "build/src",
     "build/third_party/cloud-debug-nodejs",
-    "bindings",
     "build/protos"
   ],
   "nyc": {
