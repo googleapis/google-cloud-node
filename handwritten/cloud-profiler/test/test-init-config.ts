@@ -20,7 +20,7 @@ import * as sinon from 'sinon';
 
 import {createProfiler, nodeVersionOkay} from '../src/index';
 import {Profiler} from '../src/profiler';
-import * as packageJson from '../package.json';
+const packageJson = require('../../package.json');
 
 describe('nodeVersionOkay', () => {
   const version = parseInt(packageJson.engines.node.replace('>=', ''));
