@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BareMetalSolutionClient} from '@google-cloud/baremetalsolution';
+import {BareMetalSolutionClient} from '@google-cloud/bare-metal-solution';
 
 // check that the client class type name can be used
 function doStuffWithBareMetalSolutionClient(client: BareMetalSolutionClient) {

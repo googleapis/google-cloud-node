@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const baremetalsolution = require('@google-cloud/baremetalsolution');
+const baremetalsolution = require('@google-cloud/bare-metal-solution');
 
 function main() {
   const bareMetalSolutionClient =

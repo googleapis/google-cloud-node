@@ -1,3 +1,16 @@
 {
-	"default_version": "v2"
-}
+	"name": "baremetalsolution",
+	"name_pretty": "Bare Metal Solution API",
+	"product_documentation": "https://cloud.google.com/bare-metal",
+	"client_documentation": "https://cloud.google.com/nodejs/docs/reference/bare-metal/latest",
+	"issue_tracker": "https://github.com/googleapis/nodejs-bare-metal-solution/issues",
+	"release_level": "preview",
+	"language": "nodejs",
+	"repo": "googleapis/nodejs-bare-metal-solution",
+	"distribution_name": "@google-cloud/bare-metal-solution",
+	"api_id": "baremetalsolution.googleapis.com",
+	"default_version": "v2",
+	"requires_billing": true,
+	"api_shortname": "baremetalsolution",
+	"library_type": "GAPIC_AUTO"
+  }
