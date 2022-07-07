@@ -9,7 +9,7 @@ steps:
         '-f', 'containers/node-bootstrap-container/Dockerfile', '.' ]
     # Push the docker image.
 images:
-  - gcr.io/owlbot-bootstrap-prod/owlbot-nodejs:$SHORT_SHA
-  - gcr.io/owlbot-bootstrap-prod/owlbot-nodejs:latest
-  - gcr.io/owlbot-bootstrap-staging/owlbot-nodejs:$SHORT_SHA
-  - gcr.io/owlbot-bootstrap-staging/owlbot-nodejs:latest
+  - gcr.io/owlbot-bootstrap-prod/node-bootstrapper:$SHORT_SHA
+  - gcr.io/owlbot-bootstrap-prod/node-bootstrapper:latest
+  - gcr.io/owlbot-bootstrap-staging/node-bootstrapper:$SHORT_SHA
+  - gcr.io/owlbot-bootstrap-staging/node-bootstrapper:latest
