@@ -33018,6 +33018,9 @@ export namespace google {
                     /** ListAnswerRecordsRequest parent */
                     parent?: (string|null);
 
+                    /** ListAnswerRecordsRequest filter */
+                    filter?: (string|null);
+
                     /** ListAnswerRecordsRequest pageSize */
                     pageSize?: (number|null);
 
@@ -33036,6 +33039,9 @@ export namespace google {
 
                     /** ListAnswerRecordsRequest parent. */
                     public parent: string;
+
+                    /** ListAnswerRecordsRequest filter. */
+                    public filter: string;
 
                     /** ListAnswerRecordsRequest pageSize. */
                     public pageSize: number;
@@ -34298,6 +34304,102 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an AudioInput. */
+                interface IAudioInput {
+
+                    /** AudioInput config */
+                    config?: (google.cloud.dialogflow.v2beta1.IInputAudioConfig|null);
+
+                    /** AudioInput audio */
+                    audio?: (Uint8Array|string|null);
+                }
+
+                /** Represents an AudioInput. */
+                class AudioInput implements IAudioInput {
+
+                    /**
+                     * Constructs a new AudioInput.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IAudioInput);
+
+                    /** AudioInput config. */
+                    public config?: (google.cloud.dialogflow.v2beta1.IInputAudioConfig|null);
+
+                    /** AudioInput audio. */
+                    public audio: (Uint8Array|string);
+
+                    /**
+                     * Creates a new AudioInput instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudioInput instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IAudioInput): google.cloud.dialogflow.v2beta1.AudioInput;
+
+                    /**
+                     * Encodes the specified AudioInput message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.AudioInput.verify|verify} messages.
+                     * @param message AudioInput message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IAudioInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudioInput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.AudioInput.verify|verify} messages.
+                     * @param message AudioInput message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IAudioInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudioInput message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudioInput
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.AudioInput;
+
+                    /**
+                     * Decodes an AudioInput message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudioInput
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.AudioInput;
+
+                    /**
+                     * Verifies an AudioInput message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudioInput message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudioInput
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.AudioInput;
+
+                    /**
+                     * Creates a plain object from an AudioInput message. Also converts values to other types if specified.
+                     * @param message AudioInput
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.AudioInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudioInput to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an OutputAudio. */
                 interface IOutputAudio {
 
@@ -34748,6 +34850,9 @@ export namespace google {
                     /** AnalyzeContentRequest textInput */
                     textInput?: (google.cloud.dialogflow.v2beta1.ITextInput|null);
 
+                    /** AnalyzeContentRequest audioInput */
+                    audioInput?: (google.cloud.dialogflow.v2beta1.IAudioInput|null);
+
                     /** AnalyzeContentRequest eventInput */
                     eventInput?: (google.cloud.dialogflow.v2beta1.IEventInput|null);
 
@@ -34762,6 +34867,9 @@ export namespace google {
 
                     /** AnalyzeContentRequest cxParameters */
                     cxParameters?: (google.protobuf.IStruct|null);
+
+                    /** AnalyzeContentRequest cxCurrentPage */
+                    cxCurrentPage?: (string|null);
 
                     /** AnalyzeContentRequest messageSendTime */
                     messageSendTime?: (google.protobuf.ITimestamp|null);
@@ -34785,6 +34893,9 @@ export namespace google {
                     /** AnalyzeContentRequest textInput. */
                     public textInput?: (google.cloud.dialogflow.v2beta1.ITextInput|null);
 
+                    /** AnalyzeContentRequest audioInput. */
+                    public audioInput?: (google.cloud.dialogflow.v2beta1.IAudioInput|null);
+
                     /** AnalyzeContentRequest eventInput. */
                     public eventInput?: (google.cloud.dialogflow.v2beta1.IEventInput|null);
 
@@ -34800,6 +34911,9 @@ export namespace google {
                     /** AnalyzeContentRequest cxParameters. */
                     public cxParameters?: (google.protobuf.IStruct|null);
 
+                    /** AnalyzeContentRequest cxCurrentPage. */
+                    public cxCurrentPage: string;
+
                     /** AnalyzeContentRequest messageSendTime. */
                     public messageSendTime?: (google.protobuf.ITimestamp|null);
 
@@ -34807,7 +34921,7 @@ export namespace google {
                     public requestId: string;
 
                     /** AnalyzeContentRequest input. */
-                    public input?: ("textInput"|"eventInput");
+                    public input?: ("textInput"|"audioInput"|"eventInput");
 
                     /**
                      * Creates a new AnalyzeContentRequest instance using the specified properties.
@@ -35219,6 +35333,9 @@ export namespace google {
                     /** StreamingAnalyzeContentRequest cxParameters */
                     cxParameters?: (google.protobuf.IStruct|null);
 
+                    /** StreamingAnalyzeContentRequest cxCurrentPage */
+                    cxCurrentPage?: (string|null);
+
                     /** StreamingAnalyzeContentRequest enablePartialAutomatedAgentReply */
                     enablePartialAutomatedAgentReply?: (boolean|null);
                 }
@@ -35261,6 +35378,9 @@ export namespace google {
 
                     /** StreamingAnalyzeContentRequest cxParameters. */
                     public cxParameters?: (google.protobuf.IStruct|null);
+
+                    /** StreamingAnalyzeContentRequest cxCurrentPage. */
+                    public cxCurrentPage: string;
 
                     /** StreamingAnalyzeContentRequest enablePartialAutomatedAgentReply. */
                     public enablePartialAutomatedAgentReply: boolean;

@@ -10263,6 +10263,14 @@
                             "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/AnswerRecord"
                           }
                         },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "pageSize": {
                           "type": "int32",
                           "id": 3
@@ -10411,7 +10419,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2beta1/{participant=projects/*/locations/*/conversations/*/participants/*}:analyzeContent",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "participant,event_input"
+                            "(google.api.method_signature)": "participant,audio_input"
                           },
                           "parsedOptions": [
                             {
@@ -10429,6 +10437,9 @@
                             },
                             {
                               "(google.api.method_signature)": "participant,event_input"
+                            },
+                            {
+                              "(google.api.method_signature)": "participant,audio_input"
                             }
                           ]
                         },
@@ -10762,6 +10773,18 @@
                         }
                       }
                     },
+                    "AudioInput": {
+                      "fields": {
+                        "config": {
+                          "type": "InputAudioConfig",
+                          "id": 1
+                        },
+                        "audio": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
                     "OutputAudio": {
                       "fields": {
                         "config": {
@@ -10875,6 +10898,7 @@
                         "input": {
                           "oneof": [
                             "textInput",
+                            "audioInput",
                             "eventInput"
                           ]
                         }
@@ -10891,6 +10915,10 @@
                         "textInput": {
                           "type": "TextInput",
                           "id": 6
+                        },
+                        "audioInput": {
+                          "type": "AudioInput",
+                          "id": 7
                         },
                         "eventInput": {
                           "type": "EventInput",
@@ -10911,6 +10939,10 @@
                         "cxParameters": {
                           "type": "google.protobuf.Struct",
                           "id": 18
+                        },
+                        "cxCurrentPage": {
+                          "type": "string",
+                          "id": 20
                         },
                         "messageSendTime": {
                           "type": "google.protobuf.Timestamp",
@@ -11032,6 +11064,10 @@
                         "cxParameters": {
                           "type": "google.protobuf.Struct",
                           "id": 13
+                        },
+                        "cxCurrentPage": {
+                          "type": "string",
+                          "id": 15
                         },
                         "enablePartialAutomatedAgentReply": {
                           "type": "bool",

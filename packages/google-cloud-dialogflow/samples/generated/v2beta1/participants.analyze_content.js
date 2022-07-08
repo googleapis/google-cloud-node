@@ -36,6 +36,10 @@ function main(participant) {
    */
   // const textInput = {}
   /**
+   *  The natural language speech audio to be processed.
+   */
+  // const audioInput = {}
+  /**
    *  An input event to send to Dialogflow.
    */
   // const eventInput = {}
@@ -63,6 +67,21 @@ function main(participant) {
    *  CX agent.
    */
   // const cxParameters = {}
+  /**
+   *  The unique identifier of the CX page to override the `current_page` in the
+   *  session.
+   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *  ID>/flows/<Flow ID>/pages/<Page ID>`.
+   *  If `cx_current_page` is specified, the previous state of the session will
+   *  be ignored by Dialogflow CX, including the previous
+   *  page QueryResult.current_page  and the previous session
+   *  parameters QueryResult.parameters. In most cases, `cx_current_page` and
+   *  `cx_parameters` should be configured together to direct a session to a
+   *  specific state.
+   *  Note: this field should only be used if you are connecting to a Dialogflow
+   *  CX agent.
+   */
+  // const cxCurrentPage = 'abc123'
   /**
    *  Optional. The send time of the message from end user or human agent's
    *  perspective. It is used for identifying the same message under one

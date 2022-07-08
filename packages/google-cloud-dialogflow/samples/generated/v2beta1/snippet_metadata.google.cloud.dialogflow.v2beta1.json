@@ -458,7 +458,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -469,6 +469,10 @@
                 "parameters": [
                     {
                         "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
                         "type": "TYPE_STRING"
                     },
                     {
@@ -3306,7 +3310,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 105,
+                    "end": 124,
                     "type": "FULL"
                 }
             ],
@@ -3322,6 +3326,10 @@
                     {
                         "name": "text_input",
                         "type": ".google.cloud.dialogflow.v2beta1.TextInput"
+                    },
+                    {
+                        "name": "audio_input",
+                        "type": ".google.cloud.dialogflow.v2beta1.AudioInput"
                     },
                     {
                         "name": "event_input",
@@ -3342,6 +3350,10 @@
                     {
                         "name": "cx_parameters",
                         "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "cx_current_page",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "message_send_time",
@@ -3378,7 +3390,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 113,
+                    "end": 128,
                     "type": "FULL"
                 }
             ],
@@ -3426,6 +3438,10 @@
                     {
                         "name": "cx_parameters",
                         "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "cx_current_page",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "enable_partial_automated_agent_reply",
