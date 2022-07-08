@@ -32,6 +32,7 @@
     "protobufjs": "^6.11.2"
   },
   "devDependencies": {
+    "@google-cloud/bigquery": "^6.0.0",
     "@types/chai": "^4.2.16",
     "@types/rimraf": "^3.0.0",
     "chai": "^4.2.0",

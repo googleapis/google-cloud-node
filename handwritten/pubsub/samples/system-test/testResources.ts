@@ -91,6 +91,16 @@ export class TestResources {
     return [this.getPrefix(testId), this.tokenMaker.uuid()].join('-');
   }
 
+  /**
+   * Generates a unique resource name for one run of a test within
+   * a test suite for BigQuery resources.
+   */
+  generateBigQueryName(testId: string): string {
+    return [normalizeId(this.getPrefix(testId)), this.tokenMaker.uuid()].join(
+      '_'
+    );
+  }
+
   /*!
    * Given a list of resource names (and a test ID), this will return
    * a list of all resources that should be deleted to clean up for

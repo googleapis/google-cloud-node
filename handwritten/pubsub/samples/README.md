@@ -21,6 +21,7 @@ guides.
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Create an Avro based Schema](#create-an-avro-based-schema)
+  * [Create BigQuery Subscription](#create-bigquery-subscription)
   * [Create a Proto based Schema](#create-a-proto-based-schema)
   * [Create Push Subscription](#create-push-subscription)
   * [Create Subscription](#create-subscription)
@@ -96,6 +97,25 @@ __Usage:__
 
 
 `node createAvroSchema.js <schema-name> <avsc-filename>`
+
+
+-----
+
+
+
+
+### Create BigQuery Subscription
+
+Creates a new BigQuery subscription.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createBigQuerySubscription.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createBigQuerySubscription.js,samples/README.md)
+
+__Usage:__
+
+
+`node createBigQuerySubscription.js <topic-name-or-id> <subscription-name-or-id> <bigquery-table-id>`
 
 
 -----
