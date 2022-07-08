@@ -26,8 +26,11 @@ COPY package*.json ./
  
 RUN npm install
 
+# Now copy all the code so we can compile
+COPY ./entrypoint.sh /
+
 COPY --from=build /go/bin/buildozer /go/bin/buildozer 
 
 # Run the web service on container startup.
-ENTRYPOINT ["./entrypoint.sh" ]
+ENTRYPOINT ["/entrypoint.sh" ]
 
