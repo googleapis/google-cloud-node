@@ -19,7 +19,7 @@
     "snappy": "^7.0.0"
   },
   "devDependencies": {
-    "@google-cloud/bigquery": "^5.9.3",
+    "@google-cloud/bigquery": "^6.0.0",
     "c8": "^7.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
