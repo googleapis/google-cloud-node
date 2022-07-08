@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.gkebackup.v1",
-  "libraryPackage": "@google-cloud/gkebackup",
+  "libraryPackage": "@google-cloud/gke-backup",
   "services": {
     "BackupForGKE": {
       "clients": {

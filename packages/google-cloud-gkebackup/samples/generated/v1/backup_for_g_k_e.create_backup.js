@@ -46,7 +46,7 @@ function main(parent) {
   // const backupId = 'abc123'
 
   // Imports the Gkebackup library
-  const {BackupForGKEClient} = require('@google-cloud/gkebackup').v1;
+  const {BackupForGKEClient} = require('@google-cloud/gke-backup').v1;
 
   // Instantiates a client
   const gkebackupClient = new BackupForGKEClient();
