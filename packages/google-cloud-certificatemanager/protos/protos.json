@@ -14,9 +14,7 @@
                     "java_outer_classname": "CertificateManagerProto",
                     "java_package": "com.google.cloud.certificatemanager.v1",
                     "php_namespace": "Google\\Cloud\\CertificateManager\\V1",
-                    "ruby_package": "Google::Cloud::CertificateManager::V1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/TargetSslProxies",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/targetSslProxies/{target_ssl_proxy}"
+                    "ruby_package": "Google::Cloud::CertificateManager::V1"
                   },
                   "nested": {
                     "CertificateManager": {
@@ -1260,17 +1258,11 @@
                           "fields": {
                             "targetHttpsProxy": {
                               "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.resource_reference).type": "compute.googleapis.com/TargetHttpsProxies"
-                              }
+                              "id": 1
                             },
                             "targetSslProxy": {
                               "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.resource_reference).type": "compute.googleapis.com/TargetSslProxies"
-                              }
+                              "id": 3
                             },
                             "ipConfigs": {
                               "rule": "repeated",
