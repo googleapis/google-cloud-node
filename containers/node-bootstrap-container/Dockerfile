@@ -27,11 +27,11 @@ COPY package*.json ./
 RUN npm install
 
 # Now copy all the code so we can compile
-COPY --from=nodebuild entrypoint.sh /
+COPY entrypoint.sh ./
 
 COPY --from=gobuild /go/bin/buildozer /go/bin/buildozer 
 
-RUN chmod 755 /entrypoint.sh
+RUN chmod 755 ./entrypoint.sh
 # Run the web service on container startup.
-ENTRYPOINT ["/entrypoint.sh" ]
+ENTRYPOINT ["./entrypoint.sh" ]
 
