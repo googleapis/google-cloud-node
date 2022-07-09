@@ -26,6 +26,8 @@ COPY package*.json ./
  
 RUN npm install
 
+RUN chmod 755 entrypoint.sh
+
 # Now copy all the code so we can compile
 COPY entrypoint.sh /
 
