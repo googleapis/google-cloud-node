@@ -31,6 +31,7 @@ COPY . /
 
 COPY --from=build /go/bin/buildozer /go/bin/buildozer 
 
+RUN chmod 755 /entrypoint.sh
 # Run the web service on container startup.
 ENTRYPOINT ["/entrypoint.sh" ]
 
