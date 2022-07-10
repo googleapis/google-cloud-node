@@ -52,8 +52,7 @@
     "arrify": "^2.0.0",
     "extend": "^3.0.2",
     "google-gax": "^3.0.1",
-    "is-html": "^2.0.0",
-    "protobufjs": "^6.8.8"
+    "is-html": "^2.0.0"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
