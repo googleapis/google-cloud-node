@@ -49,7 +49,6 @@
     "@google-cloud/common": "^4.0.0",
     "@types/pumpify": "^1.4.1",
     "google-gax": "^3.1.2",
-    "protobufjs": "^6.8.6",
     "pumpify": "^2.0.0",
     "stream-events": "^1.0.4",
     "uuid": "^8.3.2"

@@ -22,7 +22,7 @@
     "google-proto-files": "^2.5.0",
     "node-record-lpcm16": "^1.0.1",
     "proto3-json-serializer": "^0.1.6",
-    "protobufjs": "^6.11.2",
+    "protobufjs": "^7.0.0",
     "sox": "^0.1.0",
     "yargs": "^16.0.0"
   },
