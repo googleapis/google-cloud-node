@@ -41,7 +41,7 @@
   "dependencies": {
     "@google-cloud/storage": "^6.1.0",
     "nunjucks": "^3.2.3",
-    "octokit": "^1.7.2",
+    "octokit": "^2.0.0",
     "yargs": "^17.5.1"
   }
 }
