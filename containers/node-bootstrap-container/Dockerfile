@@ -27,7 +27,7 @@ COPY package*.json ./
 RUN npm install
 
 # Now copy all the code so we can compile
-COPY . ./
+COPY entrypoint.sh ./
 
 COPY --from=gobuild /go/bin/buildozer /go/bin/buildozer 
 
