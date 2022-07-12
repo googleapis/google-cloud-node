@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.4.0...v0.5.0) (2022-07-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Removed resource definition of Compute API resources and incorrect resource references that used them
+
+### Bug Fixes
+
+* Removed resource definition of Compute API resources and incorrect resource references that used them ([4ee1fc4](https://github.com/googleapis/nodejs-certificate-manager/commit/4ee1fc45a5bee07edf888719dee13d600f5a9733))
+
 ## [0.4.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.3.0...v0.4.0) (2022-06-30)
 
 
