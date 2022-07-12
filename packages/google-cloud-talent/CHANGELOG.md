@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [4.1.1](https://github.com/googleapis/nodejs-talent/compare/v4.1.0...v4.1.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* update generator version ([#430](https://github.com/googleapis/nodejs-talent/issues/430)) ([ef5216c](https://github.com/googleapis/nodejs-talent/commit/ef5216cf865fef5106869e1c6acb9d29da249afe))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-talent/compare/v4.0.0...v4.1.0) (2022-06-03)
 
 
