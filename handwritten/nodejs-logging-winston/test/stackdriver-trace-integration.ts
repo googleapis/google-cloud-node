@@ -22,15 +22,15 @@ declare const global: {[index: string]: {} | null};
 
 /**
  * Tests that ensure that getDefaultMetadataForTracing can be used for
- * trace-log correlation when Stackdriver Trace Agent is present. See
+ * trace-log correlation when Cloud Trace Agent is present. See
  * src/default-metadata.ts for an explanation on why this to exist.
  */
-describe('Stackdriver Trace Log Correlation', () => {
+describe('Cloud Trace Log Correlation', () => {
   // Trace context IDs seen in logs so far in a test.
   const seenContextIds: string[] = [];
   // Set a trace context ID for all succeeding Winston logs.
   let setCurrentContextId: (id: string) => void;
-  // The Stackdriver Logging Winston transport library.
+  // The Cloud Logging Winston transport library.
   let loggingWinstonLib: typeof loggingWinstonLibTypes;
   // The flag indicating if callback was called or not
   let isCallbackCalled: boolean;

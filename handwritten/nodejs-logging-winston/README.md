@@ -11,7 +11,7 @@
 
 
 This module provides a higher-level layer for working with
-[Stackdriver Logging](https://cloud.google.com/logging/docs), compatible with
+[Cloud Logging](https://cloud.google.com/logging/docs), compatible with
 [Winston](https://www.npmjs.com/package/winston). Simply attach this as a
 transport to your existing Winston loggers.
 
@@ -66,13 +66,13 @@ const {LoggingWinston} = require('@google-cloud/logging-winston');
 
 const loggingWinston = new LoggingWinston();
 
-// Create a Winston logger that streams to Stackdriver Logging
+// Create a Winston logger that streams to Cloud Logging
 // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
 const logger = winston.createLogger({
   level: 'info',
   transports: [
     new winston.transports.Console(),
-    // Add Stackdriver Logging
+    // Add Cloud Logging
     loggingWinston,
   ],
 });
@@ -82,9 +82,9 @@ logger.error('warp nacelles offline');
 logger.info('shields at 99%');
 
 ```
-For a more detailed Stackdriver Logging setup guide, see https://cloud.google.com/logging/docs/setup/nodejs.
+For a more detailed Cloud Logging setup guide, see https://cloud.google.com/logging/docs/setup/nodejs.
 
-Creates a Winston logger that streams to Stackdriver Logging
+Creates a Winston logger that streams to Cloud Logging
 
 Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
 
@@ -95,7 +95,7 @@ incompatible way until this is deemed stable. Please provide us feedback so
 that we can better refine this express integration.***
 
 We provide a middleware that can be used in an express application. Apart from
-being easy to use, this enables some more powerful features of Stackdriver
+being easy to use, this enables some more powerful features of Cloud
 Logging: request bundling. Any application logs emitted on behalf of a specific
 request will be shown nested inside the request log as you see in this
 screenshot:
@@ -105,7 +105,7 @@ screenshot:
 This middleware adds a `winston`-style log function to the `request` object.
 You can use this wherever you have access to the `request` object (`req` in the
 sample below). All log entries that are made on behalf of a specific request are
-shown bundled together in the Stackdriver Logging UI.
+shown bundled together in the Cloud Logging UI.
 
 ```javascript
 const lw = require('@google-cloud/logging-winston');
@@ -117,7 +117,7 @@ const logger = winston.createLogger();
 
 async function main() {
     // Create a middleware that will use the provided logger.
-    // A Stackdriver Logging transport will be created automatically
+    // A Cloud Logging transport will be created automatically
     // and added onto the provided logger.
     const mw = await lw.express.makeMiddleware(logger);
     // Alternatively, you can construct a LoggingWinston transport
@@ -137,7 +137,7 @@ async function main() {
     app.get('/', (req, res) => {
         // `req.log` can be used as a winston style log method. All logs generated
         // using `req.log` use the current request context. That is, all logs
-        // corresponding to a specific request will be bundled in the Stackdriver
+        // corresponding to a specific request will be bundled in the Cloud Logging
         // UI.
         req.log.info('this is an info log message');
         res.send('hello world');
@@ -204,7 +204,7 @@ defaultCallback: err => {
 
 **NOTE: The express middleware provided by this library handles this automatically for you. These instructions are for there case where you may want to handle this manually.**
 
-To format your request logs you can provide a `httpRequest` property as part of the log metadata you provide to winston. We will treat this as the [`HttpRequest`](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest) message and Stackdriver logging will show this as a request log. Example:
+To format your request logs you can provide a `httpRequest` property as part of the log metadata you provide to winston. We will treat this as the [`HttpRequest`](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest) message and Cloud Logging will show this as a request log. Example:
 
 ![Request Log Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-winston/master/doc/images/request-log.png)
 
@@ -222,11 +222,13 @@ httpRequest: {
 
 The `httpRequest` property must be a properly formatted [`HttpRequest`](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest) message.
 
+**NOTE: Due to a bug in [logform](https://github.com/winstonjs/logform/issues/125) some built in Winston formatters might not work properly with `LoggingWinston`. For more information about the problem and possible workaround please see [540](https://github.com/googleapis/nodejs-logging-winston/issues/540). In addition, [Cloud Logging for Bunyan](https://github.com/googleapis/nodejs-logging-bunyan) could be considered as alternative.
+
 ### Correlating Logs with Traces
 
 **NOTE: The express middleware provided by this library handles this automatically for you. These instructions are for there case where you may want to handle this manually.**
 
-If you use [@google-cloud/trace-agent][trace-agent] module, then this module will set the Stackdriver Logging [LogEntry][LogEntry] `trace` property based on the current trace context when available. That correlation allows you to [view log entries][trace-viewing-log-entries] inline with trace spans in the Stackdriver Trace Viewer. Example:
+If you use [@google-cloud/trace-agent][trace-agent] module, then this module will set the Cloud Logging [LogEntry][LogEntry] `trace` property based on the current trace context when available. That correlation allows you to [view log entries][trace-viewing-log-entries] inline with trace spans in the Cloud Trace Viewer. Example:
 
 ![Logs in Trace Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-winston/master/doc/images/winston-logs-in-trace.png)
 
@@ -250,7 +252,7 @@ winston.info('Log entry with custom trace value', {
 You can specify `labels` when initiating the logger constructor.
 
 ```js
-// Creates a Winston Stackdriver Logging client
+// Creates a Winston Cloud Logging client
 const loggingWinston = new LoggingWinston({
 labels: {
     name: 'some-name',
@@ -279,7 +281,7 @@ The `labels` will be on the Log Viewer.
 You can specify a `prefix` in the constructor, and that `prefix` will be prepended to all logging messages. This can be helpful, for example, to quickly identify logs from different modules in a project.
 
 ```js
-// Creates a Winston Stackdriver Logging client
+// Creates a Winston Cloud Logging client
 const loggingWinston = new LoggingWinston({
 prefix: 'some-module'
 });
