@@ -7,7 +7,7 @@
 [![Open in Cloud Shell][shell_img]][shell_link]
 
 This module provides a higher-level layer for working with
-[Stackdriver Logging](https://cloud.google.com/logging/docs), compatible with
+[Cloud Logging](https://cloud.google.com/logging/docs), compatible with
 [Winston](https://www.npmjs.com/package/winston). Simply attach this as a
 transport to your existing Winston loggers.
 

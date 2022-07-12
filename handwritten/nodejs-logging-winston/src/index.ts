@@ -46,7 +46,7 @@ export interface Options extends LoggingOptions {
   level?: string;
   /**
    * Custom logging levels as supported by winston. This list is used to
-   * translate your log level to the Stackdriver Logging level. Each property
+   * translate your log level to the Cloud Logging level. Each property
    * should have an integer value between 0 (most severe) and 7 (least severe).
    * If you are passing a list of levels to your winston logger, you should
    * provide the same list here.
@@ -102,7 +102,7 @@ export interface Options extends LoggingOptions {
 
 /**
  * This module provides support for streaming your winston logs to
- * [Stackdriver Logging](https://cloud.google.com/logging).
+ * [Cloud Logging](https://cloud.google.com/logging).
  *
  * @class
  *
@@ -110,7 +110,7 @@ export interface Options extends LoggingOptions {
  * @param {object} [options.level] The default log level. Winston will filter
  *     messages with a severity lower than this.
  * @param {object} [options.levels] Custom logging levels as supported by
- *     winston. This list is used to translate your log level to the Stackdriver
+ *     winston. This list is used to translate your log level to the Cloud
  *     Logging level. Each property should have an integer value between 0 (most
  *     severe) and 7 (least severe). If you are passing a list of levels to your
  *     winston logger, you should provide the same list here.
