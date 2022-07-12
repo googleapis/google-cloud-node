@@ -5000,6 +5000,9 @@ export namespace google {
 
                     /** InfoTypeDescription description */
                     description?: (string|null);
+
+                    /** InfoTypeDescription categories */
+                    categories?: (google.privacy.dlp.v2.IInfoTypeCategory[]|null);
                 }
 
                 /** Represents an InfoTypeDescription. */
@@ -5022,6 +5025,9 @@ export namespace google {
 
                     /** InfoTypeDescription description. */
                     public description: string;
+
+                    /** InfoTypeDescription categories. */
+                    public categories: google.privacy.dlp.v2.IInfoTypeCategory[];
 
                     /**
                      * Creates a new InfoTypeDescription instance using the specified properties.
@@ -5092,6 +5098,179 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an InfoTypeCategory. */
+                interface IInfoTypeCategory {
+
+                    /** InfoTypeCategory locationCategory */
+                    locationCategory?: (google.privacy.dlp.v2.InfoTypeCategory.LocationCategory|keyof typeof google.privacy.dlp.v2.InfoTypeCategory.LocationCategory|null);
+
+                    /** InfoTypeCategory industryCategory */
+                    industryCategory?: (google.privacy.dlp.v2.InfoTypeCategory.IndustryCategory|keyof typeof google.privacy.dlp.v2.InfoTypeCategory.IndustryCategory|null);
+
+                    /** InfoTypeCategory typeCategory */
+                    typeCategory?: (google.privacy.dlp.v2.InfoTypeCategory.TypeCategory|keyof typeof google.privacy.dlp.v2.InfoTypeCategory.TypeCategory|null);
+                }
+
+                /** Represents an InfoTypeCategory. */
+                class InfoTypeCategory implements IInfoTypeCategory {
+
+                    /**
+                     * Constructs a new InfoTypeCategory.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IInfoTypeCategory);
+
+                    /** InfoTypeCategory locationCategory. */
+                    public locationCategory?: (google.privacy.dlp.v2.InfoTypeCategory.LocationCategory|keyof typeof google.privacy.dlp.v2.InfoTypeCategory.LocationCategory|null);
+
+                    /** InfoTypeCategory industryCategory. */
+                    public industryCategory?: (google.privacy.dlp.v2.InfoTypeCategory.IndustryCategory|keyof typeof google.privacy.dlp.v2.InfoTypeCategory.IndustryCategory|null);
+
+                    /** InfoTypeCategory typeCategory. */
+                    public typeCategory?: (google.privacy.dlp.v2.InfoTypeCategory.TypeCategory|keyof typeof google.privacy.dlp.v2.InfoTypeCategory.TypeCategory|null);
+
+                    /** InfoTypeCategory category. */
+                    public category?: ("locationCategory"|"industryCategory"|"typeCategory");
+
+                    /**
+                     * Creates a new InfoTypeCategory instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InfoTypeCategory instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IInfoTypeCategory): google.privacy.dlp.v2.InfoTypeCategory;
+
+                    /**
+                     * Encodes the specified InfoTypeCategory message. Does not implicitly {@link google.privacy.dlp.v2.InfoTypeCategory.verify|verify} messages.
+                     * @param message InfoTypeCategory message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IInfoTypeCategory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InfoTypeCategory message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.InfoTypeCategory.verify|verify} messages.
+                     * @param message InfoTypeCategory message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IInfoTypeCategory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InfoTypeCategory message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InfoTypeCategory
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.InfoTypeCategory;
+
+                    /**
+                     * Decodes an InfoTypeCategory message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InfoTypeCategory
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.InfoTypeCategory;
+
+                    /**
+                     * Verifies an InfoTypeCategory message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InfoTypeCategory message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InfoTypeCategory
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.InfoTypeCategory;
+
+                    /**
+                     * Creates a plain object from an InfoTypeCategory message. Also converts values to other types if specified.
+                     * @param message InfoTypeCategory
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.InfoTypeCategory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InfoTypeCategory to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace InfoTypeCategory {
+
+                    /** LocationCategory enum. */
+                    enum LocationCategory {
+                        LOCATION_UNSPECIFIED = 0,
+                        GLOBAL = 1,
+                        ARGENTINA = 2,
+                        AUSTRALIA = 3,
+                        BELGIUM = 4,
+                        BRAZIL = 5,
+                        CANADA = 6,
+                        CHILE = 7,
+                        CHINA = 8,
+                        COLOMBIA = 9,
+                        DENMARK = 10,
+                        FRANCE = 11,
+                        FINLAND = 12,
+                        GERMANY = 13,
+                        HONG_KONG = 14,
+                        INDIA = 15,
+                        INDONESIA = 16,
+                        IRELAND = 17,
+                        ISRAEL = 18,
+                        ITALY = 19,
+                        JAPAN = 20,
+                        KOREA = 21,
+                        MEXICO = 22,
+                        THE_NETHERLANDS = 23,
+                        NORWAY = 24,
+                        PARAGUAY = 25,
+                        PERU = 26,
+                        POLAND = 27,
+                        PORTUGAL = 28,
+                        SINGAPORE = 29,
+                        SOUTH_AFRICA = 30,
+                        SPAIN = 31,
+                        SWEDEN = 32,
+                        TAIWAN = 33,
+                        THAILAND = 34,
+                        TURKEY = 35,
+                        UNITED_KINGDOM = 36,
+                        UNITED_STATES = 37,
+                        URUGUAY = 38,
+                        VENEZUELA = 39,
+                        INTERNAL = 40
+                    }
+
+                    /** IndustryCategory enum. */
+                    enum IndustryCategory {
+                        INDUSTRY_UNSPECIFIED = 0,
+                        FINANCE = 1,
+                        HEALTH = 2,
+                        TELECOMMUNICATIONS = 3
+                    }
+
+                    /** TypeCategory enum. */
+                    enum TypeCategory {
+                        TYPE_UNSPECIFIED = 0,
+                        PII = 1,
+                        SPII = 2,
+                        DEMOGRAPHIC = 3,
+                        CREDENTIAL = 4,
+                        GOVERNMENT_ID = 5,
+                        DOCUMENT = 6,
+                        CONTEXTUAL_INFORMATION = 7
+                    }
                 }
 
                 /** Properties of a ListInfoTypesRequest. */
