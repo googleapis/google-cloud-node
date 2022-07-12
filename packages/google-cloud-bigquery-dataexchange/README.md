@@ -172,7 +172,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-bigquery-data-exchange/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/analyticshub/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/bigquery-data-exchange/latest
 [product-docs]: https://cloud.google.com/analytics-hub
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

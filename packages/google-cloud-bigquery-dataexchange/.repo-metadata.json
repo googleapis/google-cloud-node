@@ -2,7 +2,7 @@
   "name": "analyticshub",
   "name_pretty": "Analytics Hub API",
   "product_documentation": "https://cloud.google.com/analytics-hub",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/analyticshub/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-data-exchange/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-bigquery-data-exchange/issues",
   "release_level": "beta",
   "language": "nodejs",
