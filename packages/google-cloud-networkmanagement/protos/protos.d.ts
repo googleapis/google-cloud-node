@@ -1317,7 +1317,8 @@ export namespace google {
                         NEXT_HOP_VPN_GATEWAY = 7,
                         NEXT_HOP_INTERNET_GATEWAY = 8,
                         NEXT_HOP_BLACKHOLE = 9,
-                        NEXT_HOP_ILB = 10
+                        NEXT_HOP_ILB = 10,
+                        NEXT_HOP_ROUTER_APPLIANCE = 11
                     }
                 }
 
@@ -2439,7 +2440,8 @@ export namespace google {
                         SOURCE_ENDPOINT_NOT_FOUND = 11,
                         MISMATCHED_SOURCE_NETWORK = 12,
                         DESTINATION_ENDPOINT_NOT_FOUND = 13,
-                        MISMATCHED_DESTINATION_NETWORK = 14
+                        MISMATCHED_DESTINATION_NETWORK = 14,
+                        UNSUPPORTED = 15
                     }
                 }
 
