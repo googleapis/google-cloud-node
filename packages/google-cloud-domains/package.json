@@ -50,7 +50,7 @@
     "jsdoc": "^3.6.6",
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
-    "linkinator": "^2.7.0",
+    "linkinator": "^4.0.0",
     "mocha": "^9.2.2",
     "null-loader": "^4.0.1",
     "pack-n-play": "^1.0.0-2",
