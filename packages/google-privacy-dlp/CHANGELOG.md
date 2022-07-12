@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-dlp/compare/v4.0.2...v4.1.0) (2022-07-12)
+
+
+### Features
+
+* InfoType categories were added to built-in infoTypes ([#730](https://github.com/googleapis/nodejs-dlp/issues/730)) ([1147763](https://github.com/googleapis/nodejs-dlp/commit/114776322342445ae1e792c51ee6a2eedc48bebf))
+
+
+### Bug Fixes
+
+* **deps:** do not depend on protobufjs ([#728](https://github.com/googleapis/nodejs-dlp/issues/728)) ([3ce38f6](https://github.com/googleapis/nodejs-dlp/commit/3ce38f6d714e32d7df3b01eb4e78023eff023de5))
+
 ## [4.0.2](https://github.com/googleapis/nodejs-dlp/compare/v4.0.1...v4.0.2) (2022-06-30)
 
 
