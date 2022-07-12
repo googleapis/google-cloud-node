@@ -69,25 +69,6 @@ describe('Vision', () => {
     );
   });
 
-  it('should detect from a URL', function () {
-    this.retries(3);
-    const url =
-      'https://lh3.googleusercontent.com/d_S5gxu_S1P6NR1gXeMthZeBzkrQMHdI5uvXrpn3nfJuXpCjlqhLQKH_hbOxTHxFhp5WugVOEcl4WDrv9rmKBDOMExhKU5KmmLFQVg';
-    return client
-      .logoDetection(url)
-      .then(
-        (
-          responses: [prototypes.google.cloud.vision.v1.IAnnotateImageResponse]
-        ) => {
-          const response = responses[0];
-          assert.strictEqual(
-            response.logoAnnotations![0].description!.toLowerCase(),
-            'google'
-          );
-        }
-      );
-  });
-
   it('should detect from a filename', () => {
     return client
       .logoDetection(IMAGES.logo)
