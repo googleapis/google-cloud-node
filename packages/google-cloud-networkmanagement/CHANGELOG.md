@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-network-management/compare/v2.1.0...v2.2.0) (2022-07-13)
+
+
+### Features
+
+* add new abort cause and new route next hop type ([#76](https://github.com/googleapis/nodejs-network-management/issues/76)) ([0c64d0e](https://github.com/googleapis/nodejs-network-management/commit/0c64d0e25779caec40732ebcd2cc2229abcc8330))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-network-management/compare/v2.0.0...v2.1.0) (2022-07-04)
 
 
