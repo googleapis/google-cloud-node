@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-datastream/compare/v2.0.0...v2.1.0) (2022-07-12)
+
+
+### Features
+
+* support regapic LRO ([#53](https://github.com/googleapis/nodejs-datastream/issues/53)) ([f607aad](https://github.com/googleapis/nodejs-datastream/commit/f607aad43c652a05bdd4a27ae008ef65e170d366))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-datastream/compare/v1.1.0...v2.0.0) (2022-05-19)
 
 
