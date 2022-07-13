@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-ids/compare/v2.0.0...v2.1.0) (2022-07-12)
+
+
+### Features
+
+* support regapic LRO ([#44](https://github.com/googleapis/nodejs-ids/issues/44)) ([c2f9093](https://github.com/googleapis/nodejs-ids/commit/c2f909353ef73faeb3c272d0384490739b1134af))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-ids/compare/v1.1.0...v2.0.0) (2022-05-19)
 
 
