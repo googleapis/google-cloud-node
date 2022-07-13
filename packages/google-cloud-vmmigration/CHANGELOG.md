@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-vmmigration/compare/v2.0.0...v2.1.0) (2022-07-13)
+
+
+### Features
+
+* support regapic LRO ([#49](https://github.com/googleapis/nodejs-vmmigration/issues/49)) ([8a8ba70](https://github.com/googleapis/nodejs-vmmigration/commit/8a8ba705e8d956e080cc8ee23cf01b1605166283))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-vmmigration/compare/v1.0.0...v2.0.0) (2022-05-19)
 
 
