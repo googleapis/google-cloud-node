@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-iap/compare/v2.0.0...v2.0.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* **docs:** document fallback rest option ([#69](https://github.com/googleapis/nodejs-iap/issues/69)) ([154d791](https://github.com/googleapis/nodejs-iap/commit/154d791460661c13822104cb8464ff726a2a905b))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-iap/compare/v1.2.0...v2.0.0) (2022-05-19)
 
 
