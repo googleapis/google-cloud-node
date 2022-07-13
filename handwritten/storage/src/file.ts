@@ -3018,8 +3018,12 @@ class File extends ServiceObject<File> {
     // file.
     const metadata = extend({}, options.metadata, {acl: null});
 
-    this.setMetadata(metadata, query, callback!);
-    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+    this.setMetadata(metadata, query)
+      .then(resp => callback!(null, ...resp))
+      .catch(callback!)
+      .finally(() => {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+      });
   }
 
   makePublic(): Promise<MakeFilePublicResponse>;

@@ -3642,28 +3642,12 @@ describe('File', () => {
     it('should execute callback with API response', done => {
       const apiResponse = {};
 
-      file.setMetadata = (metadata: {}, query: {}, callback: Function) => {
-        callback(null, apiResponse);
+      file.setMetadata = () => {
+        return Promise.resolve([apiResponse]);
       };
 
       file.makePrivate((err: Error, apiResponse_: {}) => {
         assert.ifError(err);
-        assert.strictEqual(apiResponse_, apiResponse);
-
-        done();
-      });
-    });
-
-    it('should execute callback with error & API response', done => {
-      const error = new Error('Error.');
-      const apiResponse = {};
-
-      file.setMetadata = (metadata: {}, query: {}, callback: Function) => {
-        callback(error, apiResponse);
-      };
-
-      file.makePrivate((err: Error, apiResponse_: {}) => {
-        assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, apiResponse);
 
         done();
