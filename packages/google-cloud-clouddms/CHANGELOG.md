@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-dms/compare/v2.0.0...v2.1.0) (2022-07-12)
+
+
+### Features
+
+* support regapic LRO ([#97](https://github.com/googleapis/nodejs-dms/issues/97)) ([733c394](https://github.com/googleapis/nodejs-dms/commit/733c3940e86ca015fc61223a2ec0de41a25e4e89))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-dms/compare/v1.1.0...v2.0.0) (2022-05-20)
 
 
