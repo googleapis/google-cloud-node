@@ -1,12 +1,13 @@
 steps:
     # Build the docker image.
     - name: 'gcr.io/cloud-builders/docker'
+      dir: 'containers/node-bootstrap-container'
       args: [ 'build',
         '-t', 'gcr.io/owlbot-bootstrap-prod/node-bootstrapper:$SHORT_SHA',
         '-t', 'gcr.io/owlbot-bootstrap-prod/node-bootstrapper:latest',
         '-t', 'gcr.io/owlbot-bootstrap-staging/node-bootstrapper:$SHORT_SHA',
         '-t', 'gcr.io/owlbot-bootstrap-staging/node-bootstrapper:latest', 
-        '-f', 'containers/node-bootstrap-container/Dockerfile', '.' ]
+        '.' ]
     # Push the docker image.
 images:
   - gcr.io/owlbot-bootstrap-prod/node-bootstrapper:$SHORT_SHA
