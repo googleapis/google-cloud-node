@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/nodejs-eventarc-publishing/compare/v2.2.0...v2.2.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency protobufjs to v7 ([#40](https://github.com/googleapis/nodejs-eventarc-publishing/issues/40)) ([7d6adab](https://github.com/googleapis/nodejs-eventarc-publishing/commit/7d6adab86352feccfd4df24739f2b72fd318100e))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-eventarc-publishing/compare/v2.1.0...v2.2.0) (2022-07-05)
 
 
