@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-cloud-tpu/compare/v2.0.0...v2.1.0) (2022-07-12)
+
+
+### Features
+
+* support regapic LRO ([#87](https://github.com/googleapis/nodejs-cloud-tpu/issues/87)) ([31164e2](https://github.com/googleapis/nodejs-cloud-tpu/commit/31164e2e804f18f5178177ce99d5741cb7211712))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-cloud-tpu/compare/v1.2.0...v2.0.0) (2022-05-19)
 
 
