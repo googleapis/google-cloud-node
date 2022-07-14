@@ -33,5 +33,8 @@ COPY --from=gobuild /go/bin/buildozer /go/bin/buildozer
 
 
 RUN chmod 755 /entrypoint.sh
+RUN chmod 755 /add-to-well-known-path.js
+RUN chmod 755 /create-folder-name.js
+RUN chmod 755 /create-gh-issue.js
 # Run the web service on container startup.
 ENTRYPOINT ["/entrypoint.sh" ]
