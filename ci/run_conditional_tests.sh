@@ -69,7 +69,7 @@ subdirs=(
 RETVAL=0
 
 for subdir in ${subdirs[@]}; do
-    for d in `ls -d ${subdir}/*`; do
+    for d in `ls -d ${subdir}/*/`; do
         should_test=false
         if [ -n "${GIT_DIFF_ARG}" ]; then
             echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"
