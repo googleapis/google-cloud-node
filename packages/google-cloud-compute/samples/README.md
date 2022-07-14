@@ -28,6 +28,7 @@ and 3.0.y.
   * [Create Instance From Template With Overrides](#create-instance-from-template-with-overrides)
   * [Delete Instance](#delete-instance)
   * [Disable Usage Export](#disable-usage-export)
+  * [Get Instance](#get-instance)
   * [Get Usage Export Bucket](#get-usage-export-bucket)
   * [List All Instances](#list-all-instances)
   * [List Images](#list-images)
@@ -135,6 +136,23 @@ __Usage:__
 
 
 `node samples/disableUsageExport.js`
+
+
+-----
+
+
+
+
+### Get Instance
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/getInstance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/getInstance.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getInstance.js`
 
 
 -----
