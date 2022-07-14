@@ -22,16 +22,16 @@ RUN go install github.com/bazelbuild/buildtools/buildozer@latest
 
 FROM node:14-slim as nodebuild
 
-COPY package*.json /workspace/google-cloud-node/containers/node-bootstrap-container/
+COPY package*.json /
  
 RUN npm install
 
 # Now copy all the code so we can compile
-COPY . /workspace/google-cloud-node/containers/node-bootstrap-container/
+COPY . /
 
 COPY --from=gobuild /go/bin/buildozer /go/bin/buildozer 
 
 
-RUN chmod 755 /workspace/google-cloud-node/containers/node-bootstrap-container/entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 # Run the web service on container startup.
-ENTRYPOINT ["/workspace/google-cloud-node/containers/node-bootstrap-container/entrypoint.sh" ]
+ENTRYPOINT ["/entrypoint.sh" ]
