@@ -22,12 +22,12 @@ RUN go install github.com/bazelbuild/buildtools/buildozer@latest
 
 FROM node:14-slim as nodebuild
 
-COPY package*.json ./
+COPY package*.json /workspace/google-cloud-node/containers/node-bootstrap-container/
  
 RUN npm install
 
 # Now copy all the code so we can compile
-COPY entrypoint.sh ./
+COPY entrypoint.sh /workspace/google-cloud-node/containers/node-bootstrap-container/
 
 COPY --from=gobuild /go/bin/buildozer /go/bin/buildozer 
 
