@@ -22,8 +22,8 @@ npm run compile
 npm link .
 
 cd "${WORKSPACE_DIR}/${MONO_REPO_NAME}/containers/node-bootstrap-container"
-FOLDER_NAME=node create-folder-name.js $API_ID || node create-gh-issue.js
-mkdir -p "${WORKSPACE_DIR}/${MONO_REPO_NAME}/packages/${FOLDER_NAME}" || node create-gh-issue.js
-node add-to-well-known-path.js "${WORKSPACE_DIR}" "${FOLDER_NAME}"
+FOLDER_NAME=node /create-folder-name.js $API_ID || node /create-gh-issue.js
+mkdir -p "${WORKSPACE_DIR}/${MONO_REPO_NAME}/packages/${FOLDER_NAME}" || node /create-gh-issue.js
+node /add-to-well-known-path.js "${WORKSPACE_DIR}" "${FOLDER_NAME}"
 cd  "${WORKSPACE_DIR}/${MONO_REPO_NAME}"
 /usr/local/bin/gapic-node-templating bootstrap-library --api-id "${API_ID}" --destination-folder "${WORKSPACE_DIR}/${MONO_REPO_NAME}/packages/${FOLDER_NAME}" --mono-repo-name "${MONO_REPO_NAME}" --github-token "${GITHUB_TOKEN}" || node create-gh-issue.js

@@ -22,16 +22,16 @@ RUN go install github.com/bazelbuild/buildtools/buildozer@latest
 
 FROM node:14-slim as nodebuild
 
-COPY package*.json ./
+COPY package*.json /
  
 RUN npm install
 
 # Now copy all the code so we can compile
-COPY entrypoint.sh ./
+COPY . /
 
 COPY --from=gobuild /go/bin/buildozer /go/bin/buildozer 
 
-RUN chmod 755 /workspace/entrypoint.sh
-# Run the web service on container startup.
-ENTRYPOINT ["/workspace/entrypoint.sh" ]
 
+RUN chmod 755 /entrypoint.sh
+# Run the web service on container startup.
+ENTRYPOINT ["/entrypoint.sh" ]
