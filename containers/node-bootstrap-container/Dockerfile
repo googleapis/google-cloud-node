@@ -27,7 +27,7 @@ COPY package*.json /workspace/google-cloud-node/containers/node-bootstrap-contai
 RUN npm install
 
 # Now copy all the code so we can compile
-COPY entrypoint.sh /workspace/google-cloud-node/containers/node-bootstrap-container/
+COPY . /workspace/google-cloud-node/containers/node-bootstrap-container/
 
 COPY --from=gobuild /go/bin/buildozer /go/bin/buildozer 
 
