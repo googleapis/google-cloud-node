@@ -99,10 +99,19 @@ interface Versioning {
   enabled: boolean;
 }
 
+/**
+ * Custom placement configuration.
+ * Initially used for dual-region buckets.
+ **/
+export interface CustomPlacementConfig {
+  dataLocations?: string[];
+}
+
 export interface CreateBucketRequest {
   archive?: boolean;
   coldline?: boolean;
   cors?: Cors[];
+  customPlacementConfig?: CustomPlacementConfig;
   dra?: boolean;
   location?: string;
   multiRegional?: boolean;
@@ -728,10 +737,12 @@ export class Storage extends Service {
    * @property {boolean} [archive=false] Specify the storage class as Archive.
    * @property {boolean} [coldline=false] Specify the storage class as Coldline.
    * @property {Cors[]} [cors=[]] Specify the CORS configuration to use.
+   * @property {CustomPlacementConfig} [customPlacementConfig={}] Specify the bucket's regions for dual-region buckets.
+   *     For more information, see {@link https://cloud.google.com/storage/docs/locations| Bucket Locations}.
    * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
    *     Availability.
-   * @property {string} [location] Specify the bucket's location(s). If specifying
-   *     a dual-region, can be specified as a string `"US-CENTRAL1+US-WEST1"`.
+   * @property {string} [location] Specify the bucket's location. If specifying
+   *     a dual-region, the `customPlacementConfig` property should be set in conjunction.
    *     For more information, see {@link https://cloud.google.com/storage/docs/locations| Bucket Locations}.
    * @property {boolean} [multiRegional=false] Specify the storage class as
    *     Multi-Regional.
@@ -845,8 +856,9 @@ export class Storage extends Service {
       metadata = metadataOrCallback as CreateBucketRequest;
     }
 
-    const body = Object.assign({}, metadata, {name}) as {} as {
-      [index: string]: string | {};
+    const body: CreateBucketRequest & {[index: string]: string | {}} = {
+      ...metadata,
+      name,
     };
 
     const storageClasses = {
@@ -857,9 +869,12 @@ export class Storage extends Service {
       nearline: 'NEARLINE',
       regional: 'REGIONAL',
       standard: 'STANDARD',
-    } as {[index: string]: string};
+    } as const;
+    const storageClassKeys = Object.keys(
+      storageClasses
+    ) as (keyof typeof storageClasses)[];
 
-    Object.keys(storageClasses).forEach(storageClass => {
+    for (const storageClass of storageClassKeys) {
       if (body[storageClass]) {
         if (metadata.storageClass && metadata.storageClass !== storageClass) {
           throw new Error(
@@ -869,7 +884,7 @@ export class Storage extends Service {
         body.storageClass = storageClasses[storageClass];
         delete body[storageClass];
       }
-    });
+    }
 
     if (body.requesterPays) {
       body.billing = {

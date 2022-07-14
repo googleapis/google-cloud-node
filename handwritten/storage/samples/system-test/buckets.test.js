@@ -39,7 +39,10 @@ const dualRegionBucketTurbo = storage.bucket(bucketNameDualRegionTurbo);
 const PUBLIC_ACCESS_PREVENTION_INHERITED = 'inherited';
 const PUBLIC_ACCESS_PREVENTION_ENFORCED = 'enforced';
 
-const DUAL_REGION = ['US-EAST1', 'US-WEST1'];
+const DUAL_REGION = {
+  LOCATION: 'US',
+  REGIONS: ['US-EAST1', 'US-WEST1'],
+};
 const RPO_ASYNC_TURBO = 'ASYNC_TURBO';
 const RPO_DEFAULT = 'DEFAULT';
 
@@ -216,19 +219,30 @@ it('should set public access prevention to inherited', async () => {
 });
 
 it('should create a dual-region bucket', async () => {
-  const dualRegion = `${DUAL_REGION[0]}+${DUAL_REGION[1]}`;
-
   const output = execSync(
-    `node createBucketWithDualRegion.js ${bucketNameDualRegion} ${DUAL_REGION[0]} ${DUAL_REGION[1]}`
+    `node createBucketWithDualRegion.js ${bucketNameDualRegion} ${DUAL_REGION.LOCATION} ${DUAL_REGION.REGIONS[0]} ${DUAL_REGION.REGIONS[1]}`
   );
 
-  assert.include(output, `${bucketNameDualRegion} created in '${dualRegion}'`);
+  assert.include(
+    output,
+    `${bucketNameDualRegion} created in '${DUAL_REGION.REGIONS[0]}' and '${DUAL_REGION.REGIONS[1]}'`
+  );
 
   const [exists] = await dualRegionBucket.exists();
   assert.strictEqual(exists, true);
 
   const [metadata] = await dualRegionBucket.getMetadata();
-  assert.strictEqual(metadata.location, dualRegion);
+
+  assert.strictEqual(metadata.location, DUAL_REGION.LOCATION);
+
+  assert(metadata.customPlacementConfig);
+  assert(Array.isArray(metadata.customPlacementConfig.dataLocations));
+
+  const dataLocations = metadata.customPlacementConfig.dataLocations;
+
+  assert(dataLocations.includes(DUAL_REGION.REGIONS[0]));
+  assert(dataLocations.includes(DUAL_REGION.REGIONS[1]));
+
   assert.strictEqual(metadata.locationType, 'dual-region');
 });
 

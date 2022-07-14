@@ -949,6 +949,7 @@ describe('storage', () => {
   describe('dual-region', () => {
     let bucket: Bucket;
 
+    const LOCATION = 'US';
     const REGION1 = 'US-EAST1';
     const REGION2 = 'US-WEST1';
 
@@ -957,14 +958,28 @@ describe('storage', () => {
     });
 
     it('creates a dual-region bucket', async () => {
-      const dualRegion = `${REGION1}+${REGION2}`;
-      await bucket.create({location: dualRegion});
+      await bucket.create({
+        location: LOCATION,
+        customPlacementConfig: {
+          dataLocations: [REGION1, REGION2],
+        },
+      });
 
       const [exists] = await bucket.exists();
       assert.strictEqual(exists, true);
 
       const [bucketMetadata] = await bucket.getMetadata();
-      assert.strictEqual(bucketMetadata.location, dualRegion);
+
+      assert.strictEqual(bucketMetadata.location, LOCATION);
+
+      assert(bucketMetadata.customPlacementConfig);
+      assert(Array.isArray(bucketMetadata.customPlacementConfig.dataLocations));
+
+      const dataLocations = bucketMetadata.customPlacementConfig.dataLocations;
+
+      assert(dataLocations.includes(REGION1));
+      assert(dataLocations.includes(REGION2));
+
       assert.strictEqual(bucketMetadata.locationType, 'dual-region');
     });
   });

@@ -416,7 +416,7 @@ __Usage:__
 
 ### Create a Dual-Region Bucket
 
-Create a Dual-Region Bucket with provided locations.
+Create a Dual-Region Bucket with provided location and regions.
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/createBucketWithDualRegion.js).
 
@@ -425,7 +425,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/sa
 __Usage:__
 
 
-`node createBucketWithDualRegion.js <BUCKET_NAME> <REGION1> <REGION2>`
+`node createBucketWithDualRegion.js <BUCKET_NAME> <LOCATION> <REGION1> <REGION2>`
 
 
 -----
