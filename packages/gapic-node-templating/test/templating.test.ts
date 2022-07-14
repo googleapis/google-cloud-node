@@ -58,7 +58,7 @@ describe('tests for templates', () => {
     });
 
     snapshot(
-      readFileSync(join(templateDirWrite, '.gihtub', '.OwlBot.yaml'), 'utf8')
+      readFileSync(join(templateDirWrite, '.github', '.OwlBot.yaml'), 'utf8')
     );
     snapshot(
       readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8')
