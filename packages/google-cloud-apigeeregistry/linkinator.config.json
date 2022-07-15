@@ -1,0 +1,1 @@
+{"recurse":true,"skip":["'httpRules'","lroOptions.httpRules","https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":5,"retry":true,"retryErrors":true,"retryErrorsCount":5,"retryErrorsJitter":3000}
