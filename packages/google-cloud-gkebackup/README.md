@@ -117,8 +117,8 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-gke-backup/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke
-[product-docs]: https://cloud.google.com/gke-backup/docs/
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/gke-backup/latest
+[product-docs]: https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
