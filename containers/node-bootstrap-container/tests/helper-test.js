@@ -46,7 +46,7 @@ describe('helper functions', () => {
        cp.execSync(
         `node ./add-to-well-known-path.js ${__dirname} google-cloud-kms`);
 
-        assert.deepStrictEqual(JSON.parse(fs.readFileSync(path.resolve(__dirname, 'interContainerVars.json')).toString('utf8')), {branchName: 'branchName', owlbotYamlPath: 'packages/google-cloud-kms/.OwlBot.yaml'})
+        assert.deepStrictEqual(JSON.parse(fs.readFileSync(path.resolve(__dirname, 'interContainerVars.json')).toString('utf8')), {branchName: 'branchName', owlbotYamlPath: 'packages/google-cloud-kms/.github/.OwlBot.yaml'})
     });
 
 

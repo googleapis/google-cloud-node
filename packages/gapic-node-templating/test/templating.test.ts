@@ -57,7 +57,9 @@ describe('tests for templates', () => {
       apiPathDashes: 'google-cloud-kms',
     });
 
-    snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));
+    snapshot(
+      readFileSync(join(templateDirWrite, '.github', '.OwlBot.yaml'), 'utf8')
+    );
     snapshot(
       readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8')
     );
