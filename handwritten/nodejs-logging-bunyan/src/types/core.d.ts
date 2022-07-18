@@ -91,6 +91,13 @@ export interface Options {
    * agent. Redirected logs are formatted as one line Json string following the structured logging guidelines.
    */
   redirectToStdout?: boolean;
+
+  /**
+   * Boolean flag indicating if "message" field should be used to store structured,
+   * non-text data inside jsonPayload field. This flag applies only when {@link Options#redirectToStdout} is set.
+   * By default this value is true
+   */
+  useMessageField?: boolean;
 }
 
 export interface MonitoredResource {

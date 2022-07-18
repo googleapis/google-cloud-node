@@ -246,6 +246,8 @@ The agent can parse structured logs printed to `process.stdout` and capture addi
 It is recommended to set `redirectToStdout: true` in serverless environments like Cloud Functions since it could 
 decrease logging record loss upon execution termination - since all logs are written to `process.stdout` those
 would be picked up by the Cloud Logging Agent running in Google Cloud managed environment. 
+Note that there is also a `useMessageField` option which controls if "message" field is used to store 
+structured, non-text data inside `jsonPayload` field when `redirectToStdout` is set. By default `useMessageField` is always `true`.
 
 ```js
 // Imports the Google Cloud client library for Bunyan

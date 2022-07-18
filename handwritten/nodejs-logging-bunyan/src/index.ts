@@ -37,6 +37,7 @@ import * as types from './types/core';
 
 import {ApiResponseCallback} from '@google-cloud/logging/build/src/log';
 import {LogSeverityFunctions} from '@google-cloud/logging/build/src/utils/log-common';
+import {LogSyncOptions} from '@google-cloud/logging/build/src/log-sync';
 
 // Map of Stackdriver logging levels.
 const BUNYAN_TO_STACKDRIVER: Map<number, string> = new Map([
@@ -177,6 +178,7 @@ export class LoggingBunyan extends Writable {
   private defaultCallback?: ApiResponseCallback;
   cloudLog: LogSeverityFunctions;
   redirectToStdout: boolean;
+
   constructor(options?: types.Options) {
     options = options || {};
     super({objectMode: true});
@@ -195,7 +197,14 @@ export class LoggingBunyan extends Writable {
         maxEntrySize: options.maxEntrySize || 250000,
       });
     } else {
-      this.cloudLog = new Logging(options).logSync(this.logName);
+      const logSyncOptions: LogSyncOptions = {
+        useMessageField: options.useMessageField ?? true,
+      };
+      this.cloudLog = new Logging(options).logSync(
+        this.logName,
+        undefined,
+        logSyncOptions
+      );
     }
 
     // serviceContext.service is required by the Error Reporting
