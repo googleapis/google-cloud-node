@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [4.1.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.1.0...v4.1.1) (2022-07-18)
+
+
+### Bug Fixes
+
+* Logging to stdout in Cloud Run creates a JSON object as "message" ([#644](https://github.com/googleapis/nodejs-logging-bunyan/issues/644)) ([41eaaa8](https://github.com/googleapis/nodejs-logging-bunyan/commit/41eaaa8e2dd282e625412a10907c2dd0f13cf1cb))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.0.0...v4.1.0) (2022-06-02)
 
 
