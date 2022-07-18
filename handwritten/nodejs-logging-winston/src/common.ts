@@ -30,6 +30,7 @@ import mapValues = require('lodash.mapvalues');
 import {Options} from '.';
 import {Entry, LogEntry} from '@google-cloud/logging/build/src/entry';
 import path = require('path');
+import {LogSyncOptions} from '@google-cloud/logging/build/src/log-sync';
 
 type Callback = (err: Error | null, apiResponse?: {}) => void;
 export type MonitoredResource = protos.google.api.MonitoredResource;
@@ -156,7 +157,14 @@ export class LoggingCommon {
         maxEntrySize: options.maxEntrySize || 250000,
       });
     } else {
-      this.cloudLog = new Logging(options).logSync(this.logName);
+      const logSyncOptions: LogSyncOptions = {
+        useMessageField: options.useMessageField ?? true,
+      };
+      this.cloudLog = new Logging(options).logSync(
+        this.logName,
+        undefined,
+        logSyncOptions
+      );
     }
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
