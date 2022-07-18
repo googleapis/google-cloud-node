@@ -185,6 +185,22 @@ describe('logging-common', () => {
       assert.ok(loggingCommon.cloudLog instanceof LogSync);
     });
 
+    it('should create LogCommon with LogSync and useMessage is on', () => {
+      const optionsWithRedirectToStdoutAndUseMessage = Object.assign(
+        {},
+        OPTIONS,
+        {
+          redirectToStdout: true,
+          useMessageField: true,
+        }
+      );
+      const loggingCommon = new LoggingCommon(
+        optionsWithRedirectToStdoutAndUseMessage
+      );
+      assert.ok(loggingCommon.cloudLog instanceof LogSync);
+      assert.ok(loggingCommon.cloudLog.useMessageField_ === true);
+    });
+
     it('should create LogCommon with Log', () => {
       const loggingCommon = new LoggingCommon(OPTIONS);
       assert.ok(loggingCommon.cloudLog instanceof Log);
