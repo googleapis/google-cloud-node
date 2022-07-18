@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.1.2](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.1...v5.1.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* Logging to stdout in Cloud Run creates a JSON object as "message" ([#724](https://github.com/googleapis/nodejs-logging-winston/issues/724)) ([705f90e](https://github.com/googleapis/nodejs-logging-winston/commit/705f90e701dc76d0e30cbe5f296fb3401742618c))
+
 ## [5.1.1](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.0...v5.1.1) (2022-07-12)
 
 
