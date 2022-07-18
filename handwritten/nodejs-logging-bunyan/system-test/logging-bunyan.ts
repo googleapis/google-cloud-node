@@ -57,6 +57,16 @@ describe('LoggingBunyan', function () {
     assert.ok(loggingBunyan.cloudLog instanceof LogSync);
   });
 
+  it('should create LoggingBunyan with LogSync and useMessageField is off', () => {
+    const loggingBunyan = new LoggingBunyan({
+      logName: LOG_NAME,
+      redirectToStdout: true,
+      useMessageField: false,
+    });
+    assert.ok(loggingBunyan.cloudLog instanceof LogSync);
+    assert.ok(loggingBunyan.cloudLog.useMessageField_ === false);
+  });
+
   it('should write diagnostic entry', async () => {
     instrumentation.setInstrumentationStatus(false);
     const start = Date.now();
