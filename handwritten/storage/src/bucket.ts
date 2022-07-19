@@ -392,6 +392,70 @@ export enum BucketExceptionMessages {
 }
 
 /**
+ * @callback Crc32cGeneratorToStringCallback
+ * A method returning the CRC32C as a base64-encoded string.
+ *
+ * @returns {string}
+ *
+ * @example
+ * Hashing the string 'data' should return 'rth90Q=='
+ *
+ * ```js
+ * const buffer = Buffer.from('data');
+ * crc32c.update(buffer);
+ * crc32c.toString(); // 'rth90Q=='
+ * ```
+ **/
+/**
+ * @callback Crc32cGeneratorValidateCallback
+ * A method validating a base64-encoded CRC32C string.
+ *
+ * @param {string} [value] base64-encoded CRC32C string to validate
+ * @returns {boolean}
+ *
+ * @example
+ * Should return `true` if the value matches, `false` otherwise
+ *
+ * ```js
+ * const buffer = Buffer.from('data');
+ * crc32c.update(buffer);
+ * crc32c.validate('DkjKuA=='); // false
+ * crc32c.validate('rth90Q=='); // true
+ * ```
+ **/
+/**
+ * @callback Crc32cGeneratorUpdateCallback
+ * A method for passing `Buffer`s for CRC32C generation.
+ *
+ * @param {Buffer} [data] data to update CRC32C value with
+ * @returns {undefined}
+ *
+ * @example
+ * Hashing buffers from 'some ' and 'text\n'
+ *
+ * ```js
+ * const buffer1 = Buffer.from('some ');
+ * crc32c.update(buffer1);
+ *
+ * const buffer2 = Buffer.from('text\n');
+ * crc32c.update(buffer2);
+ *
+ * crc32c.toString(); // 'DkjKuA=='
+ * ```
+ **/
+/**
+ * @typedef {object} CRC32CValidator
+ * @property {Crc32cGeneratorToStringCallback}
+ * @property {Crc32cGeneratorValidateCallback}
+ * @property {Crc32cGeneratorUpdateCallback}
+ */
+/**
+ * A function that generates a CRC32C Validator. Defaults to {@link CRC32C}
+ *
+ * @name Bucket#crc32cGenerator
+ * @type {CRC32CValidator}
+ */
+/**
  * Get and set IAM policies for your bucket.
  *
  * @name Bucket#iam
@@ -708,7 +772,7 @@ class Bucket extends ServiceObject {
         },
       },
       /**
-       * @typedef {object} DeleteBucketOptions Configuration options.
+       * IamDeleteBucketOptions Configuration options.
        * @property {boolean} [ignoreNotFound = false] Ignore an error if
        *     the bucket does not exist.
        * @property {string} [userProject] The ID of the project which will be

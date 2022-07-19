@@ -91,7 +91,7 @@ interface CRC32CValidator {
    * crc32c.validate('rth90Q=='); // true
    * ```
    */
-  validate: (o: string) => boolean;
+  validate: (value: string) => boolean;
   /**
    * A method for passing `Buffer`s for CRC32C generation.
    *
@@ -108,7 +108,7 @@ interface CRC32CValidator {
    * crc32c.toString(); // 'DkjKuA=='
    * ```
    */
-  update: (b: Buffer) => void;
+  update: (data: Buffer) => void;
 }
 
 /** A function that generates a CRC32C Validator */
