@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [:  Client](https://github.com/)
+# [Apigee Registry API: Node.js Client](https://github.com/googleapis/nodejs-apigee-registry)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/apigee-registry.svg)](https://www.npmjs.org/package/@google-cloud/apigee-registry)
@@ -14,11 +14,11 @@ apigeeregistry client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com//blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-apigee-registry/blob/main/CHANGELOG.md).
 
-
-
-* [github.com/](https://github.com/)
+* [Apigee Registry API Node.js Client API Reference][client-docs]
+* [Apigee Registry API Documentation][product-docs]
+* [github.com/googleapis/nodejs-apigee-registry](https://github.com/googleapis/nodejs-apigee-registry)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -43,7 +43,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the  API][enable_api].
+1.  [Enable the Apigee Registry API API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -56,6 +56,9 @@ npm install @google-cloud/apigee-registry
 
 
 
+
+The [Apigee Registry API Node.js Client API Reference][client-docs] documentation
+also contains samples.
 
 ## Supported Node.js Versions
 
@@ -100,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com//blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-apigee-registry/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -112,10 +115,10 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com//blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-apigee-registry/blob/main/LICENSE)
 
-
-
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/apigeeregistry/latest
+[product-docs]: https://cloud.google.com/apigee/docs/api-hub/get-started-registry-api
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

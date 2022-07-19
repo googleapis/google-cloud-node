@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const apigeeregistry = require('@google-cloud/apigeeregistry');
+const apigeeregistry = require('@google-cloud/apigee-registry');
 
 function main() {
   const provisioningClient = new apigeeregistry.ProvisioningClient();
