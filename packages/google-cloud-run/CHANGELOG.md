@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/nodejs-run/compare/v0.2.0...v0.2.1) (2022-07-20)
+
+
+### Bug Fixes
+
+* fixes for routing headers ([#17](https://github.com/googleapis/nodejs-run/issues/17)) ([992f2e0](https://github.com/googleapis/nodejs-run/commit/992f2e026cd7bb713d30e94ca8691f81f52af6ed))
+
 ## [0.2.0](https://github.com/googleapis/nodejs-run/compare/v0.1.1...v0.2.0) (2022-07-04)
 
 
